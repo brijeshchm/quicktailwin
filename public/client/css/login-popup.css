@@ -1,0 +1,217 @@
+.loginoverlay{
+	width: 100%;
+	height: 100%;
+	z-index: 99;
+	position: fixed;
+	left: 0;
+	top: 0;
+	background: #000;
+	opacity: .9;
+}
+.loginpopup{
+	margin: 0 auto;
+	width: 50%;
+	position: absolute;
+	left: 50%;
+	top: 20%;
+	z-index: 999;
+	color: #333;
+	font-size: 15px;
+	line-height: 25px;
+	-moz-transition: all 0.3s ease-in-out 0s;
+	-webkit-transition: all 0.3s ease-in-out 0s;
+	-o-transition: all 0.3s ease-in-out 0s;
+	opacity: 0;
+	visibility: hidden;
+	margin-left: -23%;
+	padding: 0px 30px;
+}
+.showup {
+	opacity: 1;
+	visibility: visible;
+}
+.popwraper {
+	border-radius: 4px;
+	width: 100%;
+	display: table;
+	float: none;
+}
+.closebtn {
+	border: 0px solid #fff;
+	cursor: pointer;
+	position: absolute;
+	right: 31px;
+	text-align: center;
+	top: 0;
+	width: 27px;
+	z-index: 9;
+	font-size: 35px;
+}
+.closebtn:hover {
+	color: red;
+	text-decoration: none;
+}
+.formright {
+	padding: 50px 30px;
+	display: table-cell;
+	float: none;
+	background: #fff none repeat scroll 0 0;
+	border-radius: 0 4px 4px 0;
+	vertical-align: top;
+}
+.formleft {
+	background: #fff;
+	display: table-cell;
+	float: none;
+	color: #000;
+	border-radius: 4px 0px 0 4px;
+	padding: 40px;
+	vertical-align: top;
+}
+.formleft h2 {
+	margin-top: 0;
+}
+
+
+/*Login Form*/
+.input-layout {
+	position: relative;
+	margin-bottom: 25px;
+	height: 40px;
+}
+.input-layout label {
+	color: #878787;
+	font-size: 16px;
+	font-weight: 400;
+	letter-spacing: .5px;
+	position: absolute;
+	pointer-events: none;
+	left: 0;
+	top: 12px;
+	-webkit-transition: .2s ease all;
+	transition: .2s ease all
+}
+.input-layout input[type=text], .input-layout input[type=password] {
+	font-weight: 400;
+	font-size: 16px;
+	color:#333 !important;
+	border: 0;
+	width: 100%;
+	height: 40px;
+	padding: 0;
+	border-bottom: 1px solid #e0e0e0;
+	box-shadow: none;
+	-webkit-transition: none;
+	transition: none;
+	border-radius: 0px;
+	background: none;
+}
+.input-layout input[type=password]{padding-right: 60px;}
+.input-layout input[type=text]:focus~label, .input-layout input[type=text]:valid~label, .input-layout input[type=password]:focus~label, .input-layout input[type=password]:valid~label {
+top:-14px;
+color: #878787!important;
+opacity:1;
+font-weight:400;
+font-size:12px;
+}
+.input-layout input[type=text]:focus:not([readonly])~label, .input-layout input[type=password]:focus:not([readonly])~label {
+	color: #333;
+	font-weight: 400
+}
+.input-layout input[type=text]:focus:required:invalid:focus, .input-layout input[type=password]:focus:required:invalid:focus {
+box-shadow:none;
+-webkit-box-shadow:none;
+-moz-box-shadow:none;
+ outline:none;
+}
+
+.input-layout input[type=password]:active, .input-layout input[type=password]:focus {
+	outline: 0;
+	border: none;
+	text-transform: none;
+	border-bottom: 1px solid #2874F0;
+}
+.input-layout input[type=text]:active, .input-layout input[type=text]:focus {
+	outline: 0;
+	padding-left: 0;
+	text-transform: none;
+	color: #1E2431;
+	font-size: 16px;
+	border-bottom: 1px solid #2874F0;
+}
+
+.input-layout .bar {
+	position: relative;
+	display: block;
+	width: 100%;
+	/*top:100%;*/
+}
+.input-layout .bar:after, .input-layout .bar:before {
+	content: '';
+	height: 1px;
+	width: 0;
+	bottom: 0px;
+	position: absolute;
+	background: #2874f0;
+	-webkit-transition: .2s ease all;
+	transition: .2s ease all
+}
+.input-layout .bar:before {
+	left: 50%
+}
+.input-layout .bar:after {
+	right: 50%
+}
+.input-layout input:focus~.bar:after, .input-layout input:focus~.bar:before {
+	width: 50%
+}
+.input-layout .highlight {
+	position: absolute;
+	height: 60%;
+	width: 100px;
+	top: 25%;
+	left: 0;
+	pointer-events: none;
+	opacity: .5
+}
+.input-layout input:focus~.highlight {
+	-webkit-animation: inputHighlighter .3s ease;
+	animation: inputHighlighter .3s ease
+}
+
+._21JmK0 {
+    bottom: 10px;
+    right: 0;
+    display: inline-block;
+    position: absolute;
+    color: #2874f0;
+    font-size: 15px;
+    font-weight: 500;
+}
+._39M2dMsubmit:hover {
+    background: #2e5e2f;
+}
+._39M2dMsubmit {
+    font-family: inherit;
+    width: 100%;
+    height: 48px;
+    font-size: 15px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+    background: #3c763d;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.2);
+    border: none;
+    color: #fff;
+}
+.jUwFiZ:hover {
+    box-shadow: 0 -1px 4px 0 rgba(0,0,0,.2);
+}
+.jUwFiZ {
+    border: none;
+    color: #2874f0;
+    background-color: #fff;
+    margin-top: 16px;
+    width: 100%;
+    height: 48px;
+    font-size: 15px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+}

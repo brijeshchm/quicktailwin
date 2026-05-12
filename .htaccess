@@ -1,0 +1,60 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Disable directory browsing
+    Options -Indexes
+
+    # Redirect all requests to public folder
+    # RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L]
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+</IfModule>
+
+# Security
+<IfModule mod_security.c>
+    SecFilterEngine Off
+    SecFilterScanPOST Off
+</IfModule>
+
+# 301 Redirects
+Redirect 301 "/categories/rent-buy" https://www.quickdials.com/categories/rent-and-buy
+Redirect 301 "/child/job" https://www.quickdials.com/child/jobs-placements
+Redirect 301 "/child/law-distance-education" https://www.quickdials.com/child/distance-education-institute
+Redirect 301 "/workday-peakon-employee-voice-consultant" https://www.quickdials.com/workday-peakon-employee-voice
+Redirect 301 "/noida/workday-peakon-employee-voice-consultant" https://www.quickdials.com/noida/workday-peakon-employee-voice
+Redirect 301 "/workday-projects-consultant" https://www.quickdials.com/workday-projects
+Redirect 301 "/workday-procurement-course-online" https://www.quickdials.com/workday-procurement
+Redirect 301 "/indian-forest-servicesifs" https://www.quickdials.com/indian-forest-services
+Redirect 301 "/ludhiana/workday-finance-modules-training" https://www.quickdials.com/workday-finance-modules
+Redirect 301 "/workday-finance-modules-training" https://www.quickdials.com/workday-finance-modules
+Redirect 301 "/beauty-parlour-services" https://www.quickdials.com/beauty-parlours
+
+# Cache Control
+<IfModule mod_headers.c>
+    Header set Cache-Control "public, max-age=36000"
+</IfModule>
+
+# GZIP Compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/x-javascript
+</IfModule>
+
+# Browser Cache
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+</IfModule>
+
+# PHP Handler
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php82 .php .php8 .phtml
+</IfModule>
