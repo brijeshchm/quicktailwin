@@ -281,19 +281,35 @@ function applyDetectedCity(cityName) {
 }
 
 function detectCityFromIP() {
-    fetch('https://ipapi.co/json/')
+    fetch('https://ipapi.co/json/?origin=*')
         .then(res => res.json())
         .then(data => {
             if (data.city) applyDetectedCity(data.city);
         })
         .catch(() => {
             // Keep default city (Bangalore) if all fails
+
+//  fetch('https://freeipapi.com/api/json')
+//     .then(res => res.json())
+//     .then(data => {
+//         if (!data.cityName) return;
+
+//         const city = data.cityName.toLowerCase();
+//         const searchCity = city
+//             .split('-')
+//             .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+//             .join(' ');
+
+//         applyDetectedCity(searchCity);
+//     })
+   
+
         });
 }
 
 function detectCityFromCoords(lat, lng) {
   
-    fetch(`https://ipapi.co/json/`)
+    fetch(`https://ipapi.co/json/?origin=*`)
         .then(res => res.json())
         .then(data => {
             if (data.city) applyDetectedCity(data.city);
