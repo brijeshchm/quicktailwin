@@ -513,8 +513,8 @@ select.form-input { padding-left:1rem; }
                                             rounded-full flex items-center justify-center mx-auto mb-4 shadow-xl">
                                     <svg class="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                                 </div>
-                                <h3 class="text-xl font-extrabold text-slate-800 mb-2">You're All Set!</h3>
-                                <p class="text-slate-500 text-sm mb-5">Congratulations! Your business account is now active. Log in to manage your profile and grow your business with QuickDials.</p>
+                                <h3 class="text-xl font-extrabold text-slate-800 mb-2">Congratulations!</h3>
+                                <p class="text-slate-500 text-sm mb-5">Your business account is now active. Log in to manage your profile and grow your business with QuickDials.</p>
                                 <div class="bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-100
                                             rounded-xl p-3.5 text-sm text-emerald-700 font-medium">
                                     Login: <span id="success-pkg" class="font-bold"></span>
