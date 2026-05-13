@@ -123,19 +123,19 @@ class BusinessController extends Controller
 					->where('business_slug', 'like', '%' . $business_slug . '%')
 					->orderBy('id', 'desc')
 					->get();
-				if (count($slugExists) > 0) {
-					$business_slug = $slugExists[0]->business_slug;
-					$business_slug = explode("-", $business_slug);
-					$end = end($business_slug);
-					reset($business_slug);
-					if (!is_numeric($end)) {
-						$business_slug[] = 1;
-					} else {
-						++$end;
-						$business_slug[count($business_slug) - 1] = $end;
-					}
-					$business_slug = implode("-", $business_slug);
-				}
+				// if (count($slugExists) > 0) {
+				// 	$business_slug = $slugExists[0]->business_slug;
+				// 	$business_slug = explode("-", $business_slug);
+				// 	$end = end($business_slug);
+				// 	reset($business_slug);
+				// 	if (!is_numeric($end)) {
+				// 		$business_slug[] = 1;
+				// 	} else {
+				// 		++$end;
+				// 		$business_slug[count($business_slug) - 1] = $end;
+				// 	}
+				// 	$business_slug = implode("-", $business_slug);
+				// }
 			}
 
 			$string = filter_var($request->input('business_name'), FILTER_SANITIZE_STRING);

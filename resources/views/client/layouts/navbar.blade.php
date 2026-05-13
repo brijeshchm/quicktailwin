@@ -427,10 +427,10 @@ function hideStickysuggestions() {
 
 function selectStickySuggestion(idx) {
     const s = stickySuggestions[idx];
-    if (!s) return;
-    document.getElementById('sticky-search-input').value = s.label;
+      if (!s) return;
+    document.getElementById('sticky-search-input').value = s.id;
     hideStickysuggestions();
-    redirectSearch(s.label, stickySelectedCity);
+    redirectSearch(s.id, stickySelectedCity);
 }
 
 function handleStickyKeydown(e) {
