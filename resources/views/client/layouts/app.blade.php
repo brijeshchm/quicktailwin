@@ -288,9 +288,6 @@ function detectCityFromIP() {
         })
         .catch(() => {
             // Keep default city (Bangalore) if all fails
- 
-   
-
         });
 }
 
