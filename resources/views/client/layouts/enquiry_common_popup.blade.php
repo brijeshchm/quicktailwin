@@ -5,7 +5,7 @@
     {{-- Header --}}
     <div class="px-6 py-5" style="background:linear-gradient(135deg,#2563EB 0%,#0891b2 100%);">
         <div class="flex items-center justify-between mb-4">
-            <h3 class="font-bold text-white text-lg">Make an Enquiry</h3>
+            <h3 class="font-bold text-white text-lg">Make an Enquiry side</h3>
             @if($formId === 'modal')
             <button onclick="document.getElementById('enquiry-modal').classList.remove('open')"
                     class="w-8 h-8 rounded-full flex items-center justify-center text-white/70 hover:text-white" style="background:rgba(255,255,255,.12);">✕</button>

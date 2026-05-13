@@ -117,7 +117,7 @@ select.ef-input { padding-left:1rem; }
 
     {{-- Main hero image --}}
     <div class="relative flex-1 overflow-hidden">
-        <img src="{{ $clientsList['profile_banner'] ?? 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1400&h=600&fit=crop' }}"
+        <img src="{{ $clientsList['profile_banner'] ?? asset('images/banner-gallery.jpg') }}"
              alt="{{ $clientsList['business_name'] ?? '' }}"
              class="hero-img absolute inset-0 w-full h-full object-cover" style="transform:scale(1.06);">
         <div class="hero-overlay-l"></div>
@@ -160,7 +160,7 @@ select.ef-input { padding-left:1rem; }
             @foreach($hImages as $i => $img)
             <img src="{{ $img }}" alt="Gallery" class="tile-img {{ $i===0?'active':'' }}"
                  data-h-slide="{{ $i }}"
-                 onerror="this.src='https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=700&h=500&fit=crop'">
+                 onerror="this.src='{{ asset('images/gallery.jpg') }}'">
             @endforeach
             <div class="absolute bottom-2 left-3 flex items-center gap-1.5 z-10" id="h-dots"></div>
         </div>
@@ -168,7 +168,7 @@ select.ef-input { padding-left:1rem; }
             @foreach($vImages as $i => $img)
             <img src="{{ $img }}" alt="Gallery" class="tile-img {{ $i===0?'active':'' }}"
                  data-v-slide="{{ $i }}"
-                 onerror="this.src='https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=700&h=500&fit=crop'">
+                 onerror="this.src='{{ asset('images/gallery.jpg') }}'">
             @endforeach
             <div class="absolute bottom-2 right-3 flex flex-col items-center gap-1 z-10" id="v-dots"></div>
         </div>
@@ -306,6 +306,7 @@ select.ef-input { padding-left:1rem; }
             {{-- Right: Enquiry Form (sidebar version) --}}
             <div class="reveal-r" id="enquiry-sidebar">
                 @include('client.layouts.enquiry_common_popup', ['keywordList' => $keywordList, 'planOptions' => $planOptions, 'formId' => 'sidebar'])
+                @include('client.layouts.common_sidebar_form', ['keywordList' => $keywordList, 'planOptions' => $planOptions, 'formId' => 'sidebar'])
             </div>
         </div>
     </div>
@@ -367,7 +368,7 @@ select.ef-input { padding-left:1rem; }
              style="aspect-ratio:{{ $i===0?'1/1':'4/3' }};border:1px solid rgba(59,130,246,.1);"
              onclick="openLightbox({{ $i }})">
             <img src="{{ $img }}" alt="Gallery {{ $i+1 }}"
-                 onerror="this.src='https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&h=300&fit=crop'">
+                 onerror="this.src='{{ asset('images/small-gallery.jpg') }}'">
             <div class="gallery-overlay"></div>
             <div class="absolute inset-0 flex items-end p-2 opacity-0 hover:opacity-100 transition-opacity">
                 <span class="text-white text-[10px] font-bold rounded-full px-2 py-0.5 bg-white/20 backdrop-blur-sm">View</span>
@@ -404,7 +405,7 @@ select.ef-input { padding-left:1rem; }
             @endphp
             <div class="activity-card reveal d-{{ $i }} rounded-2xl overflow-hidden shadow-sm bg-white {{ $i>=4?'hidden md:block':'' }}">
                 <div class="relative overflow-hidden" style="aspect-ratio:16/9;">
-                    <img src="{{ $gallery[$i] ?? 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&h=225&fit=crop' }}"
+                    <img src="{{ $gallery[$i] ?? asset('images/small-gallery.jpg')  }}"
                          alt="{{ $title }}" class="w-full h-full object-cover">
                     <div class="absolute top-3 left-3">
                         <span class="text-[10px] font-black tracking-widest uppercase px-2.5 py-1 rounded-full"
@@ -1188,7 +1189,7 @@ function selectCert(i) {
             <div class="gallery-grid-item {{ $i===0?'col-span-1 row-span-2':'' }}"
                  onclick="closeLightbox();openLightbox({{ $i }})">
                 <img src="{{ $img }}" alt="Gallery {{ $i+1 }}"
-                     onerror="this.src='https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&h=300&fit=crop'">
+                     onerror="this.src='{{ asset('images/small-gallery.jpg') }}'">
                 <div class="gallery-overlay"></div>
             </div>
             @endforeach

@@ -279,7 +279,7 @@ select.form-input { padding-left:1rem; }
                 <div class="reveal inline-flex items-center gap-2 bg-white/80 backdrop-blur
                             border border-blue-100 text-blue-700 text-sm font-semibold
                             px-4 py-2 rounded-full shadow-sm">
-                    ✨ Join 8,100+ Suppliers on QuickDials
+                    ✨ Join 15,57+ Suppliers on QuickDials
                 </div>
 
                 {{-- Animated Title --}}
@@ -409,7 +409,7 @@ select.form-input { padding-left:1rem; }
                         @endforeach
                     </div>
                     <div class="text-xs">
-                        <div class="font-bold text-slate-800">8,100+</div>
+                        <div class="font-bold text-slate-800">15,57+</div>
                         <div class="text-slate-400">active sellers</div>
                     </div>
                 </div>
@@ -788,7 +788,7 @@ select.form-input { padding-left:1rem; }
                     <h3 class="text-2xl sm:text-3xl font-extrabold text-white mb-3">
                         Ready to Grow Your Business?
                     </h3>
-                    <p class="text-blue-100 mb-7">Join 8,100+ suppliers already thriving on QuickDials</p>
+                    <p class="text-blue-100 mb-7">Join 1557+ suppliers already thriving on QuickDials</p>
                     <a href="#enquiry"
                        class="inline-flex items-center gap-3 bg-white text-blue-700 font-extrabold
                               px-8 py-4 rounded-2xl shadow-2xl hover:shadow-blue-900/30
@@ -827,7 +827,7 @@ select.form-input { padding-left:1rem; }
                 Everything you need to know about listing your business on QuickDials.
             </p>
             <div class="flex flex-wrap items-center justify-center gap-8 mt-8">
-                @foreach([['< 2 hrs','Avg. response time'],['4.9 ★','Support rating'],['8,100+','Businesses listed']] as $fs)
+                @foreach([['< 2 hrs','Avg. response time'],['4.9 ★','Support rating'],['1557+','Businesses listed']] as $fs)
                 <div class="flex items-center gap-2.5">
                     <span class="text-lg font-extrabold text-blue-600">{{ $fs[0] }}</span>
                     <span class="text-slate-400 text-xs leading-tight">{{ $fs[1] }}</span>
