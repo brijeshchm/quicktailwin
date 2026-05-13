@@ -86,7 +86,7 @@
                             <div class="w-4 h-4 border-2 border-blue-200 border-t-blue-500 rounded-full animate-spin shrink-0"></div>
                             <span class="text-sm text-gray-400 font-medium">Searching...</span>
                         </div>
-                        <ul id="hero-suggestions-list"></ul>
+                        <ul id="hero-suggestions-list" ></ul>
                     </div>
                 </div>
 

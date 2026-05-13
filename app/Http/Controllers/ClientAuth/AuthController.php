@@ -576,7 +576,7 @@ class AuthController extends Controller
                 $m->to($request->input('email'), "")->subject($subject);
             });
             
-            dd($checkmail);
+            
         }
         
         return response()->json([

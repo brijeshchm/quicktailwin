@@ -747,7 +747,7 @@
 
  
 
-@push('scripts')
+ 
 <script>
 // ─── Intersection Observer: slide-up / slide-left / slide-right ────────────
 const io = new IntersectionObserver(entries => {
@@ -864,4 +864,3 @@ let reviewTimer = setInterval(() => reviewNav(1), 4500);
 document.getElementById('review-slider-wrap')?.addEventListener('mouseenter', () => clearInterval(reviewTimer));
 document.getElementById('review-slider-wrap')?.addEventListener('mouseleave', () => { reviewTimer = setInterval(() => reviewNav(1), 4500); });
 </script>
-@endpush

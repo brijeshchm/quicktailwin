@@ -453,7 +453,8 @@ select.form-input { padding-left:1rem; }
                                     </label>
                                     <div class="relative">
                                         <svg class="field-icon absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
-                                        <input name="businessName" type="text" placeholder="e.g. Sharma Enterprises"
+                                        <input type="hidden" name="initial_form_submit" value="initialformsubmit">
+                                        <input name="business_name" type="text" placeholder="Enter Business Name"
                                                class="form-input" required minlength="2" />
                                     </div>
                                     <p class="field-error text-red-500 text-[10px] mt-0.5 hidden"></p>
@@ -474,76 +475,20 @@ select.form-input { padding-left:1rem; }
                                         <label class="block text-xs font-semibold text-slate-600 mb-1">Phone</label>
                                         <div class="relative">
                                             <svg class="field-icon absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .9h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 15z"/></svg>
-                                            <input name="phone" type="tel" placeholder="+91 98765 43210"
-                                                   class="form-input" required minlength="10" />
+                                            <input name="mobile" type="tel" placeholder="Enter Phone"
+                                                   class="form-input" minlength="10" required />
                                         </div>
                                         <p class="field-error text-red-500 text-[10px] mt-0.5 hidden"></p>
                                     </div>
                                 </div>
-
-                                {{-- City + Category --}}
-                                <div class="grid grid-cols-2 gap-2.5">
-                                    <div>
-                                        <label class="block text-xs font-semibold text-slate-600 mb-1">City</label>
-                                        <div class="relative">
-                                            <svg class="field-icon absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                                            <input name="city" type="text" placeholder="Mumbai"
-                                                   class="form-input" required minlength="2" />
-                                        </div>
-                                        <p class="field-error text-red-500 text-[10px] mt-0.5 hidden"></p>
-                                    </div>
-                                    <div>
-                                        <label class="block text-xs font-semibold text-slate-600 mb-1">Category</label>
-                                        <select name="businessCategory" class="form-input" required>
-                                            <option value="">Select…</option>
-                                            @foreach($categories as $cat)
-                                            <option value="{{ $cat }}">{{ $cat }}</option>
-                                            @endforeach
-                                        </select>
-                                        <p class="field-error text-red-500 text-[10px] mt-0.5 hidden"></p>
-                                    </div>
-                                </div>
-
-                                {{-- Package --}}
-                                <div>
-                                    <label class="block text-xs font-semibold text-slate-600 mb-1.5">
-                                        Interested Package
-                                    </label>
-                                    <div class="grid grid-cols-3 gap-2">
-                                        @foreach($packages as $pkg)
-                                        <div class="pkg-card relative rounded-xl p-2.5 border-2 border-slate-200
-                                                    bg-white text-center"
-                                             data-pkg="{{ $pkg['id'] }}"
-                                             onclick="selectPkg(this,'{{ $pkg['id'] }}')">
-                                            @if($pkg['badge'])
-                                            <div class="absolute -top-2 left-1/2 -translate-x-1/2 text-[9px]
-                                                        font-bold text-white px-2 py-0.5 rounded-full whitespace-nowrap
-                                                        {{ $pkg['id'] === 'growth' ? 'bg-blue-500' : 'bg-violet-500' }}">
-                                                {{ $pkg['badge'] }}
-                                            </div>
-                                            @endif
-                                            <div class="text-lg mb-1">
-                                                {{ $pkg['icon'] === 'globe' ? '🌐' : ($pkg['icon'] === 'trending' ? '📈' : '✨') }}
-                                            </div>
-                                            <div class="text-[10px] font-semibold text-slate-700 leading-tight">
-                                                {{ $pkg['name'] }}
-                                            </div>
-                                            <div class="pkg-check absolute top-1 right-1 hidden">
-                                                <svg class="w-3 h-3 text-blue-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                                            </div>
-                                        </div>
-                                        @endforeach
-                                    </div>
-                                    <input type="hidden" name="packageInterest" id="pkg-hidden" required />
-                                    <p id="pkg-error" class="text-red-500 text-[10px] mt-1 hidden">Please select a package</p>
-                                </div>
+                             
 
                                 {{-- Submit --}}
                                 <button type="submit" id="submit-btn"
                                         class="submit-btn w-full py-3 mt-1 text-white font-bold
                                                rounded-xl text-sm flex items-center justify-center gap-2">
                                     <span id="btn-idle" class="flex items-center gap-2">
-                                        🚀 Start Your Business Free
+                                     Start Your Business Free
                                         <svg class="w-4 h-4 btn-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                                     </span>
                                     <span id="btn-loading" class="hidden flex items-center gap-2">
@@ -569,10 +514,10 @@ select.form-input { padding-left:1rem; }
                                     <svg class="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                                 </div>
                                 <h3 class="text-xl font-extrabold text-slate-800 mb-2">You're All Set!</h3>
-                                <p class="text-slate-500 text-sm mb-5">Our team will contact you within 24 hours to activate your listing.</p>
+                                <p class="text-slate-500 text-sm mb-5">Congratulations! Your business account is now active. Log in to manage your profile and grow your business with QuickDials.</p>
                                 <div class="bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-100
                                             rounded-xl p-3.5 text-sm text-emerald-700 font-medium">
-                                    Package selected: <span id="success-pkg" class="font-bold"></span>
+                                    Login: <span id="success-pkg" class="font-bold"></span>
                                 </div>
                             </div>
                         </div>
@@ -1131,101 +1076,264 @@ select.form-input { padding-left:1rem; }
         reviewSliderEl.addEventListener('mouseleave', () => { rPaused = false; });
     }
 
-    /* ══════════════════════════════════════════
-       PACKAGE SELECTOR
-    ══════════════════════════════════════════ */
-    let selectedPkg = null;
+ 
 
-    window.selectPkg = (el, id) => {
-        selectedPkg = id;
-        document.getElementById('pkg-hidden').value = id;
-        document.getElementById('pkg-error').classList.add('hidden');
-
-        document.querySelectorAll('.pkg-card').forEach(c => {
-            c.classList.remove('selected-starter','selected-growth','selected-premium');
-            c.querySelector('.pkg-check')?.classList.add('hidden');
-        });
-        el.classList.add(`selected-${id}`);
-        el.querySelector('.pkg-check')?.classList.remove('hidden');
-    };
+     
 
     /* ══════════════════════════════════════════
        FORM VALIDATION & SUBMIT
     ══════════════════════════════════════════ */
-    const form = document.getElementById('biz-form');
-    if (form) {
-        form.querySelectorAll('.form-input').forEach(input => {
-            input.addEventListener('focus', () => {
-                input.parentElement.querySelectorAll('.field-icon').forEach(ic => ic.classList.replace('text-slate-400','text-blue-500'));
-            });
-            input.addEventListener('blur', () => {
-                input.parentElement.querySelectorAll('.field-icon').forEach(ic => ic.classList.replace('text-blue-500','text-slate-400'));
-            });
+    
+const form = document.getElementById('biz-form');
+
+if (form) {
+    // ============================================
+    // CSRF Token (read from meta tag — works in external .js too)
+    // ============================================
+    const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content || '';
+
+    // ============================================
+    // Field icon focus/blur effect
+    // ============================================
+    form.querySelectorAll('.form-input').forEach(input => {
+        input.addEventListener('focus', () => {
+            input.parentElement.querySelectorAll('.field-icon')
+                .forEach(ic => ic.classList.replace('text-slate-400', 'text-blue-500'));
         });
+        input.addEventListener('blur', () => {
+            input.parentElement.querySelectorAll('.field-icon')
+                .forEach(ic => ic.classList.replace('text-blue-500', 'text-slate-400'));
+        });
+    });
 
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            let valid = true;
-
-            form.querySelectorAll('[required]').forEach(field => {
-                const wrap = field.closest('div');
-                const err  = wrap?.querySelector('.field-error');
-                const val  = field.value.trim();
-                if (!val || (field.type === 'email' && !/\S+@\S+\.\S+/.test(val)) || (field.minLength && val.length < field.minLength)) {
-                    valid = false;
-                    if (err) { err.textContent = field.type === 'email' ? 'Enter a valid email' : field.name === 'phone' ? 'Enter a valid phone number' : `${field.name} is required`; err.classList.remove('hidden'); }
-                } else {
-                    err?.classList.add('hidden');
-                }
-            });
-
-            if (!selectedPkg) {
-                valid = false;
-                document.getElementById('pkg-error').classList.remove('hidden');
-            }
-
-            if (!valid) return;
-
-            const btn = document.getElementById('submit-btn');
-            document.getElementById('btn-idle').classList.add('hidden');
-            document.getElementById('btn-loading').classList.remove('hidden');
-            btn.disabled = true;
-
-            try {
-                const fd = new FormData(form);
-                fd.append('packageInterest', selectedPkg);
-                await fetch('{{ route("business-owners.submit") }}', { method:'POST', body:fd, headers:{'X-CSRF-TOKEN':'{{ csrf_token() }}'} });
-            } catch (_) {}
-
-            await new Promise(r => setTimeout(r, 1800));
-
-            // Show success
-            form.classList.add('hidden');
-            const successEl = document.getElementById('form-success');
-            successEl.classList.remove('hidden');
-            successEl.classList.add('show');
-            document.getElementById('success-pkg').textContent = selectedPkg;
-
-            // Confetti
-            const container = document.getElementById('confetti-container');
-            const colors = ['#2563eb','#7c3aed','#06b6d4','#10b981','#f59e0b','#ef4444'];
-            for (let i = 0; i < 30; i++) {
-                const piece = document.createElement('div');
-                piece.className = 'confetti-piece';
-                piece.style.cssText = `
-                    background:${colors[i%6]};
-                    left:50%;top:50%;
-                    animation-duration:${0.8+Math.random()*0.6}s;
-                `;
-                piece.style.setProperty('--tx', `${(Math.random()-0.5)*300}px`);
-                piece.style.setProperty('--ty', `${(Math.random()-0.5)*300}px`);
-                piece.style.setProperty('--r',  `${Math.random()*720}deg`);
-                container.appendChild(piece);
-                setTimeout(() => piece.remove(), 1500);
-            }
+    // ============================================
+    // Phone input — digits only, max 10
+    // ============================================
+    const phoneField = form.querySelector('input[name="phone"]');
+    if (phoneField) {
+        phoneField.addEventListener('input', function () {
+            this.value = this.value.replace(/\D/g, '').slice(0, 10);
         });
     }
 
+    // ============================================
+    // Validation helpers
+    // ============================================
+    function showError(field, message) {
+        const wrap = field.closest('div');
+        let err = wrap?.querySelector('.field-error');
+        
+        if (!err) {
+            err = document.createElement('p');
+            err.className = 'field-error text-red-500 text-[10px] mt-0.5';
+            wrap?.appendChild(err);
+        }
+        
+        err.textContent = message;
+        err.classList.remove('hidden');
+        field.classList.add('border-red-400');
+    }
+
+    function clearError(field) {
+        const wrap = field.closest('div');
+        const err = wrap?.querySelector('.field-error');
+        err?.classList.add('hidden');
+        field.classList.remove('border-red-400');
+    }
+
+    function validateField(field) {
+        const val = field.value.trim();
+        const name = field.name;
+
+        if (!val) {
+            const label = field.previousElementSibling?.textContent || name;
+            showError(field, `${label.replace(/[*:]/g, '').trim()} is required`);
+            return false;
+        }
+
+        if (field.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+            showError(field, 'Enter a valid email address');
+            return false;
+        }
+
+        if (name === 'phone' && !/^[6-9]\d{9}$/.test(val)) {
+            showError(field, 'Enter a valid 10-digit mobile number');
+            return false;
+        }
+
+        if (field.minLength > 0 && val.length < field.minLength) {
+            showError(field, `Minimum ${field.minLength} characters required`);
+            return false;
+        }
+
+        clearError(field);
+        return true;
+    }
+
+    // Real-time clear on input
+    form.querySelectorAll('[required]').forEach(field => {
+        field.addEventListener('blur', () => validateField(field));
+        field.addEventListener('input', () => {
+            if (field.classList.contains('border-red-400')) clearError(field);
+        });
+    });
+
+    // ============================================
+    // FORM SUBMIT
+    // ============================================
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // 1. Client-side validation
+        let valid = true;
+        form.querySelectorAll('[required]').forEach(field => {
+            if (!validateField(field)) valid = false;
+        });
+
+        // 2. Validate package selection (hidden field)
+        const pkgInput = form.querySelector('input[name="package_interest"]');
+        if (pkgInput && !pkgInput.value) {
+            valid = false;
+            const pkgGrid = document.getElementById('pkg-grid');
+            if (pkgGrid) {
+                let pkgErr = pkgGrid.parentElement.querySelector('.pkg-error');
+                if (!pkgErr) {
+                    pkgErr = document.createElement('p');
+                    pkgErr.className = 'pkg-error text-red-500 text-[10px] mt-1';
+                    pkgGrid.parentElement.appendChild(pkgErr);
+                }
+                pkgErr.textContent = 'Please select a package';
+                pkgGrid.classList.add('ring-2', 'ring-red-300', 'rounded-xl', 'p-1');
+            }
+        }
+
+        if (!valid) {
+            // Scroll to first error
+            const firstError = form.querySelector('.border-red-400, .pkg-error');
+            firstError?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return;
+        }
+
+        // 3. Loading state
+        const btn = document.getElementById('submit-btn');
+        document.getElementById('btn-idle').classList.add('hidden');
+        document.getElementById('btn-loading').classList.remove('hidden');
+        btn.disabled = true;
+
+        // 4. Submit
+        try {
+            const fd = new FormData(form);
+
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: fd,
+                headers: {
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken,
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+            });
+console.log(response);
+            // Handle Laravel validation errors (422)
+            if (response.status === 422) {
+                const data = await response.json();
+                Object.entries(data.errors || {}).forEach(([fieldName, messages]) => {
+                    const field = form.querySelector(`[name="${fieldName}"]`);
+                    if (field) showError(field, messages[0]);
+                });
+                
+                const firstError = form.querySelector('.border-red-400');
+                firstError?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                resetButton();
+                return;
+            }
+
+            // Handle other errors
+            if (!response.ok) {
+                throw new Error('Server returned ' + response.status);
+            }
+
+            // SUCCESS
+            const data = await response.json().catch(() => ({}));
+            showSuccess(data.message);
+
+        } catch (err) {
+            console.error('Submit failed:', err);
+            showToast('Something went wrong. Please try again.', 'error');
+            resetButton();
+        }
+    });
+
+    // ============================================
+    // UI HELPERS
+    // ============================================
+    function resetButton() {
+        const btn = document.getElementById('submit-btn');
+        document.getElementById('btn-idle').classList.remove('hidden');
+        document.getElementById('btn-loading').classList.add('hidden');
+        btn.disabled = false;
+    }
+
+    function showSuccess(customMessage) {
+        form.classList.add('hidden');
+        const successEl = document.getElementById('form-success');
+        
+        if (customMessage) {
+            const msgEl = successEl.querySelector('.success-message');
+            if (msgEl) msgEl.textContent = customMessage;
+        }
+        
+        successEl.classList.remove('hidden');
+        successEl.classList.add('show');
+
+        // Confetti
+        launchConfetti();
+        
+        // Scroll into view
+        successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function launchConfetti() {
+        const container = document.getElementById('confetti-container');
+        if (!container) return;
+
+        const colors = ['#2563eb', '#7c3aed', '#06b6d4', '#10b981', '#f59e0b', '#ef4444'];
+        
+        for (let i = 0; i < 30; i++) {
+            const piece = document.createElement('div');
+            piece.className = 'confetti-piece';
+            piece.style.cssText = `
+                background:${colors[i % 6]};
+                left:50%;top:50%;
+                animation-duration:${0.8 + Math.random() * 0.6}s;
+            `;
+            piece.style.setProperty('--tx', `${(Math.random() - 0.5) * 300}px`);
+            piece.style.setProperty('--ty', `${(Math.random() - 0.5) * 300}px`);
+            piece.style.setProperty('--r', `${Math.random() * 720}deg`);
+            container.appendChild(piece);
+            setTimeout(() => piece.remove(), 1500);
+        }
+    }
+
+    function showToast(message, type = 'error') {
+        const existing = document.getElementById('form-toast');
+        existing?.remove();
+
+        const colors = {
+            success: 'bg-green-50 border-green-200 text-green-700',
+            error: 'bg-red-50 border-red-200 text-red-700',
+        };
+
+        const toast = document.createElement('div');
+        toast.id = 'form-toast';
+        toast.className = `fixed top-5 right-5 z-[9999] px-4 py-3 rounded-xl border ${colors[type]} shadow-lg text-sm font-medium max-w-sm`;
+        toast.textContent = message;
+        
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 4000);
+    }
+}
     /* ══════════════════════════════════════════
        FAQ ACCORDION
     ══════════════════════════════════════════ */

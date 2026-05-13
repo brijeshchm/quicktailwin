@@ -150,6 +150,7 @@ class BusinessOwnerController extends Controller
 	 */
 	public function store(Request $request)
 	{
+		// dd($request->all());
 		if ($request->has('initial_form_submit')) {
 			$client = new Client;
 			$messages = ['mobile.regex' => 'Mobile number cannot start with 0.', 'mobile.digits' => 'Please enter a valid mobile number'];
@@ -166,11 +167,17 @@ class BusinessOwnerController extends Controller
 				],
 				'email' => 'required|email|unique:clients,email,NULL,id'
 			], $messages);
-			if ($validator->fails()) {
-				return redirect("/business-owners")
-					->withErrors($validator)
-					->withInput();
-			} else {
+
+
+				if ($validator->fails()) {
+				$errorsBag = $validator->getMessageBag()->toArray();
+
+				return response()->json(['status' => true, 'errors' => $errorsBag], 422);
+			}
+
+
+
+			 
 
 
 				$business_slug = NULL;
@@ -180,30 +187,9 @@ class BusinessOwnerController extends Controller
 				$businessName = preg_replace('/\s+/', ' ', str_replace('&', '', trim($string)));
 				$business_slug = trim(generate_slug(trim($businessName)));
 
-				if (is_null($business_slug)) {
-					return redirect("/business-owners")
-						->withErrors($validator)
-						->withInput();
-				}
-				$slugExists = DB::table('clients')
-					->select(DB::raw('business_slug'))
-					->where('business_slug',  $business_slug)
-					->orderBy('id', 'desc')
-					->first();
-				// if (!empty($slugExists) && $slugExists->count() > 0) {
-				// 	$business_slug = $slugExists->business_slug;
-				// 	$business_slug = explode("-", $business_slug);
-				// 	$end = end($business_slug);
-				// 	reset($business_slug);
-				// 	if (!is_numeric($end)) {
-				// 		$business_slug[] = 1;
-				// 	} else {
-				// 		++$end;
-				// 		$business_slug[count($business_slug) - 1] = $end;
-				// 	}
-				// 	$business_slug = implode("-", $business_slug);
-				// }
-			}
+			 
+				 
+			 
 
 			$client->business_name = $businessName;
 			$client->business_slug = $business_slug;
@@ -215,7 +201,7 @@ class BusinessOwnerController extends Controller
 			$client->active_status = '1';
 
 			$client->max_kw = 30;
-
+ 
 			if ($client->save()) {
 				$client = Client::find($client->id);
 				$emailname = $request->input('email');
@@ -236,15 +222,23 @@ class BusinessOwnerController extends Controller
 				%0D%0A--
 				%0D%0ARegards
 				%0D%0AQuickDials Team";
-				sendSMS($client->mobile, $smsMessage);
-				$this->success_msg .= 'Business registered successfully!';
-				$request->session()->flash('success_msg', $this->success_msg);
+				//sendSMS($client->mobile, $smsMessage);
+				 
 
-				return redirect("/business-owners");
+			 
+					return response()->json([
+						'status' => true,						 
+						'message' => 'Business registered successfully!'						 
+					],200);
+
 			} else {
-				$this->danger_msg .= 'Business not registered!';
-				$request->session()->flash('danger_msg', $this->danger_msg);
-				return redirect("/business-owners");
+				 
+				return response()->json([
+						'status' => false,						 
+						'message' => 'Some Error Follow up'						 
+					],404);
+
+
 			}
 		} else if ($request->has('first_form_submit')) {
 			$client = Client::find($request->input('business_id'));
