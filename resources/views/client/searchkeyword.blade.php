@@ -438,7 +438,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
                                     </a>
                                     <a href="https://wa.me/{{ preg_replace('/\D/', '', $qb['phone'] ?? '') }}" target="_blank"
                                        class="flex items-center justify-center w-12 h-12 border border-gray-300 rounded-xl hover:bg-gray-50 transition-all">
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="w-6 h-6">
+                                        <img src="{{ asset('WhatsApp.svg') }}" alt="WhatsApp" class="w-6 h-6">
                                     </a>
                                 </div>
                             </div>

@@ -80,26 +80,38 @@
     ];
 @endphp
 
-{{-- ───── Popular Services Section ───── --}}
 <section class="bg-gray-50 border-t border-gray-100 py-10" aria-label="Popular services on QuickDials">
     <div class="container mx-auto px-4">
-        <div class="mb-6">
-            <h2 class="text-lg md:text-xl font-bold text-gray-800">Popular Services on QuickDials</h2>
+        {{-- Section Header --}}
+        <div class="mb-8 text-center md:text-left">
+            <h2 class="text-lg md:text-2xl font-bold text-gray-800">
+                Trending Services on QuickDials
+            </h2>
             <p class="text-xs md:text-sm text-gray-500 mt-1">
                 Browse trending categories and find verified providers near you.
             </p>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8">
+        {{-- Categories — Stacked Vertically --}}
+        <div class="space-y-6">
             @foreach($popularServices as $category => $group)
-                <div>
-                    <h3 class="text-xs font-bold text-gray-800 uppercase tracking-wider mb-3">
-                        {{ $category }}
-                    </h3>
-                    <ul class="space-y-2">
+                <div class="flex flex-col md:flex-row md:items-start gap-3 md:gap-6 pb-5 border-b border-gray-200 last:border-0 last:pb-0">
+
+                    {{-- Category Label --}}
+                    <div class="md:w-56 shrink-0">
+                        <h3 class="text-xs font-bold text-gray-800 uppercase tracking-wider flex items-center gap-2">
+                            <span class="w-1 h-4 bg-primary rounded-full"></span>
+                            {{ $category }}
+                        </h3>
+                        <p class="text-[11px] text-gray-400 mt-1 hidden md:block">
+                            {{ count($group['items']) }} services
+                        </p>
+                    </div>
+
+                    {{-- Service Pills --}}
+                    <div class="flex flex-wrap gap-2 flex-1">
                         @foreach($group['items'] as $service)
                             @php
-                                
                                 $href = $group['type'] === 'online'
                                     ? route('city.slug', [
                                         'city_slug'    => 'online',
@@ -107,20 +119,21 @@
                                     ])
                                     : route('showCity', $service['slug']);
                             @endphp
-                            <li>
-                                <a href="{{ $href }}"
-                                   title="{{ $service['name'] }}"
-                                   class="text-xs md:text-sm text-gray-500 hover:text-primary transition-colors leading-relaxed">
-                                    {{ $service['name'] }}
-                                </a>
-                            </li>
+                            <a href="{{ $href }}"
+                               title="{{ $service['name'] }}"
+                               class="inline-block px-3 py-1.5 bg-white border border-gray-200 rounded-full text-xs text-gray-600 hover:bg-primary hover:text-gray hover:border-primary hover:shadow-sm transition-all duration-200 whitespace-nowrap text-xs md:text-sm text-gray-500 hover:text-primary transition-colors">
+                                {{ $service['name'] }}
+                            </a>
                         @endforeach
-                    </ul>
+                    </div>
                 </div>
             @endforeach
         </div>
     </div>
 </section>
+
+ 
+
 <footer class="bg-gray-50 pt-10 md:pt-16 pb-8 border-t border-gray-200">
     <div class="w-full px-4 md:px-8">
 
@@ -253,7 +266,7 @@
             {{-- Col 1: Logo + Quick Links --}}
             <div class="col-span-1">
                 <div class="mb-4">
-                    <img
+                    <img loading="lazy" decoding="async"
                         src="{{ asset('client/images/small-logo.png') }}"
                         alt="QuickDials"
                         class="h-10 w-auto object-contain"

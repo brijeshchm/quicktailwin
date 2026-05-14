@@ -198,7 +198,7 @@ $colorMap = [
                        class="c-item-btn px-3.5 py-1.5 rounded-lg text-sm font-medium
                               flex items-center gap-1.5">
                         @if(!empty($item['icon']))
-                        <img src="{{ $item['icon'] }}"
+                        <img loading="lazy" decoding="async" src="{{ $item['icon'] }}"
                              alt="{{ $item['alt'] }}"
                              class="w-4 h-4 object-contain shrink-0">
                         @endif

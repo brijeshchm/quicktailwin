@@ -1,10 +1,10 @@
 
 @extends('client.layouts.app')
-@section('title', 'Terms & Conditions | QuickDials - User Agreement & Service Terms')
+@section('title', 'Terms & Conditions | QuickDials - User Data & Privacy Protection')
 
-@section('description', 'Read the QuickDials Terms & Conditions to understand the rules, user responsibilities, service policies, business listing guidelines, account usage terms, and legal conditions for using the QuickDials platform.')
+@section('description', 'Read the QuickDials Terms & Conditions to learn how we collect, use, store, and protect user information, personal data, cookies, and business details while ensuring privacy and security on our platform.')
 
-@section('keyword', 'QuickDials terms and conditions, user agreement, service terms, website usage policy, business listing terms, account terms, QuickDials policies, legal terms, online business directory rules, platform conditions, QuickDials user policy')
+@section('keyword', 'QuickDials Terms & Conditions, user data protection, privacy protection, data security policy, personal information policy, website privacy terms, cookies policy, online privacy policy, business listing privacy, QuickDials legal policy, user information security')
 @section('content') 
 
  
@@ -151,8 +151,8 @@
         </div>
 
         <h1 class="text-5xl md:text-6xl font-black mb-4 leading-tight anim-2">
-            <span style="color:hsl(270 50% 20%)">Privacy &</span>
-            <span class="shimmer-text"> Policy of Use</span>
+            <span style="color:hsl(270 50% 20%)">Terms & </span>
+            <span class="shimmer-text"> Conditions of Use</span>
         </h1>
 
         <p class="text-lg max-w-2xl mx-auto mb-8 anim-3" style="color:hsl(270 15% 45%)">
@@ -237,26 +237,26 @@
                             <polyline points="10 9 9 9 8 9"/>
                         </svg>
                     </div>
-                    <h2 class="text-xl font-bold section-title">Quick Dials — Terms of Use</h2>
+                    <h2 class="text-xl font-bold section-title">QuickDials — Terms of Use</h2>
                 </div>
                 <div class="text-sm leading-relaxed space-y-3 section-body">
-                    <p>By visiting our website or transacting with Quick Dials, you agree to these Terms of Use. Please read them carefully before using this website. By using the website or any service available on it, you agree to be bound by these terms. Quick Dials reserves the right to change these Terms at any time. Your continued use of the website constitutes acceptance of the modified Terms.</p>
+                    <p>By visiting our website or transacting with QuickDials, you agree to these Terms of Use. Please read them carefully before using this website. By using the website or any service available on it, you agree to be bound by these terms. QuickDials reserves the right to change these Terms at any time. Your continued use of the website constitutes acceptance of the modified Terms.</p>
                     <div class="mt-5">
                         <h3 class="font-semibold text-base mb-2 subsection-title">Registrations and Certifications</h3>
                         <div class="pl-4 border-l-2 subsection-border">
-                            <p>Quick Dials acts only as a facilitator and not as an agent or partner for any third-party training or certification organization. You acknowledge that Quick Dials is only a service provider providing services related to registration, and is not responsible for any disputes arising from the certification processes or program outcomes.</p>
+                            <p>QuickDials acts only as a facilitator and not as an agent or partner for any third-party training or certification organization. You acknowledge that QuickDials is only a service provider providing services related to registration, and is not responsible for any disputes arising from the certification processes or program outcomes.</p>
                         </div>
                     </div>
                     <div class="mt-5">
                         <h3 class="font-semibold text-base mb-2 subsection-title">Accuracy of Information</h3>
                         <div class="pl-4 border-l-2 subsection-border">
-                            <p>While Quick Dials endeavors to ensure that information is current and accurate, we do not represent or warrant that it will be accurate or complete, or that it will be suitable for your particular circumstances. You agree that our website information is for general guidance only and should not be relied upon as the sole basis for decision-making.</p>
+                            <p>While QuickDials endeavors to ensure that information is current and accurate, we do not represent or warrant that it will be accurate or complete, or that it will be suitable for your particular circumstances. You agree that our website information is for general guidance only and should not be relied upon as the sole basis for decision-making.</p>
                         </div>
                     </div>
                     <div class="mt-5">
                         <h3 class="font-semibold text-base mb-2 subsection-title">User Responsibilities</h3>
                         <div class="pl-4 border-l-2 subsection-border">
-                            <p>Users are solely responsible for verifying information independently. Quick Dials shall not be liable for any errors, omissions, or inaccuracies in the content provided on the website or in connection with any action taken in reliance thereon.</p>
+                            <p>Users are solely responsible for verifying information independently. QuickDials shall not be liable for any errors, omissions, or inaccuracies in the content provided on the website or in connection with any action taken in reliance thereon.</p>
                         </div>
                     </div>
                 </div>
@@ -273,23 +273,23 @@
                     <h2 class="text-xl font-bold section-title">Venue Only</h2>
                 </div>
                 <div class="text-sm leading-relaxed space-y-3 section-body">
-                    <p>Quick Dials provides its services as a venue only, not as an organizer, sponsor, or promoter of the courses, programs, or certifications listed on the website. Quick Dials merely provides a platform for candidates and training organizations to connect.</p>
+                    <p>QuickDials provides its services as a venue only, not as an organizer, sponsor, or promoter of the courses, programs, or certifications listed on the website. QuickDials merely provides a platform for candidates and training organizations to connect.</p>
                     <div class="mt-5">
                         <h3 class="font-semibold text-base mb-2 subsection-title">Third-Party Services</h3>
                         <div class="pl-4 border-l-2 subsection-border">
-                            <p>Any training, certification, or associated services obtained through the Quick Dials platform are offered by independent third-party providers. Quick Dials makes no representations about the quality, safety, morality, legality, or any other aspect of services listed on the platform.</p>
+                            <p>Any training, certification, or associated services obtained through the QuickDials platform are offered by independent third-party providers. QuickDials makes no representations about the quality, safety, morality, legality, or any other aspect of services listed on the platform.</p>
                         </div>
                     </div>
                     <div class="mt-5">
                         <h3 class="font-semibold text-base mb-2 subsection-title">No Endorsement</h3>
                         <div class="pl-4 border-l-2 subsection-border">
-                            <p>The listing of any training provider, certification body, or course on the Quick Dials platform does not constitute an endorsement or recommendation by Quick Dials. Users should perform their own due diligence before engaging with any service provider.</p>
+                            <p>The listing of any training provider, certification body, or course on the QuickDials platform does not constitute an endorsement or recommendation by QuickDials. Users should perform their own due diligence before engaging with any service provider.</p>
                         </div>
                     </div>
                     <div class="mt-5">
                         <h3 class="font-semibold text-base mb-2 subsection-title">Fees and Payments</h3>
                         <div class="pl-4 border-l-2 subsection-border">
-                            <p>All fees quoted on the website are inclusive of applicable taxes unless stated otherwise. Quick Dials reserves the right to modify prices at any time without prior notice. Payment terms and cancellation policies are determined independently by service providers.</p>
+                            <p>All fees quoted on the website are inclusive of applicable taxes unless stated otherwise. QuickDials reserves the right to modify prices at any time without prior notice. Payment terms and cancellation policies are determined independently by service providers.</p>
                         </div>
                     </div>
                 </div>
@@ -306,23 +306,23 @@
                     <h2 class="text-xl font-bold section-title">Ownership</h2>
                 </div>
                 <div class="text-sm leading-relaxed space-y-3 section-body">
-                    <p>All content on this website, including but not limited to text, graphics, logos, icons, images, audio clips, digital downloads, data compilations, and software, is the property of Quick Dials Pvt Ltd or its content suppliers and is protected by applicable intellectual property laws.</p>
+                    <p>All content on this website, including but not limited to text, graphics, logos, icons, images, audio clips, digital downloads, data compilations, and software, is the property of QuickDials Internet Pvt Ltd or its content suppliers and is protected by applicable intellectual property laws.</p>
                     <div class="mt-5">
                         <h3 class="font-semibold text-base mb-2 subsection-title">Intellectual Property Rights</h3>
                         <div class="pl-4 border-l-2 subsection-border">
-                            <p>The compilation of all content on this site is the exclusive property of Quick Dials Pvt Ltd, with copyright authorship for this collection by Quick Dials, and protected by applicable copyright laws. All trademarks and service marks on this website not owned by Quick Dials are the property of their respective owners.</p>
+                            <p>The compilation of all content on this site is the exclusive property of QuickDials Pvt Ltd, with copyright authorship for this collection by QuickDials, and protected by applicable copyright laws. All trademarks and service marks on this website not owned by QuickDials are the property of their respective owners.</p>
                         </div>
                     </div>
                     <div class="mt-5">
                         <h3 class="font-semibold text-base mb-2 subsection-title">License to Use</h3>
                         <div class="pl-4 border-l-2 subsection-border">
-                            <p>Quick Dials grants you a limited, non-exclusive, revocable license to access and make personal, non-commercial use of this website. This license does not include any resale or commercial use of this site or its contents, any collection and use of any service listings or descriptions, any derivative use of the site, or any use of data mining, robots, or similar data gathering and extraction tools.</p>
+                            <p>QuickDials grants you a limited, non-exclusive, revocable license to access and make personal, non-commercial use of this website. This license does not include any resale or commercial use of this site or its contents, any collection and use of any service listings or descriptions, any derivative use of the site, or any use of data mining, robots, or similar data gathering and extraction tools.</p>
                         </div>
                     </div>
                     <div class="mt-5">
                         <h3 class="font-semibold text-base mb-2 subsection-title">Restrictions</h3>
                         <div class="pl-4 border-l-2 subsection-border">
-                            <p>Without prior written consent of Quick Dials, no part of this website may be reproduced, distributed, framed, published, uploaded, downloaded, transmitted, or used in any commercial manner. Unauthorized use terminates the permission or license granted by Quick Dials.</p>
+                            <p>Without prior written consent of QuickDials, no part of this website may be reproduced, distributed, framed, published, uploaded, downloaded, transmitted, or used in any commercial manner. Unauthorized use terminates the permission or license granted by QuickDials.</p>
                         </div>
                     </div>
                 </div>
@@ -341,7 +341,7 @@
                     <h2 class="text-xl font-bold section-title">Limitation of Liability</h2>
                 </div>
                 <div class="text-sm leading-relaxed space-y-3 section-body">
-                    <p>Quick Dials and its directors, officers, employees, agents, contractors, successors, and assigns shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from:</p>
+                    <p>QuickDials and its directors, officers, employees, agents, contractors, successors, and assigns shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from:</p>
                     <ul class="list-disc pl-5 space-y-2 mt-3">
                         <li>Your access to or use of or inability to access or use the Service</li>
                         <li>Any conduct or content of any third party on the Service</li>
@@ -352,13 +352,13 @@
                     <div class="mt-5">
                         <h3 class="font-semibold text-base mb-2 subsection-title">Maximum Liability</h3>
                         <div class="pl-4 border-l-2 subsection-border">
-                            <p>In no event shall Quick Dials total liability to you for all damages, losses, and causes of action exceed the amount you have paid to Quick Dials, if any, in the one (1) month period prior to the claim. Some jurisdictions do not allow the exclusion of certain warranties or the limitation or exclusion of liability for incidental or consequential damages; therefore, some of the above limitations may not apply to you.</p>
+                            <p>In no event shall QuickDials total liability to you for all damages, losses, and causes of action exceed the amount you have paid to QuickDials, if any, in the one (1) month period prior to the claim. Some jurisdictions do not allow the exclusion of certain warranties or the limitation or exclusion of liability for incidental or consequential damages; therefore, some of the above limitations may not apply to you.</p>
                         </div>
                     </div>
                     <div class="mt-5">
                         <h3 class="font-semibold text-base mb-2 subsection-title">Disclaimer of Warranties</h3>
                         <div class="pl-4 border-l-2 subsection-border">
-                            <p>The Service is provided on an "AS IS" and "AS AVAILABLE" basis without any warranties of any kind, either express or implied, including, but not limited to, implied warranties of merchantability, fitness for a particular purpose, or non-infringement. Quick Dials does not warrant that the Service will function uninterrupted, secure, or available at any particular time or location.</p>
+                            <p>The Service is provided on an "AS IS" and "AS AVAILABLE" basis without any warranties of any kind, either express or implied, including, but not limited to, implied warranties of merchantability, fitness for a particular purpose, or non-infringement. QuickDials does not warrant that the Service will function uninterrupted, secure, or available at any particular time or location.</p>
                         </div>
                     </div>
                 </div>
@@ -386,7 +386,7 @@
                     <div class="mt-5">
                         <h3 class="font-semibold text-base mb-2 subsection-title">Consumer Protection</h3>
                         <div class="pl-4 border-l-2 subsection-border">
-                            <p>Quick Dials complies with applicable consumer protection laws. If you are a consumer (as defined under applicable law), nothing in these Terms is intended to limit your rights under consumer protection legislation.</p>
+                            <p>QuickDials complies with applicable consumer protection laws. If you are a consumer (as defined under applicable law), nothing in these Terms is intended to limit your rights under consumer protection legislation.</p>
                         </div>
                     </div>
                 </div>
@@ -403,17 +403,17 @@
                     <h2 class="text-xl font-bold section-title">Dispute Resolution</h2>
                 </div>
                 <div class="text-sm leading-relaxed space-y-3 section-body">
-                    <p>Before bringing a formal dispute, you agree to first attempt to resolve it informally by contacting Quick Dials. Quick Dials will try to resolve the dispute informally within 30 days of receiving your written notice.</p>
+                    <p>Before bringing a formal dispute, you agree to first attempt to resolve it informally by contacting QuickDials. QuickDials will try to resolve the dispute informally within 30 days of receiving your written notice.</p>
                     <div class="mt-5">
                         <h3 class="font-semibold text-base mb-2 subsection-title">Arbitration</h3>
                         <div class="pl-4 border-l-2 subsection-border">
-                            <p>If a dispute cannot be resolved informally, you and Quick Dials agree to submit to binding arbitration. The arbitration shall be conducted in English in India. The arbitrator's decision shall be final and binding and may be entered as a judgment in any court of competent jurisdiction.</p>
+                            <p>If a dispute cannot be resolved informally, you and QuickDials agree to submit to binding arbitration. The arbitration shall be conducted in English in India. The arbitrator's decision shall be final and binding and may be entered as a judgment in any court of competent jurisdiction.</p>
                         </div>
                     </div>
                     <div class="mt-5">
                         <h3 class="font-semibold text-base mb-2 subsection-title">Class Action Waiver</h3>
                         <div class="pl-4 border-l-2 subsection-border">
-                            <p>You agree that any arbitration or legal proceeding shall be limited to the dispute between you and Quick Dials individually. You waive any right to participate in class action lawsuits or class-wide arbitration against Quick Dials.</p>
+                            <p>You agree that any arbitration or legal proceeding shall be limited to the dispute between you and QuickDials individually. You waive any right to participate in class action lawsuits or class-wide arbitration against QuickDials.</p>
                         </div>
                     </div>
 
@@ -426,7 +426,7 @@
                                 </svg>
                             </div>
                             <div>
-                                <div class="font-semibold text-sm mb-1" style="color:hsl(270 50% 30%)">Contact Quick Dials</div>
+                                <div class="font-semibold text-sm mb-1" style="color:hsl(270 50% 30%)">Contact QuickDials</div>
                                 <p class="text-xs" style="color:hsl(270 20% 50%)">For any questions regarding these Terms of Use or to report a dispute, please reach out to our legal team. We are committed to resolving concerns promptly and fairly.</p>
                                 <div class="mt-3 flex flex-wrap gap-2">
                                     @foreach(['Legal Queries','Support','Report Issue'] as $btn)
@@ -453,10 +453,10 @@
                 </div>
                 <h3 class="font-bold text-lg mb-2 section-title">Your Trust Matters to Us</h3>
                 <p class="text-sm max-w-md mx-auto section-body">
-                    Quick Dials Pvt Ltd is committed to maintaining the highest standards of transparency and user protection. These policies are regularly reviewed and updated.
+                    QuickDials Internet Pvt Ltd is committed to maintaining the highest standards of transparency and user protection. These policies are regularly reviewed and updated.
                 </p>
                 <div class="flex items-center justify-center gap-2 mt-4 text-xs" style="color:hsl(270 20% 60%)">
-                    <span>© {{ date('Y') }} Quick Dials Pvt Ltd</span>
+                    <span>© {{ date('Y') }} QuickDials Pvt Ltd</span>
                     <span>·</span>
                     <span>All rights reserved</span>
                 </div>

@@ -44,7 +44,7 @@ class ClientDetailController extends Controller
  
         $data        = $response['data']         ?? [];
         $clientsList = $data['clientsList']       ?? [];
-       
+      
         $certificate = $data['certificate']       ?? [];
         $comment     = $data['comment']           ?? [];
         $areaBusiness    = $data['area_business']     ?? [];
@@ -61,7 +61,7 @@ class ClientDetailController extends Controller
                 return [];
             }
         });
- 
+
         // Gallery images
         $gallery = is_array($clientsList['gallery'] ?? null)
             ? $clientsList['gallery']
@@ -97,7 +97,6 @@ class ClientDetailController extends Controller
             }
         }
  
-        // Government recognitions
         $govDocs = [
             ['title' => 'CIN',   'no' => $certificate['cin_no']   ?? null, 'img' => $certificate['cin_certificate']   ?? null, 'tileBg' => 'linear-gradient(135deg,#1e3a8a,#2563eb)',  'color' => '#1d4ed8'],
             ['title' => 'MSME',  'no' => $certificate['msme_no']  ?? null, 'img' => $certificate['msme_certificate']  ?? null, 'tileBg' => 'linear-gradient(135deg,#78350f,#b45309)',  'color' => '#92400e'],

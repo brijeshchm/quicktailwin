@@ -158,6 +158,10 @@ class CitySlugController extends Controller
         $name     = $b['business_name'] ?? 'Business Name';
         $id       = $b['business_id'] ?? $index;
 
+  $gallery = is_array($b['gallery'] ?? null)
+            ? $b['gallery']
+            : [];
+
         return [
             'id'            => $id,
             'name'          => $name,
@@ -180,6 +184,8 @@ class CitySlugController extends Controller
             'description'   => $b['description'] ?? '',
             'responseTime'  => $b['responseTime'] ?? $b['response_time'] ?? '< 15 min',
             'established'   => $b['year_of_estb'] ?? '',
+            'certifications'   => $b['certifications'] ?? '',
+            'gallery'   => $gallery ?? '',
         ];
     }
 
@@ -475,6 +481,8 @@ class CitySlugController extends Controller
 
         // 3. Otherwise treat as service / search listing
         $response = $this->fetchData($city, $slug);
+
+        
         if (!$response) {
             abort(410);
         }

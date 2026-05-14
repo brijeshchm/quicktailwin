@@ -1,14 +1,13 @@
-
 @extends('client.layouts.app')
- 
+
 @section('title', 'Refund Policy | QuickDials - Cancellation & Refund Terms')
 
-@section('description', 'Read the QuickDials Refund Policy to understand cancellation rules, refund eligibility, payment terms, subscription policies, and refund processing guidelines for services and business listings.')
+@section('description', 'Read the QuickDials Refund Policy to understand cancellation rules, refund eligibility, payment terms, subscription policies, and refund processing guidelines under Indian consumer protection laws.')
 
-@section('keyword', 'QuickDials refund policy, cancellation policy, payment refund terms, subscription refund, business listing refund, refund guidelines, online payment policy, service cancellation terms, QuickDials payment policy, refund and cancellation')
-@section('content') 
+@section('keyword', 'QuickDials refund policy, cancellation policy, payment refund terms, subscription refund, business listing refund, consumer protection india, refund guidelines, online payment policy, service cancellation terms')
 
- 
+@section('content')
+
     <style>
         [x-cloak] { display: none !important; }
 
@@ -115,13 +114,9 @@
             background: linear-gradient(135deg, hsl(270 70% 58%), hsl(290 80% 65%));
         }
     </style>
- 
 
 {{-- ── Progress bar ── --}}
 <div id="progress-bar" style="width:0%"></div>
-
- 
- 
 
 {{-- ══════════════════════════
      DECORATIVE ORBS
@@ -146,21 +141,24 @@
         <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold mb-6 anim-1"
              style="background:rgba(139,92,246,.1);color:hsl(270 60% 45%);border:1px solid rgba(139,92,246,.2)">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+                <path d="M21 3v5h-5"/>
+                <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+                <path d="M3 21v-5h5"/>
             </svg>
-            Legal Documentation
+            Compliant with Consumer Protection Act, 2019
         </div>
 
         <h1 class="text-5xl md:text-6xl font-black mb-4 leading-tight anim-2">
-            <span style="color:hsl(270 50% 20%)">Privacy &</span>
-            <span class="shimmer-text"> Policy of Use</span>
+            <span style="color:hsl(270 50% 20%)">Refund &</span>
+            <span class="shimmer-text"> Cancellation Policy</span>
         </h1>
 
         <p class="text-lg max-w-2xl mx-auto mb-8 anim-3" style="color:hsl(270 15% 45%)">
-            QuickDials Pvt Ltd — Comprehensive policies governing the use of our training and certification services.
+            Quickdials Internet Pvt. Ltd. — Transparent refund, cancellation, and dispute resolution terms governed by Indian consumer protection laws.
         </p>
 
-        <div class="flex items-center justify-center gap-6 text-sm anim-4" style="color:hsl(270 20% 55%)">
+        <div class="flex items-center justify-center gap-6 text-sm anim-4 flex-wrap" style="color:hsl(270 20% 55%)">
             <div class="flex items-center gap-2">
                 <div class="w-2 h-2 rounded-full" style="background:hsl(270 70% 58%)"></div>
                 Last updated: April 2026
@@ -168,6 +166,10 @@
             <div class="flex items-center gap-2">
                 <div class="w-2 h-2 rounded-full" style="background:hsl(290 70% 62%)"></div>
                 Effective immediately
+            </div>
+            <div class="flex items-center gap-2">
+                <div class="w-2 h-2 rounded-full" style="background:hsl(250 75% 62%)"></div>
+                Governed by laws of India
             </div>
         </div>
     </div>
@@ -182,7 +184,7 @@
      MAIN CONTENT
 ══════════════════════════ --}}
 <div class="max-w-6xl mx-auto px-6 py-12 relative z-10"
-     x-data="termsPage()" x-init="init()">
+     x-data="refundPolicyPage()" x-init="init()">
 
     <div class="flex gap-10">
 
@@ -202,12 +204,12 @@
                 <ul class="space-y-1">
                     @php
                     $sections = [
-                        ['id'=>'terms',          'label'=>'Terms of Use'],
-                        ['id'=>'venue',          'label'=>'Venue Only'],
-                        ['id'=>'ownership',      'label'=>'Ownership'],
-                        ['id'=>'limitation',     'label'=>'Limitation of Liability'],
-                        ['id'=>'applicable-law', 'label'=>'Applicable Law'],
-                        ['id'=>'dispute',        'label'=>'Dispute Resolution'],
+                        ['id'=>'introduction',   'label'=>'Introduction'],
+                        ['id'=>'eligibility',    'label'=>'Refund Eligibility'],
+                        ['id'=>'non-refundable', 'label'=>'Non-Refundable Items'],
+                        ['id'=>'process',        'label'=>'Refund Process'],
+                        ['id'=>'cancellation',   'label'=>'Cancellation Policy'],
+                        ['id'=>'disputes',       'label'=>'Disputes & Resolution'],
                     ];
                     @endphp
                     @foreach($sections as $s)
@@ -227,194 +229,267 @@
         {{-- ── CONTENT ── --}}
         <div class="flex-1 min-w-0">
 
-            {{-- ─ Terms of Use ─ --}}
-            <section id="terms" class="scroll-reveal glass-card rounded-2xl p-8 mb-8">
+            {{-- ─ 1. Introduction ─ --}}
+            <section id="introduction" class="scroll-reveal glass-card rounded-2xl p-8 mb-8">
                 <div class="flex items-center gap-4 mb-6">
                     <div class="w-12 h-12 rounded-xl icon-grad flex items-center justify-center shrink-0 icon-float">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                            <polyline points="14 2 14 8 20 8"/>
-                            <line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
-                            <polyline points="10 9 9 9 8 9"/>
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="16" x2="12" y2="12"/>
+                            <line x1="12" y1="8" x2="12.01" y2="8"/>
                         </svg>
                     </div>
-                    <h2 class="text-xl font-bold section-title">Quick Dials — Terms of Use</h2>
+                    <h2 class="text-xl font-bold section-title">Introduction & Scope</h2>
                 </div>
                 <div class="text-sm leading-relaxed space-y-3 section-body">
-                    <p>By visiting our website or transacting with Quick Dials, you agree to these Terms of Use. Please read them carefully before using this website. By using the website or any service available on it, you agree to be bound by these terms. Quick Dials reserves the right to change these Terms at any time. Your continued use of the website constitutes acceptance of the modified Terms.</p>
+                    <p>This Refund and Cancellation Policy ("<strong>Policy</strong>") is issued by <strong>Quickdials Internet Pvt. Ltd.</strong> ("QuickDials", "Company", "we", "us", or "our") and governs all refunds and cancellations relating to paid services purchased through <strong>www.quickdials.com</strong> or our mobile applications.</p>
+
+                    <p>This Policy is published in accordance with the provisions of the <strong>Information Technology Act, 2000</strong>, <strong>Consumer Protection Act, 2019</strong>, and <strong>Consumer Protection (E-Commerce) Rules, 2020</strong>, and constitutes an electronic record in terms of these laws.</p>
+
                     <div class="mt-5">
-                        <h3 class="font-semibold text-base mb-2 subsection-title">Registrations and Certifications</h3>
+                        <h3 class="font-semibold text-base mb-2 subsection-title">Services Covered</h3>
                         <div class="pl-4 border-l-2 subsection-border">
-                            <p>Quick Dials acts only as a facilitator and not as an agent or partner for any third-party training or certification organization. You acknowledge that Quick Dials is only a service provider providing services related to registration, and is not responsible for any disputes arising from the certification processes or program outcomes.</p>
+                            <p>This Policy applies to all paid offerings on the QuickDials platform, including but not limited to: business listing subscriptions, premium memberships, verified business certifications, lead packages, advertising services, featured placements, and any other digital products or services made available from time to time.</p>
                         </div>
                     </div>
+
                     <div class="mt-5">
-                        <h3 class="font-semibold text-base mb-2 subsection-title">Accuracy of Information</h3>
+                        <h3 class="font-semibold text-base mb-2 subsection-title">Acceptance of Policy</h3>
                         <div class="pl-4 border-l-2 subsection-border">
-                            <p>While Quick Dials endeavors to ensure that information is current and accurate, we do not represent or warrant that it will be accurate or complete, or that it will be suitable for your particular circumstances. You agree that our website information is for general guidance only and should not be relied upon as the sole basis for decision-making.</p>
+                            <p>By making any payment on the QuickDials platform, you ("Customer", "User", "you") acknowledge that you have read, understood, and agreed to be bound by this Policy along with our Terms of Service and Privacy Policy. If you do not agree with any part of this Policy, please refrain from purchasing any paid service.</p>
                         </div>
                     </div>
+
                     <div class="mt-5">
-                        <h3 class="font-semibold text-base mb-2 subsection-title">User Responsibilities</h3>
+                        <h3 class="font-semibold text-base mb-2 subsection-title">Amendments</h3>
                         <div class="pl-4 border-l-2 subsection-border">
-                            <p>Users are solely responsible for verifying information independently. Quick Dials shall not be liable for any errors, omissions, or inaccuracies in the content provided on the website or in connection with any action taken in reliance thereon.</p>
+                            <p>QuickDials reserves the right to amend, modify, or update this Policy at any time without prior notice, in accordance with applicable Indian laws. The version published on the website on the date of your transaction shall govern that transaction.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {{-- ─ Venue Only ─ --}}
-            <section id="venue" class="scroll-reveal glass-card rounded-2xl p-8 mb-8">
+            {{-- ─ 2. Refund Eligibility ─ --}}
+            <section id="eligibility" class="scroll-reveal glass-card rounded-2xl p-8 mb-8">
                 <div class="flex items-center gap-4 mb-6">
                     <div class="w-12 h-12 rounded-xl icon-grad flex items-center justify-center shrink-0 icon-float" style="animation-delay:.3s">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polygon points="3 11 22 2 13 21 11 13 3 11"/>
+                            <path d="M9 12l2 2 4-4"/>
+                            <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c2.39 0 4.68.94 6.36 2.64"/>
                         </svg>
                     </div>
-                    <h2 class="text-xl font-bold section-title">Venue Only</h2>
+                    <h2 class="text-xl font-bold section-title">Refund Eligibility</h2>
                 </div>
                 <div class="text-sm leading-relaxed space-y-3 section-body">
-                    <p>Quick Dials provides its services as a venue only, not as an organizer, sponsor, or promoter of the courses, programs, or certifications listed on the website. Quick Dials merely provides a platform for candidates and training organizations to connect.</p>
+                    <p>In accordance with the rights granted to consumers under <strong>Section 2(9) of the Consumer Protection Act, 2019</strong>, a customer may be eligible for a full or partial refund under the following circumstances:</p>
+
+                    <ul class="list-disc pl-5 space-y-2 mt-3">
+                        <li><strong>Service Not Delivered:</strong> Where the paid service was not delivered or activated within the committed timeline due to a fault attributable solely to QuickDials.</li>
+                        <li><strong>Duplicate Payment:</strong> Where the customer has been charged more than once for the same service due to a technical or processing error.</li>
+                        <li><strong>Unauthorized Transaction:</strong> Where a payment was deducted without the customer's authorization, subject to verification under <strong>RBI guidelines</strong> on unauthorized electronic transactions.</li>
+                        <li><strong>Material Misrepresentation:</strong> Where there is a material deficiency in service as defined under <strong>Section 2(11) of the Consumer Protection Act, 2019</strong>.</li>
+                        <li><strong>Technical Failure:</strong> Where the service could not be availed due to a verified technical fault on the QuickDials platform that QuickDials is unable to remedy.</li>
+                    </ul>
+
                     <div class="mt-5">
-                        <h3 class="font-semibold text-base mb-2 subsection-title">Third-Party Services</h3>
+                        <h3 class="font-semibold text-base mb-2 subsection-title">Cooling-Off Period</h3>
                         <div class="pl-4 border-l-2 subsection-border">
-                            <p>Any training, certification, or associated services obtained through the Quick Dials platform are offered by independent third-party providers. Quick Dials makes no representations about the quality, safety, morality, legality, or any other aspect of services listed on the platform.</p>
+                            <p>For eligible subscription services, customers may request a refund within <strong>seven (7) calendar days</strong> from the date of payment, provided the service has not been substantially used (defined as less than 10% consumption of paid leads, ads, or features). This cooling-off provision is in line with the consumer rights framework under the <strong>Consumer Protection (E-Commerce) Rules, 2020</strong>.</p>
                         </div>
                     </div>
+
                     <div class="mt-5">
-                        <h3 class="font-semibold text-base mb-2 subsection-title">No Endorsement</h3>
+                        <h3 class="font-semibold text-base mb-2 subsection-title">Documentation Required</h3>
                         <div class="pl-4 border-l-2 subsection-border">
-                            <p>The listing of any training provider, certification body, or course on the Quick Dials platform does not constitute an endorsement or recommendation by Quick Dials. Users should perform their own due diligence before engaging with any service provider.</p>
-                        </div>
-                    </div>
-                    <div class="mt-5">
-                        <h3 class="font-semibold text-base mb-2 subsection-title">Fees and Payments</h3>
-                        <div class="pl-4 border-l-2 subsection-border">
-                            <p>All fees quoted on the website are inclusive of applicable taxes unless stated otherwise. Quick Dials reserves the right to modify prices at any time without prior notice. Payment terms and cancellation policies are determined independently by service providers.</p>
+                            <p>To process a refund, the customer must provide: (i) order or transaction ID, (ii) registered email and mobile number, (iii) date and amount of transaction, (iv) reason for refund request, and (v) any supporting evidence such as screenshots, bank statements, or correspondence.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {{-- ─ Ownership ─ --}}
-            <section id="ownership" class="scroll-reveal glass-card rounded-2xl p-8 mb-8">
+            {{-- ─ 3. Non-Refundable Items ─ --}}
+            <section id="non-refundable" class="scroll-reveal glass-card rounded-2xl p-8 mb-8">
                 <div class="flex items-center gap-4 mb-6">
                     <div class="w-12 h-12 rounded-xl icon-grad flex items-center justify-center shrink-0 icon-float" style="animation-delay:.6s">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/>
                         </svg>
                     </div>
-                    <h2 class="text-xl font-bold section-title">Ownership</h2>
+                    <h2 class="text-xl font-bold section-title">Non-Refundable Services</h2>
                 </div>
                 <div class="text-sm leading-relaxed space-y-3 section-body">
-                    <p>All content on this website, including but not limited to text, graphics, logos, icons, images, audio clips, digital downloads, data compilations, and software, is the property of Quick Dials Pvt Ltd or its content suppliers and is protected by applicable intellectual property laws.</p>
+                    <p>The following categories of services are <strong>strictly non-refundable</strong>, except where required by mandatory applicable law:</p>
+
+                    <ul class="list-disc pl-5 space-y-2 mt-3">
+                        <li><strong>Consumed Leads:</strong> Leads that have already been delivered, viewed, or contacted by the customer.</li>
+                        <li><strong>Activated Subscriptions:</strong> Subscriptions where the validity period has commenced and more than 10% of the duration or features have been utilized.</li>
+                        <li><strong>Promotional & Discounted Plans:</strong> Services purchased under any promotional offer, coupon, festive discount, or limited-period campaign, unless otherwise specified in the offer terms.</li>
+                        <li><strong>Customized Services:</strong> Custom-built solutions, advertising campaigns already initiated, or services specifically tailored at the customer's request.</li>
+                        <li><strong>Third-Party Charges:</strong> Payment gateway fees, bank charges, convenience fees, or any third-party service fees that are non-recoverable.</li>
+                        <li><strong>Statutory Taxes:</strong> Goods and Services Tax (GST) component will be refunded only to the extent permissible under the <strong>Central Goods and Services Tax Act, 2017</strong>, and applicable state GST laws.</li>
+                        <li><strong>Verification & Certification Fees:</strong> Fees paid towards QuickDials Verified Business Certification once the verification process has been initiated.</li>
+                        <li><strong>Expired Services:</strong> Subscriptions or service validity periods that have already lapsed.</li>
+                    </ul>
+
                     <div class="mt-5">
-                        <h3 class="font-semibold text-base mb-2 subsection-title">Intellectual Property Rights</h3>
+                        <h3 class="font-semibold text-base mb-2 subsection-title">Service Provider Disputes</h3>
                         <div class="pl-4 border-l-2 subsection-border">
-                            <p>The compilation of all content on this site is the exclusive property of Quick Dials Pvt Ltd, with copyright authorship for this collection by Quick Dials, and protected by applicable copyright laws. All trademarks and service marks on this website not owned by Quick Dials are the property of their respective owners.</p>
-                        </div>
-                    </div>
-                    <div class="mt-5">
-                        <h3 class="font-semibold text-base mb-2 subsection-title">License to Use</h3>
-                        <div class="pl-4 border-l-2 subsection-border">
-                            <p>Quick Dials grants you a limited, non-exclusive, revocable license to access and make personal, non-commercial use of this website. This license does not include any resale or commercial use of this site or its contents, any collection and use of any service listings or descriptions, any derivative use of the site, or any use of data mining, robots, or similar data gathering and extraction tools.</p>
-                        </div>
-                    </div>
-                    <div class="mt-5">
-                        <h3 class="font-semibold text-base mb-2 subsection-title">Restrictions</h3>
-                        <div class="pl-4 border-l-2 subsection-border">
-                            <p>Without prior written consent of Quick Dials, no part of this website may be reproduced, distributed, framed, published, uploaded, downloaded, transmitted, or used in any commercial manner. Unauthorized use terminates the permission or license granted by Quick Dials.</p>
+                            <p>QuickDials operates as an intermediary platform under <strong>Section 2(1)(w) of the Information Technology Act, 2000</strong>. Refunds are not entertained for disputes between customers and third-party service providers listed on the platform. Such disputes must be resolved directly between the parties concerned.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {{-- ─ Limitation of Liability ─ --}}
-            <section id="limitation" class="scroll-reveal glass-card rounded-2xl p-8 mb-8">
+            {{-- ─ 4. Refund Process ─ --}}
+            <section id="process" class="scroll-reveal glass-card rounded-2xl p-8 mb-8">
                 <div class="flex items-center gap-4 mb-6">
                     <div class="w-12 h-12 rounded-xl icon-grad flex items-center justify-center shrink-0 icon-float" style="animation-delay:.9s">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"/>
-                            <line x1="12" y1="8" x2="12" y2="12"/>
-                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                            <polyline points="23 4 23 10 17 10"/>
+                            <polyline points="1 20 1 14 7 14"/>
+                            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
                         </svg>
                     </div>
-                    <h2 class="text-xl font-bold section-title">Limitation of Liability</h2>
+                    <h2 class="text-xl font-bold section-title">Refund Process & Timeline</h2>
                 </div>
                 <div class="text-sm leading-relaxed space-y-3 section-body">
-                    <p>Quick Dials and its directors, officers, employees, agents, contractors, successors, and assigns shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from:</p>
-                    <ul class="list-disc pl-5 space-y-2 mt-3">
-                        <li>Your access to or use of or inability to access or use the Service</li>
-                        <li>Any conduct or content of any third party on the Service</li>
-                        <li>Any content obtained from the Service</li>
-                        <li>Unauthorized access, use, or alteration of your transmissions or content</li>
-                        <li>Errors, inaccuracies, or omissions in any content on the Service</li>
-                    </ul>
+                    <p>All refund requests must follow the procedure outlined below to be considered for processing. Refunds are processed in accordance with the <strong>Reserve Bank of India (RBI)</strong> guidelines on payment system operators.</p>
+
                     <div class="mt-5">
-                        <h3 class="font-semibold text-base mb-2 subsection-title">Maximum Liability</h3>
+                        <h3 class="font-semibold text-base mb-2 subsection-title">Step 1: Raise a Request</h3>
                         <div class="pl-4 border-l-2 subsection-border">
-                            <p>In no event shall Quick Dials total liability to you for all damages, losses, and causes of action exceed the amount you have paid to Quick Dials, if any, in the one (1) month period prior to the claim. Some jurisdictions do not allow the exclusion of certain warranties or the limitation or exclusion of liability for incidental or consequential damages; therefore, some of the above limitations may not apply to you.</p>
+                            <p>Submit a written refund request via email to <strong>support@quickdials.com</strong> within seven (7) days of the transaction. Include all required documentation as specified in the Refund Eligibility section.</p>
                         </div>
                     </div>
+
                     <div class="mt-5">
-                        <h3 class="font-semibold text-base mb-2 subsection-title">Disclaimer of Warranties</h3>
+                        <h3 class="font-semibold text-base mb-2 subsection-title">Step 2: Verification</h3>
                         <div class="pl-4 border-l-2 subsection-border">
-                            <p>The Service is provided on an "AS IS" and "AS AVAILABLE" basis without any warranties of any kind, either express or implied, including, but not limited to, implied warranties of merchantability, fitness for a particular purpose, or non-infringement. Quick Dials does not warrant that the Service will function uninterrupted, secure, or available at any particular time or location.</p>
+                            <p>QuickDials will acknowledge the refund request within two (2) business days. The internal verification team will review the eligibility, transaction details, and supporting documentation within seven (7) business days from the date of request.</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-5">
+                        <h3 class="font-semibold text-base mb-2 subsection-title">Step 3: Approval & Processing</h3>
+                        <div class="pl-4 border-l-2 subsection-border">
+                            <p>If approved, refunds will be initiated within <strong>seven (7) to fourteen (14) business days</strong> from the date of approval. In line with RBI directives, the refund will be processed to the <strong>original mode of payment</strong> used at the time of purchase. The actual credit to the customer's account depends on the customer's bank or payment gateway processing time, which is typically T+5 to T+7 working days.</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-5">
+                        <h3 class="font-semibold text-base mb-2 subsection-title">Mode of Refund</h3>
+                        <div class="pl-4 border-l-2 subsection-border">
+                            <p>Refunds shall be credited only to the original source of payment:</p>
+                            <ul class="list-disc pl-5 space-y-1 mt-2">
+                                <li>Credit/Debit Card payments → Credited back to the original card.</li>
+                                <li>UPI/Net Banking payments → Credited to the originating bank account.</li>
+                                <li>Wallet payments → Credited back to the same wallet.</li>
+                            </ul>
+                            <p class="mt-2">Refunds shall not be issued in cash or to any third-party account.</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-5">
+                        <h3 class="font-semibold text-base mb-2 subsection-title">Deductions</h3>
+                        <div class="pl-4 border-l-2 subsection-border">
+                            <p>Refundable amounts may be reduced by: (i) payment gateway charges levied by third-party processors, (ii) services already consumed on a pro-rata basis, (iii) any applicable taxes that are non-recoverable under GST law, and (iv) administrative fees, if explicitly disclosed at the time of purchase.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {{-- ─ Applicable Law ─ --}}
-            <section id="applicable-law" class="scroll-reveal glass-card rounded-2xl p-8 mb-8">
+            {{-- ─ 5. Cancellation Policy ─ --}}
+            <section id="cancellation" class="scroll-reveal glass-card rounded-2xl p-8 mb-8">
                 <div class="flex items-center gap-4 mb-6">
                     <div class="w-12 h-12 rounded-xl icon-grad flex items-center justify-center shrink-0 icon-float" style="animation-delay:1.2s">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M15 9l-6 6"/>
+                            <path d="M9 9l6 6"/>
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-bold section-title">Cancellation Policy</h2>
+                </div>
+                <div class="text-sm leading-relaxed space-y-3 section-body">
+                    <p>Customers may cancel paid services subject to the terms specified below. Cancellation rights are governed by the <strong>Indian Contract Act, 1872</strong> and consumer protection regulations applicable in India.</p>
+
+                    <div class="mt-5">
+                        <h3 class="font-semibold text-base mb-2 subsection-title">Subscription Cancellation</h3>
+                        <div class="pl-4 border-l-2 subsection-border">
+                            <p>Customers may cancel an active subscription at any time through their account dashboard or by writing to <strong>support@quickdials.com</strong>. Cancellation will take effect at the end of the current billing cycle. The subscription will remain active and accessible until the expiry of the paid period; no pro-rata refund shall be provided for the unused portion unless eligibility under the Refund Policy is met.</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-5">
+                        <h3 class="font-semibold text-base mb-2 subsection-title">Auto-Renewal</h3>
+                        <div class="pl-4 border-l-2 subsection-border">
+                            <p>Where a service includes auto-renewal, customers will be notified at least seven (7) days prior to the renewal date as per RBI guidelines on recurring transactions. Customers may opt out of auto-renewal at any time from the account settings. QuickDials shall not be liable for renewal charges if cancellation is not effected before the renewal date.</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-5">
+                        <h3 class="font-semibold text-base mb-2 subsection-title">Company-Initiated Cancellation</h3>
+                        <div class="pl-4 border-l-2 subsection-border">
+                            <p>QuickDials reserves the right to suspend, terminate, or cancel any service in the event of: (i) breach of Terms of Service, (ii) fraudulent or misleading information, (iii) violation of applicable laws, (iv) misuse of the platform, or (v) non-compliance with KYC norms. In such cases, no refund shall be issued, and QuickDials may pursue legal remedies available under Indian law.</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-5">
+                        <h3 class="font-semibold text-base mb-2 subsection-title">Force Majeure</h3>
+                        <div class="pl-4 border-l-2 subsection-border">
+                            <p>QuickDials shall not be liable for cancellation, delay, or failure of service performance arising from circumstances beyond reasonable control, including but not limited to natural disasters, acts of government, pandemic, internet outages, cyber-attacks, or any event constituting force majeure under Indian law.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {{-- ─ 6. Disputes & Resolution ─ --}}
+            <section id="disputes" class="scroll-reveal glass-card rounded-2xl p-8 mb-8">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-12 h-12 rounded-xl icon-grad flex items-center justify-center shrink-0 icon-float" style="animation-delay:1.5s">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M14 13l5.1 5.1a1 1 0 0 1 0 1.4l-1.4 1.4a1 1 0 0 1-1.4 0L11 15.8"/>
                             <path d="M4.7 15.3l-1.4-1.4a1 1 0 0 1 0-1.4l9.2-9.2a1 1 0 0 1 1.4 0l1.4 1.4a1 1 0 0 1 0 1.4L6.1 15.3a1 1 0 0 1-1.4 0z"/>
                         </svg>
                     </div>
-                    <h2 class="text-xl font-bold section-title">Applicable Law &amp; Dispute Resolution</h2>
+                    <h2 class="text-xl font-bold section-title">Disputes & Grievance Resolution</h2>
                 </div>
                 <div class="text-sm leading-relaxed space-y-3 section-body">
-                    <p>These Terms shall be governed by and construed in accordance with the laws of India, without regard to its conflict of law provisions. Any disputes arising from or in connection with these Terms or your use of the Service shall be subject to the exclusive jurisdiction of the courts of India.</p>
-                    <div class="mt-5">
-                        <h3 class="font-semibold text-base mb-2 subsection-title">Jurisdiction</h3>
-                        <div class="pl-4 border-l-2 subsection-border">
-                            <p>You agree that any legal action or proceeding related to the Service or these Terms shall be instituted exclusively in a court of competent jurisdiction in India. You agree and hereby submit to the personal jurisdiction of such courts for the purpose of litigating any such action or proceeding.</p>
-                        </div>
-                    </div>
-                    <div class="mt-5">
-                        <h3 class="font-semibold text-base mb-2 subsection-title">Consumer Protection</h3>
-                        <div class="pl-4 border-l-2 subsection-border">
-                            <p>Quick Dials complies with applicable consumer protection laws. If you are a consumer (as defined under applicable law), nothing in these Terms is intended to limit your rights under consumer protection legislation.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+                    <p>In the event of any dispute concerning a refund or cancellation, the following grievance resolution mechanism shall apply, in compliance with the <strong>Consumer Protection (E-Commerce) Rules, 2020</strong> which mandates a grievance officer for every e-commerce entity in India.</p>
 
-            {{-- ─ Dispute Resolution ─ --}}
-            <section id="dispute" class="scroll-reveal glass-card rounded-2xl p-8 mb-8">
-                <div class="flex items-center gap-4 mb-6">
-                    <div class="w-12 h-12 rounded-xl icon-grad flex items-center justify-center shrink-0 icon-float" style="animation-delay:1.5s">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                        </svg>
+                    <div class="mt-5">
+                        <h3 class="font-semibold text-base mb-2 subsection-title">Grievance Officer</h3>
+                        <div class="pl-4 border-l-2 subsection-border">
+                            <p>As mandated under <strong>Rule 4(5) of the Consumer Protection (E-Commerce) Rules, 2020</strong>, QuickDials has appointed a Grievance Officer. Complaints may be addressed to:</p>
+                            <ul class="list-none mt-3 space-y-1">
+                                <li><strong>Name:</strong> Grievance Officer, Quickdials Internet Pvt. Ltd.</li>
+                                <li><strong>Email:</strong> grievance@quickdials.com</li>
+                                <li><strong>Phone:</strong> [Insert Contact Number]</li>
+                                <li><strong>Address:</strong> [Insert Registered Office Address]</li>
+                            </ul>
+                            <p class="mt-2">The Grievance Officer shall acknowledge receipt of the complaint within forty-eight (48) hours and resolve the matter within one (1) month from the date of receipt.</p>
+                        </div>
                     </div>
-                    <h2 class="text-xl font-bold section-title">Dispute Resolution</h2>
-                </div>
-                <div class="text-sm leading-relaxed space-y-3 section-body">
-                    <p>Before bringing a formal dispute, you agree to first attempt to resolve it informally by contacting Quick Dials. Quick Dials will try to resolve the dispute informally within 30 days of receiving your written notice.</p>
+
+                    <div class="mt-5">
+                        <h3 class="font-semibold text-base mb-2 subsection-title">Consumer Forum</h3>
+                        <div class="pl-4 border-l-2 subsection-border">
+                            <p>If the dispute is not resolved through internal grievance mechanisms, customers may approach the appropriate <strong>Consumer Disputes Redressal Commission</strong> (District, State, or National) as established under the <strong>Consumer Protection Act, 2019</strong>. Customers may also lodge complaints with the <strong>National Consumer Helpline</strong> at <strong>1915</strong> or via <strong>consumerhelpline.gov.in</strong>.</p>
+                        </div>
+                    </div>
+
                     <div class="mt-5">
                         <h3 class="font-semibold text-base mb-2 subsection-title">Arbitration</h3>
                         <div class="pl-4 border-l-2 subsection-border">
-                            <p>If a dispute cannot be resolved informally, you and Quick Dials agree to submit to binding arbitration. The arbitration shall be conducted in English in India. The arbitrator's decision shall be final and binding and may be entered as a judgment in any court of competent jurisdiction.</p>
+                            <p>Any unresolved dispute, controversy, or claim arising out of or in relation to this Policy shall be finally resolved by arbitration under the <strong>Arbitration and Conciliation Act, 1996</strong>. The arbitration shall be conducted by a sole arbitrator appointed mutually by the parties. The seat and venue of arbitration shall be <strong>[Insert City], India</strong>, and the proceedings shall be conducted in English.</p>
                         </div>
                     </div>
+
                     <div class="mt-5">
-                        <h3 class="font-semibold text-base mb-2 subsection-title">Class Action Waiver</h3>
+                        <h3 class="font-semibold text-base mb-2 subsection-title">Governing Law & Jurisdiction</h3>
                         <div class="pl-4 border-l-2 subsection-border">
-                            <p>You agree that any arbitration or legal proceeding shall be limited to the dispute between you and Quick Dials individually. You waive any right to participate in class action lawsuits or class-wide arbitration against Quick Dials.</p>
+                            <p>This Policy is governed by and construed in accordance with the laws of the Republic of India. Subject to the arbitration clause above, the courts at <strong>[Insert City]</strong> shall have exclusive jurisdiction over any matter arising out of or relating to this Policy.</p>
                         </div>
                     </div>
 
@@ -427,14 +502,18 @@
                                 </svg>
                             </div>
                             <div>
-                                <div class="font-semibold text-sm mb-1" style="color:hsl(270 50% 30%)">Contact Quick Dials</div>
-                                <p class="text-xs" style="color:hsl(270 20% 50%)">For any questions regarding these Terms of Use or to report a dispute, please reach out to our legal team. We are committed to resolving concerns promptly and fairly.</p>
+                                <div class="font-semibold text-sm mb-1" style="color:hsl(270 50% 30%)">Need Help with a Refund?</div>
+                                <p class="text-xs" style="color:hsl(270 20% 50%)">Our team is committed to resolving refund and cancellation matters promptly and in accordance with Indian consumer protection laws. Reach out through any of the channels below.</p>
                                 <div class="mt-3 flex flex-wrap gap-2">
-                                    @foreach(['Legal Queries','Support','Report Issue'] as $btn)
-                                    <a href="#" class="btn-purple inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold text-white transition-all duration-200 hover:scale-105 hover:shadow-md">
-                                        {{ $btn }}
+                                    <a href="mailto:support@quickdials.com" class="btn-purple inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold text-white transition-all duration-200 hover:scale-105 hover:shadow-md">
+                                        Refund Support
                                     </a>
-                                    @endforeach
+                                    <a href="mailto:grievance@quickdials.com" class="btn-purple inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold text-white transition-all duration-200 hover:scale-105 hover:shadow-md">
+                                        Grievance Officer
+                                    </a>
+                                    <a href="{{ route('contact.us') }}" class="btn-purple inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold text-white transition-all duration-200 hover:scale-105 hover:shadow-md">
+                                        Contact Us
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -452,12 +531,14 @@
                         </svg>
                     </div>
                 </div>
-                <h3 class="font-bold text-lg mb-2 section-title">Your Trust Matters to Us</h3>
+                <h3 class="font-bold text-lg mb-2 section-title">Your Trust is Our Foundation</h3>
                 <p class="text-sm max-w-md mx-auto section-body">
-                    Quick Dials Pvt Ltd is committed to maintaining the highest standards of transparency and user protection. These policies are regularly reviewed and updated.
+                    Quickdials Internet Pvt. Ltd. is committed to fair business practices and full compliance with the Consumer Protection Act, 2019 and all applicable Indian laws governing e-commerce transactions.
                 </p>
-                <div class="flex items-center justify-center gap-2 mt-4 text-xs" style="color:hsl(270 20% 60%)">
-                    <span>© {{ date('Y') }} Quick Dials Pvt Ltd</span>
+                <div class="flex items-center justify-center gap-2 mt-4 text-xs flex-wrap" style="color:hsl(270 20% 60%)">
+                    <span>© {{ date('Y') }} Quickdials Internet Pvt. Ltd.</span>
+                    <span>·</span>
+                    <span>CIN: U63112KA2026PTC215594</span>
                     <span>·</span>
                     <span>All rights reserved</span>
                 </div>
@@ -467,12 +548,10 @@
     </div>{{-- /flex --}}
 </div>{{-- /Alpine root --}}
 
- 
-
 <script>
-function termsPage() {
+function refundPolicyPage() {
     return {
-        active: 'terms',
+        active: 'introduction',
 
         init() {
             /* ── Scroll reveal ── */
@@ -483,7 +562,7 @@ function termsPage() {
             document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
 
             /* ── Progress bar + active section ── */
-            const sections = ['terms','venue','ownership','limitation','applicable-law','dispute'];
+            const sections = ['introduction','eligibility','non-refundable','process','cancellation','disputes'];
             const bar = document.getElementById('progress-bar');
 
             window.addEventListener('scroll', () => {
@@ -509,5 +588,4 @@ function termsPage() {
 }
 </script>
 
- 
- @endsection
+@endsection

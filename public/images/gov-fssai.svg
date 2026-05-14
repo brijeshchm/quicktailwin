@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 340" font-family="Georgia, serif">
+  <!-- Background -->
+  <rect width="480" height="340" fill="#f0f4f8"/>
+  <!-- Top header band -->
+  <rect width="480" height="64" fill="#1a3a6e"/>
+  <!-- Emblem circle -->
+  <circle cx="240" cy="44" r="30" fill="none" stroke="#c8a84b" stroke-width="2.5"/>
+  <circle cx="240" cy="44" r="24" fill="#1a3a6e" stroke="#c8a84b" stroke-width="1"/>
+  <text x="240" y="40" text-anchor="middle" fill="#c8a84b" font-size="8" font-weight="bold">GOVT</text>
+  <text x="240" y="51" text-anchor="middle" fill="#c8a84b" font-size="7">OF INDIA</text>
+  <!-- Side decorative lines -->
+  <rect x="12" y="10" width="3" height="44" fill="#c8a84b" rx="1.5"/>
+  <rect x="465" y="10" width="3" height="44" fill="#c8a84b" rx="1.5"/>
+  <!-- Ministry text -->
+  <text x="240" y="82" text-anchor="middle" fill="#1a3a6e" font-size="11" font-weight="bold" letter-spacing="1">Ministry of Health &amp; Family Welfare</text>
+  <text x="240" y="97" text-anchor="middle" fill="#c8a84b" font-size="9.5" font-weight="bold" letter-spacing="2">GOVERNMENT OF INDIA</text>
+  <!-- Title bar -->
+  <rect x="32" y="108" width="416" height="28" fill="#1a3a6e" rx="4"/>
+  <text x="240" y="126" text-anchor="middle" fill="white" font-size="12" font-weight="bold" letter-spacing="1.5">FSSAI FOOD BUSINESS OPERATOR LICENSE</text>
+  <!-- Content area -->
+  <rect x="32" y="144" width="416" height="162" fill="white" rx="4" stroke="#dde3ec" stroke-width="1"/>
+  <!-- Diagonal watermark -->
+  <text x="240" y="225" text-anchor="middle" fill="rgba(26,58,110,0.06)" font-size="52" font-weight="bold" transform="rotate(-20,240,225)">FSSAI</text>
+  <!-- Fields -->
+  <text x="52" y="168" fill="#6b7280" font-size="8.5" font-weight="bold" letter-spacing="0.5">LICENSE NUMBER</text>
+  <text x="52" y="180" fill="#1a3a6e" font-size="10" font-weight="bold">10024041001234</text>
+  <text x="240" y="168" fill="#6b7280" font-size="8.5" font-weight="bold" letter-spacing="0.5">LICENSE TYPE</text>
+  <text x="240" y="180" fill="#1a3a6e" font-size="10" font-weight="bold">Central License</text>
+  <line x1="52" y1="188" x2="428" y2="188" stroke="#e5e7eb" stroke-width="0.8"/>
+  <text x="52" y="202" fill="#6b7280" font-size="8.5" font-weight="bold" letter-spacing="0.5">BUSINESS NAME</text>
+  <text x="52" y="214" fill="#111827" font-size="11" font-weight="bold">L'Aura Brasserie Restaurant</text>
+  <line x1="52" y1="222" x2="428" y2="222" stroke="#e5e7eb" stroke-width="0.8"/>
+  <text x="52" y="236" fill="#6b7280" font-size="8.5" font-weight="bold" letter-spacing="0.5">ADDRESS</text>
+  <text x="52" y="248" fill="#374151" font-size="9">123 Culinary Blvd, Downtown Arts District</text>
+  <line x1="52" y1="256" x2="428" y2="256" stroke="#e5e7eb" stroke-width="0.8"/>
+  <text x="52" y="270" fill="#6b7280" font-size="8.5" font-weight="bold" letter-spacing="0.5">VALID FROM</text>
+  <text x="52" y="281" fill="#374151" font-size="9">01 January 2025</text>
+  <text x="200" y="270" fill="#6b7280" font-size="8.5" font-weight="bold" letter-spacing="0.5">VALID UNTIL</text>
+  <text x="200" y="281" fill="#374151" font-size="9">31 December 2027</text>
+  <text x="340" y="270" fill="#6b7280" font-size="8.5" font-weight="bold" letter-spacing="0.5">ISSUED</text>
+  <text x="340" y="281" fill="#374151" font-size="9">2025</text>
+  <!-- Status badge -->
+  <rect x="340" y="257" width="74" height="16" rx="8" fill="rgba(22,163,74,0.12)" stroke="rgba(22,163,74,0.4)" stroke-width="1"/>
+  <circle cx="351" cy="265" r="3" fill="#16a34a"/>
+  <text x="358" y="269" fill="#15803d" font-size="8" font-weight="bold">ACTIVE</text>
+  <!-- Footer -->
+  <rect width="480" height="20" y="320" fill="#1a3a6e"/>
+  <text x="240" y="332" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="7.5" letter-spacing="1">FOOD SAFETY AND STANDARDS AUTHORITY OF INDIA · fssai.gov.in</text>
+</svg>

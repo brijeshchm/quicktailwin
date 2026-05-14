@@ -151,6 +151,7 @@
         src="{{ $card['img'] ?? '' }}"
         alt="{{ $card['title'] ?? '' }}"
         loading="lazy"
+        decoding="async"
         class="absolute inset-0 w-full h-full object-cover object-center opacity-50 group-hover:opacity-65 group-hover:scale-105 transition-all duration-500"
     />
 

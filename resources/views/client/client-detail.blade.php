@@ -116,7 +116,7 @@ select.ef-input { padding-left:1rem; }
 
     {{-- Main hero image --}}
     <div class="relative flex-1 overflow-hidden">
-        <img src="{{ $clientsList['profile_banner'] ?? asset('images/banner-gallery.jpg') }}"
+        <img loading="lazy" decoding="async" src="{{ $clientsList['profile_banner'] ?? asset('images/banner-gallery.jpg') }}"
              alt="{{ $clientsList['business_name'] ?? '' }}"
              class="hero-img absolute inset-0 w-full h-full object-cover" style="transform:scale(1.06);">
         <div class="hero-overlay-l"></div>
@@ -346,6 +346,8 @@ select.ef-input { padding-left:1rem; }
 {{-- ════════════════════════════════════════
      GALLERY SECTION
 ════════════════════════════════════════ --}}
+
+
 @if(count($gallery))
 <section style="background:linear-gradient(135deg,#f0fdfa 0%,#e0f2fe 100%);">
     <div class="w-full px-8 md:px-16 pt-8 pb-2">
@@ -425,6 +427,8 @@ select.ef-input { padding-left:1rem; }
 {{-- ════════════════════════════════════════
      GOVERNMENT RECOGNITIONS
 ════════════════════════════════════════ --}}
+
+ 
  @if(count($govDocs))
 <section style="background:linear-gradient(180deg,#f0f4ff 0%,#e8edf8 100%);">
     <div class="w-full px-8 md:px-16 py-10">
@@ -456,7 +460,7 @@ select.ef-input { padding-left:1rem; }
                     <div class="w-12 h-12 rounded-xl overflow-hidden shrink-0 border-2 flex items-center justify-center"
                          style="background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.2);">
                         @if(!empty($doc['img']))
-                            <img src="{{ $doc['img'] }}" alt="{{ $doc['title'] }}"
+                            <img src="{{ asset($doc['img']) }}" alt="{{ $doc['title'] }}"
                                  class="w-full h-full object-cover">
                         @else
                             <span class="text-white text-xl">🏛️</span>
@@ -507,7 +511,7 @@ select.ef-input { padding-left:1rem; }
                         @if(!empty($doc['img']))
                         <div class="rounded-xl overflow-hidden"
                              style="box-shadow:0 2px 12px rgba(0,0,0,.08);border:1px solid rgba(0,0,0,.06);">
-                            <img src="{{ $doc['img'] }}" alt="{{ $doc['title'] }}" class="w-full block">
+                            <img src="{{ asset($doc['img']) }}" alt="{{ $doc['title'] }}" class="w-full block">
                         </div>
                         @else
                         <div class="rounded-xl flex flex-col items-center gap-3 py-6 text-center"
@@ -559,7 +563,7 @@ select.ef-input { padding-left:1rem; }
 						@if(!empty($first['img']))
 <div class="rounded-2xl overflow-hidden"
      style="box-shadow:0 2px 20px rgba(0,0,0,.08);">
-    <img src="{{ $first['img'] }}" alt="{{ $first['title'] }}"
+    <img src="{{ asset($first['img']) }}" alt="{{ $first['title'] }}"
          class="w-full object-cover">
 </div>
 @endif

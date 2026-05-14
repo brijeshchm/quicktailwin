@@ -1,17 +1,16 @@
 @extends('client.layouts.app')
  
 
-@section('title', 'Contact Us | QuickDials - India’s Trusted Local Business Search Engine')
+@section('title', 'About QuickDials — India\'s Trusted Service Marketplace & Lead Platform')
 
-@section('description', 'Contact QuickDials for business listings, customer support, advertising, partnership opportunities, and local business inquiries. Get in touch with India’s trusted local business search engine to connect with verified businesses and services across India.')
+@section('description', 'QuickDials connects 1M+ customers with verified businesses across IT, weddings, home services, healthcare, real estate, finance, travel & more. Get quality leads, real reviews, and direct customer connections')
 
-@section('keyword', 'Contact QuickDials, QuickDials support, business listing support India, contact local business directory, QuickDials customer care, business inquiries, advertise on QuickDials, local business platform India, verified business support, QuickDials contact details, online business directory support')
+@section('keyword', 'About QuickDials, lead management software, service marketplace india, business listing, get business leads')
 
 
 
 @section('content')
  @include('client.components.banner-section')
-
  
 
  
@@ -167,14 +166,14 @@
                         </h1>
 
                         <p class="reveal d-2 text-base text-gray-500 leading-relaxed">
-                            Quick Dials is a fast-growing service search and lead platform in India. It helps people find the right service providers in one place. The platform works on a simple match-making idea. Users search for a service, and Quick Dials connects them with the right providers. The website <strong class="font-bold">
+                            About QuickDials Internet Pvt. Ltd is a fast-growing service search and lead platform in India. It helps people find the right service providers in one place. The platform works on a simple match-making idea. Users search for a service, and QuickDials connects them with the right providers. The website <strong class="font-bold">
     QuickDials
     <span class="align-super text-[10px] font-semibold">TM</span>
-</strong> makes it easy to search, compare, and contact service providers without confusion.
+</strong> Internet Pvt. Ltd makes it easy to search, compare, and contact service providers without confusion.
                         </p>
 
                          <p class="reveal d-2 text-base text-gray-500 leading-relaxed">
-                            Quick Dials works like a search engine for everyday services and professional needs. People use it to find trusted and verified service providers across many fields. The information on the platform is clear, updated, and easy to understand.
+                            QuickDials works like a search engine for everyday services and professional needs. People use it to find trusted and verified service providers across many fields. The information on the platform is clear, updated, and easy to understand.
                         </p>
                     </div>
 
@@ -487,7 +486,340 @@
     </main>
 </div>
 
+  
+
+
+
+
+
+
+
+
+
+
+
+
  
+
+{{-- ═══════════════ 2. INTRODUCTION ═══════════════ --}}
+<section class="py-16 md:py-20 bg-white">
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+        <span class="inline-block text-xs font-bold text-orange-600 uppercase tracking-wider mb-3">
+            Who We Are
+        </span>
+        <h2 class="text-2xl md:text-4xl font-bold text-gray-900 leading-tight mb-5">
+            Lead Management Software for Service Industries
+        </h2>
+        <p class="text-sm md:text-base text-gray-600 leading-relaxed max-w-3xl mx-auto">
+            <strong class="text-gray-900">Quickdials Internet Pvt. Ltd. (Quickdials)</strong> lets businesses acquire real leads for IT services, wedding planning, electrical and repair work, healthcare, real estate, finance, wellness, travel, hotels, restaurants, and professional services. The platform links service providers with people who are looking for help or services right now.
+        </p>
+    </div>
+</section>
+
+{{-- ═══════════════ 3. LEAD MANAGEMENT SOFTWARE — 9 FEATURES ═══════════════ --}}
+<section class="py-16 md:py-20 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12 max-w-2xl mx-auto">
+            <span class="inline-block text-xs font-bold text-orange-600 uppercase tracking-wider mb-3">
+                Our Platform
+            </span>
+            <h2 class="text-2xl md:text-4xl font-bold text-gray-900 leading-tight">
+                Lead Management Software
+            </h2>
+            <p class="text-sm md:text-base text-gray-500 mt-3">
+                Built for businesses that want real customers — not random clicks.
+            </p>
+        </div>
+
+        @php
+            $platformFeatures = [
+                [
+                    'icon'  => 'target',
+                    'color' => 'blue',
+                    'title' => 'Service-Based Quality Leads',
+                    'desc'  => 'Quickdials lets businesses acquire real leads for IT services, wedding planning, electrical and repair work, healthcare, real estate, finance, wellness, travel, hotels, restaurants, and professional services.',
+                ],
+                [
+                    'icon'  => 'crosshair',
+                    'color' => 'orange',
+                    'title' => 'Targeted Reach for Many Services',
+                    'desc'  => 'Companies can find the ideal clients based on city, area, type of service, and demands. Get leads for electricians, wedding planners, doctors, travel agents, or loan advisors.',
+                ],
+                [
+                    'icon'  => 'user-check',
+                    'color' => 'green',
+                    'title' => 'Understanding Customer Needs First',
+                    'desc'  => 'We make sure we know what the customer wants — budget, location, urgency, and service expectations — before passing on leads. This helps firms get more valuable and relevant inquiries.',
+                ],
+                [
+                    'icon'  => 'message-circle',
+                    'color' => 'purple',
+                    'title' => 'Direct Interaction Between Businesses & Customers',
+                    'desc'  => 'The platform lets customers and service providers talk directly, making it easier to respond swiftly to repair requests, healthcare appointments, property inquiries, or event organizing.',
+                ],
+                [
+                    'icon'  => 'users',
+                    'color' => 'pink',
+                    'title' => 'Large Multi-Service User Base',
+                    'desc'  => 'People use Quickdials to find a wide range of services — IT support, weddings, medical care, real estate, financial options, wellness services, travel bookings, and repair needs.',
+                ],
+                [
+                    'icon'  => 'star',
+                    'color' => 'yellow',
+                    'title' => 'Reviews and Ratings',
+                    'desc'  => 'Customer reviews and ratings help people find reliable service providers and assist businesses in gaining the trust of new consumers.',
+                ],
+                [
+                    'icon'  => 'badge-check',
+                    'color' => 'sky',
+                    'title' => 'Certified Business Listing',
+                    'desc'  => 'Quickdials Certified businesses are more trustworthy and visible — especially in competitive fields like healthcare, real estate, finance, and home services.',
+                ],
+                [
+                    'icon'  => 'bar-chart-3',
+                    'color' => 'indigo',
+                    'title' => 'Reports & Lead Tracking',
+                    'desc'  => 'Track leads, responses, and performance. See which services are in higher demand and where you need to make changes.',
+                ],
+                [
+                    'icon'  => 'map-pin',
+                    'color' => 'red',
+                    'title' => 'Local and Area-Based Leads',
+                    'desc'  => 'Service providers get leads from nearby places. Especially helpful for electricians, repair services, clinics, hotels, and other local specialists.',
+                ],
+            ];
+            $colorMap = [
+                'blue'   => 'bg-blue-50 text-blue-600',
+                'orange' => 'bg-orange-50 text-orange-600',
+                'green'  => 'bg-green-50 text-green-600',
+                'purple' => 'bg-purple-50 text-purple-600',
+                'pink'   => 'bg-pink-50 text-pink-600',
+                'yellow' => 'bg-yellow-50 text-yellow-600',
+                'sky'    => 'bg-sky-50 text-sky-600',
+                'indigo' => 'bg-indigo-50 text-indigo-600',
+                'red'    => 'bg-red-50 text-red-600',
+            ];
+        @endphp
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
+            @foreach($platformFeatures as $feature)
+                <div class="group bg-white border border-gray-100 hover:border-gray-200 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 rounded-2xl p-6">
+                    <div class="w-12 h-12 rounded-xl {{ $colorMap[$feature['color']] }} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <i data-lucide="{{ $feature['icon'] }}" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-gray-900 mb-2 leading-snug">{{ $feature['title'] }}</h3>
+                    <p class="text-xs md:text-sm text-gray-500 leading-relaxed">{{ $feature['desc'] }}</p>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+{{-- ═══════════════ 4. WHAT PEOPLE USE QUICKDIALS FOR ═══════════════ --}}
+<section class="py-16 md:py-20 bg-white">
+    <div class="container mx-auto px-4 max-w-6xl">
+        <div class="text-center mb-12 max-w-2xl mx-auto">
+            <span class="inline-block text-xs font-bold text-orange-600 uppercase tracking-wider mb-3">
+                Our Users
+            </span>
+            <h2 class="text-2xl md:text-4xl font-bold text-gray-900 leading-tight">
+                What People Use QuickDials For
+            </h2>
+            <p class="text-sm md:text-base text-gray-500 mt-3 max-w-2xl mx-auto">
+                People use QuickDials to find the proper service without calling many numbers or running around.
+            </p>
+        </div>
+
+        @php
+            $useCases = [
+                [
+                    'icon'  => 'laptop',
+                    'title' => 'IT & Technical Help',
+                    'desc'  => 'Some people need help with IT things like fixing their websites, getting software support, or technical services for their business.',
+                ],
+                [
+                    'icon'  => 'heart',
+                    'title' => 'Weddings & Events',
+                    'desc'  => 'Some people are arranging weddings or other events and need reliable planners, designers, photographers, or caterers.',
+                ],
+                [
+                    'icon'  => 'home',
+                    'title' => 'Home & Repair Needs',
+                    'desc'  => 'A lot of people use QuickDials for regular home needs like electricians, repairs, packers & movers, and maintenance services.',
+                ],
+                [
+                    'icon'  => 'stethoscope',
+                    'title' => 'Healthcare & Wellness',
+                    'desc'  => 'Some people are looking for doctors, clinics, hospitals, or wellness services for themselves or their families.',
+                ],
+                [
+                    'icon'  => 'building',
+                    'title' => 'Property & Finance',
+                    'desc'  => 'People who wish to buy, sell, or rent property — or need help with loans, insurance, or taxes — also use QuickDials.',
+                ],
+                [
+                    'icon'  => 'dumbbell',
+                    'title' => 'Fitness, Beauty & Wellness',
+                    'desc'  => 'People often look for fitness, beauty, and wellness services — including gyms, yoga courses, salons, and spas.',
+                ],
+                [
+                    'icon'  => 'plane',
+                    'title' => 'Travel & Hospitality',
+                    'desc'  => 'Another large reason people use QuickDials is to arrange trips. Find hotels, restaurants, tour services, and travel agencies in one spot.',
+                ],
+                [
+                    'icon'  => 'briefcase',
+                    'title' => 'Business & Professional',
+                    'desc'  => 'Professionals and organizations use QuickDials to find contractors, consultants, security services, and other support services.',
+                ],
+            ];
+        @endphp
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            @foreach($useCases as $case)
+                <div class="bg-gradient-to-br from-gray-50 to-white border border-gray-100 hover:border-blue-200 hover:shadow-md rounded-2xl p-5 transition-all">
+                    <div class="w-11 h-11 rounded-xl bg-white shadow-sm flex items-center justify-center text-blue-600 mb-3">
+                        <i data-lucide="{{ $case['icon'] }}" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="text-sm font-bold text-gray-900 mb-1.5">{{ $case['title'] }}</h3>
+                    <p class="text-xs text-gray-500 leading-relaxed">{{ $case['desc'] }}</p>
+                </div>
+            @endforeach
+        </div>
+
+        {{-- Closing Statement --}}
+        <div class="mt-12 max-w-3xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 px-5 py-3 bg-blue-50 rounded-2xl">
+                <i data-lucide="check-circle-2" class="w-5 h-5 text-blue-600 shrink-0"></i>
+                <p class="text-sm md:text-base font-semibold text-gray-800">
+                    QuickDials helps individuals get the correct service at the right time without making mistakes or too many calls.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{-- ═══════════════ 5. FINDING THE RIGHT SERVICES (9 CATEGORIES) ═══════════════ --}}
+<section class="py-16 md:py-20 bg-gradient-to-b from-gray-50 to-white">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12 max-w-2xl mx-auto">
+            <span class="inline-block text-xs font-bold text-orange-600 uppercase tracking-wider mb-3">
+                Service Categories
+            </span>
+            <h2 class="text-2xl md:text-4xl font-bold text-gray-900 leading-tight">
+                Finding the Right Services for People
+            </h2>
+            <p class="text-sm md:text-base text-gray-500 mt-3">
+                Verified professionals across every category your customers care about.
+            </p>
+        </div>
+
+        @php
+            $categories = [
+                [
+                    'icon'  => 'monitor',
+                    'title' => 'Technical and IT Support',
+                    'desc'  => 'QuickDials helps consumers identify IT service providers for website work, computer support, software help, and other technical needs based on what they need.',
+                ],
+                [
+                    'icon'  => 'heart',
+                    'title' => 'Wedding Planning & Event Services',
+                    'desc'  => 'Hire wedding planners, decorators, photographers, event organizers, and other wedding-related services to make sure your big day goes off without a hitch.',
+                ],
+                [
+                    'icon'  => 'wrench',
+                    'title' => 'Home, Electrical & Repair Services',
+                    'desc'  => 'Connect with electricians, repair workers, carpenters, packers and movers, and other home service providers for daily household needs.',
+                ],
+                [
+                    'icon'  => 'stethoscope',
+                    'title' => 'Healthcare & Medical Services',
+                    'desc'  => 'Find doctors, clinics, hospitals, dentists, and wellness centers — and get advice on picking the best medical services.',
+                ],
+                [
+                    'icon'  => 'building-2',
+                    'title' => 'Real Estate & Property Services',
+                    'desc'  => 'Identify property dealers, rental homes, flats, offices, and get help with buying, selling, or renting property.',
+                ],
+                [
+                    'icon'  => 'wallet',
+                    'title' => 'Finance, Loans & Tax Services',
+                    'desc'  => 'Conveniently handle your money by talking to loan officers, financial counselors, tax consultants, and insurance agents.',
+                ],
+                [
+                    'icon'  => 'dumbbell',
+                    'title' => 'Wellness, Fitness & Lifestyle Services',
+                    'desc'  => 'Find yoga courses, dance schools, gyms, spas, beauty services, and health professionals.',
+                ],
+                [
+                    'icon'  => 'plane',
+                    'title' => 'Travel, Hotels & Hospitality Services',
+                    'desc'  => 'Locate travel agencies, tour companies, hotels, restaurants, and other travel-related services for work or leisure travel.',
+                ],
+                [
+                    'icon'  => 'briefcase',
+                    'title' => 'Professional & Business Services',
+                    'desc'  => 'Find business-related services like consultants, contractors, security service providers, and other experts.',
+                ],
+            ];
+        @endphp
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
+            @foreach($categories as $cat)
+                <div class="group relative bg-white border border-gray-100 hover:border-orange-200 rounded-2xl p-6 overflow-hidden hover:shadow-xl transition-all duration-300">
+                    <div class="absolute -top-8 -right-8 w-24 h-24 bg-gradient-to-br from-orange-100 to-blue-100 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="relative">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 text-white flex items-center justify-center mb-4 shadow-md shadow-blue-500/20">
+                            <i data-lucide="{{ $cat['icon'] }}" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-gray-900 mb-2 leading-snug">{{ $cat['title'] }}</h3>
+                        <p class="text-xs md:text-sm text-gray-500 leading-relaxed">{{ $cat['desc'] }}</p>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+{{-- ═══════════════ 6. CTA ═══════════════ --}}
+<section class="py-16 md:py-20 bg-gradient-to-br from-blue-600 via-blue-700 to-orange-600 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10"
+         style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 24px 24px;"></div>
+
+    <div class="relative container mx-auto px-4 text-center max-w-3xl">
+        <h2 class="text-2xl md:text-4xl lg:text-5xl font-extrabold text-white mb-5 leading-tight">
+            Get the Right Service. Or the Right Customer.
+        </h2>
+        <p class="text-sm md:text-lg text-blue-50 mb-8 max-w-2xl mx-auto">
+            Whether you're a customer searching for trusted help — or a business looking to grow — QuickDials makes the connection in seconds.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-3">
+            <a href="{{ route('login') }}"
+               class="inline-flex items-center gap-2 px-6 py-3.5 bg-white text-blue-700 hover:bg-gray-50 text-sm font-bold rounded-full shadow-xl transition-all">
+                <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                Get Listed Free
+            </a>
+            <a href="{{ route('home') }}"
+               class="inline-flex items-center gap-2 px-6 py-3.5 bg-transparent text-white hover:bg-white/10 text-sm font-bold rounded-full border-2 border-white/50 transition-all">
+                <i data-lucide="search" class="w-4 h-4"></i>
+                Find a Service Now
+            </a>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script>
 (function () {
     /* ── IntersectionObserver — all reveal classes ── */
@@ -504,6 +836,11 @@
             .forEach(el => observer.observe(el));
 })();
 </script>
- 
+ <script>
+    // Re-init Lucide icons (after dynamic content)
+    document.addEventListener('DOMContentLoaded', () => {
+        if (window.lucide) window.lucide.createIcons();
+    });
+</script>
     
 @endsection

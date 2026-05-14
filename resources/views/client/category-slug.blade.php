@@ -47,7 +47,7 @@
 
             {{-- ── Star Rating ── --}}
             <div class="flex items-center gap-2 text-sm mt-2 flex-wrap">
-                <img src="/client/images/{{ $stars }}" alt="{{ $ratingValue }} star rating" class="star-img" />
+                <img loading="lazy" decoding="async" src="/client/images/{{ $stars }}" alt="{{ $ratingValue }} star rating" class="star-img" />
                 <span class="font-semibold">{{ $ratingValue }}</span>
                 <span class="text-slate-400">out of 5</span>
                 <span class="text-slate-400">based on</span>

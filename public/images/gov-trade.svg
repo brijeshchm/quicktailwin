@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 340" font-family="Georgia, serif">
+  <rect width="480" height="340" fill="#f5f0eb"/>
+  <!-- Header -->
+  <rect width="480" height="64" fill="#7c2d12"/>
+  <circle cx="240" cy="44" r="30" fill="none" stroke="#fbbf24" stroke-width="2.5"/>
+  <circle cx="240" cy="44" r="24" fill="#7c2d12" stroke="#fbbf24" stroke-width="1"/>
+  <text x="240" y="40" text-anchor="middle" fill="#fbbf24" font-size="8" font-weight="bold">MUNI</text>
+  <text x="240" y="51" text-anchor="middle" fill="#fbbf24" font-size="7">CORP.</text>
+  <rect x="12" y="10" width="3" height="44" fill="#fbbf24" rx="1.5"/>
+  <rect x="465" y="10" width="3" height="44" fill="#fbbf24" rx="1.5"/>
+  <text x="240" y="82" text-anchor="middle" fill="#7c2d12" font-size="11" font-weight="bold" letter-spacing="1">Municipal Corporation — Downtown Division</text>
+  <text x="240" y="97" text-anchor="middle" fill="#b45309" font-size="9.5" font-weight="bold" letter-spacing="2">TRADE &amp; COMMERCE DEPARTMENT</text>
+  <!-- Title bar -->
+  <rect x="32" y="108" width="416" height="28" fill="#7c2d12" rx="4"/>
+  <text x="240" y="126" text-anchor="middle" fill="white" font-size="12" font-weight="bold" letter-spacing="1.5">TRADE LICENSE CERTIFICATE</text>
+  <!-- Content -->
+  <rect x="32" y="144" width="416" height="162" fill="white" rx="4" stroke="#e7ddd5" stroke-width="1"/>
+  <text x="240" y="225" text-anchor="middle" fill="rgba(124,45,18,0.05)" font-size="52" font-weight="bold" transform="rotate(-20,240,225)">TRADE</text>
+  <text x="52" y="168" fill="#6b7280" font-size="8.5" font-weight="bold" letter-spacing="0.5">LICENSE NUMBER</text>
+  <text x="52" y="180" fill="#7c2d12" font-size="10" font-weight="bold">MC/DTA/2025/R-00874</text>
+  <text x="240" y="168" fill="#6b7280" font-size="8.5" font-weight="bold" letter-spacing="0.5">CATEGORY</text>
+  <text x="240" y="180" fill="#7c2d12" font-size="10" font-weight="bold">Restaurant &amp; Eatery</text>
+  <line x1="52" y1="188" x2="428" y2="188" stroke="#e5e7eb" stroke-width="0.8"/>
+  <text x="52" y="202" fill="#6b7280" font-size="8.5" font-weight="bold" letter-spacing="0.5">ESTABLISHMENT NAME</text>
+  <text x="52" y="214" fill="#111827" font-size="11" font-weight="bold">L'Aura Brasserie Restaurant</text>
+  <line x1="52" y1="222" x2="428" y2="222" stroke="#e5e7eb" stroke-width="0.8"/>
+  <text x="52" y="236" fill="#6b7280" font-size="8.5" font-weight="bold" letter-spacing="0.5">PREMISES ADDRESS</text>
+  <text x="52" y="248" fill="#374151" font-size="9">123 Culinary Blvd, Downtown Arts District</text>
+  <line x1="52" y1="256" x2="428" y2="256" stroke="#e5e7eb" stroke-width="0.8"/>
+  <text x="52" y="270" fill="#6b7280" font-size="8.5" font-weight="bold" letter-spacing="0.5">ISSUED DATE</text>
+  <text x="52" y="281" fill="#374151" font-size="9">15 March 2025</text>
+  <text x="200" y="270" fill="#6b7280" font-size="8.5" font-weight="bold" letter-spacing="0.5">EXPIRY DATE</text>
+  <text x="200" y="281" fill="#374151" font-size="9">14 March 2026</text>
+  <rect x="340" y="257" width="74" height="16" rx="8" fill="rgba(22,163,74,0.12)" stroke="rgba(22,163,74,0.4)" stroke-width="1"/>
+  <circle cx="351" cy="265" r="3" fill="#16a34a"/>
+  <text x="358" y="269" fill="#15803d" font-size="8" font-weight="bold">ACTIVE</text>
+  <rect width="480" height="20" y="320" fill="#7c2d12"/>
+  <text x="240" y="332" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="7.5" letter-spacing="1">MUNICIPAL CORPORATION TRADE &amp; COMMERCE DEPT · mc.gov.in</text>
+</svg>

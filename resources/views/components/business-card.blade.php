@@ -37,7 +37,30 @@
     $openUntil = $business['openUntil'] ?? '8:00 PM';
 
     $filledStars = round($rating);
+
+       
+                     
 @endphp
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @if($view === 'list')
 {{-- LIST VIEW --}}
@@ -54,14 +77,172 @@
     <div class="relative z-10 flex gap-3 sm:gap-5 items-start p-3 sm:p-5 pl-4 sm:pl-6">
         {{-- Avatar --}}
         <div class="relative flex-shrink-0">
-            <div class="w-16 h-16 sm:w-24 sm:h-24 rounded-2xl bg-gradient-to-br {{ $color }} flex items-center justify-center shadow-lg">
-                <span class="text-white text-lg sm:text-2xl font-bold">{{ $initials }}</span>
+    <div class="w-24 h-24 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br {{ $color }} overflow-hidden shadow-lg">
+
+        @if(!empty($business['gallery']))
+        @php
+            $galleryImages = array_values(array_filter($business['gallery'], fn($g) => !empty($g['galley']['large'])));
+            $sliderId = 'slider-' . ($business['id'] ?? uniqid());
+            $total = count($galleryImages);
+        @endphp
+
+        <div class="relative w-full h-full overflow-hidden" id="{{ $sliderId }}">
+
+            {{-- Track --}}
+            <div class="flex h-full transition-transform duration-500 ease-in-out"
+                 id="{{ $sliderId }}-track">
+                @foreach($galleryImages as $i => $item)
+                @php $img = $item['galley']['large']; @endphp
+                <div class="flex-shrink-0 w-full h-full">
+                    <img
+                        src="{{ asset($img['src']) }}"
+                        alt="{{ $img['alt'] ?? '' }}"
+                        loading="{{ $i === 0 ? 'eager' : 'lazy' }}"
+                        class="w-full h-full object-cover"
+                    />
+                </div>
+                @endforeach
             </div>
-            @if($isOpen)
-            <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 text-[8px] sm:text-[9px] font-bold bg-emerald-500 text-white px-1.5 sm:px-2 py-0.5 rounded-full whitespace-nowrap shadow-md">OPEN</span>
+
+            @if($total > 1)
+
+            {{-- Prev --}}
+            <button onclick="imgSlide('{{ $sliderId }}', -1)"
+                    class="absolute left-1 top-1/2 -translate-y-1/2 z-10 w-5 h-5 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center text-white transition-all">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+                </svg>
+            </button>
+
+            {{-- Next --}}
+            <button onclick="imgSlide('{{ $sliderId }}', 1)"
+                    class="absolute right-1 top-1/2 -translate-y-1/2 z-10 w-5 h-5 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center text-white transition-all">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                </svg>
+            </button>
+
+            {{-- Counter --}}
+            <div class="absolute top-1 right-1 z-10 bg-black/50 text-white text-[9px] font-semibold px-1.5 py-0.5 rounded-full leading-none">
+                <span id="{{ $sliderId }}-current">1</span>/{{ $total }}
+            </div>
+
+            {{-- Dots --}}
+            <div class="absolute bottom-1 left-1/2 -translate-x-1/2 flex gap-1 z-10">
+                @foreach($galleryImages as $i => $item)
+                <button onclick="imgGoTo('{{ $sliderId }}', {{ $i }})"
+                        id="{{ $sliderId }}-dot-{{ $i }}"
+                        class="rounded-full transition-all duration-300 {{ $i === 0 ? 'w-3 h-1.5 bg-white' : 'w-1.5 h-1.5 bg-white/50' }}">
+                </button>
+                @endforeach
+            </div>
+
             @endif
         </div>
 
+        @else
+
+        {{-- Fallback initials --}}
+        <div class="w-full h-full flex items-center justify-center">
+            <span class="text-white text-lg sm:text-2xl font-bold">{{ $initials ?? '' }}</span>
+        </div>
+
+        @endif
+    </div>
+
+    {{-- Open badge --}}
+    @if($isOpen ?? false)
+    <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 text-[8px] sm:text-[9px] font-bold bg-emerald-500 text-white px-1.5 sm:px-2 py-0.5 rounded-full whitespace-nowrap shadow-md z-10">
+        OPEN
+    </span>
+    @endif
+</div>
+
+<script>
+// ── Global image slider — handles multiple instances ──────────────────────
+window._sliders = {};
+
+function imgSliderInit(id, total) {
+    if (window._sliders[id]) return;
+    window._sliders[id] = { current: 0, total, timer: null };
+
+    const slider = document.getElementById(id);
+    if (!slider) return;
+
+    // Touch/swipe
+    let touchStartX = 0;
+    slider.addEventListener('touchstart', e => {
+        touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    slider.addEventListener('touchend', e => {
+        const diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) imgSlide(id, diff > 0 ? 1 : -1);
+    });
+
+    // Pause on hover
+    slider.addEventListener('mouseenter', () => {
+        clearInterval(window._sliders[id].timer);
+    });
+    slider.addEventListener('mouseleave', () => {
+        imgStartAuto(id);
+    });
+
+    if (total > 1) imgStartAuto(id);
+}
+
+function imgGoToIndex(id, idx) {
+    const s = window._sliders[id];
+    if (!s) return;
+    s.current = (idx + s.total) % s.total;
+
+    // Move track
+    const track = document.getElementById(id + '-track');
+    if (track) track.style.transform = `translateX(-${s.current * 100}%)`;
+
+    // Counter
+    const counter = document.getElementById(id + '-current');
+    if (counter) counter.textContent = s.current + 1;
+
+    // Dots
+    for (let i = 0; i < s.total; i++) {
+        const dot = document.getElementById(id + '-dot-' + i);
+        if (!dot) continue;
+        dot.className = i === s.current
+            ? 'rounded-full transition-all duration-300 w-3 h-1.5 bg-white'
+            : 'rounded-full transition-all duration-300 w-1.5 h-1.5 bg-white/50';
+    }
+}
+
+window.imgSlide = function (id, dir) {
+    const s = window._sliders[id];
+    if (!s) return;
+    imgGoToIndex(id, s.current + dir);
+    clearInterval(s.timer);
+    imgStartAuto(id);
+};
+
+window.imgGoTo = function (id, idx) {
+    imgGoToIndex(id, idx);
+    const s = window._sliders[id];
+    if (s) { clearInterval(s.timer); imgStartAuto(id); }
+};
+
+function imgStartAuto(id) {
+    const s = window._sliders[id];
+    if (!s || s.total <= 1) return;
+    s.timer = setInterval(() => imgGoToIndex(id, s.current + 1), 3500);
+}
+
+// Auto-init all sliders on page load
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('[id^="slider-"]').forEach(el => {
+        const track = document.getElementById(el.id + '-track');
+        if (!track) return;
+        const total = track.children.length;
+        imgSliderInit(el.id, total);
+    });
+});
+</script>
         {{-- Info --}}
         <div class="flex-1 min-w-0">
             <div class="flex items-start justify-between gap-1">

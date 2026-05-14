@@ -83,12 +83,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
         <div class="absolute inset-0 bg-indigo-900/50"></div>
         <div class="relative w-full px-3 sm:px-8 py-3 sm:py-5 flex items-center gap-3 sm:gap-5 h-full">
             <div class="flex-1 min-w-0">
-                <!-- <div class="flex items-center gap-1.5 sm:gap-2 mb-0.5 sm:mb-1 flex-wrap">
-                    <span class="text-[9px] sm:text-[10px] font-bold text-white/60 border border-white/20 px-1.5 sm:px-2 py-0.5 rounded-full uppercase tracking-widest">Advertisement</span>
-                    <span class="text-[9px] sm:text-[10px] font-bold text-amber-300 bg-amber-300/10 border border-amber-300/20 px-1.5 sm:px-2 py-0.5 rounded-full animate-pulse">Limited Time Offer</span>
-                </div> -->
-                <!-- <h2 class="text-white font-bold text-sm sm:text-xl leading-snug">Transform Your Sleep — Up to 50% Off Premium Mattresses</h2> -->
-                <!-- <p class="text-white/70 text-[10px] sm:text-sm mt-0.5 hidden sm:block">Free delivery · 100-night trial · EMI starting ₹799/mo</p> -->
+                
             </div>
             <div class="flex-shrink-0 flex items-center gap-2 sm:gap-3">
                 
@@ -113,26 +108,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
                 </nav>
 
                 <h1 class="text-lg font-bold text-gray-900 leading-tight">{{ $keyword }} in {{ ucfirst($city) }}</h1>
-
-                {{-- Rating --}}
-                <!-- <div itemscope itemtype="https://schema.org/Product" >
-                <div itemProp="aggregateRating" itemScope itemType="https://schema.org/AggregateRating"
-                     class="flex items-center gap-2 text-sm mt-1">
-                    <img src="/client/images/{{ $starImg }}" alt="{{ $ratingValue }} star rating" class="h-4 w-auto">
-                    <span itemProp="ratingValue">{{ $ratingValue }}</span>
-                    <span>out of</span>
-                    <span itemProp="bestRating">5</span>
-                    <span>based on</span>
-                    <span itemProp="ratingCount">{{ $ratingCount }}</span>
-                    <span>ratings</span>
-                </div></div> -->
-
-
-
-
-
-
-
+ 
                 <div itemscope itemtype="https://schema.org/Product" class="space-y-2">
 
     {{-- Required: Product Name --}}
@@ -156,10 +132,12 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
 
         <img src="{{ asset('client/images/' . $starImg) }}"
              alt="{{ $ratingValue }} out of 5 stars"
-             class="h-4 w-auto"
+             class="lazy-image h-4 w-auto"
              width="80"
              height="16"
-             loading="lazy">
+             loading="lazy"
+            decoding="async"
+             >
 
         <span class="font-semibold text-gray-900">
             <span itemprop="ratingValue">{{ $ratingValue }}</span>
@@ -195,15 +173,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
                     <span class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-xs">▾</span>
                 </div>
 
-                <!-- <button @click="showFilters = !showFilters"
-                        class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium border transition-all"
-                        :class="showFilters ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-gray-600 border-gray-200 hover:border-indigo-300 hover:text-indigo-600'">
-                    ⚙ Filters
-                    <span x-show="activeFilterCount > 0"
-                          class="w-4 h-4 bg-red-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center"
-                          x-text="activeFilterCount"></span>
-                </button> -->
-
+               
 
                  <button @click="showFilters = !showFilters"
                         class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium border transition-all"
@@ -222,10 +192,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
                             class="p-1.5 rounded-lg transition-all"
                             :class="view==='grid' ? 'bg-white shadow-sm text-indigo-600' : 'text-gray-400 hover:text-gray-600'">⊞</button>
                 </div>
-                <!-- <div class="flex items-center bg-gray-100 rounded-xl p-0.5">
-                    <button @click="view = 'list'" class="p-1.5 rounded-lg transition-all" :class="view === 'list' ? 'bg-white shadow-sm text-indigo-600' : 'text-gray-400 hover:text-gray-600'">☰</button>
-                    <button @click="view = 'grid'" class="p-1.5 rounded-lg transition-all" :class="view === 'grid' ? 'bg-white shadow-sm text-indigo-600' : 'text-gray-400 hover:text-gray-600'">⊞</button>
-                </div> -->
+                
             </div>
         </div>
 
@@ -283,28 +250,20 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
         {{-- Main content --}}
         <main class="flex-1 min-w-0">
  
-            {{-- Listings --}}
-            <!-- <div x-show="filteredCount === 0" class="text-center py-20">
-                <div class="w-16 h-16 bg-indigo-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <span class="text-2xl">🔍</span>
-                </div>
-                <p class="text-gray-700 font-semibold mb-1">No businesses found</p>
-                <p class="text-gray-400 text-sm">Try adjusting your search or filters</p>
-                <button @click="resetFilters()" class="mt-4 px-5 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-xl hover:bg-indigo-700">Clear all filters</button>
-            </div> -->
+          
 
             <div id="listings-container" x-show="filteredCount > 0">
-                @php $adInterval = 5; @endphp
+                @php $adInterval = 5; 
+         
+                
+                @endphp
                 @foreach($businesses as $chunkIndex => $chunk)
                 @php $chunkStart = $chunkIndex * $adInterval; @endphp
 
                 <div :class="view === 'grid' ? 'grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4' : 'bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden divide-y divide-gray-50'"
                      id="chunk-{{ $chunkIndex }}">
 
-                    <a 
-                        href="{{ route('business.details', $chunk['business_slug']) }}"
-                        class="block"
-                    >
+                    
                     <div class="business-card"
                          data-name="{{ strtolower($chunk['name'] ?? '') }}"
                          data-category="{{ strtolower(is_array($chunk['category'] ?? '') ? implode(',', $chunk['category']) : ($chunk['category'] ?? '')) }}"
@@ -315,7 +274,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
                          x-show="shouldShow($el)">
                         <x-business-card :business="$chunk" :index="$chunkIndex" :view="'list'" />
                     </div>
-                    </a>
+                    
                 </div>
 
                 {{-- Inline ad after every chunk except last --}}
@@ -416,6 +375,8 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
         src="{{ $kwData['key_icon'] ?? $kwData['child_icon'] ??'' }}" 
         alt="{{ $qb['name'] ?? '' }}"
         class="w-8 h-8 object-contain group-hover:scale-105 transition-transform duration-500"
+        loading="lazy"
+        decoding="async"
     >
 
 </div>
@@ -448,8 +409,9 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
                         @foreach($quickBusinesses ?? [] as $qb)
                         <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group">
                             <div class="relative w-full h-48 overflow-hidden rounded-t-2xl bg-gray-100">
-                                <img src="{{ $qb['image'] ?? '' }}" alt="{{ $qb['name'] ?? '' }}"
-                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <img loading="lazy"
+            decoding="async" src="{{ $qb['image'] ?? '' }}" alt="{{ $qb['name'] ?? '' }}" 
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" >
                             </div>
                             <div class="p-5">
                                 <div class="flex items-center gap-2 mb-3">
@@ -469,7 +431,8 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
                                     </a>
                                     <a href="https://wa.me/{{ preg_replace('/\D/', '', $qb['phone'] ?? '') }}" target="_blank"
                                        class="flex items-center justify-center w-12 h-12 border border-gray-300 rounded-xl hover:bg-gray-50 transition-all">
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="w-6 h-6">
+                                        <img src="{{ asset('WhatsApp.svg') }}" alt="WhatsApp" class="w-6 h-6" loading="lazy"
+            decoding="async">
                                     </a>
                                 </div>
                             </div>

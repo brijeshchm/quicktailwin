@@ -41,7 +41,7 @@
             <div class="{{ $i >= 6 ? 'hidden md:block' : '' }} cursor-pointer group flex flex-col items-center gap-1.5">
                 <div class="w-full aspect-square rounded-lg overflow-hidden border border-yellow-500/30 group-hover:border-yellow-300/70 shadow-md group-hover:shadow-yellow-500/20 group-hover:shadow-lg transition-all duration-300">
                    
-                        <img src="{{ $ws['img'] ?? '' }}" alt="{{ $ws['title'] ?? '' }}"
+                        <img loading="lazy" decoding="async" src="{{ $ws['img'] ?? '' }}" alt="{{ $ws['title'] ?? '' }}"
                              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-out" loading="lazy"/>
                    
                 </div>
