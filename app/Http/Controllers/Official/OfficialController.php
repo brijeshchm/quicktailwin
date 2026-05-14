@@ -192,14 +192,14 @@ class OfficialController extends Controller
             return null;
         });
  
-        if (!$data) abort(404);
+        if (!$data) abort(410);
  
         // Handle both { data: {} } and { data: [{}] }
         $raw = $data['data'] ?? null;
         if (is_array($raw) && isset($raw[0])) {
             $raw = $raw[0];
         }
-        if (!$raw) abort(404);
+        if (!$raw) abort(410);
  
         $blogDetails = $raw['blogDetails'] ?? [];
         $blogList    = $raw['blogList']    ?? [];

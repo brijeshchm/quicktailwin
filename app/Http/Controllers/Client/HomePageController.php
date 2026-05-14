@@ -1052,7 +1052,7 @@ class HomePageController extends Controller
 				$lead->kw_text = $keyword[0]->keyword;
 				$bucketIndex = $keyword[0]->bucket;
 			} else {
-				return response()->json(['status' => 1, 'msg' => 'Keyword not found'], 404);
+				return response()->json(['status' => 1, 'msg' => 'Keyword not found'], 410);
 			}
 			if ($request->has('b_end')) {
 				$lead->b_end = $request->input('b_end');
@@ -1396,7 +1396,7 @@ Instead of limiting learning to theory, the course takes you through:.",
 		if (view()->exists('client.html.' . $html)) {
 			return view('client.html.' . $html);
 		} else {
-			return view('404');
+			return view('410');
 		}
 	}
 
@@ -1849,7 +1849,7 @@ Instead of limiting learning to theory, the course takes you through:.",
         });
 //  dd($response);
         if (!$response) {
-            abort(404);
+            abort(410);
         }
  
         /* ── extract data (mirrors the Next.js component) ── */
@@ -1926,7 +1926,7 @@ Instead of limiting learning to theory, the course takes you through:.",
         });
  
         if (!$response) {
-            abort(404);
+            abort(410);
         }
  
         /* ── extract data (mirrors the Next.js component) ── */
