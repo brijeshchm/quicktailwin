@@ -253,6 +253,8 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
           
 
             <div id="listings-container" x-show="filteredCount > 0">
+
+            @if(!empty($businesses))
                 @php $adInterval = 5; 
          
                 
@@ -281,6 +283,24 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
                
                 @endforeach
 
+
+                <div id="enquiry-modal"
+     class="fixed inset-0 z-[210] items-center justify-center p-4"
+     style="background:rgba(10,15,40,.75);backdrop-filter:blur(14px);"
+     onclick="if(event.target===this)this.classList.remove('open')">
+
+    <div class="relative w-full max-w-md overflow-hidden"
+         style="border-radius:1.75rem;"
+         onclick="event.stopPropagation()">
+        @include('client.layouts.enquiry-popup-form', [
+            'keywordList' => $keyword,
+            'planOptions' => '',
+            'formId' => 'modal'
+        ])
+    </div>
+</div>
+
+@endif
 
                  <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-700 my-3 shadow-md">
                     <div class="relative px-5 py-4 flex items-center gap-5 flex-wrap sm:flex-nowrap">
@@ -734,21 +754,7 @@ function listingPage() {
   
 
 {{-- Modal: REMOVED `hidden`, controlled fully by CSS --}}
-<div id="enquiry-modal"
-     class="fixed inset-0 z-[210] items-center justify-center p-4"
-     style="background:rgba(10,15,40,.75);backdrop-filter:blur(14px);"
-     onclick="if(event.target===this)this.classList.remove('open')">
 
-    <div class="relative w-full max-w-md overflow-hidden"
-         style="border-radius:1.75rem;"
-         onclick="event.stopPropagation()">
-        @include('client.layouts.enquiry-popup-form', [
-            'keywordList' => $keyword,
-            'planOptions' => '',
-            'formId' => 'modal'
-        ])
-    </div>
-</div>
 
 <style>
     #enquiry-modal { display: none; }
