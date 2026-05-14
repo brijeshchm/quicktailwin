@@ -698,6 +698,11 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
     </div>
     @endif
 
+
+ 
+
+     
+
 </div>
 
 <script>

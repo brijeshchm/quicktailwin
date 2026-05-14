@@ -1,5 +1,126 @@
 {{-- resources/views/layouts/footer.blade.php --}}
 
+
+
+@php
+    $popularServices = [
+        'Online Training Courses' => [
+            'type'  => 'online',
+            'items' => [
+                ['name' => 'Workday Training',              'slug' => 'workday-training'],
+                ['name' => 'SAP Training',                  'slug' => 'sap-training'],
+                ['name' => 'SAP FICO Training',             'slug' => 'sap-fico-training'],
+                ['name' => 'SAP HR Training',               'slug' => 'sap-hr-training'],
+                ['name' => 'SAP ABAP Training',             'slug' => 'sap-abap-training'],
+                ['name' => 'AWS Training',                  'slug' => 'aws-training'],
+                ['name' => 'Salesforce Training',           'slug' => 'salesforce-training'],
+                ['name' => 'Python Training',               'slug' => 'python-training'],
+                ['name' => 'Data Science Training',         'slug' => 'data-science-training'],
+                ['name' => 'Artificial Intelligence',       'slug' => 'artificial-intelligence-training'],
+                ['name' => 'Machine Learning Training',     'slug' => 'machine-learning-training'],
+                ['name' => 'Power BI Training',             'slug' => 'power-bi-training'],
+                ['name' => 'Tableau Training',              'slug' => 'tableau-training'],
+                ['name' => 'Full Stack Developer Course',   'slug' => 'full-stack-developer-training'],
+                ['name' => 'DevOps Training',               'slug' => 'devops-training'],
+                ['name' => 'Cloud Computing Training',      'slug' => 'cloud-computing-training'],
+            ],
+        ],
+
+        'Home Appliance Repair' => [
+            'type'  => 'service',
+            'items' => [
+                ['name' => 'AC Repair Service',             'slug' => 'ac-repair-service'],
+                ['name' => 'Refrigerator Repair',           'slug' => 'refrigerator-services'],
+                ['name' => 'Washing Machine Repair',        'slug' => 'washing-machine-repairs'],
+                ['name' => 'TV Repair (Home Service)',      'slug' => 'tv-repairs'],
+                ['name' => 'Water Purifier Repair',         'slug' => 'water-purifier-repairs'],
+                ['name' => 'Laptop Service at Home',        'slug' => 'laptop-repair'],
+                ['name' => 'Computer Repair Service',       'slug' => 'computer-repair'],
+            ],
+        ],
+
+        'Vehicle Services' => [
+            'type'  => 'service',
+            'items' => [
+                ['name' => 'Car Repair Service',            'slug' => 'car-service'],
+                ['name' => 'Bike Repair Service',           'slug' => 'bike-service'],
+                ['name' => 'Wedding Car Decoration',        'slug' => 'car-decoration'],
+                ['name' => 'Ghoda Baggi for Wedding',       'slug' => 'ghoda-baggi'],
+            ],
+        ],
+
+        'Wedding & Events' => [
+            'type'  => 'service',
+            'items' => [
+                ['name' => 'Banquet Halls Near Me',         'slug' => 'banquet-hall'],
+                ['name' => 'Court Marriage Registration',   'slug' => 'court-marriage'],
+                ['name' => 'Dhol Shehnai for Wedding',      'slug' => 'dhol-shehnai'],
+                ['name' => 'Flower Stage Decoration',       'slug' => 'flower-decoration'],
+                ['name' => 'Cold Fire for Wedding',         'slug' => 'fog-and-cold-fire'],
+                ['name' => 'Wedding Road Light',            'slug' => 'road-light'],
+                ['name' => 'Varmala for Wedding',           'slug' => 'varmala'],
+                ['name' => 'Wedding Photography & Video',   'slug' => 'photo-and-videography'],
+                ['name' => 'Wedding Choreographer',         'slug' => 'wedding-choreographer'],
+                ['name' => 'Wedding Event Organisers',      'slug' => 'wedding-organisers'],
+                ['name' => 'Wedding Astrologer',            'slug' => 'wedding-astrologer'],
+            ],
+        ],
+
+        'Sports Academies Near You' => [
+            'type'  => 'service',
+            'items' => [
+                ['name' => 'Cricket Academy',               'slug' => 'cricket-academy'],
+                ['name' => 'Badminton Academy',             'slug' => 'badminton-academy'],
+                ['name' => 'Swimming Academy',              'slug' => 'swimming-academy'],
+                ['name' => 'Boxing Academy',                'slug' => 'boxing'],
+                ['name' => 'Taekwondo Classes',             'slug' => 'taekwondo'],
+                ['name' => 'Javelin Throw Academy',         'slug' => 'javelin-throw'],
+            ],
+        ],
+    ];
+@endphp
+
+{{-- ───── Popular Services Section ───── --}}
+<section class="bg-gray-50 border-t border-gray-100 py-10" aria-label="Popular services on QuickDials">
+    <div class="container mx-auto px-4">
+        <div class="mb-6">
+            <h2 class="text-lg md:text-xl font-bold text-gray-800">Popular Services on QuickDials</h2>
+            <p class="text-xs md:text-sm text-gray-500 mt-1">
+                Browse trending categories and find verified providers near you.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8">
+            @foreach($popularServices as $category => $group)
+                <div>
+                    <h3 class="text-xs font-bold text-gray-800 uppercase tracking-wider mb-3">
+                        {{ $category }}
+                    </h3>
+                    <ul class="space-y-2">
+                        @foreach($group['items'] as $service)
+                            @php
+                                
+                                $href = $group['type'] === 'online'
+                                    ? route('city.slug', [
+                                        'city_slug'    => 'online',
+                                        'service_slug' => $service['slug'],
+                                    ])
+                                    : route('showCity', $service['slug']);
+                            @endphp
+                            <li>
+                                <a href="{{ $href }}"
+                                   title="{{ $service['name'] }}"
+                                   class="text-xs md:text-sm text-gray-500 hover:text-primary transition-colors leading-relaxed">
+                                    {{ $service['name'] }}
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
 <footer class="bg-gray-50 pt-10 md:pt-16 pb-8 border-t border-gray-200">
     <div class="w-full px-4 md:px-8">
 
@@ -141,17 +262,17 @@
                 </div>
                 <ul class="space-y-2">
                     @foreach([
-                        ['name' => 'Home',                      'href' => '/','route'=>route('home')],
-                        ['name' => 'About Us',                  'href' => '/about-us','route'=>route('about.us')],
-                        ['name' => 'Contact Us',                'href' => '/contact-us','route'=>route('contact.us')],
-                        ['name' => 'Careers',                   'href' => '/careers','route'=>route('careers')],
-                        ['name' => 'Blog',                      'href' => '/blog','route'=>route('blog.show')],
-                        ['name' => 'Pricing',                   'href' => '/pricing','route'=>route('pricing')],
+                        ['name' => 'Home',                      'route'=>route('home')],
+                        ['name' => 'About Us',                  'route'=>route('about.us')],
+                        ['name' => 'Contact Us',               'route'=>route('contact.us')],
+                        ['name' => 'Careers',                   'route'=>route('careers')],
+                        ['name' => 'Blog',                      'route'=>route('blog.show')],
+                        ['name' => 'Pricing',                  'route'=>route('pricing')],
                       //  ['name' => 'Advertise on QuickDials',   'href' => '/business-owners','route'=>route('login')],
-                        ['name' => 'Privacy Policy',            'href' => '/privacy-policy','route'=>route('privacy.policy')],
-                        ['name' => 'Terms of Service',          'href' => '/terms-conditions','route'=>route('terms.conditions')],
-                        ['name' => 'Copyright Policy',          'href' => '/copyright-policy','route'=>route('copyright.policy')],
-                        ['name' => 'Refund Policy',             'href' => '/refund-policy','route'=>route('refund.policy')],
+                        ['name' => 'Privacy Policy',            'route'=>route('privacy.policy')],
+                        ['name' => 'Terms of Service',          'route'=>route('terms.conditions')],
+                        ['name' => 'Copyright Policy',          'route'=>route('copyright.policy')],
+                        ['name' => 'Refund Policy',             'route'=>route('refund.policy')],
                     ] as $link)
 
                         <li>
