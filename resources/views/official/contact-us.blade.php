@@ -65,7 +65,7 @@
                 [
                     'label'     => 'Phone',
                     'value'     => '+91-75-9543-9543',
-                    'sub'       => 'Mon–Fri, 9am–6pm EST',
+                    'sub'       => 'Mon–Fri, 10am–7pm EST',
                     'href'      => 'tel:+917595439543',
                     'iconBg'    => 'bg-violet-50',
                     'iconColor' => 'text-violet-600',
@@ -202,7 +202,7 @@
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                         </svg>
-                                        Mon–Fri, 9am–6pm PST
+                                        Mon–Fri, 10am–7pm PST
                                     </p>
                                 </div>
                             </div>
@@ -230,7 +230,7 @@
                         'country'  => 'India',
                         'address'  => 'UNIT 101 OXFORD TOWERS, 139/88 HAL OLD AIRPORT RD, H.A.L II Stage, Bangalore North, Bangalore- 560008, Karnataka',
                         'phone'    => '+91-75-9543-9543',
-                        'hours'    => 'Mon–Fri, 9am–6pm EST',
+                        'hours'    => 'Mon–Fri, 10am–7pm EST',
                         'flag'     => '🇮🇳',
                         'gradient' => 'from-blue-500 to-indigo-500',
                         'bg'       => 'from-blue-50 to-indigo-50',
@@ -243,7 +243,7 @@
                         'country'  => 'India',
                         'address'  => 'G-13, Sector-3, Noida, UP, India, 201301',
                         'phone'    => '+91-75-9543-9543',
-                        'hours'    => 'Mon–Fri, 9am–6pm GMT',
+                        'hours'    => 'Mon–Fri, 10am–7pm GMT',
                         'flag'     => '🇮🇳',
                         'gradient' => 'from-rose-500 to-pink-500',
                         'bg'       => 'from-rose-50 to-pink-50',
@@ -364,64 +364,116 @@
                 </div>
 
                 {{-- Form --}}
-                <div x-show="!submitted">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-3.5">
-                        <div class="flex flex-col gap-1.5">
-                            <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Full Name</label>
-                            <input x-model="form.name" type="text" placeholder="Jane Smith" required
-                                   class="input-focus w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 text-sm placeholder-gray-300" />
-                        </div>
-                        <div class="flex flex-col gap-1.5">
-                            <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Email</label>
-                            <input x-model="form.email" type="email" placeholder="jane@company.com" required
-                                   class="input-focus w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 text-sm placeholder-gray-300" />
-                        </div>
-                    </div>
+                {{-- resources/views/client/contact-form.blade.php --}}
 
-                    <div class="flex flex-col gap-1.5 mb-3.5">
-                        <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Subject</label>
-                        <select x-model="form.subject" required
-                                class="input-focus w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 appearance-none cursor-pointer">
-                            <option value="" disabled selected>Select a topic...</option>
-                            <option value="general">General Inquiry</option>
-                            <option value="sales">Sales &amp; Pricing</option>
-                            <option value="support">Technical Support</option>
-                            <option value="partnership">Partnership</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
+<div x-data="contactForm()" x-init="init()">
+    {{-- ✅ CSRF meta tag must exist in your <head>: <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
 
-                    <div class="flex flex-col gap-1.5 mb-3.5">
-                        <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Message</label>
-                        <textarea x-model="form.message" rows="4" placeholder="Tell us how we can help..." required
-                                  class="input-focus w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 text-sm placeholder-gray-300 resize-none"></textarea>
-                    </div>
+    <div x-show="!submitted">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-3.5">
+            {{-- Full Name --}}
+            <div class="flex flex-col gap-1.5">
+                <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Full Name</label>
+                <input x-model="form.name" type="text" placeholder="Jane Smith"
+                       class="input-focus w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 text-sm placeholder-gray-300"
+                       :class="errors.name ? 'border-red-400' : ''" />
+                <p x-show="errors.name" x-text="errors.name" class="text-xs text-red-500 mt-0.5"></p>
+            </div>
 
-                    <button type="button" @click="submit()" :disabled="loading"
-                            class="relative w-full mt-1 py-3.5 rounded-xl font-semibold text-white overflow-hidden btn-gradient hover:opacity-90 transition-opacity disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+            {{-- Email --}}
+            <div class="flex flex-col gap-1.5">
+                <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Email</label>
+                <input x-model="form.email" type="email" placeholder="jane@company.com"
+                       class="input-focus w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 text-sm placeholder-gray-300"
+                       :class="errors.email ? 'border-red-400' : ''" />
+                <p x-show="errors.email" x-text="errors.email" class="text-xs text-red-500 mt-0.5"></p>
+            </div>
+        </div>
 
-                        {{-- Loading state --}}
-                        <template x-if="loading">
-                            <span class="flex items-center gap-2">
-                                <svg class="w-4 h-4 spinner" viewBox="0 0 24 24" fill="none">
-                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
-                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
-                                </svg>
-                                Sending...
-                            </span>
-                        </template>
+        {{-- ✅ NEW: Mobile field --}}
+        <div class="flex flex-col gap-1.5 mb-3.5">
+            <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Mobile</label>
+            <input x-model="form.mobile" type="tel" inputmode="numeric" maxlength="10"
+                   placeholder="9876543210"
+                   @input="form.mobile = form.mobile.replace(/\D/g,'')"
+                   class="input-focus w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 text-sm placeholder-gray-300"
+                   :class="errors.mobile ? 'border-red-400' : ''" />
+            <p x-show="errors.mobile" x-text="errors.mobile" class="text-xs text-red-500 mt-0.5"></p>
+        </div>
 
-                        {{-- Default state --}}
-                        <template x-if="!loading">
-                            <span class="flex items-center gap-1.5 px-4 py-2 bg-sky-500 hover:bg-sky-600 text-white text-xs font-semibold rounded-md shadow transition-colors">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
-                                </svg>
-                                Send Message
-                            </span>
-                        </template>
-                    </button>
-                </div>
+        {{-- Subject --}}
+        <div class="flex flex-col gap-1.5 mb-3.5">
+            <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Subject</label>
+            <select x-model="form.subject"
+                    class="input-focus w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-900 appearance-none cursor-pointer"
+                    :class="errors.subject ? 'border-red-400' : ''">
+                <option value="" disabled>Select a topic...</option>
+                <option value="general">General Inquiry</option>
+                <option value="sales">Sales &amp; Pricing</option>
+                <option value="support">Technical Support</option>
+                <option value="partnership">Partnership</option>
+                <option value="other">Other</option>
+            </select>
+            <p x-show="errors.subject" x-text="errors.subject" class="text-xs text-red-500 mt-0.5"></p>
+        </div>
+
+        {{-- Message --}}
+        <div class="flex flex-col gap-1.5 mb-3.5">
+            <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Message</label>
+            <textarea x-model="form.message" rows="4" placeholder="Tell us how we can help..."
+                      class="input-focus w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 text-sm placeholder-gray-300 resize-none"
+                      :class="errors.message ? 'border-red-400' : ''"></textarea>
+            <p x-show="errors.message" x-text="errors.message" class="text-xs text-red-500 mt-0.5"></p>
+        </div>
+
+        {{-- ✅ Honeypot (spam trap) — hidden from humans --}}
+        <input type="text" x-model="form.website" tabindex="-1" autocomplete="off"
+               class="hidden" aria-hidden="true" />
+
+        {{-- Server error banner --}}
+        <div x-show="serverError" x-cloak
+             class="mb-3 p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs">
+            <span x-text="serverError"></span>
+        </div>
+
+        {{-- Submit button --}}
+        <button type="button" @click="submit()" :disabled="loading"
+                class="relative w-full mt-1 py-3.5 rounded-xl font-semibold text-white overflow-hidden btn-gradient hover:opacity-90 transition-opacity disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 bg-sky-500 hover:bg-sky-600">
+            <template x-if="loading">
+                <span class="flex items-center gap-2">
+                    <svg class="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
+                    </svg>
+                    Sending...
+                </span>
+            </template>
+            <template x-if="!loading">
+                <span class="flex items-center gap-1.5">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                    </svg>
+                    Send Message
+                </span>
+            </template>
+        </button>
+    </div>
+
+    {{-- ✅ Success state --}}
+    <div x-show="submitted" x-cloak class="text-center py-10">
+        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-green-100 flex items-center justify-center">
+            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+            </svg>
+        </div>
+        <h3 class="text-lg font-bold text-gray-900">Thanks, we got your message!</h3>
+        <p class="text-sm text-gray-500 mt-1">Our team will get back to you within 24 hours.</p>
+        <button @click="reset()" class="mt-5 text-xs font-semibold text-sky-600 hover:underline">
+            Send another message
+        </button>
+    </div>
+</div>
+
 
             </div>{{-- /form card --}}
         </div>
@@ -430,58 +482,101 @@
 </main>
 
  
-
-{{-- ══════════════════════════════════════
-     ALPINE COMPONENT
-════════════════════════════════════════ --}}
+ 
 <script>
 function contactForm() {
     return {
-        loading:   false,
+        loading: false,
         submitted: false,
-        form: { name: '', email: '', subject: '', message: '' },
+        serverError: '',
+        form: {
+            name: '',
+            email: '',
+            mobile: '',
+            subject: '',
+            message: '',
+            website: '', // honeypot
+        },
+        errors: {},
 
-        init() { /* nothing async needed */ },
+        init() {
+            // optional: prefill from localStorage if you want
+        },
+
+        clientValidate() {
+            this.errors = {};
+            if (!this.form.name || this.form.name.trim().length < 3) this.errors.name = 'Please enter your full name.';
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(this.form.email)) this.errors.email = 'Please enter a valid email.';
+            if (!/^[6-9]\d{9}$/.test(this.form.mobile)) this.errors.mobile = 'Enter a valid 10-digit Indian mobile.';
+            if (!this.form.subject) this.errors.subject = 'Please select a topic.';
+            if (!this.form.message || this.form.message.trim().length < 10) this.errors.message = 'Message must be at least 10 characters.';
+            return Object.keys(this.errors).length === 0;
+        },
 
         async submit() {
-            if (!this.form.name || !this.form.email || !this.form.subject || !this.form.message) return;
+            this.serverError = '';
+            if (!this.clientValidate()) return;
+
+            // honeypot: bot fills hidden field → silently fake success
+            if (this.form.website) { this.submitted = true; return; }
 
             this.loading = true;
-
             try {
-                /*
-                 * Wire to your Laravel API:
-                 * const res = await fetch('/api/contact', {
-                 *   method: 'POST',
-                 *   headers: {
-                 *     'Content-Type': 'application/json',
-                 *     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                 *   },
-                 *   body: JSON.stringify(this.form),
-                 * });
-                 */
+                const token = document.querySelector('meta[name="csrf-token"]')?.content || '';
+                const res = await fetch('/client/lead/saveEnquiryContact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest', // ✅ critical — controller checks $request->ajax()
+                        'X-CSRF-TOKEN': token,                // ✅ critical — Laravel CSRF
+                    },
+                    body: JSON.stringify({
+                        name: this.form.name.trim(),
+                        email: this.form.email.trim(),
+                        mobile: this.form.mobile.trim(),
+                        subject: this.form.subject,
+                        message: this.form.message.trim(),
+                    }),
+                });
 
-                // Simulate network delay (remove when wiring real API)
-                await new Promise(r => setTimeout(r, 1600));
+                const data = await res.json().catch(() => ({}));
 
-                this.submitted = true;
-            } catch (err) {
-                console.error('Contact form error:', err);
+                if (res.ok && (data?.response?.responseCode === 200 || data?.statusCode === 1)) {
+                    this.submitted = true;
+                    this.resetFields();
+                    return;
+                }
+
+                // validation errors from server (status 400)
+                if (res.status === 400 && data?.errors) {
+                    Object.keys(data.errors).forEach(k => this.errors[k] = data.errors[k][0]);
+                    return;
+                }
+
+                this.serverError = data?.message || 'Something went wrong. Please try again.';
+            } catch (e) {
+                console.error(e);
+                this.serverError = 'Network error. Please check your connection and retry.';
             } finally {
                 this.loading = false;
             }
         },
 
+        resetFields() {
+            this.form = { name: '', email: '', mobile: '', subject: '', message: '', website: '' };
+            this.errors = {};
+        },
+
         reset() {
             this.submitted = false;
-            this.form = { name: '', email: '', subject: '', message: '' };
+            this.serverError = '';
+            this.resetFields();
         },
-    };
+    }
 }
 </script>
-
- 
-
+  
 
  
  @endsection

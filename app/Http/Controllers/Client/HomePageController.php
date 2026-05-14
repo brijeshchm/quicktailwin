@@ -598,7 +598,7 @@ class HomePageController extends Controller
 			if ($lead->save()) {
 
 				return response()->json([
-					'statusCode' => 1,
+					'statusCode' => true,
 					'response' => [
 						'responseCode' => 200,
 						'payload' => '',
@@ -607,7 +607,7 @@ class HomePageController extends Controller
 				], 200);
 			} else {
 				return response()->json([
-					'statusCode' => 1,
+					'statusCode' => true,
 					'response' => [
 						'responseCode' => 200,
 						'payload' => '',
