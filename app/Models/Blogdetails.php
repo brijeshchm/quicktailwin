@@ -16,6 +16,8 @@ class Blogdetails extends Model
     'meta_keywords',
     'meta_description',
     'top_content',
+    'top_heading',
+    'bottom_heading',
     'bottom_content',
     'image_banner',
     'ratingcount',

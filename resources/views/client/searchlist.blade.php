@@ -604,7 +604,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
     {{-- Top Description --}}
     @if(!empty($topDescription))
     <div class="bg-white rounded-2xl p-6 mt-4 mx-4">
-        <h2 class="text-lg font-bold text-gray-900 mb-3">Trusted {{ $keyword }}</h2>
+        <h2 class="text-lg font-bold text-gray-900 mb-3">Trusted {{ $kwData['top_heading']??'' }}</h2>
         <div class="text-sm text-gray-600 leading-relaxed">{!! $topDescription !!}</div>
     </div>
     @endif
@@ -612,7 +612,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
     {{-- Bottom Description --}}
     @if(!empty($bottomDescription))
     <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mt-4 mx-4">
-        <h2 class="text-lg font-bold text-gray-900 mb-3">Find the Best {{ $keyword }} in {{ $area }}</h2>
+        <h2 class="text-lg font-bold text-gray-900 mb-3">Find the Best {{ $kwData['bottom_heading'] }} in {{ $area }}</h2>
         <div class="text-sm text-gray-600 leading-relaxed">{!! $bottomDescription !!}</div>
     </div>
     @endif

@@ -418,7 +418,7 @@ class BlogController extends Controller
 
 
 			$validator = Validator::make($request->all(), [
-				// 'heading' => 'required|string|min:10|max:1065',			 
+				'heading' => 'nullable',			 
 				'description' => 'required|string',
 				// 'paragraph1' => 'required|string|max:255',
 				// 'paragraph2' => 'nullable|string|max:255',
@@ -440,7 +440,7 @@ class BlogController extends Controller
 				$blogdetails = Blogdetails::findOrFail($id);
 
 				$blogdetails->update([
-					// 'heading' => $request->heading,
+					'heading' => $request->heading,
 					'description' => $request->description,
 				]);
 
@@ -497,10 +497,12 @@ class BlogController extends Controller
 			try {
 
 				$blogdetails = Blogdetails::findOrFail($id);
-
+ 
 				$blogdetails->update([
 					'top_content' => $request->top_content,
 					'bottom_content' => $request->bottom_content,
+					'bottom_heading' => $request->bottom_heading,
+					'top_heading' => $request->top_heading,
 				]);
 
 				return response()->json([

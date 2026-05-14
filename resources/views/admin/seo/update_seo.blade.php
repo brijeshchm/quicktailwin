@@ -198,9 +198,23 @@ padding:0px;
             <form class="form-horizontal" method="POST" onsubmit="return keywordController.updatePageContent(this,<?php echo (isset($keyword->id)? $keyword->id:""); ?>)" >
                 {{ csrf_field() }}
                 <div class="form-group">
+                    <label class="col-md-2 control-label">Top Heading</label>
+                    <div class="col-md-8">
+                        <input class="form-control" name="top_heading" value="{{ $keyword->top_heading }}" placeholder="Enter top heading">
+                    </div>
+                </div>
+
+
+                <div class="form-group">
                     <label class="col-md-2 control-label">Page Top Description (max 500 chars)</label>
                     <div class="col-md-8">
                         <textarea class="form-control summernote" name="top_description" rows="9" placeholder="Enter Page Top Description">{{ $keyword->top_description }}</textarea>
+                    </div>
+                </div>
+                  <div class="form-group">
+                    <label class="col-md-2 control-label">Bottom Heading</label>
+                    <div class="col-md-8">
+                        <input class="form-control" name="bottom_heading" value="{{ $keyword->bottom_heading }}" placeholder="Enter bottom heading">
                     </div>
                 </div>
             <div class="form-group ">
@@ -216,6 +230,36 @@ padding:0px;
         </div>
             </form>
         </div>
+
+        <div class="section-border">
+            <h4>Extra Content</h4>
+            <form class="form-horizontal" method="POST" onsubmit="return keywordController.extraPageContent(this,<?php echo (isset($keyword->id)? $keyword->id:""); ?>)" >
+                {{ csrf_field() }}
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Extra Heading</label>
+                    <div class="col-md-8">
+                        <input class="form-control" name="extra_heading" value="{{ $keyword->extra_heading }}" placeholder="Enter Extra heading">
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Page Extra Description (max 500 chars)</label>
+                    <div class="col-md-8">
+                        <textarea class="form-control summernote" name="extra_description" rows="9" placeholder="Enter Page Extra Description">{{ $keyword->extra_description }}</textarea>
+                    </div>
+                </div>
+                  
+            	
+            <div class="form-group text-center">
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-btn"></i> Submit
+            </button>
+        </div>
+            </form>
+        </div>
+
+
 
         {{-- ==================== FAQ SECTION ==================== --}}
         <div class="section-border">

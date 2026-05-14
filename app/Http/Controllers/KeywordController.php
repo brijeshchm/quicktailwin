@@ -1933,6 +1933,8 @@ class KeywordController extends Controller
 		if ($kwObj) {
 			$kwObj->top_description = $request->input('top_description');
 			$kwObj->bottom_description = $request->input('bottom_description');
+			$kwObj->bottom_heading = $request->input('bottom_heading');
+			$kwObj->top_heading = $request->input('top_heading');
 
 
 			if ($kwObj->isDirty()) {
@@ -1961,6 +1963,52 @@ class KeywordController extends Controller
 		} else {
 			$status = 0;
 			$msg = "Content Update could not be submitted!";
+		}
+
+		return response()->json(['status' => $status, 'msg' => $msg], 200);
+	}
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function extraPageContent(Request $request, $id)
+	{
+		if (!($request->user()->current_user_can('administrator') || $request->user()->current_user_can('edit_SEO'))) {
+			return response()->json(['status' => 1, 'errors' => 'errors unauthorised'], 400);
+		}
+
+		if (empty($id) || is_null($id)) {
+			$danger_msg = 'Keyword cannot be null or blank.';
+			return response()->json(['status' => 1, 'errors' => $danger_msg], 400);
+		}
+		$validator = Validator::make($request->all(), [
+			'extra_heading' => 'nullable',
+			'extra_description' => 'nullable',
+
+
+		]);
+
+		if ($validator->fails()) {
+			$errorsBag = $validator->getMessageBag()->toArray();
+			return response()->json(['status' => 1, 'errors' => $errorsBag], 400);
+		}
+		$kwObj = Keyword::findOrFail($id);
+
+		if ($kwObj) {
+			$kwObj->extra_heading = $request->input('extra_heading');
+			$kwObj->extra_description = $request->input('extra_description');			 
+		}
+
+		if (!empty($kwObj->save())) {
+			$status = 1;
+			$msg = "Extra Content Update submitted successfully!";
+
+		} else {
+			$status = 0;
+			$msg = "Extra Content Update could not be submitted!";
 		}
 
 		return response()->json(['status' => $status, 'msg' => $msg], 200);

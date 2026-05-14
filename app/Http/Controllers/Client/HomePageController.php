@@ -1866,7 +1866,7 @@ Instead of limiting learning to theory, the course takes you through:.",
         $bgImage          = $kwData['category_banner']   ?? '/computer-courses-training.jpg';
         $metaTitle        = $kwData['meta_title']        ?? $keyword;
         $metaDescription  = $kwData['meta_description']  ?? '';
- 
+         $metaKeywords  = $kwData['meta_keywords']  ?? '';
         /* star image map */
         $starMap = [
             0 => 'star_1.png', 2 => 'star_2.png', 3 => 'star_3.png',
@@ -1875,6 +1875,16 @@ Instead of limiting learning to theory, the course takes you through:.",
         ];
         $stars = $starMap[$ratingValue] ?? 'star_4.5.png';
  
+
+		$faqs = [];
+        for ($i = 1; $i <= 6; $i++) {
+            $q = $kwData["faqq{$i}"] ?? '';
+            $a = $kwData["faqa{$i}"] ?? '';
+            if ($q && $a) $faqs[] = ['q' => $q, 'a' => $a];
+        }
+
+
+
         /* category colour palette (index-based, mirrors Next.js CAT_STYLE) */
         $catColors = [
             '#1a5276','#1a6496','#4a235a','#b7770d','#0b3d5e',
@@ -1884,59 +1894,14 @@ Instead of limiting learning to theory, the course takes you through:.",
  
         return view('client.category-slug', compact(
             'slug', 'keyword', 'childCategory', 'childSlug',
-            'topDescription', 'bottomDescription',
+            'topDescription', 'bottomDescription','faqs',
             'ratingCount', 'ratingValue', 'stars', 'bgImage',
-            'categoryList', 'catColors',
+            'categoryList', 'catColors','metaKeywords',
             'metaTitle', 'metaDescription'
         ));
     
 
-
-
-		// $parentCategories = ParentCategory::get();
-		// $childCategories = ChildCategory::get();
-		// $businessServices = DB::table('parent_category')
-		// 	->join('child_category', 'child_category.parent_category_id', '=', 'parent_category.id')
-		// 	->select('parent_category.*', 'child_category.*')
-		// 	->where('parent_category.parent_slug', $slug)
-		// 	->groupBy('child_slug')
-		// 	->orderBy('child_category', 'asc')
-		// 	->get();
-
-
-		// $keyword = DB::table('parent_category')->where('parent_slug', $slug)->first();
-
-		// if (!empty($keyword)) {
-
-
-
-		// 	$clientsList = DB::table('clients')
-		// 		->join('assigned_kwds', 'clients.id', '=', 'assigned_kwds.client_id')
-		// 		->join('keyword', 'assigned_kwds.kw_id', '=', 'keyword.id')
-		// 		->join('citylists', 'assigned_kwds.city_id', '=', 'citylists.id')
-		// 		->leftJoin(DB::raw('(SELECT SUM(rating) AS rating,comment_client_ID,COUNT(comment_ID) AS comment_count FROM comments GROUP BY comment_client_ID) c'), 'c.comment_client_ID', '=', 'clients.id')
-		// 		->select('clients.*', 'citylists.city', 'assigned_kwds.sold_on_position', 'c.rating', 'c.comment_count')
-		// 		->where('assigned_kwds.parent_cat_id', '=', $keyword->id)
-		// 		->orderByRaw("
-		// 		CASE clients.client_type
-		// 		WHEN 'platinum' THEN 1
-		// 		WHEN 'diamond' THEN 2
-		// 		WHEN 'gold' THEN 3
-		// 		WHEN 'silver' THEN 4
-		// 		ELSE 5
-		// 		END
-		// 		")
-
-		// 		->groupBy('client_id')
-		// 		->get();
-		// 	$city = "";
-		// 	return view('client.category', ['businessServices' => $businessServices, 'parentCategories' => $parentCategories, 'childCategories' => $childCategories, 'keyword' => $keyword, 'clientsList' => $clientsList, 'city' => $city]);
-		// } else {
-
-		// 	return response()->view('client.errorpage', [], 404);
-
-		// }
-
+ 
 
 
 
@@ -1959,7 +1924,7 @@ Instead of limiting learning to theory, the course takes you through:.",
  
             return $res->successful() ? $res->json() : null;
         });
-//  dd($response);
+ 
         if (!$response) {
             abort(404);
         }
@@ -1978,7 +1943,15 @@ Instead of limiting learning to theory, the course takes you through:.",
         $bgImage          = $kwData['category_banner']   ?? '/computer-courses-training.jpg';
         $metaTitle        = $kwData['meta_title']        ?? $keyword;
         $metaDescription  = $kwData['meta_description']  ?? '';
+        $metaKeywords  = $kwData['meta_keywords']  ?? '';
  
+  		$faqs = [];
+        for ($i = 1; $i <= 6; $i++) {
+            $q = $kwData["faqq{$i}"] ?? '';
+            $a = $kwData["faqa{$i}"] ?? '';
+            if ($q && $a) $faqs[] = ['q' => $q, 'a' => $a];
+        }
+
         /* star image map */
         $starMap = [
             0 => 'star_1.png', 2 => 'star_2.png', 3 => 'star_3.png',
@@ -1996,9 +1969,9 @@ Instead of limiting learning to theory, the course takes you through:.",
  
         return view('client.child-slug', compact(
             'child_slug', 'keyword', 'childCategory', 'childSlug',
-            'topDescription', 'bottomDescription',
+            'topDescription', 'bottomDescription','metaKeywords',
             'ratingCount', 'ratingValue', 'stars', 'bgImage',
-            'childLists', 'catColors',
+            'childLists', 'catColors','faqs','kwData',
             'metaTitle', 'metaDescription'
         ));
     

@@ -2832,6 +2832,49 @@ var dataTableAssignedKeywords = $('#datatable-assigned-keywords').dataTable({
 				}); 
 				 return false;	
 			},	
+			 extraPageContent:function(THIS,id){	
+			  var $this = $(THIS);
+			var form = new FormData(THIS);	
+		 
+				$.ajax({
+					url:"/developer/seo/extraPageContent/"+id,
+					type:"POST",					   
+					dataType:"json",	
+					data:form,
+					 cache: false,
+					contentType: false, 
+                    processData: false,                      
+					success:function(data){
+					 	
+						if(data.status){	
+					 					
+						$('#messagemodel .modal-title').text("Blog Desciption");	
+						$('#messagemodel .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
+						$('#messagemodel').modal({keyboard:false,backdrop:'static'});
+						$('#messagemodel').css({'width':'100%'});
+							removeValidationErrors($this);
+							//window.location.href ="/developer/seoCity";
+						}else{
+							$('#messagemodel .modal-title').text("Blog Desciption");	
+							$('#messagemodel .modal-body').html("<div class='alert alert-danger'>"+data.msg+"</div>");			
+							$('#messagemodel').modal({keyboard:false,backdrop:'static'});
+							$('#messagemodel').css({'width':'100%'});		 
+							
+						}
+					},
+					error:function(jqXHR, textStatus, errorThrown){
+					 
+						var response = JSON.parse(jqXHR.responseText);
+						if(response.status){ 
+							showValidationErrors($this,response.errors);						 
+						}else{
+							alert('Something went wrong');
+						}
+						 
+					}
+				}); 
+				 return false;	
+			},	
 			 updateFaqKeyword:function(THIS,id){	
 			  var $this = $(THIS);
 			var form = new FormData(THIS);	
@@ -3113,6 +3156,7 @@ var dataTableAssignedKeywords = $('#datatable-assigned-keywords').dataTable({
 				}); 
 				 return false;	
 			},	
+			
 			 updateBlogImage:function(THIS,id){	
 			  var $this = $(THIS);
 			var form = new FormData(THIS);	

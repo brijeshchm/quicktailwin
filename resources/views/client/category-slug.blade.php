@@ -54,10 +54,8 @@
                 <span class="font-semibold">{{ number_format($ratingCount) }}</span>
                 <span class="text-slate-400">ratings</span>
             </div>
-
-            @if(!empty($topDescription))
-                <p class="text-slate-600 text-sm mt-3 max-w-2xl leading-relaxed">{{ $topDescription }}</p>
-            @endif
+ 
+          
         </div>
     </div>
 
@@ -147,6 +145,116 @@
         
 
     </div>
+
+
+    
+    {{-- Agents comparison table --}}
+    @if(count($agents ?? []) > 0)
+    <section class="w-full p-4">
+        <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-4">TOP {{ count($agents) }} {{ $keyword }}</h2>
+        <div class="w-full overflow-x-auto border rounded-lg">
+            <table class="w-full border-collapse">
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="border px-4 py-3 text-left font-semibold min-w-[150px]">Name</th>
+                        @foreach($agents as $agent)
+                        <th class="border px-4 py-3 text-left text-blue-600 hover:underline cursor-pointer whitespace-nowrap">{{ $agent['name'] }}</th>
+                        @endforeach
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                    $agentRows = [
+                        'Address' => 'address', 'About' => 'about',
+                        'Services Offered' => 'Services_Offered', 'Listed Categories' => 'Listed_Categories',
+                        'Year of Establishment' => 'Year_of_Establishment', 'Reviews' => 'No_of_Reviews',
+                        'Rating' => 'Rating', 'Service Type' => 'Training_Type',
+                        'Government Recognition' => 'Government_Recognition',
+                    ];
+                    @endphp
+                    @foreach($agentRows as $label => $key)
+                    @php $allEmpty = collect($agents)->every(fn($a) => empty($a[$key])); @endphp
+                    @if(!$allEmpty)
+                    <tr>
+                        <td class="border px-4 py-3 font-semibold">{{ $label }}</td>
+                        @foreach($agents as $agent)
+                        <td class="border px-4 py-3 text-sm leading-relaxed min-w-[200px]">
+                            {{ empty($agent[$key]) ? '—' : (is_array($agent[$key]) ? implode(', ', $agent[$key]) : $agent[$key]) }}
+                        </td>
+                        @endforeach
+                    </tr>
+                    @endif
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </section>
+    @endif
+
+    {{-- Course About --}}
+    @if(!empty($kwData['heading']) && !empty($kwData['courseabout']))
+    <div class="border rounded-lg p-4 bg-white shadow-sm mx-4">
+        <section class="rounded-md p-1">
+            <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-blue-900">{{ $kwData['heading'] }}</h2>
+            <div class="w-full h-[2px] bg-teal-500 mt-3 mb-5"></div>
+            <div class="text-gray-800 leading-relaxed mb-5">{!! $kwData['courseabout'] !!}</div>
+            <ul class="space-y-3">
+                @foreach(['paragraph1','paragraph2','paragraph3','paragraph4','paragraph5','paragraph6'] as $p)
+                @if(!empty($kwData[$p]))
+                <li class="flex items-start gap-2 text-gray-800">
+                    <span class="text-orange-500 mt-1">✔</span>
+                    <span>{!! $kwData[$p] !!}</span>
+                </li>
+                @endif
+                @endforeach
+            </ul>
+        </section>
+    </div>
+    @endif
+
+    {{-- Top Description --}}
+    @if(!empty($topDescription))
+    <div class="bg-white rounded-2xl p-6 mt-4 mx-4">
+        <h2 class="text-lg font-bold text-gray-900 mb-3">Trusted {{ $keyword }}</h2>
+        <div class="text-sm text-gray-600 leading-relaxed">{!! $topDescription !!}</div>
+    </div>
+    @endif
+
+    {{-- Bottom Description --}}
+    @if(!empty($bottomDescription))
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mt-4 mx-4">
+        <h2 class="text-lg font-bold text-gray-900 mb-3">Find the Best {{ $keyword }} </h2>
+        <div class="text-sm text-gray-600 leading-relaxed">{!! $bottomDescription !!}</div>
+    </div>
+    @endif
+
+    {{-- FAQ --}}
+    @if(count($faqs ?? []) > 0)
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+        <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            💬 Frequently Asked Questions — {{ $keyword }}
+        </h2>
+        <div class="space-y-2">
+        
+            @foreach($faqs as $fi => $faq)
+            @if(!empty($faq['q']) && !empty($faq['a']))
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === {{ $fi }} ? null : {{ $fi }}"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                  {{ $faq['q'] }} 
+                    <span x-text="openFaq === {{ $fi }} ? '▲' : '▼'" class="text-gray-400 text-xs flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === {{ $fi }}" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                   {!! $faq['a'] !!}
+                </div>
+            </div>
+            @endif
+            @endforeach
+            
+        </div>
+    </div>
+    @endif
+
 
 
 

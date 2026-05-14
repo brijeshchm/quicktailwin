@@ -137,12 +137,11 @@ Route::post('/update-user/{id}',[App\Http\Controllers\userController::class, 'up
 	Route::post('/seo/updateMetaInformation/{id}',[App\Http\Controllers\KeywordController::class, 'updateMetaInformation'])->middleware('auth');
 	Route::post('/seo/updateAboutKeyword/{id}',[App\Http\Controllers\KeywordController::class, 'updateAboutKeyword'])->middleware('auth');
 	Route::post('/seo/updatePageContent/{id}',[App\Http\Controllers\KeywordController::class, 'updatePageContent'])->middleware('auth');
+	Route::post('/seo/extraPageContent/{id}',[App\Http\Controllers\KeywordController::class, 'extraPageContent'])->middleware('auth');
 	Route::post('/seo/updateFaqKeyword/{id}',[App\Http\Controllers\KeywordController::class, 'updateFaqKeyword'])->middleware('auth');
 
 	/* SEO */
  	Route::get('/seo-work', [App\Http\Controllers\SeoWorkController::class, 'index']);
-
-		
 
 	//seoWork
 	Route::get('seo-work', [App\Http\Controllers\SeoWorkController::class, 'index'])->middleware('auth:developer');
@@ -509,7 +508,7 @@ Route::get('blog/editBlog/{id}', [App\Http\Controllers\BlogController::class, 'e
 Route::post('blog/updateBlogMeta/{id}', [App\Http\Controllers\BlogController::class, 'updateBlogMeta'])->middleware('auth');
 Route::post('blog/updateAboutBlog/{id}', [App\Http\Controllers\BlogController::class, 'updateAboutBlog'])->middleware('auth');
 Route::post('blog/updatePageContent/{id}', [App\Http\Controllers\BlogController::class, 'updatePageContent'])->middleware('auth');
-Route::post('blog/updatePageContent/{id}', [App\Http\Controllers\BlogController::class, 'updatePageContent'])->middleware('auth');
+
 Route::post('blog/updateBlogImage/{id}', [App\Http\Controllers\BlogController::class, 'updateBlogImage'])->middleware('auth');
 Route::post('blog/updateFaqBlog/{id}', [App\Http\Controllers\BlogController::class, 'updateFaqBlog'])->middleware('auth');
 Route::get('blog/getblogdetails', [App\Http\Controllers\BlogController::class, 'getPaginationBlog'])->middleware('auth');
@@ -530,10 +529,6 @@ Route::get('testimonials/status/{id}/{val}',[App\Http\Controllers\TestimonialsCo
 /* developer testimonials routing */
 //Route::resource('posts', 'API\PostAPIController');
 
-
-
-
-
 //occupation
 Route::get('occupation', [App\Http\Controllers\OccupationController::class, 'index'])->middleware('auth:developer');
 Route::get('occupationAdd/add', [App\Http\Controllers\OccupationController::class, 'occupationAdd'])->middleware('auth:developer');
@@ -545,9 +540,6 @@ Route::get('occupation/get-occupation', [App\Http\Controllers\OccupationControll
 Route::get('occupation/delete/{id}', [App\Http\Controllers\OccupationController::class, 'delete'])->middleware('auth:developer');
  
  
- 
-
-
 //seoCity
 Route::get('seoCity', [App\Http\Controllers\SeoCityController::class, 'index'])->middleware('auth:developer');
 Route::get('seoCity/add', [App\Http\Controllers\SeoCityController::class, 'seoCityAdd'])->middleware('auth:developer');
@@ -557,6 +549,4 @@ Route::post('seoCity/editSaveSeoCity/{id}', [App\Http\Controllers\SeoCityControl
 Route::get('seoCity/status/{id}/{val}', [App\Http\Controllers\SeoCityController::class, 'status'])->middleware('auth:developer');
 Route::get('seoCity/get-seoCity', [App\Http\Controllers\SeoCityController::class, 'getSeoCityPagination'])->middleware('auth:developer');
 Route::get('seoCity/delete/{id}', [App\Http\Controllers\SeoCityController::class, 'delete'])->middleware('auth:developer');
- 
- 
  

@@ -359,7 +359,7 @@ class CitySlugController extends Controller
         $data     = $response['data'] ?? [];
     
         $kwData   = $data['keyword'] ?? [];
- 
+
         // ── Keyword / meta ─────────────────────────────────────────────────
         $keyword    = $this->replaceCity($kwData['keyword'] ?? $slug, $city);
         $area       = $kwData['area'] ?? $city;

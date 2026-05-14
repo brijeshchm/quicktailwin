@@ -191,12 +191,12 @@ padding:0px;
             <form class="form-horizontal" method="POST" onsubmit="return blogController.updateAboutBlog(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)" >
                 {{ csrf_field() }}
 
-                <!-- <div class="form-group">
+                <div class="form-group">
                     <label class="col-md-2 control-label">Heading</label>
                     <div class="col-md-8">
                         <input class="form-control" name="heading" value="{{ $edit_data->heading }}" placeholder="Enter heading">
                     </div>
-                </div> -->
+                </div>
 
                  <div class="form-group">
                     <label class="col-md-2 control-label">Description</label>
@@ -220,12 +220,30 @@ padding:0px;
             <h4>Page Content</h4>
             <form class="form-horizontal" method="POST" onsubmit="return blogController.updatePageContent(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)" >
                 {{ csrf_field() }}
+
+                 <div class="form-group">
+                    <label class="col-md-2 control-label">Top Heading</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="top_heading" value="{{ old('top_heading',(isset($edit_data)) ? $edit_data->top_heading:"")}}" placeholder="Enter Top Heading "> 
+                    </div>
+                </div>
+
+
                 <div class="form-group">
                     <label class="col-md-2 control-label">Page Top Description (max 500 chars)</label>
                     <div class="col-md-10">
                         <textarea class="form-control summernote" id="editor" name="top_content" rows="20" placeholder="Enter Page Top Description">{{ old('top_content', $edit_data->top_content ?? '') }}</textarea>
                     </div>
                 </div>
+
+                   <div class="form-group">
+                    <label class="col-md-2 control-label">Bottom Heading</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="bottom_heading" value="{{ old('bottom_heading',(isset($edit_data)) ? $edit_data->bottom_heading:"")}}" placeholder="Enter bottom Heading"> 
+                    </div>
+                </div>
+
+
             <div class="form-group ">
                 <label for="bottom_content" class="col-md-2 control-label">Page Bottom Description</label>
                 <div class="col-md-10">
