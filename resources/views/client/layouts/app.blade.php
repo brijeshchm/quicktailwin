@@ -311,22 +311,8 @@ if (navigator.geolocation) {
 } else {
     detectCityFromIP();
 }
- (() => {
-    const imgs = document.querySelectorAll('img');
-    const stats = { lazy: 0, eager: 0, missing: 0, total: imgs.length };
-    const issues = [];
 
-    imgs.forEach((img, i) => {
-        const loading = img.getAttribute('loading');
-        if (loading === 'lazy') stats.lazy++;
-        else if (loading === 'eager') stats.eager++;
-        else { stats.missing++; issues.push({ index: i, src: img.src.split('/').pop(), parent: img.parentElement.tagName }); }
-    });
-
-    console.table(stats);
-    console.log('🟡 Images WITHOUT loading attribute:');
-    console.table(issues);
-})();
+ 
 </script>
 
 
