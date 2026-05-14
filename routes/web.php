@@ -16,7 +16,19 @@ use Illuminate\Support\Facades\DB;
 //Auth::routes();
 
  
- 
+ Route::get('/cache-clear/', function () {
+
+	$exitCode = Artisan::call('config:clear');
+	$exitCode = Artisan::call('cache:clear');
+	$exitCode = Artisan::call('cache:clear');
+	//$exitCode = Artisan::call('route:cache');
+	Artisan::call('optimize:clear');
+
+	// $exitCode = Artisan::call('optimize');
+
+	return '<h1>Cache cleared</h1>';
+});
+
 
 
 use App\Http\Controllers\Business\BusinessController;
@@ -549,3 +561,6 @@ Route::POST('/{city}/lead/auto-form-save', [App\Http\Controllers\Client\HomePage
 // });
 
 require __DIR__.'/auth.php';
+
+
+
