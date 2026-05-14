@@ -504,8 +504,8 @@ Route::get('/get-zones/{city_id}', [HomePageController::class, 'getZones'])->nam
 
 // City home
 Route::get('/{city}', [CitySlugController::class, 'showCityOrService'])
-    ->name('showCity')
-    ->where(['city' => '[a-z0-9][a-z0-9\-]*']);
+    ->name('showCity');
+    // ->where(['city' => '[a-z0-9][a-z0-9\-]*']);
 
 // Route::get('/{city_slug}/{service_slug}', [SearchListController::class, 'showCityWithService'])->name('listing.show');
     // ->where([
@@ -515,8 +515,8 @@ Route::get('/{city}', [CitySlugController::class, 'showCityOrService'])
  
 
 Route::get('/{city_slug}/{service_slug}', [CitySlugController::class, 'showCityWithService'])
-    ->where('city_slug', '[a-z0-9\-]+')
-    ->where('service_slug', '[a-z0-9\-]+')
+    // ->where('city_slug', '[a-z0-9\-]+')
+    // ->where('service_slug', '[a-z0-9\-]+')
     ->name('city.slug');
 
 

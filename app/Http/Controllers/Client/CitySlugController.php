@@ -454,28 +454,23 @@ class CitySlugController extends Controller
     public function showCityWithService(Request $request, string $city, string $slug)
     {
         $city = strtolower($city);
-
+ 
         // 1. Validate city
         if (!$this->cityExists($city)) {
-            abort(410);
+              abort(410);
+           
         }
 
         // 2. If slug is NOT a service, try it as a business slug
         if (!$this->serviceExists($slug)) {
-            // $client = Client::where('business_slug', $slug)->first();
-
-            // if (!$client) {
-            //     abort(410);
-            // }
- 
+            
             $businessResponse = $this->fetchBusinessData($slug);
-
-   
-            if (!$businessResponse) {
-                abort(410);
+           if (!$businessResponse) {
+              
+               abort(410);
             }
 
-            // IMPORTANT: return the view + pass $slug into the method
+             
             return $this->getClientDetail($businessResponse,$slug);
         }
 
@@ -491,38 +486,7 @@ class CitySlugController extends Controller
     }
 
 
-    public function showCityWithService_old(Request $request, string $city, string $slug)
-    {
-        $city = strtolower($city);
- 
-        // ── Validate city ──────────────────────────────────────────────────
-        if (!$this->cityExists($city)) {
-            abort(410);
-        }
-        if (!$this->serviceExists($slug)) {          
- 
-            $client = Client::where('business_slug', $slug)->first();
-         
-            if (empty($client)) {
-                abort(410);
-            }else{
-     
-
-          $businessResponse = $this->fetchBusinessData($slug);
-        if (!$businessResponse) abort(410);
-          $this->getClientDetail($businessResponse);
- 
-            }
-        }
-         
-        
-        // ── Fetch data ─────────────────────────────────────────────────────
-        $response = $this->fetchData($city, $slug);       
-
-        $this->getsearchlist($response,$slug,$city);
-       
-    }
-
+   
 
 
 

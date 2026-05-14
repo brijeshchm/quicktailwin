@@ -68,7 +68,7 @@
                 <h2 class="text-base font-extrabold text-slate-900">Top Professional Courses</h2>
                 <a href="{{ route('category.list') }}" class="text-xs text-indigo-600 font-semibold hover:underline">View all →</a>
             </div>
-
+ 
             <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-6 gap-3">
                 @forelse($categoryList as $i => $course)
                     @php
