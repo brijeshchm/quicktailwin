@@ -260,10 +260,10 @@ class CitySlugController extends Controller
             : [];
  
         $hImages = array_slice($gallery, 0, (int) ceil(count($gallery) / 2)) ?: [
-            '/images/gallery.jpeg',
+            asset('/images/gallery.jpg'),
         ];
         $vImages = array_slice($gallery, (int) ceil(count($gallery) / 2)) ?: [
-            '/images/gallery.jpeg',
+            asset('/images/gallery.jpg'),
         ];
  
         // Services / assigned keywords

@@ -1,7 +1,10 @@
 @extends('client.layouts.app')
-@section('title', $metaTitle ?? $keyword )
-@section('description', $metaDescription ?? '')
-@section('keyword', $metaKeywords ?? '')
+@section('title', $metaTitle ?? $keyword . ' | QuickDials')
+
+@section('description', $metaDescription ?? 'Find the best ' . $keyword . ' with QuickDials. Explore verified businesses, phone numbers, addresses, reviews, ratings, photos, maps, and trusted local services near you.')
+
+@section('keyword', $metaKeywords ?? $keyword . ', best ' . $keyword . ', top ' . $keyword . ' near me, verified ' . $keyword . ', local business directory, QuickDials, business listings, reviews and ratings, contact details, nearby services, trusted businesses, top local services')
+
 
 @section('content')
 {{-- In your layout <head> or @push('styles') --}}

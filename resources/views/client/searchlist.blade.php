@@ -1,7 +1,9 @@
 @extends('client.layouts.app')
-@section('title', $metaTitle ?? $metaTitle . ' in ' . ucfirst($city))
-@section('description', $metaDescription ?? '')
-@section('keyword', $metaKeywords ?? '')
+@section('title', $metaTitle ?? $keyword . ' in ' . ucfirst($city) . ' | QuickDials')
+
+@section('description', $metaDescription ?? 'Find the best ' . $keyword . ' in ' . ucfirst($city) . ' with QuickDials. Discover verified businesses, addresses, phone numbers, reviews, ratings, photos, maps, and top local services near you.')
+
+@section('keyword', $metaKeywords ?? $keyword . ' in ' . ucfirst($city) . ', best ' . $keyword . ' in ' . ucfirst($city) . ', top ' . $keyword . ' near me, verified ' . $keyword . ', local business directory, QuickDials, business listings in ' . ucfirst($city) . ', reviews and ratings, contact details, nearby services, top businesses in ' . ucfirst($city))
 
 @section('content')
 
@@ -581,7 +583,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
     {{-- Course About --}}
     @if(!empty($kwData['heading']) && !empty($kwData['courseabout']))
     <div class="border rounded-lg p-4 bg-white shadow-sm mx-4">
-        <section class="bg-gray-100 border rounded-md p-6">
+        <section class="rounded-md p-1">
             <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-blue-900">{{ $kwData['heading'] }}</h2>
             <div class="w-full h-[2px] bg-teal-500 mt-3 mb-5"></div>
             <div class="text-gray-800 leading-relaxed mb-5">{!! $kwData['courseabout'] !!}</div>
@@ -601,7 +603,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
 
     {{-- Top Description --}}
     @if(!empty($topDescription))
-    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mt-4 mx-4">
+    <div class="bg-white rounded-2xl p-6 mt-4 mx-4">
         <h2 class="text-lg font-bold text-gray-900 mb-3">Trusted {{ $keyword }}</h2>
         <div class="text-sm text-gray-600 leading-relaxed">{!! $topDescription !!}</div>
     </div>
@@ -663,7 +665,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
     @endif
 
     {{-- Other Cities --}}
-    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mt-4 mx-4">
+    <div class="bg-white rounded-2xl p-6 mt-4 mx-4">
         <h2 class="text-base font-bold text-gray-900 mb-3 flex items-center gap-2">🔍 Find {{ $keyword }} in Other City</h2>
         <ul class="flex flex-wrap gap-2 text-sm text-gray-600">
             @foreach($otherCities as $i => $c)

@@ -252,7 +252,7 @@ try {
 
                 {{-- Age --}}
                 <div>
-                    <label class="text-[10px] font-semibold text-gray-500 mb-0.5 block">Age Range ff</label>
+                    <label class="text-[10px] font-semibold text-gray-500 mb-0.5 block">Age Range</label>
                     <select x-model="form.age" class="w-full text-xs border rounded-xl px-3 py-2 outline-none bg-white cursor-pointer focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
                             :class="errors.age ? 'border-red-400 ring-2 ring-red-100' : 'border-gray-200'">
                         <option value="">Select Age Range</option>
@@ -292,8 +292,7 @@ try {
 
                 <div class="mb-2">
                     <label class="text-[10px] font-semibold text-gray-500 mb-0.5 block">Comments</label>
-                    <textarea x-model="form.comment" placeholder="Tell us what you're looking for…" rows="4"
-                              class="w-full text-xs border border-gray-200 rounded-xl px-3 py-2 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 placeholder-gray-400 transition-all resize-none"></textarea>
+                    <textarea x-model="form.comment" placeholder="Tell us what you're looking for…" rows="4" class="w-full text-xs border border-gray-200 rounded-xl px-3 py-2 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 placeholder-gray-400 transition-all resize-none"></textarea>
                 </div>
 
                 <div class="bg-indigo-50 border border-indigo-100 rounded-xl px-3 py-2 space-y-1 mb-2">

@@ -1,11 +1,11 @@
 @extends('client.layouts.app')
  
 
-@section('title', 'About Quick Dials Quick Dials- Local search, IT Training, Playschool, overseas education.')
-@section('description', 'Quick Dials- Local search, IT Training, Playschool, overseas education.')
-@section('keyword', 'Quick Dials- Local search, IT Training, Playschool, overseas education.')
+@section('title', 'Contact Us | QuickDials - India’s Trusted Local Business Search Engine')
 
+@section('description', 'Contact QuickDials for business listings, customer support, advertising, partnership opportunities, and local business inquiries. Get in touch with India’s trusted local business search engine to connect with verified businesses and services across India.')
 
+@section('keyword', 'Contact QuickDials, QuickDials support, business listing support India, contact local business directory, QuickDials customer care, business inquiries, advertise on QuickDials, local business platform India, verified business support, QuickDials contact details, online business directory support')
 
 
 

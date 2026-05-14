@@ -330,8 +330,8 @@ class CitiesController extends Controller
 
 		header("Access-Control-Allow-Origin: *");
 		header('Access-Control-Allow-Credentials: true');
-
-		if ($request->wantsJson()) {
+ 
+		// if ($request->wantsJson()) {
 
 			$q = trim($request->input('q'));
 
@@ -412,7 +412,7 @@ class CitiesController extends Controller
 				'status' => true,
 				'keywords' => $keywords
 			]);
-		}
+		
 
 
 	}

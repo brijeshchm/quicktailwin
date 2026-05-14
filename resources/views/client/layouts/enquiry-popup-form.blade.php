@@ -54,7 +54,7 @@ select.ef-input { padding-left:1rem; }
             <p class="text-sm font-semibold text-gray-500 mb-4">Step 1 — Your contact details</p>
             <div class="space-y-3">
                 <div>
-                    <label class="text-xs font-semibold text-gray-500 mb-1 block">Full Name fff*</label>
+                    <label class="text-xs font-semibold text-gray-500 mb-1 block">Full Name*</label>
                     <div class="relative">
                         <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">👤</span>
                        
@@ -417,73 +417,4 @@ select.ef-input { padding-left:1rem; }
     });
 })();
 </script>
-
-<!-- 
-
-<script>
-
-    
-/* ── 3-Step Enquiry Form ── */
-(function () {
-    document.querySelectorAll('[data-enquiry-form]').forEach(form => {
-        const steps = form.querySelectorAll('[data-step]');
-        const dots  = form.querySelectorAll('[data-dot]');
-        const lines = form.querySelectorAll('[data-line]');
-        let current = 1;
-
-        const show = (n) => {
-            current = n;
-            steps.forEach(s => s.classList.toggle('hidden', +s.dataset.step !== n));
-            dots.forEach(d => {
-                const dn = +d.dataset.dot;
-                d.className = 'step-dot ' + (dn < n ? 'done' : dn === n ? 'active' : 'pending');
-                d.textContent = dn < n ? '✓' : dn;
-            });
-            lines.forEach(l => { l.style.background = +l.dataset.line < n ? 'rgba(255,255,255,.7)' : 'rgba(255,255,255,.2)'; });
-        };
-
-        form.querySelectorAll('[data-next]').forEach(btn => {
-            btn.addEventListener('click', () => show(current + 1));
-        });
-        form.querySelectorAll('[data-back]').forEach(btn => {
-            btn.addEventListener('click', () => show(current - 1));
-        });
-        form.querySelectorAll('[data-send]').forEach(btn => {
-            btn.addEventListener('click', () => {
-                btn.disabled = true;
-                btn.textContent = 'Sending…';
-                setTimeout(() => {
-                    show(4);
-                    form.querySelector('[data-step="4"]').classList.remove('hidden');
-                    steps.forEach(s => s.classList.add('hidden'));
-                    form.querySelector('[data-step="4"]').classList.remove('hidden');
-                }, 1100);
-            });
-        });
-
-        // OTP boxes
-        const otpBoxes = form.querySelectorAll('.otp-box');
-        otpBoxes.forEach((box, i) => {
-            box.addEventListener('input', () => {
-                box.value = box.value.replace(/\D/g,'').slice(-1);
-                box.classList.toggle('filled', !!box.value);
-                if (box.value && i < otpBoxes.length - 1) otpBoxes[i+1].focus();
-            });
-            box.addEventListener('keydown', (e) => {
-                if (e.key === 'Backspace' && !box.value && i > 0) otpBoxes[i-1].focus();
-            });
-        });
-
-        form.querySelectorAll('[data-verify]').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const otp = Array.from(otpBoxes).map(b => b.value).join('');
-                if (otp.length < 5) return;
-                form.querySelector('[data-success]')?.classList.remove('hidden');
-                steps.forEach(s => s.classList.add('hidden'));
-                form.querySelector('[data-success]')?.classList.remove('hidden');
-            });
-        });
-    });
-})();
-
-</script> -->
+ 

@@ -1,9 +1,10 @@
 
 @extends('client.layouts.app')
-@section('title', 'Terms Conditions Quick Dials- Local search, IT Training, Service, overseas education')
-@section('description', 'Terms Conditions Dials- Local search, IT Training, Service, overseas education')
-@section('keyword', 'Terms Conditions Dials- Local search, IT Training, Service, overseas education')
+@section('title', 'Terms & Conditions | QuickDials - User Agreement & Service Terms')
 
+@section('description', 'Read the QuickDials Terms & Conditions to understand the rules, user responsibilities, service policies, business listing guidelines, account usage terms, and legal conditions for using the QuickDials platform.')
+
+@section('keyword', 'QuickDials terms and conditions, user agreement, service terms, website usage policy, business listing terms, account terms, QuickDials policies, legal terms, online business directory rules, platform conditions, QuickDials user policy')
 @section('content') 
 
  

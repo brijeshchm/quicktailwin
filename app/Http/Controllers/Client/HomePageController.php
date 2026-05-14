@@ -937,6 +937,60 @@ class HomePageController extends Controller
 
 
 	}
+
+ public function enquirySendOtp(Request $request)
+    {
+
+ 
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            //'password' => 'required',
+        ]);
+ 
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+ 
+    
+       
+    
+          
+	 
+	 
+		$otp = mt_rand(100000, 999999);
+		$request->session()->put('otp', $otp);
+           
+
+            //$message = "{$otp} is quickdials Portal Verification Code for {$request->session()->get('client.mobile')}.";
+            // $message = "{$otp} is Lead Portal Verification Code for {$request->session()->get('client.mobile')} quickdials";
+            //     $templateId ='1707161786775524106';
+
+            // //sendSMS($request->session()->get('client.mobile'),$message,$templateId);
+
+ 
+
+			//  dd($user);
+            $message = "{$otp} is QuickDials Verification Code for {$request->email} .";
+            $subject = "{$otp} is QuickDials Verification Code";
+            $checkmail = Mail::send('emails.sendotp_to_email', ['msg' => $message], function ($m) use ($message, $request, $subject) {
+                $m->from('leads.quickdials@gmail.com', 'Login OTP');
+                $m->to($request->input('email'), "")->subject($subject);
+            });
+            
+            
+       
+        
+        return response()->json([
+            'status' => true,
+            'message' => 'OTP has been sent to your email successfully',
+            'otp' => $otp,
+           
+            
+         
+        ]);
+    }
+
+
 	/**
 	 * Store a newly created resource in storage.
 	 *

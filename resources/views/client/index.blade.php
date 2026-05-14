@@ -1,9 +1,11 @@
  
 @extends('client.layouts.app')
 
-@section('title', 'Quick Dials | A Local Search Engine for Businesses')
-@section('description', 'Find Only Certified Training Institutes, Coaching Centers near you on quickdials and Get Free counseling, Free Demo Classes, and Get Placement Assistence.')
-@section('keyword', 'Find Best It Training Centre near You, Find Best It Training Institute near You, Find Top 10 IT Training Institute near You, Find Best Entrance Exam Preparation Centre Near you, Top 10 Entrance Exam Centre Near you, Find Best Distance Education Centre Near You, Find Top 10 Distance Education Centre Near You, Find Best School And Colleges Near You, Find Top 10 school And College Near You, Get Education Loan, GET Free career Counselling, Find Best overseas education consultants Near you, Find Top 10 overseas education consultants Near you.')
+@section('title', 'QuickDials - India’s Trusted Local Business Search Engine')
+
+@section('description', 'QuickDials is India’s leading local business search engine to discover top-rated IT training institutes, hotels, salons, healthcare services, real estate, travel agencies, schools, colleges, and more near you. Find verified business listings, addresses, phone numbers, reviews, ratings, photos, and maps across India.')
+
+@section('keyword', 'QuickDials, local business directory India, business listing website, IT training institutes near me, coaching centres near me, hotels near me, salons near me, healthcare services, real estate services, travel agencies, schools and colleges near me, certified institutes, education consultants, online business directory, local search engine India, top businesses near me, business reviews and ratings')
 
 @section('content')
  
@@ -21,7 +23,7 @@
  @include('client.components.homePage.featured-businesses')
  @include('client.components.homePage.blog-service')
  @include('client.components.homePage.stats-banner')
- @include('client.components.homePage.country-flags')
+ 
 
 
 

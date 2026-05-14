@@ -523,6 +523,7 @@ Route::get('/{city_slug}/{service_slug}', [CitySlugController::class, 'showCityW
 
 Route::POST('/client/lead/add-lead/', [App\Http\Controllers\Client\HomePageController::class, 'store']);
 Route::POST('/client/lead/saveTwoEnquiry', [App\Http\Controllers\Client\HomePageController::class, 'saveTwoEnquiry']);
+Route::POST('/client/enquirySendOtp', [App\Http\Controllers\Client\HomePageController::class, 'enquirySendOtp']);
 Route::POST('/client/lead/saveEnquiry', [App\Http\Controllers\Client\HomePageController::class, 'saveEnquiryWithoutZone']);
 Route::POST('/form/validate-step', [App\Http\Controllers\Client\HomePageController::class, 'validateStep'])->name('form.validate.step');
 

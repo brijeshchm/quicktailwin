@@ -1,7 +1,12 @@
 @extends('client.layouts.app')
- @section('title', 'Quick Dials- Local search, IT Training, Playschool, overseas education, Business owners')
-@section('description', 'Quick Dials- Local search, IT Training, Playschool, overseas education, Business owners')
-@section('keyword', 'Quick Dials- Local search, IT Training, Playschool, overseas education, Business owners')
+@section('title', $metaTitle ?? $keyword . ' | QuickDials - Trusted Local Search')
+
+@section('description', $metaDescription ?? 'Find the best ' . $keyword . ' services with QuickDials. Explore verified businesses, phone numbers, addresses, reviews, ratings, photos, maps, and trusted local service providers near you.')
+
+@section('keyword', $metaKeywords ?? $keyword . ', best ' . $keyword . ', top ' . $keyword . ' services, verified businesses, local business directory, QuickDials, nearby services, reviews and ratings, trusted businesses, contact details, local search engine India')
+
+
+
 
 @section('content')	
 @include('client.components.banner-section')
@@ -126,10 +131,15 @@
         </div>
 </main>
 
-  <aside class="hidden lg:block w-80 xl:w-96 flex-shrink-0 sticky top-[80px] self-start">
+  <aside class="lg:block w-80 xl:w-96 flex-shrink-0 sticky top-[80px] self-start">
 
 
-          @include('client.layouts.common_sidebar_form')
+ <div class="reveal-r" id="enquiry-sidebar">
+                @include('client.layouts.enquiry_common_popup')
+                
+            </div>
+
+           
         
         </aside>
    

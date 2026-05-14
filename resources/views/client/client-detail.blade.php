@@ -1,8 +1,7 @@
 @extends('client.layouts.app')
- 
-@section('title', $title | 'Quick dials')
-@section('description', $description?? 'Quick dials')
-@section('keyword', $keyword ??'Quick dials')
+@section('title', $metaTitle ?? 'Quick Dials | A Local Search Engine for Businesses')
+@section('description', $metaDescription ?? 'Category local search engine, for Certified Training Institutes near you Quickdials, Hotels, Salons, Real Estate, Travel, Healthcare, Education,Find addresses, phone numbers, reviews and ratings, photos, maps of businesses Find Only Certified Training Institutes')
+@section('keyword', $metaKeywords ?? 'Find Best It Training Centre near You, Find Best It Training Institute near You, Find Top 10 IT Training Institute near You, Find Best Entrance Exam Preparation Centre Near you, Top 10 Entrance Exam Centre Near you, Find Best Distance Education Centre Near You, Find Top 10 Distance Education Centre Near You, Find Best School And Colleges Near You, Find Top 10 school And College Near You, Get Education Loan, GET Free career Counselling, Find Best overseas education consultants Near you, Find Top 10 overseas education consultants Near you')
 
 @section('content')
 @include('client.components.banner-section')
@@ -129,7 +128,7 @@ select.ef-input { padding-left:1rem; }
                 <div class="rounded-2xl overflow-hidden shadow-2xl flex items-center justify-center shrink-0"
                      style="width:80px;height:80px;@media(min-width:768px){width:160px;height:160px;}
                             border:2px solid rgba(255,255,255,.35);background:rgba(255,255,255,.1);backdrop-filter:blur(14px);">
-                    <img src="{{ $clientsList['logo'] ?? '/logo.png' }}"
+                    <img src="{{ $clientsList['logo'] ?? asset('client/images/default_pp_small.png') }}"
                          alt="{{ $clientsList['business_name'] ?? '' }}"
                          class="w-full h-full object-cover"
                          onerror="this.style.display='none'">
@@ -190,10 +189,10 @@ select.ef-input { padding-left:1rem; }
                 💬 WhatsApp
             </button>
         </a>
-        <button onclick="document.getElementById('enquiry-modal').classList.add('open')"
+        <!-- <button onclick="document.getElementById('enquiry-modal').classList.add('open')"
                 class="flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold text-sm text-white" style="background:#2563eb;">
             ✉️ Enquire Now
-        </button>
+        </button> -->
         <button onclick="document.getElementById('location-modal').classList.add('open')"
                 class="flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold text-sm text-blue-700 border border-blue-200 hover:bg-blue-50">
             📍 Location
@@ -306,7 +305,7 @@ select.ef-input { padding-left:1rem; }
             {{-- Right: Enquiry Form (sidebar version) --}}
             <div class="reveal-r" id="enquiry-sidebar">
                 @include('client.layouts.enquiry_common_popup', ['keywordList' => $keywordList, 'planOptions' => $planOptions, 'formId' => 'sidebar'])
-                @include('client.layouts.common_sidebar_form', ['keywordList' => $keywordList, 'planOptions' => $planOptions, 'formId' => 'sidebar'])
+                
             </div>
         </div>
     </div>

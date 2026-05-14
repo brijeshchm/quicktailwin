@@ -1,9 +1,8 @@
  
 @extends('client.layouts.app')
-
-@section('title', 'Quick Dials- Local search, IT Training, Playschool, overseas education, Business owners')
-@section('description', 'Quick Dials- Local search, IT Training, Playschool, overseas education, Business owners')
-@section('keyword', 'Quick Dials- Local search, IT Training, Playschool, overseas education, Business owners')
+@section('title', $metaTitle ?? 'Quick Dials | A Local Search Engine for Businesses')
+@section('description', $metaDescription ?? 'Category local search engine, for Certified Training Institutes near you Quickdials, Hotels, Salons, Real Estate, Travel, Healthcare, Education,Find addresses, phone numbers, reviews and ratings, photos, maps of businesses Find Only Certified Training Institutes')
+@section('keyword', $metaKeywords ?? 'Find Best It Training Centre near You, Find Best It Training Institute near You, Find Top 10 IT Training Institute near You, Find Best Entrance Exam Preparation Centre Near you, Top 10 Entrance Exam Centre Near you, Find Best Distance Education Centre Near You, Find Top 10 Distance Education Centre Near You, Find Best School And Colleges Near You, Find Top 10 school And College Near You, Get Education Loan, GET Free career Counselling, Find Best overseas education consultants Near you, Find Top 10 overseas education consultants Near you')
 
 @section('content')
  @include('client.components.banner-section')

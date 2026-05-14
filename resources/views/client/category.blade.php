@@ -1,8 +1,10 @@
 @extends('client.layouts.app')
-@section('title', 'Quick Dials- Local search, IT Training, Playschool, overseas education, Business owners')
-@section('description', 'Quick Dials- Local search, IT Training, Playschool, overseas education, Business owners')
-@section('keyword', 'Quick Dials- Local search, IT Training, Playschool, overseas education, Business owners')
- 
+@section('title','Categories | QuickDials - Explore Trusted Local Businesses')
+
+@section('description','Browse business categories on QuickDials to discover verified local businesses, IT training institutes, hotels, salons, healthcare services, travel agencies, real estate services, schools, colleges, and more across India.')
+
+@section('keyword','business categories, local business directory India, QuickDials categories, verified business listings, IT training institutes, hotels, salons, healthcare services, travel services, real estate services, education services, local search engine India, top businesses near me')
+
 @section('content')	
  @include('client.components.banner-section')
    

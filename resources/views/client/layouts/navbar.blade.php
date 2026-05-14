@@ -13,7 +13,7 @@
                 src="{{ asset('client/images/small-logo.png') }}"
                 alt="QuickDials"
                 class="h-12 w-auto sm:h-10 md:h-12 lg:h-14 object-contain"
-                onerror="this.onerror=null;this.src='client/images/small-logo.png';"
+                onerror="this.onerror=null;this.src='{{ asset('client/images/small-logo.png') }}'"
             />
         </a>
 
@@ -172,28 +172,77 @@
     </div>
 
     {{-- Mobile search bar (always visible on mobile) --}}
-    @if (!request()->is('/'))
-    <div class="md:hidden border-t border-gray-100 bg-white/95 backdrop-blur-md">
-        <div class="px-3 py-2">
-            <div class="flex bg-white rounded-xl border border-gray-200 shadow-md h-9 overflow-hidden">
-                <div class="flex items-center gap-1 h-9 px-2.5 text-xs font-semibold text-blue-700 border-r border-gray-200 whitespace-nowrap">
+   {{-- Mobile search bar (always visible on mobile) --}}
+@if (!request()->is('/'))
+<div class="md:hidden border-t border-gray-100 bg-white/95 backdrop-blur-md relative">
+    <div class="px-3 py-2">
+        <div class="flex bg-white rounded-xl border border-gray-200 shadow-md h-9 overflow-visible relative">
+
+            {{-- Mobile City selector (tappable) --}}
+            <div id="mobile-city-dropdown" class="relative shrink-0">
+                <button
+                    type="button"
+                    id="mobile-city-btn"
+                    onclick="toggleMobileCity()"
+                    class="flex items-center gap-1 h-9 px-2.5 text-xs font-semibold text-blue-700 border-r border-gray-200 hover:bg-blue-50 transition-colors whitespace-nowrap rounded-l-xl"
+                >
                     <i data-lucide="map-pin" class="w-3 h-3 text-blue-500"></i>
                     <span id="mobile-city-label">Bangalore</span>
-                </div>
-                <input
-                    type="text"
-                    placeholder="Search businesses, services..."
-                    class="flex-1 text-xs px-2.5 outline-none border-gray-100 bg-transparent text-gray-800 placeholder:text-gray-400 hover:border-gray-300"
-                    id="mobile-search-input"
-                    onkeydown="if(event.key==='Enter') doMobileSearch()"
-                />
-                <button onclick="doMobileSearch()" class="shrink-0 bg-orange-500 hover:bg-orange-600 text-white h-9 px-3 rounded-r-xl flex items-center transition-colors">
-                    <i data-lucide="search" class="w-3.5 h-3.5"></i>
+                    <i data-lucide="chevron-down" class="w-2.5 h-2.5 text-gray-400 transition-transform duration-200" id="mobile-city-chevron"></i>
                 </button>
+
+                {{-- Mobile City Panel --}}
+                <div
+                    id="mobile-city-panel"
+                    class="hidden absolute top-full left-0 mt-1.5 bg-white rounded-xl shadow-2xl border border-gray-100 z-[70] w-52 overflow-hidden"
+                >
+                    <div class="p-2 border-b border-gray-100">
+                        <div class="flex items-center gap-1.5 bg-gray-50 rounded-lg px-2.5 py-1.5 border border-gray-200">
+                            <i data-lucide="search" class="w-3.5 h-3.5 text-gray-400 shrink-0"></i>
+                            <input
+                                id="mobile-city-search"
+                                type="text"
+                                placeholder="Search city..."
+                                class="flex-1 text-xs bg-transparent outline-none text-gray-700 placeholder:text-gray-400 font-medium"
+                                oninput="filterMobileCities(this.value)"
+                            />
+                            <button type="button" onclick="clearMobileCitySearch()" class="text-gray-300 hover:text-gray-500 text-xs hidden" id="mobile-city-clear">✕</button>
+                        </div>
+                    </div>
+                    <div class="max-h-48 overflow-y-auto py-1" id="mobile-city-list"></div>
+                </div>
             </div>
+
+            {{-- Mobile Search Input --}}
+            <input
+                id="mobile-search-input"
+                type="text"
+                autocomplete="off"
+                placeholder="Search businesses, services..."
+                class="flex-1 text-xs px-2.5 outline-none bg-transparent text-gray-800 placeholder:text-gray-400"
+                oninput="handleMobileSearchInput(this.value)"
+                onkeydown="handleMobileKeydown(event)"
+            />
+
+            {{-- Mobile Search Button --}}
+            <button
+                type="button"
+                onclick="doMobileSearch()"
+                class="shrink-0 bg-orange-500 hover:bg-orange-600 text-white h-9 px-3 rounded-r-xl flex items-center transition-colors"
+            >
+                <i data-lucide="search" class="w-3.5 h-3.5"></i>
+            </button>
+        </div>
+
+        {{-- Mobile Suggestions Dropdown --}}
+        <div
+            id="mobile-suggestions"
+            class="hidden absolute top-full left-3 right-3 mt-1 bg-white rounded-xl shadow-2xl border border-gray-100 z-[60] overflow-hidden"
+        >
+            <ul id="mobile-suggestions-list"></ul>
         </div>
     </div>
-
+</div>
 @endif
 
     {{-- Mobile menu dropdown --}}
@@ -467,5 +516,168 @@ function toggleMobileMenu() {
     iconOpen.classList.toggle('hidden', isHidden);
     iconClose.classList.toggle('hidden', !isHidden);
 }
+
+
+// ─── MOBILE: City Dropdown ─────────────────────────────────────────────────
+function toggleMobileCity() {
+    const panel   = document.getElementById('mobile-city-panel');
+    const chevron = document.getElementById('mobile-city-chevron');
+    if (!panel) return;
+    const isHidden = panel.classList.contains('hidden');
+    panel.classList.toggle('hidden', !isHidden);
+    if (chevron) chevron.style.transform = isHidden ? 'rotate(180deg)' : '';
+    if (isHidden) renderMobileCityList(FALLBACK_CITIES);
+}
+
+function renderMobileCityList(list, q = '') {
+    const clearBtn = document.getElementById('mobile-city-clear');
+    if (clearBtn) clearBtn.classList.toggle('hidden', !q);
+    const el = document.getElementById('mobile-city-list');
+    if (!el) return;
+    el.innerHTML = list.map(city => `
+        <button type="button" onclick="selectMobileCity('${city.city}')"
+            class="w-full text-left px-4 py-2 text-xs transition-colors font-medium flex items-center gap-2
+                   ${city.city === stickySelectedCity ? 'text-blue-700 bg-blue-50' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'}">
+            ${city.city === stickySelectedCity
+                ? '<span class="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></span>'
+                : '<span class="ml-3.5"></span>'}
+            ${city.cityDetails}
+        </button>`).join('');
+}
+
+let mobileCityTimeout = null;
+function filterMobileCities(q) {
+    const clearBtn = document.getElementById('mobile-city-clear');
+    if (clearBtn) clearBtn.classList.toggle('hidden', !q);
+    clearTimeout(mobileCityTimeout);
+    if (q.length < 1) { renderMobileCityList(FALLBACK_CITIES); return; }
+    mobileCityTimeout = setTimeout(async () => {
+        try {
+            const r = await fetch(`https://api.quickdials.com/api/website/getCityList?city=${encodeURIComponent(q)}`);
+            const d = await r.json();
+            const m = (d.data ?? []).map(i => ({ city: i.city, cityDetails: i.cityDetails }));
+            renderMobileCityList(m.length ? m : FALLBACK_CITIES, q);
+        } catch {
+            renderMobileCityList(FALLBACK_CITIES.filter(c => c.cityDetails.toLowerCase().includes(q.toLowerCase())), q);
+        }
+    }, 250);
+}
+
+function clearMobileCitySearch() {
+    const input = document.getElementById('mobile-city-search');
+    if (input) { input.value = ''; filterMobileCities(''); }
+}
+
+function selectMobileCity(city) {
+    stickySelectedCity = city;
+    // Sync labels everywhere
+    const stickyLabel = document.getElementById('sticky-city-label');
+    const mobileLabel = document.getElementById('mobile-city-label');
+    if (stickyLabel) stickyLabel.textContent = city;
+    if (mobileLabel) mobileLabel.textContent = city;
+    // Close panel
+    document.getElementById('mobile-city-panel').classList.add('hidden');
+    const chev = document.getElementById('mobile-city-chevron');
+    if (chev) chev.style.transform = '';
+    // Focus search
+    const inp = document.getElementById('mobile-search-input');
+    if (inp) inp.focus();
+}
+
+// ─── MOBILE: Search Suggestions ────────────────────────────────────────────
+let mobileSearchTimeout = null;
+let mobileSuggestions   = [];
+let activeMobileIdx     = -1;
+
+function handleMobileSearchInput(val) {
+    clearTimeout(mobileSearchTimeout);
+    if (val.trim().length < 2) { hideMobileSuggestions(); return; }
+    mobileSearchTimeout = setTimeout(() => fetchMobileSuggestions(val.trim()), 220);
+}
+
+async function fetchMobileSuggestions(q) {
+    try {
+        const res  = await fetch(`https://api.quickdials.com/api/website/get-keyword-list?keyword=${encodeURIComponent(q)}`);
+        const data = await res.json();
+        mobileSuggestions = (data.data ?? []).map(i => ({ id: i.slug, label: i.keyword, kind: i.type }));
+        renderMobileSuggestions(q);
+    } catch { hideMobileSuggestions(); }
+}
+
+function renderMobileSuggestions(q) {
+    const list = document.getElementById('mobile-suggestions-list');
+    const box  = document.getElementById('mobile-suggestions');
+    if (!list || !box) return;
+    if (!mobileSuggestions.length) { hideMobileSuggestions(); return; }
+    const kindColors = { category: 'bg-blue-50 text-blue-600', service: 'bg-orange-50 text-orange-600', keyword: 'bg-green-50 text-green-600' };
+    list.innerHTML = mobileSuggestions.map((s, idx) => {
+        const low = q.toLowerCase();
+        const lbl = s.label;
+        const mi  = lbl.toLowerCase().indexOf(low);
+        const hl  = mi >= 0
+            ? `${lbl.slice(0,mi)}<span class="text-blue-600 font-semibold">${lbl.slice(mi,mi+q.length)}</span>${lbl.slice(mi+q.length)}`
+            : lbl;
+        const kc = kindColors[s.kind] || 'bg-gray-100 text-gray-500';
+        return `<li>
+            <button type="button" onmousedown="selectMobileSuggestion(${idx})" ontouchstart="selectMobileSuggestion(${idx})"
+                class="w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors hover:bg-gray-50">
+                <svg class="w-3.5 h-3.5 text-gray-300 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/></svg>
+                <span class="flex-1 text-sm text-gray-700">${hl}</span>
+                <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full uppercase tracking-wide ${kc}">${s.kind}</span>
+            </button>
+        </li>`;
+    }).join('');
+    box.classList.remove('hidden');
+    activeMobileIdx = -1;
+}
+
+function hideMobileSuggestions() {
+    const box = document.getElementById('mobile-suggestions');
+    if (box) box.classList.add('hidden');
+    mobileSuggestions = [];
+    activeMobileIdx = -1;
+}
+
+function selectMobileSuggestion(idx) {
+    const s = mobileSuggestions[idx];
+    if (!s) return;
+    document.getElementById('mobile-search-input').value = s.id;
+    hideMobileSuggestions();
+    redirectSearch(s.id, stickySelectedCity);
+}
+
+function handleMobileKeydown(e) {
+    if (e.key === 'Enter') { e.preventDefault(); doMobileSearch(); }
+    else if (e.key === 'Escape') hideMobileSuggestions();
+}
+
+function doMobileSearch() {
+    const inp = document.getElementById('mobile-search-input');
+    if (!inp) return;
+    const kw = inp.value.trim();
+    redirectSearch(kw, stickySelectedCity);
+}
+
+// Close mobile city dropdown on outside tap
+document.addEventListener('mousedown', (e) => {
+    const dd = document.getElementById('mobile-city-dropdown');
+    if (dd && !dd.contains(e.target)) {
+        const panel = document.getElementById('mobile-city-panel');
+        const chev  = document.getElementById('mobile-city-chevron');
+        if (panel) panel.classList.add('hidden');
+        if (chev) chev.style.transform = '';
+    }
+    // Close mobile suggestions on outside tap
+    const inp = document.getElementById('mobile-search-input');
+    const sug = document.getElementById('mobile-suggestions');
+    if (inp && sug && !inp.contains(e.target) && !sug.contains(e.target)) {
+        sug.classList.add('hidden');
+    }
+});
+
+// Re-init Lucide icons after dynamic insert (run after DOM ready)
+document.addEventListener('DOMContentLoaded', () => {
+    if (window.lucide) window.lucide.createIcons();
+});
  
 </script>

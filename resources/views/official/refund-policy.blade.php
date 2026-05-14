@@ -1,10 +1,11 @@
 
 @extends('client.layouts.app')
  
-@section('title', 'Refund Policy Quick Dials- Local search, IT Training, Service, overseas education')
-@section('description', 'Refund Policy Dials- Local search, IT Training, Service, overseas education')
-@section('keyword', 'Refund Policy Dials- Local search, IT Training, Service, overseas education')
+@section('title', 'Refund Policy | QuickDials - Cancellation & Refund Terms')
 
+@section('description', 'Read the QuickDials Refund Policy to understand cancellation rules, refund eligibility, payment terms, subscription policies, and refund processing guidelines for services and business listings.')
+
+@section('keyword', 'QuickDials refund policy, cancellation policy, payment refund terms, subscription refund, business listing refund, refund guidelines, online payment policy, service cancellation terms, QuickDials payment policy, refund and cancellation')
 @section('content') 
 
  
