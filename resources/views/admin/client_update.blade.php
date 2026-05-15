@@ -403,6 +403,15 @@
 					</div>
 				</div>
 				<div class="form-group col-md-6">
+					<div class="col-md-12">
+					 <label>Business Slug:</label>                
+                    
+                       <input name="business_slug" type="text" class="form-control" value="{{ old('business_slug',(isset($client)) ? $client->business_slug:"")}}" placeholder="Please enter business Slug">
+                   
+               
+					</div>
+				</div>
+				<div class="form-group col-md-6">
 					<div class="col-md-12"> 
 					  <label>*Email:</label>
                       <input name="email" type="email" class="form-control" id="Email" value="{{ old('email',(isset($client)) ? $client->email:"")}}" placeholder="Please enter Email" >

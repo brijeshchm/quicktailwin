@@ -795,6 +795,12 @@ class BackEndClientsController extends Controller
 							'max:255',
 							Rule::unique('clients', 'business_name')->ignore($id),
 						],
+						'business_slug' => [
+							'required',
+							'string',
+							'max:255',
+							Rule::unique('clients', 'business_slug')->ignore($id),
+						],
 						'email' => [
 							'required',
 							'email',
@@ -866,8 +872,12 @@ class BackEndClientsController extends Controller
 					// 	}
 					// 	$business_slug = implode("-", $business_slug);
 					// }
+				if(!$request->input('business_slug')){
+				$client->business_slug = $business_slug;
+				}else{
 
-					$client->business_slug = $business_slug;
+				$client->business_slug = $request->input('business_slug');
+				}
 
 					$client->email = $request->input('email');
 					$client->mobile = $request->input('mobile');
