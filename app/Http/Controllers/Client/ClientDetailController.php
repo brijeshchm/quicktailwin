@@ -136,12 +136,28 @@ class ClientDetailController extends Controller
             ['day'=>'Saturday',  'hours'=>'9:00 AM – 7:00 PM'],
             ['day'=>'Sunday',    'hours'=>'Closed'],
         ];
+
+               $areaBusiness    = $data['area_business']     ?? [];
+        $overviewBusiness= $data['overview_business'] ?? [];
+        $relatedSearches = $data['related_searches']  ?? [];
+//  dd($relatedSearches);
+
+
+
  
-        $title = $clientsList['meta_title']??"";
-        $keyword = $clientsList['meta_keyword']??"";
-       $description = $clientsList['meta_description']??"";
+        $metaTitle = $clientsList['business_name'] .'|'. $clientsList['city']. '| '.'QuickDials';
+        $metaKeywords =$clientsList['business_name'] .'| '.'QuickDials';
+
+        $relatedSearches = $data['related_searches'] ?? []; 
+        $services = array_values(array_slice($relatedSearches, 0, 4)); 
+        $serviceText = implode(', ', $services);
+        $metaDescription = $clientsList['business_name'] . ' in ' . $clientsList['city'] .
+            ' - ' . $serviceText .
+            '. View address, photos, reviews and contact details on QuickDials.';
+
+
         return view('client.client-detail', compact(
-            'slug', 'response', 'clientsList', 'certificate','title','keyword','description',
+            'slug', 'response', 'clientsList', 'certificate','metaTitle','metaKeywords','metaDescription',
             'comment', 'areaBusiness', 'overviewBusiness',
             'relatedList', 'keywordList', 'gallery', 'hImages', 'vImages',
             'assignKeyword', 'certifications', 'govDocs', 'reviews',

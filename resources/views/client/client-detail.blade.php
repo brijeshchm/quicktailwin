@@ -179,11 +179,11 @@ select.ef-input { padding-left:1rem; }
 ════════════════════════════════════════ --}}
 <div class="hidden md:block sticky-bar">
     <div class="w-full px-8 md:px-16 py-3 flex flex-wrap gap-2 items-center">
-        <a href="tel:+917559435943">
+        <!-- <a href="tel:+917559435943">
             <button class="glow-pulse flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold text-sm text-white" style="background:#16a34a;">
                 📞 Call Now
             </button>
-        </a>
+        </a> -->
         <a href="https://wa.me/917559435943" target="_blank" rel="noreferrer">
             <button class="flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold text-sm text-white" style="background:#25D366;">
                 💬 WhatsApp
@@ -223,7 +223,7 @@ select.ef-input { padding-left:1rem; }
         <div class="flex flex-wrap items-center gap-2">
             @foreach([
                 ['📍', $clientsList['address'] ?? 'India',         $googleMapUrl,  'rgba(251,146,60,.12)', 'rgba(251,146,60,.2)'],
-                ['📞', '+91-75-5943-5943',                         'tel:+917559435943', 'rgba(56,189,248,.12)', 'rgba(56,189,248,.2)'],
+             
                 ['✉️', $clientsList['email'] ?? '',                 'mailto:'.($clientsList['email']??'#'), 'rgba(167,139,250,.12)', 'rgba(167,139,250,.2)'],
             ] as [$icon, $text, $href, $bg, $border])
             @if($text)
@@ -885,7 +885,7 @@ function selectCert(i) {
                     <div class="space-y-3">
                         @foreach([
                             ['📍', $clientsList['business_name'] ?? '', null, '#ea580c'],
-                            ['📞', '+917559435943', 'tel:+917559435943', '#0891b2'],
+                            
                             ['✉️', $clientsList['email'] ?? '', 'mailto:'.($clientsList['email']??'#'), '#7c3aed'],
                             ['🌐', $clientsList['website'] ?? '', $clientsList['website'] ?? '#', '#2563eb'],
                         ] as [$icon,$text,$href,$color])
@@ -1106,11 +1106,11 @@ function selectCert(i) {
 ════════════════════════════════════════ --}}
 <div id="mobile-bar" class="fixed left-0 bottom-2 right-0 z-50 flex items-center gap-2 px-4 py-3 md:hidden"
      style="background:rgba(255,255,255,.95);backdrop-filter:blur(16px);border-top:1px solid rgba(59,130,246,.15);box-shadow:0 -4px 24px rgba(37,99,235,.1);">
-    <a href="tel:+917559435943" class="flex-1">
+    <!-- <a href="tel:+917559435943" class="flex-1">
         <button class="w-full flex items-center justify-center gap-1.5 py-3 rounded-2xl font-bold text-sm text-white" style="background:#16a34a;">
             📞 Call Now
         </button>
-    </a>
+    </a> -->
     <a href="https://wa.me/917559435943" target="_blank" rel="noreferrer" class="flex-1">
         <button class="w-full flex items-center justify-center gap-1.5 py-3 rounded-2xl font-bold text-sm text-white" style="background:#25D366;">
             💬 WhatsApp
