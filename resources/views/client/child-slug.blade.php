@@ -12,16 +12,8 @@
 
 <div class="bg-indigo-600 text-white">
     <div class="container mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-        <div>
-            <p class="text-xs font-semibold uppercase tracking-widest text-indigo-200 mb-0.5">{{ $keyword }}</p>
-            <h2 class="text-base sm:text-lg font-extrabold leading-tight">
-                Globallyss d Recognised Certifications — {{ $keyword }} 200+ more
-            </h2>
-        </div>
-        <a href="{{ route('category.list') }}"
-           class="shrink-0 px-5 py-2 bg-white text-indigo-700 font-bold rounded-lg text-sm hover:bg-indigo-50 transition-colors shimmer-btn whitespace-nowrap">
-            Browse All Courses →
-        </a>
+        
+         
     </div>
 </div>
 
