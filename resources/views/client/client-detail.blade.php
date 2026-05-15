@@ -189,10 +189,7 @@ select.ef-input { padding-left:1rem; }
                 💬 WhatsApp
             </button>
         </a>
-        <!-- <button onclick="document.getElementById('enquiry-modal').classList.add('open')"
-                class="flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold text-sm text-white" style="background:#2563eb;">
-            ✉️ Enquire Now
-        </button> -->
+    
         <button onclick="document.getElementById('location-modal').classList.add('open')"
                 class="flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold text-sm text-blue-700 border border-blue-200 hover:bg-blue-50">
             📍 Location
