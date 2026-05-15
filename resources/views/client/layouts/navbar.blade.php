@@ -426,7 +426,7 @@ let activeStickyIdx     = -1;
 
 function handleStickySearchInput(val) {
     clearTimeout(stickySearchTimeout);
-    if (val.trim().length < 2) {
+    if (val.trim().length < 1) {
         hideStickysuggestions();
         return;
     }

@@ -95,10 +95,10 @@
         {{-- Categories — Stacked Vertically --}}
         <div class="space-y-6">
             @foreach($popularServices as $category => $group)
-                <div class="flex flex-col md:flex-row md:items-start gap-3 md:gap-6 pb-5 border-b border-gray-200 last:border-0 last:pb-0">
+                <div class="">
 
                     {{-- Category Label --}}
-                    <div class="md:w-56 shrink-0">
+                    <!-- <div class="md:w-56 shrink-0">
                         <h3 class="text-xs font-bold text-gray-800 uppercase tracking-wider flex items-center gap-2">
                             <span class="w-1 h-4 bg-primary rounded-full"></span>
                             {{ $category }}
@@ -106,7 +106,7 @@
                         <p class="text-[11px] text-gray-400 mt-1 hidden md:block">
                             {{ count($group['items']) }} services
                         </p>
-                    </div>
+                    </div> -->
 
                     {{-- Service Pills --}}
                     <div class="flex flex-wrap gap-2 flex-1">
