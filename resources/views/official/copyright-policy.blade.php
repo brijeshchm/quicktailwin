@@ -319,11 +319,7 @@
                     </div>
                 </section>
 
-                {{-- Footer note --}}
-                <div class="text-center py-8 border-t border-gray-200">
-                    <p class="text-sm text-gray-500">&copy; {{ date('Y') }} Quick Dials Pvt Ltd. All rights reserved.</p>
-                    <p class="text-xs text-gray-400 mt-1">This policy was last reviewed and updated in April 2026.</p>
-                </div>
+               
             </main>
         </div>
     </div>

@@ -536,7 +536,7 @@
                     Quickdials Internet Pvt. Ltd. is committed to fair business practices and full compliance with the Consumer Protection Act, 2019 and all applicable Indian laws governing e-commerce transactions.
                 </p>
                 <div class="flex items-center justify-center gap-2 mt-4 text-xs flex-wrap" style="color:hsl(270 20% 60%)">
-                    <span>© {{ date('Y') }} Quickdials Internet Pvt. Ltd.</span>
+                    <span>© 2026 Quickdials Internet Pvt. Ltd.</span>
                     <span>·</span>
                     <span>CIN: U63112KA2026PTC215594</span>
                     <span>·</span>

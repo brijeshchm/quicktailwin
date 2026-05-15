@@ -456,7 +456,7 @@
                     QuickDials Internet Pvt Ltd is committed to maintaining the highest standards of transparency and user protection. These policies are regularly reviewed and updated.
                 </p>
                 <div class="flex items-center justify-center gap-2 mt-4 text-xs" style="color:hsl(270 20% 60%)">
-                    <span>© {{ date('Y') }} QuickDials Pvt Ltd</span>
+                    <span>© 2026 QuickDials Pvt Ltd</span>
                     <span>·</span>
                     <span>All rights reserved</span>
                 </div>

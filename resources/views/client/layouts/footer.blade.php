@@ -1,7 +1,5 @@
 {{-- resources/views/layouts/footer.blade.php --}}
 
-
-
 @php
     $popularServices = [
         'Online Training Courses' => [
@@ -25,7 +23,6 @@
                 ['name' => 'Cloud Computing Training',      'slug' => 'cloud-computing-training'],
             ],
         ],
-
         'Home Appliance Repair' => [
             'type'  => 'service',
             'items' => [
@@ -38,7 +35,6 @@
                 ['name' => 'Computer Repair Service',       'slug' => 'computer-repair'],
             ],
         ],
-
         'Vehicle Services' => [
             'type'  => 'service',
             'items' => [
@@ -48,7 +44,6 @@
                 ['name' => 'Ghoda Baggi for Wedding',       'slug' => 'ghoda-baggi'],
             ],
         ],
-
         'Wedding & Events' => [
             'type'  => 'service',
             'items' => [
@@ -65,7 +60,6 @@
                 ['name' => 'Wedding Astrologer',            'slug' => 'wedding-astrologer'],
             ],
         ],
-
         'Sports Academies Near You' => [
             'type'  => 'service',
             'items' => [
@@ -78,10 +72,23 @@
             ],
         ],
     ];
+
+    // 🔑 Flatten all categories into ONE single array
+    $allServices = [];
+    foreach ($popularServices as $group) {
+        foreach ($group['items'] as $service) {
+            $service['type'] = $group['type'];
+            $allServices[] = $service;
+        }
+    }
+
+    // Optional: shuffle for variety on each page load
+    // shuffle($allServices);
 @endphp
 
 <section class="bg-gray-50 border-t border-gray-100 py-10" aria-label="Popular services on QuickDials">
     <div class="container mx-auto px-4">
+
         {{-- Section Header --}}
         <div class="mb-8 text-center md:text-left">
             <h2 class="text-lg md:text-2xl font-bold text-gray-800">
@@ -92,46 +99,28 @@
             </p>
         </div>
 
-        {{-- Categories — Stacked Vertically --}}
-        <div class="space-y-6">
-            @foreach($popularServices as $category => $group)
-                <div class="">
+        {{-- All services in ONE flat loop --}}
+        <div class="flex flex-wrap gap-2">
+            @foreach($allServices as $service)
+                @php
+                    $href = $service['type'] === 'online'
+                        ? route('city.slug', [
+                            'city_slug'    => 'online',
+                            'service_slug' => $service['slug'],
+                        ])
+                        : route('showCity', $service['slug']);
+                @endphp
 
-                    {{-- Category Label --}}
-                    <!-- <div class="md:w-56 shrink-0">
-                        <h3 class="text-xs font-bold text-gray-800 uppercase tracking-wider flex items-center gap-2">
-                            <span class="w-1 h-4 bg-primary rounded-full"></span>
-                            {{ $category }}
-                        </h3>
-                        <p class="text-[11px] text-gray-400 mt-1 hidden md:block">
-                            {{ count($group['items']) }} services
-                        </p>
-                    </div> -->
-
-                    {{-- Service Pills --}}
-                    <div class="flex flex-wrap gap-2 flex-1">
-                        @foreach($group['items'] as $service)
-                            @php
-                                $href = $group['type'] === 'online'
-                                    ? route('city.slug', [
-                                        'city_slug'    => 'online',
-                                        'service_slug' => $service['slug'],
-                                    ])
-                                    : route('showCity', $service['slug']);
-                            @endphp
-                            <a href="{{ $href }}"
-                               title="{{ $service['name'] }}"
-                               class="inline-block px-3 py-1.5 bg-white border border-gray-200 rounded-full text-xs text-gray-600 hover:bg-primary hover:text-gray hover:border-primary hover:shadow-sm transition-all duration-200 whitespace-nowrap text-xs md:text-sm text-gray-500 hover:text-primary transition-colors">
-                                {{ $service['name'] }}
-                            </a>
-                        @endforeach
-                    </div>
-                </div>
+                <a href="{{ $href }}"
+                   title="{{ $service['name'] }}"
+                   class="inline-block px-3 py-1.5 bg-white border border-gray-200 rounded-full text-xs text-gray-600 hover:bg-primary hover:text-gray hover:border-primary hover:shadow-sm transition-all duration-200 whitespace-nowrap text-xs md:text-sm text-gray-500 hover:text-primary transition-colors">
+                    {{ $service['name'] }}
+                </a>
             @endforeach
         </div>
     </div>
 </section>
-
+ 
  
 
 <footer class="bg-gray-50 pt-10 md:pt-16 pb-8 border-t border-gray-200">
