@@ -13,9 +13,9 @@
 <div class="bg-indigo-600 text-white">
     <div class="container mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
         <div>
-            <p class="text-xs font-semibold uppercase tracking-widest text-indigo-200 mb-0.5">Professional Training</p>
+            <p class="text-xs font-semibold uppercase tracking-widest text-indigo-200 mb-0.5">{{ $keyword }}</p>
             <h2 class="text-base sm:text-lg font-extrabold leading-tight">
-                Globallyss d Recognised Certifications — PMP, CISA, SAP, Oracle &amp; 200+ more
+                Globallyss d Recognised Certifications — {{ $keyword }} 200+ more
             </h2>
         </div>
         <a href="{{ route('category.list') }}"
@@ -36,10 +36,10 @@
             <nav class="text-xs sm:text-sm text-slate-500 mb-1 flex items-center gap-1.5 flex-wrap">
                 <a href="{{ route('home') }}" class="hover:text-indigo-600 transition-colors">Home</a>
                 <span>›</span>
-                @if(!empty($childSlug))
-                    <a href="{{ route('child.show', $childSlug) }}" class="hover:text-indigo-600 transition-colors">{{ $childCategory }}</a>
+           
+                    <a href="{{ route('child.list') }}" class="hover:text-indigo-600 transition-colors">Child</a>
                     <span>›</span>
-                @endif
+            
                 <span class="text-slate-600">{{ $keyword }}</span>
             </nav>
 
@@ -65,7 +65,7 @@
         {{-- Course grid --}}
         <div class="flex-1 min-w-0">
             <div class="flex items-center justify-between mb-4">
-                <h2 class="text-base font-extrabold text-slate-900">Top Professional Courses</h2>
+                <h2 class="text-base font-extrabold text-slate-900">Top {{ $keyword }}</h2>
                 <a href="{{ route('category.list') }}" class="text-xs text-indigo-600 font-semibold hover:underline">View all →</a>
             </div>
 

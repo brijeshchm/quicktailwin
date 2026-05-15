@@ -17,7 +17,7 @@
         <div>
             <p class="text-xs font-semibold uppercase tracking-widest text-indigo-200 mb-0.5">Professional Training</p>
             <h2 class="text-base sm:text-lg font-extrabold leading-tight">
-                Globallyss d Recognised Certifications — PMP, CISA, SAP, Oracle &amp; 200+ more
+                Globallyss d Recognised Certifications — {{ $keyword }} 200+ more
             </h2>
         </div>
         <a href="{{ route('category.list') }}"
@@ -36,10 +36,10 @@
             <nav class="text-xs sm:text-sm text-slate-500 mb-1 flex items-center gap-1.5 flex-wrap">
                 <a href="{{ route('home') }}" class="hover:text-indigo-600 transition-colors">Home</a>
                 <span>›</span>
-                @if(!empty($childSlug))
-                    <a href="{{ route('categories.show', $childSlug) }}" class="hover:text-indigo-600 transition-colors">{{ $childCategory }}</a>
+             
+                    <a href="{{ route('category.list') }}" class="hover:text-indigo-600 transition-colors">Categories</a>
                     <span>›</span>
-                @endif
+              
                 <span class="text-slate-600">{{ $keyword }}</span>
             </nav>
 
