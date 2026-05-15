@@ -162,6 +162,10 @@ class CitySlugController extends Controller
             ? $b['gallery']
             : [];
 
+
+            $overviewBusiness = $b['overviewBusiness'][0];
+ 
+
         return [
             'id'            => $id,
             'name'          => $name,
@@ -186,6 +190,7 @@ class CitySlugController extends Controller
             'established'   => $b['year_of_estb'] ?? '',
             'certifications'   => $b['certifications'] ?? '',
             'gallery'   => $gallery ?? '',
+            'overviewBusiness'   => $overviewBusiness ?? '',
         ];
     }
 
@@ -388,6 +393,7 @@ class CitySlugController extends Controller
 
         // ── Businesses ─────────────────────────────────────────────────────
         $rawList    = $data['clientsList'] ?? [];
+        
         $agents    = $data['agents'] ?? [];
         $businesses = collect($rawList)
             ->map(fn ($b, $i) => $this->normalizeBusiness($b, $i))

@@ -1,6 +1,9 @@
 @props(['business', 'index' => 0, 'view' => 'list'])
 
 @php
+
+
+ 
     $colorPalette = [
         'from-violet-500 to-indigo-600',
         'from-emerald-500 to-teal-600',
@@ -44,24 +47,6 @@
 
  
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @if($view === 'list')
 {{-- LIST VIEW --}}
 <div class="group relative bg-white border-b border-gray-100 last:border-b-0 transition-all duration-300 hover:bg-indigo-50/30"
@@ -81,6 +66,9 @@
 
         @if(!empty($business['gallery']))
         @php
+
+
+
             $galleryImages = array_values(array_filter($business['gallery'], fn($g) => !empty($g['galley']['large'])));
             $sliderId = 'slider-' . ($business['id'] ?? uniqid());
             $total = count($galleryImages);
@@ -305,10 +293,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span class="line-clamp-1">{{ collect([$address, $city])->filter()->implode(', ') }}</span>
             </p>
             @endif
-
+ 
             {{-- Description --}}
-            @if($description)
-            <p class="hidden sm:block text-xs text-gray-500 mt-1 line-clamp-1">{!! $description !!}</p>
+            @if($business['overviewBusiness'])
+            <p class="sm:block text-xs text-gray-500 mt-1 line-clamp-1">{!! $business['overviewBusiness'] !!} sdadasd</p>
             @endif
 
             {{-- Tags/Category --}}
@@ -325,13 +313,13 @@ document.addEventListener('DOMContentLoaded', () => {
     {{-- Action Buttons --}}
     <div class="relative z-10 px-3 sm:px-5 pb-3 sm:pb-4 pl-4 sm:pl-6">
         <div class="flex items-center gap-1.5 sm:gap-2 w-full">
-            <a href="tel:{{ $phone }}" class="flex-1 flex items-center justify-center gap-1 sm:gap-1.5 py-1.5 sm:py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-[10px] sm:text-xs font-semibold shadow-sm shadow-indigo-200 transition-colors">
+            <!-- <a href="tel:{{ $phone }}" class="flex-1 flex items-center justify-center gap-1 sm:gap-1.5 py-1.5 sm:py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-[10px] sm:text-xs font-semibold shadow-sm shadow-indigo-200 transition-colors">
                 📞 <span>Call</span>
-            </a>
-            <a href="https://wa.me/{{ preg_replace('/\D/', '', $phone) }}" target="_blank" rel="noopener noreferrer"
+            </a> -->
+            <!-- <a href="https://wa.me/{{ preg_replace('/\D/', '', $phone) }}" target="_blank" rel="noopener noreferrer"
                class="flex-1 flex items-center justify-center gap-1 sm:gap-1.5 py-1.5 sm:py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-[10px] sm:text-xs font-semibold shadow-sm shadow-emerald-200 transition-colors">
                 💬 <span>WhatsApp</span>
-            </a>
+            </a> -->
             <button onclick="document.getElementById('enquiry-modal').classList.add('open')"
                class="flex-1 relative flex items-center justify-center gap-1 sm:gap-1.5 py-1.5 sm:py-2 rounded-xl bg-violet-600 hover:bg-violet-700 text-white text-[10px] sm:text-xs font-semibold shadow-sm shadow-violet-200 transition-colors">
                 ✉ <span>Enquiry</span>

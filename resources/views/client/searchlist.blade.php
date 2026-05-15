@@ -254,53 +254,81 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
 
             <div id="listings-container" x-show="filteredCount > 0">
 
-            @if(!empty($businesses))
-                @php $adInterval = 5; 
-         
-                
-                @endphp
-                @foreach($businesses as $chunkIndex => $chunk)
-                @php $chunkStart = $chunkIndex * $adInterval; @endphp
+            
 
-                <div :class="view === 'grid' ? 'grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4' : 'bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden divide-y divide-gray-50'"
-                     id="chunk-{{ $chunkIndex }}">
+@if(!empty($businesses))
+    @php
+        $adInterval = 4;
+        // Chunk into groups of 5 for inline ad placement
+        $businessChunks = collect($businesses)->chunk($adInterval);
+    @endphp
 
-                    
-                    <div class="business-card"
-                         data-name="{{ strtolower($chunk['name'] ?? '') }}"
-                         data-category="{{ strtolower(is_array($chunk['category'] ?? '') ? implode(',', $chunk['category']) : ($chunk['category'] ?? '')) }}"
-                         data-rating="{{ $chunk['rating'] ?? 4.0 }}"
-                         data-verified="{{ $chunk['verified'] ? '1' : '0' }}"
-                         data-open="{{ $chunk['isOpen'] ? '1' : '0' }}"
-                         data-reviews="{{ $chunk['reviewCount'] ?? 0 }}"
-                         x-show="shouldShow($el)">
-                        <x-business-card :business="$chunk" :index="$chunkIndex" :view="'list'" />
-                    </div>
-                    
+    @foreach($businessChunks as $chunkIndex => $chunk)
+
+        {{-- ONE grid wrapper for the ENTIRE chunk --}}
+        <div :class="view === 'grid'
+            ? 'grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-2 gap-4 mb-6'
+            : 'bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden divide-y divide-gray-50 mb-6'"
+             id="chunk-{{ $chunkIndex }}">
+
+            @foreach($chunk as $bIndex => $business)
+                @php $globalIndex = $chunkIndex * $adInterval + $bIndex; @endphp
+
+                <div class="business-card"
+                     data-name="{{ strtolower($business['name'] ?? '') }}"
+                     data-category="{{ strtolower(is_array($business['category'] ?? '') ? implode(',', $business['category']) : ($business['category'] ?? '')) }}"
+                     data-rating="{{ $business['rating'] ?? 4.0 }}"
+                     data-verified="{{ ($business['verified'] ?? false) ? '1' : '0' }}"
+                     data-open="{{ ($business['isOpen'] ?? false) ? '1' : '0' }}"
+                     data-reviews="{{ $business['reviewCount'] ?? 0 }}"
+                     x-show="shouldShow($el)">
+                    <x-business-card :business="$business" :index="$globalIndex" :view="'list'" />
                 </div>
+            @endforeach
+        </div>
 
-                {{-- Inline ad after every chunk except last --}}
-               
-                @endforeach
+        {{-- Inline ad between chunks (not after the last one) --}}
+        @if(!$loop->last)
+             
 
 
-                <div id="enquiry-modal"
-     class="fixed inset-0 z-[210] items-center justify-center p-4"
-     style="background:rgba(10,15,40,.75);backdrop-filter:blur(14px);"
-     onclick="if(event.target===this)this.classList.remove('open')">
 
-    <div class="relative w-full max-w-md overflow-hidden"
-         style="border-radius:1.75rem;"
-         onclick="event.stopPropagation()">
-        @include('client.layouts.enquiry-popup-form', [
-            'keywordList' => $keyword,
-            'planOptions' => '',
-            'formId' => 'modal'
-        ])
+            <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-700 my-3 shadow-md">
+                    <div class="relative px-5 py-4 flex items-center gap-5 flex-wrap sm:flex-nowrap">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-2 mb-0.5 flex-wrap">
+                                <span class="text-[9px] font-bold text-white/60 border border-white/20 px-2 py-0.5 rounded-full uppercase tracking-widest">Sponsored</span>
+                                <span class="text-[9px] font-bold text-amber-300 bg-amber-300/10 border border-amber-300/20 px-2 py-0.5 rounded-full animate-pulse">Featured Offer</span>
+                            </div>
+                            <p class="text-white font-bold text-base sm:text-lg leading-tight">Get ₹500 Cashback on Your First Interior Design Order</p>
+                            <p class="text-white/70 text-xs mt-0.5">Verified interior designers · Free consultation · 10,000+ happy homes</p>
+                        </div>
+                        <a href="{{ route('login') }}" class="flex-shrink-0 bg-white text-teal-700 font-bold text-sm px-5 py-2.5 rounded-xl hover:bg-white/90 shadow-lg whitespace-nowrap">Claim Offer</a>
+                    </div>
+                </div>
+        @endif
+    @endforeach
+
+    {{-- Enquiry Modal --}}
+    <div id="enquiry-modal"
+         class="fixed inset-0 z-[210] items-center justify-center p-4"
+         style="background:rgba(10,15,40,.75);backdrop-filter:blur(14px);"
+         onclick="if(event.target===this)this.classList.remove('open')">
+        <div class="relative w-full max-w-md overflow-hidden"
+             style="border-radius:1.75rem;"
+             onclick="event.stopPropagation()">
+            @include('client.layouts.enquiry-popup-form', [
+                'keywordList' => $keyword,
+                'planOptions' => '',
+                'formId' => 'modal'
+            ])
+        </div>
     </div>
-</div>
-
 @endif
+
+
+
+ 
 
                  <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-700 my-3 shadow-md">
                     <div class="relative px-5 py-4 flex items-center gap-5 flex-wrap sm:flex-nowrap">

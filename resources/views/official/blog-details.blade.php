@@ -6,6 +6,12 @@
 @section('content')
 @include('client.components.banner-section')
  
+
+<?php 
+
+ 
+
+?>
 <style> 
 :root {
     --accent:  #2563eb;
@@ -441,13 +447,22 @@
                 @endif
 
                 @if(!empty($blogDetails['top_content']))
+                 <h2>                    
+                    {{ $blogDetails['top_heading'] }}
+                </h2>
                 <div class="reveal" style="transition-delay:0.1s;">
+                
+
                     {!! $blogDetails['top_content'] !!}
                 </div>
                 @endif
 
                 @if(!empty($blogDetails['bottom_content']))
+                   
                 <div class="reveal" style="transition-delay:0.15s;">
+                    <h2>
+                                  {{ $blogDetails['bottom_heading'] }}
+                </h2>
                     {!! $blogDetails['bottom_content'] !!}
                 </div>
                 @endif

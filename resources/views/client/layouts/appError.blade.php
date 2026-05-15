@@ -16,7 +16,7 @@
     @include('client.layouts.navbar')
 
     <main>
-    
+
     @yield('content')
     </main>
 
