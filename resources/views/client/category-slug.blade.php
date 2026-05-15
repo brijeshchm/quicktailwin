@@ -56,7 +56,7 @@
         {{-- Course grid --}}
         <div class="flex-1 min-w-0">
             <div class="flex items-center justify-between mb-4">
-                <h2 class="text-base font-extrabold text-slate-900">Top Professional Courses</h2>
+                <h2 class="text-base font-extrabold text-slate-900">Top {{ $keyword }}</h2>
                 <a href="{{ route('category.list') }}" class="text-xs text-indigo-600 font-semibold hover:underline">View all →</a>
             </div>
  
