@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
    {{-- Canonical URL --}}
 @if (request()->is('/'))
-    <link rel="canonical" href="{{ url('/') }}" />
+    <link rel="canonical" href="https://www.quickdials.com/" />
 @elseif (View::hasSection('canonical'))
     @yield('canonical')
 @else

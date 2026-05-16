@@ -375,6 +375,17 @@ Route::get('/sitemap-city-2.xml', function () {
 		->header('Content-Type', 'text/xml');
 
 });
+Route::get('/sitemap-businesses.xml', function () {
+
+	$clients = DB::table('clients')
+		->where('active_status', '1')
+		->select('business_slug', 'updated_at')
+		->get();
+	return response()
+		->view('client.sitemap-businesses', compact('clients'))
+		->header('Content-Type', 'text/xml');
+
+});
 
 Route::get('/sitemap-city-3.xml', function () {
 
