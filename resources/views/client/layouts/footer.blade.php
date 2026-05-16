@@ -1,5 +1,32 @@
 {{-- resources/views/layouts/footer.blade.php --}}
 
+ 
+
+<footer class="bg-gray-50 pt-10 md:pt-16 pb-8 border-t border-gray-200">
+    <div class="w-full px-4 md:px-8">
+
+        {{-- ─── CTA Banner ─── --}}
+        <div class="bg-white rounded-2xl p-6 md:p-10 mb-10 shadow-lg shadow-gray-200/50 border border-gray-100 flex flex-col md:flex-row items-center justify-between gap-5 relative overflow-hidden">
+            <div class="absolute right-0 top-0 w-48 h-48 bg-blue-500/5 rounded-full blur-[60px] pointer-events-none"></div>
+            <div class="max-w-2xl text-center md:text-left">
+                <h3 class="text-lg md:text-2xl font-black text-gray-900 mb-2">
+                    List Your Business to Grow Today!
+                </h3>
+                <p class="text-gray-500 text-sm">
+                    Join thousands of businesses reaching local customers every day. Free profile setup in 5 minutes.
+                </p>
+            </div>
+            <a
+                href="{{ route('login') }}"
+                class="flex items-center gap-2 bg-sky-500 hover:bg-sky-600 text-white font-bold text-sm px-6 py-2.5 rounded-full shadow-lg shadow-blue-200/50 shrink-0 whitespace-nowrap transition-colors"
+            >
+                Create Free Account
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+        </div>
+
+
+
 @php
     $popularServices = [
         'Online Training Courses' => [
@@ -121,30 +148,7 @@
     </div>
 </section>
  
- 
 
-<footer class="bg-gray-50 pt-10 md:pt-16 pb-8 border-t border-gray-200">
-    <div class="w-full px-4 md:px-8">
-
-        {{-- ─── CTA Banner ─── --}}
-        <div class="bg-white rounded-2xl p-6 md:p-10 mb-10 shadow-lg shadow-gray-200/50 border border-gray-100 flex flex-col md:flex-row items-center justify-between gap-5 relative overflow-hidden">
-            <div class="absolute right-0 top-0 w-48 h-48 bg-blue-500/5 rounded-full blur-[60px] pointer-events-none"></div>
-            <div class="max-w-2xl text-center md:text-left">
-                <h3 class="text-lg md:text-2xl font-black text-gray-900 mb-2">
-                    List Your Business to Grow Today!
-                </h3>
-                <p class="text-gray-500 text-sm">
-                    Join thousands of businesses reaching local customers every day. Free profile setup in 5 minutes.
-                </p>
-            </div>
-            <a
-                href="{{ route('login') }}"
-                class="flex items-center gap-2 bg-sky-500 hover:bg-sky-600 text-white font-bold text-sm px-6 py-2.5 rounded-full shadow-lg shadow-blue-200/50 shrink-0 whitespace-nowrap transition-colors"
-            >
-                Create Free Account
-                <i data-lucide="arrow-right" class="w-4 h-4"></i>
-            </a>
-        </div>
 
         {{-- ─── SEO Category Grid ─── --}}
         <div class="mb-10 bg-white rounded-2xl border border-gray-100 shadow-sm divide-y divide-gray-100 overflow-hidden">
@@ -168,7 +172,7 @@
                         ['name' => 'Electric Services',               'slug' => 'electric-services','type'=>'categories'],
                         ['name' => 'Government Exam',                 'slug' => 'entrance-exams-coaching','type'=>'categories'],
                         ['name' => 'Web Designers',                   'slug' => 'web-designers','type'=>'keyword'],
-                        ['name' => 'Medical',                         'slug' => 'medical','type'=>'child'],
+                      
                         ['name' => 'Carpenters',                      'slug' => 'carpenters','type'=>'keyword'],
                         ['name' => 'Health & Wellness',               'slug' => 'health-and-wellness','type'=>'categories'],
                         ['name' => 'Yoga',                            'slug' => 'yoga-classes','type'=>'child'],
@@ -254,15 +258,8 @@
 
             {{-- Col 1: Logo + Quick Links --}}
             <div class="col-span-1">
-                <div class="mb-4">
-                    <img loading="lazy" decoding="async"
-                        src="{{ asset('client/images/small-logo.png') }}"
-                        alt="QuickDials"
-                        class="h-10 w-auto object-contain"
-                        onerror="this.onerror=null;this.src='{{ asset('client/images/small-logo.png') }}"
-                    />
-                </div>
-                <ul class="space-y-2">
+                 
+                <ul class="space-y-3">
                     @foreach([
                         ['name' => 'Home',                      'route'=>route('home')],
                         ['name' => 'About Us',                  'route'=>route('about.us')],
@@ -286,16 +283,16 @@
 
             {{-- Col 2: Popular Categories --}}
             <div>
-                <h4 class="font-bold text-gray-900 mb-4 uppercase tracking-wider text-xs">Popular Categories</h4>
+                
                 <ul class="space-y-2">
                     @foreach([
                         ['name' => 'Professional Courses', 'slug' => 'professional-courses','type'=>'categories'],
                         ['name' => 'Wedding Planning',    'slug' => 'wedding-planning','type'=>'child'],
                         ['name' => 'Healthcare',          'slug' => 'health-and-wellness','type'=>'categories'],
                         ['name' => 'Real Estate',         'slug' => 'real-estate','type'=>'categories'],
-                        ['name' => 'Electric Services',   'slug' => 'electric-services','type'=>'categories'],
+                        
                         ['name' => 'Security System',     'slug' => 'security-system','type'=>'categories'],
-                        ['name' => 'Medical',             'slug' => 'medical','type'=>'child'],
+                      
                     ] as $link)
 
                         @php
@@ -315,40 +312,12 @@
                 </ul>
             </div>
 
-            {{-- Col 3: Business Services --}}
-            <div>
-                <h4 class="font-bold text-gray-900 mb-4 uppercase tracking-wider text-xs">Business Services</h4>
-                <ul class="space-y-2">
-                    @foreach([
-                        ['name' => 'Patient Care Service',   'href' => 'patient-care-services','type'=>'keyword'],
-                        ['name' => 'Home Appliances Repair', 'href' => 'home-appliance-repair-training','type'=>'keyword'],
-                        ['name' => 'Wedding Organisers',     'href' => 'wedding-organisers','type'=>'keyword'],
-                        ['name' => 'AC Services',            'href' => 'ac-repair-service','type'=>'keyword'],
-                        ['name' => 'Security Guards',        'href' => 'security-guards-services','type'=>'keyword'],
-                        ['name' => 'Cleaning Services',      'href' => 'cleaning-services','type'=>'keyword'],
-                        ['name' => 'Repairs Services',       'href' => 'repair-services','type'=>'child'],
-                        ['name' => 'SPA Beauty',             'href' => 'spa','type'=>'categories'],
-                        ['name' => 'Loan',                   'href' => 'loan-service','type'=>'child'],
-                        ['name' => 'Tax Consultants',        'href' => 'income-tax-consultants','type'=>'keyword'],
-                    ] as $link)
-                        @php
-                        $footerUrl = match($link['type'] ?? '') {
-                        'keyword'    => route('showCity',        $link['href']),
-                        'child'      => route('child.show',      $link['href']),
-                        'categories' => route('categories.show', $link['href'])
-
-                        };
-                        @endphp
-                        <li>
-                            <a href="{{ $footerUrl }}" class="text-gray-500 text-sm hover:text-primary transition-colors">{{ $link['name'] }}</a>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
+         
+            
 
             {{-- Col 4: For Businesses --}}
             <div>
-                <h4 class="font-bold text-gray-900 mb-4 uppercase tracking-wider text-xs">For Businesses</h4>
+                <!-- <h4 class="font-bold text-gray-900 mb-4 uppercase tracking-wider text-xs">For Businesses</h4> -->
                 <ul class="space-y-2">
                     @foreach([
                         ['name' => 'Add your Business',  'href' => 'business-owners','route'=>route('login')],
