@@ -105,7 +105,30 @@ padding:0px;
 							@endif
 						</div>
 					</div>	
+<div class="form-group">
+						<label for="name" class="col-md-2 control-label">Category</label>
+						<div class="col-md-8">
+							<select type="text" class="form-control" name="category" >
+								<option value="">Select Category</option>
+								@if($categories)
+									@foreach($categories as $category)
 
+									<option value="{{ $category->id}}" @if ($category->id== old('category'))
+                    selected="selected"	
+                    @else
+                    {{ (isset($edit_data) && $edit_data->category_id ==$category->id ) ? "selected":"" }} @endif>{{ $category->parent_category}}</option>
+									@endforeach
+									@endif
+								
+
+							</select>
+							@if ($errors->has('category'))
+								<span class="error alert-danger">
+									<strong>{{ $errors->first('category') }}</strong>
+								</span>
+							@endif
+						</div>
+					</div>	
 
                 <div class="form-group">
                     <label class="col-md-2 control-label">Name</label>

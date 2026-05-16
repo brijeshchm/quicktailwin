@@ -724,8 +724,8 @@
         {{-- Stats row --}}
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 max-w-4xl mx-auto text-center">
             @foreach([
-                ['value'=>'10,000+','label'=>'Happy Couples'],
-                ['value'=>'500+',   'label'=>'Verified Vendors'],
+                ['value'=>'10+','label'=>'Happy Couples'],
+                ['value'=>'5+',   'label'=>'Verified Vendors'],
                 ['value'=>'50+',    'label'=>'Cities Covered'],
                 ['value'=>'4.9★',  'label'=>'Average Rating'],
             ] as $i => $stat)

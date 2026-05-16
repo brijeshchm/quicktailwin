@@ -17,6 +17,8 @@ class Blogdetails extends Model
     'meta_description',
     'top_content',
     'top_heading',
+    'category_id',
+    'category_name',
     'bottom_heading',
     'bottom_content',
     'image_banner',
