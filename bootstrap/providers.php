@@ -1,7 +1,10 @@
 <?php
 
-use App\Providers\AppServiceProvider;
+ 
 
 return [
-    AppServiceProvider::class,
+    App\Providers\AppServiceProvider::class,
+    App\Providers\SeoLogServiceProvider::class,
+    App\Providers\VersionsServicesProvider::class,
+    App\Providers\RouteServiceProvider::class,
 ];
