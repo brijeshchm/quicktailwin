@@ -89,6 +89,7 @@ class ClientDetailController extends Controller
  
         // Certifications (up to 10)
         $certifications = [];
+        if($certificate["award_name1"] ){
         for ($i = 1; $i <= 10; $i++) {
             $name = $certificate["award_name{$i}"] ?? null;
             $img  = $certificate["award_img{$i}"]  ?? null;
@@ -96,7 +97,10 @@ class ClientDetailController extends Controller
                 $certifications[] = ['name' => $name, 'img' => $img, 'index' => $i];
             }
         }
- 
+        }
+
+        $govDocs = [];
+        if($certificate['cin_no']){
         $govDocs = [
             ['title' => 'CIN',   'no' => $certificate['cin_no']   ?? null, 'img' => $certificate['cin_certificate']   ?? null, 'tileBg' => 'linear-gradient(135deg,#1e3a8a,#2563eb)',  'color' => '#1d4ed8'],
             ['title' => 'MSME',  'no' => $certificate['msme_no']  ?? null, 'img' => $certificate['msme_certificate']  ?? null, 'tileBg' => 'linear-gradient(135deg,#78350f,#b45309)',  'color' => '#92400e'],
@@ -106,8 +110,10 @@ class ClientDetailController extends Controller
             ['title' => 'COI',   'no' => $certificate['coi_no']   ?? null, 'img' => $certificate['coi_certificate']   ?? null, 'tileBg' => 'linear-gradient(135deg,#14532d,#802e15)',  'color' => '#802e15'],
             ['title' => 'PAN',   'no' => $certificate['pan_no']   ?? null, 'img' => $certificate['pan_certificate']   ?? null, 'tileBg' => 'linear-gradient(135deg,#7c1580,#16a34a)',  'color' => '#7c1580'],
         ];
+
         $govDocs = array_values(array_filter($govDocs, fn($g) => $g['no'] || $g['img']));
- 
+        }
+
         // Reviews
         $reviews = is_array($comment) ? array_values($comment) : [];
  
@@ -137,10 +143,10 @@ class ClientDetailController extends Controller
             ['day'=>'Sunday',    'hours'=>'Closed'],
         ];
 
-               $areaBusiness    = $data['area_business']     ?? [];
+        $areaBusiness    = $data['area_business']     ?? [];
         $overviewBusiness= $data['overview_business'] ?? [];
         $relatedSearches = $data['related_searches']  ?? [];
-//  dd($relatedSearches);
+ 
 
  
         $metaTitle = $clientsList['business_name'] .'|'. $clientsList['city']. '| '.'QuickDials';
