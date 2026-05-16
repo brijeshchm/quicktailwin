@@ -583,7 +583,7 @@ class CitySlugController extends Controller
          $zones     = $responseZones['data'] ?? [];
 
        
-        return view('client.searchkeyword ', compact(
+        return view('client.searchkeyword', compact(
             'city', 'slug', 'keyword', 'area','zones',
             'childSlug', 'childCat',
             'ratingCount', 'ratingValue', 'bgImage',

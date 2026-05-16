@@ -116,7 +116,7 @@
 
 <a href="https://play.google.com/store/apps/details?id=com.quick_dial&hl=en_IN"
    target="_blank"
-   class="group inline-flex items-center justify-center w-10 h-10 rounded-full bg-green-600 hover:bg-green-700 from-green-500 to-emerald-600 text-white shadow-md hover:shadow-xl hover:scale-110 transition-all duration-300">
+   class="group inline-flex items-center justify-center w-10 h-10 rounded-full bg-green-600 hover:bg-EB2C3B-700 from-green-500 to-emerald-600 text-white shadow-md hover:shadow-xl hover:scale-110 transition-all duration-300">
 
     <!-- Android Icon -->
     <svg xmlns="http://www.w3.org/2000/svg"

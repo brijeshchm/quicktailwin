@@ -2660,14 +2660,7 @@ class BackEndClientsController extends Controller
 
 				});
 			}
-			/* if($request->input('search.paid_status')!=''){
-				if($request->input('search.paid_status')=='1'){
-					$leads = $leads->where('clients.paid_status','1');
-				}else{
-					$leads = $leads->where('clients.paid_status','0');
-				}
-			}
-			 */
+			 
 			if ($request->input('search.paid_status') != '') {
 				$leads = $leads->where('clients.paid_status', $request->input('search.paid_status'));
 
@@ -2807,6 +2800,7 @@ class BackEndClientsController extends Controller
 				$data[] = [
 					$username . " " . $paidOrNot,
 					$lead->business_name . '' . $type,
+					$lead->business_slug,
 					$lead->first_name . ' ' . $lead->last_name,
 					$lead->city,
 					$lead->email,
