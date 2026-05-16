@@ -1854,6 +1854,8 @@ Instead of limiting learning to theory, the course takes you through:.",
  
         /* ── extract data (mirrors the Next.js component) ── */
         $kwData       = $response['data']['keyword']      ?? [];
+
+		// dd($kwData);
         $categoryList = $response['data']['categoryList'] ?? [];
  
         $keyword          = $kwData['parent_category']   ?? '';

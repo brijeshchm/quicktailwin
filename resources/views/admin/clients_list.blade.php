@@ -175,6 +175,7 @@
 							<tr>
 								<th>User_ID</th>
 								<th>Business_Name</th>
+								<th>Slug</th>
 								
 								<th>Name</th>
 								<th>City</th>

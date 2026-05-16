@@ -11,12 +11,30 @@
 @section('content')	
 @include('client.components.banner-section')
 
+ @php
  
-<div class="bg-indigo-600 text-white">
-    <div class="container mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-         
+ 
+$bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
+
+ @endphp
+
+<div x-show="showAd" x-cloak
+         class="relative w-full overflow-hidden h-40"
+         style="background-image: url('{{ $bgImage }}'); background-size: cover; background-position: center;">
+        <div class="absolute inset-0 bg-indigo-900/50"></div>
+        <div class="relative w-full px-3 sm:px-8 py-3 sm:py-5 flex items-center gap-3 sm:gap-5 h-full">
+            <div class="flex-1 min-w-0">
+                
+            </div>
+            <div class="flex-shrink-0 flex items-center gap-2 sm:gap-3">
+                
+                
+            </div>
+        </div>
     </div>
-</div>
+
+
+  
 
 
 <div class="container mx-auto px-4 py-7">
