@@ -1399,6 +1399,52 @@ function copyPageLink(btn) {
 
 
 
+@php
+
+$localBusiness[] = [
+
+    "@context" => "https://schema.org",
+    "@type" => "LocalBusiness",
+
+    "name" => $clientsList['business_name'] ?? '',
+
+    "image" => !empty($clientsList['logo'])
+        ? $clientsList['logo']
+        : asset('client/images/default_pp_small.png'),
+
+    "address" => [
+        "@type" => "PostalAddress",
+        "streetAddress" => $clientsList['address'] ?? '',
+        "addressLocality" => $clientsList['city'] ?? '',
+        "addressRegion" => $clientsList['country'] ?? 'India',
+        "postalCode" => $clientsList['pincode'] ?? '',
+        "addressCountry" => "IN"
+    ],
+
+    "telephone" => $clientsList['call'] ?? '',
+
+    "url" => url()->current(),
+
+    "aggregateRating" => [
+        "@type" => "AggregateRating",
+        "ratingValue" => $clientsList['rating'] ?? '1',
+        "reviewCount" => $clientsList['ratingCount'] ?? '1'
+    ]
+
+];
+
+@endphp
+
+ 
+@if(!empty($localBusiness))
+<script type="application/ld+json">
+{!! json_encode(
+    count($localBusiness) === 1 ? $localBusiness[0] : $localBusiness,
+    JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
+) !!}
+</script>
+@endif
+
 
 
 

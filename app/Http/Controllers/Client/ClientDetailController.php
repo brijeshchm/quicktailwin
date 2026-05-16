@@ -142,8 +142,6 @@ class ClientDetailController extends Controller
         $relatedSearches = $data['related_searches']  ?? [];
 //  dd($relatedSearches);
 
-
-
  
         $metaTitle = $clientsList['business_name'] .'|'. $clientsList['city']. '| '.'QuickDials';
         $metaKeywords =$clientsList['business_name'] .'| '.'QuickDials';
@@ -155,7 +153,7 @@ class ClientDetailController extends Controller
             ' - ' . $serviceText .
             '. View address, photos, reviews and contact details on QuickDials.';
 
-
+ 
         return view('client.client-detail', compact(
             'slug', 'response', 'clientsList', 'certificate','metaTitle','metaKeywords','metaDescription',
             'comment', 'areaBusiness', 'overviewBusiness',

@@ -345,6 +345,9 @@ $bgImage = $bgImage ?? '/computer-courses-training.jpg';
 
 </div>
 
+
+
+
 <script>
 function listingPage() {
     return {
