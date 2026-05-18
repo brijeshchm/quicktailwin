@@ -239,16 +239,16 @@ class OfficialController extends Controller
             $blogDetails['paragraph6'] ?? '',
         ], fn($p) => trim($p) !== ''));
  
-
-          
-        $categories = Blogdetails::select('category_name as name', DB::raw('COUNT(*) as count'))
-        ->whereNotNull('category_name')
-        ->where('category_name',$blogDetails['category_name'])
-        ->where('category_name', '!=', '')
-        ->groupBy('category_name')
-        ->orderBy('count', 'DESC')
-        ->get();
-     
+            $categories = [];
+        if($blogDetails['category_name']){
+            $categories = Blogdetails::select('category_name as name', DB::raw('COUNT(*) as count'))
+            ->whereNotNull('category_name')
+            ->where('category_name',$blogDetails['category_name'])
+            ->where('category_name', '!=', '')
+            ->groupBy('category_name')
+            ->orderBy('count', 'DESC')
+            ->get();
+        }
         return view('official.blog-details', compact(
             'blogDetails','blogList','tickerItems','categories',
             'faqs','authorColor','paragraphs','slug'
