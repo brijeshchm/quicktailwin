@@ -164,17 +164,10 @@ class WebsiteRazorpayController extends Controller
 	public function razCheckOut(Request $request)
 	{
 
- 
-		
-		$data = $this->dataDecodeJsonBase64($_GET['o']);
+		$data = $this->dataDecodeJsonBase64($_GET['encrypt']);
 
-		 
 		return view('client.razorpay.pay-checkout', ['data' => $data]);
 	}
-
-
-
-
 
 	function get_curl_handle($payment_id, $data)
 	{
@@ -398,151 +391,8 @@ class WebsiteRazorpayController extends Controller
 
 
 
-
-	public function feesPayGateway(Request $request)
-	{
-
-
-		if (isset($_GET['status'], $_GET['o']) && !empty($_GET['o'])) {
-			$o = base64_decode($_GET['o'], $strict = false);
-			$data = json_decode($o);
-			$status = $_GET['status'];
-		} else {
-			$data = array();
-		}
-		$paymentMode = PaymentMode::where('status', 1)->get();
-		return view('business.razorpay.fees-pay-page-out', ['paymentMode' => $paymentMode, 'id' => $id, 'data' => $data]);
-	}
-
-
-
-	public function feesPayGatewaySave(Request $request)
-	{
-
-
-		if ($request->ajax()) {
-			if ($request->input('order_id')) {
-				$data = $this->dataDecodeJsonBase64($_POST['o']);
-
-				$paymentHistory = new CcavenueHistory;
-				$paymentHistory->name = $data->name;
-				$paymentHistory->email = $data->email;
-				$paymentHistory->mobile = $data->phone;
-				$paymentHistory->course = $data->course;
-				$paymentHistory->amount = $data->amt;
-				$paymentHistory->billing_city = $data->city;
-				$paymentHistory->country = $data->country;
-				$paymentHistory->billing_state = $data->state;
-				$paymentHistory->payment_mode = $request->input('mode');
-				$paymentHistory->order_id = $request->input('order_id');
-
-				if ($paymentHistory->save()) {
-
-
-
-
-					$headers = 'MIME-Version: 1.0' . "\r\n";
-					$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-					//	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-					// Additional headers
-					//	$headers .= 'From: enquiry@quickdials.com' . "\r\n";
-					$headers .= 'From: quickdials <info@quickdials.com>';
-
-					$to = "brijesh.chauhan@quickdials.com";
-					$subject = "Payment- " . $data->name . " | " . $data->course . " | " . $request->input('mode') . " | " . $data->amt . " Amount";
-
-					$message = ' <tr>
-						<td style="padding:0in 0in 7.5pt 0in">
-						<p class="MsoNormal"><strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">Name:</span></strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">
-						' . $data->name . '</span><u></u><u></u></p>
-						</td>
-						</tr>
-						<tr>
-						<td style="padding:0in 0in 7.5pt 0in">
-						<p class="MsoNormal"><strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">Email:</span></strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">
-						' . $data->email . '</span><u></u><u></u></p>
-						</td>
-						</tr>
-						<tr>
-						<td style="padding:0in 0in 7.5pt 0in">
-						<p class="MsoNormal"><strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">Technology:</span></strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">
-						' . $data->course . ' </span><u></u><u></u></p>
-						</td>
-						</tr>
-						<tr>
-						<td style="padding:0in 0in 7.5pt 0in">
-						<p class="MsoNormal"><strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">Mobile:</span></strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">' . $data->phone . '</span><u></u><u></u></p>
-						</td>
-						</tr>	<tr>
-						<td style="padding:0in 0in 7.5pt 0in">
-						<p class="MsoNormal"><strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">Amount: </span></strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333"> ' . $data->amt . '</span><u></u><u></u></p>
-						</td>
-						</tr>		
-
-						<tr>
-						<td style="padding:0in 0in 7.5pt 0in">
-						<p class="MsoNormal"><strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">City:</span></strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333"> ' . $data->city . '</span><u></u><u></u></p>
-						</td>
-						</tr>
-						<tr>
-						<td style="padding:0in 0in 7.5pt 0in">
-						<p class="MsoNormal"><strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">Country :</span></strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333"> ' . $data->country . '</span><u></u><u></u></p>
-						</td>
-						</tr>
-						<tr>
-						<td style="padding:0in 0in 7.5pt 0in">
-						<p class="MsoNormal"><strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">Mode:</span></strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333"> ' . $request->input('mode') . '</span><u></u><u></u></p>
-						</td>
-						</tr>
-						 
-						';
-
-
-
-					$stdemail = "";
-					$codemail = "";
-					$coordinator = "";
-
-
-					Mail::send('mails.send_payment_inquiry', ['msg' => $message], function ($m) use ($message, $request, $subject, $stdemail, $codemail, $data) {
-						$m->from('info@quickdials.com', $data->name);
-						if ($request->file('photoimg')) {
-							$m->attach($request->file('photoimg')->getRealPath(), [
-								'as' => $request->file('photoimg')->getClientOriginalName(),
-								'mime' => $request->file('photoimg')->getMimeType()
-							]);
-						}
-						$m->to('quickdials1@gmail.com', "")->subject($subject)->cc($data->email);
-					});
-
-
-
-
-					$arr['status'] = 1;
-					$arr['msg'] = "Successfully submit ";
-					$arr['oo'] = $_POST['o'];
-
-				} else {
-					$arr['status'] = 0;
-					$arr['msg'] = "Not Successfully payment";
-
-
-				}
-			} else {
-				$arr['status'] = 1;
-				$arr['msg'] = "Not Update Photo Successfully ";
-
-			}
-
-			echo json_encode($arr);
-
-
-		}
-
-
-
-	}
-
+ 
+ 
 
 
 	public function airpay(Request $request)

@@ -192,12 +192,12 @@
                             <input type="hidden" name="currency" id="currency" value="INR">
 
                             {{-- ✅ FIX #4: Dynamic environment-aware URLs --}}
-                            <!-- <input type="hidden" name="surl" id="surl" value="https://api.quickdials.com/business/success">
-                            <input type="hidden" name="furl" id="furl" value="https://api.quickdials.com/business/failed"> -->
+                            <input type="hidden" name="surl" id="surl" value="https://www.quickdials.com/success">
+                            <input type="hidden" name="furl" id="furl" value="https://www.quickdials.com/failed">
 
 
-                            <input type="hidden" name="surl" id="surl" value="http://localhost:8000/success">
-                            <input type="hidden" name="furl" id="furl" value="http://localhost:8000/failed">
+                            <!-- <input type="hidden" name="surl" id="surl" value="http://localhost:8000/success">
+                            <input type="hidden" name="furl" id="furl" value="http://localhost:8000/failed"> -->
 
 
 
@@ -410,7 +410,7 @@ jQuery(document).ready(function ($) {
         var billing_country    = $form.find('#billing_country').val();
         var billing_state      = $form.find('#billing_state').val();
         var city               = $form.find('#city').val();
-
+ 
         // ✅ FIX #5: Validation with visible error message
         if (!card_holder_name_id || card_holder_name_id.trim() === '') {
             showError('Customer name is missing. Please go back and complete your details.');
