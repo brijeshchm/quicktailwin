@@ -157,9 +157,7 @@ class RazorpayController extends Controller
 	/**
 	 * Return the specified resource from storage.
 	 *
-	 * @param  obj  Request object
-	 * @param  int  $id
-	 * @return Json Response
+	 * 
 	 */
 	public function checkOut(Request $request)
 	{

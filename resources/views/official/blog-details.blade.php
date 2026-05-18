@@ -573,7 +573,7 @@
                         overflow-y-auto pr-1 scrollbar-thin">
 
                 {{-- ── TABLE OF CONTENTS (blogList) ── --}}
-                @if(count($blogList))
+                @if(count($categories))
                 <div class="reveal-right bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
                     <h4 class="text-sm font-bold text-slate-900 mb-4 uppercase tracking-widest
                                flex items-center gap-2">
@@ -581,14 +581,42 @@
                         In this article
                     </h4>
                     <ul class="space-y-2">
-                        @foreach(array_slice($blogList, 0, 40) as $i => $tocItem)
+                        @foreach(array_slice($categories, 0, 40) as $i => $tocItem)
                         <li>
                             <button class="text-xs text-gray-400 hover:text-blue-600 transition-colors
                                            text-left flex items-start gap-2 group w-full">
                                 <span class="w-1 h-1 rounded-full bg-blue-300 group-hover:bg-blue-500
-                                             mt-1.5 shrink-0 transition-colors"></span>
-                                {{ $tocItem['name'] ?? '' }}
+                                             mt-1.5 shrink-0 transition-colors">
+                                            
+                                            {{ $tocItem['name'] ?? '' }}
+                                            </span>
+                                
+
+
+                                 <span class="bg-slate-100 text-slate-500 rounded-md px-2 py-0.5
+                                             text-xs font-medium">
+                                    {{ $cat['count'] }}
+                                </span>
                             </button>
+                        </li>
+
+
+                        <li>
+                            <a href="{{ route('category.blog', ['url' => Str::slug($tocItem->category_name)]) }}"
+                               class="group flex items-center justify-between py-2 text-sm
+                                      text-slate-500 hover:text-blue-600 transition-colors">
+                                <span class="flex items-center">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-blue-300 mr-2.5
+                                                 group-hover:bg-blue-500 transition-colors"></span>
+                                    {{ ucwords(str_replace('-', ' ', $tocItem->category_name)) }} 
+
+
+                                </span>
+                                <span class="bg-slate-100 text-slate-500 rounded-md px-2 py-0.5
+                                             text-xs font-medium">
+                                    {{ $cat['count'] }}
+                                </span>
+                            </a>
                         </li>
                         @endforeach
                     </ul>

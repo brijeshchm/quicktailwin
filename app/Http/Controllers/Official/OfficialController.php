@@ -11,9 +11,11 @@ use App\Subscribe;
 use App\Models\Blogdetails;
 use App\Models\Client\Client; //model
 use App\Models\Keyword;
+ 
 use App\Models\Citieslists;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
+use DB;
 class OfficialController extends Controller
 {
 
@@ -148,15 +150,14 @@ class OfficialController extends Controller
         $tickerArticles  = array_slice($featuredArticle, 4, 10);
         $listArticles    = array_slice($featuredArticle, 1);   
         $firstBlog    = $featuredArticle['0'];   
- 
-        $categories = [
-            ['name' => 'SAP Certification',    'count' => 42],
-            ['name' => 'Business Technology',  'count' => 28],
-            ['name' => 'Cloud Computing',      'count' => 19],
-            ['name' => 'Programming',          'count' => 15],
-            ['name' => 'Data Science',         'count' => 24],
-            ['name' => 'IT Administration',    'count' => 11],
-        ];
+        $categories = Blogdetails::select('category_name as name', DB::raw('COUNT(*) as count'))
+        ->whereNotNull('category_name')
+        ->where('category_name', '!=', '')
+        ->groupBy('category_name')
+        ->orderBy('count', 'DESC')
+        ->get();
+
+    
  
         // $tags = [
         //     'SAP S/4HANA', 'FICO', 'ABAP', 'Python', 'AWS',
@@ -202,6 +203,8 @@ class OfficialController extends Controller
         if (!$raw) abort(410);
  
         $blogDetails = $raw['blogDetails'] ?? [];
+
+       
         $blogList    = $raw['blogList']    ?? [];
         $tickerItems = array_slice($blogList, 4, 10);
  
@@ -236,13 +239,39 @@ class OfficialController extends Controller
             $blogDetails['paragraph6'] ?? '',
         ], fn($p) => trim($p) !== ''));
  
+
+          
+        $categories = Blogdetails::select('category_name as name', DB::raw('COUNT(*) as count'))
+        ->whereNotNull('category_name')
+        ->where('category_name',$blogDetails['category_name'])
+        ->where('category_name', '!=', '')
+        ->groupBy('category_name')
+        ->orderBy('count', 'DESC')
+        ->get();
+        
         return view('official.blog-details', compact(
-            'blogDetails','blogList','tickerItems',
+            'blogDetails','blogList','tickerItems','categories',
             'faqs','authorColor','paragraphs','slug'
         ));
          
     }
 
+    public function blogCategory(Request $request, $slug)
+    {
+
+   
+        $blogs = Blogdetails::where('category_name',$slug)->orderBy('id', 'DESC')->get();
+
+       
+        $categories = Blogdetails::select('category_name as name', DB::raw('COUNT(*) as count'))
+        ->whereNotNull('category_name')
+        ->where('category_name',$slug)
+        ->where('category_name', '!=', '')
+        ->groupBy('category_name')
+        ->orderBy('count', 'DESC')
+        ->get();
+        return view('client.blog-category', ['categories' => $categories,'blogs'=>$blogs]);
+    }
     public function testimonials()
     {
         $testimonialsdetails = Testimonialsdetail::orderBy('id', 'DESC')->get();

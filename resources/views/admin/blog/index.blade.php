@@ -106,13 +106,13 @@ padding:0px;
 						<div class="col-md-8">
 							<select type="text" class="form-control" name="category" >
 								<option value="">Select Category</option>
-								@if($categories)
-									@foreach($categories as $category)
+								@if($childs)
+									@foreach($childs as $child)
 
-									<option value="{{ $category->id}}" @if ($category->id== old('category'))
+									<option value="{{ $child->id}}" @if ($child->id== old('category'))
                     selected="selected"	
                     @else
-                    {{ (isset($edit_data) && $edit_data->category_id ==$category->id ) ? "selected":"" }} @endif>{{ $category->parent_category}}</option>
+                    {{ (isset($edit_data) && $edit_data->category_id ==$child->id ) ? "selected":"" }} @endif>{{ $child->child_category}}</option>
 									@endforeach
 									@endif
 								

@@ -457,6 +457,7 @@ Route::get('/advertise', [App\Http\Controllers\Official\OfficialController::clas
 Route::get('/blog', [App\Http\Controllers\Official\OfficialController::class, 'blog'])->name('blog.show');
 //Route::get('/official/blog-details', [App\Http\Controllers\Official\OfficialController::class, 'blogdetails']);
 Route::get('/blog/{slug}', [App\Http\Controllers\Official\OfficialController::class, 'blogdetails'])->name('blog.details');
+Route::get('/blog/category/{url}',[App\Http\Controllers\Official\OfficialController::class, 'blogCategory'])->name('category.blog');
 Route::get('/subscribe', [App\Http\Controllers\Official\OfficialController::class, 'subscribe']);
 Route::get('/testimonials', [App\Http\Controllers\Official\OfficialController::class, 'testimonials']);
 Route::get('/terms-conditions', [App\Http\Controllers\Official\OfficialController::class, 'termsconditions'])->name('terms.conditions');

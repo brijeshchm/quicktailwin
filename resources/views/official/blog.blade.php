@@ -422,13 +422,15 @@
                         @if($categories)
                         @foreach($categories as $cat)
                         <li>
-                            <a href="{{ route('blog.show') }}"
+                            <a href="{{ route('category.blog', ['url' => Str::slug($cat->name)]) }}"
                                class="group flex items-center justify-between py-2 text-sm
                                       text-slate-500 hover:text-blue-600 transition-colors">
                                 <span class="flex items-center">
                                     <span class="w-1.5 h-1.5 rounded-full bg-blue-300 mr-2.5
                                                  group-hover:bg-blue-500 transition-colors"></span>
-                                    {{ $cat['name'] }}
+                                    {{ $cat['name'] }} 
+
+
                                 </span>
                                 <span class="bg-slate-100 text-slate-500 rounded-md px-2 py-0.5
                                              text-xs font-medium">

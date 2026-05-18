@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use App\Models\Blogdetails;
-use App\Models\ParentCategory;
+use App\Models\ChildCategory;
 use App\Models\Author;
 use Image;
 use Auth;
@@ -47,7 +47,7 @@ class BlogController extends Controller
 
 		$data['button'] = "Save";
 		$data['authors'] = Author::where('status','1')->get();
-		$data['categories'] = ParentCategory::where('status','1')->get();
+		$data['childs'] = ChildCategory::where('status','1')->get();
 		if ($request->isMethod('post') && $request->input('submit') == "Save") {
 
 
@@ -133,11 +133,11 @@ class BlogController extends Controller
 				$blogdetails->ratingcount = $request->input('ratingcount');
 
 
-				$category = ParentCategory::where('id',$request->input('category'))->first();
+				$category = ChildCategory::where('id',$request->input('category'))->first();
 
 				if(!empty($category)){
 				$blogdetails->category_id = $category->id;
-				$blogdetails->category_name = $category->parent_category;
+				$blogdetails->category_name = $category->child_slug;
 				}
 				if ($blogdetails->save()) {
 					return response()->json([
@@ -240,7 +240,7 @@ class BlogController extends Controller
 
 		$data['edit_data'] = Blogdetails::find($id);
 		$data['authors'] = Author::where('status','1')->get();
-		$data['categories'] = ParentCategory::where('status','1')->get();
+		$data['childs'] = ChildCategory::where('status','1')->get();
 		$data['button'] = "Update";
 		if ($request->isMethod('post') && $request->input('submit') == "Update") {
 
@@ -267,11 +267,11 @@ class BlogController extends Controller
 			$blogdetails->bottom_content = $request->input('bottom_content');
 			$blogdetails->ratingvalue = $request->input('ratingvalue');
 			$blogdetails->ratingcount = $request->input('ratingcount');
-			$category = ParentCategory::where('id',$request->input('category'))->first();
+			$category = ChildCategory::where('id',$request->input('category'))->first();
 
 			if(!empty($category)){
 				$blogdetails->category_id = $category->id;
-				$blogdetails->category_name = $category->parent_category;
+				$blogdetails->category_name = $category->child_slug;
 			}
 			//$file = $request->file('logo');
 			// LOGO Pictures
@@ -386,7 +386,7 @@ class BlogController extends Controller
 			try {
 
 				$blogdetails = Blogdetails::findOrFail($id);
-				$category = ParentCategory::where('id',$request->category)->first();
+				$category = ChildCategory::where('id',$request->category)->first();
 
 			 
 				$blogdetails->update([
@@ -401,7 +401,7 @@ class BlogController extends Controller
 					'ratingvalue' => $request->ratingvalue,
 					'ratingcount' => $request->ratingcount,
 					'category_id' => $category->id,
-					'category_name' => $category->parent_category,
+					'category_name' => $category->child_slug,
 				]);
 
 				return response()->json([

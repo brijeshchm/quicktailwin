@@ -148,50 +148,7 @@
 						</div>
 		                    </div>
 		                    
-		                    <div class="tab-pane fade" id="faceanissue" role="tabpanel" aria-labelledby="faceanissue">
-								<div class="student-payment">
-		                      		<h3>Face an issue</h3>
-		                      		<form method="POST" onsubmit="return homeController.faceAnIssue(this)" action="" autocomplete="off">
-		                       
-		                      			<div class="form-inline">
-										<input type="hidden" name="_token" value="{{ csrf_token() }}" />
-										<div class="ans">
-										    <input type="text" name="name" value="{{ old('name', (isset($data->name)) ? $data->name:"")}}" class="form-control" placeholder="Enter Full Name *">
-											
-										@if ($errors->has('name'))
-											<span class="help-block"><strong>{{ $errors->first('name') }}</strong></span>
-										 
-										@endif
-										</div>
-										<div class="ans">
-										    <input type="text" name="email" value="{{ old('email',(isset($data->email)) ? $data->email:"")}}"  class="form-control" placeholder="E-mail *">
-										    @if ($errors->has('email'))
-											<span class="help-block"><strong>{{ $errors->first('email') }}</strong></span>
-										 
-										@endif
-										</div>
-										</div>
-		                      			<div class="form-inline">	
-										   <div class="ans">
-											 <input type="text" name="phone" value="{{ old('phone',(isset($data->phone)) ? $data->phone:"")}}"  class="form-control" maxlength="16" onkeypress="return isNumberKey(event);" placeholder="Contact No. *">
-											 @if ($errors->has('phone'))
-											<span class="help-block"><strong>{{ $errors->first('phone') }}</strong></span>
-										 
-										@endif
-										</div>
-										<div class="ans">
-										  <textarea type="text" name="remark" class="form-control" placeholder="Enter Face an issue remark *">{{ old('remark',(isset($data->remark)) ? $data->remark:"")}}</textarea>
-											@if ($errors->has('remark'))
-											<span class="help-block"><strong>{{ $errors->first('remark') }}</strong></span>
-										 
-										@endif
-										</div>
-		                      			</div>  
-									   
-									    <button type="submit" class="face-issue-button" name="submit">Submit</button>
-									</form>
-		                      	</div>
-							</div>
+		                
 		                      
 		                </div>
 					</div>
