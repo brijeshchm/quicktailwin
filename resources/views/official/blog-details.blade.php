@@ -582,7 +582,8 @@
                     </h4>
                     <ul class="space-y-2">
                         @if($categories->isNotEmpty())
-                        @foreach(array_slice($categories, 0, 40) as $i => $tocItem)
+                       
+                        @foreach($categories as $i => $tocItem)
                         <li>
                             <button class="text-xs text-gray-400 hover:text-blue-600 transition-colors
                                            text-left flex items-start gap-2 group w-full">
