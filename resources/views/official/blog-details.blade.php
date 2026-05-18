@@ -616,7 +616,7 @@
                                 </span>
                                 <span class="bg-slate-100 text-slate-500 rounded-md px-2 py-0.5
                                              text-xs font-medium">
-                                    {{ $cat['count'] }}
+                                    {{ $tocItem->count }}
                                 </span>
                             </a>
                         </li>
