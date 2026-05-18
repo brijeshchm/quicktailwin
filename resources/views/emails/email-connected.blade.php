@@ -32,8 +32,8 @@
                                          
 											<tr>
 											<td style="background-color:white;vertical-align:super">
-											<a href="https://quickdials/noida/aws-training" title="quickdials"><span>
-											<img loading="lazy" src="https://quickdials/client/images/advertise.jpg" height="auto" width="400px" class="CToWUd"></span></a>
+											<a href="https://quickdials.com/noida/aws-training" title="quickdials"><span>
+											<img loading="lazy" src="https://quickdials.com/client/images/advertise.jpg" height="auto" width="400px" class="CToWUd"></span></a>
 											</td>
 											</tr> 
 		<tr>          <td style="color:white;font-size:11px;background-color:#09f">                <center><p style="padding-top:2%;padding-bottom:2%">If you no longer want to receive emails from us, you can </p>unsubscribe</center>            </td>     </tr> 

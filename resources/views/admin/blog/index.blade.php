@@ -118,9 +118,9 @@ padding:0px;
 								
 
 							</select>
-							@if ($errors->has('author'))
+							@if ($errors->has('category'))
 								<span class="error alert-danger">
-									<strong>{{ $errors->first('author') }}</strong>
+									<strong>{{ $errors->first('category') }}</strong>
 								</span>
 							@endif
 						</div>

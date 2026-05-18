@@ -155,11 +155,7 @@
 
         {{-- Mobile buttons --}}
         <div class="md:hidden flex items-center gap-1.5">
-            <!-- <button onclick="openLoginModal()" class="flex items-center gap-1 text-xs h-7 px-2 font-medium text-gray-700 hover:text-primary border border-gray-200 rounded-md transition-colors">
-                <i data-lucide="user" class="w-3.5 h-3.5"></i>
-                Login
-            </button> -->
-
+           
 
              <button
                 onclick="openLoginModal()"
@@ -170,8 +166,7 @@
 
             <span class="relative inline-flex">
                 <span class="pulse-ring absolute inset-0 rounded-full"></span>
-                <!-- <a href="{{ route('login') }}" class="relative flex items-center gap-1 bg-gradient-to-r from-orange-500 to-orange-400 text-white text-xs font-bold px-2 h-7 rounded-full"> -->
-
+               
                 <a
                     href="{{ route('login') }}"
                     class="relative flex items-center gap-1 px-2 md:px-3 bg-gradient-to-r from-orange-500 to-orange-400 hover:from-orange-600 hover:to-orange-500 text-white text-[10px] sm:text-xs md:text-sm font-bold h-7 md:h-8 rounded-full shadow-lg transition-all duration-300"
