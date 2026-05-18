@@ -53,7 +53,7 @@
         <div class="absolute bottom-0 right-1/4 w-72 h-72 bg-gradient-to-tl from-indigo-200/40 to-blue-100/20 rounded-full blur-3xl"></div>
     </div>
 
-    <section class="section profile relative z-10 py-8 md:py-12 lg:py-16 px-4">
+    <section class="section profile relative z-10 py-8 md:py-12 lg:py-16 px-4 h-600">
         <div class="max-w-4xl mx-auto">
 
             {{-- HEADER --}}

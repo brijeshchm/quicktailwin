@@ -257,8 +257,8 @@ document.getElementById("merchant_order_id").value = o;
 					
 
 
-					<input type="hidden" name="surl" id="surl" value="http://localhost:8000/business/success"> 
-				<input type="hidden" name="furl" id="furl" value="http://localhost:8000/business/failed">  
+					<input type="hidden" name="surl" id="surl" value="{{ url('business/success')}} "> 
+				<input type="hidden" name="furl" id="furl" value="{{ url('business/failed')}} ">  
 
 
 				<!-- <input type="hidden" name="surl" id="surl" value="https://www.quickdials.com/business/success/"> 
