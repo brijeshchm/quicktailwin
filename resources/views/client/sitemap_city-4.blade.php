@@ -5,8 +5,8 @@
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 @foreach ($keywords as $keyword)
-<url>     
-<loc>{{ url('greater-noida/'.$keyword->slug) }}</loc>
+<url>
+<loc>{{ route('city.slug', ['city_slug' => 'greater-noida','service_slug' => $keyword->slug ]) }}</loc>
 <lastmod>{{ \Carbon\Carbon::parse($keyword->updated_at)->toAtomString() }}</lastmod>    
 <changefreq>weekly</changefreq>
 <priority>0.80</priority>
@@ -14,24 +14,24 @@
 @endforeach 
 
 @foreach ($keywords as $keyword)
-<url>     
-<loc>{{ url('gurgaon/'.$keyword->slug) }}</loc>
+<url>
+<loc>{{ route('city.slug', ['city_slug' => 'gurgaon','service_slug' => $keyword->slug ]) }}</loc>
 <lastmod>{{ \Carbon\Carbon::parse($keyword->updated_at)->toAtomString() }}</lastmod>    
 <changefreq>weekly</changefreq>
 <priority>0.80</priority>
 </url>
 @endforeach 
  @foreach ($keywords as $keyword)
-<url>     
-<loc>{{ url('mumbai/'.$keyword->slug) }}</loc>
+<url>
+<loc>{{ route('city.slug', ['city_slug' => 'mumbai','service_slug' => $keyword->slug ]) }}</loc>
 <lastmod>{{ \Carbon\Carbon::parse($keyword->updated_at)->toAtomString() }}</lastmod>    
 <changefreq>weekly</changefreq>
 <priority>0.80</priority>
 </url>
 @endforeach 
 @foreach ($keywords as $keyword)
-<url>     
-<loc>{{ url('chandigarh/'.$keyword->slug) }}</loc>
+<url>
+<loc>{{ route('city.slug', ['city_slug' => 'chandigarh','service_slug' => $keyword->slug ]) }}</loc>
 <lastmod>{{ \Carbon\Carbon::parse($keyword->updated_at)->toAtomString() }}</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.80</priority>
@@ -41,7 +41,8 @@
 
 @foreach ($keywords as $keyword)
 <url>     
-      <loc>{{ url('meerut/'.$keyword->slug) }}</loc>
+       
+      <loc>{{ route('city.slug', ['city_slug' => 'meerut','service_slug' => $keyword->slug ]) }}</loc>
       <lastmod>{{ \Carbon\Carbon::parse($keyword->updated_at)->toAtomString() }}</lastmod>    
       <changefreq>weekly</changefreq>
       <priority>0.80</priority>

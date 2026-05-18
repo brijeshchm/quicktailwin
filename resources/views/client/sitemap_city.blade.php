@@ -6,8 +6,8 @@
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  
 @foreach ($keywords as $keyword)
-<url>     
-    <loc>{{ url('jalandhar/'.$keyword->slug) }}</loc>
+<url>    
+    <loc>{{ route('city.slug', ['city_slug' => 'jalandhar','service_slug' => $keyword->slug ]) }}</loc>
     <lastmod>{{ \Carbon\Carbon::parse($keyword->updated_at)->toAtomString() }}</lastmod>    
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
@@ -15,8 +15,8 @@
 @endforeach 
 
 @foreach ($keywords as $keyword)
-<url>     
-    <loc>{{ url('dehradun/'.$keyword->slug) }}</loc>
+<url>
+    <loc>{{ route('city.slug', ['city_slug' => 'dehradun','service_slug' => $keyword->slug ]) }}</loc>
     <lastmod>{{ \Carbon\Carbon::parse($keyword->updated_at)->toAtomString() }}</lastmod>    
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
