@@ -555,7 +555,7 @@ Route::POST('/client/lead/saveEnquiryContact', [App\Http\Controllers\Client\Home
 
 
 Route::POST('/lead/auto-form-save', [App\Http\Controllers\Client\HomePageController::class, 'autoFormSave']);
-Route::POST('/{city}/lead/auto-form-save', [App\Http\Controllers\Client\HomePageController::class, 'autoFormSave']);
+//Route::POST('/{city}/lead/auto-form-save', [App\Http\Controllers\Client\HomePageController::class, 'autoFormSave']);
 
 
 
