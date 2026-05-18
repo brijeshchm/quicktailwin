@@ -47,7 +47,7 @@ class BlogController extends Controller
 
 		$data['button'] = "Save";
 		$data['authors'] = Author::where('status','1')->get();
-		$data['childs'] = ChildCategory::where('status','1')->orderBy('child_category', 'asc')->get();
+		$data['childs'] = ChildCategory::orderBy('child_category', 'asc')->get();
 		if ($request->isMethod('post') && $request->input('submit') == "Save") {
 
 
@@ -240,7 +240,7 @@ class BlogController extends Controller
 
 		$data['edit_data'] = Blogdetails::find($id);
 		$data['authors'] = Author::where('status','1')->get();
-		$data['childs'] = ChildCategory::where('status','1')->orderBy('child_category', 'asc')->get();
+		$data['childs'] = ChildCategory::orderBy('child_category', 'asc')->get();
 		$data['button'] = "Update";
 		if ($request->isMethod('post') && $request->input('submit') == "Update") {
 
