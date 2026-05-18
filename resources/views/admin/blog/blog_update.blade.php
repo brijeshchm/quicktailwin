@@ -224,7 +224,7 @@ padding:0px;
                  <div class="form-group">
                     <label class="col-md-2 control-label">Description</label>
                     <div class="col-md-8">
-                        <textarea class="form-control" name="description" placeholder="Enter description" rows="7">{{ old('description', $edit_data->description ?? '') }}</textarea>
+                        <textarea class="form-control summernote" name="description" placeholder="Enter description" rows="7">{{ old('description', $edit_data->description ?? '') }}</textarea>
                     </div>
                 </div>
 

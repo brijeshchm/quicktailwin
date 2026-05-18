@@ -261,8 +261,7 @@ class OfficialController extends Controller
 
    
         $blogs = Blogdetails::where('category_name',$slug)->orderBy('id', 'DESC')->get();
-
-       
+ 
         $categories = Blogdetails::select('category_name as name', DB::raw('COUNT(*) as count'))
         ->whereNotNull('category_name')
         ->where('category_name',$slug)
