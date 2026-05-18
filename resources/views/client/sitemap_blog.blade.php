@@ -7,7 +7,7 @@
 
 @foreach ($blogs as $blog)
 <url>
-    <loc>{{ url('blog/'.$blog->slug) }}</loc>    
+    <loc>{{ route('blog.details', $blog->slug) }}</loc>    
     <lastmod>{{ \Carbon\Carbon::parse($blog->updated_at)->toAtomString() }}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
