@@ -172,13 +172,13 @@ Route::middleware('auth:clients')->group(function () {
 	/* Change Password - CLIENT */
 
 	/* Change Password - CLIENT */
-	Route::get('/business/pay-deposit', [App\Http\Controllers\Client\RazorpayController::class, 'payDeposit']);
-	Route::get('/business/subscribe-free', [App\Http\Controllers\Client\RazorpayController::class, 'subscribeFree']);
-	Route::post('/business/saveSubscribeFree/{id}', [App\Http\Controllers\Client\RazorpayController::class, 'saveSubscribeFree']);
-	Route::post('/business/razorPayCheckout', [App\Http\Controllers\Client\RazorpayController::class, 'razorPayCheckout']);
-	Route::post('/business/save-processing', [App\Http\Controllers\Client\RazorpayController::class, 'saveProcessing']);
-	Route::get('/business/success', [App\Http\Controllers\Client\RazorpayController::class, 'success']);
-	Route::get('/business/failed', [App\Http\Controllers\Client\RazorpayController::class, 'failed']);
+	Route::get('/business/pay-deposit', [App\Http\Controllers\Business\RazorpayController::class, 'payDeposit']);
+	Route::get('/business/subscribe-free', [App\Http\Controllers\Business\RazorpayController::class, 'subscribeFree']);
+	Route::post('/business/saveSubscribeFree/{id}', [App\Http\Controllers\Business\RazorpayController::class, 'saveSubscribeFree']);
+	Route::post('/business/razorPayCheckout', [App\Http\Controllers\Business\RazorpayController::class, 'razorPayCheckout']);
+	Route::post('/business/save-processing', [App\Http\Controllers\Business\RazorpayController::class, 'saveProcessing']);
+	Route::get('/business/success', [App\Http\Controllers\Business\RazorpayController::class, 'success']);
+	Route::get('/business/failed', [App\Http\Controllers\Business\RazorpayController::class, 'failed']);
 
 
 
@@ -519,8 +519,11 @@ Route::get('/categories/{slug}', [HomePageController::class, 'categories'])->nam
 Route::get('/child/{slug}', [HomePageController::class, 'childSlus'])->name('child.show');
 
 Route::get('/get-zones/{city_id}', [HomePageController::class, 'getZones'])->name('zones.get');
-
-
+Route::get('payment/checkout', [App\Http\Controllers\Client\WebsiteRazorpayController::class, 'razCheckOut'])->name('raz.checkout');;
+//?status=correction&o=
+Route::post('razorPayCheckout', [App\Http\Controllers\Client\WebsiteRazorpayController::class, 'razorPayCheckout']);
+Route::get('/success', [App\Http\Controllers\Client\WebsiteRazorpayController::class, 'success']);
+Route::get('/failed', [App\Http\Controllers\Client\WebsiteRazorpayController::class, 'failed']);
 // // City home
 // Route::get('/{city}', [HomePageController::class, 'showCityOrService'])
 //     ->name('showCity')
@@ -557,9 +560,7 @@ Route::POST('/client/lead/saveEnquiryContact', [App\Http\Controllers\Client\Home
 Route::POST('/lead/auto-form-save', [App\Http\Controllers\Client\HomePageController::class, 'autoFormSave']);
 //Route::POST('/{city}/lead/auto-form-save', [App\Http\Controllers\Client\HomePageController::class, 'autoFormSave']);
 
-
-
-
+ 
 
 
 // Route::get('/dashboard', function () {

@@ -15,7 +15,7 @@ use App\Models\Client\Client;
 
 use Mail;
 
-class RazorpayController extends Controller
+class WebsiteRazorpayController extends Controller
 {
 	/**
 	 * Create a new controller instance.
@@ -25,8 +25,8 @@ class RazorpayController extends Controller
 	public function __construct(Request $request)
 	{
 		//testing Key  brijeshchauhansit@gmail.com
-// 		define('RAZOR_KEY_ID', 'rzp_test_S4xUXChoSZWOwY');
-// 		define('RAZOR_KEY_SECRET', 'k7hFQ9R5yfSaMnhuC3ps9S9O');
+		define('RAZOR_KEY_ID', 'rzp_test_S4xUXChoSZWOwY');
+		define('RAZOR_KEY_SECRET', 'k7hFQ9R5yfSaMnhuC3ps9S9O');
 
 	}
 
@@ -161,10 +161,15 @@ class RazorpayController extends Controller
 	 * @param  int  $id
 	 * @return Json Response
 	 */
-	public function checkOut(Request $request)
+	public function razCheckOut(Request $request)
 	{
+
+ 
+		
 		$data = $this->dataDecodeJsonBase64($_GET['o']);
-		return view('business.razorpay.pay-checkout', ['data' => $data]);
+
+		 
+		return view('client.razorpay.pay-checkout', ['data' => $data]);
 	}
 
 
@@ -192,6 +197,7 @@ class RazorpayController extends Controller
 
 	public function razorPayCheckout(Request $request)
 	{
+	 
 		if (!empty($request->razorpay_payment_id) && !empty($request->merchant_order_id)) {
 
 			$json = array();
@@ -357,7 +363,7 @@ class RazorpayController extends Controller
 			]);	 
 		}
  
-		return view('business.razorpay.success', [
+		return view('client.razorpay.success', [
 			'data' => $data,
 			'paymentHistory' => $paymentHistory
 		]);
@@ -367,7 +373,7 @@ class RazorpayController extends Controller
 	public function failed(Request $request)
 	{
 
-		return view('business.razorpay.failed');
+		return view('client.razorpay.failed');
 	}
 
 	public function getInvoicePrintPdf(Request $request)

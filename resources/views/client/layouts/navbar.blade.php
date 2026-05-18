@@ -189,7 +189,7 @@
 
     {{-- Mobile search bar (always visible on mobile) --}}
    {{-- Mobile search bar (always visible on mobile) --}}
-@if (!request()->is('/'))
+@if (!request()->is('/') && !request()->is('payment/checkout'))
 <div class="md:hidden border-t border-gray-100 bg-white/95 backdrop-blur-md relative">
     <div class="px-3 py-2">
         <div class="flex bg-white rounded-xl border border-gray-200 shadow-md h-9 overflow-visible relative">

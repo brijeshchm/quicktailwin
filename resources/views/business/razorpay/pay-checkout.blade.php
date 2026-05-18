@@ -332,9 +332,5 @@ document.getElementById("merchant_order_id").value = o;
 	     
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   
-  <script>
-     
    
-  
-  </script>
-							 @endsection
+@endsection

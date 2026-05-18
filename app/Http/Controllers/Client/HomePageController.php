@@ -489,76 +489,7 @@ class HomePageController extends Controller
     }
 
 
-	public function validateStep_old(Request $request)
-	{
-
-		$step = $request->step;
-		//  dd($request->all());
-		$rules = [];
-
-		if ($step == 1) {
-			$rules = [
-				'name' => 'required|regex:/^[\pL\s\-]+$/u|min:3|max:32',
-				'email' => 'nullable|email|regex:/^[^\s()<>@,;:\/]+@\w[\w\.-]+\.[a-z]{2,}$/i',
-
-
-				'mobile' => [
-					'required',
-					'regex:/^(\+?[1-9]\d{1,14}|0?[6-9]\d{9})$/'
-				],
-				'location' => 'required',
-				// 'code' => 'required',
-			];
-			$messages = [
-				'name.required' => 'Full name is required.',
-				'email.required' => 'Email is required.',
-				'email.email' => 'Email is invalid.',
-				'mobile.required' => 'Phone number is required.',
-				'mobile.regex' => 'Please enter a valid number.',
-				'location.required' => 'Your location is required.',
-				'code.required' => 'Country code is required.',
-			];
-		}
-
-		if ($step == 2) {
-			$rules = [
-				'age' => 'required',
-				// 'frmcheck' => 'required|array',
-				// 'frmcheck.*' => 'required',
-				'plan' => 'required',
-				// 'kw_text' => 'required',
-				// 'experience' => 'required',
-			];
-
-			$messages = [
-				'age' => 'Please select age',
-				'plan' => 'Please select When you want',
-				'experience' => 'Please select experience',
-				'frmcheck.required' => 'Please select your experience level',
-				'frmcheck.min' => 'Please select at least one option',
-			];
-		}
-
-		if ($step == 3) {
-			$rules = [
-				'remark' => 'required|max:500',
-			];
-
-			$messages = [
-				'remark' => 'Please Enter you message',
-			];
-		}
-
-		$validator = Validator::make($request->all(), $rules, $messages);
-
-		if ($validator->fails()) {
-
-			$errorsBag = $validator->getMessageBag()->toArray();
-			return response()->json(['status' => false, 'errors' => $errorsBag], 400);
-		}
-
-		return response()->json(['status' => true]);
-	}
+	 
 
 	public function saveEnquiryContact(Request $request)
 	{

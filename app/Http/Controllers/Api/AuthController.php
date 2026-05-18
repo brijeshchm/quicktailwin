@@ -204,12 +204,7 @@ class AuthController extends Controller
                 'data' => $user,
 
             ])->header('Access-Control-Allow-Origin', 'http://localhost:3000');
-            
-            
-            
-    
-    
-    
+               
     
     
 		//return redirect('https://www.quickdials.com/business/dashboard');
