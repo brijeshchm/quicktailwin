@@ -588,12 +588,12 @@
 
 
                         <li>
-                            <a href="{{ url('blog/category/'.$tocItem->category_name) }}"
+                            <a href="{{ url('blog/category/'.$tocItem->name) }}"
                                class="group flex items-center justify-between py-2 text-sm
                                       text-slate-500 hover:text-blue-600 transition-colors">
                                 <span class="flex items-center">
                                     <span class="w-1.5 h-1.5 rounded-full bg-blue-300 mr-2.5 group-hover:bg-blue-500 transition-colors">
-                                    {{ ucwords(str_replace('-', ' ', $tocItem->category_name)) }} 
+                                    {{ ucwords(str_replace('-', ' ', $tocItem->name)) }} 
                                     </span>
 
                                 </span>
