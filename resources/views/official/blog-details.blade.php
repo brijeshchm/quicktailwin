@@ -604,7 +604,7 @@
 
 
                         <li>
-                            <a href="{{ route('category.blog', ['url' => $tocItem->category_name]) }}"
+                            <a href="{{ url('blog/category/'.$tocItem->category_name) }}"
                                class="group flex items-center justify-between py-2 text-sm
                                       text-slate-500 hover:text-blue-600 transition-colors">
                                 <span class="flex items-center">
