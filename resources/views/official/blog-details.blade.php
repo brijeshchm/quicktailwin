@@ -573,7 +573,7 @@
                         overflow-y-auto pr-1 scrollbar-thin">
 
                 {{-- ── TABLE OF CONTENTS (blogList) ── --}}
-                @if(count($categories))
+                @if(!empty($categories))
                 <div class="reveal-right bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
                     <h4 class="text-sm font-bold text-slate-900 mb-4 uppercase tracking-widest
                                flex items-center gap-2">
@@ -581,6 +581,7 @@
                         In this article
                     </h4>
                     <ul class="space-y-2">
+                        @if($categories->isNotEmpty())
                         @foreach(array_slice($categories, 0, 40) as $i => $tocItem)
                         <li>
                             <button class="text-xs text-gray-400 hover:text-blue-600 transition-colors
@@ -619,6 +620,7 @@
                             </a>
                         </li>
                         @endforeach
+                        @endif
                     </ul>
                 </div>
                 @endif

@@ -248,7 +248,7 @@ class OfficialController extends Controller
         ->groupBy('category_name')
         ->orderBy('count', 'DESC')
         ->get();
-        
+      
         return view('official.blog-details', compact(
             'blogDetails','blogList','tickerItems','categories',
             'faqs','authorColor','paragraphs','slug'
