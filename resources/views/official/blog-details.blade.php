@@ -592,10 +592,9 @@
                                class="group flex items-center justify-between py-2 text-sm
                                       text-slate-500 hover:text-blue-600 transition-colors">
                                 <span class="flex items-center">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-blue-300 mr-2.5 group-hover:bg-blue-500 transition-colors">
-                                    {{ ucwords(str_replace('-', ' ', $tocItem->name)) }} 
-                                    </span>
+                                <span class="w-1.5 h-1.5 rounded-full bg-blue-300 mr-2.5 group-hover:bg-blue-500 transition-colors inline-block"></span>
 
+                                {{ ucwords(str_replace('-', ' ', $tocItem->name)) }}
                                 </span>
                                 <span class="bg-slate-100 text-slate-500 rounded-md px-2 py-0.5
                                              text-xs font-medium">
