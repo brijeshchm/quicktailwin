@@ -584,23 +584,7 @@
                         @if($categories->isNotEmpty())
                        
                         @foreach($categories as $i => $tocItem)
-                        <li>
-                            <button class="text-xs text-gray-400 hover:text-blue-600 transition-colors
-                                           text-left flex items-start gap-2 group w-full">
-                                <span class="w-1 h-1 rounded-full bg-blue-300 group-hover:bg-blue-500
-                                             mt-1.5 shrink-0 transition-colors">
-                                            
-                                            {{ $tocItem['name'] ?? '' }}
-                                            </span>
-                                
-
-
-                                 <span class="bg-slate-100 text-slate-500 rounded-md px-2 py-0.5
-                                             text-xs font-medium">
-                                    {{ $tocItem['count'] }}
-                                </span>
-                            </button>
-                        </li>
+                     
 
 
                         <li>
