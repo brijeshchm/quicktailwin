@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
     <title>Payment Checkout — QuickDials</title>
     <meta name="keywords" content="Quickdials Payment checkout">
     <meta name="description" content="Quickdials Payment checkout">
@@ -44,6 +45,355 @@
 </head>
 <body>
 
+
+ <style>
+/* ═══════════════════════════════════════════════════════════
+   PREMIUM MOBILE CHECKOUT (≤ 768px)
+   Stripe/Razorpay-grade mobile UX
+═══════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+    /* ── Hide everything that's not essential ── */
+    .max-w-4xl > .mt-8.flex.flex-wrap,
+    .max-w-4xl > p.text-center.text-xs,
+    .pointer-events-none.absolute.inset-0.overflow-hidden,
+    .absolute.-inset-0\.5.bg-gradient-to-r,
+    .h-1\.5.bg-gradient-to-r {
+        display: none !important;
+    }
+
+    /* ── Body background: clean off-white ── */
+    body {
+        background: #f8fafc !important;
+    }
+    #main {
+        background: #f8fafc !important;
+    }
+
+    /* ── Section: zero outer padding, bottom space for sticky CTA ── */
+    section.profile {
+        padding: 0 !important;
+        padding-bottom: 100px !important;  /* room for sticky pay button */
+    }
+
+    /* ── Top SSL strip: full-width thin bar at very top ── */
+    .max-w-4xl > .flex.flex-col.items-center {
+        margin-bottom: 0 !important;
+        padding: 10px 16px !important;
+        background: #ffffff !important;
+        border-bottom: 1px solid #e2e8f0 !important;
+        flex-direction: row !important;
+        justify-content: center !important;
+        gap: 8px !important;
+    }
+    .max-w-4xl > .flex.flex-col.items-center h1,
+    .max-w-4xl > .flex.flex-col.items-center > p {
+        display: none !important;
+    }
+    .inline-flex.items-center.gap-2.px-4.py-1\.5 {
+        margin-bottom: 0 !important;
+        padding: 4px 12px !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+    .inline-flex.items-center.gap-2.px-4.py-1\.5 svg {
+        width: 14px !important;
+        height: 14px !important;
+    }
+    .inline-flex.items-center.gap-2.px-4.py-1\.5 span {
+        font-size: 10px !important;
+        letter-spacing: 0.08em !important;
+    }
+
+    /* ── Main card: edge-to-edge on mobile, no border-radius ── */
+    .relative.bg-white.rounded-2xl {
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        background: transparent !important;
+    }
+    .relative.bg-white.rounded-2xl > div:last-child {
+        padding: 0 !important;
+    }
+    .relative.group {
+        padding: 0 !important;
+    }
+
+    /* ═══ HERO: Total Amount ═══ */
+    .text-center.mb-10.pb-10 {
+        margin: 0 !important;
+        padding: 32px 20px 28px !important;
+        background: linear-gradient(135deg, #ffffff 0%, #f0f5ff 100%) !important;
+        border-bottom: 1px solid #e2e8f0 !important;
+        border-radius: 0 !important;
+    }
+    .text-center.mb-10.pb-10 .text-xs.font-semibold.uppercase {
+        font-size: 10px !important;
+        letter-spacing: 0.2em !important;
+        margin-bottom: 8px !important;
+        color: #64748b !important;
+        font-weight: 600 !important;
+    }
+    .text-5xl.md\:text-7xl {
+        font-size: 44px !important;
+        font-weight: 800 !important;
+        letter-spacing: -0.02em !important;
+    }
+    .text-3xl.md\:text-4xl.font-medium.text-slate-400 {
+        font-size: 24px !important;
+        font-weight: 500 !important;
+        color: #94a3b8 !important;
+    }
+    .text-center.mb-10.pb-10 .inline-flex.items-center.gap-2.mt-4 {
+        margin-top: 12px !important;
+        padding: 5px 12px !important;
+        background: #eef4ff !important;
+        border-radius: 999px !important;
+    }
+    .text-center.mb-10.pb-10 .inline-flex.items-center.gap-2.mt-4 span {
+        font-size: 11px !important;
+        font-weight: 600 !important;
+    }
+
+    /* ═══ Section card wrapper for Order Details & Price Breakdown ═══ */
+    .mb-10:not(.pb-10):not(.p-5) {
+        margin: 0 !important;
+        padding: 20px !important;
+        background: #ffffff !important;
+        border-bottom: 1px solid #e2e8f0 !important;
+    }
+
+    /* Section headers */
+    .mb-10 h2,
+    .mb-10 h3 {
+        font-size: 11px !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.15em !important;
+        color: #64748b !important;
+        margin-bottom: 14px !important;
+    }
+
+    /* ── Order Detail rows: clean, tight, pro look ── */
+    .flex.items-center.justify-between.py-3.px-4 {
+        padding: 12px 0 !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        border-bottom: 1px solid #f1f5f9 !important;
+    }
+    .flex.items-center.justify-between.py-3.px-4:last-child {
+        border-bottom: none !important;
+    }
+    .space-y-3 > * + * {
+        margin-top: 0 !important;
+    }
+
+    /* Icon containers: smaller, more refined */
+    .w-10.h-10.rounded-lg {
+        width: 36px !important;
+        height: 36px !important;
+        border-radius: 10px !important;
+    }
+    .w-10.h-10.rounded-lg svg {
+        width: 17px !important;
+        height: 17px !important;
+    }
+
+    /* Labels & values */
+    .flex.items-center.justify-between.py-3 .text-sm.font-medium.text-slate-500 {
+        font-size: 13px !important;
+        color: #64748b !important;
+        font-weight: 500 !important;
+    }
+    .flex.items-center.justify-between.py-3 .text-sm.font-semibold {
+        font-size: 14px !important;
+        font-weight: 600 !important;
+    }
+    .flex.items-center.gap-3 {
+        gap: 12px !important;
+    }
+
+    /* Email truncation on mobile */
+    .text-sm.font-semibold.text-\[\#042D6E\].truncate {
+        max-width: 160px !important;
+    }
+
+    /* ── Coins row: premium highlight ── */
+    .flex.items-center.justify-between.py-3.px-4.rounded-xl.bg-gradient-to-r {
+        margin: 12px -20px 0 !important;
+        padding: 14px 20px !important;
+        border-radius: 0 !important;
+        background: linear-gradient(90deg, #fffbeb 0%, #fff7ed 100%) !important;
+        border: none !important;
+        border-top: 1px solid #fde68a !important;
+        border-bottom: 1px solid #fde68a !important;
+    }
+    .text-\[10px\].text-amber-700\/70 {
+        font-size: 10px !important;
+        font-weight: 500 !important;
+    }
+    .text-sm.font-bold.text-amber-700 {
+        font-size: 15px !important;
+    }
+
+    /* ═══ Price Breakdown: bottom panel ═══ */
+    .mb-10.p-5.rounded-xl.bg-slate-50\/70 {
+        margin: 0 !important;
+        padding: 20px !important;
+        background: #f8fafc !important;
+        border-radius: 0 !important;
+        border: none !important;
+        border-bottom: 1px solid #e2e8f0 !important;
+    }
+    .mb-10.p-5 .space-y-2\.5 > * + * {
+        margin-top: 10px !important;
+    }
+    .mb-10.p-5 .text-sm {
+        font-size: 14px !important;
+    }
+    .mb-10.p-5 .text-slate-600 {
+        color: #64748b !important;
+    }
+    .mb-10.p-5 .font-medium.text-slate-800 {
+        color: #1e293b !important;
+        font-weight: 600 !important;
+    }
+    .mb-10.p-5 .border-t {
+        padding-top: 12px !important;
+        margin-top: 12px !important;
+        border-top: 1px dashed #cbd5e1 !important;
+    }
+    .mb-10.p-5 .font-semibold.text-\[\#042D6E\] {
+        font-size: 15px !important;
+        font-weight: 700 !important;
+    }
+    .mb-10.p-5 .font-bold.text-lg {
+        font-size: 20px !important;
+        font-weight: 800 !important;
+    }
+
+    /* ═══ STICKY PAY BUTTON at bottom ═══ */
+    #razorpay-frm-payment {
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        padding: 14px 16px calc(14px + env(safe-area-inset-bottom)) !important;
+        background: #ffffff !important;
+        border-top: 1px solid #e2e8f0 !important;
+        box-shadow: 0 -8px 24px -8px rgba(15, 23, 42, 0.12) !important;
+        z-index: 50 !important;
+        margin: 0 !important;
+    }
+    #razorpay-frm-payment .flex.flex-col-reverse.sm\:flex-row {
+        gap: 0 !important;
+    }
+
+    #razor-pay-now {
+        padding: 16px !important;
+        border-radius: 14px !important;
+        background: linear-gradient(135deg, #4131eb 0%, #0452f0 100%) !important;
+        box-shadow: 0 8px 20px -4px rgba(1, 10, 29, 0.5) !important;
+        min-height: 56px !important;
+        flex: 1 !important;
+    }
+
+    /* Idle state styling */
+    #pay-btn-idle {
+        background: transparent !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        gap: 8px !important;
+    }
+    #pay-btn-idle .tracking-wide {
+        font-size: 15px !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.04em !important;
+        text-transform: none !important;
+    }
+    #pay-btn-idle svg {
+        width: 18px !important;
+        height: 18px !important;
+    }
+
+    /* Loading state */
+    #pay-btn-loading .tracking-wide {
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        text-transform: none !important;
+    }
+
+    /* ── Error alert: floats nicely ── */
+    #payment-error-alert {
+        margin: 12px 16px !important;
+        padding: 12px !important;
+        border-radius: 12px !important;
+        gap: 10px !important;
+    }
+    #payment-error-alert h4 {
+        font-size: 13px !important;
+    }
+    #payment-error-alert p {
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   EXTRA SMALL (≤ 380px — iPhone SE / older Android)
+═══════════════════════════════════════════════════════════ */
+@media (max-width: 380px) {
+    .text-5xl.md\:text-7xl {
+        font-size: 38px !important;
+    }
+    .text-3xl.md\:text-4xl.font-medium.text-slate-400 {
+        font-size: 20px !important;
+    }
+    .text-center.mb-10.pb-10 {
+        padding: 24px 16px 20px !important;
+    }
+    .mb-10:not(.pb-10):not(.p-5),
+    .mb-10.p-5 {
+        padding: 16px !important;
+    }
+    .flex.items-center.justify-between.py-3.px-4.rounded-xl.bg-gradient-to-r {
+        margin-left: -16px !important;
+        margin-right: -16px !important;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+    .text-sm.font-semibold.text-\[\#042D6E\].truncate {
+        max-width: 130px !important;
+    }
+    .mb-10.p-5 .font-bold.text-lg {
+        font-size: 18px !important;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Smooth animations across all sizes
+═══════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+    @keyframes slideUp {
+        from { transform: translateY(20px); opacity: 0; }
+        to   { transform: translateY(0); opacity: 1; }
+    }
+    .text-center.mb-10.pb-10,
+    .mb-10:not(.pb-10) {
+        animation: slideUp 0.4s ease-out backwards;
+    }
+    .text-center.mb-10.pb-10 { animation-delay: 0.05s; }
+    .mb-10:not(.pb-10):nth-of-type(2) { animation-delay: 0.1s; }
+    .mb-10.p-5 { animation-delay: 0.15s; }
+
+    /* Tap feedback */
+    #razor-pay-now:active {
+        transform: scale(0.98) !important;
+        transition: transform 0.1s !important;
+    }
+}
+</style>
+
+ 
 <main id="main" class="main relative overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/40 min-h-screen">
 
     {{-- DECORATIVE BACKGROUND ORBS --}}
@@ -64,8 +414,7 @@
                     </svg>
                     <span class="text-xs font-semibold text-emerald-700 uppercase tracking-wider">256-bit SSL Secure Checkout</span>
                 </div>
-                <h1 class="text-3xl md:text-4xl font-bold text-[#042D6E] tracking-tight">Review Your Order</h1>
-                <p class="text-sm text-slate-500 mt-2">Verify your details before proceeding to payment</p>
+               
             </div>
 
             {{-- ✅ FIX #5: GLOBAL ERROR ALERT (visible since hidden inputs can't show inline errors) --}}
@@ -183,7 +532,8 @@
                         </div>
 
                         {{-- ✅ FIX #2: REMOVED <form> wrapper, button is now type="button" so it never submits a form --}}
-                        <div id="razorpay-frm-payment">
+<form id="razorpay-frm-payment">
+                        <div >
 
                             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                             <input type="hidden" name="tid" id="tid" readonly />
@@ -192,12 +542,12 @@
                             <input type="hidden" name="currency" id="currency" value="INR">
 
                             {{-- ✅ FIX #4: Dynamic environment-aware URLs --}}
-                            <input type="hidden" name="surl" id="surl" value="https://www.quickdials.com/success">
-                            <input type="hidden" name="furl" id="furl" value="https://www.quickdials.com/failed">
+                            <!-- <input type="hidden" name="surl" id="surl" value="https://www.quickdials.com/success">
+                            <input type="hidden" name="furl" id="furl" value="https://www.quickdials.com/failed"> -->
 
 
-                            <!-- <input type="hidden" name="surl" id="surl" value="http://localhost:8000/success">
-                            <input type="hidden" name="furl" id="furl" value="http://localhost:8000/failed"> -->
+                            <input type="hidden" name="surl" id="surl" value="http://localhost:8000/success">
+                            <input type="hidden" name="furl" id="furl" value="http://localhost:8000/failed">
 
 
 
@@ -213,7 +563,7 @@
                             <input type="hidden" name="billing_phone" id="billing-phone" value="{{ $data->phone }}">
                             <input type="hidden" name="coins" id="coins" value="{{ $data->coins }}">
                             <input type="hidden" name="client_id" id="client_id" value="{{ $data->client_id }}">
-                            <input type="hidden" name="username" id="username" value="{{ $data->username }}">
+                           
                             <input type="hidden" name="billing_country" id="billing_country" value="{{ $data->country }}">
                             <input type="hidden" name="billing_state" id="billing_state" value="{{ $data->state }}">
                             <input type="hidden" name="city" id="city" value="{{ $data->city }}">
@@ -222,21 +572,14 @@
                             {{-- ACTION BUTTONS --}}
                             <div class="flex flex-col-reverse sm:flex-row gap-3 sm:gap-4">
 
-                                <!-- <a href="{{ url('/business/package') }}"
-                                   class="group/cancel flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 text-sm font-semibold
-                                          bg-white text-slate-700 border-2 border-slate-200 rounded-xl
-                                          hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900
-                                          transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-slate-100">
-                                    <svg class="w-4 h-4 group-hover/cancel:-translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-                                    Cancel
-                                </a> -->
+                               
 
                                 {{-- ✅ FIX #2: type="button" so no form submission --}}
                                 {{-- ✅ FIX #6: Has loading state slots --}}
                                 <button type="button"
                                         id="razor-pay-now"
                                         class="group/pay flex-[2] relative inline-flex items-center justify-center gap-2 px-6 py-4 text-sm font-bold
-                                               bg-gradient-to-br from-[#3876F1] via-[#1C19B0] to-[#1B1464]
+                                                from-[#3876F1] via-[#1C19B0] to-[#1B1464]
                                                text-white rounded-xl overflow-hidden
                                                shadow-lg shadow-blue-500/30 hover:shadow-2xl hover:shadow-blue-500/40
                                                hover:-translate-y-0.5 active:translate-y-0
@@ -244,7 +587,7 @@
                                                transition-all duration-300
                                                focus:outline-none focus:ring-4 focus:ring-blue-300">
 
-                                    <span class="absolute inset-0 -translate-x-full group-hover/pay:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent" aria-hidden="true"></span>
+                                    <span class="absolute inset-0 -translate-x-full group-hover/pay:translate-x-full transition-transform duration-700 from-transparent via-white/20 to-transparent" aria-hidden="true"></span>
 
                                     {{-- Idle state --}}
                                  <span id="pay-btn-idle"
@@ -292,7 +635,7 @@
                             </div>
 
                         </div>
-
+</form>
                     </div>
                 </div>
             </div>
@@ -392,6 +735,7 @@ jQuery(document).ready(function ($) {
         // Read all values
         var $form        = $('#razorpay-frm-payment');
         var total        = $form.find('#gst_total_amount').val() * 100;
+      
         var merchant_order_id  = $form.find('#merchant_order_id').val();
         var merchant_surl_id   = $form.find('#surl').val();
         var merchant_furl_id   = $form.find('#furl').val();
@@ -413,29 +757,29 @@ jQuery(document).ready(function ($) {
  
         // ✅ FIX #5: Validation with visible error message
         if (!card_holder_name_id || card_holder_name_id.trim() === '') {
-            showError('Customer name is missing. Please go back and complete your details.');
+            alert('Customer name is missing. Please go back and complete your details.');
             return false;
         }
         if (!email || email.trim() === '') {
-            showError('Email address is missing. Please go back and complete your details.');
+            alert('Email address is missing. Please go back and complete your details.');
             return false;
         }
         if (!phone || phone.trim() === '') {
-            showError('Mobile number is missing. Please go back and complete your details.');
+            alert('Mobile number is missing. Please go back and complete your details.');
             return false;
         }
         if (!merchant_amount || merchant_amount <= 0) {
-            showError('Invalid payment amount. Please refresh the page.');
+            alert('Invalid payment amount. Please refresh the page.');
             return false;
         }
         if (!key_id) {
-            showError('Payment gateway not configured. Please contact support.');
+            alert('Payment gateway not configured. Please contact support.');
             return false;
         }
 
         // ✅ FIX #6: Lock button to prevent double-click
         setButtonLoading(true);
-
+ 
         var razorpay_options = {
             key: key_id,
             amount: merchant_total,
@@ -481,6 +825,7 @@ jQuery(document).ready(function ($) {
                     },
                     dataType: 'json',
                     success: function (res) {
+                        
                         try {
                             var obj = (typeof res.data === 'string') ? jQuery.parseJSON(res.data) : res.data;
                             window.location = res.redirectURL
@@ -523,16 +868,19 @@ jQuery(document).ready(function ($) {
 
         try {
             var razorpayInstance = new Razorpay(razorpay_options);
+
+  
+            
             razorpayInstance.on('payment.failed', function (response) {
                 setButtonLoading(false);
-                showError('Payment failed: ' + (response.error.description || 'Please try again.'));
-                console.error('Razorpay payment failed:', response.error);
+                console.log('Payment failed: ' + (response.error.description || 'Please try again.'));
+                console.log('Razorpay payment failed:', response.error);
             });
             razorpayInstance.open();
         } catch (err) {
             setButtonLoading(false);
-            showError('Could not open payment gateway. Please refresh and try again.');
-            console.error('Razorpay init error:', err);
+            console.log('Could not open payment gateway. Please refresh and try again.');
+            console.log('Razorpay init error:', err);
         }
     });
 

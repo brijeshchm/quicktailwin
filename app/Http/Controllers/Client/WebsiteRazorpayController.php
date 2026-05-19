@@ -69,9 +69,7 @@ class WebsiteRazorpayController extends Controller
 	/**
 	 * Return the specified resource from storage.
 	 *
-	 * @param  obj  Request object
-	 * @param  int  $id
-	 * @return Json Response
+ 
 	 */
 	public function saveProcessing(Request $request)
 	{
@@ -157,9 +155,7 @@ class WebsiteRazorpayController extends Controller
 	/**
 	 * Return the specified resource from storage.
 	 *
-	 * @param  obj  Request object
-	 * @param  int  $id
-	 * @return Json Response
+	 
 	 */
 	public function razCheckOut(Request $request)
 	{
@@ -168,10 +164,99 @@ class WebsiteRazorpayController extends Controller
 
 		return view('client.razorpay.pay-checkout', ['data' => $data]);
 	}
+	/**
+	 * Return the get package.
+	 *
+	 
+	 */
+	 
 
+	public function getPackage(Request $request)
+	{
+    /* ── 1. Decode & validate input ── */
+    $encrypt = $request->input('encrypt');
+    $getData = $this->dataDecodeJsonBase64($encrypt);
+   
+
+    /* ── 2. Fetch client safely ── */
+    $client = Client::find($getData->client_id);
+   
+
+    /* ── 3. Common payload ── */
+    $common = [
+        'business_name' => trim($client->business_name),
+        'customer_name' => trim($client->sirName) . ' ' . $client->first_name . ' ' . $client->last_name,
+        'email'         => trim($client->email),
+        'phone'         => $client->mobile,
+        'country'       => $client->country,
+        'state'         => $client->state,
+        'city'          => $client->city,
+        'client_id'     => $client->id,
+        'tds_status'    => 'No',
+        'tds_amount'    => '0',
+    ];
+
+    /* ── 4. Packages ── */
+    $packages = [
+        'coins_1000'  => [1000,  1111],   // 0.90
+        'coins_2000'  => [2000,  2272],   // 0.89
+        'coins_3000'  => [3000,  3529],   // 0.86
+        'coins_5000'  => [5000,  6099],   // 0.84
+        'coins_10000' => [10000, 12500],  // 0.78
+    ];
+
+    /* ── 5. Color themes (one per card, cycles if packages exceed colors) ── */
+    $colors = [
+        ['gradient' => 'from-green-50 to-gray-100',     'border' => 'border-gray-200',   'cta_style' => 'outline'],
+        ['gradient' => 'from-indigo-50 to-indigo-100',  'border' => 'border-indigo-300', 'cta_style' => 'solid'],
+        ['gradient' => 'from-amber-50 to-yellow-50',    'border' => 'border-amber-200',  'cta_style' => 'outline'],
+        ['gradient' => 'from-green-50 to-gray-100',     'border' => 'border-gray-200',   'cta_style' => 'solid'],
+        ['gradient' => 'from-indigo-50 to-indigo-100',  'border' => 'border-indigo-300', 'cta_style' => 'outline'],
+    ];
+
+    /* ── 6. Badges (optional — null = no badge) ── */
+    $badges = [null, 'Most Popular', 'Best Value', null, null];
+
+    /* ── 7. Build packages ── */
+    $data  = [];
+    $index = 0;
+
+    foreach ($packages as $key => [$amount, $coins]) {
+
+        $gst   = round($amount * 0.18);
+        $theme = $colors[$index % count($colors)];   // safe cycle if more pkgs than colors
+        $badge = $badges[$index] ?? null;
+
+        $item = array_merge($common, $theme, [
+            'amt'              => $amount,
+            'gst_status'       => 'yes',
+            'gst_tax'          => $gst,
+            'gst_total_amount' => $amount + $gst,
+            'total_amount'     => $amount + $gst,
+            'coins'            => $coins,
+            'package'          => "{$amount} Rs to {$coins} Coins",
+            'package_bottom'   => "Buy Package",
+            'badge'            => $badge,
+            'cta'              => $badge === 'Most Popular' ? 'Choose Premium'
+                                : ($badge === 'Best Value' ? 'Go Royal' : 'Get Started'),
+        ]);
+
+        $item['encrypt'] = $this->dataEncodeJsonBase64($item);
+
+        $data[$key] = $item;
+        $index++;
+    }
+	 
+
+    return view('client.razorpay.pay-package', compact('data'));
+}
+		
+ 
 	function get_curl_handle($payment_id, $data)
 	{
-		$url = 'https://api.razorpay.com/v1/payments/' . $payment_id . '/capture';
+ 
+		$url = 'https://api.razorpay.com/v1/payments/' . $payment_id;
+		// $url = 'https://api.razorpay.com/v1/payments/' . $payment_id . '/capture';
 		$key_id = 'rzp_test_S4xUXChoSZWOwY';
 		$key_secret = 'k7hFQ9R5yfSaMnhuC3ps9S9O';
 		$params = http_build_query($data);
@@ -190,7 +275,7 @@ class WebsiteRazorpayController extends Controller
 
 	public function razorPayCheckout(Request $request)
 	{
-	 
+ 
 		if (!empty($request->razorpay_payment_id) && !empty($request->merchant_order_id)) {
 
 			$json = array();
@@ -232,6 +317,8 @@ class WebsiteRazorpayController extends Controller
 				'amount' => $amount,
 				'currency' => $currency_code,
 			);
+
+ 
 			$success = false;
 			$error = '';
 			try {
@@ -242,10 +329,49 @@ class WebsiteRazorpayController extends Controller
 				$result = curl_exec($ch);
 				$data = json_decode($result);
 				$http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+ 
 
 				if ($result === false) {
 					$success = false;
 					$error = 'Curl error: ' . curl_error($ch);
+					//false case
+
+					$clientdeatails = Client::find($paymentInfo['client_id']);
+					$paymenthistory = new PaymentHistory;
+					$paymenthistory->client_id = $paymentInfo['client_id'];
+					$paymenthistory->paymentcollect = $paymentInfo['client_id'];
+					$paymenthistory->customer_name = $paymentInfo['card_holder_name'];
+					$paymenthistory->order_number = $paymentInfo['order_id'];
+					$paymenthistory->business_name = $clientdeatails->business_name;
+					$paymenthistory->mobile = $paymentInfo['phone'];
+					$paymenthistory->email = $paymentInfo['email'];
+					$paymenthistory->package_name = $clientdeatails->client_type;
+					$paymenthistory->coins_amt = $paymentInfo['coins'];
+					$paymenthistory->selectproofid = "";
+					$paymenthistory->proofid = "";
+					$paymenthistory->paid_amount = $paymentInfo['paid_amount'];
+					$paymenthistory->tds_status = "No";
+					$paymenthistory->tds_amount = "0";
+					$paymenthistory->gst_tax = $paymentInfo['gst_tax'];
+					$paymenthistory->gst_total_amount = $paymentInfo['merchant_amount'];
+					$paymenthistory->gst_status = "Yes";
+					$paymenthistory->total_amount = $paymentInfo['merchant_amount'];
+					$paymenthistory->transactionid = $paymentInfo['razorpay_payment_id'];
+					$paymenthistory->paymentcollect = 0;
+					$paymenthistory->payment_mode = "razorpay";
+					$paymenthistory->status = "faild";
+					$paymenthistory->payment_bank = "";
+					$paymenthistory->save();
+
+					  
+
+
+
+
+
+
+
+
 				} else {
 					$response_array = json_decode($result, true);
 					//Check success response
@@ -254,25 +380,31 @@ class WebsiteRazorpayController extends Controller
 					} else {
 						$success = false;
 						if (!empty($response_array['error']['code'])) {
-							$error = $response_array['error']['code'] . ':' . $response_array['error']['description'];
+						 
+
+								$error  =  $response_array['error']['code'] . ':' . $response_array['error']['description'];
 						} else {
-							$error = 'Invalid Response <br/>' . $result;
+						 
+							$error  = 'Invalid Response <br/>' . $result;
 						}
 					}
 				}
 				//close connection
 				curl_close($ch);
 			} catch (Exception $e) {
-				$success = false;
-				$error = $e->getMessage();
+				 
+					$success = false;
+					 
+					$error = $e->getMessage();
 			}
 			if ($success === true) {
-				if (!$order_info['order_status_id']) {
 
+
+				if (!$order_info['order_status_id']) {
+					$json['msg'] ='order status id empty';
 					$json['data'] = json_encode($paymentInfo);
 					$json['redirectURL'] = $request->merchant_surl_id;
 				} else {
-
 
 
 					$clientdeatails = Client::find($paymentInfo['client_id']);
@@ -298,6 +430,7 @@ class WebsiteRazorpayController extends Controller
 					$paymenthistory->transactionid = $paymentInfo['razorpay_payment_id'];
 					$paymenthistory->paymentcollect = 0;
 					$paymenthistory->payment_mode = "razorpay";
+					$paymenthistory->status = "success";
 					$paymenthistory->payment_bank = "";
 					$paymenthistory->save();
 
@@ -326,7 +459,7 @@ class WebsiteRazorpayController extends Controller
 			} else {
 
 
-				$json['data'] = json_encode($paymentInfo);
+				$json['data'] = json_encode($paymentInfo); 
 				$json['redirectURL'] = $_POST['merchant_furl_id'];
 			}
 			$json['msg'] = 'success';

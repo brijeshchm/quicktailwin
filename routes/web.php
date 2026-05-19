@@ -522,6 +522,11 @@ Route::get('/child/{slug}', [HomePageController::class, 'childSlus'])->name('chi
 Route::get('/get-zones/{city_id}', [HomePageController::class, 'getZones'])->name('zones.get');
 Route::get('payment/checkout', [App\Http\Controllers\Client\WebsiteRazorpayController::class, 'razCheckOut'])->name('raz.checkout');;
 //?status=correction&encrypt=
+
+Route::get('package', [App\Http\Controllers\Client\WebsiteRazorpayController::class, 'getPackage'])->name('package.list');;
+//	
+
+
 Route::post('razorPayCheckout', [App\Http\Controllers\Client\WebsiteRazorpayController::class, 'razorPayCheckout']);
 Route::get('/success', [App\Http\Controllers\Client\WebsiteRazorpayController::class, 'success']);
 Route::get('/failed', [App\Http\Controllers\Client\WebsiteRazorpayController::class, 'failed']);
