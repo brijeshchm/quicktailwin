@@ -232,17 +232,6 @@ select.ef-input { padding-left:1rem; }
 </div>
 
 
-<style>
-
-/* #enquiry-modal.open{display:flex;} */
-
- 
-    #enquiry-modal { display: none; }
-    /* #enquiry-modal.open { display: flex; } 
-    body.modal-open { overflow: hidden; } */
- 
-
-</style>
 
 
 
