@@ -1,5 +1,3 @@
-{{-- resources/views/business/partials/enquiry-form.blade.php --}}
-{{-- $formId = 'sidebar' or 'modal' --}}
 
 <style>
     
@@ -234,7 +232,17 @@ select.ef-input { padding-left:1rem; }
 </div>
 
 
-<style>#enquiry-modal.open{display:flex;}</style>
+<style>
+
+/* #enquiry-modal.open{display:flex;} */
+
+ 
+    #enquiry-modal { display: none; }
+    /* #enquiry-modal.open { display: flex; } 
+    body.modal-open { overflow: hidden; } */
+ 
+
+</style>
 
 
 
