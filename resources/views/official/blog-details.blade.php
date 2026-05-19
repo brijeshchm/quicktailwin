@@ -433,10 +433,10 @@
             <div class="prose-article">
 
                 {{-- Section heading + description --}}
-                @if(!empty($blogDetails['title']))
+                @if(!empty($blogDetails['heading']))
                 <h2 class="reveal-x text-xl font-bold text-slate-900 mt-10 mb-4 flex items-center gap-3">
                     <span class="w-1 h-6 bg-blue-500 rounded-full inline-block shrink-0"></span>
-                    {{ $blogDetails['title'] }}
+                    {{ $blogDetails['heading'] }}
                 </h2>
                 @endif
 
