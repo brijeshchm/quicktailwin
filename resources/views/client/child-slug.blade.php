@@ -124,12 +124,7 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
                     <p class="col-span-full text-slate-400 text-sm py-8 text-center">No courses found for this category.</p>
                 @endforelse
             </div>
-
-            @if(!empty($bottomDescription))
-                <div class="mt-8 prose prose-sm max-w-none text-slate-600 leading-relaxed">
-                    <p>{{ $bottomDescription }}</p>
-                </div>
-            @endif
+ 
         </div>
 </main>
 
