@@ -810,8 +810,8 @@ function listingPage() {
 
 <style>
     #enquiry-modal { display: none; }
-    #enquiry-modal.open { display: flex; }
-    body.modal-open { overflow: hidden; }
+    /* #enquiry-modal.open { display: flex; } 
+    body.modal-open { overflow: hidden; } */
 </style>
 
 @endsection
