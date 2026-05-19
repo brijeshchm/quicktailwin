@@ -257,12 +257,12 @@ document.getElementById("merchant_order_id").value = o;
 					
 
 
-					<input type="hidden" name="surl" id="surl" value="{{ url('business/success')}} "> 
-				<input type="hidden" name="furl" id="furl" value="{{ url('business/failed')}} ">  
+					<!-- <input type="hidden" name="surl" id="surl" value="{{ url('business/success')}} "> 
+				<input type="hidden" name="furl" id="furl" value="{{ url('business/failed')}} ">   -->
 
 
-				<!-- <input type="hidden" name="surl" id="surl" value="https://www.quickdials.com/business/success/"> 
-				<input type="hidden" name="furl" id="furl" value="https://www.quickdials.com/business/failed/">  -->
+				<input type="hidden" name="surl" id="surl" value="https://www.quickdials.com/business/success/"> 
+				<input type="hidden" name="furl" id="furl" value="https://www.quickdials.com/business/failed/"> 
 
 				<input type="hidden" class="form-control" id="amount1" placeholder="amount" value="<?php if($data->amt){ echo $data->amt; } ?>" readonly="readonly">
 				<input type="hidden" class="form-control" id="amount2" placeholder="amount" value="<?php if($data->amt){ echo $data->amt; } ?>" readonly="readonly">
