@@ -10,10 +10,11 @@
  {{-- In your layout <head> or @push('styles') --}}
 <style>
 
-/* #enquiry-modal.open{display:flex;} */
-#enquiry-modal { display: none; }
-    /* #enquiry-modal.open { display: flex; } 
-    body.modal-open { overflow: hidden; } */
+  
+    #enquiry-modal { display: none; }
+    #enquiry-modal.open { display: flex; }
+    body.modal-open { overflow: hidden; }
+ 
 #scroll-progress {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -811,6 +812,7 @@ function listingPage() {
   
 
 {{-- Modal: REMOVED `hidden`, controlled fully by CSS --}}
+
 
 
 
