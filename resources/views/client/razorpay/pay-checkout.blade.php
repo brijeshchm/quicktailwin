@@ -543,7 +543,7 @@
 
                             {{-- ✅ FIX #4: Dynamic environment-aware URLs --}}
                             <input type="hidden" name="surl" id="surl" value="https://www.quickdials.com/payment-done">
-                            <input type="hidden" name="furl" id="furl" value="https://www.quickdials.com/payment-done"> 
+                            <input type="hidden" name="furl" id="furl" value="https://www.quickdials.com/failed"> 
 
 
                             <!-- <input type="hidden" name="surl" id="surl" value="http://localhost:8000/payment-done">
