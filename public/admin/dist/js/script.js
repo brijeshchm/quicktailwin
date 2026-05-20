@@ -1304,7 +1304,7 @@ var dataTableAssignedKeywords = $('#datatable-assigned-keywords').dataTable({
 				
             var $this = $(THIS);
             var form = new FormData(THIS);
-
+	 
 				$.ajax({
 					"url":"/developer/keyword/updateIcon/"+id,
 					"type":"POST",
@@ -1313,15 +1313,24 @@ var dataTableAssignedKeywords = $('#datatable-assigned-keywords').dataTable({
 					"contentType": false, 
                     "processData": false,   
 					"success":function(data,textStatus,jqXHR){
-					 
+					 console.log(data);
 						if(data.statusCode){
 							mainSpinner.stop();
-							$('#messageModal').show();
-						
-							$('#messageModal').find('.alert-success').html(data.data.message).show();							 
+
+							$('#messagemodel .modal-title').text("update");	
+							$('#messagemodel .modal-body').html("<div class='alert alert-success'>"+data.data.message+"</div>");			
+							$('#messagemodel').modal({keyboard:false,backdrop:'static'});
+							$('#messagemodel').css({'width':'100%'});
+
+							setInterval(function() {
+							$("#messagemodel").modal("hide");
+							}, 1000);
+							// $('#messageModal').show();
+
+							// $('#messageModal').find('.alert-success').html(data.data.message).show();							 
 							dataTableViewAllKwds.ajax.reload(null,false);		
 							// window.location.href ="/developer/keyword";
-
+							window.location.reload();
 						}else{
 							mainSpinner.stop();
 						 alert(data.data.message);
