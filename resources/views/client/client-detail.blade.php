@@ -391,32 +391,67 @@ select.ef-input { padding-left:1rem; }
             </div>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-            @foreach([
-                ['Chef\'s Spring Tasting Menu','Introducing bold seasonal ingredients with a refined European twist.','2 days ago','Food'],
-                ['Behind the Kitchen','Go behind the scenes with our culinary team as they prepare for a busy service.','5 days ago','Video'],
-                ['Weekend Brunch Setup','Our beautiful weekend brunch table — book your spot before it fills up.','1 week ago','Events'],
-                ['Private Dining Launch','Our newly refurbished private dining suite is now open for bookings.','10 days ago','Venue'],
-            ] as $i => [$title,$desc,$date,$tag])
-            @php
-            $tagColors = ['Food'=>['rgba(249,115,22,.12)','#ea580c'],'Video'=>['rgba(124,58,237,.12)','#7c3aed'],'Events'=>['rgba(20,184,166,.12)','#0d9488'],'Venue'=>['rgba(37,99,235,.12)','#2563EB']];
-            $tc = $tagColors[$tag] ?? ['rgba(100,116,139,.1)','#64748b'];
-            @endphp
-            <div class="activity-card reveal d-{{ $i }} rounded-2xl overflow-hidden shadow-sm bg-white {{ $i>=4?'hidden md:block':'' }}">
-                <div class="relative overflow-hidden" style="aspect-ratio:16/9;">
-                    <img src="{{ $gallery[$i] ?? asset('images/small-gallery.jpg')  }}"
-                         alt="{{ $title }}" class="w-full h-full object-cover">
-                    <div class="absolute top-3 left-3">
-                        <span class="text-[10px] font-black tracking-widest uppercase px-2.5 py-1 rounded-full"
-                              style="background:{{ $tc[0] }};color:{{ $tc[1] }};backdrop-filter:blur(8px);">{{ $tag }}</span>
-                    </div>
-                </div>
-                <div class="px-4 py-3.5">
-                    <p class="text-[10px] font-semibold text-gray-400 mb-1">{{ $date }}</p>
-                    <h4 class="font-bold text-gray-900 text-sm leading-snug mb-1">{{ $title }}</h4>
-                    <p class="text-xs text-gray-500 leading-relaxed">{{ $desc }}</p>
+
+@php
+    // Color palette cycles through cards based on index
+    $tagPalette = [
+        ['rgba(249,115,22,.12)', '#ea580c'],  // orange
+        ['rgba(124,58,237,.12)', '#7c3aed'],  // purple
+        ['rgba(20,184,166,.12)', '#0d9488'],  // teal
+        ['rgba(37,99,235,.12)', '#2563EB'],   // blue
+        ['rgba(236,72,153,.12)', '#db2777'],  // pink
+        ['rgba(245,158,11,.12)', '#d97706'],  // amber
+    ];
+@endphp
+
+@if(!empty($recentActivitys) && count($recentActivitys) > 0)
+    @foreach($recentActivitys as $activity)
+        @php
+
+    
+            [$tagBg, $tagColor] = $tagPalette[$activity['index'] % count($tagPalette)];
+        @endphp
+
+        <div class="activity-card reveal d-{{ $activity['index'] }} rounded-2xl overflow-hidden shadow-sm bg-white {{ $activity['index'] >= 4 ? 'hidden md:block' : '' }}">
+            <div class="relative overflow-hidden" style="aspect-ratio:16/9;">
+                <img src="{{ $activity['img'] ?? '' }}"
+                     alt="{{ $activity['name'] ?? 'Recent Activity' }}"
+                     loading="lazy"
+                     class="w-full h-full object-cover">
+
+                <div class="absolute top-3 left-3">
+                    <span class="text-[10px] font-black tracking-widest uppercase px-2.5 py-1 rounded-full"
+                          style="background:{{ $tagBg }}; color:{{ $tagColor }}; backdrop-filter:blur(8px);">
+                        Activity {{ $activity['index'] }}
+                    </span>
                 </div>
             </div>
-            @endforeach
+
+            <div class="px-4 py-3.5">
+                <h4 class="font-bold text-gray-900 text-sm leading-snug mb-1 line-clamp-1">
+                    {{ $activity['name'] ?? '' }}
+                </h4>
+                @if(!empty($activity['paragraph']))
+                    <p class="text-xs text-gray-500 leading-relaxed line-clamp-3">
+                        {{ $activity['paragraph'] }}
+                    </p>
+                @endif
+            </div>
+        </div>
+    @endforeach
+@else
+    {{-- Empty state --}}
+    <div class="col-span-full text-center py-12">
+        <svg class="w-12 h-12 mx-auto text-gray-300 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                  d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+        </svg>
+        <p class="text-sm text-gray-400">No recent activities to show yet.</p>
+    </div>
+@endif
+
+
+ 
         </div>
     </div>
 </section>
@@ -506,10 +541,20 @@ select.ef-input { padding-left:1rem; }
 
                         {{-- Document image --}}
                         @if(!empty($doc['img']))
-                        <div class="rounded-xl overflow-hidden"
+                        <!-- <div class="rounded-xl overflow-hidden"
                              style="box-shadow:0 2px 12px rgba(0,0,0,.08);border:1px solid rgba(0,0,0,.06);">
                             <img src="{{ asset($doc['img']) }}" alt="{{ $doc['title'] }}" class="w-full block">
-                        </div>
+                        </div> -->
+
+                           <div class="group rounded-xl overflow-hidden mx-auto w-full max-w-xs cursor-pointer
+                shadow-md border border-black/5
+                hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
+        <img src="{{ asset($doc['img']) }}"
+             alt="{{ $doc['title'] }}"
+             loading="lazy"
+             class="w-full h-48 object-cover block
+                    group-hover:scale-105 transition-transform duration-500">
+    </div>
                         @else
                         <div class="rounded-xl flex flex-col items-center gap-3 py-6 text-center"
                              style="background:rgba(29,78,216,.06);">
@@ -556,14 +601,28 @@ select.ef-input { padding-left:1rem; }
                     </div>
                     <div class="flex-1 min-h-0 px-6 pb-6 w-[600px] h-[200px]" id="gov-preview-img">
                     
-
-						@if(!empty($first['img']))
+@if(!empty($doc['img']))
+    <div class="group rounded-xl overflow-hidden mx-auto w-full max-w-xs cursor-pointer
+                shadow-md border border-black/5
+                hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
+        <img src="{{ asset($doc['img']) }}"
+             alt="{{ $doc['title'] }}"
+             loading="lazy"
+             class="w-full h-48 object-cover block
+                    group-hover:scale-105 transition-transform duration-500">
+    </div>
+@endif
+ 
+<!-- 
+	@if(!empty($first['img']))
 <div class="rounded-2xl overflow-hidden"
      style="box-shadow:0 2px 20px rgba(0,0,0,.08);">
     <img src="{{ asset($first['img']) }}" alt="{{ $first['title'] }}"
          class="w-full object-cover">
 </div>
-@endif
+@endif -->
+
+
                         <div class="flex items-center justify-between mt-3 px-1">
                             <div>
                                 <p class="text-[9px] text-gray-400 uppercase font-bold">Document No.</p>
@@ -641,7 +700,9 @@ function selectGov(i) {
          <h3 class="text-xl font-black" style="color:${doc.color};">${doc.title}</h3>`;
 
     if (imgEl) imgEl.innerHTML = (doc.img
-        ? `<div class="rounded-2xl overflow-hidden" style="box-shadow:0 2px 20px rgba(0,0,0,.08);">
+        ? `<div class="group rounded-xl overflow-hidden mx-auto w-full max-w-xs cursor-pointer
+                shadow-md border border-black/5
+                hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300" style="box-shadow:0 2px 20px rgba(0,0,0,.08);">
                <img src="${doc.img}" alt="${doc.title}" class="w-full">
            </div>`
         : `<div class="rounded-xl flex flex-col items-center gap-3 py-8 text-center"
@@ -701,7 +762,9 @@ function selectGov(i) {
                     </div>
                     <div class="flex-1 min-h-0 px-6 pb-6" id="cert-preview-img">
                         @if(!empty($certifications[0]['img']))
-                        <div class="rounded-2xl overflow-hidden" style="box-shadow:0 2px 20px rgba(0,0,0,.08);">
+                        <div class="group rounded-xl overflow-hidden mx-auto w-full max-w-xs cursor-pointer
+                shadow-md border border-black/5
+                hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300" style="box-shadow:0 2px 20px rgba(0,0,0,.08);">
                             <img src="{{ $certifications[0]['img'] }}"
                                  alt="{{ $certifications[0]['name'] }}" class="w-full">
                         </div>
@@ -836,7 +899,9 @@ function selectCert(i) {
         `<p class="text-[10px] font-black tracking-widest uppercase text-gray-400 mb-1">Certificate</p>
          <h3 class="text-xl font-black text-amber-600">${cert.name || ''}</h3>`;
     if (imgEl) imgEl.innerHTML = cert.img
-        ? `<div class="rounded-2xl overflow-hidden" style="box-shadow:0 2px 20px rgba(0,0,0,.08);">
+        ? `<div class="group rounded-xl overflow-hidden mx-auto w-full max-w-xs cursor-pointer
+                shadow-md border border-black/5
+                hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300" style="box-shadow:0 2px 20px rgba(0,0,0,.08);">
                <img src="${cert.img}" alt="${cert.name || ''}" class="w-full">
            </div>`
         : `<div class="rounded-xl flex flex-col items-center gap-3 py-8 text-center"

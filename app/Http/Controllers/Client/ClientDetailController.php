@@ -69,12 +69,8 @@ class ClientDetailController extends Controller
             ? $clientsList['gallery']
             : [];
  
-        $hImages = array_slice($gallery, 0, (int) ceil(count($gallery) / 2)) ?: [
-            'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=700&h=500&fit=crop',
-        ];
-        $vImages = array_slice($gallery, (int) ceil(count($gallery) / 2)) ?: [
-            'https://images.unsplash.com/photo-1464207687429-7505649dae38?w=700&h=500&fit=crop',
-        ];
+        $hImages = array_slice($gallery, 0, (int) ceil(count($gallery) / 2)) ?: '';
+        $vImages = array_slice($gallery, (int) ceil(count($gallery) / 2)) ?: '';
  
         // Services / assigned keywords
         $assignKeyword = is_array($clientsList['assign_keyword'] ?? null)
@@ -91,15 +87,15 @@ class ClientDetailController extends Controller
  
         // Certifications (up to 10)
         $certifications = [];
-        if($certificate["award_name1"] ){
+       
         for ($i = 1; $i <= 10; $i++) {
             $name = $certificate["award_name{$i}"] ?? null;
             $img  = $certificate["award_img{$i}"]  ?? null;
-            if ($name || $img) {
+            if ($img) {
                 $certifications[] = ['name' => $name, 'img' => $img, 'index' => $i];
             }
         }
-        }
+        
 
 
 
@@ -110,7 +106,7 @@ class ClientDetailController extends Controller
             $name = $recentActivity["recent_name{$i}"] ?? null;
             $img  = $recentActivity["recent_img{$i}"]  ?? null;
             $paragraph   = $recentActivity["recent_paragraph{$i}"]  ?? null;
-            if ($name || $img) {
+            if ($img) {
                 $recentActivitys[] = ['name' => $name, 'img' => $img,'paragraph'=>$paragraph, 'index' => $i];
             }
         }
