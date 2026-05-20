@@ -1765,20 +1765,15 @@ Instead of limiting learning to theory, the course takes you through:.",
 
 	public function categories(Request $request, $slug)
 	{
+	
+		$res = Http::timeout(10)->withoutVerifying()
+			->get('https://api.quickdials.com/api/website/searchCategories', [
+				'category-slug' => $slug,
+			]);
 
+		$response = $res->successful() ? $res->json() : null;
+	
 
-
-	$cacheKey = 'category_slug_' . md5($slug);
- 
-        $response = Cache::remember($cacheKey, 3600, function () use ($slug) {
-            $res = Http::timeout(10)->withoutVerifying()
-                ->get('https://api.quickdials.com/api/website/searchCategories', [
-                    'category-slug' => $slug,
-                ]);
- 
-            return $res->successful() ? $res->json() : null;
-        });
-//  dd($response);
         if (!$response) {
             abort(410);
         }
@@ -1845,18 +1840,18 @@ Instead of limiting learning to theory, the course takes you through:.",
 
 	public function childSlus(Request $request, $child_slug)
 	{
-		 
-
-	$cacheKey = 'category_slug_' . md5($child_slug);
+		  
  
-        $response = Cache::remember($cacheKey, 3600, function () use ($child_slug) {
+    
             $res = Http::timeout(10)->withoutVerifying()
                 ->get('https://api.quickdials.com/api/website/searchChild', [
                     'child-slug' => $child_slug,
                 ]);
  
-            return $res->successful() ? $res->json() : null;
-        });
+            
+
+			   $response = $res->successful() ? $res->json() : null;
+       
  
         if (!$response) {
             abort(410);

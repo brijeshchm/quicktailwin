@@ -585,7 +585,7 @@ select.ef-input { padding-left:1rem; }
             <div class="hidden md:flex flex-col" id="gov-preview">
                 @if(!empty($govDocs[0]))
                 @php $first = $govDocs[0]; @endphp
-                <div class="rounded-3xl bg-white flex flex-col flex-1 overflow-hidden w-[600px] h-[200px]"
+                <div class="rounded-3xl flex flex-col flex-1 overflow-hidden w-[600px] h-[200px]"
                      style="box-shadow:0 4px 40px rgba(0,0,0,.1);border:1px solid rgba(0,0,0,.06);">
                     <div class="flex justify-center pt-5 pb-2">
                         <span class="inline-block w-12 h-1.5 rounded-full"
@@ -751,7 +751,7 @@ function selectGov(i) {
                 @if(!empty($certifications[0]))
 
 				
-                <div class="rounded-3xl bg-white flex flex-col flex-1 overflow-hidden"
+                <div class="rounded-3xl flex flex-col flex-1 overflow-hidden"
                      style="box-shadow:0 4px 40px rgba(0,0,0,.1);border:1px solid rgba(0,0,0,.06);">
                     <div class="flex justify-center pt-5 pb-2">
                         <span class="inline-block w-12 h-1.5 rounded-full bg-amber-500"></span>

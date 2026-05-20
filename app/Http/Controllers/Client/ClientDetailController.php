@@ -24,25 +24,25 @@ class ClientDetailController extends Controller
 	 */
 	public function index(string $slug)
 	{
- 
-	 $cacheKey = 'business_detail_' . md5($slug);
- 
-        $response = Cache::remember($cacheKey, 3600, function () use ($slug) {
-            try {
-                $res = Http::timeout(10)->withoutVerifying()
-                    ->get('https://api.quickdials.com/api/website/business-details', [
-                        'business_slug' => $slug,
-                    ]);
-                return $res->successful() ? $res->json() : null;
-            } catch (\Exception $e) {
-                \Log::error('BusinessDetail API: ' . $e->getMessage());
-                return null;
-            }
-        });
- 
-        if (!$response) abort(410);
- 
-        $data        = $response['data']         ?? [];
+        try {
+        $res = Http::timeout(10)
+        ->withoutVerifying()
+        ->get('https://api.quickdials.com/api/website/business-details', [
+        'business_slug' => $slug,
+        ]);
+
+        $response = $res->successful() ? $res->json() : null;
+
+        } catch (\Exception $e) {
+        \Log::error('BusinessDetail API: ' . $e->getMessage());
+        $response = null;
+        }
+
+        if (!$response) {
+        abort(410);
+        }
+
+            $data = $response['data'] ?? [];
         $clientsList = $data['clientsList']       ?? [];
       
         $certificate = $data['certificate']       ?? [];
@@ -59,6 +59,8 @@ class ClientDetailController extends Controller
                 $res = Http::timeout(10)
                     ->get('https://api.quickdials.com/api/website/get-keyword-list');
                 return $res->successful() ? ($res->json('data') ?? []) : [];
+
+                 
             } catch (\Exception $e) {
                 return [];
             }
