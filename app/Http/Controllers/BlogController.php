@@ -45,6 +45,7 @@ class BlogController extends Controller
 	public function add(Request $request)
 	{
 
+	date_default_timezone_set('Asia/Kolkata');
 		$data['button'] = "Save";
 		$data['authors'] = Author::where('status','1')->get();
 		$data['childs'] = ChildCategory::orderBy('child_category', 'asc')->get();
@@ -97,7 +98,7 @@ class BlogController extends Controller
 	 */
 	public function addBlog(Request $request)
 	{
-
+		date_default_timezone_set('Asia/Kolkata');
 		if ($request->ajax()) {
 
 
@@ -237,7 +238,7 @@ class BlogController extends Controller
 	public function edit(Request $request, $id)
 	{
 
-
+		date_default_timezone_set('Asia/Kolkata');
 		$data['edit_data'] = Blogdetails::find($id);
 		$data['authors'] = Author::where('status','1')->get();
 		$data['childs'] = ChildCategory::orderBy('child_category', 'asc')->get();

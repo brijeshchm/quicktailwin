@@ -63,7 +63,7 @@
 									</div>
 										 
 									<div class="col-lg-4">
-										<label for="pc_icon">Category Icon</label>
+										<label for="pc_icon">Category Icon(127*112px)</label>
 									 	
 									 		
 									 @if(!empty($edit_data->category_icon))

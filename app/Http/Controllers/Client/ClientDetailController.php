@@ -47,7 +47,7 @@ class ClientDetailController extends Controller
       
         $certificate = $data['certificate']       ?? [];
         $recentActivity = $data['recentActivity']       ?? [];
-  
+ 
         $comment     = $data['comment']           ?? [];
         $areaBusiness    = $data['area_business']     ?? [];
         $overviewBusiness= $data['overview_business'] ?? [];
@@ -104,20 +104,36 @@ class ClientDetailController extends Controller
 
 
              // Certifications (up to 10)
-        // $recentActivity = [];
-        // if($recentActivity["recent_name1"] ){
-        // for ($i = 1; $i <= 10; $i++) {
-        //     $name = $recentActivity["recent_name{$i}"] ?? null;
-        //     $img  = $recentActivity["recent_img{$i}"]  ?? null;
-        //     $paragraph   = $recentActivity["recent_paragraph{$i}"]  ?? null;
-        //     if ($name || $img) {
-        //         $recentActivity[] = ['name' => $name, 'img' => $img,'paragraph'=>$paragraph, 'index' => $i];
-        //     }
-        // }
-        // }
+        $recentActivitys = [];
+       
+        for ($i = 1; $i <= 6; $i++) {
+            $name = $recentActivity["recent_name{$i}"] ?? null;
+            $img  = $recentActivity["recent_img{$i}"]  ?? null;
+            $paragraph   = $recentActivity["recent_paragraph{$i}"]  ?? null;
+            if ($name || $img) {
+                $recentActivitys[] = ['name' => $name, 'img' => $img,'paragraph'=>$paragraph, 'index' => $i];
+            }
+        }
+        
+        
+        $defaultImg = "";  
+        $recentActivitys = [];
 
-
-
+        for ($i = 1; $i <= 6; $i++) {
+            $name      = $recentActivity["recent_name{$i}"]      ?? null;
+            $img       = $recentActivity["recent_img{$i}"]       ?? null;
+            $paragraph = $recentActivity["recent_paragraph{$i}"] ?? null;
+        
+            if ($img) {
+                $recentActivitys[] = [
+                    'name'      => $name,
+                    'img'       => $img,
+                    'paragraph' => $paragraph,
+                    'index'     => $i,
+                ];
+            }
+        }
+ 
 
         $govDocs = [];
         if($certificate['cin_no']){
@@ -186,7 +202,7 @@ class ClientDetailController extends Controller
             'relatedList', 'keywordList', 'gallery', 'hImages', 'vImages',
             'assignKeyword', 'certifications', 'govDocs', 'reviews',
             'gradients', 'bgColors', 'iconColors', 'planOptions',
-            'googleMapUrl', 'mapSrc', 'yearsExp', 'yearEst',
+            'googleMapUrl', 'mapSrc', 'yearsExp', 'yearEst','recentActivitys',
             'todayDay', 'hours','linearGradients'
         ));
 	

@@ -58,7 +58,7 @@
 									
 									
 										<div class="col-lg-4">
-										<label for="icon">Icon:(65*65Pixels)</label>
+										<label for="icon">Icon:(127*112Pixels)</label>
 										<input type="file" class="form-control" name="pc_icon" id="pc_icon" placeholder="upload icon" >
 										@if ($errors->has('pc_icon'))
 											<span class="help-block">
@@ -98,41 +98,7 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-
-			<!-- Modal -->
-			<!--<div id="updateChildCategoryModal" class="modal fade" role="dialog">-->
-			<!--	<div class="modal-dialog modal-sm">-->
-
-			 
-			<!--	<div class="modal-content">-->
-			<!--		<form method="POST" action="/developer/child_category/update">-->
-			<!--			<div class="form-group">-->
-			<!--				<div class="modal-header">-->
-			<!--					<button type="button" class="close" data-dismiss="modal">&times;</button>-->
-			<!--				</div>-->
-			<!--				<div class="modal-body">-->
-			<!--					{{ csrf_field() }}-->
-			<!--					<input type="hidden" name="id">-->
-
-			<!--					<label>Select Parent Category:</label>-->
-			<!--					<select name="parent_category_id" class="form-control select2-single" style="width:100%">-->
-			<!--						<?php foreach($parent_categories as $parent_category): ?>-->
-			<!--						<option value="<?php echo $parent_category->id; ?>"><?php echo $parent_category->parent_category; ?></option>-->
-			<!--						<?php endforeach; ?>-->
-			<!--					</select>-->
-								
-			<!--					<label style="margin-top:34px;">Enter Child Category:</label>-->
-			<!--					<input type="text" class="form-control" name="child_category" placeholder="Enter Child Category">								-->
-			<!--				</div>-->
-			<!--				<div class="modal-footer">-->
-			<!--					<button type="submit" class="btn btn-info">Update</button>-->
-			<!--				</div>-->
-			<!--			</div>-->
-			<!--		</form>-->
-			<!--	</div>-->
-
-			<!--	</div>-->
-			<!--</div>-->
+ 
 			
 			
 			<!-- Modal -->
