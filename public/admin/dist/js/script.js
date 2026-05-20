@@ -1329,8 +1329,8 @@ var dataTableAssignedKeywords = $('#datatable-assigned-keywords').dataTable({
 
 							// $('#messageModal').find('.alert-success').html(data.data.message).show();							 
 							dataTableViewAllKwds.ajax.reload(null,false);		
-							// window.location.href ="/developer/keyword";
-							window.location.reload();
+							window.location.href ="/developer/keyword";
+							// window.location.reload();
 						}else{
 							mainSpinner.stop();
 						 alert(data.data.message);
