@@ -492,8 +492,8 @@ class KeywordController extends Controller
 			$filename = $this->saveImageSmart(
 				$request->file('icon'),
 				$destinationPath,
-				150,
-				150
+				127,
+				112
 			);
 
 			$image = array(
@@ -1101,8 +1101,8 @@ class KeywordController extends Controller
 					$filename = $this->saveImageSmart(
 						$request->file('icon'),
 						$destinationPath,
-						150,
-						150
+						127,
+						112
 					);
 
 					$image = array(
