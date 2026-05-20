@@ -440,10 +440,12 @@ Route::get('/business_keyword/getKeywords/{id}',[App\Http\Controllers\BusinessKe
 	Route::post('/clients/editSaveUploadPics/{id}',[App\Http\Controllers\BackEndClientsController::class, 'editSaveUploadPics'])->middleware('auth:developer');
 	Route::post('/clients/save-certificate-auto/{id}',[App\Http\Controllers\BackEndClientsController::class, 'autoSaveCertificate'])->middleware('auth:developer');
 	Route::post('/clients/save-award-auto/{id}',[App\Http\Controllers\BackEndClientsController::class, 'autoSaveAward'])->middleware('auth:developer');
+	Route::post('/clients/save-recent-activity-auto/{id}',[App\Http\Controllers\BackEndClientsController::class, 'autoSaveRecentActivity'])->middleware('auth:developer');
 	
 	
 	Route::get('/clients/certificate/{slug}/{id}',[App\Http\Controllers\BackEndClientsController::class, 'certificateDel']);
 	Route::get('/clients/award/{slug}/{id}',[App\Http\Controllers\BackEndClientsController::class, 'awardDel']);
+	Route::get('/clients/recent/{slug}/{id}',[App\Http\Controllers\BackEndClientsController::class, 'recentActivityDel']);
  
 
 

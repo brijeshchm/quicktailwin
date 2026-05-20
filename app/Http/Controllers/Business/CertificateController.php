@@ -671,4 +671,169 @@ class CertificateController extends Controller
 		return redirect('business/business-award');
 
 	}
+
+	public function getBusinessRecentActivity(Request $request)
+	{
+
+		// 
+		$clientID = auth()->guard('clients')->user()->id;
+		$client = Client::find($clientID);
+		return view('business.recent-activity', ['client' => $client]);
+	}
+
+
+public function saveBusinessRecentActivity(Request $request)
+{
+    /* ───────────────────────────────────────
+       1. VALIDATION (covers all fields)
+       ─────────────────────────────────────── */
+    $rules = [
+        'business_id' => 'required|exists:clients,id',
+    ];
+ 
+
+    // Recent activities 1-6
+    for ($i = 1; $i <= 6; $i++) {
+        $rules["recent_name{$i}"]      = 'nullable|string|max:255';
+        $rules["recent_paragraph{$i}"] = 'nullable|string|max:2000';
+        $rules["recent_img{$i}"]       = 'nullable|file|mimes:jpg,jpeg,png,webp,svg,pdf|max:10240';
+    }
+
+    $validator = Validator::make($request->all(), $rules);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'status' => 0,
+            'errors' => $validator->errors()->toArray(),
+        ], 400);
+    }
+
+    /* ───────────────────────────────────────
+       2. FETCH CLIENT (safe)
+       ─────────────────────────────────────── */
+    $client = Client::find($request->business_id);
+
+    if (!$client) {
+        return response()->json([
+            'status' => 0,
+            'msg'    => 'Client not found.',
+        ], 404);
+    }
+
+    /* ───────────────────────────────────────
+       3. HELPERS
+       ─────────────────────────────────────── */
+    // Clean short text (names) — keeps letters, numbers, spaces, basic punctuation
+    $cleanText = fn($value) => trim(strip_tags($value ?? ''));
+
+    // Clean paragraphs — allow more chars, strip HTML
+    $cleanPara = fn($value) => trim(strip_tags($value ?? ''));
+
+    $filePath        = getFolderStructure();
+    $destinationPath = public_path($filePath);
+  
+
+    /* ───────────────────────────────────────
+       5. RECENT ACTIVITIES LOOP (1-6)   ✅ NEW
+       ─────────────────────────────────────── */
+    for ($i = 1; $i <= 6; $i++) {
+        $nameField = "recent_name{$i}";
+        $paraField = "recent_paragraph{$i}";
+        $imgField  = "recent_img{$i}";
+
+        // Save name + paragraph
+        $client->$nameField = $cleanText($request->$nameField);
+        $client->$paraField = $cleanPara($request->$paraField);
+
+        // Save image (if uploaded)
+        if ($request->hasFile($imgField)) {
+            $this->deleteOldImage($client->$imgField);
+
+            $newFile = $this->saveImageSmart(
+                $request->file($imgField),
+                $destinationPath,
+                1000,
+                1000
+            );
+
+            $client->$imgField = json_encode([
+                'large' => [
+                    'name' => $cleanText($request->$nameField),
+                    'alt'  => $cleanText($request->$nameField),
+                    'src'  => $filePath . '/' . $newFile,
+                ],
+            ]);
+        }
+    }
+
+    /* ───────────────────────────────────────
+       6. SAVE
+       ─────────────────────────────────────── */
+    try {
+        $client->save();
+        return response()->json([
+            'status' => 1,
+            'msg'    => 'Updated successfully!',
+        ], 200);
+    } catch (\Exception $e) {
+        \Log::error('saveBusinessRecentActivity error: ' . $e->getMessage());
+        return response()->json([
+            'status' => 0,
+            'msg'    => 'Could not save. Please try again.',
+        ], 500);
+    }
+}
+
+/* ───────────────────────────────────────
+   HELPER: Delete old image when replaced
+   ─────────────────────────────────────── */
+protected function deleteOldImage($jsonString)
+{
+    if (empty($jsonString)) return;
+
+    try {
+        $data = json_decode($jsonString);
+        $src  = $data->large->src ?? null;
+
+        if ($src && file_exists(public_path($src))) {
+            @unlink(public_path($src));
+        }
+    } catch (\Exception $e) {
+        // Silent fail — don't break upload if old file missing
+    }
+}
+
+
+ 
+
+	public function recentActivityDel($slug, $id)
+	{
+
+		$delet_data = Client::findOrFail($id);
+ 
+ 
+
+		if ($delet_data->$slug != '') {
+			$image = json_decode($delet_data->$slug);
+
+			$large = '' . $image->large->src;
+			if (!empty($image->thumbnail->src)) {
+				$thumbnail = '' . $image->thumbnail->src;
+				if (file_exists($thumbnail)) {
+					unlink($thumbnail);
+				}
+			}
+			if (file_exists($large)) {
+				unlink($large);
+			}
+		}
+
+		$edit_data = array($slug => "", );
+		$del = Client::where('id', $id)->update($edit_data);
+
+		return redirect('business/recent-activity');
+
+	}
+
+
 }

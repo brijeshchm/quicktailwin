@@ -46,6 +46,8 @@ class ClientDetailController extends Controller
         $clientsList = $data['clientsList']       ?? [];
       
         $certificate = $data['certificate']       ?? [];
+        $recentActivity = $data['recentActivity']       ?? [];
+  
         $comment     = $data['comment']           ?? [];
         $areaBusiness    = $data['area_business']     ?? [];
         $overviewBusiness= $data['overview_business'] ?? [];
@@ -98,6 +100,24 @@ class ClientDetailController extends Controller
             }
         }
         }
+
+
+
+             // Certifications (up to 10)
+        // $recentActivity = [];
+        // if($recentActivity["recent_name1"] ){
+        // for ($i = 1; $i <= 10; $i++) {
+        //     $name = $recentActivity["recent_name{$i}"] ?? null;
+        //     $img  = $recentActivity["recent_img{$i}"]  ?? null;
+        //     $paragraph   = $recentActivity["recent_paragraph{$i}"]  ?? null;
+        //     if ($name || $img) {
+        //         $recentActivity[] = ['name' => $name, 'img' => $img,'paragraph'=>$paragraph, 'index' => $i];
+        //     }
+        // }
+        // }
+
+
+
 
         $govDocs = [];
         if($certificate['cin_no']){

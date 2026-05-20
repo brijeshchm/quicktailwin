@@ -149,6 +149,9 @@
         <div class="sidebar-item" onclick="showContent('award')">
             <i class="fa fa-trophy"></i> <a href="#award">Award</a>
         </div>
+        <div class="sidebar-item" onclick="showContent('recent_activity')">
+            <i class="fa fa-history"></i> <a href="#recent_activity">Recent Activity</a>
+        </div>
         <div class="sidebar-item" onclick="showContent('keywords')">
             <i class="fa fa-key"></i> <a href="#keywords">Assigned Keywords</a>
         </div>
@@ -1669,6 +1672,319 @@
         </div>
     </div>
   
+
+
+	 <div class="section-content" id="recent_activity">
+        <div class="form-container">
+            <h2>recent activity</h2>
+ 
+            <style>
+/* ═══════════════════════════════════════════
+   RECENT ACTIVITY CARD DESIGN
+═══════════════════════════════════════════ */
+.recent-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    height: 100%;
+}
+.recent-card:hover {
+    box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+.recent-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 14px;
+    margin-bottom: 16px;
+    border-bottom: 1px dashed #e5e7eb;
+}
+.recent-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    color: white;
+    font-weight: 700;
+    font-size: 13px;
+}
+.recent-title {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+/* Media area */
+.recent-media {
+    margin-bottom: 16px;
+}
+
+/* Upload dropzone (when no image) */
+.upload-dropzone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 160px;
+    padding: 20px;
+    border: 2px dashed #d1d5db;
+    border-radius: 12px;
+    background: #f9fafb;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+.upload-dropzone:hover {
+    border-color: #6366f1;
+    background: #eef2ff;
+}
+.upload-icon {
+    font-size: 32px;
+    color: #6366f1;
+    margin-bottom: 8px;
+}
+.upload-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 4px;
+}
+.upload-hint {
+    font-size: 11px;
+    color: #9ca3af;
+}
+
+/* Preview (when image exists) */
+.media-preview {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f3f4f6;
+    border: 1px solid #e5e7eb;
+}
+.media-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+.pdf-wrap {
+    position: relative;
+}
+.pdf-box {
+    width: 100%;
+    height: 200px;
+    display: block;
+}
+.view-pdf {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    font-size: 12px;
+    border-radius: 8px;
+    backdrop-filter: blur(4px);
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid #e5e7eb !important;
+}
+
+/* Remove button (top-right of preview) */
+.btn-remove {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(220, 38, 38, 0.95);
+    color: #ffffff;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+.btn-remove:hover {
+    background: #b91c1c;
+    color: #ffffff;
+    transform: scale(1.05);
+}
+
+/* Modern form fields */
+.recent-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.form-group-modern {
+    display: flex;
+    flex-direction: column;
+}
+.form-label-modern {
+    font-size: 12px;
+    font-weight: 600;
+    color: #6b7280;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+.form-control-modern {
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 14px;
+    color: #1f2937;
+    background: #ffffff;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.form-control-modern:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+    outline: none;
+}
+.form-control-modern::placeholder {
+    color: #9ca3af;
+}
+textarea.form-control-modern {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+    .recent-card { padding: 14px; }
+    .media-img, .pdf-box { height: 180px; }
+    .upload-dropzone { min-height: 140px; }
+}
+</style>
+				   <form class="recent_form" id="recentActivityFrom" method="POST"
+                                        enctype="multipart/form-data">
+                         <input type="hidden" name="business_id"
+                                            value="{{ old('middle_name', (isset($client)) ? $client->id : "")}}">
+
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                                      
+
+<div class="row">
+    @for($i = 1; $i <= 6; $i++)
+        @php
+            // Dynamic field names — works for recent_img1...recent_img6
+            $imgField   = "recent_img{$i}";
+            $nameField  = "recent_name{$i}";
+            $paraField  = "recent_paragraph{$i}";
+
+            // Decode stored image JSON
+            $recentImg  = !empty($client->$imgField) ? json_decode($client->$imgField) : null;
+            $recentPath = $recentImg->large->src ?? '';
+            $recentUrl  = $recentPath ? asset($recentPath) : '';
+            $ext        = strtolower(pathinfo($recentPath, PATHINFO_EXTENSION));
+
+            // First one is required, rest optional
+            $isRequired = ($i === 1);
+
+            // Badge number (01, 02, 03...)
+            $badgeNum   = str_pad($i, 2, '0', STR_PAD_LEFT);
+        @endphp
+
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="recent-card">
+
+                {{-- ── HEADER ── --}}
+                <div class="recent-card-header">
+                    <span class="recent-badge">{{ $badgeNum }}</span>
+                    <h6 class="recent-title">
+                        Recent Activity {{ $i }}
+                        @if($isRequired) <span class="text-danger">*</span> @endif
+                    </h6>
+                </div>
+
+                {{-- ── IMAGE / FILE AREA ── --}}
+                <div class="recent-media">
+                    @if($recentPath)
+                        <div class="media-preview">
+                            @if($ext === 'pdf')
+                                <div class="pdf-wrap">
+                                    <embed src="{{ $recentUrl }}" type="application/pdf" class="pdf-box">
+                                    <a href="{{ $recentUrl }}" target="_blank" class="btn btn-light btn-sm view-pdf">
+                                        <i class="bi bi-eye"></i> View PDF
+                                    </a>
+                                </div>
+                            @else
+                                <img loading="lazy"
+                                     src="{{ $recentUrl }}"
+                                     alt="Recent activity {{ $i }}"
+                                     class="media-img">
+                            @endif
+
+                            <a href="{{ url("developer/clients/recent/{$imgField}/{$client->id}") }}"
+                               class="btn-remove"
+                               title="Remove"
+                               onclick="return confirm('Remove this file?');">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </div>
+                    @else
+                        <label for="recent_img{{ $i }}_input" class="upload-dropzone">
+                            <i class="bi bi-cloud-arrow-up upload-icon"></i>
+                            <span class="upload-text">Click to upload</span>
+                            <small class="upload-hint">JPG, PNG, WEBP — max 5MB</small>
+                            <input type="file"
+                                   id="recent_img{{ $i }}_input"
+                                   name="{{ $imgField }}"
+                                   class="d-none preview-input"
+                                   accept=".jpg,.jpeg,.png,.webp"
+                                   @if($isRequired) required @endif>
+                        </label>
+                    @endif
+                </div>
+
+                {{-- ── FIELDS ── --}}
+                <div class="recent-fields">
+                    <div class="form-group-modern">
+                        <label class="form-label-modern">Activity Name</label>
+                        <input type="text"
+                               name="{{ $nameField }}"
+                               class="form-control form-control-modern"
+                               value="{{ old($nameField, $client->$nameField ?? '') }}"
+                               placeholder="e.g. Event title {{ $i }}"
+                               @if($isRequired) required @endif>
+                    </div>
+
+                    <div class="form-group-modern">
+                        <label class="form-label-modern">Description</label>
+                        <textarea name="{{ $paraField }}"
+                                  class="form-control form-control-modern"
+                                  rows="3"
+                                  placeholder="Briefly describe this activity...">{{ old($paraField, $client->$paraField ?? '') }}</textarea>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    @endfor
+</div>
+
+
+                                       
+
+                                    </form>
+
+        </div>
+    </div>
+
 	<div class="section-content" id="keywords">
         <div class="form-container">
             <h4>Assigned Keywords</h4>
@@ -2642,6 +2958,96 @@ function per_select_zone(per_city,per_zone){
     const formData = new FormData(awardFrom);     
 	mainSpinner.start();      
 		fetch("{{ url('developer/clients/save-award-auto') }}/" + clientId, {
+        method: "POST",
+        headers: {
+          'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+        },
+        body: formData
+      })
+        .then(async (res) => {
+          console.log(res);
+          if (!res.ok) {         
+            const errorData = await res.json();
+            throw errorData;
+          }
+          return res.json();
+        })
+        .then(data => {
+          console.log(data.status)
+          if (data.status) {
+
+            console.log('Auto-saved ✔');
+            // hideLoader();
+			mainSpinner.stop();
+            if (!awardFrom.dataset.saved) {
+              awardFrom.dataset.saved = "true";
+              setTimeout(() => {
+                 
+              }, 500);
+            }
+
+
+            $("#messaged").modal("show");
+            $('#messaged .modal-title').text("Successfully");
+            $('#messaged .modal-body').html("<div class='alert alert-success'>" + data.msg + "</div>");
+            $('#messaged').modal({ keyboard: false, backdrop: 'static' });
+            $('#messaged').css({ 'width': '100%' });
+            setInterval(function () {
+              $("#messaged").modal("hide");
+            }, 3000);
+
+          } else {
+            // hideLoader();
+			mainSpinner.stop();
+            console.warn('Auto-save failed');
+          }
+        })
+        .catch((err) => {
+			mainSpinner.stop();
+        //   hideLoader();
+          if (err.errors) {
+
+            let errorHtml = "<div class='alert alert-danger'><ul>";
+
+            Object.keys(err.errors).forEach(function (key) {
+              errorHtml += "<li>" + err.errors[key][0] + "</li>";
+            });
+
+            errorHtml += "</ul></div>";
+
+            $("#messaged").modal("show");
+            $('#messaged .modal-title').text("Validation Error");
+            $('#messaged .modal-body').html(errorHtml);
+
+          } else {
+            console.error("Unexpected Error:", err);
+          }
+
+
+        });
+    }
+  </script>
+
+
+
+  <script>
+ 
+
+    const recentActivityFrom = document.getElementById('recentActivityFrom');
+
+    recentActivityFrom.addEventListener('change', function () {
+      clearTimeout(autoSaveTimer);
+
+      autoSaveTimer = setTimeout(() => {
+        autoSaveRecentForm();
+      }, 800); // debounce
+    });
+   
+    function autoSaveRecentForm() {
+	const clientId = "{{ isset($client->id) ? $client->id : '' }}"; 
+    const formData = new FormData(recentActivityFrom);     
+	mainSpinner.start();      
+		fetch("{{ url('developer/clients/save-recent-activity-auto') }}/" + clientId, {
         method: "POST",
         headers: {
           'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value

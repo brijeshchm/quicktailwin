@@ -133,10 +133,16 @@
           <span>Award</span>
         </a>
         </li> 
-       
+
+        <li class="nav-item">
+        <a class="nav-link <?php if(Request::segment(2)=='recent-activity') { echo "active"; } ?>" href="{{url('business/recent-activity')}}">
+          <i class="bi bi-activity"></i>
+          <span>Recent Activity</span>
+        </a>
+        </li>     
 
 
-          <li class="nav-item">
+        <li class="nav-item">
         <a class="nav-link <?php if(Request::segment(2)=='business-review') { echo "active"; } ?>" href="{{url('business/business-review')}}">
           <i class="bi bi-star"></i>
           <span>Review</span>
@@ -145,7 +151,7 @@
      
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#account-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-person-check"></i><span>Account</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-person-check"></i><span>Pay Account</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="account-nav" class="nav-content collapse <?php if(Request::segment(2)=='package' || Request::segment(2)=='billing-history' || Request::segment(2)=='coins-history' || Request::segment(2)=='account-settings' || Request::segment(2)== 'pay-deposit' ||  Request::segment(2)=='account-settings'){ echo  "show"; }   ?>" data-bs-parent="#sidebar-nav">
           <li>

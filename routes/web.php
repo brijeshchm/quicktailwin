@@ -67,18 +67,22 @@ Route::middleware('auth:clients')->group(function () {
 
 	Route::get('/business/business-certificate', [App\Http\Controllers\Business\CertificateController::class, 'getBusinessCertificate']);
 
-	Route::get('/business/business-award', [App\Http\Controllers\Business\CertificateController::class, 'getBusinessAward']);
 	Route::post('/business/editSaveCertificate/{id}', [App\Http\Controllers\Business\CertificateController::class, 'saveBusinessCertificate']);
 	Route::post('/business/save-certificate-auto', [App\Http\Controllers\Business\CertificateController::class, 'autoSaveCertificate']);
 
-	Route::post('/business/save-award-auto', [App\Http\Controllers\Business\CertificateController::class, 'saveBusinessAward']);
-
+	
 
 
 	Route::get('/business/certificate/{slug}/{id}', [App\Http\Controllers\Business\CertificateController::class, 'certificateDel']);
+
+	Route::post('/business/save-award-auto', [App\Http\Controllers\Business\CertificateController::class, 'saveBusinessAward']);
 	Route::get('/business/award/{slug}/{id}', [App\Http\Controllers\Business\CertificateController::class, 'awardDel']);
-
-
+	Route::get('/business/business-award', [App\Http\Controllers\Business\CertificateController::class, 'getBusinessAward']);
+	
+	Route::post('/business/save-recent-activity-auto', [App\Http\Controllers\Business\CertificateController::class, 'saveBusinessRecentActivity']);
+	Route::get('/business/recent/{slug}/{id}', [App\Http\Controllers\Business\CertificateController::class, 'recentActivityDel']);
+	Route::get('/business/recent-activity', [App\Http\Controllers\Business\CertificateController::class, 'getBusinessRecentActivity']);
+	
 
 
 	Route::post('/business/savePersonalDetails/{id}', [App\Http\Controllers\Business\PersonalDetailsController::class, 'savePersonalDetails']);

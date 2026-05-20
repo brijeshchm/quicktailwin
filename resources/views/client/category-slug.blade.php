@@ -132,9 +132,17 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
 
  
             @if(!empty($topDescription))
-             
+               @php
+                    $defaultHeading = '';
+
+                    if (!empty($kwData['top_heading'])) {
+                    $defaultHeading=  $kwData['top_heading'];
+                    }else{
+                    $defaultHeading = 'Trusted '. $keyword;
+                    }    
+                    @endphp
                 <div class="mt-8 prose prose-sm max-w-none text-slate-600 leading-relaxed">
-                    <h2 class="text-lg font-bold text-gray-900 mb-3">Trusted {{ $keyword }}</h2>
+                    <h2 class="text-lg font-bold text-gray-900 mb-3"> {{ $defaultHeading }}</h2>
                     <p>{{ $topDescription }}</p>
                 </div>
             @endif
@@ -224,13 +232,23 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
     </div>
     @endif
 
-    {{-- Top Description --}}
+    
    
 
     {{-- Bottom Description --}}
     @if(!empty($bottomDescription))
+
+      @php
+    $bottom_heading = '';
+
+    if (!empty($kwData['bottom_heading'])) {
+        $bottom_heading=  $kwData['bottom_heading'];
+    }else{
+     $bottom_heading = 'Find the Best '.$keyword;
+    }    
+    @endphp
     <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mt-4 mx-4">
-        <h2 class="text-lg font-bold text-gray-900 mb-3">Find the Best {{ $keyword }} </h2>
+        <h2 class="text-lg font-bold text-gray-900 mb-3"> {{ $bottom_heading }} </h2>
         <div class="text-sm text-gray-600 leading-relaxed">{!! $bottomDescription !!}</div>
     </div>
     @endif
