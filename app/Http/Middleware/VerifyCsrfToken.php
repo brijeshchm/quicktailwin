@@ -18,7 +18,7 @@ class VerifyCsrfToken extends Middleware
     'api/auth/verify-otp', 
     '/api/auth/verify-otp',
     '/razorPayCheckout',
-    '/success',
+    '/payment-done',
     '/failed',
     
     

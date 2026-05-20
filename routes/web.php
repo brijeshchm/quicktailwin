@@ -532,7 +532,7 @@ Route::get('package', [App\Http\Controllers\Client\WebsiteRazorpayController::cl
 
 
 Route::post('razorPayCheckout', [App\Http\Controllers\Client\WebsiteRazorpayController::class, 'razorPayCheckout']);
-Route::get('/success', [App\Http\Controllers\Client\WebsiteRazorpayController::class, 'success']);
+Route::get('/payment-done', [App\Http\Controllers\Client\WebsiteRazorpayController::class, 'success']);
 Route::get('/failed', [App\Http\Controllers\Client\WebsiteRazorpayController::class, 'failed']);
 // // City home
 // Route::get('/{city}', [HomePageController::class, 'showCityOrService'])

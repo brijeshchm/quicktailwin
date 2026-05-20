@@ -254,8 +254,8 @@ a.new-payment-type {position: relative;}
 <input type="hidden" name="merchant_order_id" id="merchant_order_id"> 
 <input type="hidden" name="language" value="EN"> 
 <input type="hidden" name="currency" id="currency" value="INR"> 
-<input type="hidden" name="surl" id="surl" value="https://www.quickdials.com/success/"> 
-<input type="hidden" name="furl" id="furl" value="https://www.quickdials.com/failed/"> 
+<input type="hidden" name="surl" id="surl" value="https://www.quickdials.com/business/success/"> 
+<input type="hidden" name="furl" id="furl" value="https://www.quickdials.com/business/failed/"> 
 <!--<input type="hidden" name="surl" id="surl" value="http://localhost:8000/success/"> 
 <input type="hidden" name="furl" id="furl" value="http://localhost:8000/failed/">  -->
 
