@@ -51,7 +51,7 @@
             </div>
 
             <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-2 tracking-tight">
-                Payment Successful! 🎉
+                Payment Successful!
             </h1>
             <p class="text-sm sm:text-base text-slate-500 max-w-md mx-auto">
                 Thank you @if($name)<span class="font-semibold text-slate-700">{{ $name }}</span>@endif — your transaction has been completed securely.
@@ -153,7 +153,8 @@
                     Download Invoice
                 </a>
             @else
-                <a href="{{ url('business/billing-history') }}"
+
+                <a href="{{ url('business/billing-history') }}" 
                    class="group inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-bold
                           bg-gradient-to-r from-emerald-500 to-teal-500 text-white
                           shadow-lg shadow-emerald-300/40 hover:shadow-xl hover:-translate-y-0.5
@@ -226,7 +227,7 @@
         {{-- ════════════ HELP LINK ════════════ --}}
         <p class="text-center text-xs text-slate-400 mt-6">
             Facing any issue?
-            <a href="{{ url('contact') }}" class="text-emerald-600 hover:underline font-semibold">
+            <a href="{{ url('contact-us') }}" class="text-emerald-600 hover:underline font-semibold">
                 Contact Support
             </a>
         </p>

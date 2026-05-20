@@ -128,7 +128,8 @@
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="2 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download w-4 h-4 text-primary" aria-hidden="true"><path d="M12 15V3"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m7 10 5 5 5-5"></path></svg>
 
 </a>
- 
+    		 
+			@if (!Auth::guard('clients')->check())
             <button
                 onclick="openLoginModal()"
                 class="flex items-center gap-1.5 px-4 py-2 bg-sky-500 hover:bg-sky-600 text-white text-xs font-semibold rounded-md shadow transition-colors"
@@ -137,7 +138,7 @@
                 Login / Register
             </button>
 
-            <span class="relative inline-flex">
+             <span class="relative inline-flex">
                 <span class="pulse-ring absolute inset-0 rounded-full"></span>
                 <a
                     href="{{ route('login') }}"
@@ -150,7 +151,193 @@
                 <!-- Android App Download Button -->
 
             </span>
+@else
 
+ @php
+    $client     = auth()->guard('clients')->user();
+    $businessName = $client->business_name ?? 'Account';
+
+    // Profile logo with fallback
+    $profileImg = asset('client/images/user.png');
+    if (!empty($client->logo)) {
+        $logo = @unserialize($client->logo);
+        if (!empty($logo['large']['src'])) {
+            $profileImg = asset($logo['large']['src']);
+        }
+    }
+
+    // Active route helper for highlighting current page in dropdown
+    $currentUrl = url()->current();
+@endphp
+
+<div class="head-right-lout relative" x-data="{ open: false }" @keydown.escape.window="open = false">
+
+    {{-- ════════════ PROFILE TRIGGER ════════════ --}}
+    <button @click="open = !open"
+            @click.outside="open = false"
+            class="flex items-center gap-2 px-2 py-1.5 rounded-full hover:bg-gray-100 transition-all duration-200 group"
+            aria-haspopup="true"
+            :aria-expanded="open">
+
+        {{-- Avatar --}}
+        <div class="relative shrink-0">
+            <img loading="lazy"
+                 src="{{ $profileImg }}"
+                 alt="{{ $businessName }}"
+                 onerror="this.src='{{ asset('client/images/user.png') }}'"
+                 class="w-9 h-9 rounded-full object-cover border-2 border-white shadow-sm">
+
+            {{-- Online indicator --}}
+            <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full"></span>
+        </div>
+
+        {{-- Name (hidden on mobile) --}}
+        <span class="hidden md:block text-sm font-semibold text-gray-700 group-hover:text-gray-900 max-w-[140px] truncate">
+            {{ ucfirst($businessName) }}
+        </span>
+
+        {{-- Chevron --}}
+        <svg class="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-transform duration-200"
+             :class="open ? 'rotate-180' : ''"
+             fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
+        </svg>
+    </button>
+
+    {{-- ════════════ DROPDOWN MENU ════════════ --}}
+    <div x-show="open"
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0 scale-95 -translate-y-2"
+         x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-95 -translate-y-2"
+         class="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-2xl shadow-gray-900/10 border border-gray-100 overflow-hidden z-50"
+         style="display: none;">
+
+        {{-- Header: profile info --}}
+        <div class="px-4 py-3.5 bg-gradient-to-br from-indigo-50 to-blue-50 border-b border-gray-100">
+            <div class="flex items-center gap-3">
+                <img src="{{ $profileImg }}"
+                     onerror="this.src='{{ asset('client/images/user.png') }}'"
+                     alt="{{ $businessName }}"
+                     class="w-11 h-11 rounded-full object-cover border-2 border-white shadow-md shrink-0">
+                <div class="min-w-0 flex-1">
+                    <p class="text-sm font-bold text-gray-900 truncate">{{ ucfirst($businessName) }}</p>
+                    @if(!empty($client->email))
+                        <p class="text-xs text-gray-500 truncate">{{ $client->email }}</p>
+                    @endif
+                </div>
+            </div>
+        </div>
+
+        {{-- Menu items --}}
+        @php
+            $menuItems = [
+                ['url' => 'business/personal-details',  'icon' => 'user',     'label' => 'My Profile'],
+                ['url' => 'business/account-settings',  'icon' => 'gear',     'label' => 'Account Settings'],
+                ['url' => 'business/favorite-enquiry',  'icon' => 'star',     'label' => 'Favorite Enquiry'],
+                ['url' => 'business/manage-enquiry',    'icon' => 'envelope', 'label' => 'Manage Enquiry'],
+                ['url' => 'business/keywords',          'icon' => 'book',     'label' => 'Service Keywords'],
+                ['url' => 'business/package',           'icon' => 'package',  'label' => 'Package',         'badge' => 'New'],
+                ['url' => 'business/billing-history',   'icon' => 'wallet',   'label' => 'My Transactions'],
+            ];
+        @endphp
+
+        <div class="py-1.5">
+            @foreach($menuItems as $item)
+                @php $isActive = $currentUrl === url($item['url']); @endphp
+                <a href="{{ url($item['url']) }}"
+                   class="flex items-center gap-3 px-4 py-2.5 text-sm transition-colors
+                          {{ $isActive
+                                ? 'bg-indigo-50 text-indigo-700 font-semibold'
+                                : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900' }}">
+
+                    {{-- Icon --}}
+                    <span class="w-8 h-8 flex items-center justify-center rounded-lg shrink-0
+                                 {{ $isActive ? 'bg-indigo-100 text-indigo-600' : 'bg-gray-100 text-gray-500' }}">
+                        @switch($item['icon'])
+                            @case('user')
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                </svg>
+                                @break
+                            @case('gear')
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                                @break
+                            @case('star')
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.539 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+                                </svg>
+                                @break
+                            @case('envelope')
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                                @break
+                            @case('book')
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                                </svg>
+                                @break
+                            @case('package')
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                                </svg>
+                                @break
+                            @case('wallet')
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+                                </svg>
+                                @break
+                        @endswitch
+                    </span>
+
+                    <span class="flex-1">{{ $item['label'] }}</span>
+
+                    {{-- Optional badge --}}
+                    @if(!empty($item['badge']))
+                        <span class="px-2 py-0.5 text-[10px] font-bold rounded-full bg-emerald-100 text-emerald-700">
+                            {{ $item['badge'] }}
+                        </span>
+                    @endif
+                </a>
+            @endforeach
+        </div>
+
+        {{-- Logout (separated) --}}
+        <div class="border-t border-gray-100 py-1.5 bg-gray-50/50">
+            <a href="{{ url('client/logout') }}"
+               onclick="return confirm('Are you sure you want to logout?');"
+               class="flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors">
+                <span class="w-8 h-8 flex items-center justify-center rounded-lg bg-red-100 text-red-600 shrink-0">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                    </svg>
+                </span>
+                <span class="flex-1 font-semibold">Logout</span>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+
+
+           
+@endif
         </div>
 
         {{-- Mobile buttons --}}
