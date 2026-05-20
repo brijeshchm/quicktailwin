@@ -91,8 +91,8 @@ class ChildCategoryController extends Controller
 			$filename = $this->saveImageSmart(
 				$request->file('pc_icon'),
 				$destinationPath,
-				150,
-				150
+				127,
+				112
 			);
 
 			$image['pc_icon'] = array(
@@ -357,8 +357,8 @@ class ChildCategoryController extends Controller
 			$filename = $this->saveImageSmart(
 				$request->file('pc_icon'),
 				$destinationPath,
-				90,
-				90
+				127,
+				112
 			);
 
 			$image['pc_icon'] = array(
