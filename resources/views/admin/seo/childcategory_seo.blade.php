@@ -184,12 +184,23 @@ padding:0px;
 								</div>
 							
 								
-							
+							<div class="form-group">
+									<label for="Top Heading" class="col-md-2 control-label">Top Heading</label>
+									<div class="col-md-8">
+										<input class="form-control" name="top_heading" placeholder="Enter top heading" value="{{ $keyword->top_heading }}">
+									</div>
+								</div>
 								
 								<div class="form-group">
 									<label for="top_description" class="col-md-2 control-label">Page Top Description(only 500 character )</label>
 									<div class="col-md-8">
 										<textarea class="form-control" name="top_description" placeholder="Enter Page Top Description"  rows="9">{{ $keyword->top_description }}</textarea>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="Bottom Heading" class="col-md-2 control-label">Bottom Heading</label>
+									<div class="col-md-8">
+										<input class="form-control" name="bottom_heading" placeholder="Enter bottom heading" value="{{ $keyword->bottom_heading }}">
 									</div>
 								</div>
 								<div class="form-group">

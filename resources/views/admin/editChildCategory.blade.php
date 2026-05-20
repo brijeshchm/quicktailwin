@@ -52,7 +52,7 @@
 									</div>
 										
 										<div class="col-lg-4">
-										<label for="icon">Icon:(65*65Pixels)</label>
+										<label for="icon">Icon:(127*112Pixels)</label>
 										
 										
 										@if(!empty($edit_data->pc_icon))

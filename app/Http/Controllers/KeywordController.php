@@ -2239,7 +2239,8 @@ class KeywordController extends Controller
 				$kwObj->bottom_description = $bottom_description;
 				$kwObj->ratingvalue = $request->input('ratingvalue');
 				$kwObj->ratingcount = $request->input('ratingcount');
-
+				$kwObj->top_heading = $request->input('top_heading');
+				$kwObj->bottom_heading = $request->input('bottom_heading');
 				if ($kwObj->save()) {
 					++$i;
 				}
@@ -2405,6 +2406,10 @@ class KeywordController extends Controller
 				$kwObj->faqq6 = $request->input('faqq6');
 				$kwObj->faqa6 = $request->input('faqa6');
 				$kwObj->bottom_description = $bottom_description;
+
+				$kwObj->top_heading = $request->input('top_heading');
+				$kwObj->bottom_heading = $request->input('bottom_heading');
+
 				$kwObj->ratingvalue = $request->input('ratingvalue');
 				$kwObj->ratingcount = $request->input('ratingcount');
 				if ($kwObj->save()) {

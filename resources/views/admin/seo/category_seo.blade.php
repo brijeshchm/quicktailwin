@@ -113,21 +113,21 @@ padding:0px;
 								</div>
 								
 								<div class="form-group">
-									<label for="top_description" class="col-md-2 control-label">FAQ Question 1</label>
+									<label for="FAQ Question 1" class="col-md-2 control-label">FAQ Question 1</label>
 									<div class="col-md-8">
 										<input class="form-control" name="faqq1" placeholder="Enter FAQ Question 1" value="{{ $keyword->faqq1 }}">
 									</div>
 								</div>
 								
 								<div class="form-group">
-									<label for="top_description" class="col-md-2 control-label">FAQ Answer 1</label>
+									<label for="FAQ Answer 1" class="col-md-2 control-label">FAQ Answer 1</label>
 									<div class="col-md-8">
 										<textarea class="form-control" name="faqa1" placeholder="Enter FAQ Answer 1">{{ $keyword->faqa1 }}</textarea>
 									</div>
 								</div>
 								
 								<div class="form-group">
-									<label for="top_description" class="col-md-2 control-label">FAQ Question 2</label>
+									<label for="FAQ Question 2" class="col-md-2 control-label">FAQ Question 2</label>
 									<div class="col-md-8">
 										<input class="form-control" name="faqq2" placeholder="Enter FAQ Question 2" value="{{ $keyword->faqq2 }}">
 									</div>
@@ -140,7 +140,7 @@ padding:0px;
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="top_description" class="col-md-2 control-label">FAQ Question 3</label>
+									<label for="FAQ Question 3" class="col-md-2 control-label">FAQ Question 3</label>
 									<div class="col-md-8">
 										<input class="form-control" name="faqq3" placeholder="Enter FAQ Question 3" value="{{ $keyword->faqq3 }}">
 									</div>
@@ -154,7 +154,7 @@ padding:0px;
 								</div>
 								
 								<div class="form-group">
-									<label for="top_description" class="col-md-2 control-label">FAQ Question 4</label>
+									<label for="FAQ Question 4" class="col-md-2 control-label">FAQ Question 4</label>
 									<div class="col-md-8">
 										<input class="form-control" name="faqq4" placeholder="Enter FAQ Question 4" value="{{ $keyword->faqq4 }}">
 									</div>
@@ -167,7 +167,7 @@ padding:0px;
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="top_description" class="col-md-2 control-label">FAQ Question 5</label>
+									<label for="FAQ Question 5" class="col-md-2 control-label">FAQ Question 5</label>
 									<div class="col-md-8">
 										<input class="form-control" name="faqq5" placeholder="Enter FAQ Question 5" value="{{ $keyword->faqq5 }}">
 									</div>
@@ -180,6 +180,14 @@ padding:0px;
 									</div>
 								</div>
 								
+
+									<div class="form-group">
+									<label for="Top Heading" class="col-md-2 control-label">Top Heading</label>
+									<div class="col-md-8">
+										<input class="form-control" name="top_heading" placeholder="Enter top heading" value="{{ $keyword->top_heading }}">
+									</div>
+								</div>
+
 								<div class="form-group">
 									<label for="top_description" class="col-md-2 control-label">Page Top Description(only 500 character )</label>
 									<div class="col-md-8">
@@ -187,6 +195,13 @@ padding:0px;
 									</div>
 								</div>
 								
+								
+								<div class="form-group">
+									<label for="Bottom Heading" class="col-md-2 control-label">Bottom Heading</label>
+									<div class="col-md-8">
+										<input class="form-control" name="bottom_heading" placeholder="Enter bottom heading" value="{{ $keyword->bottom_heading }}">
+									</div>
+								</div>
 								<div class="form-group">
 									<label for="bottom_description" class="col-md-2 control-label">Page Bottom Description</label>
 									<div class="col-md-8">
