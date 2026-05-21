@@ -1953,9 +1953,9 @@ Instead of limiting learning to theory, the course takes you through:.",
         $venues = [
             ['name' => 'The Taj Mahal Palace', 'location' => 'Colaba, Mumbai',       'rating' => 4.9, 'reviews' => 124, 'price' => '₹₹₹₹', 'img' => 'popular/The_Taj_Mahal_Palace.jpg'],
             ['name' => 'JW Marriott Juhu',     'location' => 'Juhu, Mumbai',         'rating' => 4.8, 'reviews' => 98,  'price' => '₹₹₹₹', 'img' => 'popular/venues2.jpg'],
-            ['name' => 'Sahara Star',          'location' => 'Vile Parle, Mumbai',   'rating' => 4.7, 'reviews' => 156, 'price' => '₹₹₹',  'img' => 'popular/Sahara_Star,jpg'],
+            ['name' => 'Sahara Star',          'location' => 'Vile Parle, Mumbai',   'rating' => 4.7, 'reviews' => 156, 'price' => '₹₹₹',  'img' => 'popular/Sahara_Star.jpg'],
             ['name' => 'The Leela',            'location' => 'Andheri, Mumbai',      'rating' => 4.8, 'reviews' => 112, 'price' => '₹₹₹₹', 'img' => 'popular/The_Leela.jpg'],
-            ['name' => 'ITC Maratha',          'location' => 'Andheri East, Mumbai', 'rating' => 4.6, 'reviews' => 84,  'price' => '₹₹₹',  'img' => 'ITC_Maratha/ITC_Maratha.jpg'],
+            ['name' => 'ITC Maratha',          'location' => 'Andheri East, Mumbai', 'rating' => 4.6, 'reviews' => 84,  'price' => '₹₹₹',  'img' => 'popular/ITC_Maratha.jpg'],
         ];
  
         $steps = [
