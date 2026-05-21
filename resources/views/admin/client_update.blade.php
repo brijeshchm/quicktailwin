@@ -11,7 +11,7 @@
    <div id="page-wrapper">
 	<div class="row">
 		<div class="col-lg-12">
-				<h6 class="page-header"> {{ ucwords($client->business_name) }}</h6>
+				<h3 class="page-header">Company name:  {{ ucwords($client->business_name) }}</h3>
 		</div>               
 	</div>
 <style>
