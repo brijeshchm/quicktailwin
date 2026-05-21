@@ -156,19 +156,23 @@ select.ef-input { padding-left:1rem; }
     {{-- Right image tiles (desktop) --}}
     <div class="hidden md:flex flex-col" style="width:38%;gap:3px;">
         <div class="tile-slider flex-1" style="border-left:3px solid rgba(255,255,255,.18);">
-            @foreach($hImages as $i => $img)
+        @if($hImages)    
+        @foreach($hImages as $i => $img)
             <img src="{{ $img }}" alt="Gallery" class="tile-img {{ $i===0?'active':'' }}"
                  data-h-slide="{{ $i }}"
                  onerror="this.src='{{ asset('images/gallery.jpg') }}'">
             @endforeach
+            @endif
             <div class="absolute bottom-2 left-3 flex items-center gap-1.5 z-10" id="h-dots"></div>
         </div>
         <div class="tile-slider flex-1" style="border-left:3px solid rgba(255,255,255,.18);">
-            @foreach($vImages as $i => $img)
+        @if($vImages)   
+        @foreach($vImages as $i => $img)
             <img src="{{ $img }}" alt="Gallery" class="tile-img {{ $i===0?'active':'' }}"
                  data-v-slide="{{ $i }}"
                  onerror="this.src='{{ asset('images/gallery.jpg') }}'">
             @endforeach
+            @endif
             <div class="absolute bottom-2 right-3 flex flex-col items-center gap-1 z-10" id="v-dots"></div>
         </div>
     </div>
