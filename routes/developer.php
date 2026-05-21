@@ -419,7 +419,7 @@ Route::get('/business_keyword/getKeywords/{id}',[App\Http\Controllers\BusinessKe
 	Route::post('/clients/addZoneToClient/{id}',[App\Http\Controllers\BackEndClientsController::class, 'addZoneToClient'])->middleware('auth');
 	Route::post('/clients/editSaveClientProfileLogo/{id}',[App\Http\Controllers\BackEndClientsController::class, 'editSaveClientProfileLogo'])->middleware('auth:developer');
 	Route::post('/clients/uploadClientGalleryPics/{id}',[App\Http\Controllers\BackEndClientsController::class, 'uploadClientGalleryPics'])->middleware('auth:developer');
-	Route::post('/clients/uploadClientGallery/{id}',[App\Http\Controllers\BackEndClientsController::class, 'uploadClientGalleryPics'])->middleware('auth:developer');
+	// Route::post('/clients/uploadClientGallery/{id}',[App\Http\Controllers\BackEndClientsController::class, 'uploadClientGalleryPics'])->middleware('auth:developer');
 	 
 	Route::get('/clients/update/profileLogo/logoDel/{id}',[App\Http\Controllers\BackEndClientsController::class, 'logoDel']);
 	Route::get('/clients/update/profileLogo/profilePicDel/{id}',[App\Http\Controllers\BackEndClientsController::class, 'profilePicDel']);

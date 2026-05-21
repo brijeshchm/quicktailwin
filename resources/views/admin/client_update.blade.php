@@ -846,7 +846,7 @@
 					}
 				endif; ?>
 					
-				<form id="imageform" method="post" enctype="multipart/form-data">
+				<form id="uploadGalleryform" method="post" enctype="multipart/form-data">
                      {{csrf_field()}}
                      <input type="hidden" name="business_id" value="{{$client->id}}">
                      <input type="hidden" name="upload_pics" value="upload_pics">
@@ -3173,17 +3173,17 @@ function per_select_zone(per_city,per_zone){
   <script>
  
 
-    const imageform = document.getElementById('imageform');
+    const imageform = document.getElementById('uploadGalleryform');
 
     imageform.addEventListener('change', function () {
       clearTimeout(autoSaveTimer);
 
       autoSaveTimer = setTimeout(() => {
-        autoSaveForm();
+        autoGallerySaveForm();
       }, 800); // debounce
     });
    
-    function autoSaveForm() {
+    function autoGallerySaveForm() {
 	const clientId = "{{ isset($client->id) ? $client->id : '' }}"; 
     const formData = new FormData(imageform);     
 	mainSpinner.start();      
