@@ -8504,6 +8504,31 @@ $(document).ready(function(){
 		 
 	});
 	
+	$(document).on('change','.client_cat_service',function(e){
+		e.preventDefault();
+		var $value = $(this).val();
+	 
+		$.ajax({
+			type: "POST",		 
+			url:"/developer/clients/submitClientCategoryService/"+$value,
+			data: $('#submitClientCategoryService').serialize(),
+			dataType: 'json',
+			success: function(response) {
+				 
+				if(response.status){ 
+					alert(response.message);
+				}else{
+					alert(response.message);
+				}
+				 
+			},
+			error: function(response) {
+				alert("An error occured");
+			}
+		});
+		 
+	});
+	
 	
 	$(document).on('change','.conversion_status',function(e){
 		e.preventDefault();

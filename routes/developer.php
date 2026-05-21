@@ -451,6 +451,7 @@ Route::get('/business_keyword/getKeywords/{id}',[App\Http\Controllers\BusinessKe
 
 
 	Route::post('/clients/assignClientToEmployee/{id}',[App\Http\Controllers\BackEndClientsController::class, 'assignClientToEmployee'])->middleware('auth:developer');
+	Route::post('/clients/submitClientCategoryService/{id}',[App\Http\Controllers\BackEndClientsController::class, 'submitClientCategoryService'])->middleware('auth:developer');
 	Route::post('/clients/conversionClientStatus/{id}',[App\Http\Controllers\BackEndClientsController::class, 'conversionClientStatus'])->middleware('auth:developer');
 	Route::post('/clients/clientPaidStatus/{id}',[App\Http\Controllers\BackEndClientsController::class, 'conversionClientStatus'])->middleware('auth:developer');
 	Route::post('/clients/clientCertifiedStatus/{id}',[App\Http\Controllers\BackEndClientsController::class, 'clientCertifiedStatus'])->middleware('auth:developer');

@@ -400,7 +400,7 @@
 					<div class="col-md-12">
 					 <label>Business Name:</label>                
                     
-                       <input name="business_name" type="text" class="form-control" value="{{ old('business_name',(isset($client)) ? $client->business_name:"")}}" placeholder="Please enter business name">
+          <input name="business_name" type="text" class="form-control" value="{{ old('business_name',(isset($client)) ? $client->business_name:"")}}" placeholder="Please enter business name">
                    
                
 					</div>
@@ -409,7 +409,7 @@
 					<div class="col-md-12">
 					 <label>Business Slug:</label>                
                     
-                       <input name="business_slug" type="text" class="form-control" value="{{ old('business_slug',(isset($client)) ? $client->business_slug:"")}}" placeholder="Please enter business Slug">
+          <input name="business_slug" type="text" class="form-control" value="{{ old('business_slug',(isset($client)) ? $client->business_slug:"")}}" placeholder="Please enter business Slug">
                    
                
 					</div>
@@ -515,7 +515,7 @@
             
 					</div>
 				</div>
-				 
+			
 				
 				<div class="form-group col-md-12">
 					<div class="col-sm-12"> 
@@ -2170,8 +2170,8 @@ textarea.form-control-modern {
 						{{csrf_field()}}
 					<input type="hidden" name="client_id" id="clientIDASSKW" value="{{$client->username}}">
 						
-						<div class="form-group">
-							<div class="col-md-6">
+						<div class="form-group col-md-6">
+							<div class="col-md-12">
 								<label>Assign Client:</label>
 									@if(Auth::user()->current_user_can('administrator') || Auth::user()->current_user_can('client_package_name'))
 								<select class="select2-single form-control assign_client" name="created_by">
@@ -2197,14 +2197,66 @@ textarea.form-control-modern {
 									?>
 								@endif
 							</div>
-							<div class="col-md-1">
+					 
 								 
 								<input type="hidden" name="submit_client_assign" value="1" />
 								 
-							</div>
+				 
 						</div>
 					</form>
 				</div>
+
+
+        
+				<div>
+ 
+					<form id="submitClientCategoryService" class="form-horizontal" enctype="multipart/form-data" method="POST">
+						{{csrf_field()}}
+					<input type="hidden" name="client_id" id="clientIDASSKW" value="{{$client->username}}">
+		 
+						 
+
+
+
+         <div class="form-group col-md-6">
+					<div class="col-sm-12"> 
+					   <label>Category Service:</label>
+            
+                 
+               <select class="form-control client_cat_service select2-cat-service" name="category_service">
+
+
+               <?php
+                   $catService =getOverViewBusiness();
+										foreach($catService as $key=>$value){
+											$selected = "";
+											if($key == $client->category_service):
+												$selected = "selected";
+											endif;
+											?>
+											<option value="{{ $key }}" <?php echo $selected; ?>>{{ ucfirst($key) }}</option>
+											<?php
+										}
+									?>
+					 
+					</select>
+            
+					</div>
+				</div>
+						 
+						 
+						 
+				 
+								 
+								<input type="hidden" name="client_cat_service" value="1" />
+								 
+						 
+					 
+					</form>
+				</div>
+
+
+
 						
 				<div>
 

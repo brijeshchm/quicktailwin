@@ -1482,7 +1482,7 @@ class BackEndClientsController extends Controller
 
 
 
-	/**
+	/*
 	 * Update the specified resource in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
@@ -1506,10 +1506,29 @@ class BackEndClientsController extends Controller
 				return response()->json(['status' => 0, 'message' => 'Client not updated !!']);
 			}
 		}
+	}
 
+	/*
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function submitClientCategoryService(Request $request, $id)
+	{
+ 
 
+		if ($request->has('client_cat_service')) {
 
-
+			$client = Client::withTrashed()->where('username', $request->input('client_id'))->first();
+			$client->category_service = $request->input('category_service');
+			if ($client->save()) {
+				return response()->json(['status' => 1, 'message' => 'Category Service updated successfully !!']);
+			} else {
+				return response()->json(['status' => 0, 'message' => 'Client not updated !!']);
+			}
+		}
 	}
 
 	public function autoSaveAward(Request $request,$id)

@@ -463,6 +463,13 @@
         maximumSelectionSize: 6,
         containerCssClass: ":all:"
     });
+
+     $(".select2-cat-service").select2({
+        theme: "bootstrap",
+        placeholder: "Select service",
+        maximumSelectionSize: 6,
+        containerCssClass: ":all:"
+    });
      $(".select2-city").select2({
         theme: "bootstrap",
         placeholder: "Select City",
