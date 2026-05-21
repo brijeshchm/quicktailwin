@@ -11,7 +11,7 @@
    <div id="page-wrapper">
 	<div class="row">
 		<div class="col-lg-12">
-				<h1 class="page-header">Update "{{{ ucwords($client->business_name) }}}"</h1>
+				<h6 class="page-header"> "{{{ ucwords($client->business_name) }}}"</h6>
 		</div>               
 	</div>
 <style>
