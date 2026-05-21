@@ -275,7 +275,7 @@
             <div class="reveal img-card d-{{ min($i,8) }}" style="aspect-ratio:16/10;">
                 <img src="{{ $cat['img'] }}" alt="{{ $cat['name'] }}"
                      class="absolute inset-0 w-full h-full object-cover"
-                     onerror="this.src='https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&h=300&fit=crop'">
+                     >
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent"></div>
                 <div class="overlay-hover"></div>
                 <div class="ring-hover"></div>
@@ -301,12 +301,12 @@
 
     <div class="grid grid-cols-3 md:grid-cols-6 gap-6 mb-16">
         @foreach([
-            ['name'=>'Banquet Halls','img'=>'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&h=400&fit=crop'],
-            ['name'=>'Catering Services','img'=>'https://images.unsplash.com/photo-1555244162-803834f70033?w=400&h=400&fit=crop'],
-            ['name'=>'Stage Decorators','img'=>'https://images.unsplash.com/photo-1478827387698-1527781a4887?w=400&h=400&fit=crop'],
-            ['name'=>'Photographers','img'=>'https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=400&h=400&fit=crop'],
-            ['name'=>'Pandits','img'=>'https://images.unsplash.com/photo-1583939411023-14783179e581?w=400&h=400&fit=crop'],
-            ['name'=>'Invitation Cards','img'=>'https://images.unsplash.com/photo-1523438885200-e635ba2c371e?w=400&h=400&fit=crop'],
+            ['name'=>'Banquet Halls','img'=>'popular/Banquet-Halls.jpg'],
+            ['name'=>'Catering Services','img'=>'popular/Catering-Services.jpg'],
+            ['name'=>'Stage Decorators','img'=>'popular/Stage-Decorators.jpg'],
+            ['name'=>'Photographers','img'=>'popular/Photo_and_Videography.jpg'],
+            ['name'=>'Pandits','img'=>'popular/Pandits.jpg'],
+            ['name'=>'Invitation Cards','img'=>'popular/Invitation_Cards.png'],
         ] as $cat)
         <a href="{{ route('category.list') }}" class="group block reveal">
             <div class="relative h-48 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition">
@@ -321,7 +321,7 @@
 
     {{-- Photographer Banner --}}
     <div class="relative h-[300px] rounded-3xl overflow-hidden mb-16 reveal">
-        <img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=1200&h=600&fit=crop"
+        <img src="popular/Wedding_Photographers.jpg"
              alt="Wedding Photographers" class="absolute inset-0 w-full h-full object-cover">
         <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/40"></div>
         <div class="absolute inset-0 flex items-center justify-center text-center text-white px-6">
@@ -343,7 +343,11 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
             @foreach($prewedding as $i => $item)
             <div class="reveal d-{{ min($i,8) }} bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
-                <div class="h-48 bg-gray-100 relative flex items-center justify-center text-6xl">💍</div>
+                <div class="h-48 bg-gray-100 relative flex items-center justify-center text-6xl">
+
+                      <img src="{{ $cat['img'] }}" alt="{{ $cat['name'] }}"
+                     class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                </div>
                 <div class="p-4 text-center font-medium text-sm">{{ $item }}</div>
             </div>
             @endforeach
@@ -452,8 +456,7 @@
                     <div class="relative overflow-hidden" style="height:6rem; @media(min-width:640px){height:8rem;} @media(min-width:768px){height:9rem;}">
                         <div class="h-24 sm:h-32 md:h-36 overflow-hidden">
                             <img src="{{ $item['img'] }}" alt="{{ $item['name'] }}"
-                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                 onerror="this.src='https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&h=300&fit=crop'">
+                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                         </div>
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
                         <div class="overlay-hover"></div>
@@ -469,10 +472,10 @@
 
             {{-- Feature card (desktop only) --}}
             <div class="reveal-r hidden lg:block group relative rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-shadow cursor-pointer">
-                <img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=600&h=800&fit=crop"
+                <img src="popular/Grand_Bridal.jpg"
                      alt="Grand Bridal Entry"
                      class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                     onerror="this.src='https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&h=800&fit=crop'">
+                     >
                 <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent"></div>
                 <div class="overlay-hover"></div>
                 <div class="absolute bottom-5 left-5 right-5">
@@ -523,7 +526,7 @@
                     <div class="relative h-56 overflow-hidden">
                         <img src="{{ $venue['img'] }}" alt="{{ $venue['name'] }}"
                              class="w-full h-full object-cover" draggable="false"
-                             onerror="this.src='https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=700&h=500&fit=crop'">
+                             >
                         <div class="absolute top-4 right-4 bg-white px-2 py-1 rounded text-xs font-bold shadow-sm">
                             {{ $venue['price'] }}
                         </div>
@@ -583,7 +586,7 @@
 
             {{-- Feature card --}}
             <div class="reveal-l hidden lg:block group relative rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-shadow cursor-pointer">
-                <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&h=800&fit=crop"
+                <img src="popular/Royal_Groom.jpg"
                      alt="Royal Groom Entry"
                      class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent"></div>
@@ -601,7 +604,7 @@
                     <div class="h-24 sm:h-32 md:h-36 overflow-hidden">
                         <img src="{{ $item['img'] }}" alt="{{ $item['name'] }}"
                              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                             onerror="this.src='https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&h=300&fit=crop'">
+                            >
                     </div>
                     <div class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent"></div>
                     <div class="overlay-hover"></div>
