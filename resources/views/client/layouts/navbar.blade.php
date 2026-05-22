@@ -116,17 +116,13 @@
 
 <a href="https://play.google.com/store/apps/details?id=com.quick_dial&hl=en_IN"
    target="_blank"
-   class="group inline-flex items-center justify-center w-10 h-10 rounded-full bg-green-600 hover:bg-EB2C3B-700 from-green-500 to-emerald-600 text-white shadow-md hover:shadow-xl hover:scale-110 transition-all duration-300">
+   class="group inline-flex items-center justify-center w-24 h-36 hover:bg-EB2C3B-700 from-green-500 to-emerald-600  transition-all duration-300">
 
-    <!-- Android Icon -->
-    <svg xmlns="http://www.w3.org/2000/svg"
-         viewBox="0 0 24 24"
-         fill="currentColor"
-         class="w-5 h-5 group-hover:rotate-12 transition-transform duration-300">
-        <path d="M17.6 9.48l1.43-2.49a.5.5 0 10-.87-.5l-1.46 2.54A9.958 9.958 0 0012 8c-1.63 0-3.17.39-4.54 1.08L6 6.54a.5.5 0 10-.87.5L6.56 9.5A5.99 5.99 0 004 14v5a1 1 0 001 1h1v2a1 1 0 002 0v-2h8v2a1 1 0 002 0v-2h1a1 1 0 001-1v-5a5.99 5.99 0 00-2.4-4.52zM8 13a1 1 0 110-2 1 1 0 010 2zm8 0a1 1 0 110-2 1 1 0 010 2z"/>
-    </svg>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="2 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download w-4 h-4 text-primary" aria-hidden="true"><path d="M12 15V3"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m7 10 5 5 5-5"></path></svg>
-
+    <img 
+    src="{{ asset('play-store-android.png') }}" 
+    class="h-[50px] w-auto object-contain"
+/>
+     
 </a>
     		 
 			@if (!Auth::guard('clients')->check())
@@ -343,6 +339,18 @@
         {{-- Mobile buttons --}}
         <div class="md:hidden flex items-center gap-1.5">
            
+        
+
+<a href="https://play.google.com/store/apps/details?id=com.quick_dial&hl=en_IN"
+   target="_blank"
+   class="group inline-flex items-center justify-center hover:bg-EB2C3B-700 from-green-500 to-emerald-600  transition-all duration-300">
+
+     <img 
+    src="{{ asset('play-store-android.png') }}" 
+    class="h-20 w-auto sm:h-24 md:h-28 lg:h-32 object-contain" 
+/>
+     
+</a>
 
              <button
                 onclick="openLoginModal()"
