@@ -400,7 +400,7 @@ class CitySlugController extends Controller
             ->all();
 
 
-            // dd($agents);
+             
         // ── Agents comparison table ────────────────────────────────────────
         $agents = collect($agents)
             ->map(fn ($b) => $this->normalizeAgent($b))

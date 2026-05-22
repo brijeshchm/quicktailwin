@@ -605,6 +605,27 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
     </div>
     @endif
 
+
+
+    {{-- extra_description --}}
+    @if(!empty($kwData['extra_description']))
+     @php
+    $extra_heading = '';
+
+    if (!empty($kwData['extra_heading'])) {
+        $extra_heading=  $kwData['extra_heading'];
+    }else{
+     $extra_heading = $keyword . ' in ' . ucwords($area);
+    }    
+    @endphp
+
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mt-4 mx-4">
+        <h2 class="text-lg font-bold text-gray-900 mb-3"> {{ $extra_heading }}</h2>
+        <div class="text-sm text-gray-600 leading-relaxed">{!! $kwData['extra_description'] !!}</div>
+    </div>
+    @endif
+
+
     {{-- FAQ --}}
     @if(count($faqs ?? []) > 0)
     <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
@@ -634,7 +655,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
     @if(!empty($relatedCategory))
     <div class="bg-white py-10 border-t border-gray-200 mt-4">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-2xl font-bold text-gray-900 mb-6">Related Categories in <span class="text-blue-600">{{ ucfirst($city) }}</span></h2>
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Related Categories<span class="text-blue-600">{{ ucfirst($city) }}</span></h2>
             <div class="flex flex-wrap gap-x-8 gap-y-3 text-[15px]">
                 @foreach($relatedCategory as $slug => $name)
                 <a href="{{ route('child.show', $slug) }}" class="text-gray-700 hover:text-blue-600 transition-colors duration-200">{{ $name }}</a>

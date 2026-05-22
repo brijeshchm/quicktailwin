@@ -75,6 +75,9 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
     'count' => $starCounts[$s],
     'percent' => $totalReviews > 0 ? round(($starCounts[$s] / $totalReviews) * 100) : 0
 ]);
+
+
+ 
 @endphp
 
 <div class="min-h-screen bg-gray-50 flex flex-col mt-4"
@@ -657,6 +660,27 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
         <div class="text-sm text-gray-600 leading-relaxed">{!! $bottomDescription !!}</div>
     </div>
     @endif
+
+
+    {{-- extra_description --}}
+    @if(!empty($kwData['extra_description']))
+     @php
+    $extra_heading = '';
+
+    if (!empty($kwData['extra_heading'])) {
+        $extra_heading=  $kwData['extra_heading'];
+    }else{
+     $extra_heading = $keyword . ' in ' . ucwords($area);
+    }    
+    @endphp
+
+    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mt-4 mx-4">
+        <h2 class="text-lg font-bold text-gray-900 mb-3"> {{ $extra_heading }}</h2>
+        <div class="text-sm text-gray-600 leading-relaxed">{!! $kwData['extra_description'] !!}</div>
+    </div>
+    @endif
+
+
 
     {{-- FAQ --}}
     @if(count($faqs ?? []) > 0)

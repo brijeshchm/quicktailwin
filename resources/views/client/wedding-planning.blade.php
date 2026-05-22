@@ -341,14 +341,15 @@
     <div class="mb-16">
         <h2 class="serif text-3xl font-semibold mb-8 reveal">Pre-Wedding Planning</h2>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+
             @foreach($prewedding as $i => $item)
             <div class="reveal d-{{ min($i,8) }} bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
                 <div class="h-48 bg-gray-100 relative flex items-center justify-center text-6xl">
-
-                      <img src="{{ $cat['img'] }}" alt="{{ $cat['name'] }}"
-                     class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                     
+                    <img src="{{ $item['img'] }}" alt="{{ $item['name'] }}"  onerror="this.src='{{ asset('images/default.jpg') }}'"
+                     class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" >
                 </div>
-                <div class="p-4 text-center font-medium text-sm">{{ $item }}</div>
+                <div class="p-4 text-center font-medium text-sm">{{ $item['name'] }}</div>
             </div>
             @endforeach
         </div>
@@ -371,12 +372,93 @@
     <div class="mb-16">
         <h2 class="serif text-3xl font-semibold mb-8 reveal">For Your Big Day</h2>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+
+        
             @foreach($bigDay as $i => $item)
-            <div class="reveal d-{{ min($i,8) }} bg-white rounded-2xl p-6 text-center shadow-sm hover:shadow transition">
-                <div class="text-5xl mb-4">🎉</div>
-                <p class="font-semibold text-sm">{{ $item }}</p>
-            </div>
+             <div class="reveal d-{{ min($i, 8) }} group bg-white rounded-2xl overflow-hidden shadow-md
+            hover:shadow-2xl transition-shadow duration-500 cursor-pointer
+            tilt-card"
+     style="transform-style: preserve-3d; perspective: 1000px;">
+
+    <div class="relative w-full h-48 overflow-hidden tilt-inner"
+         style="transform-style: preserve-3d; transition: transform 0.3s ease;">
+
+        <img src="{{ $item['img'] }}"
+             alt="{{ $item['name'] }}"
+             loading="lazy"
+             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+
+        {{-- Floating name overlay (lifts on hover) --}}
+        <div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-transparent
+                    translate-y-2 group-hover:translate-y-0 opacity-90 group-hover:opacity-100
+                    transition-all duration-400"
+             style="transform: translateZ(20px);">
+            <p class="font-bold text-sm text-white text-center">{{ $item['name'] }}</p>
+        </div>
+    </div>
+</div>
+
+<script>
+(function () {
+    document.querySelectorAll('.tilt-card').forEach(card => {
+        const inner = card.querySelector('.tilt-inner');
+        if (!inner) return;
+
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const cx = rect.width / 2;
+            const cy = rect.height / 2;
+            const rotateX = ((y - cy) / cy) * -8;  // tilt strength
+            const rotateY = ((x - cx) / cx) * 8;
+
+            inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            inner.style.transform = 'rotateX(0) rotateY(0) scale(1)';
+        });
+    });
+})();
+</script>
             @endforeach
+
+
+
+        
+            @foreach($bigDay as $i => $item)
+             <div class="reveal d-{{ min($i, 8) }} group relative bg-white rounded-2xl overflow-hidden shadow-sm
+            hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 cursor-pointer">
+
+    {{-- Image wrapper --}}
+    <div class="relative w-full h-48 overflow-hidden">
+        <img src="{{ $item['img'] }}"
+             alt="{{ $item['name'] }}"
+             loading="lazy"
+             onerror="this.src='{{ asset('images/default.jpg') }}'"
+             class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110">
+
+        {{-- Shine sweep --}}
+        <div class="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000
+                    bg-gradient-to-r from-transparent via-white/40 to-transparent"></div>
+
+        {{-- Gradient overlay on hover --}}
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent
+                    opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+    </div>
+
+    {{-- Content --}}
+    <div class="p-5 text-center">
+        <p class="font-semibold text-sm text-gray-800 group-hover:text-indigo-600 transition-colors">
+            {{ $item['name'] }}
+        </p>
+    </div>
+</div>
+            @endforeach
+
+
+
         </div>
     </div>
 

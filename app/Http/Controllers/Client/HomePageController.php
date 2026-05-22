@@ -1969,17 +1969,27 @@ Instead of limiting learning to theory, the course takes you through:.",
             ['name' => 'Ananya & Vikram Mehta',  'location' => 'Delhi',     'date' => 'October 2024',  'rating' => 5, 'text' => 'From the mehendi ceremony to the reception, everything was perfect. Our wedding planner was always available, incredibly organized, and made us feel calm throughout.',  'avatar' => 'AV', 'grad' => 'from-amber-400 to-orange-500', 'package' => 'Premium Package'],
             ['name' => 'Deepa & Arjun Nair',     'location' => 'Bangalore', 'date' => 'February 2025', 'rating' => 5, 'text' => 'We had no idea how to plan a wedding for 400 guests. Shaadi6 took care of everything — venue, catering, flowers, even the honeymoon. Most stress-free experience ever.',  'avatar' => 'DA', 'grad' => 'from-purple-400 to-pink-500',  'package' => 'Royal Package'],
         ];
- 
-        $prewedding = [
-            'Wedding Astrologers','Marriage Certificate Agents','Jewellery Showrooms',
-            'Readymade Garments','Haldi Stage Decors','Wedding Card Printers',
-            'Hotels','Honeymoon Tour Packages',
-        ];
- 
-        $bigDay = [
-            'Stage Decorators','Wedding Caterers','Jewellery Showrooms','DJ Services',
-            'Wedding Bands','Bridal Makeup Artists','Wedding Choreographers','Party Organisers',
-        ];
+		$prewedding = [
+			['name' => 'Wedding Astrologers', 'img' => 'popular/Wedding-Astrologers.jpg'],
+			['name' => 'Marriage Certificate Agents', 'img' => 'popular/Marriage-Certificate-Agents.jpg'],
+			['name' => 'Jewellery Showrooms', 'img' => 'popular/Jewellery-Showrooms.jpg'],
+			['name' => 'Readymade Garments', 'img' => 'popular/Readymade-Garments.jpg'],
+			['name' => 'Haldi Stage Decors', 'img' => 'popular/Haldi-Stage-Decors.jpg'],
+			['name' => 'Wedding Card Printers', 'img' => 'popular/Wedding-Card-Printers.jpg'],
+			['name' => 'Hotels', 'img' => 'popular/Hotels.jpg'],
+			['name' => 'Honeymoon Tour Packages', 'img' => 'popular/Honeymoon-Tour-Packages.jpg'],
+		];
+
+		$bigDay = [
+			['name' => 'Stage Decorators', 'img' => 'popular/Stage_Decorators.png'],
+			['name' => 'Wedding Caterers', 'img' => 'popular/Wedding-Caterers.jpg'],
+			['name' => 'Jewellery Showrooms', 'img' => 'popular/Jewellery-Showrooms.jpg'],
+			['name' => 'DJ Services', 'img' => 'popular/DJ-Services.jpg'],
+			['name' => 'Wedding Bands', 'img' => 'popular/Wedding-Bands.jpg'],
+			['name' => 'Bridal Makeup Artists', 'img' => 'popular/Bridal-Makeup-Artists.jpg'],
+			['name' => 'Wedding Choreographers', 'img' => 'popular/Wedding-Choreographers.jpg'],
+			['name' => 'Party Organisers', 'img' => 'popular/Party-Organisers.jpg'],
+		];
  
         return view('client.wedding-planning', compact(
             'stats','categories','brideCategories','groomCategories',
@@ -1989,7 +1999,34 @@ Instead of limiting learning to theory, the course takes you through:.",
 
 	}
 
+	public function doctorHub(Request $request)
+	{
 
+  	return view('client.doctor-hub');
+	}
+
+
+	
+	public function spaHub(Request $request)
+	{
+
+
+	 $spa = [
+            'name'        => 'Serenity Spa & Wellness',
+            'tagline'     => 'Pure indulgence, modern wellness',
+            'phone'       => '+919876543210',
+            'whatsapp'    => '919876543210',
+            'email'       => 'hello@serenityspa.in',
+            'address'     => '42 Lotus Garden Lane, Koregaon Park, Pune',
+            'slug'        => 'serenity-spa-pune',
+             'location'  => 'Koregaon Park · Pune',
+		 
+        'est'       => '2013',
+        ];
+
+
+  	return view('client.spa-hub', compact('spa'));
+	}
 
 
 	public function getZones($city_id)

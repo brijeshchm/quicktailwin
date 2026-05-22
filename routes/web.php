@@ -492,6 +492,8 @@ Route::get('/courses/playwright-automation-training-in-noida', [App\Http\Control
 
 
 Route::get('/wedding-pannel', [App\Http\Controllers\Client\HomePageController::class, 'weddingPannel'])->name('wedding.pannel');
+//Route::get('/doctor-hub', [App\Http\Controllers\Client\HomePageController::class, 'doctorHub'])->name('doctor.hub');
+Route::get('/spa-hub', [App\Http\Controllers\Client\HomePageController::class, 'spaHub'])->name('spa.hub');
 
 
 
