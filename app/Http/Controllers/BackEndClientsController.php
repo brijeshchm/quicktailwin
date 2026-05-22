@@ -1328,7 +1328,7 @@ class BackEndClientsController extends Controller
 				$src = imagecreatefromjpeg($imagePath);
 				break;
 			case 'png':
-				$src = imagecreatefrompng($imagePath);
+				$src = @imagecreatefrompng($imagePath);
 				imagepalettetotruecolor($src);
 				imagealphablending($src, true);
 				imagesavealpha($src, true);
