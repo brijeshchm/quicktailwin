@@ -196,9 +196,7 @@ Route::middleware('auth:clients')->group(function () {
 Route::get('/client-login', [App\Http\Controllers\ClientAuth\AuthController::class, 'clientLogin']);
 Route::post('/client-login', [App\Http\Controllers\ClientAuth\AuthController::class, 'clientLoginPost'])->name('client.login');
 
-// Route::post('auth/send-otp', [App\Http\Controllers\ClientAuth\AuthController::class, 'sendOtp']);
-//Route::post('/client-verify-otp', [App\Http\Controllers\ClientAuth\AuthController::class, 'clientVerifyOtp']);
-
+ 
 
 Route::get('/google-login', [App\Http\Controllers\ClientAuth\AuthController::class, 'redirectToGoogle'])->name('google.login');
 Route::get('/auth/google/callback', [App\Http\Controllers\ClientAuth\AuthController::class, 'handleGoogleCallback']);

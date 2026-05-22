@@ -903,7 +903,9 @@ class HomePageController extends Controller
 			//  dd($user);
             $message = "{$otp} is QuickDials Verification Code for {$request->email} .";
             $subject = "{$otp} is QuickDials Verification Code";
-            $checkmail = Mail::send('emails.sendotp_to_email', ['msg' => $message], function ($m) use ($message, $request, $subject) {
+        
+
+			 $checkmail = Mail::send('emails.sendotp_to_email', ['otp' => $otp,'name'=>$request->email], function ($m) use ($message, $request, $subject) {
                 $m->from('leads.quickdials@gmail.com', 'Login OTP');
                 $m->to($request->input('email'), "")->subject($subject);
             });

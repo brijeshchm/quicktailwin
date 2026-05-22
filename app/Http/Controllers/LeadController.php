@@ -1595,18 +1595,15 @@ class LeadController extends Controller
 	 */
 	public function sendLeadEmail($client, $lead, $type = null)
 	{
+		 
+
 		$template = 'emails.sendlead';
-		if (!is_null($type) && $type == 'defaulter') {
-			$template = 'emails.send_lead_to_defaulters';
-		}
+		$clientname=$client->business_name;
+		$check=  Mail::send($template, ['clientname'=>$clientname,'lead'=>$lead], function ($m) use ($client,$lead) {    
+		$m->from('leads.quickdials@gmail.com', 'QuickDials');             
 
-		$check = Mail::send($template, ['client' => $client, 'lead' => $lead], function ($m) use ($client, $lead) {
-
-			$m->from('info@quickdials.com', 'QuickDials');
-			$email = "info@quicindia.com";
-			//$client->email
-			// $m->to('info@quicindia.in', $client->first_name." ".$client->last_name)->subject('quickdials Lead: '.$lead->kw_text);
-		});
+		$m->to($client->email, ucfirst($lead->name))->subject($lead->kw_text.' | '.$lead->name.' - Quickdials.com');
+		});	
 
 	}
 
@@ -2283,7 +2280,7 @@ class LeadController extends Controller
 								$check=  Mail::send($template, ['clientname'=>$clientname,'lead'=>$lead], function ($m) use ($client,$lead) {    
 								$m->from('leads.quickdials@gmail.com', 'QuickDials');             
 							 
-								$m->to($client->email, $lead->name)->subject($lead->kw_text.' | '.$lead->name.' - Quickdials.com');
+								$m->to($client->email, ucfirst($lead->name))->subject($lead->kw_text.' | '.$lead->name.' - Quickdials.com');
 								});	
 									 	
 								//event(new LeadPush($lead,$cid));
