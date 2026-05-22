@@ -183,7 +183,7 @@ private function saveImageSmart($file, $destinationPath, $width = null, $height 
     $ext = strtolower($file->getClientOriginalExtension());
     $name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
     $name = str_replace(' ', '_', $name);
-    $filename = time();
+    $filename = bin2hex(random_bytes(5)).'_Quickdials';
 
     // ✅ SVG → Save directly
     if ($ext === 'svg') {

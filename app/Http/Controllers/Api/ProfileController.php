@@ -203,7 +203,7 @@ class ProfileController extends Controller
                     'landmark' => $user->landmark,
                     'state' => $user->state,
                     'country' => $user->country,
-                    'time' => $time,
+                    // 'time' => $time,
                     'days' => $days,
                     'times' => $times,
                     'certifications' => $certifications,

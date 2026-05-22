@@ -1871,10 +1871,10 @@ textarea.form-control-modern {
 </style>
 				   <form class="recent_form" id="recentActivityFrom" method="POST"
                                         enctype="multipart/form-data">
-                         <input type="hidden" name="business_id"
-                                            value="{{ old('middle_name', (isset($client)) ? $client->id : "")}}">
+        <input type="hidden" name="business_id"
+        value="{{ old('middle_name', (isset($client)) ? $client->id : "")}}">
 
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                                       
 
@@ -1919,7 +1919,7 @@ textarea.form-control-modern {
                                 <div class="pdf-wrap">
                                     <embed src="{{ $recentUrl }}" type="application/pdf" class="pdf-box">
                                     <a href="{{ $recentUrl }}" target="_blank" class="btn btn-light btn-sm view-pdf">
-                                        <i class="bi bi-eye"></i> View PDF
+                                        <i class="fa fa-eye"></i> View PDF
                                     </a>
                                 </div>
                             @else
@@ -1933,7 +1933,7 @@ textarea.form-control-modern {
                                class="btn-remove"
                                title="Remove"
                                onclick="return confirm('Remove this file?');">
-                                <i class="bi bi-trash"></i>
+                                <i class="fa fa-trash"></i>
                             </a>
                         </div>
                     @else
@@ -3097,7 +3097,9 @@ function per_select_zone(per_city,per_zone){
    
     function autoSaveRecentForm() {
 	const clientId = "{{ isset($client->id) ? $client->id : '' }}"; 
-    const formData = new FormData(recentActivityFrom);     
+    const formData = new FormData(recentActivityFrom);    
+    
+ 
 	mainSpinner.start();      
 		fetch("{{ url('developer/clients/save-recent-activity-auto') }}/" + clientId, {
         method: "POST",

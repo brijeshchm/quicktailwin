@@ -269,7 +269,7 @@ textarea.form-control-modern {
 
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-                                        <div class="row">
+                                  
 
 
 <div class="row">
@@ -376,7 +376,7 @@ textarea.form-control-modern {
                                   
 
 
-                                        </div>
+                                    
 
  
 

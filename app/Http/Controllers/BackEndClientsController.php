@@ -1223,7 +1223,7 @@ class BackEndClientsController extends Controller
 			$validator = Validator::make($request->all(), [
 				'logo' => 'mimes:jpeg,jpg,png,svg,webp|max:12048',
 				'profile_pic' => 'mimes:jpeg,jpg,png,svg,webp|max:12048',
-				'year_of_estb' => 'required',
+				// 'year_of_estb' => 'required',
 			], [
 				'profile_pic.dimensions' => 'Please upload Banner of given size -> [Minimum Height:319px] &amp; [Minimum Width:1137px].',
 				'logo.dimensions' => 'Please upload profile logo of given size -> .[Maximum Height:150px] &amp; [Maximum Width:300px]'
@@ -1310,8 +1310,9 @@ class BackEndClientsController extends Controller
 		$ext = strtolower($file->getClientOriginalExtension());
 		$name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
 		$name = str_replace(' ', '_', $name);
-		$filename = time();
+		$filename = bin2hex(random_bytes(5)).'_Quickdials';
 
+		 
 		// ✅ SVG → Save directly
 		if ($ext === 'svg') {
 			$finalName = $filename . '.svg';
@@ -1757,7 +1758,7 @@ public function autoSaveRecentActivity(Request $request)
     for ($i = 1; $i <= 6; $i++) {
         $rules["recent_name{$i}"]      = 'nullable|string|max:255';
         $rules["recent_paragraph{$i}"] = 'nullable|string|max:2000';
-        $rules["recent_img{$i}"]       = 'nullable|file|mimes:jpg,jpeg,png,webp,svg,pdf|max:10240';
+        $rules["recent_img{$i}"]       = 'nullable|file|mimes:jpg,jpeg,png,webp,svg|max:10240';
     }
 
     $validator = Validator::make($request->all(), $rules);
@@ -1809,6 +1810,7 @@ public function autoSaveRecentActivity(Request $request)
 
         // Save image (if uploaded)
         if ($request->hasFile($imgField)) {
+			 
             $this->deleteOldImage($client->$imgField);
 
             $newFile = $this->saveImageSmart(
