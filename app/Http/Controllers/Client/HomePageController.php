@@ -1929,15 +1929,15 @@ Instead of limiting learning to theory, the course takes you through:.",
         ];
  
         $brideCategories = [
-            ['name' => 'Makeup Artists',    'img' => 'popular/Banquet-Halls.jpg'],
-            ['name' => 'Mehendi Artists',   'img' => 'popular/Mehandi_artist.jpg'],
-            ['name' => 'Bridal Wear',       'img' => 'popular/Bridal_wear.jpg'],
-            ['name' => 'Bridal Entry',       'img' => 'popular/stage-decoratorss.jpg'],
-            ['name' => 'Varmala', 'img' => 'popular/Trousseau_Packing.png'],
-            ['name' => 'Wedding footwear',     'img' => 'popular/South_Rituals.png'],
-            ['name' => 'Bridal Jewellery',  'img' => 'popular/Jewellery.jpg'],
-            ['name' => 'Invitation Cards',  'img' => 'popular/Invitation_Cards.png'],
-            ['name' => 'Honeymoon Planning','img' => 'popular/Honeymoon_Planning.png'],
+            ['name' => 'Makeup Artists',    'img' => 'popular/Makeup_Artists_bride.png'],
+            ['name' => 'Mehendi Artists',   'img' => 'popular/Mehendi_Artists_bride.png'],
+            ['name' => 'Bridal Wear',       'img' => 'popular/Bridal_Wear_bride.png'],
+            ['name' => 'Bridal Entry',       'img' => 'popular/Bridal_Entry_bride.png'],
+            ['name' => 'Varmala', 'img' => 'popular/Varmala.png'],
+            ['name' => 'Wedding footwear',     'img' => 'popular/Wedding_footwear.png'],
+            ['name' => 'Bridal Jewellery',  'img' => 'popular/Bridal_Jewellery_bride.png'],
+            ['name' => 'Invitation Cards',  'img' => 'popular/Invitation_Cards_bride.png'],
+            ['name' => 'Honeymoon Planning','img' => 'popular/Honeymoon_Planning_bride.png'],
         ];
  
         $groomCategories = [
@@ -1972,25 +1972,25 @@ Instead of limiting learning to theory, the course takes you through:.",
             ['name' => 'Deepa & Arjun Nair',     'location' => 'Bangalore', 'date' => 'February 2025', 'rating' => 5, 'text' => 'We had no idea how to plan a wedding for 400 guests. Shaadi6 took care of everything — venue, catering, flowers, even the honeymoon. Most stress-free experience ever.',  'avatar' => 'DA', 'grad' => 'from-purple-400 to-pink-500',  'package' => 'Royal Package'],
         ];
 		$prewedding = [
-			['name' => 'Wedding Astrologers', 'img' => 'popular/Wedding-Astrologers.jpg'],
-			['name' => 'Marriage Certificate Agents', 'img' => 'popular/Marriage-Certificate-Agents.jpg'],
-			['name' => 'Jewellery Showrooms', 'img' => 'popular/Jewellery-Showrooms.jpg'],
-			['name' => 'Readymade Garments', 'img' => 'popular/Readymade-Garments.jpg'],
-			['name' => 'Haldi Stage Decors', 'img' => 'popular/Haldi-Stage-Decors.jpg'],
-			['name' => 'Wedding Card Printers', 'img' => 'popular/Wedding-Card-Printers.jpg'],
-			['name' => 'Hotels', 'img' => 'popular/Hotels.jpg'],
-			['name' => 'Honeymoon Tour Packages', 'img' => 'popular/Honeymoon-Tour-Packages.jpg'],
+			['name' => 'Wedding Astrologers', 'img' => 'popular/Wedding-Astrologers.png'],
+			['name' => 'Marriage Certificate Agents', 'img' => 'popular/Marriage-Certificate-Agents.png'],
+			['name' => 'Jewellery Showrooms', 'img' => 'popular/Jewellery-Showrooms.png'],
+			['name' => 'Readymade Garments', 'img' => 'popular/Readymade-Garments.png'],
+			['name' => 'Haldi Stage Decors', 'img' => 'popular/Haldi-Stage-Decors.png'],
+			['name' => 'Wedding Card Printers', 'img' => 'popular/Wedding-Card-Printers.png'],
+			['name' => 'Hotels', 'img' => 'popular/Hotels.png'],
+			['name' => 'Honeymoon Tour Packages', 'img' => 'popular/Honeymoon-Tour-Packages.png'],
 		];
 
 		$bigDay = [
 			['name' => 'Stage Decorators', 'img' => 'popular/Stage_Decorators.png'],
-			['name' => 'Wedding Caterers', 'img' => 'popular/Wedding-Caterers.jpg'],
-			['name' => 'Cold Pyro & Fog Matka', 'img' => 'popular/Jewellery-Showrooms.jpg'],
-			['name' => 'DJ Services', 'img' => 'popular/DJ-Services.jpg'],
-			['name' => 'Wedding Bands', 'img' => 'popular/Wedding-Bands.jpg'],
-			['name' => 'Singer dancer', 'img' => 'popular/Bridal-Makeup-Artists.jpg'],
-			['name' => 'Wedding Choreographers', 'img' => 'popular/Wedding-Choreographers.jpg'],
-			['name' => 'Wedding Organisers', 'img' => 'popular/Party-Organisers.jpg'],
+			['name' => 'Wedding Caterers', 'img' => 'popular/Wedding_Caterers.png'],
+			['name' => 'Cold Pyro & Fog Matka', 'img' => 'popular/Cold_Pyro_Fog_Matka.png'],
+			['name' => 'DJ Services', 'img' => 'popular/DJ_Services.png'],
+			['name' => 'Wedding Bands', 'img' => 'popular/Wedding-Bands.png'],
+			['name' => 'Singer dancer', 'img' => 'popular/Singer_dancer.png'],
+			['name' => 'Wedding Choreographers', 'img' => 'popular/Wedding_Choreographers.png'],
+			['name' => 'Wedding Organisers', 'img' => 'popular/Wedding_Organisers.png'],
 		];
  
         return view('client.wedding-planning', compact(
@@ -2025,9 +2025,46 @@ Instead of limiting learning to theory, the course takes you through:.",
 		 
         'est'       => '2013',
         ];
+$reviews =  [
+            ['name' => 'Priya M.',  'rating' => 5, 'created_at' => '2025-03-15', 'treatment' => 'Signature Retreat',  'text' => "Absolutely heavenly — three hours of uninterrupted bliss. Staff is attentive, ambiance is world-class, and the products are genuinely luxurious. Serenity is the best spa I've ever visited.",                  'color' => '#f97316'],
+            ['name' => 'Rohan K.',  'rating' => 5, 'created_at' => '2025-02-10', 'treatment' => 'Hot Stone Therapy',  'text' => "The hot stone therapy was exactly what my back needed. Every detail was considered — the music, aromas, temperature. I left feeling like a different person. Already booked my next session.",                'color' => '#ea580c'],
+            ['name' => 'Ananya S.', 'rating' => 5, 'created_at' => '2025-01-22', 'treatment' => "Couple's Retreat",   'text' => "Booked for our anniversary — the private suite was set up with incredible thoughtfulness. Both of us agree it was the most memorable thing we've done together.",                                              'color' => '#f59e0b'],
+            ['name' => 'Deepak V.', 'rating' => 4, 'created_at' => '2024-12-05', 'treatment' => 'Ayurvedic Ritual',   'text' => "Authentic and deeply relaxing — herbal oils of excellent quality and a therapist who explained each step. Slightly long wait on Saturday but the treatment was excellent.",                                    'color' => '#0d9488'],
+            ['name' => 'Meera T.',  'rating' => 5, 'created_at' => '2024-11-18', 'treatment' => 'Facial Glow',        'text' => "My skin hasn't looked this good in years — even a week after. Fully bespoke to my skin type and the products were genuinely premium. Worth every rupee and more.",                                              'color' => '#7c3aed'],
+            ['name' => 'Sanjay R.', 'rating' => 5, 'created_at' => '2024-10-30', 'treatment' => 'Swedish Massage',    'text' => "My first spa experience and Serenity made it unforgettable. The Swedish massage was deeply relaxing, the environment thoughtful. I've been back twice already.",                                                  'color' => '#db2777'],
+        ];
+ 
+
+  	return view('client.spa-hub', compact('spa','reviews'));
+	}
+	
+	public function saloonHub(Request $request)
+	{
 
 
-  	return view('client.spa-hub', compact('spa'));
+	 $spa = [
+            'name'        => 'Serenity Spa & Wellness',
+            'tagline'     => 'Pure indulgence, modern wellness',
+            'phone'       => '+919876543210',
+            'whatsapp'    => '919876543210',
+            'email'       => 'hello@serenityspa.in',
+            'address'     => '42 Lotus Garden Lane, Koregaon Park, Pune',
+            'slug'        => 'serenity-spa-pune',
+             'location'  => 'Koregaon Park · Pune',
+		 
+        'est'       => '2013',
+        ];
+$reviews =  [
+            ['name' => 'Priya M.',  'rating' => 5, 'created_at' => '2025-03-15', 'treatment' => 'Signature Retreat',  'text' => "Absolutely heavenly — three hours of uninterrupted bliss. Staff is attentive, ambiance is world-class, and the products are genuinely luxurious. Serenity is the best spa I've ever visited.",                  'color' => '#f97316'],
+            ['name' => 'Rohan K.',  'rating' => 5, 'created_at' => '2025-02-10', 'treatment' => 'Hot Stone Therapy',  'text' => "The hot stone therapy was exactly what my back needed. Every detail was considered — the music, aromas, temperature. I left feeling like a different person. Already booked my next session.",                'color' => '#ea580c'],
+            ['name' => 'Ananya S.', 'rating' => 5, 'created_at' => '2025-01-22', 'treatment' => "Couple's Retreat",   'text' => "Booked for our anniversary — the private suite was set up with incredible thoughtfulness. Both of us agree it was the most memorable thing we've done together.",                                              'color' => '#f59e0b'],
+            ['name' => 'Deepak V.', 'rating' => 4, 'created_at' => '2024-12-05', 'treatment' => 'Ayurvedic Ritual',   'text' => "Authentic and deeply relaxing — herbal oils of excellent quality and a therapist who explained each step. Slightly long wait on Saturday but the treatment was excellent.",                                    'color' => '#0d9488'],
+            ['name' => 'Meera T.',  'rating' => 5, 'created_at' => '2024-11-18', 'treatment' => 'Facial Glow',        'text' => "My skin hasn't looked this good in years — even a week after. Fully bespoke to my skin type and the products were genuinely premium. Worth every rupee and more.",                                              'color' => '#7c3aed'],
+            ['name' => 'Sanjay R.', 'rating' => 5, 'created_at' => '2024-10-30', 'treatment' => 'Swedish Massage',    'text' => "My first spa experience and Serenity made it unforgettable. The Swedish massage was deeply relaxing, the environment thoughtful. I've been back twice already.",                                                  'color' => '#db2777'],
+        ];
+ 
+
+  	return view('client.saloon-hub', compact('spa','reviews'));
 	}
 
 

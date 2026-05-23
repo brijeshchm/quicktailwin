@@ -3014,7 +3014,7 @@ var dataTableAssignedKeywords = $('#datatable-assigned-keywords').dataTable({
 						$('#messagemodel').modal({keyboard:false,backdrop:'static'});
 						$('#messagemodel').css({'width':'100%'});
 							removeValidationErrors($this);
-						 	window.location.href ="/developer/blog/blogdetails";
+						 	// window.location.href ="/developer/blog/blogdetails";
 						}else{
 							$('#messagemodel .modal-title').text("Meta Information");	
 							$('#messagemodel .modal-body').html("<div class='alert alert-danger'>"+data.msg+"</div>");			
@@ -3038,8 +3038,7 @@ var dataTableAssignedKeywords = $('#datatable-assigned-keywords').dataTable({
 			},	
 			 updateBlogMeta:function(THIS,id){	
 			  var $this = $(THIS);
-			var form = new FormData(THIS);	
-		 
+			var form = new FormData(THIS);			 
 				$.ajax({
 					url:"/developer/blog/updateBlogMeta/"+id,
 					type:"POST",					   
@@ -3255,7 +3254,61 @@ var dataTableAssignedKeywords = $('#datatable-assigned-keywords').dataTable({
 			
 		};
 	})();
-// PUSH LEAD CONTROLLER
+
+
+var bulkLeadController = (function(){
+		return {		 		  
+			 
+			 saveBulkLead:function(THIS){	
+			  var $this = $(THIS);
+			var form = new FormData(THIS);		
+				 console.log(form);
+				$.ajax({
+					url:"/developer/bulkupload/lead",
+					type:"POST",					   
+					dataType:"json",	
+					data:form,
+					 cache: false,
+					contentType: false, 
+                    processData: false,                      
+					success:function(data){
+					 	
+						if(data.status){	
+					 					
+						$('#messagemodel .modal-title').text("Bulk lead");	
+						$('#messagemodel .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
+						$('#messagemodel').modal({keyboard:false,backdrop:'static'});
+						$('#messagemodel').css({'width':'100%'});
+							removeValidationErrors($this);
+						 	 
+						}else{
+							$('#messagemodel .modal-title').text("Meta Information");	
+							$('#messagemodel .modal-body').html("<div class='alert alert-danger'>"+data.msg+"</div>");			
+							$('#messagemodel').modal({keyboard:false,backdrop:'static'});
+							$('#messagemodel').css({'width':'100%'});		 
+							
+						}
+					},
+					error:function(jqXHR, textStatus, errorThrown){
+					 
+						var response = JSON.parse(jqXHR.responseText);
+						if(response.status){ 
+							showValidationErrors($this,response.errors);						 
+						}else{
+							alert('Something went wrong');
+						}
+						 
+					}
+				}); 
+				 return false;	
+			}
+			  	
+		};
+	})();
+
+
+
+	// PUSH LEAD CONTROLLER
 // ********************
 
 // *************

@@ -313,13 +313,13 @@ document.addEventListener('DOMContentLoaded', () => {
     {{-- Action Buttons --}}
     <div class="relative z-10 px-3 sm:px-5 pb-3 sm:pb-4 pl-4 sm:pl-6">
         <div class="flex items-center gap-1.5 sm:gap-2 w-full">
-            <!-- <a href="tel:{{ $phone }}" class="flex-1 flex items-center justify-center gap-1 sm:gap-1.5 py-1.5 sm:py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-[10px] sm:text-xs font-semibold shadow-sm shadow-indigo-200 transition-colors">
+            <a  class="flex-1 flex items-center justify-center gap-1 sm:gap-1.5 py-1.5 sm:py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-[10px] sm:text-xs font-semibold shadow-sm shadow-indigo-200 transition-colors">
                 📞 <span>Call</span>
-            </a> -->
-            <!-- <a href="https://wa.me/{{ preg_replace('/\D/', '', $phone) }}" target="_blank" rel="noopener noreferrer"
+            </a>
+            <a target="_blank" rel="noopener noreferrer"
                class="flex-1 flex items-center justify-center gap-1 sm:gap-1.5 py-1.5 sm:py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-[10px] sm:text-xs font-semibold shadow-sm shadow-emerald-200 transition-colors">
                 💬 <span>WhatsApp</span>
-            </a> -->
+            </a>
             <button onclick="document.getElementById('enquiry-modal').classList.add('open')"
                class="flex-1 relative flex items-center justify-center gap-1 sm:gap-1.5 py-1.5 sm:py-2 rounded-xl bg-violet-600 hover:bg-violet-700 text-white text-[10px] sm:text-xs font-semibold shadow-sm shadow-violet-200 transition-colors">
                 ✉ <span>Enquiry</span>

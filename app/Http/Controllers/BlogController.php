@@ -100,8 +100,6 @@ class BlogController extends Controller
 	{
 		date_default_timezone_set('Asia/Kolkata');
 		if ($request->ajax()) {
-
-
 			try {
 				$validator = Validator::make($request->all(), [
 					'name' => 'required|string|min:3|max:165',

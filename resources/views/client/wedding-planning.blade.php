@@ -426,38 +426,7 @@
 
 
 
-        
-            @foreach($bigDay as $i => $item)
-             <div class="reveal d-{{ min($i, 8) }} group relative bg-white rounded-2xl overflow-hidden shadow-sm
-            hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 cursor-pointer">
-
-    {{-- Image wrapper --}}
-    <div class="relative w-full h-48 overflow-hidden">
-        <img src="{{ $item['img'] }}"
-             alt="{{ $item['name'] }}"
-             loading="lazy"
-             onerror="this.src='{{ asset('images/default.jpg') }}'"
-             class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110">
-
-        {{-- Shine sweep --}}
-        <div class="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000
-                    bg-gradient-to-r from-transparent via-white/40 to-transparent"></div>
-
-        {{-- Gradient overlay on hover --}}
-        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent
-                    opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-    </div>
-
-    {{-- Content --}}
-    <div class="p-5 text-center">
-        <p class="font-semibold text-sm text-gray-800 group-hover:text-indigo-600 transition-colors">
-            {{ $item['name'] }}
-        </p>
-    </div>
-</div>
-            @endforeach
-
-
+         
 
         </div>
     </div>
@@ -554,7 +523,7 @@
 
             {{-- Feature card (desktop only) --}}
             <div class="reveal-r hidden lg:block group relative rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-shadow cursor-pointer">
-                <img src="popular/Grand_Bridal.jpg"
+                <img src="popular/Grand_Bridal_Entry1.png"
                      alt="Grand Bridal Entry"
                      class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                      >

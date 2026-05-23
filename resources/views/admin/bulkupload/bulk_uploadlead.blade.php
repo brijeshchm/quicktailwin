@@ -2,7 +2,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Bulk Upload - Lead ddd</h1>
+                    <h1 class="page-header">Bulk Upload - Lead</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -46,24 +46,9 @@
 							{{Session::get('danger_msg')}}
 						</div>
 					@endif
-					<form class="form-horizontal" action="{{ url('developer/bulkupload/lead') }}" method="POST" enctype="multipart/form-data">
+					<form class="form-horizontal" method="POST" onsubmit="return bulkLeadController.saveBulkLead(this,<?php echo (isset($edit_data->id)? $edit_data->id:""); ?>)" enctype="multipart/form-data">
 						{{csrf_field()}}
-						<div class="form-group">
-									<div class="control-label col-md-2">
-									<label>Select User<sup><i style="color:red" class="fa fa-asterisk fa-fw" aria-hidden="true"></i></sup> </label>
-									</div>
-									<div class="col-md-4">
-									<select class="form-control select2-single" name="user_id" required>
-									<option value="">Select User</option>
-									<?php $getUserList = getUserList(); ?>
-									@if(isset($getUserList))
-									@foreach($getUserList as $counsellor)								 
-									<option value="{{ $counsellor->id }}">{{$counsellor->first_name}} {{$counsellor->last_name}}</option>									 
-									@endforeach
-									@endif
-									</select>
-									</div>
-						</div>
+						 
 							<div class="form-group">
 										<div class="control-label col-md-2">
 											<label>Lead Type<sup><i style="color:red" class="fa fa-asterisk fa-fw" aria-hidden="true"></i></sup></label>
