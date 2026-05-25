@@ -296,7 +296,7 @@ document.addEventListener('DOMContentLoaded', () => {
  
             {{-- Description --}}
             @if($business['overviewBusiness'])
-            <p class="sm:block text-xs text-gray-500 mt-1 line-clamp-1">{!! $business['overviewBusiness'] !!} sdadasd</p>
+            <p class="sm:block text-xs text-gray-500 mt-1 line-clamp-1">{!! $business['overviewBusiness'] !!} </p>
             @endif
 
             {{-- Tags/Category --}}
