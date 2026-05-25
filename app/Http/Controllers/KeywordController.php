@@ -448,7 +448,7 @@ class KeywordController extends Controller
 	{
 		$edit_data = Keyword::find($id);
 		$banner_data = KeywordBanner::where('keyword_id',$id)->get();
-		$clients = Client::select('business_slug','id','business_name')->whereNotNull('business_slug')->get();
+		$clients = Client::select('business_slug','id','business_name')->whereNotNull('business_slug')->orderBy('business_name','asc')->get();
 
 		return view("admin.editIcon", ['edit_data' => $edit_data,'banner_data'=>$banner_data,'clients'=>$clients]);
 
