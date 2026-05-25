@@ -304,7 +304,13 @@ async function handleVerifyOtp() {
         if (data.status) {
             document.getElementById('success-email').textContent = email;
             showStep('success');
-            setTimeout(() => { window.location.href = data.redirect; }, 1500);
+            setTimeout(() => {
+                
+            window.location.href = data.redirect;
+
+
+
+             }, 1500);
         } else {
             showError('otp-error', data.message || 'Invalid or expired code.');
         }

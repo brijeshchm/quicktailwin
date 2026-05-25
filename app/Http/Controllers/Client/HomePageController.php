@@ -1918,14 +1918,14 @@ Instead of limiting learning to theory, the course takes you through:.",
         $categories = [
             ['name' => 'Banquet Halls',     'img' => '/popular/Banquet-Halls.jpg'],
             ['name' => 'Decor & Flowers',   'img' => '/popular/Flower_Decoration.jpg'],
-            ['name' => 'Invitation Cards',  'img' => '/popular/invitation.png'],
-            ['name' => 'Caterers & Food',   'img' => '/popular/catering.jpg'],
-            ['name' => 'Trousseau Packing', 'img' => '/popular/Trousseau_Packing.png'],
-            ['name' => 'Photography',       'img' => '/popular/photography.jpg'],
-            ['name' => 'Mehendi Artists',   'img' => '/popular/mehendi.jpg'],
-            ['name' => 'Musicians & DJ',    'img' => '/popular/music.jpg'],
-            ['name' => 'Choreography',      'img' => '/popular/choreo.jpg'],
-            ['name' => 'Wedding Cakes',     'img' => '/popular/cake.jpg'],
+            ['name' => 'Invitation Cards',  'img' => '/popular/Invitation_Cards_pre.png'],
+            ['name' => 'Caterers & Food',   'img' => '/popular/Caterers_Food.png'],
+            ['name' => 'Trousseau Packing', 'img' => '/popular/Trousseau_Packing_pre.png'],
+            ['name' => 'Photography',       'img' => '/popular/Photography_pre.png'],
+            ['name' => 'Mehendi Artists',   'img' => '/popular/Mehendi_Artists_pre.png'],
+            ['name' => 'Musicians & DJ',    'img' => '/popular/Musicians_DJ_pre.png'],
+            ['name' => 'Choreography',      'img' => '/popular/Choreography_pre.png'],
+            ['name' => 'Wedding Cakes',     'img' => '/popular/Wedding_cakes.png'],
         ];
  
         $brideCategories = [
@@ -1941,15 +1941,15 @@ Instead of limiting learning to theory, the course takes you through:.",
         ];
  
         $groomCategories = [
-            ['name' => 'Wedding Suit',      'img' => 'popular/wedding_suit_for_groom.jpg'],
-            ['name' => 'Mehendi Artists',   'img' => 'popular/Mehandi_artist.jpg'],
-            ['name' => 'Sherwani & Wear',   'img' => 'popular/Sherwani_Wear.png'],
-            ['name' => 'Groom Entry',       'img' => 'popular/Groom_Entry.png'],
-            ['name' => 'Wedding Rath',     'img' => 'popular/South_Rituals.png'],
-            ['name' => 'Fireworks & Crackers',     'img' => 'popular/North_Rituals.png'],
-            ['name' => 'Grooming & Hair',   'img' => 'popular/Grooming_Hair.jpg'],
-            ['name' => 'Dhol & Band',       'img' => 'popular/Dhol_Shehnai.jpg'],
-            ['name' => 'Pre-Wedding Shoot', 'img' => 'popular/Pre-Wedding-Shoot.jpg'],
+            ['name' => 'Wedding Suit',      'img' => 'popular/Wedding_Suit_groom.png'],
+            ['name' => 'Mehendi Artists',   'img' => 'popular/Mehendi_Artists_groom.png'],
+            ['name' => 'Sherwani & Wear',   'img' => 'popular/Sherwani_Wear_groom.png'],
+            ['name' => 'Groom Entry',       'img' => 'popular/Groom_Entry_groom.png'],
+            ['name' => 'Wedding Rath',     'img' => 'popular/Wedding_Rath_groom.png'],
+            ['name' => 'Fireworks & Crackers',     'img' => 'popular/Fireworks_Crackers.png'],
+            ['name' => 'Grooming & Hair',   'img' => 'popular/Grooming_Hair_groom.png'],
+            ['name' => 'Dhol & Band',       'img' => 'popular/Dhol_Band_groom.png'],
+            ['name' => 'Pre-Wedding Shoot', 'img' => 'popular/Pre-Wedding_Shoot_groom.png'],
         ];
  
         $venues = [
