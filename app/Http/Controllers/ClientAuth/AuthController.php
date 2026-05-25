@@ -626,7 +626,7 @@ class AuthController extends Controller
 						return response()->json([
 							'status'=>true,
 						 	'message'=>'Redirecting',
-							'redirect'=>'business/dashboard'
+							'redirect'=>url('business/dashboard')
 							 
 						],200);
 					}
