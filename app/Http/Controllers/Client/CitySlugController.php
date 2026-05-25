@@ -368,9 +368,10 @@ class CitySlugController extends Controller
 
         
         $data     = $response['data'] ?? [];
-    
+   
         $kwData   = $data['keyword'] ?? [];
-
+        $keywordBanners   = $kwData['keywordBanners'] ?? [];
+ 
         // ── Keyword / meta ─────────────────────────────────────────────────
         $keyword    = $this->replaceCity($kwData['keyword'] ?? $slug, $city);
         $area       = $kwData['area'] ?? $city;
@@ -421,18 +422,41 @@ class CitySlugController extends Controller
             ))
         );
 
+
+         
+ 
+
+
+    
+
         // ── Chunk businesses for ad insertion every 5 ─────────────────────
         $businessChunks = array_chunk($businesses, 5);
         $quickBusinesses = $data['quickBusinesses'] ?? [];
         $responseZones = $this->fetchCityData($city);
         $zones     = $responseZones['data'] ?? [];
  
+
+        			
+		
+            $keywordBanners = DB::table('keyword_banners')
+    ->where('keyword_id', '2973')
+    ->orderBy('sort_order')
+    ->get()
+    ->map(function ($b) {
+        $b->image_url = asset($b->image_path);
+        $b->alt_text  = $b->alt_text ?: 'Banner';
+        $b->click_url = $b->client_slug ? url('/business-details/' . $b->client_slug) : null;
+        return $b;
+    })
+    ->values();
+	
+	
         return view('client.searchlist ', compact(
             'city', 'slug', 'keyword', 'area','zones',
             'childSlug', 'childCat',
             'ratingCount', 'ratingValue', 'bgImage',
             'topDescription', 'bottomDescription',
-            'faqs', 'kwData',
+            'faqs', 'kwData','keywordBanners',
             'businesses', 'businessChunks',
             'agents', 'reviews', 'categories',
             'relatedCategory', 'servicesRelated',

@@ -76,18 +76,130 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
     'percent' => $totalReviews > 0 ? round(($starCounts[$s] / $totalReviews) * 100) : 0
 ]);
 
-
- 
+//   echo "<pre>";print_r($keywordBanners);die;
 @endphp
 
 <div class="min-h-screen bg-gray-50 flex flex-col mt-4"
      x-data="listingPage()" x-init="init()">
 
-  
+  @php
+    $hasBanners = is_countable($keywordBanners) && count($keywordBanners) > 0;
+@endphp
 
+@if($hasBanners)
+<div x-data='bannerSlider(@json($keywordBanners), 4000)'
+     x-init="init()"
+     @mouseenter="pause()"
+     @mouseleave="resume()"
+     @keydown.window.arrow-left.prevent="prev()"
+     @keydown.window.arrow-right.prevent="next()"
+     x-show="showAd"
+     x-cloak
+     class="relative w-full overflow-hidden h-48 group rounded-lg shadow-md">
+
+    {{-- Slides --}}
+    <template x-for="(banner, idx) in banners" :key="banner.id">
+        <div class="absolute inset-0 w-full h-full transition-opacity duration-700 ease-in-out"
+             :class="idx === current ? 'opacity-100 z-10' : 'opacity-0 z-0'"
+             :aria-hidden="idx !== current">
+
+            {{-- Clickable wrapper if client_slug exists --}}
+            <template x-if="banner.click_url">
+                <a :href="banner.click_url" rel="noopener sponsored" class="block w-full h-full">
+                    <img :src="banner.image_url"
+                         :alt="banner.alt_text"
+                         :loading="idx === 0 ? 'eager' : 'lazy'"
+                         :fetchpriority="idx === 0 ? 'high' : 'auto'"
+                         width="1351sw" height="190"
+                         class="w-full h-full object-contain" />
+                </a>
+            </template>
+
+            <template x-if="!banner.click_url">
+                <img :src="banner.image_url"
+                     :alt="banner.alt_text"
+                     :loading="idx === 0 ? 'eager' : 'lazy'"
+                     :fetchpriority="idx === 0 ? 'high' : 'auto'"
+                     width="1200" height="190"
+                     class="w-full h-full object-cover" />
+            </template>
+
+            <div class="absolute inset-0 bg-indigo-900/50 pointer-events-none"></div>
+
+            <div class="absolute inset-0 px-3 sm:px-8 py-3 sm:py-5 flex items-center gap-3 sm:gap-5 pointer-events-none">
+                <div class="flex-1 min-w-0 text-white"></div>
+                <div class="flex-shrink-0 flex items-center gap-2 sm:gap-3"></div>
+            </div>
+        </div>
+    </template>
+
+    {{-- Pagination dots --}}
+    <div x-show="banners.length > 1"
+         class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+        <template x-for="(b, idx) in banners" :key="'dot-'+b.id">
+            <button @click="goTo(idx)"
+                    :class="idx === current ? 'bg-white w-6' : 'bg-white/50 hover:bg-white/80 w-2'"
+                    class="h-2 rounded-full transition-all duration-300"
+                    :aria-label="'Go to slide ' + (idx + 1)"></button>
+        </template>
+    </div>
+
+    {{-- Arrows --}}
+    <button x-show="banners.length > 1" @click="prev()" aria-label="Previous"
+            class="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-black/30 hover:bg-black/60 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+    </button>
+
+    <button x-show="banners.length > 1" @click="next()" aria-label="Next"
+            class="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-black/30 hover:bg-black/60 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+    </button>
+
+    {{-- Progress bar --}}
+    <div x-show="banners.length > 1"
+         class="absolute bottom-0 left-0 h-1 bg-white/80 z-20 transition-all ease-linear"
+         :style="`width: ${progress}%; transition-duration: ${timer ? interval : 0}ms`">
+    </div>
+</div>
+
+
+<script>
+function bannerSlider(banners, interval = 4000) {
+    return {
+        banners: banners || [],
+        current: 0,
+        timer: null,
+        interval: interval,
+        progress: 0,
+        showAd: true,
+
+        init() {
+            console.log('Slider init — banners loaded:', this.banners.length, this.banners);
+            if (this.banners.length > 1) {
+                this.start();
+                document.addEventListener('visibilitychange', () => {
+                    document.hidden ? this.pause() : this.resume();
+                });
+            }
+        },
+        start()  { this.progress = 100; this.timer = setInterval(() => this.next(), this.interval); },
+        pause()  { clearInterval(this.timer); this.timer = null; this.progress = 0; },
+        resume() { if (!this.timer && this.banners.length > 1) this.start(); },
+        next()   { this.current = (this.current + 1) % this.banners.length; this.resetProgress(); },
+        prev()   { this.current = (this.current - 1 + this.banners.length) % this.banners.length; this.resetProgress(); },
+        goTo(idx){ this.current = idx; this.pause(); setTimeout(() => this.resume(), 50); },
+        resetProgress() { this.progress = 0; requestAnimationFrame(() => { this.progress = 100; }); }
+    }
+}
+</script>
+@else
     {{-- Hero Banner --}}
     <div x-show="showAd" x-cloak
-         class="relative w-full overflow-hidden h-40"
+         class="relative w-full overflow-hidden h-48"
          style="background-image: url('{{ $bgImage }}'); background-size: cover; background-position: center;">
         <div class="absolute inset-0 bg-indigo-900/50"></div>
         <div class="relative w-full px-3 sm:px-8 py-3 sm:py-5 flex items-center gap-3 sm:gap-5 h-full">
@@ -100,7 +212,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
             </div>
         </div>
     </div>
-
+@endif
     {{-- Filter / Sort bar --}}
     <div class="w-full bg-white border-b border-gray-100 px-4 sm:px-6 py-2">
         <div class="flex items-center justify-between gap-3 flex-wrap">

@@ -97,4 +97,9 @@ class Keyword extends Model
     {
         return $this->hasMany(Lead::class, 'kw_id');
     }
+	
+	public function banners()
+	{
+	return $this->hasMany(\App\Models\KeywordBanner::class)->orderBy('sort_order');
+	}
 }

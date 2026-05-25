@@ -159,6 +159,13 @@
         containerCssClass: ":all:"
     });
 	
+	$(".select2-client").select2({
+        theme: "bootstrap",
+        placeholder: "Select client",
+        maximumSelectionSize: 6,
+        containerCssClass: ":all:"
+    });
+	
 	
 	$(".select2-cat-service").select2({
         theme: "bootstrap",

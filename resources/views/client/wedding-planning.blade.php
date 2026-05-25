@@ -16,7 +16,7 @@
     position: relative;
     min-height: 52vh;
     overflow: hidden;
-    background: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=1400&h=900&fit=crop') center/cover no-repeat;
+    background: url('/popular/wedding-banner.png') center/cover no-repeat;
 }
 @media(min-width:768px)  { .hero-section { min-height: 65vh; } }
 @media(min-width:1280px) { .hero-section { min-height: 70vh; } }
@@ -193,7 +193,7 @@
             <span class="text-red-400 text-sm">♥</span>
             <div class="h-px w-8 md:w-14 bg-red-400"></div>
             <span class="text-red-300 text-[10px] md:text-xs font-semibold tracking-[.15em] uppercase ml-1">
-                Shaadi6 · India's #1 Wedding Platform
+             India's #1 Wedding Platform
             </span>
         </div>
 

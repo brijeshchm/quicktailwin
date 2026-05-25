@@ -14,10 +14,11 @@ use App\Models\ChildCategory;
 use App\Models\ParentCategory;
 use App\Models\Keyword;
 use App\Models\SeoLog;
+use App\Models\KeywordBanner;
 use App\Models\KeywordSellCount;
 use App\Services\SeoLogService;
 use App\Services\VersionsServices;
-
+use App\Models\Client\Client; //model
 
 class KeywordController extends Controller
 {
@@ -446,7 +447,10 @@ class KeywordController extends Controller
 	public function editIcon(Request $request, $id)
 	{
 		$edit_data = Keyword::find($id);
-		return view("admin.editIcon", ['edit_data' => $edit_data]);
+		$banner_data = KeywordBanner::where('keyword_id',$id)->get();
+		$clients = Client::select('business_slug','id','business_name')->whereNotNull('business_slug')->get();
+
+		return view("admin.editIcon", ['edit_data' => $edit_data,'banner_data'=>$banner_data,'clients'=>$clients]);
 
 	}
 
@@ -611,7 +615,7 @@ class KeywordController extends Controller
 	}
 
 
-	/**
+	/*
 	 * Show the form for editing the specified resource.
 	 *
 	 * @param  int  $id

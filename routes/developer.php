@@ -125,6 +125,13 @@ Route::post('/update-user/{id}',[App\Http\Controllers\userController::class, 'up
 	Route::get('/keyword/assigin-get-zones/{city_id}/{kwID}',[App\Http\Controllers\KeywordController::class, 'assigingetzones'])->middleware('auth');
 	Route::get('/keyword/seoStatus/{id}/{val}', [App\Http\Controllers\KeywordController::class, 'seoStatus'])->middleware('auth:developer');
 	
+	use App\Http\Controllers\KeywordBannerController;
+	
+
+Route::post('keyword/{id}/banners',         [KeywordBannerController::class, 'upload'])->name('banners.upload');
+    Route::delete('keyword/banner/{id}',        [KeywordBannerController::class, 'destroy'])->name('banner.delete');
+    Route::post('keyword/banner/{id}/client',   [KeywordBannerController::class, 'updateClient'])->name('banner.client'); // ✅ NEW
+    Route::post('keyword/banners/reorder',      [KeywordBannerController::class, 'reorder'])->name('banners.reorder');
 
 	/* Keywords */
 
