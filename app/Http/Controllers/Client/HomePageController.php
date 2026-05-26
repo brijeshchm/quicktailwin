@@ -53,16 +53,11 @@ class HomePageController extends Controller
             $pool->as('wedding')->withoutVerifying()->get('https://api.quickdials.com/api/website/weddingPlanning'),
         ]);
 
-        $homeData    = $responses['home']->json()    ?? [];
-
-      
+        $homeData    = $responses['home']->json() ?? [];    
+	  
         $repairsData = $responses['repairs']->json() ?? [];
         $weddingData = $responses['wedding']->json() ?? [];
- 
-
-
-
-        return view('client.index', compact('homeData', 'repairsData', 'weddingData'));
+         return view('client.index', compact('homeData', 'repairsData', 'weddingData'));
 	}
 
 	public function saveEnquiry(Request $request)
@@ -1961,9 +1956,9 @@ Instead of limiting learning to theory, the course takes you through:.",
         ];
  
         $steps = [
-            ['number' => '01', 'icon' => '🔍', 'title' => 'Choose Your Dream',    'desc' => 'Browse thousands of venues, vendors, and wedding professionals across India. Filter by budget, location, and style to find your perfect match.'],
-            ['number' => '02', 'icon' => '📅', 'title' => 'Plan with Experts',    'desc' => 'Our dedicated wedding planners work closely with you to craft every detail — from invitations to reception — ensuring nothing is left to chance.'],
-            ['number' => '03', 'icon' => '❤️', 'title' => 'Celebrate Forever',   'desc' => 'Step into the most magical day of your life, knowing every detail has been thoughtfully arranged. Focus on love — we handle the rest.'],
+            ['number' => '01', 'icon' => 'popular/Choose_Your_Dream.png', 'title' => 'Choose Your Dream',    'desc' => 'Browse thousands of venues, vendors, and wedding professionals across India. Filter by budget, location, and style to find your perfect match.'],
+            ['number' => '02', 'icon' => 'popular/Plan_with_Experts.png', 'title' => 'Plan with Experts',    'desc' => 'Our dedicated wedding planners work closely with you to craft every detail — from invitations to reception — ensuring nothing is left to chance.'],
+            ['number' => '03', 'icon' => 'popular/Celebrate_Forever.png', 'title' => 'Celebrate Forever',   'desc' => 'Step into the most magical day of your life, knowing every detail has been thoughtfully arranged. Focus on love — we handle the rest.'],
         ];
  
         $testimonials = [
@@ -2001,12 +1996,7 @@ Instead of limiting learning to theory, the course takes you through:.",
 
 	}
 
-	public function doctorHub(Request $request)
-	{
-
-  	return view('client.doctor-hub');
-	}
-
+	
 
 	
 	public function spaHub(Request $request)

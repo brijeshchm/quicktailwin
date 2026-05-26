@@ -372,8 +372,7 @@
     <div class="mb-16">
         <h2 class="serif text-3xl font-semibold mb-8 reveal">For Your Big Day</h2>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-
-        
+       
             @foreach($bigDay as $i => $item)
              <div class="reveal d-{{ min($i, 8) }} group bg-white rounded-2xl overflow-hidden shadow-md
             hover:shadow-2xl transition-shadow duration-500 cursor-pointer
