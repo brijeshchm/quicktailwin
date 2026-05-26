@@ -120,8 +120,9 @@
 
     <img 
     src="{{ asset('play-store-android.png') }}" 
-    class="h-[50px] w-auto object-contain"
-/>
+    class="h-12 w-auto sm:h-16 md:h-20 lg:h-24 xl:h-28 2xl:h-32 object-contain"
+     loading="lazy"
+     decoding="async" />
      
 </a>
     		 
@@ -344,15 +345,62 @@
 <a href="https://play.google.com/store/apps/details?id=com.quick_dial&hl=en_IN"
    target="_blank"
    class="group inline-flex items-center justify-center hover:bg-EB2C3B-700 from-green-500 to-emerald-600  transition-all duration-300">
-
-     <img 
-    src="{{ asset('play-store-android.png') }}" 
-    class="h-20 w-auto sm:h-24 md:h-28 lg:h-32 object-contain" 
+     <img src="{{ asset('play-store-android.png') }}" 
+   class="h-12 w-auto sm:h-16 md:h-20 lg:h-24 xl:h-28 2xl:h-32 object-contain"
+     loading="lazy"
+     decoding="async"
 />
-     
+    
 </a>
 
-             <button
+
+
+    {{-- Login / Register Button --}}
+    <button
+        onclick="openLoginModal()"
+        type="button"
+        aria-label="Login or Register"
+        class="flex items-center justify-center gap-1 sm:gap-1.5
+               px-2.5 sm:px-3 md:px-4 lg:px-5
+               h-8 sm:h-9 md:h-10
+               bg-sky-500 hover:bg-sky-600 active:bg-sky-700
+               text-white text-[11px] sm:text-xs md:text-sm lg:text-base
+               font-semibold whitespace-nowrap
+               rounded-md shadow hover:shadow-md
+               focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-1
+               transition-all duration-200">
+        <i data-lucide="user" class="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4"></i>
+        <span class="hidden xs:inline">Login / </span>Register
+    </button>
+
+    {{-- Free Listing CTA --}}
+    <span class="relative inline-flex">
+        <span class="pulse-ring absolute inset-0 rounded-full"></span>
+
+        
+            <a href="{{ route('login') }}"
+            aria-label="Add Free Listing"
+            class="relative flex items-center gap-1 sm:gap-1.5
+                   px-2.5 sm:px-3 md:px-4 lg:px-5
+                   h-8 sm:h-9 md:h-10
+                   bg-gradient-to-r from-orange-500 to-orange-400
+                   hover:from-orange-600 hover:to-orange-500
+                   text-white text-[11px] sm:text-xs md:text-sm lg:text-base
+                   font-bold whitespace-nowrap
+                   rounded-full shadow-lg hover:shadow-xl
+                   focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-1
+                   transition-all duration-300">
+            <i data-lucide="plus-circle" class="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4"></i>
+            Free Listing
+        </a>
+    </span>
+ 
+
+
+
+
+
+             <!-- <button
                 onclick="openLoginModal()"
                class="flex items-center justify-center px-2 md:px-3 h-7 md:h-8 bg-sky-500 hover:bg-sky-600 text-white text-[10px] sm:text-xs md:text-sm font-semibold rounded-md shadow transition-colors"
             >             <i data-lucide="user" class="w-3.5 h-4.5"></i>
@@ -369,7 +417,12 @@
                     <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
                     Free Listing
                 </a>
-            </span>
+            </span> -->
+
+
+
+
+
             <button
                 id="mobile-menu-btn"
                 class="p-1.5 text-gray-700 hover:text-primary transition-colors"
