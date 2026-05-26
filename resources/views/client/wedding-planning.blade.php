@@ -140,7 +140,7 @@
 .step-num {
     position:absolute;top:-.75rem;right:-.75rem;
     width:2.5rem;height:2.5rem;border-radius:50%;
-    background:var(--primary);color:white;font-weight:700;font-size:.875rem;
+    background:var(--primary);color:black;font-weight:700;font-size:.875rem;
     display:flex;align-items:center;justify-content:center;
     box-shadow:0 4px 12px rgba(192,57,43,.35);
 }
@@ -693,19 +693,20 @@
             <div class="grid md:grid-cols-3 gap-12 md:gap-8">
                 @foreach($steps as $i => $step)
                 <div class="reveal d-{{ $i }} flex flex-col items-center text-center relative">
-                    <div class="relative mb-8">
-                        <div class="step-circle">
-                            <div class="w-20 h-20 rounded-full bg-red-50 flex items-center justify-center text-4xl shadow-inner">
-                                {{ $step['icon'] }}
-                            </div>
-                        </div>
-                        <div class="step-num">{{ $i + 1 }}</div>
-                        <div class="absolute inset-0 rounded-full blur-xl scale-150"
-                             style="background:rgba(192,57,43,.05);"></div>
-                    </div>
-                    <h3 class="serif text-2xl font-bold text-gray-900 mb-4">{{ $step['title'] }}</h3>
-                    <p class="text-gray-500 leading-relaxed max-w-xs text-sm">{{ $step['desc'] }}</p>
-                </div>
+    <div class="relative mb-8">
+        <div class="step-circle">
+            <img src="{{ $step['icon'] }}"
+                 alt="{{ $step['title'] }}"
+                 class="w-20 h-20 rounded-full object-cover bg-red-50 shadow-inner ring-2 ring-white"
+                 loading="lazy" />
+        </div>
+        <div class="step-num">{{ $i + 1 }}</div>
+        <div class="absolute inset-0 rounded-full blur-xl scale-150 pointer-events-none"
+             style="background: rgba(192,57,43,.05);"></div>
+    </div>
+    <h3 class="serif text-2xl font-bold text-gray-900 mb-4">{{ $step['title'] }}</h3>
+    <p class="text-gray-500 leading-relaxed max-w-xs text-sm">{{ $step['desc'] }}</p>
+</div>
                 @endforeach
             </div>
         </div>
