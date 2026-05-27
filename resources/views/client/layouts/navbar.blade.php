@@ -348,7 +348,7 @@
    target="_blank"
    class="group inline-flex items-center justify-center hover:bg-EB2C3B-700 from-green-500 to-emerald-600  transition-all duration-300">
      <img src="{{ asset('play-store-android.png') }}" 
-   class="h-10 w-auto sm:h-16 md:h-20 lg:h-24 xl:h-28 2xl:h-32 object-contain"
+   class="h-10 w-24 sm:h-16 md:h-20 lg:h-24 xl:h-28 2xl:h-32 object-contain"
      loading="lazy"
      decoding="async"
 />
