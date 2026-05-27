@@ -240,7 +240,7 @@ class OfficialController extends Controller
         ], fn($p) => trim($p) !== ''));
  
             $categories = [];
-        if($blogDetails['category_name']){
+        if(!empty($blogDetails['category_name'])){
             $categories = Blogdetails::select('category_name as name', DB::raw('COUNT(*) as count'))
             ->whereNotNull('category_name')
             ->where('category_name',$blogDetails['category_name'])
