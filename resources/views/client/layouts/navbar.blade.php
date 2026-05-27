@@ -129,7 +129,7 @@
 			@if (!Auth::guard('clients')->check())
             <button
                 onclick="openLoginModal()"
-                class="flex items-center gap-1.5 px-4 py-2 bg-sky-500 hover:bg-sky-600 text-white text-xs font-semibold rounded-md shadow transition-colors"
+                class="flex items-center gap-1.5 px-4 py-3 bg-sky-500 hover:bg-sky-600 text-white text-xs font-semibold rounded-md shadow transition-colors"
             >
                 <i data-lucide="user" class="w-3.5 h-3.5"></i>
                 Login / Register
@@ -139,9 +139,11 @@
                 <span class="pulse-ring absolute inset-0 rounded-full"></span>
                 <a
                     href="{{ route('login') }}"
-                    class="relative flex items-center gap-1.5 bg-gradient-to-r from-orange-500 to-orange-400 hover:from-orange-600 hover:to-orange-500 text-white text-xs font-bold px-4 h-8 rounded-full shadow-lg transition-all"
+                    class="relative flex items-center gap-1.5 bg-gradient-to-r from-orange-500 to-orange-400 hover:from-orange-600 hover:to-orange-500 text-white text-xs font-bold px-4 h-10 rounded-full shadow-lg transition-all"
                 >
                     <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
+                    
+                    Business
                     Free Listing
                 </a>
 
