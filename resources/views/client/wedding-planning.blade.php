@@ -504,7 +504,7 @@
                 @foreach($brideCategories as $i => $item)
                 <div class="reveal d-{{ min($i,8) }} img-card group shadow-sm hover:shadow-lg transition-all duration-300">
                     <div class="relative overflow-hidden" style="height:9rem; @media(min-width:640px){height:8rem;} @media(min-width:768px){height:9rem;}">
-                        <div class="h-24 sm:h-32 md:h-36 overflow-hidden">
+                        <div class="w-full h-full sm:h-32 md:h-36 overflow-hidden">
                             <img src="{{ $item['img'] }}" alt="{{ $item['name'] }}"
                                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                         </div>
