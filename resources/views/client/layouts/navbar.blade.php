@@ -120,7 +120,7 @@
 
     <img 
     src="{{ asset('play-store-android.png') }}" 
-    class="h-12 w-auto sm:h-16 md:h-20 lg:h-24 xl:h-28 2xl:h-32 object-contain"
+    class="h-14 w-auto sm:h-16 md:h-20 lg:h-24 xl:h-28 2xl:h-32 object-contain"
      loading="lazy"
      decoding="async" />
      
@@ -340,7 +340,7 @@
         </div>
 
         {{-- Mobile buttons --}}
-        <div class="md:hidden flex items-center gap-1.5">
+        <div class="md:hidden flex items-center gap-10">
            
         
 
@@ -348,7 +348,7 @@
    target="_blank"
    class="group inline-flex items-center justify-center hover:bg-EB2C3B-700 from-green-500 to-emerald-600  transition-all duration-300">
      <img src="{{ asset('play-store-android.png') }}" 
-   class="h-12 w-auto sm:h-16 md:h-20 lg:h-24 xl:h-28 2xl:h-32 object-contain"
+   class="h-10 w-auto sm:h-16 md:h-20 lg:h-24 xl:h-28 2xl:h-32 object-contain"
      loading="lazy"
      decoding="async"
 />
@@ -358,7 +358,7 @@
 
 
     {{-- Login / Register Button --}}
-    <button
+    <!-- <button
         onclick="openLoginModal()"
         type="button"
         aria-label="Login or Register"
@@ -373,10 +373,10 @@
                transition-all duration-200">
         <i data-lucide="user" class="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4"></i>
         <span class="hidden xs:inline">Login / </span>Register
-    </button>
+    </button> -->
 
     {{-- Free Listing CTA --}}
-    <span class="relative inline-flex">
+    <!-- <span class="relative inline-flex">
         <span class="pulse-ring absolute inset-0 rounded-full"></span>
 
         
@@ -393,9 +393,9 @@
                    focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-1
                    transition-all duration-300">
             <i data-lucide="plus-circle" class="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4"></i>
-            Free Listing
+            Free Listing dd
         </a>
-    </span>
+    </span> -->
  
 
 
