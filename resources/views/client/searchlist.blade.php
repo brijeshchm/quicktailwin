@@ -830,8 +830,8 @@ function bannerSlider(banners, interval = 4000) {
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6">Related Categories in <span class="text-blue-600">{{ ucfirst($city) }}</span></h2>
             <div class="flex flex-wrap gap-x-8 gap-y-3 text-[15px]">
-                @foreach($relatedCategory as $slug => $name)
-                <a href="{{ route('child.show', $slug) }}" class="text-gray-700 hover:text-blue-600 transition-colors duration-200">{{ $name }}</a>
+                @foreach($relatedCategory as $slug_c => $name)
+                <a href="{{ route('child.show', $slug_c) }}" class="text-gray-700 hover:text-blue-600 transition-colors duration-200">{{ $name }}</a>
                 @endforeach
             </div>
             <div class="mt-8">
