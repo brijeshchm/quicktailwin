@@ -159,7 +159,9 @@
                                         <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                             <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
                                         </svg>
-                                        150hrs
+                                     
+
+                                        {{ date('d, M Y', strtotime($blog['created_at'])) ?? ''}}
                                     </span>
                                     <span class="flex items-center gap-1">
                                         <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
