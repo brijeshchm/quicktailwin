@@ -419,6 +419,8 @@
                         Topics
                     </h4>
                     <ul class="space-y-1">
+
+                   
                         @if($categories)
                         @foreach($categories as $cat)
                         <li>
@@ -428,7 +430,7 @@
                                 <span class="flex items-center">
                                     <span class="w-1.5 h-1.5 rounded-full bg-blue-300 mr-2.5
                                                  group-hover:bg-blue-500 transition-colors"></span>
-                                    {{ $cat['name'] }} 
+                                  {{ ucfirst(str_replace('-', ' ', $cat['name'])) }}
 
 
                                 </span>
