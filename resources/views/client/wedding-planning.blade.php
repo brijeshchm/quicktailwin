@@ -271,24 +271,31 @@
         </div>
 
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2">
-            @foreach($categories as $i => $cat)
-            <div class="reveal img-card d-{{ min($i,8) }}" style="aspect-ratio:16/10;">
-                <img src="{{ $cat['img'] }}" alt="{{ $cat['name'] }}"
-                     class="absolute inset-0 w-full h-full object-cover"
-                     >
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent"></div>
-                <div class="overlay-hover"></div>
-                <div class="ring-hover"></div>
-                <div class="absolute bottom-0 left-0 right-0 p-2">
-                    <p class="text-white text-[11px] md:text-xs font-semibold leading-tight drop-shadow">
-                        {{ $cat['name'] }}
-                    </p>
-                    <p class="text-amber-400 text-[9px] font-medium mt-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
-                        Explore →
-                    </p>
-                </div>
-            </div>
-            @endforeach
+        @foreach($categories as $i => $cat)
+         <a href="{{ route('showCity', $cat['slug']) }}"
+       class="group reveal img-card d-{{ min($i,8) }} relative block overflow-hidden rounded-lg cursor-pointer"
+       style="aspect-ratio:16/10;"
+       aria-label="View {{ $cat['name'] }}">
+
+        <img src="{{ $cat['img'] }}" alt="{{ $cat['name'] }}"
+             class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent"></div>
+        <div class="overlay-hover"></div>
+        <div class="ring-hover"></div>
+
+        <div class="absolute bottom-0 left-0 right-0 p-2">
+            <p class="text-white text-[11px] md:text-xs font-semibold leading-tight drop-shadow">
+                {{ $cat['name'] }}
+            </p>
+            <p class="text-amber-400 text-[9px] font-medium mt-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                Explore →
+            </p>
+        </div>
+    </a>
+@endforeach   
+        
+         
         </div>
     </div>
 </section>
@@ -301,22 +308,22 @@
 
     <div class="grid grid-cols-3 md:grid-cols-6 gap-6 mb-16">
         @foreach([
-            ['name'=>'Banquet Halls','img'=>'popular/Banquet-Halls.jpg'],
-            ['name'=>'Catering Services','img'=>'popular/Catering-Services.jpg'],
-            ['name'=>'Stage Decorators','img'=>'popular/Stage-Decorators.jpg'],
-            ['name'=>'Photographers','img'=>'popular/Photo_and_Videography.jpg'],
-            ['name'=>'Pandits','img'=>'popular/Pandits.jpg'],
-            ['name'=>'Invitation Cards','img'=>'popular/Invitation_Cards.png'],
-        ] as $cat)
-        <a href="{{ route('category.list') }}" class="group block reveal">
-            <div class="relative h-48 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition">
-                <img src="{{ $cat['img'] }}" alt="{{ $cat['name'] }}"
-                     class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                <div class="absolute bottom-4 left-4 text-white font-medium text-sm">{{ $cat['name'] }}</div>
-            </div>
-        </a>
-        @endforeach
+    ['name'=>'Banquet Halls',     'slug'=>'banquet-hall',     'img'=>'popular/Banquet-Halls.jpg'],
+    ['name'=>'Catering Services', 'slug'=>'catering-services', 'img'=>'popular/Catering-Services.jpg'],
+    ['name'=>'Stage Decorators',  'slug'=>'stage-decorators',  'img'=>'popular/Stage-Decorators.jpg'],
+    ['name'=>'Photographers',     'slug'=>'photographers',     'img'=>'popular/Photo_and_Videography.jpg'],
+    ['name'=>'Pandits',           'slug'=>'pandits',           'img'=>'popular/Pandits.jpg'],
+    ['name'=>'Invitation Cards',  'slug'=>'invitation-cards',  'img'=>'popular/Invitation_Cards.png'],
+] as $cat)
+    <a href="{{ route('showCity', $cat['slug']) }}" class="group block reveal">
+        <div class="relative h-48 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition">
+            <img src="{{ $cat['img'] }}" alt="{{ $cat['name'] }}"
+                 class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+            <div class="absolute bottom-4 left-4 text-white font-medium text-sm">{{ $cat['name'] }}</div>
+        </div>
+    </a>
+@endforeach
     </div>
 
     {{-- Photographer Banner --}}
@@ -343,15 +350,20 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
 
             @foreach($prewedding as $i => $item)
-            <div class="reveal d-{{ min($i,8) }} bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
-                <div class="h-48 bg-gray-100 relative flex items-center justify-center text-6xl">
-                     
-                    <img src="{{ $item['img'] }}" alt="{{ $item['name'] }}"  onerror="this.src='{{ asset('images/default.jpg') }}'"
-                     class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" >
+            <a href="{{ route('showCity', $item['slug']) }}"
+            class="group reveal d-{{ min($i,8) }} block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition"
+            aria-label="View {{ $item['name'] }}">
+
+                <div class="h-48 bg-gray-100 relative flex items-center justify-center text-6xl overflow-hidden">
+                    <img src="{{ $item['img'] }}"
+                        alt="{{ $item['name'] }}"
+                        onerror="this.src='{{ asset('images/default.jpg') }}'"
+                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                 </div>
+
                 <div class="p-4 text-center font-medium text-sm">{{ $item['name'] }}</div>
-            </div>
-            @endforeach
+            </a>
+        @endforeach
         </div>
     </div>
 
@@ -373,30 +385,32 @@
         <h2 class="serif text-3xl font-semibold mb-8 reveal">For Your Big Day</h2>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
        
-            @foreach($bigDay as $i => $item)
-             <div class="reveal d-{{ min($i, 8) }} group bg-white rounded-2xl overflow-hidden shadow-md
-            hover:shadow-2xl transition-shadow duration-500 cursor-pointer
-            tilt-card"
-     style="transform-style: preserve-3d; perspective: 1000px;">
+             @foreach($bigDay as $i => $item)
+    <a href="{{ route('showCity', $item['slug']) }}"
+       class="reveal d-{{ min($i, 8) }} group block bg-white rounded-2xl overflow-hidden shadow-md
+              hover:shadow-2xl transition-shadow duration-500 tilt-card"
+       style="transform-style: preserve-3d; perspective: 1000px;"
+       aria-label="View {{ $item['name'] }}">
 
-    <div class="relative w-full h-48 overflow-hidden tilt-inner"
-         style="transform-style: preserve-3d; transition: transform 0.3s ease;">
+        <div class="relative w-full h-48 overflow-hidden tilt-inner"
+             style="transform-style: preserve-3d; transition: transform 0.3s ease;">
 
-        <img src="{{ $item['img'] }}"
-             alt="{{ $item['name'] }}"
-             loading="lazy"
-             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+            <img src="{{ $item['img'] }}"
+                 alt="{{ $item['name'] }}"
+                 loading="lazy"
+                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
 
-        {{-- Floating name overlay (lifts on hover) --}}
-        <div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-transparent
-                    translate-y-2 group-hover:translate-y-0 opacity-90 group-hover:opacity-100
-                    transition-all duration-400"
-             style="transform: translateZ(20px);">
-            <p class="font-bold text-sm text-white text-center">{{ $item['name'] }}</p>
+            {{-- Floating name overlay --}}
+            <div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-transparent
+                        translate-y-2 group-hover:translate-y-0 opacity-90 group-hover:opacity-100
+                        transition-all duration-400"
+                 style="transform: translateZ(20px);">
+                <p class="font-bold text-sm text-white text-center">{{ $item['name'] }}</p>
+            </div>
         </div>
-    </div>
-</div>
-
+    </a>
+@endforeach
+ 
 <script>
 (function () {
     document.querySelectorAll('.tilt-card').forEach(card => {
@@ -409,9 +423,8 @@
             const y = e.clientY - rect.top;
             const cx = rect.width / 2;
             const cy = rect.height / 2;
-            const rotateX = ((y - cy) / cy) * -8;  // tilt strength
+            const rotateX = ((y - cy) / cy) * -8;
             const rotateY = ((x - cx) / cx) * 8;
-
             inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
         });
 
@@ -421,7 +434,7 @@
     });
 })();
 </script>
-            @endforeach
+
 
 
 
@@ -502,22 +515,25 @@
         <div class="grid lg:grid-cols-3 gap-4 items-stretch">
             <div class="lg:col-span-2 grid grid-cols-3 gap-2 sm:gap-3">
                 @foreach($brideCategories as $i => $item)
-                <div class="reveal d-{{ min($i,8) }} img-card group shadow-sm hover:shadow-lg transition-all duration-300">
-                    <div class="relative overflow-hidden" style="height:9rem; @media(min-width:640px){height:8rem;} @media(min-width:768px){height:9rem;}">
-                        <div class="w-full h-full sm:h-32 md:h-36 overflow-hidden">
-                            <img src="{{ $item['img'] }}" alt="{{ $item['name'] }}"
-                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
-                        <div class="overlay-hover"></div>
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0 px-2 py-1.5">
-                        <p class="text-white font-semibold text-[10px] sm:text-xs leading-tight drop-shadow">
-                            {{ $item['name'] }}
-                        </p>
-                    </div>
-                </div>
-                @endforeach
+    <a href="{{ route('showCity', $item['slug']) }}"
+       class="reveal d-{{ min($i,8) }} img-card group block relative shadow-sm hover:shadow-lg transition-all duration-300"
+       aria-label="View {{ $item['name'] }}">
+
+        <div class="relative overflow-hidden h-36 sm:h-32 md:h-36">
+            <img src="{{ $item['img'] }}" alt="{{ $item['name'] }}"
+                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
+            <div class="overlay-hover"></div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 px-2 py-1.5">
+            <p class="text-white font-semibold text-[10px] sm:text-xs leading-tight drop-shadow">
+                {{ $item['name'] }}
+            </p>
+        </div>
+    </a>
+@endforeach
             </div>
 
             {{-- Feature card (desktop only) --}}
@@ -649,21 +665,25 @@
 
             {{-- Grid --}}
             <div class="lg:col-span-2 grid grid-cols-3 gap-2 sm:gap-3">
-                @foreach($groomCategories as $i => $item)
-                <div class="reveal d-{{ min($i,8) }} img-card group shadow-sm hover:shadow-lg transition-all duration-300">
-                    <div class="h-24 sm:h-32 md:h-36 overflow-hidden">
-                        <img src="{{ $item['img'] }}" alt="{{ $item['name'] }}"
-                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                            >
-                    </div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent"></div>
-                    <div class="overlay-hover"></div>
-                    <div class="absolute bottom-0 left-0 right-0 px-2 py-1.5">
-                        <p class="text-white font-semibold text-[10px] sm:text-xs leading-tight drop-shadow">
-                            {{ $item['name'] }}
-                        </p>
-                    </div>
-                </div>
+                 @foreach($groomCategories as $i => $item)
+                    <a href="{{ route('showCity', $item['slug']) }}"
+                    class="reveal d-{{ min($i,8) }} img-card group block relative shadow-sm hover:shadow-lg transition-all duration-300"
+                    aria-label="View {{ $item['name'] }}">
+
+                        <div class="h-24 sm:h-32 md:h-36 overflow-hidden">
+                            <img src="{{ $item['img'] }}" alt="{{ $item['name'] }}"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        </div>
+
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent"></div>
+                        <div class="overlay-hover"></div>
+
+                        <div class="absolute bottom-0 left-0 right-0 px-2 py-1.5">
+                            <p class="text-white font-semibold text-[10px] sm:text-xs leading-tight drop-shadow">
+                                {{ $item['name'] }}
+                            </p>
+                        </div>
+                    </a>
                 @endforeach
             </div>
         </div>

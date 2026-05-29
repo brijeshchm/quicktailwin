@@ -1910,43 +1910,65 @@ Instead of limiting learning to theory, the course takes you through:.",
             ['value' => '50+',    'label' => 'Cities'],
         ];
  
-        $categories = [
-            ['name' => 'Banquet Halls',     'img' => '/popular/Banquet-Halls.jpg'],
-            ['name' => 'Decor & Flowers',   'img' => '/popular/Flower_Decoration.jpg'],
-            ['name' => 'Invitation Cards',  'img' => '/popular/Invitation_Cards_pre.png'],
-            ['name' => 'Caterers & Food',   'img' => '/popular/Caterers_Food.png'],
-            ['name' => 'Trousseau Packing', 'img' => '/popular/Trousseau_Packing_pre.png'],
-            ['name' => 'Photography',       'img' => '/popular/Photography_pre.png'],
-            ['name' => 'Mehendi Artists',   'img' => '/popular/Mehendi_Artists_pre.png'],
-            ['name' => 'Musicians & DJ',    'img' => '/popular/Musicians_DJ_pre.png'],
-            ['name' => 'Choreography',      'img' => '/popular/Choreography_pre.png'],
-            ['name' => 'Wedding Cakes',     'img' => '/popular/Wedding_cakes.png'],
-        ];
- 
-        $brideCategories = [
-            ['name' => 'Makeup Artists',    'img' => 'popular/Makeup_Artists_bride.png'],
-            ['name' => 'Mehendi Artists',   'img' => 'popular/Mehendi_Artists_bride.png'],
-            ['name' => 'Bridal Wear',       'img' => 'popular/Bridal_Wear_bride.png'],
-            ['name' => 'Bridal Entry',       'img' => 'popular/Bridal_Entry_bride.png'],
-            ['name' => 'Varmala', 'img' => 'popular/varmala3.jpeg'],
-            ['name' => 'Wedding footwear',     'img' => 'popular/Wedding_footwear.png'],
-            ['name' => 'Bridal Jewellery',  'img' => 'popular/Bridal_Jewellery_bride.png'],
-            ['name' => 'Invitation Cards',  'img' => 'popular/Invitation_Cards_bride.png'],
-            ['name' => 'Honeymoon Planning','img' => 'popular/Honeymoon_Planning_bride.png'],
-        ];
- 
-        $groomCategories = [
-            ['name' => 'Wedding Suit',      'img' => 'popular/Wedding_Suit_groom.png'],
-            ['name' => 'Mehendi Artists',   'img' => 'popular/Mehendi_Artists_groom.png'],
-            ['name' => 'Sherwani & Wear',   'img' => 'popular/Sherwani_Wear_groom.png'],
-            ['name' => 'Groom Entry',       'img' => 'popular/Groom_Entry_groom.png'],
-            ['name' => 'Wedding Rath',     'img' => 'popular/Wedding_Rath_groom.png'],
-            ['name' => 'Fireworks & Crackers',     'img' => 'popular/Fireworks_Crackers.png'],
-            ['name' => 'Grooming & Hair',   'img' => 'popular/Grooming_Hair_groom.png'],
-            ['name' => 'Dhol & Band',       'img' => 'popular/Dhol_Band_groom.png'],
-            ['name' => 'Pre-Wedding Shoot', 'img' => 'popular/Pre-Wedding_Shoot_groom.png'],
-        ];
- 
+       $categories = [
+			['name' => 'Banquet Halls',     'slug' => 'banquet-hall',     'img' => '/popular/Banquet-Halls.jpg'],
+			['name' => 'Decor & Flowers',   'slug' => 'flower-decoration',     'img' => '/popular/Flower_Decoration.jpg'],
+			['name' => 'Invitation Cards',  'slug' => 'invitation-cards',  'img' => '/popular/Invitation_Cards_pre.png'],
+			['name' => 'Caterers & Food',   'slug' => 'caterers-food',     'img' => '/popular/Caterers_Food.png'],
+			['name' => 'Trousseau Packing', 'slug' => 'trousseau-packing', 'img' => '/popular/Trousseau_Packing_pre.png'],
+			['name' => 'Photography',       'slug' => 'photography',       'img' => '/popular/Photography_pre.png'],
+			['name' => 'Mehendi Artists',   'slug' => 'mehendi-artists',   'img' => '/popular/Mehendi_Artists_pre.png'],
+			['name' => 'Musicians & DJ',    'slug' => 'musicians-dj',      'img' => '/popular/Musicians_DJ_pre.png'],
+			['name' => 'Choreography',      'slug' => 'choreography',      'img' => '/popular/Choreography_pre.png'],
+			['name' => 'Wedding Cakes',     'slug' => 'wedding-cakes',     'img' => '/popular/Wedding_cakes.png'],
+		];
+
+		$brideCategories = [
+			['name' => 'Makeup Artists',     'slug' => 'makeup-artists',     'img' => 'popular/Makeup_Artists_bride.png'],
+			['name' => 'Mehendi Artists',    'slug' => 'mehendi-artists',    'img' => 'popular/Mehendi_Artists_bride.png'],
+			['name' => 'Bridal Wear',        'slug' => 'bridal-wear',        'img' => 'popular/Bridal_Wear_bride.png'],
+			['name' => 'Bridal Entry',       'slug' => 'bridal-entry',       'img' => 'popular/Bridal_Entry_bride.png'],
+			['name' => 'Varmala',            'slug' => 'varmala',            'img' => 'popular/varmala3.jpeg'],
+			['name' => 'Wedding footwear',   'slug' => 'wedding-footwear',   'img' => 'popular/Wedding_footwear.png'],
+			['name' => 'Bridal Jewellery',   'slug' => 'bridal-jewellery',   'img' => 'popular/Bridal_Jewellery_bride.png'],
+			['name' => 'Invitation Cards',   'slug' => 'invitation-cards',   'img' => 'popular/Invitation_Cards_bride.png'],
+			['name' => 'Honeymoon Planning', 'slug' => 'honeymoon-planning', 'img' => 'popular/Honeymoon_Planning_bride.png'],
+		];
+
+		$groomCategories = [
+			['name' => 'Wedding Suit',         'slug' => 'wedding-suit',         'img' => 'popular/Wedding_Suit_groom.png'],
+			['name' => 'Mehendi Artists Groom',      'slug' => 'mehendi-artists-groom',      'img' => 'popular/Mehendi_Artists_groom.png'],
+			['name' => 'Sherwani & Wear',      'slug' => 'sherwani-wear',        'img' => 'popular/Sherwani_Wear_groom.png'],
+			['name' => 'Groom Entry',          'slug' => 'groom-entry',          'img' => 'popular/Groom_Entry_groom.png'],
+			['name' => 'Wedding Rath',         'slug' => 'wedding-rath',         'img' => 'popular/Wedding_Rath_groom.png'],
+			['name' => 'Fireworks & Crackers', 'slug' => 'fireworks-crackers',   'img' => 'popular/Fireworks_Crackers.png'],
+			['name' => 'Grooming & Hair',      'slug' => 'grooming-hair',        'img' => 'popular/Grooming_Hair_groom.png'],
+			['name' => 'Dhol & Band',          'slug' => 'dhol-band',            'img' => 'popular/Dhol_Band_groom.png'],
+			['name' => 'Pre-Wedding Shoot',    'slug' => 'pre-wedding-shoot',    'img' => 'popular/Pre-Wedding_Shoot_groom.png'],
+		];
+
+		$prewedding = [
+			['name' => 'Wedding Astrologers',         'slug' => 'wedding-astrologers',         'img' => 'popular/Wedding-Astrologers.png'],
+			['name' => 'Marriage Certificate Agents', 'slug' => 'marriage-certificate-agents', 'img' => 'popular/Marriage-Certificate-Agents.png'],
+			['name' => 'Jewellery Showrooms',         'slug' => 'jewellery-showrooms',         'img' => 'popular/Jewellery-Showrooms.png'],
+			['name' => 'Readymade Garments',          'slug' => 'readymade-garments',          'img' => 'popular/Readymade-Garments.png'],
+			['name' => 'Haldi Stage Decors',          'slug' => 'haldi-stage-decors',          'img' => 'popular/Haldi-Stage-Decors.png'],
+			['name' => 'Wedding Card Printers',       'slug' => 'wedding-card-printers',       'img' => 'popular/Wedding-Card-Printers.png'],
+			['name' => 'Hotels',                      'slug' => 'hotels',                      'img' => 'popular/Hotels.png'],
+			['name' => 'Honeymoon Tour Packages',     'slug' => 'honeymoon-tour-packages',     'img' => 'popular/Honeymoon-Tour-Packages.png'],
+		];
+
+		$bigDay = [
+			['name' => 'Stage Decorators',       'slug' => 'stage-decorators',       'img' => 'popular/Stage_Decorators.png'],
+			['name' => 'Wedding Caterers',       'slug' => 'wedding-caterers',       'img' => 'popular/Wedding_Caterers.png'],
+			['name' => 'Cold Pyro & Fog Matka',  'slug' => 'cold-pyro-fog-matka',    'img' => 'popular/Cold_Pyro_Fog_Matka.png'],
+			['name' => 'DJ Services',            'slug' => 'dj-services',            'img' => 'popular/DJ_Services.png'],
+			['name' => 'Wedding Bands',          'slug' => 'wedding-bands',          'img' => 'popular/Wedding-Bands.png'],
+			['name' => 'Singer dancer',          'slug' => 'singer-dancer',          'img' => 'popular/Singer_dancer.png'],
+			['name' => 'Wedding Choreographers', 'slug' => 'wedding-choreographers', 'img' => 'popular/Wedding_Choreographers.png'],
+			['name' => 'Wedding Organisers',     'slug' => 'wedding-organisers',     'img' => 'popular/Wedding_Organisers.png'],
+		];
+
         $venues = [
             ['name' => 'The Taj Mahal Palace', 'location' => 'Colaba, Mumbai',       'rating' => 4.9, 'reviews' => 124, 'price' => '₹₹₹₹', 'img' => 'popular/The_Taj_Mahal_Palace.jpg'],
             ['name' => 'JW Marriott Juhu',     'location' => 'Juhu, Mumbai',         'rating' => 4.8, 'reviews' => 98,  'price' => '₹₹₹₹', 'img' => 'popular/venues2.jpg'],
@@ -1966,27 +1988,7 @@ Instead of limiting learning to theory, the course takes you through:.",
             ['name' => 'Ananya & Vikram Mehta',  'location' => 'Delhi',     'date' => 'October 2024',  'rating' => 5, 'text' => 'From the mehendi ceremony to the reception, everything was perfect. Our wedding planner was always available, incredibly organized, and made us feel calm throughout.',  'avatar' => 'AV', 'grad' => 'from-amber-400 to-orange-500', 'package' => 'Premium Package'],
             ['name' => 'Deepa & Arjun Nair',     'location' => 'Bangalore', 'date' => 'February 2025', 'rating' => 5, 'text' => 'We had no idea how to plan a wedding for 400 guests. Shaadi6 took care of everything — venue, catering, flowers, even the honeymoon. Most stress-free experience ever.',  'avatar' => 'DA', 'grad' => 'from-purple-400 to-pink-500',  'package' => 'Royal Package'],
         ];
-		$prewedding = [
-			['name' => 'Wedding Astrologers', 'img' => 'popular/Wedding-Astrologers.png'],
-			['name' => 'Marriage Certificate Agents', 'img' => 'popular/Marriage-Certificate-Agents.png'],
-			['name' => 'Jewellery Showrooms', 'img' => 'popular/Jewellery-Showrooms.png'],
-			['name' => 'Readymade Garments', 'img' => 'popular/Readymade-Garments.png'],
-			['name' => 'Haldi Stage Decors', 'img' => 'popular/Haldi-Stage-Decors.png'],
-			['name' => 'Wedding Card Printers', 'img' => 'popular/Wedding-Card-Printers.png'],
-			['name' => 'Hotels', 'img' => 'popular/Hotels.png'],
-			['name' => 'Honeymoon Tour Packages', 'img' => 'popular/Honeymoon-Tour-Packages.png'],
-		];
-
-		$bigDay = [
-			['name' => 'Stage Decorators', 'img' => 'popular/Stage_Decorators.png'],
-			['name' => 'Wedding Caterers', 'img' => 'popular/Wedding_Caterers.png'],
-			['name' => 'Cold Pyro & Fog Matka', 'img' => 'popular/Cold_Pyro_Fog_Matka.png'],
-			['name' => 'DJ Services', 'img' => 'popular/DJ_Services.png'],
-			['name' => 'Wedding Bands', 'img' => 'popular/Wedding-Bands.png'],
-			['name' => 'Singer dancer', 'img' => 'popular/Singer_dancer.png'],
-			['name' => 'Wedding Choreographers', 'img' => 'popular/Wedding_Choreographers.png'],
-			['name' => 'Wedding Organisers', 'img' => 'popular/Wedding_Organisers.png'],
-		];
+		
  
         return view('client.wedding-planning', compact(
             'stats','categories','brideCategories','groomCategories',
