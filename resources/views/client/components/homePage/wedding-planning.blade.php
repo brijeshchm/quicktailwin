@@ -20,7 +20,7 @@
                     <p class="text-yellow-200/60 text-[10px] leading-none mt-0.5">Everything for your perfect day</p>
                 </div>
             </div>
-            <a href="{{ route('child.show', 'wedding-planning') }}" class="text-yellow-200 text-[10px] font-semibold hover:underline flex items-center gap-0.5">
+            <a href="{{ route('wedding.planning') }}" class="text-yellow-200 text-[10px] font-semibold hover:underline flex items-center gap-0.5">
                 View All
                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
             </a>

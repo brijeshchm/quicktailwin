@@ -538,7 +538,7 @@ Route::post('/kw/search', [App\Http\Controllers\Client\HomePageController::class
 Route::get('/courses/playwright-automation-training-in-noida', [App\Http\Controllers\Client\HomePageController::class, 'playwrightAutomation']);
 
 
-Route::get('/wedding-planning', [App\Http\Controllers\Client\HomePageController::class, 'weddingPannel'])->name('wedding.pannel');
+Route::get('/wedding-planning', [App\Http\Controllers\Client\HomePageController::class, 'weddingPannel'])->name('wedding.planning');
 //Route::get('/doctor-hub', [App\Http\Controllers\Client\DoctorController::class, 'doctorHub'])->name('doctor.hub');
 
 Route::get('/doctor-details', [App\Http\Controllers\Client\DoctorController::class, 'clinicDetails'])->name('clinic.details');

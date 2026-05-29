@@ -287,7 +287,7 @@
                 <ul class="space-y-2">
                     @foreach([
                         ['name' => 'Professional Courses', 'slug' => 'professional-courses','type'=>'categories'],
-                        ['name' => 'Wedding Planning',    'slug' => 'wedding-planning','type'=>'child'],
+                        ['name' => 'Wedding Planning',    'slug' => 'wedding-planning','type'=>'keyword'],
                         ['name' => 'Healthcare',          'slug' => 'health-and-wellness','type'=>'categories'],
                         ['name' => 'Real Estate',         'slug' => 'real-estate','type'=>'categories'],
                         
