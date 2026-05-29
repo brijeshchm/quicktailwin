@@ -61,7 +61,7 @@ class OfficialController extends Controller
      */
     public function rss()
     {
-        $blogrecents = Blogdetails::limit(8)->orderBy('id', 'DESC')->get();
+        $blogrecents = Blogdetails::where('status', '1')->limit(8)->orderBy('id', 'DESC')->get();
         return view('official.rss', ['blogrecents' => $blogrecents]);
     }
 
@@ -243,6 +243,7 @@ class OfficialController extends Controller
         if(!empty($blogDetails['category_name'])){
             $categories = Blogdetails::select('category_name as name', DB::raw('COUNT(*) as count'))
             ->whereNotNull('category_name')
+            ->where('status', '1')
             ->where('category_name',$blogDetails['category_name'])
             ->where('category_name', '!=', '')
             ->groupBy('category_name')
@@ -260,10 +261,11 @@ class OfficialController extends Controller
     {
 
    
-        $blogs = Blogdetails::where('category_name',$slug)->orderBy('id', 'DESC')->get();
+        $blogs = Blogdetails::where('status', '1')->where('category_name',$slug)->orderBy('id', 'DESC')->get();
  
         $categories = Blogdetails::select('category_name as name', DB::raw('COUNT(*) as count'))
         ->whereNotNull('category_name')
+        ->where('status', '1')
         ->where('category_name',$slug)
         ->where('category_name', '!=', '')
         ->groupBy('category_name')
