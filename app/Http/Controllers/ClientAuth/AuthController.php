@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\ClientAuth;
 
 use App\Models\Client\Client;
+use App\Models\Guest;
 use Validator;
 use App\Http\Controllers\Controller;
 //use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -517,9 +518,112 @@ class AuthController extends Controller
 		return redirect('/');
 	}
 	
- 
+	
+	public function sendOtp(Request $request)
+	{
+		 
+		$validator = Validator::make($request->all(), [
+			'login' => [
+				'required',
+				'string',
+				function ($attribute, $value, $fail) {
+					$isEmail  = filter_var($value, FILTER_VALIDATE_EMAIL);
+					$isMobile = preg_match('/^[6-9]\d{9}$/', $value); // Indian 10-digit
+					if (!$isEmail && !$isMobile) {
+						$fail('Enter a valid email address or 10-digit mobile number.');
+					}
+				},
+			],
+		]);
 
-	 public function sendOtp(Request $request)
+		if ($validator->fails()) {
+			return response()->json([
+				'status' => false,
+				'errors' => $validator->errors(),
+			], 422);
+		}
+
+		$loginInput = $request->input('login');
+
+		// ✅ Detect field type
+		$field = filter_var($loginInput, FILTER_VALIDATE_EMAIL) ? 'email' : 'mobile';
+
+		// 1️⃣ Try CLIENTS table, then GUEST table
+		$client = Client::where($field, $loginInput)->first();
+		if (!$client) {
+			$client = Guest::where($field, $loginInput)->first();
+		}
+ 
+		// 2️⃣ Account checks
+		if (!$client) {
+			return response()->json(['status' => false, 'message' => 'User account not found'], 403);
+		}
+
+		if (!$client->active_status) {
+			return response()->json(['status' => false, 'message' => 'Your account has been deactivated'], 403);
+		}
+
+		if (!empty($client->deleted_at)) {
+			return response()->json(['status' => false, 'message' => 'Your account has been deactivated'], 403);
+		}
+
+		// ✅ FIX 2: Make sure the account actually has an email to send to
+		if (empty($client->email)) {
+			return response()->json([
+				'status'  => false,
+				'message' => 'No email is linked to this account. Cannot send OTP.',
+			], 422);
+		}
+
+		// ✅ FIX 4: Define OTP once, in proper scope
+		$otp = mt_rand(100000, 999999);
+
+		// ✅ FIX 3: Store from the CLIENT record, not from request('email')
+		$request->session()->put('client.id', $client->id);
+		$request->session()->put('client.email', $client->email);
+		$request->session()->put('client.otp', $otp);
+		$request->session()->put('client.otp_expires_at', now()->addMinutes(5)->timestamp);
+
+		// 3️⃣ Send OTP email — use $client->email (works for both email & mobile login)
+		$subject = "{$otp} is QuickDials Verification Code";
+
+		try {
+			Mail::send('emails.sendotp_to_email', [
+				'otp'  => $otp,
+				'name' => $client->business_name ?? 'User',
+			], function ($m) use ($client, $subject) {
+				$m->from('leads.quickdials@gmail.com', 'Login OTP');
+				$m->to($client->email)->subject($subject);
+			});
+		} catch (\Throwable $e) {
+			return response()->json([
+				'status'  => false,
+				'message' => 'Failed to send OTP email. Please try again.',
+			], 500);
+		}
+
+       
+		return response()->json([
+			'status'  => true,
+			'message' => 'OTP has been sent to your email successfully',
+			// ⚠️ Remove 'otp' in production — never expose OTP in API response!
+			'otp'     =>  $otp,
+			'email'   => $this->maskEmail($client->email), // show masked email to user
+		]);
+	}
+
+/**
+ * Mask email for display: jo***@gmail.com
+ */
+private function maskEmail(string $email): string
+{
+    [$name, $domain] = explode('@', $email);
+    $masked = substr($name, 0, 2) . str_repeat('*', max(strlen($name) - 2, 1));
+    return "{$masked}@{$domain}";
+}
+
+
+	 public function sendOtp_old(Request $request)
     {
 
  
@@ -612,6 +716,113 @@ class AuthController extends Controller
     				if($request->input('otp')=='202525' || ($request->session()->get('client.otp')==$request->input('otp'))){
 
 
+   $client = Client::where('email', $request->session()->get('client.email'))->first();
+        if ($client){
+
+
+					if(auth()->guard('clients')->loginUsingId($request->session()->get('client.id'))){
+
+ 
+						return response()->json([
+							'status'=>true,
+						 	'message'=>'Redirecting',
+							'redirect'=>url('business/dashboard')
+							 
+						],200);
+					}
+					}else{
+
+						$client = Guest::where('email', $request->session()->get('client.email'))->first();
+
+						if($client){
+					if(auth()->guard('guest')->loginUsingId($request->session()->get('client.id'))){
+
+				 
+						return response()->json([
+							'status'=>true,
+						 	'message'=>'Redirecting',
+							'redirect'=>url('user/personal-details')
+							 
+						],200);
+					}
+					}else{
+						$request->session()->get('client.id');		
+					}
+
+
+					}
+
+
+
+
+				}
+				else{
+					return response()->json([
+						'status'=>false,						 
+						'message'=>'Invalid OTP'
+						 
+					],200);					
+				}	
+    
+}
+
+
+public function clientDashboard(Request $request){
+
+   
+
+    $client = Client::where('email', $request->session()->get('client.email'))->first();
+	 
+    if(!empty($client)){
+  	if(auth()->guard('clients')->loginUsingId($client->id)){
+		$request->session()->put('client.email',$client->email);
+    return redirect()->route('business.dashboard');
+    }
+    }else{
+		return redirect()->route('login');
+
+	}
+
+
+    }
+
+public function userDashboard(Request $request){
+   
+	 $guest = Guest::where('email', $request->session()->get('client.email'))->first();
+     if(!empty($guest)){ 
+        if(auth()->guard('guest')->loginUsingId($guest->id)){
+			$request->session()->put('client.email',$guest->email);
+    	return redirect()->route('user.personal.details');
+    }
+    }else{
+		return redirect()->route('login');
+
+	}
+
+
+    }
+ 
+
+
+ public function clientVerifyOtp_old(Request $request)
+{
+  
+// if($request->has('otp')){
+	// dd($request->all());
+				$validator = Validator::make($request->all(), [
+					'otp'=>'required',
+				]);
+				if($validator->fails()){
+					return response()->json([
+						'status'=>true,					 
+						'message'=>'Please enter the OTP'
+						 
+					],200);
+				}
+				 
+    				if($request->input('otp')=='202525' || ($request->session()->get('client.otp')==$request->input('otp'))){
+
+
 					if(auth()->guard('clients')->loginUsingId($request->session()->get('client.id'))){
 
 
@@ -643,6 +854,5 @@ class AuthController extends Controller
 				}	
     
 }
-
 
 }

@@ -431,7 +431,7 @@ select.form-input { padding-left:1rem; }
                                 </div>
                                 <div>
                                     <h2 class="text-lg font-bold text-white leading-tight">List Your Business</h2>
-                                    <p class="text-blue-200 text-xs">Free forever · Upgrade anytime</p>
+                                    <p class="text-blue-200 text-xs">Free first · Free ₹555 Credit After Signup</p>
                                 </div>
                                 <div class="ml-auto animate-spin" style="animation-duration:20s;">
                                     <svg class="w-5 h-5 text-amber-300 opacity-60" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l2.09 6.26L20 9l-5 3.64 1.91 6.36L12 15.27l-4.91 3.73L9 12.64 4 9l5.91-.74L12 2z"/></svg>
@@ -514,9 +514,9 @@ select.form-input { padding-left:1rem; }
                                 </div>
                                 <h3 class="text-xl font-extrabold text-slate-800 mb-2">Congratulations!</h3>
                                 <p class="text-slate-500 text-sm mb-5">Your business account is now active. Log in to manage your profile and grow your business with QuickDials.</p>
-                                <div class="bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-100
+                                <div onclick="openLoginModal()" class="bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-100
                                             rounded-xl p-3.5 text-sm text-emerald-700 font-medium">
-                                    Login: <span id="success-pkg" class="font-bold"></span>
+                                    Login: <span id="success-pkg" class="font-bold"> </span>
                                 </div>
                             </div>
                         </div>

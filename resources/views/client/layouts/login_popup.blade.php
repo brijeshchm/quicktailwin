@@ -14,7 +14,7 @@
             <img loading="lazy" decoding="async" src="{{ asset('client/images/small-logo.png') }}" alt="QuickDials"
                  class="h-10 mx-auto mb-3 object-contain" onerror="this.style.display='none'">
             <h2 class="text-lg font-black text-gray-900">Welcome Back</h2>
-            <p class="text-sm text-gray-500 mt-1">Sign in to your QuickDials account</p>
+            <p class="text-sm text-gray-500 mt-1">Sign in to your business account</p>
         </div>
 
         {{-- Google --}}
@@ -38,9 +38,9 @@
         {{-- ══ STEP 1: Email ══ --}}
         <div id="step-email">
             <input
-                type="email"
+                type="text"
                 id="login-email"
-                name="email"
+                name="login"
                  autocomplete="off"
                 placeholder="Enter your email"
                 class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-100 transition-all mb-1"
@@ -196,23 +196,26 @@ function hideError(elId) {
 
 // ── STEP 1: Send OTP ──────────────────────────────────────────────────────────
 async function handleEmailLogin() {
-    const email = document.getElementById('login-email').value.trim();
+    const login = document.getElementById('login-email').value.trim();
     hideError('email-error');
  
-    if (!email) { showError('email-error', 'Please enter your email address.'); return; }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError('email-error', 'Please enter a valid email address.'); return; }
+    if (!login) { showError('email-error', 'Please enter your email address.'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(login)) {
+        
+    showError('email-error', 'Please enter a valid email address.'); return; 
+    }
 
     setLoading('email-btn', true, 'Continue with Email');
     try {
         const res  = await fetch('/auth/send-otp', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': CSRF() },
-            body: JSON.stringify({ email }),
+            body: JSON.stringify({ login }),
         });
         const data = await res.json();
 
         if (data.status) {
-            document.getElementById('otp-email-display').textContent = email;
+            document.getElementById('otp-email-display').textContent = login;
             showStep('otp');
             initOtpInputs();
             startCountdown();

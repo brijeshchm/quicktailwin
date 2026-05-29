@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Business;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
-
+use App\Models\Client\Client; //model
 class BusinessDashboardController extends Controller
 {
     protected $danger_msg = '';
@@ -24,7 +24,7 @@ class BusinessDashboardController extends Controller
 
     }
 
-
+    
 
     /**
      * Display a listing of the resource.

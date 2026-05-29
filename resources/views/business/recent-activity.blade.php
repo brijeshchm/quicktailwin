@@ -326,7 +326,7 @@ textarea.form-control-modern {
                             <a href="{{ url("business/recent/{$imgField}/{$client->id}") }}"
                                class="btn-remove"
                                title="Remove"
-                               onclick="return confirm('Remove this file?');">
+                               >
                                 <i class="bi bi-trash"></i>
                             </a>
                         </div>

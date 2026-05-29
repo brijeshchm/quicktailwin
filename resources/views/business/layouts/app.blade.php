@@ -174,17 +174,53 @@
         <div class="new-lead"><a href="{{ url('business/new-enquiry') }}"> <span class="bell"><i class="bi bi-envelope"></i> {{ $leads??''}}</span></a></div>
     </div>
     <div class="notifi">
-        
+<?php 
+$guests = DB::table('guests')->where('email',$client->email)->first();
+if(!empty($guests)){
+?>
+<a href="{{ route('user.dashboard') }}" class="profile-btn">
+<i class="bi bi-person-vcard"></i>
+<span>Your Profile</span>
+</a>
+<?php  } ?>
+
+<style>
+.profile-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:12px 18px;
+    background:#0ea5e9;
+    color:#fff;
+    text-decoration:none;
+    border-radius:8px;
+    font-size:13px;
+    font-weight:600;
+    box-shadow:0 2px 8px rgba(0,0,0,.15);
+    transition:all .3s ease;
+}
+
+.profile-btn:hover{
+    background:#0284c7;
+    transform:translateY(-1px);
+}
+
+.profile-btn i{
+    width:16px;
+    height:16px;
+}
+</style>
     </div>
 </div>
    
   
 
     <nav class="header-nav ms-auto">
+     
       <ul class="d-flex align-items-center">
 
    
- 
+
  
          <li class="nav-item dropdown">
 

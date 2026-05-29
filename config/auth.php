@@ -46,6 +46,10 @@ return [
 			'driver' => 'session',
 			'provider' => 'clients',
 		],
+		'guest' => [
+			'driver' => 'session',
+			'provider' => 'guest',
+		],
         'developer' => [
 			'driver' => 'session',
 			'provider' => 'developers',
@@ -82,6 +86,10 @@ return [
 	    'clients' => [
 			'driver' => 'eloquent',
 			'model' => App\Models\Client\Client::class,
+		],
+	    'guest' => [
+			'driver' => 'eloquent',
+			'model' => App\Models\Guest::class,
 		],
         'developers' => [
 			'driver' => 'eloquent',
@@ -122,6 +130,12 @@ return [
         ],
 		 'clients' => [
             'provider' => 'clients',
+            'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+		 'guests' => [
+            'provider' => 'guests',
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,

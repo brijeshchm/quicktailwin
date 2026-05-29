@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+// use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
  
@@ -10,12 +10,55 @@ use App\Http\Controllers\Client\SearchListController;
 use App\Http\Controllers\Client\CitySlugController;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
-
+use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\ServiceController;
+use App\Http\Controllers\User\VouchersController;
  
 //Route::auth();
 //Auth::routes();
 
  
+
+
+ 
+
+ 
+Route::middleware('auth:guest')->group(function () {
+		Route::get('dashboard',       [ProfileController::class, 'dashbord'])->name('user.show.dashbord');
+		Route::get('user/personal-details',       [ProfileController::class, 'edit'])->name('user.personal.details');
+		Route::post('user/profile/update',     [ProfileController::class, 'autosave'])->name('user.profile.autosave');          
+		Route::get('user/service',          [ServiceController::class, 'service'])->name('user.service.index');         
+		Route::get('user/vouchers',         [VouchersController::class, 'vouchers'])->name('user.vouchers.index');
+
+Route::post('user/autosave-avatar', [ProfileController::class, 'autosaveAvatar'])->name('user.profile.autosave-avatar');
+        
+        Route::post('user/profile/send-otp',  [ProfileController::class, 'sendOtp'])->name('user.userprofile.send-otp');
+        Route::post('user/profile/verify-otp',[ProfileController::class, 'verifyOtp'])->name('user.profile.verify-otp');
+    
+
+ 
+    Route::get('/vouchers/my',       [VouchersController::class, 'myVouchers'])->name('user.vouchers.my');
+    Route::post('vouchers/claim',   [VouchersController::class, 'claim'])->name('user.vouchers.claim');
+    Route::post('vouchers/continue',[VouchersController::class, 'continue'])->name('user.vouchers.continue');
+ 
+    
+    Route::get('/user/logout',       [ProfileController::class, 'userLogout'])->name('user.userLogout');
+
+
+
+});
+
+// Language switcher
+Route::post('/language/change', function (\Illuminate\Http\Request $request) {
+    $locale = $request->input('locale', 'en');
+    if (in_array($locale, ['en', 'hi', 'es'])) {
+        session(['locale' => $locale]);
+        app()->setLocale($locale);
+    }
+    return back();
+})->name('language.change');
+
+
  Route::get('/cache-clear/', function () {
 
 	$exitCode = Artisan::call('config:clear');
@@ -33,10 +76,16 @@ use Illuminate\Support\Facades\DB;
 
 use App\Http\Controllers\Business\BusinessController;
 use App\Http\Controllers\Business\EnquiryController;
+
+Route::get('/client/dashboard', [App\Http\Controllers\ClientAuth\AuthController::class, 'clientDashboard'])->name('client.dashboard');
+Route::get('/user/dashboard', [App\Http\Controllers\ClientAuth\AuthController::class, 'userDashboard'])->name('user.dashboard');
+
+
 Route::middleware('auth:clients')->group(function () {
 	//Auth::routes();
 
-	Route::get('/business/dashboard', [App\Http\Controllers\Business\BusinessDashboardController::class, 'dashboard']);
+	 
+	Route::get('/business/dashboard', [App\Http\Controllers\Business\BusinessDashboardController::class, 'dashboard'])->name('business.dashboard');
 	Route::get('/business-owners/get-leads', [EnquiryController::class, 'getLeads']);
 	Route::get('/business/enquiry', [EnquiryController::class, 'enquiry']);
 	Route::get('/business/lead-follow-up', [EnquiryController::class, 'leadFollowUp']);
