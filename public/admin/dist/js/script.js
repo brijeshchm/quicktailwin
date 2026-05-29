@@ -7180,9 +7180,8 @@ function deleteChildCategory(id,THIS){
 				"/developer/child_category/delete/"+id,
 				function(response,status){
 					if(response.status){
-						alert(response.msg);
-						//$this.closest('tr').remove();
-						//dataTableExample.row($this.parents('tr')).remove().draw();
+						alert(response.msg);						 
+						dataTableAllChild.ajax.reload(null,false);
 						dataTableAssignedKeywords.ajax.reload(null,false);
 					}
 				}
