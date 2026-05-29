@@ -174,15 +174,7 @@
         <div class="new-lead"><a href="{{ url('business/new-enquiry') }}"> <span class="bell"><i class="bi bi-envelope"></i> {{ $leads??''}}</span></a></div>
     </div>
     <div class="notifi">
-<?php 
-$guests = DB::table('guests')->where('email',$client->email)->first();
-if(!empty($guests)){
-?>
-<a href="{{ route('user.dashboard') }}" class="profile-btn">
-<i class="bi bi-person-vcard"></i>
-<span>Your Profile</span>
-</a>
-<?php  } ?>
+ 
 
 <style>
 .profile-btn{
