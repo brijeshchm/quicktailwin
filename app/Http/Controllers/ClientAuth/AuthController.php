@@ -462,7 +462,55 @@ class AuthController extends Controller
 			->redirect();
 	}
 
-	public function handleGoogleCallback()
+
+	public function handleGoogleCallback(Request $request)
+	{  
+    try {
+        $googleUser = Socialite::driver('google')->stateless()->user();
+        $parts     = explode(' ', $googleUser->getName(), 2);
+        $firstName = $parts[0];
+        $lastName  = $parts[1] ?? '';
+        $email     = $googleUser->getEmail();
+
+        // 1. Check if Guest (User) exists → redirect user/dashboard
+        $guest = Guest::where('email', $email)->first();
+        if ($guest) {
+			$request->session()->put('client.email',$guest->email);
+            auth()->guard('guest')->login($guest);
+			
+            return redirect('/user/dashboard');
+        }
+
+        // 2. Check if Client exists → redirect business/dashboard
+        $client = Client::where('email', $email)->first();
+        if ($client) {
+            Client::where('email', $email)
+                ->update(['google_id' => $googleUser->getId()]);
+			$request->session()->put('client.email',$client->email);
+            auth()->guard('clients')->loginUsingId($client->id);
+            return redirect('/business/dashboard');
+        }
+
+        // 3. Neither exists → create Guest account
+        $guest = Guest::create([
+            'email'      => $email,
+            'google_id'  => $googleUser->getId(),
+            'first_name' => $firstName,
+            'last_name'  => $lastName,
+            'password'   => bcrypt(\Str::random(16)), // random password
+        ]);
+
+        auth()->guard('guest')->login($guest);
+        return redirect('/user/dashboard');
+
+    } catch (\Exception $e) {
+        return redirect('/business-owners')
+            ->with('error', 'Google login failed. Please try again.');
+    }
+}
+
+
+	public function handleGoogleCallback_old()
 	{  
 
 	try {
