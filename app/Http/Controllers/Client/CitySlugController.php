@@ -386,7 +386,7 @@ class CitySlugController extends Controller
  
         // ── FAQs ───────────────────────────────────────────────────────────
         $faqs = [];
-        for ($i = 1; $i <= 6; $i++) {
+        for ($i = 1; $i <= 8; $i++) {
             $q = $this->replaceCity($kwData["faqq{$i}"] ?? '', $city);
             $a = $this->replaceCity($kwData["faqa{$i}"] ?? '', $city);
             if ($q && $a) $faqs[] = ['q' => $q, 'a' => $a];
@@ -551,10 +551,10 @@ class CitySlugController extends Controller
  
         $topDescription    = $this->replaceCity($kwData['top_description'] ?? '', $area);
         $bottomDescription = $this->replaceCity($kwData['bottom_description'] ?? '', $area);
-// dd($ratingCount);
+ 
         // ── FAQs ───────────────────────────────────────────────────────────
         $faqs = [];
-        for ($i = 1; $i <= 6; $i++) {
+        for ($i = 1; $i <= 8; $i++) {
             $q = $this->replaceCity($kwData["faqq{$i}"] ?? '', '');
             $a = $this->replaceCity($kwData["faqa{$i}"] ?? '', '');
             if ($q && $a) $faqs[] = ['q' => $q, 'a' => $a];
@@ -568,7 +568,7 @@ class CitySlugController extends Controller
             ->all();
 
 
-            // dd($businesses);
+         
         // ── Agents comparison table ────────────────────────────────────────
         $agents = collect($agents)
             ->map(fn ($b) => $this->normalizeAgent($b))

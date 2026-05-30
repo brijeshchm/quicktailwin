@@ -276,10 +276,12 @@ function bannerSlider(banners, interval = 4000) {
     </div>
 </div>
 
-                <p class="text-sm text-gray-500 mt-1">
-                    Showing <span class="font-semibold text-gray-800" x-text="filteredCount"></span> results for
+                <!-- <p class="text-sm text-gray-500 mt-1">
+                    Showing <span class="font-semibold text-gray-800" x-text="filteredCount"></span>
+                     
+                    results for
                     <span class="font-semibold text-blue-700">{{ $keyword }} in {{ ucfirst($city) }}</span>
-                </p>
+                </p> -->
             </div>
 
             {{-- Controls --}}

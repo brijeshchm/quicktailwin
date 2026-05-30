@@ -4,6 +4,7 @@
 <url>
     <loc>{{ route('city.slug', ['city_slug' => 'bhopal', 'service_slug' => $keyword->slug]) }}</loc>
     <lastmod>{{ \Carbon\Carbon::parse($keyword->updated_at)->toAtomString() }}</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
 </url>
 @endforeach
@@ -11,7 +12,8 @@
 @foreach ($keywords as $keyword)
 <url> 
     <loc>{{ route('city.slug', ['city_slug' => 'kolkata', 'service_slug' => $keyword->slug]) }}</loc>
-    <lastmod>{{ \Carbon\Carbon::parse($keyword->updated_at)->toAtomString() }}</lastmod>    
+    <lastmod>{{ \Carbon\Carbon::parse($keyword->updated_at)->toAtomString() }}</lastmod>
+    <changefreq>weekly</changefreq>    
     <priority>0.80</priority>
 </url>
 @endforeach
@@ -19,7 +21,8 @@
 @foreach ($keywords as $keyword)
 <url>
     <loc>{{ route('city.slug', ['city_slug' => 'faridabad', 'service_slug' => $keyword->slug]) }}</loc>
-    <lastmod>{{ \Carbon\Carbon::parse($keyword->updated_at)->toAtomString() }}</lastmod>    
+    <lastmod>{{ \Carbon\Carbon::parse($keyword->updated_at)->toAtomString() }}</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.80</priority>
 </url>
 @endforeach
@@ -27,7 +30,8 @@
 @foreach ($keywords as $keyword)
 <url>     
     <loc>{{ route('city.slug', ['city_slug' => 'ghaziabad', 'service_slug' => $keyword->slug]) }}</loc>
-    <lastmod>{{ \Carbon\Carbon::parse($keyword->updated_at)->toAtomString() }}</lastmod>    
+    <lastmod>{{ \Carbon\Carbon::parse($keyword->updated_at)->toAtomString() }}</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.80</priority>
 </url>
 @endforeach
@@ -35,7 +39,8 @@
 @foreach ($keywords as $keyword)
 <url>  
     <loc>{{ route('city.slug', ['city_slug' => 'pune', 'service_slug' => $keyword->slug]) }}</loc>
-    <lastmod>{{ \Carbon\Carbon::parse($keyword->updated_at)->toAtomString() }}</lastmod>    
+    <lastmod>{{ \Carbon\Carbon::parse($keyword->updated_at)->toAtomString() }}</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.80</priority>
 </url>
 @endforeach  
@@ -43,7 +48,8 @@
 @foreach ($keywords as $keyword)
 <url>     
     <loc>{{ route('city.slug', ['city_slug' => 'indore', 'service_slug' => $keyword->slug]) }}</loc>
-    <lastmod>{{ \Carbon\Carbon::parse($keyword->updated_at)->toAtomString() }}</lastmod>    
+    <lastmod>{{ \Carbon\Carbon::parse($keyword->updated_at)->toAtomString() }}</lastmod>
+    <changefreq>weekly</changefreq>    
     <priority>0.80</priority>
 </url>
 @endforeach 
