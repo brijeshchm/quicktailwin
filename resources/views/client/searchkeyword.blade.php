@@ -160,10 +160,10 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
 </div>
 
 
-                <p class="text-sm text-gray-500 mt-1">
+                <!-- <p class="text-sm text-gray-500 mt-1">
                     Showing <span class="font-semibold text-gray-800" x-text="filteredCount"></span> results for
                     <span class="font-semibold text-blue-700">{{ $keyword }}</span>
-                </p>
+                </p> -->
             </div>
 
             {{-- Controls --}}
