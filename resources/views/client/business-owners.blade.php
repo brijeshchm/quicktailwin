@@ -1086,14 +1086,10 @@ select.form-input { padding-left:1rem; }
 const form = document.getElementById('biz-form');
 
 if (form) {
-    // ============================================
-    // CSRF Token (read from meta tag — works in external .js too)
-    // ============================================
+    
     const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content || '';
 
-    // ============================================
-    // Field icon focus/blur effect
-    // ============================================
+    
     form.querySelectorAll('.form-input').forEach(input => {
         input.addEventListener('focus', () => {
             input.parentElement.querySelectorAll('.field-icon')
@@ -1105,9 +1101,7 @@ if (form) {
         });
     });
 
-    // ============================================
-    // Phone input — digits only, max 10
-    // ============================================
+    
     const phoneField = form.querySelector('input[name="phone"]');
     if (phoneField) {
         phoneField.addEventListener('input', function () {
@@ -1115,9 +1109,7 @@ if (form) {
         });
     }
 
-    // ============================================
-    // Validation helpers
-    // ============================================
+    
     function showError(field, message) {
         const wrap = field.closest('div');
         let err = wrap?.querySelector('.field-error');
@@ -1126,9 +1118,10 @@ if (form) {
             err = document.createElement('p');
             err.className = 'field-error text-red-500 text-[10px] mt-0.5';
             wrap?.appendChild(err);
-        }
+        }        
         
-        err.textContent = message;
+        message = message.replace(/_/g, " ");
+        err.textContent = message = message.charAt(0).toUpperCase() + message.slice(1);
         err.classList.remove('hidden');
         field.classList.add('border-red-400');
     }
@@ -1232,7 +1225,7 @@ if (form) {
                     'X-Requested-With': 'XMLHttpRequest',
                 },
             });
-console.log(response);
+ 
             // Handle Laravel validation errors (422)
             if (response.status === 422) {
                 const data = await response.json();
