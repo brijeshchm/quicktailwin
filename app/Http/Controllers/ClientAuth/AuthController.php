@@ -563,6 +563,7 @@ class AuthController extends Controller
 
 	public function logout(Request $request){	  
 		Auth::guard('clients')->logout();
+		
 		return redirect('/');
 	}
 	

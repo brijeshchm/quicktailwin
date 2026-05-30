@@ -139,7 +139,7 @@ class ChildCategoryController extends Controller
 	{
 		if ($request->ajax()) {
 
-			$childCategory = ChildCategory::join('parent_category', 'child_category.parent_category_id', '=', 'parent_category.id')
+			$childCategory = ChildCategory::leftjoin('parent_category', 'child_category.parent_category_id', '=', 'parent_category.id')
 				->select('child_category.*', 'parent_category.parent_category')->orderBy('id', 'desc');
 			if ($request->input('search.value') != '') {
 				$childCategory = $childCategory->where(function ($query) use ($request) {
