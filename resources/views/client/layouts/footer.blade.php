@@ -166,15 +166,15 @@
                         ['name' => 'Rent & Buy',                      'slug' => 'rent-or-buy','type'=>'child'],
                         ['name' => 'PG & Hostel',                     'slug' => 'pg-hostels','type'=>'keyword'],
                         ['name' => 'Computer Courses & Training',     'slug' => 'computer-courses','type'=>'categories'],
-                        ['name' => 'Study Abroad',                    'slug' => 'study-abroad','type'=>'categories'],
+                        ['name' => 'Study Abroad',                    'slug' => 'study-abroad','type'=>'child'],
                         ['name' => 'Home Services',                   'slug' => 'home-services','type'=>'keyword'],
                         ['name' => 'Parties, Special Occasions & Wedding', 'slug' => 'wedding-organisers','type'=>'keyword'],
                         ['name' => 'Electric Services',               'slug' => 'electric-services','type'=>'categories'],
-                        ['name' => 'Government Exam',                 'slug' => 'entrance-exams-coaching','type'=>'categories'],
+                        ['name' => 'Government Exam',                 'slug' => 'entrance-exams-coaching','type'=>'child'],
                         ['name' => 'Web Designers',                   'slug' => 'web-designers','type'=>'keyword'],
                       
                         ['name' => 'Carpenters',                      'slug' => 'carpenters','type'=>'keyword'],
-                        ['name' => 'Health & Wellness',               'slug' => 'health-and-wellness','type'=>'categories'],
+                        ['name' => 'Health & Wellness',               'slug' => 'health-wellness','type'=>'keyword'],
                         ['name' => 'Yoga',                            'slug' => 'yoga-classes','type'=>'child'],
                         ['name' => 'CA & TAX Consultants',            'slug' => 'tax-consultants','type'=>'keyword'],
                     ],
@@ -201,7 +201,7 @@
                     'heading' => 'Education Training',
                     'links' => [
                         ['name' => 'Schools & Colleges',              'slug' => 'coaching-tuitions','type'=>'keyword'],
-                        ['name' => 'Entrance Exam Coaching',          'slug' => 'entrance-exams-coaching','type'=>'categories'],
+                        ['name' => 'Entrance Exam Coaching',          'slug' => 'entrance-exams-coaching','type'=>'child'],
                         ['name' => 'Competitive Exam Coaching',       'slug' => 'competitive-exam-coaching','type'=>'keyword'],
                         ['name' => 'Distance Education',              'slug' => 'distance-education','type'=>'keyword'],
                         ['name' => 'Language Training',               'slug' => 'language-training','type'=>'keyword'],
@@ -288,10 +288,10 @@
                     @foreach([
                         ['name' => 'Professional Courses', 'slug' => 'professional-courses','type'=>'categories'],
                         ['name' => 'Wedding Planning',    'slug' => 'wedding-planning','type'=>'keyword'],
-                        ['name' => 'Healthcare',          'slug' => 'health-and-wellness','type'=>'categories'],
-                        ['name' => 'Real Estate',         'slug' => 'real-estate','type'=>'categories'],
+                        ['name' => 'Healthcare',          'slug' => 'health-wellness','type'=>'keyword'],
+                        ['name' => 'Real Estate',         'slug' => 'real-estate','type'=>'child'],
                         
-                        ['name' => 'Security System',     'slug' => 'security-system','type'=>'categories'],
+                        ['name' => 'Security System',     'slug' => 'security-system','type'=>'child'],
                       
                     ] as $link)
 

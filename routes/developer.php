@@ -112,7 +112,7 @@ Route::post('/update-user/{id}',[App\Http\Controllers\userController::class, 'up
 	
 	Route::post('/keyword/edit',[App\Http\Controllers\KeywordController::class, 'edit'])->middleware('auth');
 		
-	Route::get('//get-child-category/{id}',[App\Http\Controllers\KeywordController::class, 'editIcon'])->middleware('auth');
+	Route::get('/get-child-category/{id}',[App\Http\Controllers\KeywordController::class, 'editIcon'])->middleware('auth');
 	Route::post('/keyword/updateIcon/{id}',[App\Http\Controllers\KeywordController::class, 'updateIcon'])->middleware('auth');
 	Route::get('/keyword/icon_del/{id}', [App\Http\Controllers\KeywordController::class, 'deleteIcon']);
 	Route::post('/keyword/update',[App\Http\Controllers\KeywordController::class, 'update'])->middleware('auth');

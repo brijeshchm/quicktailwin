@@ -636,7 +636,7 @@
 
                 async submitBooking() {
                     try {
-                        await fetch('{{  url("/spa/booking") }}', {
+                        await fetch('{{  url("/client/lead/saveEnquiry") }}', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
