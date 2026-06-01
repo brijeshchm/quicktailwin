@@ -163,7 +163,7 @@
       
       </div>
        
-        <div class="expire">Expire: {{ date('d M, Y',strtotime($client->expired_on)) ?? '' }}</div>
+        <!-- <div class="expire">Expire: {{ date('d M, Y',strtotime($client->expired_on)) ?? '' }}</div> -->
        <form class="profileSave" method="POST">
         <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="{{ $client->pauseLead??'' }}" data-client-id="{{ $client->id }}" @if(!empty($client->pauseLead)) {{ "checked"}} @endif>
@@ -174,8 +174,6 @@
         <div class="new-lead"><a href="{{ url('business/new-enquiry') }}"> <span class="bell"><i class="bi bi-envelope"></i> {{ $leads??''}}</span></a></div>
     </div>
     <div class="notifi">
- 
-
 <style>
 .profile-btn{
     display:inline-flex;
