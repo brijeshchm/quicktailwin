@@ -111,9 +111,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         }
 
         .hidden-init { display: none; }
-    </style>
-
-    
+    </style>    
 </head>
 <body class="min-h-screen bg-white text-gray-900 antialiased">
     <!-- Google Tag Manager (noscript) -->

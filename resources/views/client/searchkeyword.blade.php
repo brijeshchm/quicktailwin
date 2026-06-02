@@ -9,6 +9,9 @@
 @section('content')
 {{-- In your layout <head> or @push('styles') --}}
 <style>
+#enquiry-modal { display: none; }
+#enquiry-modal.open { display: flex; }
+body.modal-open { overflow: hidden; }
 #scroll-progress {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -248,72 +251,107 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
         {{-- Main content --}}
         <main class="flex-1 min-w-0">
  
-            {{-- Listings --}}
-            <!-- <div x-show="filteredCount === 0" class="text-center py-20">
-                <div class="w-16 h-16 bg-indigo-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <span class="text-2xl">🔍</span>
-                </div>
-                <p class="text-gray-700 font-semibold mb-1">No businesses found</p>
-                <p class="text-gray-400 text-sm">Try adjusting your search or filters</p>
-                <button @click="resetFilters()" class="mt-4 px-5 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-xl hover:bg-indigo-700">Clear all filters</button>
-            </div> -->
-
           
 
-             <div id="listings-container" x-show="filteredCount > 0"> 
-    @php $adInterval = 5; @endphp
+            <div id="listings-container" x-show="filteredCount > 0">
 
-    {{-- ✅ Single wrapper outside the loop --}}
-    <div :class="view === 'grid'
-            ? 'grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4'
-            : 'bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden divide-y divide-gray-50'"
-         id="listings-wrapper">
+            
 
-        @foreach($businesses as $index => $business)
+@if(!empty($businesses))
+    @php
+        $adInterval = 4;
+        // Chunk into groups of 5 for inline ad placement
+        $businessChunks = collect($businesses)->chunk($adInterval);
+    @endphp
 
-         
-            <div class="business-card"
-                 data-name="{{ strtolower($business['name'] ?? '') }}"
-                 data-category="{{ strtolower(is_array($business['category'] ?? '') ? implode(',', $business['category']) : ($business['category'] ?? '')) }}"
-                 data-rating="{{ $business['rating'] ?? 4.0 }}"
-                 data-verified="{{ !empty($business['verified']) ? '1' : '0' }}"
-                 data-open="{{ !empty($business['isOpen']) ? '1' : '0' }}"
-                 data-reviews="{{ $business['reviewCount'] ?? 0 }}"
-                 x-show="shouldShow($el)">
-                <x-business-card :business="$business" :index="$index" />
-            </div>
-         
-        @endforeach
+    @foreach($businessChunks as $chunkIndex => $chunk)
 
-    </div>
+        {{-- ONE grid wrapper for the ENTIRE chunk --}}
+        <div :class="view === 'grid'
+            ? 'grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-2 gap-4 mb-6'
+            : 'bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden divide-y divide-gray-50 mb-6'"
+             id="chunk-{{ $chunkIndex }}">
 
-    {{-- ✅ Ad after every 5th item, outside the grid wrapper so it breaks the flow --}}
-    @foreach($businesses as $index => $business)
-        @if(($index + 1) % $adInterval === 0 && !$loop->last)
-        <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-700 my-3 shadow-md">
-            <div class="relative px-5 py-4 flex items-center gap-5 flex-wrap sm:flex-nowrap">
-                <div class="flex-1 min-w-0">
-                    <div class="flex items-center gap-2 mb-0.5 flex-wrap">
-                        <span class="text-[9px] font-bold text-white/60 border border-white/20 px-2 py-0.5 rounded-full uppercase tracking-widest">Sponsored</span>
-                        <span class="text-[9px] font-bold text-amber-300 bg-amber-300/10 border border-amber-300/20 px-2 py-0.5 rounded-full animate-pulse">Featured Offer</span>
-                    </div>
-                    <p class="text-white font-bold text-base sm:text-lg leading-tight">Get ₹500 Cashback on Your First Interior Design Order</p>
-                    <p class="text-white/70 text-xs mt-0.5">Verified interior designers · Free consultation · 10,000+ happy homes</p>
+            @foreach($chunk as $bIndex => $business)
+                @php $globalIndex = $chunkIndex * $adInterval + $bIndex; @endphp
+
+                <div class="business-card"
+                     data-name="{{ strtolower($business['name'] ?? '') }}"
+                     data-category="{{ strtolower(is_array($business['category'] ?? '') ? implode(',', $business['category']) : ($business['category'] ?? '')) }}"
+                     data-rating="{{ $business['rating'] ?? 4.0 }}"
+                     data-verified="{{ ($business['verified'] ?? false) ? '1' : '0' }}"
+                     data-open="{{ ($business['isOpen'] ?? false) ? '1' : '0' }}"
+                     data-reviews="{{ $business['reviewCount'] ?? 0 }}"
+                     x-show="shouldShow($el)">
+                    <x-business-card :business="$business" :index="$globalIndex" :view="'list'" />
                 </div>
-                <a href="{{ route('login') }}" class="flex-shrink-0 bg-white text-teal-700 font-bold text-sm px-5 py-2.5 rounded-xl hover:bg-white/90 shadow-lg whitespace-nowrap">Claim Offer</a>
-            </div>
+            @endforeach
         </div>
+
+        {{-- Inline ad between chunks (not after the last one) --}}
+        @if(!$loop->last)
+             
+
+
+
+            <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-700 my-3 shadow-md">
+                    <div class="relative px-5 py-4 flex items-center gap-5 flex-wrap sm:flex-nowrap">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-2 mb-0.5 flex-wrap">
+                                <span class="text-[9px] font-bold text-white/60 border border-white/20 px-2 py-0.5 rounded-full uppercase tracking-widest">Sponsored</span>
+                                <span class="text-[9px] font-bold text-amber-300 bg-amber-300/10 border border-amber-300/20 px-2 py-0.5 rounded-full animate-pulse">Featured Offer</span>
+                            </div>
+                            <p class="text-white font-bold text-base sm:text-lg leading-tight">Get ₹500 Cashback on Your First Interior Design Order</p>
+                            <p class="text-white/70 text-xs mt-0.5">Verified interior designers · Free consultation · 10,000+ happy homes</p>
+                        </div>
+                        <a href="{{ route('login') }}" class="flex-shrink-0 bg-white text-teal-700 font-bold text-sm px-5 py-2.5 rounded-xl hover:bg-white/90 shadow-lg whitespace-nowrap">Claim Offer</a>
+                    </div>
+                </div>
         @endif
     @endforeach
 
-</div>
+    {{-- Enquiry Modal --}}
+    <div id="enquiry-modal"
+         class="fixed inset-0 z-[210] items-center justify-center p-4"
+         style="background:rgba(10,15,40,.75);backdrop-filter:blur(14px);"
+         onclick="if(event.target===this)this.classList.remove('open')">
+        <div class="relative w-full max-w-md overflow-hidden"
+             style="border-radius:1.75rem;"
+             onclick="event.stopPropagation()">
+            @include('client.layouts.enquiry-popup-form', [
+                'keywordList' => $keyword,
+                'planOptions' => '',
+                'formId' => 'modal'
+            ])
+        </div>
+    </div>
+@endif
 
-            {{-- Reviews Section --}}
+
+
+ 
+
+                <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-700 my-3 shadow-md">
+                    <div class="relative px-5 py-4 flex items-center gap-5 flex-wrap sm:flex-nowrap">
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-2 mb-0.5 flex-wrap">
+                                <span class="text-[9px] font-bold text-white/60 border border-white/20 px-2 py-0.5 rounded-full uppercase tracking-widest">Sponsored</span>
+                                <span class="text-[9px] font-bold text-amber-300 bg-amber-300/10 border border-amber-300/20 px-2 py-0.5 rounded-full animate-pulse">Featured Offer</span>
+                            </div>
+                            <p class="text-white font-bold text-base sm:text-lg leading-tight">Get ₹500 Cashback on Your First Interior Design Order</p>
+                            <p class="text-white/70 text-xs mt-0.5">Verified interior designers · Free consultation · 10,000+ happy homes</p>
+                        </div>
+                        <a href="{{ route('login') }}" class="flex-shrink-0 bg-white text-teal-700 font-bold text-sm px-5 py-2.5 rounded-xl hover:bg-white/90 shadow-lg whitespace-nowrap">Claim Offer</a>
+                    </div>
+                </div>
+            </div>
+
             @if($totalReviews)
+            {{-- Reviews Section --}}
             <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mt-4">
                 <div class="flex items-center justify-between mb-5">
                     <h2 class="text-lg font-bold text-gray-900">User Reviews</h2>
-                    <span class="text-xs text-blue-600 hover:underline font-medium flex items-center gap-1">Write a Review ↗</span>
+                    
                 </div>
 
                 {{-- Rating summary --}}
@@ -375,26 +413,27 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
                 <p class="text-sm text-gray-400 text-center py-6">No reviews yet.</p>
                 @endforelse
             </div>
-            @endif
 
+            @endif
             {{-- Property Banner --}}
             <div class="w-full bg-[#E9D9B8] rounded-lg p-4 mt-4 md:p-6 flex flex-col md:flex-row items-center justify-between gap-4">
                 <div class="flex items-center gap-4">
-                    <div class="text-4xl">
-
-                       <img 
-        src="{{ $kwData['key_icon'] ?? $kwData['child_icon'] }}" 
+                    <div class="w-12 h-12 flex items-center justify-center overflow-hidden rounded-lg">
+    
+    <img 
+        src="{{ $kwData['key_icon'] ?? $kwData['child_icon'] ??'' }}" 
         alt="{{ $qb['name'] ?? '' }}"
         class="w-8 h-8 object-contain group-hover:scale-105 transition-transform duration-500"
-    >
-                    </div>
-                    <div>
+        loading="lazy"
+        decoding="async">
+</div>
+                <div>
                         <h3 class="text-lg md:text-xl font-bold text-gray-800">Attention!</h3>
-                        <p class="text-sm md:text-base font-semibold text-gray-700">{{ $keyword }} Owners</p>
+                        <p class="text-sm md:text-base font-semibold text-gray-700">Advertise Owners</p>
                     </div>
                 </div>
                 <div class="text-center md:text-left max-w-md">
-                    <p class="text-sm md:text-base text-gray-800 leading-relaxed">Looking to {{ $keyword }}? Advertise on Quickdials Properties</p>
+                    <p class="text-sm md:text-base text-gray-800 leading-relaxed">Looking to {{ $keyword }}? Advertise on Quickdials Provider</p>
                 </div>
                 <div>
                     <button class="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-5 py-2.5 rounded-md flex items-center gap-2 transition">
@@ -417,8 +456,9 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
                         @foreach($quickBusinesses ?? [] as $qb)
                         <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group">
                             <div class="relative w-full h-48 overflow-hidden rounded-t-2xl bg-gray-100">
-                                <img src="{{ $qb['image'] ?? '' }}" alt="{{ $qb['name'] ?? '' }}"
-                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <img loading="lazy"
+            decoding="async" src="{{ $qb['image'] ?? '' }}" alt="{{ $qb['name'] ?? '' }}" 
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" >
                             </div>
                             <div class="p-5">
                                 <div class="flex items-center gap-2 mb-3">
@@ -438,7 +478,8 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
                                     </a>
                                     <a href="https://wa.me/{{ preg_replace('/\D/', '', $qb['phone'] ?? '') }}" target="_blank"
                                        class="flex items-center justify-center w-12 h-12 border border-gray-300 rounded-xl hover:bg-gray-50 transition-all">
-                                        <img src="{{ asset('WhatsApp.svg') }}" alt="WhatsApp" class="w-6 h-6">
+                                        <img src="{{ asset('WhatsApp.svg') }}" alt="WhatsApp" class="w-6 h-6" loading="lazy"
+                                            decoding="async">
                                     </a>
                                 </div>
                             </div>
@@ -473,13 +514,6 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
             </section>
 
         </main>
-
-
-
-
-
-  
- 
 
     
  

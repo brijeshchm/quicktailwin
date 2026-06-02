@@ -217,9 +217,9 @@ function renderHeroCityList(list, q = '') {
             class="w-full text-left px-4 py-2 text-xs transition-colors font-medium flex items-center gap-2
                    ${city.city === heroSelectedCity ? 'text-blue-700 bg-blue-50' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'}">
             ${city.city === heroSelectedCity
-                ? '<span class="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></span>'
-                : '<span class="ml-3.5"></span>'}
-            ${city.cityDetails}
+                ? '<i data-lucide="map-pin" class="w-3 h-3 text-blue-500"></i><span class="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></span>'
+                : '<i data-lucide="map-pin" class="w-3 h-3 text-blue-500"></i>'}
+            ${city.cityDetails} 
         </button>`).join('');
 }
 renderHeroCityList(CITIES);

@@ -33,6 +33,7 @@
                         onclick="toggleStickyCity()"
                     >
                         <i data-lucide="map-pin" class="w-3 h-3 text-blue-500"></i>
+                        
                         <span id="sticky-city-label">Bangalore</span>
                         <i data-lucide="chevron-down" class="w-2.5 h-2.5 text-gray-400 transition-transform duration-200" id="sticky-city-chevron"></i>
                     </button>
@@ -57,11 +58,13 @@
                         </div>
                         <div class="max-h-48 overflow-y-auto py-1" id="sticky-city-list">
                             @foreach(['Mumbai','Delhi','Bangalore','Hyderabad','Chennai','Pune','Kolkata','Ahmedabad'] as $city)
+                              
                                 <button
                                     onclick="selectStickyCity('{{ $city }}')"
                                     class="w-full text-left px-4 py-2 text-xs transition-colors font-medium flex items-center gap-2 text-gray-700 hover:bg-blue-50 hover:text-blue-700"
                                     data-city="{{ $city }}"
                                 >
+                                 <i data-lucide="map-pin" class="w-3 h-3 text-blue-500"></i>
                                     <span class="ml-3.5">{{ $city }}</span>
                                 </button>
                             @endforeach
@@ -776,7 +779,7 @@ function renderStickyCityList(list, q = '') {
                    ${city.city === stickySelectedCity ? 'text-blue-700 bg-blue-50' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'}">
             ${city.city === stickySelectedCity
                 ? '<span class="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></span>'
-                : '<span class="ml-3.5"></span>'}
+                : ' <i data-lucide="map-pin" class="w-3 h-3 text-blue-500"></i>'}
             ${city.cityDetails}
         </button>`).join('');
 }

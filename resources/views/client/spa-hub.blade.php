@@ -8,9 +8,7 @@
  
 
 <div x-data="spaHub()" x-init="init()" class="bg-white">
-
-    
-    
+  
 
     {{-- ════════════ MAIN SECTIONS ════════════ --}}
     <main class="pt-[60px]">

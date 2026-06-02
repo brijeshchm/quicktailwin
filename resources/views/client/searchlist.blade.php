@@ -276,12 +276,12 @@ function bannerSlider(banners, interval = 4000) {
     </div>
 </div>
 
-                <!-- <p class="text-sm text-gray-500 mt-1">
-                    Showing <span class="font-semibold text-gray-800" x-text="filteredCount"></span>
-                     
-                    results for
-                    <span class="font-semibold text-blue-700">{{ $keyword }} in {{ ucfirst($city) }}</span>
-                </p> -->
+                        <!-- <p class="text-sm text-gray-500 mt-1">
+                            Showing <span class="font-semibold text-gray-800" x-text="filteredCount"></span>
+                            
+                            results for
+                            <span class="font-semibold text-blue-700">{{ $keyword }} in {{ ucfirst($city) }}</span>
+                        </p> -->
             </div>
 
             {{-- Controls --}}
@@ -453,7 +453,7 @@ function bannerSlider(banners, interval = 4000) {
 
  
 
-                 <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-700 my-3 shadow-md">
+                <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-700 my-3 shadow-md">
                     <div class="relative px-5 py-4 flex items-center gap-5 flex-wrap sm:flex-nowrap">
                         <div class="flex-1 min-w-0">
                             <div class="flex items-center gap-2 mb-0.5 flex-wrap">
@@ -547,11 +547,9 @@ function bannerSlider(banners, interval = 4000) {
         alt="{{ $qb['name'] ?? '' }}"
         class="w-8 h-8 object-contain group-hover:scale-105 transition-transform duration-500"
         loading="lazy"
-        decoding="async"
-    >
-
+        decoding="async">
 </div>
-                    <div>
+                <div>
                         <h3 class="text-lg md:text-xl font-bold text-gray-800">Attention!</h3>
                         <p class="text-sm md:text-base font-semibold text-gray-700">Advertise Owners</p>
                     </div>
@@ -603,7 +601,7 @@ function bannerSlider(banners, interval = 4000) {
                                     <a href="https://wa.me/{{ preg_replace('/\D/', '', $qb['phone'] ?? '') }}" target="_blank"
                                        class="flex items-center justify-center w-12 h-12 border border-gray-300 rounded-xl hover:bg-gray-50 transition-all">
                                         <img src="{{ asset('WhatsApp.svg') }}" alt="WhatsApp" class="w-6 h-6" loading="lazy"
-            decoding="async">
+                                            decoding="async">
                                     </a>
                                 </div>
                             </div>

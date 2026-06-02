@@ -11,11 +11,11 @@
     ];
  
     $rotatingWords = ['Renewal', 'Serenity', 'Balance', 'Bliss', 'Harmony'];
-    $services = [
-        'Swedish Massage', 'Hot Stone Therapy', 'Ayurvedic Ritual',
-        'Aromatherapy', 'Hydrotherapy', 'Facial Glow',
-        'Signature 3-Hour Retreat', "Couple's Retreat", 'Nail & Polish',
-    ];
+    // $services = [
+    //     'Swedish Massage', 'Hot Stone Therapy', 'Ayurvedic Ritual',
+    //     'Aromatherapy', 'Hydrotherapy', 'Facial Glow',
+    //     'Signature 3-Hour Retreat', "Couple's Retreat", 'Nail & Polish',
+    // ];
     $timeSlots = [
         '9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM',
         '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM', '6:00 PM',
@@ -208,7 +208,7 @@
                             </div>
                             <div class="text-2xl font-extrabold text-white leading-tight"
                                  style="font-family:'Playfair Display',serif;">
-                                Book Your <span class="opacity-90">Treatment</span>
+                                Book Your <span class="opacity-90">Spa</span>
                             </div>
                         </div>
 
@@ -252,18 +252,22 @@
                             <div class="text-lg font-bold text-stone-900 mb-1" style="font-family:'Playfair Display',serif;">
                                 Tell us about you
                             </div>
-                            <div class="text-xs text-stone-400 mb-4">Step 1 of 3 · Choose your treatment next</div>
+                            <div class="text-xs text-stone-400 mb-4">Step 1 of 3 · Choose your Service next</div>
 
                             <div class="space-y-3.5">
                                 <div>
                                     <label class="hf-label">Full Name *</label>
-                                    <input type="text" class="hf-input" placeholder="Priya Sharma" x-model="form.name">
+                                    <input type="text" class="hf-input" placeholder="Enter Name" x-model="form.name">                                    
+                                    <input type="hidden" x.model="form.from_page" value="spa hub">
+                                    <input type="hidden" x.model="form.lead_form" value="1">                                   
+                                    <input type="hidden" x.model="form.location_id"   value="none">
+                                    
                                 </div>
                                 <div>
                                     <label class="hf-label">Mobile Number *</label>
                                     <div class="flex gap-1.5">
                                         <div class="px-3 py-2.5 rounded-lg border-2 border-stone-200 bg-stone-50 text-sm font-bold text-stone-700">+91</div>
-                                        <input type="tel" class="hf-input flex-1" placeholder="98765 43210" maxlength="10"
+                                        <input type="tel" class="hf-input flex-1" placeholder="Enter Phone no" maxlength="10"
                                                x-model="form.phone"
                                                @input="form.phone = $event.target.value.replace(/\D/g,'').slice(0,10)">
                                     </div>
@@ -274,24 +278,24 @@
                             <button class="hf-cta mt-4"
                                     :disabled="!form.name.trim() || form.phone.length !== 10"
                                     @click="goStep(2, 1)">
-                                Continue to Treatment →
+                                Continue to Service →
                             </button>
                         </div>
 
                         {{-- ═══ Step 2: Treatment ═══ --}}
                         <div x-show="step === 2" :class="`hf-slide-${formDir}`">
                             <div class="text-lg font-bold text-stone-900 mb-1" style="font-family:'Playfair Display',serif;">
-                                Choose your treatment
+                                Choose your Service
                             </div>
                             <div class="text-xs text-stone-400 mb-4">Step 2 of 3 · OTP verification next</div>
 
                             <div class="space-y-3">
                                 <div>
-                                    <label class="hf-label">Treatment *</label>
-                                    <select class="hf-select" x-model="form.service">
-                                        <option value="">— Choose a treatment —</option>
+                                    <label class="hf-label">Service *</label>
+                                    <select class="hf-select" x-model="form.kw_text">
+                                        <option value="">— Choose a Service —</option>
                                         @foreach($services as $s)
-                                            <option value="{{ $s }}">{{ $s }}</option>
+                                            <option value="{{ $s->id }}">{{ $s->keyword }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -328,7 +332,7 @@
                                     </label>
                                     <textarea class="hf-input resize-none" rows="2"
                                               placeholder="Allergies, preferences, special occasions…"
-                                              x-model="form.notes"></textarea>
+                                              x-model="form.remark"></textarea>
                                 </div>
                             </div>
 
@@ -338,7 +342,7 @@
                                     ← Back
                                 </button>
                                 <button class="hf-cta flex-1"
-                                        :disabled="!form.service || !form.date || !form.time"
+                                        :disabled="!form.kw_text || !form.date || !form.time"
                                         @click="sendOtp(); goStep(3, 2)">
                                     Verify with OTP →
                                 </button>
@@ -383,7 +387,7 @@
                                 </button>
                                 <button @click="goStep(2, 3)"
                                         class="w-full py-2.5 rounded-lg border-2 border-stone-200 bg-stone-50 text-stone-600 font-semibold text-xs">
-                                    ← Back to Treatment
+                                    ← Back to Service
                                 </button>
                             </div>
 
@@ -546,7 +550,7 @@
                 step: 1,
                 formDir: 'right',
                 form: {
-                    name: '', phone: '', service: '', date: '', time: '', notes: '',
+                    name: '', phone: '', kw_text: '', date: '',from_page:'',lead_form:'',location_id:'', time: '', remark: '',
                 },
                 otp: ['', '', '', '', '', ''],
                 demoOtp: '',
@@ -570,11 +574,11 @@
                     const items = [
                         { label: '👤 Name',      value: this.form.name },
                         { label: '📱 Mobile',    value: '+91 ' + this.form.phone },
-                        { label: '🌸 Treatment', value: this.form.service },
+                        { label: '🌸 Treatment', value: this.form.kw_text },
                         { label: '📅 Date',      value: new Date(this.form.date + 'T00:00:00').toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' }) },
                         { label: '⏰ Time',      value: this.form.time },
                     ];
-                    if (this.form.notes) items.push({ label: '📝 Notes', value: this.form.notes });
+                    if (this.form.remark) items.push({ label: '📝 Notes', value: this.form.remark });
                     return items;
                 },
 
@@ -651,7 +655,7 @@
 
                 reset() {
                     this.step    = 1;
-                    this.form    = { name: '', phone: '', service: '', date: '', time: '', notes: '' };
+                    this.form    = { name: '', phone: '', kw_text: '', date: '', time: '', remark: '' };
                     this.otp     = ['', '', '', '', '', ''];
                     this.demoOtp = '';
                     this.otpError = '';
