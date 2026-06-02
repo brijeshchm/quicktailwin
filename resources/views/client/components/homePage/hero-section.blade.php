@@ -144,8 +144,8 @@
                 };
                 @endphp
                     <a href="{{ $catUrl }}"
-   title="{{ $card['title'] ?? '' }}"
-   class="banner-card relative shrink-0 rounded-t-2xl overflow-hidden cursor-pointer group h-[140px] sm:h-[155px] block {{ $colorMap[$i % count($colorMap)] }}">
+            title="{{ $card['title'] ?? '' }}"
+            class="banner-card relative shrink-0 rounded-t-2xl overflow-hidden cursor-pointer group h-[140px] sm:h-[155px] block {{ $colorMap[$i % count($colorMap)] }}">
 
     <img
         src="{{ $card['img'] ?? '' }}"
@@ -210,28 +210,82 @@ const CITIES = cityNames.map(name => ({
     cityDetails: name
 }));
 
+// function renderHeroCityList(list, q = '') {
+//     const el = document.getElementById('hero-city-list');
+//     el.innerHTML = list.map(city => `
+//         <button onclick="selectHeroCity('${city.city}')"
+//             class="w-full text-left px-4 py-2 text-xs transition-colors font-medium flex items-center gap-2
+//                    ${city.city === heroSelectedCity ? 'text-blue-700 bg-blue-50' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'}">
+//             ${city.city === heroSelectedCity
+//                 ? '<span class="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></span>'
+//                 : '<i data-lucide="map-pin" class="w-3 h-3 text-blue-500"></i>'}
+//             ${city.cityDetails} 
+//         </button>`).join('');
+// }
+
 function renderHeroCityList(list, q = '') {
     const el = document.getElementById('hero-city-list');
-    el.innerHTML = list.map(city => `
-        <button onclick="selectHeroCity('${city.city}')"
-            class="w-full text-left px-4 py-2 text-xs transition-colors font-medium flex items-center gap-2
-                   ${city.city === heroSelectedCity ? 'text-blue-700 bg-blue-50' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'}">
-            ${city.city === heroSelectedCity
-                ? '<i data-lucide="map-pin" class="w-3 h-3 text-blue-500"></i><span class="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></span>'
-                : '<i data-lucide="map-pin" class="w-3 h-3 text-blue-500"></i>'}
-            ${city.cityDetails} 
-        </button>`).join('');
+
+    el.innerHTML = list.map((city, index) => {
+        const cityName = city.city || city.name || '';
+        const cityDetails = city.cityDetails || cityName;
+
+        return `
+            <button type="button"
+                data-index="${index}"
+                class="hero-city-btn w-full text-left px-4 py-2 text-xs transition-colors font-medium flex items-center gap-2
+                ${cityName === heroSelectedCity ? 'text-blue-700 bg-blue-50' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'}">
+
+                ${cityName === heroSelectedCity
+                    ? '<span class="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></span>'
+                    : '<i data-lucide="map-pin" class="w-3 h-3 text-blue-500"></i>'}
+
+                ${cityDetails}
+            </button>
+        `;
+    }).join('');
+
+    document.querySelectorAll('.hero-city-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const index = this.getAttribute('data-index');
+            const selectedCity = list[index];
+
+            selectHeroCity(selectedCity.city || selectedCity.name, selectedCity);
+        });
+    });
+
+    if (window.lucide) {
+        lucide.createIcons();
+    }
 }
 renderHeroCityList(CITIES);
 
 function toggleHeroCity() {
-    const panel   = document.getElementById('hero-city-panel');
+    const panel = document.getElementById('hero-city-panel');
     const chevron = document.getElementById('hero-city-chevron');
-    const hidden  = panel.classList.contains('hidden');
-    panel.classList.toggle('hidden', !hidden);
-    chevron.style.transform = hidden ? 'rotate(180deg)' : '';
-    if (hidden) { document.getElementById('hero-city-search').focus(); }
+    const search = document.getElementById('hero-city-search');
+
+    const isHidden = panel.classList.contains('hidden');
+
+    if (isHidden) {
+        panel.classList.remove('hidden');
+        chevron.style.transform = 'rotate(180deg)';
+        search.focus();
+    } else {
+        panel.classList.add('hidden');
+        chevron.style.transform = '';
+    }
 }
+
+
+// function toggleHeroCity() {
+//     const panel   = document.getElementById('hero-city-panel');
+//     const chevron = document.getElementById('hero-city-chevron');
+//     const hidden  = panel.classList.contains('hidden');
+//     panel.classList.toggle('hidden', !hidden);
+//     chevron.style.transform = hidden ? 'rotate(180deg)' : '';
+//     if (hidden) { document.getElementById('hero-city-search').focus(); }
+// }
 
 let heroCityTimeout = null;
 function filterHeroCities(q) {
@@ -257,15 +311,24 @@ function clearHeroCitySearch() {
     document.getElementById('hero-city-clear').classList.add('hidden');
 }
 
+
+
+
+
 function selectHeroCity(city) {
     heroSelectedCity = city;
+   
     document.getElementById('hero-city-label').textContent = city;
-    document.getElementById('sticky-city-label').textContent = city;
-    document.getElementById('mobile-city-label').textContent = city;
-    document.getElementById('hero-city-panel').classList.add('hidden');
+    // document.getElementById('sticky-city-label').textContent = city;
+    // document.getElementById('mobile-city-label').textContent = city;
+     
+    // document.getElementById('hero-city-panel').classList.add('hidden');
+    document.getElementById('hero-city-list').classList.add('hidden');
+    // document.getElementById('hero-city-dropdown').style.display = 'none';
     document.getElementById('hero-city-chevron').style.transform = '';
     setTimeout(() => document.getElementById('hero-search-input').focus(), 60);
 }
+ 
 
 document.addEventListener('mousedown', e => {
     const dd = document.getElementById('hero-city-dropdown');

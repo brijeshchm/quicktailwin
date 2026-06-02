@@ -3,8 +3,8 @@
 @php
     $spa = $spa ?? [
         'name'      => 'Serenity Spa & Wellness',
-        'phone'     => '+919876543210',
-        'whatsapp'  => '919876543210',
+        'phone'     => '+9175-9543-9543',
+        'whatsapp'  => '917595439543',
         'location'  => 'Koregaon Park · Pune',
         'address'   => 'Koregaon Park, Pune',
         'est'       => '2013',

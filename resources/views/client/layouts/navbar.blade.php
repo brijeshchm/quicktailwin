@@ -812,7 +812,7 @@ function clearStickyCitySearch() {
 function selectStickyCity(city) {
     stickySelectedCity = city;
     document.getElementById('sticky-city-label').textContent = city;
-    document.getElementById('mobile-city-label').textContent = city;
+    // document.getElementById('mobile-city-label').textContent = city; 
     document.getElementById('sticky-city-panel').classList.add('hidden');
     document.getElementById('sticky-city-chevron').style.transform = '';
     document.getElementById('sticky-search-input').focus();
