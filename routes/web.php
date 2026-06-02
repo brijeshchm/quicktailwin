@@ -299,33 +299,19 @@ Route::get('/sitemap-blog.xml', function () {
 			->get();
 	return response()
 		->view('client.sitemap_blog', compact('blogs'))
-		->header('Content-Type', 'text/xml');
+		->header('Content-Type', 'application/xml; charset=UTF-8');
 
 });
 
- Route::get('/sitemap-raipur', function () {
-     	$keywords =  DB::table('keyword')
-			->where('seo_type', '1')
-			->select('slug', 'updated_at')
-			->get();
-	return response()
-        ->view('client.sitemap-common', [
-            'city' => 'raipur',
-            'keywords' => $keywords
-        ])
-       ->header('Content-Type', 'text/xml');
-});
+ 
 
 Route::get('/sitemap.xml', function () {
-
-	 
+ 
 		$keywords =  DB::table('keyword')
 			->where('seo_type', '1')
 			->select('slug', 'updated_at')
 			->get();
 	 
-
- 
 		$categories =  DB::table('parent_category')
 			->where('status', '1')
 			->select('parent_slug', 'updated_at')
@@ -343,30 +329,7 @@ Route::get('/sitemap.xml', function () {
 	 ->header('Content-Type', 'application/xml; charset=UTF-8');
 
 });
-
-// Route::get('/sitemap', function () {
-
-	 
-// 		$keywords =  DB::table('keyword')
-// 			->where('seo_type', '1')
-// 			->select('slug', 'updated_at')
-// 			->get();
-	  
-// 		$categories =  DB::table('parent_category')
-// 			->where('status', '1')
-// 			->select('parent_slug', 'updated_at')
-// 			->get();
-	 	 
-// 		$childCategories =  DB::table('child_category')
-// 			->where('status', '1')
-// 			->select('child_slug', 'updated_at')
-// 			->get();
-	 
-// 	return response()
-// 		->view('client.sitemap', compact('keywords','categories','childCategories'))
-// 		->header('Content-Type', 'text/xml');
-
-// });
+ 
 
 Route::get('/sitemap-online.xml', function () {
 
@@ -379,7 +342,7 @@ Route::get('/sitemap-online.xml', function () {
 
 	return response()
 		->view('client.sitemap_online', compact('keywords'))
-		->header('Content-Type', 'text/xml');
+		->header('Content-Type', 'application/xml; charset=UTF-8');
 
 });
 
@@ -394,7 +357,7 @@ Route::get('/sitemap-city.xml', function () {
 
 	return response()
 		->view('client.sitemap_city', compact('keywords'))
-		->header('Content-Type', 'text/xml');
+		->header('Content-Type', 'application/xml; charset=UTF-8');
 
 });
 
@@ -405,11 +368,7 @@ Route::get('/sitemap-city-1.xml', function () {
 			->where('seo_type', '1')
 			->select('slug', 'updated_at')
 			->get();
-	 
-
- 
-		
-		 return response()
+	 	 return response()
         ->view('client.sitemap_city_1', compact('keywords'))
         ->header('Content-Type', 'application/xml; charset=UTF-8');
 
@@ -423,7 +382,7 @@ Route::get('/sitemap-city-2.xml', function () {
 		->get();
 	return response()
 		->view('client.sitemap_city-2', compact('keywords'))
-		->header('Content-Type', 'text/xml');
+		->header('Content-Type', 'application/xml; charset=UTF-8');
 
 });
 Route::get('/sitemap-businesses.xml', function () {
@@ -434,7 +393,7 @@ Route::get('/sitemap-businesses.xml', function () {
 		->get();
 	return response()
 		->view('client.sitemap-businesses', compact('clients'))
-		->header('Content-Type', 'text/xml');
+		->header('Content-Type', 'application/xml; charset=UTF-8');
 
 });
 
@@ -446,7 +405,7 @@ Route::get('/sitemap-city-3.xml', function () {
 		->get();
 	return response()
 		->view('client.sitemap_city-3', compact('keywords'))
-		->header('Content-Type', 'text/xml');
+		->header('Content-Type', 'application/xml; charset=UTF-8');
 
 });
 Route::get('/sitemap-city-4.xml', function () {
@@ -457,18 +416,16 @@ Route::get('/sitemap-city-4.xml', function () {
 		->get();
 	return response()
 		->view('client.sitemap_city-4', compact('keywords'))
-		->header('Content-Type', 'text/xml');
+		->header('Content-Type', 'application/xml; charset=UTF-8');
 
 });
 
 Route::get('/quickdialssitemap.xml', function () {
-	return response()->view('client.quickdialssitemap')->header('Content-Type', 'text/xml');
+	return response()->view('client.quickdialssitemap')
+	->header('Content-Type', 'application/xml; charset=UTF-8');
 });
 
-Route::get('/quickdialssitemap', function () {
-	return response()->view('client.quickdialssitemap')->header('Content-Type', 'text/xml');
-});
-
+ 
 
 
 
