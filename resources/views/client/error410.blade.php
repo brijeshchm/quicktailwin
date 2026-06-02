@@ -12,7 +12,7 @@
 
         <!-- Big 404 -->
         <h1 class="text-8xl md:text-9xl font-extrabold text-blue-600 tracking-tight">
-            404
+            410
         </h1>
 
         <!-- Heading -->
