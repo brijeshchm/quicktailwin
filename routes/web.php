@@ -316,65 +316,33 @@ Route::get('/sitemap-blog.xml', function () {
        ->header('Content-Type', 'text/xml');
 });
 
-// Route::get('/sitemap.xml', function () {
-
-	 
-// 		$keywords =  DB::table('keyword')
-// 			->where('seo_type', '1')
-// 			->select('slug', 'updated_at')
-// 			->get();
-	 
-
- 
-// 		$categories =  DB::table('parent_category')
-// 			->where('status', '1')
-// 			->select('parent_slug', 'updated_at')
-// 			->get();
- 
-	 
-// 		$childCategories =  DB::table('child_category')
-// 			->where('status', '1')
-// 			->select('child_slug', 'updated_at')
-// 			->get();
-	 
-
-// 	return response()
-// 		->view('client.sitemap', compact('keywords','categories','childCategories'))
-// 	->header('Content-Type', 'text/xml');
-
-// });
-
-
-
- 
-
 Route::get('/sitemap.xml', function () {
 
-    $keywords = DB::table('keyword')
-        ->where('seo_type', '1')
-        ->select('slug', 'updated_at')
-        ->get();
+	 
+		$keywords =  DB::table('keyword')
+			->where('seo_type', '1')
+			->select('slug', 'updated_at')
+			->get();
+	 
 
-    $categories = DB::table('parent_category')
-        ->where('status', '1')
-        ->select('parent_slug', 'updated_at')
-        ->get();
+ 
+		$categories =  DB::table('parent_category')
+			->where('status', '1')
+			->select('parent_slug', 'updated_at')
+			->get();
+ 
+	 
+		$childCategories =  DB::table('child_category')
+			->where('status', '1')
+			->select('child_slug', 'updated_at')
+			->get();
+	 
 
-    $childCategories = DB::table('child_category')
-        ->where('status', '1')
-        ->select('child_slug', 'updated_at')
-        ->get();
+	return response()
+		->view('client.sitemap', compact('keywords','categories','childCategories'))
+	 ->header('Content-Type', 'application/xml; charset=UTF-8');
 
-    return response()
-        ->view('client.sitemap', compact('keywords', 'categories', 'childCategories'))
-        ->header('Content-Type', 'application/xml; charset=UTF-8')
-        ->header('Cache-Control', 'public, max-age=36000');
-
-})->withoutMiddleware([
-    
-    \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-    \App\Http\Middleware\VerifyCsrfToken::class,
-]);
+});
 
 // Route::get('/sitemap', function () {
 
