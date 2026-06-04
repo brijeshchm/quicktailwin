@@ -752,7 +752,28 @@ function bannerSlider(banners, interval = 4000) {
     <div class="text-sm text-gray-600 leading-relaxed">{!! $topDescription !!}</div>
     </div>
     @endif
+<style>
+    .leading-relaxed h3{
+        font-size: 1.225rem;
+        line-height: 1.75rem;
+        font-weight: 700;
 
+    }
+
+    .leading-relaxed h4{
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+        font-weight: 700;
+
+    }
+
+    .leading-relaxed h5{
+        font-size: 0.925rem;
+        line-height: 1.75rem;
+        font-weight: 700;
+
+    }
+    </style>
     {{-- Bottom Description --}}
     @if(!empty($bottomDescription))
 

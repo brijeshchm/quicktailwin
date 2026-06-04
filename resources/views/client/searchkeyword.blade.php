@@ -639,7 +639,28 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
         <div class="text-sm text-gray-600 leading-relaxed">{!! $topDescription !!}</div>
     </div>
     @endif
+<style>
+    .leading-relaxed h3{
+        font-size: 1.225rem;
+        line-height: 1.75rem;
+        font-weight: 700;
 
+    }
+
+    .leading-relaxed h4{
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+        font-weight: 700;
+
+    }
+
+    .leading-relaxed h5{
+        font-size: 0.925rem;
+        line-height: 1.75rem;
+        font-weight: 700;
+
+    }
+    </style>
     {{-- Bottom Description --}}
     @if(!empty($bottomDescription))
 
@@ -652,6 +673,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
      $bottom_heading = 'Find the Best '.$keyword;
     }    
     @endphp
+    
     <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mt-4 mx-4">
         <h2 class="text-lg font-bold text-gray-900 mb-3"> {{ $bottom_heading }}  </h2>
         <div class="text-sm text-gray-600 leading-relaxed">{!! $bottomDescription !!}</div>
