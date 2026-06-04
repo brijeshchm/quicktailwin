@@ -742,12 +742,12 @@ function bannerSlider(banners, interval = 4000) {
     if (!empty($kwData['top_heading'])) {
         $defaultHeading=  $kwData['top_heading'];
     }else{
-     $defaultHeading = $keyword . ' in ' . ucwords($city);
+     $defaultHeading = 'Trusted'. $keyword . ' in ' . ucwords($city);
     }    
     @endphp
 
     <h2 class="text-lg font-bold text-gray-900 mb-3">
-        Trusted {{ $defaultHeading }}
+         {{ $defaultHeading }}
     </h2>
     <div class="text-sm text-gray-600 leading-relaxed">{!! $topDescription !!}</div>
     </div>
@@ -763,12 +763,12 @@ function bannerSlider(banners, interval = 4000) {
     if (!empty($kwData['bottom_heading'])) {
         $bottom_heading=  $kwData['bottom_heading'];
     }else{
-     $bottom_heading = $keyword . ' in ' . ucwords($area);
+     $bottom_heading = 'Find the Best '.$keyword . ' in ' . ucwords($area);
     }    
     @endphp
 
     <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mt-4 mx-4">
-        <h2 class="text-lg font-bold text-gray-900 mb-3">Find the Best {{ $bottom_heading }}</h2>
+        <h2 class="text-lg font-bold text-gray-900 mb-3">{{ $bottom_heading }}</h2>
         <div class="text-sm text-gray-600 leading-relaxed">{!! $bottomDescription !!}</div>
     </div>
     @endif
