@@ -773,6 +773,9 @@ function bannerSlider(banners, interval = 4000) {
         font-weight: 700;
 
     }
+    table {
+        width:100%;
+    }
     </style>
     {{-- Bottom Description --}}
     @if(!empty($bottomDescription))

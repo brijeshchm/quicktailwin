@@ -660,6 +660,9 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
         font-weight: 700;
 
     }
+     table {
+        width:100%;
+    }
     </style>
     {{-- Bottom Description --}}
     @if(!empty($bottomDescription))
