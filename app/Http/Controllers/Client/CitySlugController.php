@@ -386,7 +386,7 @@ class CitySlugController extends Controller
  
         // ── FAQs ───────────────────────────────────────────────────────────
         $faqs = [];
-        for ($i = 1; $i <= 8; $i++) {
+        for ($i = 0; $i <= 8; $i++) {
             $q = $this->replaceCity($kwData["faqq{$i}"] ?? '', $city);
             $a = $this->replaceCity($kwData["faqa{$i}"] ?? '', $city);
             if ($q && $a) $faqs[] = ['q' => $q, 'a' => $a];
@@ -554,12 +554,12 @@ class CitySlugController extends Controller
  
         // ── FAQs ───────────────────────────────────────────────────────────
         $faqs = [];
-        for ($i = 1; $i <= 8; $i++) {
+        for ($i = 0; $i <= 8; $i++) {
             $q = $this->replaceCity($kwData["faqq{$i}"] ?? '', '');
             $a = $this->replaceCity($kwData["faqa{$i}"] ?? '', '');
             if ($q && $a) $faqs[] = ['q' => $q, 'a' => $a];
         }
-
+ 
         // ── Businesses ─────────────────────────────────────────────────────
         $rawList    = $data['clientsList'] ?? [];
         $agents    = $data['agents'] ?? [];
