@@ -1126,7 +1126,7 @@ function selectCert(i) {
                 </div>
 
                 <div class="h-px" style="background:rgba(124,58,237,.1);"></div>
-
+ 
                 <div id="review-list" class="flex flex-col gap-4">
                     @forelse($reviews as $i => $review)
                     @php
@@ -1267,27 +1267,83 @@ function selectCert(i) {
 </div>
 
 {{-- Review Form Modal (simple) --}}
-<div id="review-form-modal" class="fixed inset-0 z-[220] hidden items-center justify-center p-4"
+ <div id="review-form-modal" class="fixed inset-0 z-[220] hidden items-center justify-center p-4"
      style="background:rgba(10,15,40,.75);backdrop-filter:blur(14px);"
      onclick="if(event.target===this)this.classList.remove('open')">
     <div class="bg-white rounded-2xl p-6 w-full max-w-md" onclick="event.stopPropagation()">
         <h2 class="text-xl font-bold mb-4">Write a Review</h2>
-        <div id="star-input" class="flex gap-2 mb-4">
-            @for($s=1;$s<=5;$s++)<span class="text-3xl cursor-pointer text-gray-300 star-btn" data-star="{{ $s }}" onclick="setRating({{ $s }})">★</span>@endfor
+ 
+        {{-- Star Rating --}}
+        <div class="mb-4 flex">
+            <label class="block text-sm font-medium text-gray-700 mb-1">
+                Rating <span class="text-red-500">*</span>
+            </label>
+            <div id="star-input" class="flex gap-2">
+                @for($s=1;$s<=5;$s++)
+                    <span class="text-3xl cursor-pointer text-gray-300 star-btn" 
+                          data-star="{{ $s }}" 
+                          onclick="setRating({{ $s }})">★</span>
+                @endfor
+            </div>
         </div>
+
         <input type="hidden" id="review-rating-val" value="0">
-        <input type="text" id="review-name-val" placeholder="Your name" class="w-full border rounded-xl px-3 py-2.5 text-sm mb-3 outline-none focus:border-blue-400">
-        <textarea rows="3" id="review-text-val" placeholder="Share your experience…" class="w-full border rounded-xl px-3 py-2.5 text-sm mb-4 resize-none outline-none focus:border-blue-400"></textarea>
-        <button onclick="submitReview()" class="w-full py-3 rounded-xl font-bold text-white text-sm" style="background:linear-gradient(135deg,#7c3aed,#a855f7);">
+        <input type="hidden" id="review-currentClient-val" value="{{ $clientsList['business_id'] ?? '' }}">
+
+        {{-- Name --}}
+        <div class="mb-3">
+            <label class="block text-sm font-medium text-gray-700 mb-1">
+                Your Name <span class="text-red-500">*</span>
+            </label>
+            <input type="text" id="review-name-val" 
+                   placeholder="Your name" 
+                   class="w-full border rounded-xl px-3 py-2.5 text-sm outline-none focus:border-blue-400">
+        </div>
+
+        {{-- Email --}}
+        <div class="mb-3">
+            <label class="block text-sm font-medium text-gray-700 mb-1">
+                Email Address <span class="text-red-500">*</span>
+            </label>
+            <input type="email" id="review-email-val" 
+                   placeholder="Your Email" 
+                   class="w-full border rounded-xl px-3 py-2.5 text-sm outline-none focus:border-blue-400">
+        </div>
+
+        {{-- Phone --}}
+        <div class="mb-3">
+            <label class="block text-sm font-medium text-gray-700 mb-1">
+                Phone Number <span class="text-red-500">*</span>
+            </label>
+            <input type="text" id="review-phone-val" 
+                   placeholder="Your phone" 
+                   class="w-full border rounded-xl px-3 py-2.5 text-sm outline-none focus:border-blue-400">
+        </div>
+
+        {{-- Review --}}
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">
+                Your Review <span class="text-red-500">*</span>
+            </label>
+            <textarea rows="3" id="review-text-val" 
+                      placeholder="Share your experience…" 
+                      class="w-full border rounded-xl px-3 py-2.5 text-sm resize-none outline-none focus:border-blue-400"></textarea>
+        </div>
+
+        {{-- Required note --}}
+        <p class="text-xs text-gray-400 mb-3">
+            <span class="text-red-500">*</span> All fields are required
+        </p>
+
+        <button onclick="submitReview()" 
+                class="w-full py-3 rounded-xl font-bold text-white text-sm" 
+                style="background:linear-gradient(135deg,#7c3aed,#a855f7);">
             Submit Review
         </button>
     </div>
 </div>
 <style>#review-form-modal.open{display:flex;}</style>
 
- 
-
- 
 {{-- Pass PHP data to JS --}}
 <script>
 const GALLERY  = @json($gallery);
@@ -1374,23 +1430,23 @@ function filterReviews(btn, filter) {
 }
 
 /* ── Review star rating ── */
-function setRating(n) {
-    document.getElementById('review-rating-val').value = n;
-    document.querySelectorAll('.star-btn').forEach((s, i) => {
-        s.style.color = i < n ? '#f59e0b' : '#d1d5db';
-    });
-}
+// function setRating(n) {
+//     document.getElementById('review-rating-val').value = n;
+//     document.querySelectorAll('.star-btn').forEach((s, i) => {
+//         s.style.color = i < n ? '#f59e0b' : '#d1d5db';
+//     });
+// }
 
 /* ── Submit review ── */
-function submitReview() {
-    const rating = document.getElementById('review-rating-val').value;
-    const name   = document.getElementById('review-name-val').value;
-    const text   = document.getElementById('review-text-val').value;
-    if (!rating || !name || !text) return alert('Please fill all fields and select a rating.');
-    document.getElementById('review-form-modal').classList.remove('open');
-    // TODO: POST to your review API
-    alert('Thank you for your review!');
-}
+// function submitReview() {
+//     const rating = document.getElementById('review-rating-val').value;
+//     const name   = document.getElementById('review-name-val').value;
+//     const text   = document.getElementById('review-text-val').value;
+//     if (!rating || !name || !text) return alert('Please fill all fields and select a rating.');
+//     document.getElementById('review-form-modal').classList.remove('open');
+//     // TODO: POST to your review API
+//     alert('Thank you for your review!');
+// }
 
 /* ── Copy link ── */
 function copyPageLink(btn) {
@@ -1515,6 +1571,141 @@ $localBusiness[] = [
 @endif
 
 
+
+
+
+
+<script>
+// Star Rating
+function setRating(star) {
+    document.getElementById('review-rating-val').value = star;
+    document.querySelectorAll('.star-btn').forEach((s, i) => {
+        s.classList.toggle('text-yellow-400', i < star);
+        s.classList.toggle('text-gray-300', i >= star);
+    });
+}
+
+// Submit Review
+async function submitReview() {
+    const rating  = document.getElementById('review-rating-val').value;
+    const currentClient  = document.getElementById('review-currentClient-val').value;
+    const name    = document.getElementById('review-name-val').value.trim();
+    const email   = document.getElementById('review-email-val').value.trim();
+    const phone   = document.getElementById('review-phone-val').value.trim();
+    const comment = document.getElementById('review-text-val').value.trim();
+
+    // Frontend Validation
+    if (!rating || rating == 0) {
+        showAlert('Please select a star rating.', 'error');
+        return;
+    }
+    
+    if (!name) {
+        showAlert('Please enter name.', 'error');
+        return;
+    }
+
+
+     if (!email) {
+        showAlert('Please enter email.', 'error');
+        return;
+    }
+
+
+     if (!phone) {
+        showAlert('Please enter phone.', 'error');
+        return;
+    }
+    if (!comment) {
+        showAlert('Please enter comment.', 'error');
+        return;
+    }
+
+
+    const btn = document.querySelector('#review-form-modal button[onclick="submitReview()"]');
+    btn.disabled = true;
+    btn.textContent = 'Submitting...';
+
+    try {
+        const response = await fetch('/review', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                'X-Requested-With': 'XMLHttpRequest', // Ajax header
+            },
+            body: JSON.stringify({
+                currentClient:       currentClient,
+                comment_author:       name,
+                comment_author_email: email,
+                comment_author_phone: phone,
+                comment_content:      comment,
+                s_rating:             rating,
+            }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.status) {
+            showAlert(data.message, 'success');
+            // Form reset
+            document.getElementById('review-name-val').value    = '';
+            document.getElementById('review-email-val').value   = '';
+            document.getElementById('review-phone-val').value   = '';
+            document.getElementById('review-text-val').value    = '';
+            document.getElementById('review-rating-val').value  = '0';
+            document.querySelectorAll('.star-btn').forEach(s => {
+                s.classList.add('text-gray-300');
+                s.classList.remove('text-yellow-400');
+            });
+            // Modal close
+            setTimeout(() => {
+                document.getElementById('review-form-modal')
+                    .classList.remove('open');
+            }, 1500);
+        } else {
+            // Validation errors
+            if (data.errors) {
+                const msgs = Object.values(data.errors).flat().join('\n');
+                showAlert(msgs, 'error');
+            } else {
+                showAlert(data.message || 'Something went wrong.', 'error');
+            }
+        }
+    } catch (err) {
+        showAlert('Network error. Please try again.', 'error');
+    } finally {
+        btn.disabled = false;
+        btn.textContent = 'Submit Review';
+    }
+}
+
+// Alert helper
+function showAlert(msg, type) {
+    const existing = document.getElementById('review-alert');
+    if (existing) existing.remove();
+
+    const div = document.createElement('div');
+    div.id = 'review-alert';
+    div.className = `mb-3 px-4 py-2 rounded-xl text-sm font-medium ${
+        type === 'success' 
+            ? 'bg-green-100 text-green-700' 
+            : 'bg-red-100 text-red-700'
+    }`;
+    div.textContent = msg;
+
+    const modal = document.querySelector('#review-form-modal .bg-white');
+    modal.insertBefore(div, modal.querySelector('button'));
+}
+
+// Modal open helper
+function openReviewModal() {
+    const modal = document.getElementById('review-form-modal');
+    modal.classList.add('open');
+    modal.classList.remove('hidden');
+    modal.style.display = 'flex';
+}
+</script>
 
 
 

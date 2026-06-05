@@ -320,19 +320,7 @@ class HomePageController extends Controller
 			}
 			$lead->remark = htmlspecialchars(strip_tags(trim($request->input('comment'))));
 			$lead->created_by = 101;
-			// $lead->terms = $request->terms;
-			// if ($request->zone) {
-
-			// 	$zone = Zone::find($request->zone);
-			// 	$lead->zone_id = $zone->id;
-			// 	$lead->zone = $zone->zone;
-			// } else {
-			// 	if (!empty($city->id)) {
-			// 		$zone = Zone::where('city_id', $city->id)->first();
-			// 		$lead->zone_id = $zone->id;
-			// 		$lead->zone = $zone->zone;
-			// 	}
-			// }
+			 
 
 			$today = date('Y-m-d');
 			$checklead = Lead::where('mobile', $newmobile)->where('kw_text', $request->input('kw_text'))->where('city_name', $cityName)->whereDate('created_at', '=', date_format(date_create($today), 'Y-m-d'))->get()->count();
@@ -2026,8 +2014,9 @@ $reviews =  [
             ['name' => 'Sanjay R.', 'rating' => 5, 'created_at' => '2024-10-30', 'treatment' => 'Swedish Massage',    'text' => "My first spa experience and Serenity made it unforgettable. The Swedish massage was deeply relaxing, the environment thoughtful. I've been back twice already.",                                                  'color' => '#db2777'],
         ];
  
-
-  	return view('client.spa-hub', compact('spa','reviews'));
+$services = keyword::where('child_category_id','293')->get();
+ 
+  	return view('client.spa-hub', compact('spa','reviews','services'));
 	}
 	
 	public function saloonHub(Request $request)

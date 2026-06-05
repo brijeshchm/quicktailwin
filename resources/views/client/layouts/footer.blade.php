@@ -265,6 +265,7 @@
                         ['name' => 'About Us',                  'route'=>route('about.us')],
                         ['name' => 'Contact Us',               'route'=>route('contact.us')],
                         ['name' => 'Careers',                   'route'=>route('careers')],
+                        ['name' => 'Interviews',                   'route'=>route('interviews')],
                         ['name' => 'Blog',                      'route'=>route('blog.show')],
                         ['name' => 'Pricing',                  'route'=>route('pricing')],
                       //  ['name' => 'Advertise on QuickDials',   'href' => '/business-owners','route'=>route('login')],

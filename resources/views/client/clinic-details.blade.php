@@ -720,8 +720,5 @@ function counter(target) {
         });
     </script>
 
-
- 
-
  
 @endsection

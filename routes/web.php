@@ -263,7 +263,7 @@ Route::prefix('developer')->name('developer.')->middleware(['auth:developer'])->
 });
 
 
-Route::get('/interviews', [App\Http\Controllers\Client\InterviewController::class, 'index']);
+Route::get('/interviews', [App\Http\Controllers\Client\InterviewController::class, 'index'])->name('interviews');
 Route::get('/interviews/php-interview-question-answer', [App\Http\Controllers\Client\InterviewController::class, 'phpInterview']);
 Route::get('/interviews/mysql-interview-question-answer', [App\Http\Controllers\Client\InterviewController::class, 'mysqlInterview']);
 Route::get('/interviews/technical-logic-question-answer', [App\Http\Controllers\Client\InterviewController::class, 'technicalInterview']);

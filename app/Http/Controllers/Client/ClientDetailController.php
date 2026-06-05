@@ -42,7 +42,7 @@ class ClientDetailController extends Controller
         abort(410);
         }
 
-            $data = $response['data'] ?? [];
+        $data = $response['data'] ?? [];
         $clientsList = $data['clientsList']       ?? [];
       
         $certificate = $data['certificate']       ?? [];
@@ -52,7 +52,7 @@ class ClientDetailController extends Controller
         $areaBusiness    = $data['area_business']     ?? [];
         $overviewBusiness= $data['overview_business'] ?? [];
         $relatedSearches = $data['related_searches']  ?? [];
- 
+  
         // Keyword list for enquiry form (cached separately)
         $keywordList = Cache::remember('keyword_list', 3600, function () {
             try {
