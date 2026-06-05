@@ -1,250 +1,583 @@
-<!Doctype html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title>Quick Dials-Order_<?php echo date('d-m-Y H:i:s'); ?></title>
-		<link rel="stylesheet" href="style.css">
-		<link href="<?php echo asset('admin/printstyle.css'); ?>" rel="stylesheet">
-	</head>
-	<body>
-		<header>
-			<h1>Quick Dials Order Details </h1>
-				 
-	
-			<section>
-			<img src="https://www.quickdials.com/client/images/small-logo.png">
-			</section>
-			<address>
-			
-				<b style="font-size: 18px;">Quick Dials Service Pvt Ltd</b>
-				<p> Address:Pillar No.33, NH-19, opposite flyover, Faridabad, haryana </p>
-				<p>Phone : +91-75-5943-5943</p>
-				<p>Email : info@quickdials.com</p>
-				<p>Website : www.quickdials.com</p>
-				<p>GST No : </p>
-				<p>TAN No : </p>
-				
-			</address>
-			</header>
-			<aside><h1></h1></aside>
-		<article>	 
-		<p>Dear <strong><?php echo $paymentuprint->business_name ?>,</strong></p>
-		<p style="font-size: 12px;">We are privileged to serve you and we greatly value our relationship! 
-The order form with the following details has been successfully created.</p>
-		</article>	 
-		<article>	 
-				 
-			<table class="meta">
-				<tr>
-					<th><span>Order Number</span></th>
-					<td><span>#<?php echo $paymentuprint->order_number ?></span></td>
-				</tr>
-				<tr>
-					<th><span >Order Date</span></th>
-					<td><span ><?php echo date('d-M-Y',strtotime($paymentuprint->order_date)); ?></span></td>
-				</tr> 
-				<tr>
-					<th><span >Customer Name</span></th>
-					<td><span id="prefix"></span><span><?php echo ucfirst($paymentuprint->customer_name) ?></span></td>
-				</tr>
-				<tr>
-					<th><span >Phone</span></th>
-					<td><span id="prefix" ></span><span><?php echo $paymentuprint->mobile ?></span></td>
-				</tr>	
-				<tr>
-					<th><span >Business Name </span></th>
-					<td><span id="prefix" ></span><span><?php echo ucfirst($paymentuprint->business_name); ?>	</span></td>
-				</tr>	
-				<tr>
-					<th><span >Package Name</span></th>
-					<td><span id="prefix" ></span><span><?php echo $paymentuprint->package_name ?></span></td>
-				</tr>
-				<tr>
-					<th><span >Leads</span></th>
-					<td><span id="prefix" ></span><span><?php echo $paymentuprint->leads_count ?></span></td>
-				</tr>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Quick Dials — Order <?php echo date('d-m-Y H:i:s'); ?></title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap');
 
-				
-				<?php if($paymentuprint->package_name=='Diamond'){ ?>
-				<tr>
-					<th><span >Duration</span></th>
-					<td><span id="prefix" ></span><span contenteditable><?php  echo date('d-M-Y',strtotime($paymentuprint->expired_from));?>  To <?php echo date('d-M-Y',strtotime($paymentuprint->expired_on)); ?></span></td>
-				</tr>				
-		 	    <tr>
-					<th><span >Total Order Amount</span></th>
-					<td><span id="prefix" ></span><span contenteditable><?php echo $paymentuprint->paid_amount ?> INR</span></td>					
-				</tr> 
-				
-				<?php }else if($paymentuprint->package_name=='Gold'){ ?>
-				 
-				 <tr>
-					<th><span >Duration</span></th>
-					<td><span id="prefix" ></span><span contenteditable><?php  echo date('d-M-Y',strtotime($paymentuprint->expired_from));?>  To <?php echo date('d-M-Y',strtotime($paymentuprint->expired_on)); ?></span></td>
-				</tr>	
-				<tr>
-					<th><span >Total Order Amount</span></th>
-					<td><span id="prefix" ></span><span contenteditable><?php echo $paymentuprint->paid_amount ?> INR</span></td>
-					</tr>
-				<?php }if($paymentuprint->package_name=='Platinum'){ ?>
-				<tr>
-					<th><span >Leads</span></th>
-					<td><span id="prefix" ></span><span contenteditable><?php  echo date('d-M-Y',strtotime($paymentuprint->expired_from));?>  To <?php echo date('d-M-Y',strtotime($paymentuprint->expired_on)); ?></span></td>
-				</tr>
-					
-				
-				<tr>
-					<th><span >Total Order Amount</span></th>
-					<td><span id="prefix" ></span><span contenteditable> <?php echo $paymentuprint->paid_amount ?> INR</span></td>
-					</tr>
-				
-				<?php } ?>
-				 
-			</table>
-			</article>
-			 
-			<article>
-			<b>Payment Details: </b>
-			
-			<table class="balance">
-							 
-				<tr>
-					<th><span >Amount Paid</span></th>
-					<td><span data-prefix></span><span><?php echo $paymentuprint->paid_amount ?></span></td>
-				</tr>
-				<tr>
-					<th><span >GST</span></th>
-					<td><span data-prefix></span><span style="font-weight: 700;"><?php echo $paymentuprint->gst_tax ?></span></td>
-				</tr>
-				<tr>
-					<th><span >TDS</span></th>
-					<td><span data-prefix></span><span><?php echo $paymentuprint->tds_amount ?></span></td>
-				</tr>
-			
-				<tr>
-					<th><span >Total Amount</span></th>
-					<td><span data-prefix></span><span><?php echo $paymentuprint->total_amount ?></span></td>
-				</tr>
-				
-				
-			</table>
-			
-			<table class="amount">
-				<tr>	
-					<th><span >Mode of payment</span></th>				
-					<td style="width:224px"><span><?php echo ucfirst($paymentuprint->payment_mode); ?></span></td>
-				</tr>
-		 
-				<tr>	
-					<th><span >Payment Bank</span></th>				
-					<td style="width:224px"><span><?php if(!empty($paymentuprint->payment_bank)) {?>
-				<?php echo ucfirst($paymentuprint->payment_bank); ?> 
-				<?php }else  if(!empty($paymentuprint->chq_card_no)) { ?>
-				Cheque No <?php echo $paymentuprint->chq_card_no ?>
-				<?php }else  if(!empty($paymentuprint->pay_paytm)) { ?>
-				 <?php echo $paymentuprint->pay_paytm ?>
-				<?php }else  if(!empty($paymentuprint->pay_neft)) { ?>
-				  <?php echo $paymentuprint->pay_neft ?>
-				<?php }else  if(!empty($paymentuprint->pay_googlePay)) { ?>
-				 <?php echo $paymentuprint->pay_googlePay ?> <?php } ?> 		</span></td>
-				</tr>
-			 
-				
-				<?php if(!empty($paymentuprint->chq_card_no)) {?>
-				<tr>	
-					<th><span >Cheque No</span></th>				
-					<td style="width:224px"><span><?php echo $paymentuprint->chq_card_no ?></span></td>
-				</tr>
-				<?php } ?>
-				<tr>	
-					<th><span >Amount in Words</span></th>				
-					<td style="width:224px"><span><?php echo $paymentuprint->paid_amt_in_words ?></span></td>
-				</tr>
- 
-				 <?php if(!empty($paymentuprint->transactionid)){ ?>
-				<tr>	
-					<th><span >TransactionId</span></th>				
-					<td style="width:224px"><span>#<?php echo $paymentuprint->transactionid ?></span></td>
-				</tr>
-				 <?php } ?>
-				 <?php if($paymentuprint->proofid){ ?>
-				<tr>	
-					<th><span >ID Proof</span></th>				
-					<td style="width:224px"><span><?php echo $paymentuprint->selectproofid ?>(<?php echo $paymentuprint->proofid ?>)</span></td>
-				</tr>
- 
-				 <?php } ?>
- 
-				 
-				
-				
-			</table>
-			 
-			 
-			 
-		</article>
-		 
-		
-		
-		<article>
-		<b>Listing Details: </b>
-		<table class="inventory">
-				<thead>
-					<tr>
-						<!-- <th><span >City</span></th> -->
-						<th><span >Category</span></th>
-						<!-- <th><span >Subcategory</span></th> -->
-						<th><span >Keyword</span></th>						 
-					</tr>
-				</thead>
-				<tbody>
-					<?php if(!empty($assignKeyword)){ 																			
-					foreach($assignKeyword as $keyword){
+  :root {
+    --brand:     #005DFF;
+    --brand-dk:  #003DB3;
+    --accent:    #FF6B2B;
+    --dark:      #0A0F28;
+    --mid:       #4B5563;
+    --light:     #F4F7FF;
+    --border:    #E5EAF3;
+    --success:   #10B981;
+    --white:     #FFFFFF;
+  }
 
-					?>
-					<tr>
-					<!-- <td><?php echo $keyword->city;  ?></td> -->
-					<td><?php echo $keyword->parent_category; ?></td>
-					<!-- <td><?php echo $keyword->child_category; ?></td> -->
-					<td><?php echo $keyword->keyword; ?></td>
-					</tr>
-					<?php } } ?>
+  * { margin:0; padding:0; box-sizing:border-box; }
 
-					  
-					 
-				</tbody>
-			</table>
-			
-		</article>
-			<article>
-		<strong>Note:</strong><p style="margin: -15px 0px 0px 52px;font-size: 12px;margin-bottom:4px;">You can check your balance value and the pending lead details while login your quickdials.com.</p>		
-		<p style="font-size: 12px;margin-bottom:6px;">Apart from this No verbal and written commitment will not consider.</p>
-		<p style="font-size: 12px;margin-bottom:6px;">This contract (which term includes this order form and terms expressly referred to herein) represent the entire agreement between the concerned parties and shall prevail over, exclude and supersede any other terms or conditions, oral or written.</p>
-		<p style="font-size: 12px;margin-bottom:6px;">Your Advertisement will be activated within 3 days of the payment clearance,</p>
-		<p style="font-size: 12px;margin-bottom:6px;">Should you have any queries, please contact us on our email to <a style="color: #005DFF;" href="https://www.quickdials.com/contact-us" target="_blank">help@quickdials.com.</a></p>
-		
-		<p style="font-size: 12px;margin-bottom:6px;">This is an advertisement contract and the applicable rate of TDS is @ 2% only under section 194C. Kindly deduct TDS on the net amount only (Contract /Package value) excluding Tax portion.</p>
-		<p style="font-size: 12px;margin-bottom:6px;">Timings: Monday to Sunday: 24/7.</p>
-		<p style="font-size: 12px;margin-bottom:6px;">Please click below to refer the terms and conditions.</p>		
-		</article>
-		<article>
-		<strong><a href="https://www.quickdials.com/privacy-policy" target="_blank">Terms & Condition :</a></strong>
-		<p style="font-size: 12px;margin-bottom:6px;">Looking forward to a long and fruitful association with you!</p>
-		<p style="font-size: 12px;margin-bottom:6px;">Sincerely, </p>
-		<strong>Team Quick Dials Service Pvt. Ltd.</strong>
-		<p style="font-size: 12px;margin-top:4px;">Regd Office: UNIT 101 OXFORD TOWERS, 139/88 HAL OLD AIRPORT RD, H.A.L II Stage, Bangalore North, Bangalore- 560008, Karnataka.</p>
-			</article>
-		<aside>
-			<h1><span></span></h1>
-			<div class="thank" style="text-align:center">
-				Thank You ! 
-				 
-			</div>
-		</aside>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		 
-	</body>
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #EEF2FF;
+    color: var(--dark);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  /* ── PAGE WRAPPER ── */
+  .page {
+    max-width: 820px;
+    margin: 30px auto;
+    background: var(--white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,93,255,.12);
+  }
+
+  /* ── HEADER ── */
+  .inv-header {
+    background: linear-gradient(135deg, var(--brand-dk) 0%, var(--brand) 60%, #3B82F6 100%);
+    padding: 36px 40px 28px;
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+  .inv-header::before {
+    content:'';
+    position:absolute;
+    top:-60px; right:-60px;
+    width:220px; height:220px;
+    border-radius:50%;
+    background:rgba(255,255,255,.07);
+  }
+  .inv-header::after {
+    content:'';
+    position:absolute;
+    bottom:-80px; right:80px;
+    width:160px; height:160px;
+    border-radius:50%;
+    background:rgba(255,255,255,.05);
+  }
+
+  .header-top {
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:20px;
+  }
+
+  .brand-block { flex:1; }
+  .brand-block img {
+    height:44px;     
+    margin-bottom:12px;
+    display:block;
+  }
+  .brand-block h1 {
+    font-family:'Playfair Display',serif;
+    font-size:22px;
+    font-weight:700;
+    letter-spacing:-.3px;
+    line-height:1.2;
+  }
+  .brand-block p {
+    font-size:11.5px;
+    opacity:.8;
+    margin-top:4px;
+    line-height:1.7;
+  }
+
+  .invoice-badge {
+    text-align:right;
+    flex-shrink:0;
+  }
+  .invoice-badge .label {
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    opacity:.75;
+  }
+  .invoice-badge .number {
+    font-size:28px;
+    font-weight:700;
+    letter-spacing:-1px;
+    line-height:1;
+    margin-top:4px;
+  }
+  .invoice-badge .date-tag {
+    margin-top:8px;
+    display:inline-block;
+    background:rgba(255,255,255,.18);
+    border:1px solid rgba(255,255,255,.25);
+    border-radius:20px;
+    padding:4px 12px;
+    font-size:11px;
+    font-weight:500;
+  }
+
+  /* ── GREETING STRIP ── */
+  .greeting-strip {
+    background: var(--light);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 40px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:13px;
+    color: var(--mid);
+  }
+  .greeting-strip strong { color: var(--dark); }
+  .greeting-strip .dot {
+    width:6px; height:6px;
+    border-radius:50%;
+    background:var(--brand);
+    flex-shrink:0;
+  }
+
+  /* ── BODY SECTIONS ── */
+  .inv-body { padding: 32px 40px; }
+
+  .section-title {
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color: var(--brand);
+    margin-bottom:14px;
+  }
+  .section-title::after {
+    content:'';
+    flex:1;
+    height:1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+  }
+
+  /* ── TWO-COL GRID ── */
+  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:28px; }
+
+  /* ── INFO CARD ── */
+  .info-card {
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-radius:12px;
+    overflow:hidden;
+  }
+  .info-card .card-head {
+    background: linear-gradient(90deg,#EEF2FF,#F8FAFF);
+    border-bottom:1px solid var(--border);
+    padding:10px 16px;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--brand);
+  }
+  .info-card table { width:100%; border-collapse:collapse; }
+  .info-card table tr:not(:last-child) td,
+  .info-card table tr:not(:last-child) th {
+    border-bottom:1px solid var(--border);
+  }
+  .info-card table th {
+    padding:9px 16px;
+    font-weight:600;
+    color:var(--mid);
+    font-size:11.5px;
+    white-space:nowrap;
+    width:45%;
+    text-align:left;
+    background:transparent;
+  }
+  .info-card table td {
+    padding:9px 16px;
+    font-weight:500;
+    color:var(--dark);
+    font-size:12px;
+  }
+
+  /* ── FULL-WIDTH TABLE ── */
+  .full-card {
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:12px;
+    overflow:hidden;
+    margin-bottom:28px;
+  }
+  .full-card .card-head {
+    background: linear-gradient(90deg,#EEF2FF,#F8FAFF);
+    border-bottom:1px solid var(--border);
+    padding:10px 20px;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--brand);
+  }
+
+  /* ── PAYMENT TABLE ── */
+  .pay-grid {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+    margin-bottom:28px;
+  }
+
+  .pay-summary {
+    background:var(--light);
+    border:1px solid var(--border);
+    border-radius:12px;
+    overflow:hidden;
+  }
+  .pay-summary .card-head {
+    background:linear-gradient(90deg,#EEF2FF,#F8FAFF);
+    border-bottom:1px solid var(--border);
+    padding:10px 16px;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--brand);
+  }
+  .pay-summary table { width:100%; border-collapse:collapse; }
+  .pay-summary table tr:not(:last-child) td,
+  .pay-summary table tr:not(:last-child) th {
+    border-bottom:1px solid var(--border);
+  }
+  .pay-summary table th {
+    padding:9px 16px;
+    font-weight:600;
+    color:var(--mid);
+    font-size:11.5px;
+    text-align:left;
+    width:55%;
+  }
+  .pay-summary table td {
+    padding:9px 16px;
+    font-weight:600;
+    color:var(--dark);
+    font-size:12px;
+    text-align:right;
+  }
+  .pay-summary .total-row th,
+  .pay-summary .total-row td {
+    background:var(--brand);
+    color:var(--white) !important;
+    font-size:13px;
+    font-weight:700;
+  }
+
+  /* ── LISTING TABLE ── */
+  .listing-table { width:100%; border-collapse:collapse; }
+  .listing-table thead tr {
+    background:linear-gradient(90deg,var(--brand),#3B82F6);
+    color:var(--white);
+  }
+  .listing-table thead th {
+    padding:11px 20px;
+    font-size:11.5px;
+    font-weight:600;
+    letter-spacing:.5px;
+    text-align:left;
+  }
+  .listing-table tbody tr:nth-child(even) { background:#F8FAFF; }
+  .listing-table tbody tr:hover { background:#EEF2FF; }
+  .listing-table tbody td {
+    padding:10px 20px;
+    font-size:12px;
+    color:var(--dark);
+    border-bottom:1px solid var(--border);
+  }
+
+  /* ── NOTES ── */
+  .notes-box {
+    background:#FFFBEB;
+    border:1px solid #FDE68A;
+    border-left:4px solid #F59E0B;
+    border-radius:10px;
+    padding:16px 20px;
+    margin-bottom:28px;
+  }
+  .notes-box .notes-title {
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:#92400E;
+    margin-bottom:10px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .notes-box ul {
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+  }
+  .notes-box ul li {
+    font-size:11.5px;
+    color:#78350F;
+    padding-left:14px;
+    position:relative;
+    line-height:1.6;
+  }
+  .notes-box ul li::before {
+    content:'→';
+    position:absolute;
+    left:0;
+    color:#F59E0B;
+    font-size:10px;
+  }
+
+  /* ── FOOTER ── */
+  .inv-footer {
+    background:linear-gradient(135deg,var(--dark),#1E2A5A);
+    color:var(--white);
+    padding:28px 40px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+  }
+  .footer-left .tc-link {
+    color:#93C5FD;
+    text-decoration:none;
+    font-size:12px;
+    font-weight:600;
+  }
+  .footer-left p {
+    font-size:11px;
+    opacity:.6;
+    margin-top:4px;
+  }
+  .thank-block {
+    text-align:right;
+  }
+  .thank-block .thank-text {
+    font-family:'Playfair Display',serif;
+    font-size:22px;
+    font-weight:700;
+    color:var(--white);
+    letter-spacing:-.3px;
+  }
+  .thank-block .team-text {
+    font-size:11px;
+    opacity:.65;
+    margin-top:3px;
+  }
+  .regd-office {
+    font-size:10.5px;
+    opacity:.5;
+    margin-top:6px;
+    max-width:360px;
+    line-height:1.5;
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    body { background:var(--white); }
+    .page { box-shadow:none; margin:0; border-radius:0; }
+    .notes-box { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    .inv-header, .inv-footer,
+    .listing-table thead tr,
+    .pay-summary .total-row th,
+    .pay-summary .total-row td { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ══ HEADER ══ -->
+  <div class="inv-header">
+    <div class="header-top">
+      <div class="brand-block">
+        <img src="https://www.quickdials.com/client/images/small-logo.png" alt="Quick Dials">
+        <h1>Quick Dials Internet Pvt. Ltd.</h1>
+        <p>
+          Pillar No.33, NH-19, Faridabad, Haryana<br>
+          📞 +91-75-5943-5943 &nbsp;|&nbsp; ✉ info@quickdials.com &nbsp;|&nbsp; 🌐 www.quickdials.com
+        </p>
+      </div>
+      <div class="invoice-badge">
+        <div class="label">Order Receipt</div>
+        <div class="number">#<?php echo $paymentuprint->order_number ?></div>
+        <div class="date-tag">📅 <?php echo date('d M Y', strtotime($paymentuprint->order_date)); ?></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ GREETING ══ -->
+  <div class="greeting-strip">
+    <div class="dot"></div>
+    Dear <strong>&nbsp;<?php echo $paymentuprint->business_name ?></strong>, &nbsp;— Thank you for choosing Quick Dials!.
+  </div>
+
+  <!-- ══ BODY ══ -->
+  <div class="inv-body">
+
+    <!-- Order + Customer Details -->
+    <div class="section-title">Order Information</div>
+    <div class="two-col">
+
+      <div class="info-card">
+        <div class="card-head">📋 Order Details</div>
+        <table>
+          <tr><th>Order Number</th><td>#<?php echo $paymentuprint->order_number ?></td></tr>
+          <tr><th>Order Date</th><td><?php echo date('d M Y', strtotime($paymentuprint->order_date)); ?></td></tr>
+          <tr><th>Package</th><td><?php echo $paymentuprint->package_name ?></td></tr>
+          <tr><th>Leads</th><td><?php echo $paymentuprint->leads_count ?></td></tr>
+          <?php if(!empty($paymentuprint->expired_from)): ?>
+          <tr><th>Duration</th><td><?php echo date('d M Y',strtotime($paymentuprint->expired_from)); ?> → <?php echo date('d M Y',strtotime($paymentuprint->expired_on)); ?></td></tr>
+          <?php endif; ?>
+        </table>
+      </div>
+
+      <div class="info-card">
+        <div class="card-head">👤 Customer Details</div>
+        <table>
+          <tr><th>Customer Name</th><td><?php echo ucfirst($paymentuprint->customer_name) ?></td></tr>
+          <tr><th>Business Name</th><td><?php echo ucfirst($paymentuprint->business_name) ?></td></tr>
+          <tr><th>Phone</th><td><?php echo $paymentuprint->mobile ?></td></tr>
+          <?php if(!empty($paymentuprint->comment_author_email)): ?>
+          <tr><th>Email</th><td><?php echo $paymentuprint->comment_author_email ?></td></tr>
+          <?php endif; ?>
+        </table>
+      </div>
+
+    </div>
+
+    <!-- Payment Details -->
+    <div class="section-title">Payment Details</div>
+    <div class="pay-grid">
+
+      <div class="pay-summary">
+        <div class="card-head">💰 Amount Summary</div>
+        <table>
+          <tr><th>Amount Paid</th><td>₹ <?php echo number_format($paymentuprint->paid_amount, 2) ?></td></tr>
+          <tr><th>GST</th><td>₹ <?php echo number_format($paymentuprint->gst_tax, 2) ?></td></tr>
+          <tr><th>TDS</th><td>₹ <?php echo number_format($paymentuprint->tds_amount, 2) ?></td></tr>
+          <tr class="total-row"><th>Total Amount</th><td>₹ <?php echo number_format($paymentuprint->total_amount, 2) ?></td></tr>
+        </table>
+      </div>
+
+      <div class="pay-summary">
+        <div class="card-head">🏦 Payment Info</div>
+        <table>
+          <tr>
+            <th>Mode</th>
+            <td><?php echo ucfirst($paymentuprint->payment_mode); ?></td>
+          </tr>
+          <tr>
+            <th>Bank / Ref</th>
+            <td>
+              <?php
+                if(!empty($paymentuprint->payment_bank)) echo ucfirst($paymentuprint->payment_bank);
+                elseif(!empty($paymentuprint->chq_card_no)) echo 'Cheque: '.$paymentuprint->chq_card_no;
+                elseif(!empty($paymentuprint->pay_paytm)) echo $paymentuprint->pay_paytm;
+                elseif(!empty($paymentuprint->pay_neft)) echo $paymentuprint->pay_neft;
+                elseif(!empty($paymentuprint->pay_googlePay)) echo $paymentuprint->pay_googlePay;
+                else echo '—';
+              ?>
+            </td>
+          </tr>
+          <?php if(!empty($paymentuprint->transactionid)): ?>
+          <tr><th>Transaction ID</th><td>#<?php echo $paymentuprint->transactionid ?></td></tr>
+          <?php endif; ?>
+          <tr><th>Amount in Words</th><td><?php echo $paymentuprint->paid_amt_in_words ?></td></tr>
+          <?php if($paymentuprint->proofid): ?>
+          <tr><th>ID Proof</th><td><?php echo $paymentuprint->selectproofid ?> (<?php echo $paymentuprint->proofid ?>)</td></tr>
+          <?php endif; ?>
+        </table>
+      </div>
+
+    </div>
+
+    <!-- Listing Details -->
+    <?php if(!empty($assignKeyword)): ?>
+    <div class="section-title">Listing Details</div>
+    <div class="full-card" style="margin-bottom:28px;">
+      <table class="listing-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Category</th>
+            <th>Keyword</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php $i=1; foreach($assignKeyword as $keyword): ?>
+          <tr>
+            <td style="color:var(--mid);width:40px;"><?php echo $i++; ?></td>
+            <td><?php echo $keyword->parent_category; ?></td>
+            <td><?php echo $keyword->keyword; ?></td>
+          </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
+    </div>
+    <?php endif; ?>
+
+    <!-- Notes -->
+    <div class="notes-box">
+      <div class="notes-title">⚠ Important Notes</div>
+      <ul>
+        <li>You can check your balance value and pending lead details after logging into quickdials.com.</li>
+        <li>No verbal or written commitment outside this order form will be considered.</li>
+        <li>This contract represents the entire agreement between the parties and supersedes any other terms.</li>
+        <li>Your advertisement will be activated within <strong>3 days</strong> of payment clearance.</li>
+        <li>Applicable TDS rate is <strong>@2%</strong> under Section 194C on net amount excluding tax.</li>
+        <li>For queries, email us at <a href="mailto:help@quickdials.com" style="color:#92400E;font-weight:600;">help@quickdials.com</a></li>
+        <li>Timings: Monday to Sunday — 24/7</li>
+      </ul>
+    </div>
+
+    <!-- GST / TAN -->
+    <div class="info-card" style="margin-bottom:0;">
+      <div class="card-head">🏢 Company Registration</div>
+      <table>
+        <tr>
+          <th>GST Number</th>
+          <td>09AAECL0574H1ZG</td>
+          <th>TAN Number</th>
+          <td>BLRQ01951F</td>
+        </tr>
+		 <tr>
+          <th>PAN No</th>
+          <td>AABCQ2259D</td>
+          <th>CIN No</th>
+          <td>U63112KA2026PTC215594</td>
+        </tr>
+      </table>
+    </div>
+
+  </div><!-- /inv-body -->
+
+  <!-- ══ FOOTER ══ -->
+  <div class="inv-footer">
+    <div class="footer-left">
+      <a href="https://www.quickdials.com/privacy-policy" target="_blank" class="tc-link">
+        Terms &amp; Conditions →
+      </a>
+      <p>Looking forward to a long and fruitful association with you!</p>
+      <p class="regd-office">
+        Regd. Office: Unit 101, Oxford Towers, 139/88 HAL Old Airport Rd, H.A.L II Stage, Bangalore North, Bangalore — 560008, Karnataka.
+      </p>
+    </div>
+    <div class="thank-block">
+      <div class="thank-text">Thank You!</div>
+      <div class="team-text">Team Quick Dials Internet Pvt. Ltd.</div>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+</body>
 </html>
