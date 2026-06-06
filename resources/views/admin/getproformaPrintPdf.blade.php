@@ -696,7 +696,7 @@ body {
     <div class="footer-divider"></div>
     <div class="footer-bottom">
       <div class="gen-note">
-        🔒 System generated document — <?php echo date('d M Y H:i'); ?>
+         
       </div>
       <button class="print-btn" onclick="window.print()">🖨️ Print Invoice</button>
     </div>

@@ -23,6 +23,7 @@
  @include('client.components.homePage.featured-businesses')
  @include('client.components.homePage.blog-service')
  @include('client.components.homePage.stats-banner')
+ @include('client.components.homePage.country-flags')
  
 
 

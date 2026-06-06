@@ -606,7 +606,7 @@ body{
         G-13, Sector-3, Noida, Pin Code — 201301 (UP), India<br>
         <span style="font-size:10.5px;">
           Support: <a href="https://www.quickdials.com/contact-us" target="_blank">help@quickdials.com</a>
-          &nbsp;|&nbsp; Helpline: +91-75-9543-9543 &nbsp;|&nbsp; Available 24/7
+          &nbsp;|&nbsp; Helpline: +91-75-9543-9543 &nbsp;|&nbsp;
         </span>
       </div>
       <div class="fo-thank">

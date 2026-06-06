@@ -397,10 +397,7 @@
                  style="color:rgba(255,255,255,.65);text-decoration:none;display:block;margin-bottom:5px;">
                 Upgrade Plan
               </a>
-              <a href="https://quickdials.com/privacy-policy" target="_blank"
-                 style="color:rgba(255,255,255,.65);text-decoration:none;display:block;">
-                Unsubscribe
-              </a>
+             
             </td>
           </tr>
           <tr>
