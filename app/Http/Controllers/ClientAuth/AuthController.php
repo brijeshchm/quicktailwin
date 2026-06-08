@@ -12,6 +12,7 @@ use Auth;
 use Mail;
 use Illuminate\Http\Request;
 use App\Models\OtpCode;
+use Illuminate\Support\Facades\RateLimiter;
 class AuthController extends Controller
 {
     /*
@@ -567,6 +568,7 @@ class AuthController extends Controller
 		return redirect('/');
 	}
 	
+	 
 	
 	public function sendOtp(Request $request)
 	{
@@ -636,29 +638,49 @@ class AuthController extends Controller
 		// 3️⃣ Send OTP email — use $client->email (works for both email & mobile login)
 		$subject = "{$otp} is QuickDials Verification Code";
 
-		try {
-			Mail::send('emails.sendotp_to_email', [
-				'otp'  => $otp,
-				'name' => $client->business_name ?? 'User',
-			], function ($m) use ($client, $subject) {
-				$m->from('leads.quickdials@gmail.com', 'Login OTP');
-				$m->to($client->email)->subject($subject);
-			});
-		} catch (\Throwable $e) {
+		$key = 'otp-send:' . $request->ip();
+
+		if (RateLimiter::tooManyAttempts($key, 3)) {
+			$seconds = RateLimiter::availableIn($key);
 			return response()->json([
-				'status'  => false,
-				'message' => 'Failed to send OTP email. Please try again.',
-			], 500);
+				'status' => 0,
+				'msg'    => "Too many attempts. Try again in {$seconds} seconds."
+			], 429);
+		}
+
+		RateLimiter::hit($key, 60);  
+
+		try {
+			$message = "{$otp} is QuickDials Verification Code for {$client->email}.";
+			$subject  = "{$otp} is QuickDials Verification Code";
+ 
+			Mail::send(
+				'emails.sendotp_to_email',
+				['otp' => $otp, 'name' => $client->business_name],
+				function ($m) use ($request, $subject, $client) {
+					$m->from('leads.quickdials@gmail.com', 'QuickDials');
+					$m->to($client->email, "")->subject($subject);
+				}
+			);
+
+			if (Mail::failures()) {
+				\Log::error('Mail failed to: ' . $request->input('email'));
+				return response()->json(['status' => 0, 'msg' => 'Mail failed to send.'], 500);
+			}
+
+			return response()->json(['status' => 1, 'msg' => 'OTP sent successfully.']);
+
+		} catch (\Swift_TransportException $e) {
+			\Log::error('SMTP Error: ' . $e->getMessage());
+			return response()->json(['status' => 0, 'msg' => 'SMTP connection failed: ' . $e->getMessage()], 500);
+
+		} catch (\Exception $e) {
+			\Log::error('Mail Error: ' . $e->getMessage());
+			return response()->json(['status' => 0, 'msg' => 'Mail error: ' . $e->getMessage()], 500);
 		}
 
        
-		return response()->json([
-			'status'  => true,
-			'message' => 'OTP has been sent to your email successfully',
-			// ⚠️ Remove 'otp' in production — never expose OTP in API response!
-			'otp'     =>  $otp,
-			'email'   => $this->maskEmail($client->email), // show masked email to user
-		]);
+	 
 	}
 
 /**
