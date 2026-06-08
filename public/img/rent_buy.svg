@@ -1,0 +1,43 @@
+<svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="30" y1="20" x2="270" y2="285" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#18B7FF"/>
+      <stop offset="0.45" stop-color="#7B61FF"/>
+      <stop offset="1" stop-color="#FF8A00"/>
+    </linearGradient>
+    <linearGradient id="card" x1="50" y1="60" x2="250" y2="250" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#F5F7FF"/>
+    </linearGradient>
+    <filter id="shadow" x="20" y="30" width="260" height="240" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#1B1B3A" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <rect width="300" height="300" rx="36" fill="url(#bg)"/>
+  <circle cx="52" cy="55" r="24" fill="white" opacity="0.18"/>
+  <circle cx="250" cy="64" r="34" fill="white" opacity="0.14"/>
+  <circle cx="246" cy="246" r="46" fill="white" opacity="0.10"/>
+
+  <g filter="url(#shadow)">
+    <rect x="45" y="58" width="210" height="188" rx="26" fill="url(#card)"/>
+  </g>
+
+  <path d="M76 143L150 82L224 143" stroke="#26335D" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M93 137V218H207V137" fill="#EAF1FF" stroke="#26335D" stroke-width="10" stroke-linejoin="round"/>
+  <rect x="134" y="162" width="32" height="56" rx="6" fill="#7B61FF"/>
+  <rect x="177" y="158" width="20" height="20" rx="4" fill="#18B7FF"/>
+  <rect x="103" y="158" width="20" height="20" rx="4" fill="#18B7FF"/>
+
+  <rect x="58" y="221" width="86" height="38" rx="19" fill="#18B7FF"/>
+  <text x="101" y="246" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="white">RENT</text>
+
+  <rect x="156" y="221" width="86" height="38" rx="19" fill="#FF8A00"/>
+  <text x="199" y="246" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="white">BUY</text>
+
+  <circle cx="217" cy="103" r="15" fill="#FFC83D" stroke="#26335D" stroke-width="6"/>
+  <path d="M229 114L247 132M239 124L232 131M247 132L240 139" stroke="#26335D" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <path d="M82 91C82 75 95 62 111 62C127 62 140 75 140 91C140 113 111 138 111 138C111 138 82 113 82 91Z" fill="#FF4D8D" stroke="#26335D" stroke-width="6"/>
+  <circle cx="111" cy="91" r="9" fill="white"/>
+</svg>

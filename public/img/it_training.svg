@@ -1,0 +1,41 @@
+<svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="20" y1="20" x2="280" y2="285" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#18B7FF"/>
+      <stop offset="0.45" stop-color="#7B61FF"/>
+      <stop offset="1" stop-color="#FF8A00"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="75" y1="78" x2="226" y2="190" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#26335D"/>
+      <stop offset="1" stop-color="#11182F"/>
+    </linearGradient>
+    <filter id="shadow" x="30" y="35" width="240" height="230" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#1B1B3A" flood-opacity="0.20"/>
+    </filter>
+  </defs>
+
+  <rect width="300" height="300" rx="36" fill="url(#bg)"/>
+  <circle cx="46" cy="58" r="25" fill="white" opacity="0.16"/>
+  <circle cx="253" cy="66" r="38" fill="white" opacity="0.13"/>
+  <circle cx="252" cy="250" r="45" fill="white" opacity="0.10"/>
+
+  <g filter="url(#shadow)">
+    <rect x="55" y="66" width="190" height="150" rx="22" fill="white"/>
+    <rect x="72" y="82" width="156" height="98" rx="13" fill="url(#screen)"/>
+    <path d="M114 216H186L196 239H104L114 216Z" fill="#EAF1FF"/>
+    <rect x="91" y="235" width="118" height="12" rx="6" fill="white"/>
+  </g>
+
+  <path d="M116 116L94 131L116 146" stroke="#18B7FF" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M184 116L206 131L184 146" stroke="#FF8A00" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M159 108L141 153" stroke="#7B61FF" stroke-width="9" stroke-linecap="round"/>
+
+  <rect x="85" y="196" width="130" height="38" rx="19" fill="#7B61FF"/>
+  <text x="150" y="221" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="white">IT TRAINING</text>
+
+  <circle cx="222" cy="98" r="23" fill="#FFC83D" stroke="#26335D" stroke-width="6"/>
+  <path d="M213 97L220 104L233 90" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="57" y="92" width="38" height="38" rx="12" fill="#FF4D8D" stroke="#26335D" stroke-width="5"/>
+  <path d="M68 105H84M68 117H80" stroke="white" stroke-width="5" stroke-linecap="round"/>
+</svg>
