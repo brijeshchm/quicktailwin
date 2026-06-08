@@ -737,24 +737,20 @@ private function maskEmail(string $email): string
                     // 'expires_at' => Carbon::now()->addMinutes(5),
                 ]
             );
-
-			//  dd($user);
+		 
             $message = "{$otp} is QuickDials Verification Code for {$user->email} .";
             $subject = "{$otp} is QuickDials Verification Code";
             $checkmail = Mail::send('emails.sendotp_to_email', ['otp' => $otp,'name'=>$user->business_name], function ($m) use ($message, $request, $subject) {
                 $m->from(env('MAIL_USERNAME'), 'Login OTP');
                 $m->to($request->input('email'), "")->subject($subject);
-            });
-            
+            });        
             
         }
         
         return response()->json([
             'status' => true,
             'message' => 'OTP has been sent to your email successfully',
-            'otp' => $otp,
-           
-            
+            'otp' => $otp,           
             'data' => $user,
         ]);
     }
