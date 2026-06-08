@@ -872,7 +872,7 @@ class LeadController extends Controller
 												$template = 'emails.sendlead';
 												$clientname=$clientC->business_name;
 												$check=  Mail::send($template, ['clientname'=>$clientname,'lead'=>$lead], function ($m) use ($clientC,$lead) {    
-												$m->from('leads.quickdials@gmail.com', 'QuickDials');             
+												$m->from(env('MAIL_USERNAME'), 'QuickDials');             
 
 												$m->to($clientC->email, $lead->name)->subject($lead->kw_text.' | '.$lead->name.' - Quickdials.com');
 												});
@@ -1185,7 +1185,7 @@ class LeadController extends Controller
 												$template = 'emails.sendlead';
 												$clientname=$clnt->business_name;
 												$check=  Mail::send($template, ['clientname'=>$clientname,'lead'=>$lead], function ($m) use ($clnt,$lead) {    
-												$m->from('leads.quickdials@gmail.com', 'QuickDials');             
+												$m->from(env('MAIL_USERNAME'), 'QuickDials');             
 
 												$m->to($clnt->email, $lead->name)->subject($lead->kw_text.' | '.$lead->name.' - Quickdials.com');
 												});
@@ -1600,7 +1600,7 @@ class LeadController extends Controller
 		$template = 'emails.sendlead';
 		$clientname=$client->business_name;
 		$check=  Mail::send($template, ['clientname'=>$clientname,'lead'=>$lead], function ($m) use ($client,$lead) {    
-		$m->from('leads.quickdials@gmail.com', 'QuickDials');             
+		$m->from(env('MAIL_USERNAME'), 'QuickDials');             
 
 		$m->to($client->email, ucfirst($lead->name))->subject($lead->kw_text.' | '.$lead->name.' - Quickdials.com');
 		});	
@@ -2278,7 +2278,7 @@ class LeadController extends Controller
 								$template = 'emails.sendlead';
 								$clientname=$client->business_name;
 								$check=  Mail::send($template, ['clientname'=>$clientname,'lead'=>$lead], function ($m) use ($client,$lead) {    
-								$m->from('leads.quickdials@gmail.com', 'QuickDials');             
+								$m->from(env('MAIL_USERNAME'), 'QuickDials');             
 							 
 								$m->to($client->email, ucfirst($lead->name))->subject($lead->kw_text.' | '.$lead->name.' - Quickdials.com');
 								});	

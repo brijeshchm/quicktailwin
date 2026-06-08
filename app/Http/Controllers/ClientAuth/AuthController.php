@@ -217,7 +217,7 @@ class AuthController extends Controller
 					$message = "{$otp} is QuickDials Verification Code for {$request->session()->get('client.email')} .";
 					$subject = "{$otp} is QuickDials Verification Code";
 					// Mail::send('emails.sendotp_to_email', ['msg'=>$message], function ($m) use ($message,$request,$subject) {
-					// 	$m->from('leads.quickdials@gmail.com', 'Login OTP');
+					// 	$m->from(env('MAIL_USERNAME'), 'Login OTP');
 					// 	$m->to($request->input('email'), "")->subject($subject);
 					// });	
 				
@@ -360,7 +360,7 @@ class AuthController extends Controller
 					 
 					
 			 $checkmail = Mail::send('emails.sendotp_to_email', ['otp' => $otp,'name'=>$request->email], function ($m) use ($message, $request, $subject) {
-                $m->from('leads.quickdials@gmail.com', 'Login OTP');
+                $m->from(env('MAIL_USERNAME'), 'Login OTP');
                 $m->to($request->input('email'), "")->subject($subject);
             });
 		 
@@ -649,7 +649,6 @@ class AuthController extends Controller
 		}
 
 		RateLimiter::hit($key, 60);  
-
 		try {
 			$message = "{$otp} is QuickDials Verification Code for {$client->email}.";
 			$subject  = "{$otp} is QuickDials Verification Code";
@@ -658,15 +657,10 @@ class AuthController extends Controller
 				'emails.sendotp_to_email',
 				['otp' => $otp, 'name' => $client->business_name],
 				function ($m) use ($request, $subject, $client) {
-					$m->from('leads.quickdials@gmail.com', 'QuickDials');
+					$m->from(env('MAIL_USERNAME'), 'QuickDials');
 					$m->to($client->email, "")->subject($subject);
 				}
 			);
-
-			if (Mail::failures()) {
-				\Log::error('Mail failed to: ' . $request->input('email'));
-				return response()->json(['status' => 0, 'msg' => 'Mail failed to send.'], 500);
-			}
 
 			return response()->json(['status' => 1, 'msg' => 'OTP sent successfully.']);
 
@@ -748,7 +742,7 @@ private function maskEmail(string $email): string
             $message = "{$otp} is QuickDials Verification Code for {$user->email} .";
             $subject = "{$otp} is QuickDials Verification Code";
             $checkmail = Mail::send('emails.sendotp_to_email', ['otp' => $otp,'name'=>$user->business_name], function ($m) use ($message, $request, $subject) {
-                $m->from('leads.quickdials@gmail.com', 'Login OTP');
+                $m->from(env('MAIL_USERNAME'), 'Login OTP');
                 $m->to($request->input('email'), "")->subject($subject);
             });
             
