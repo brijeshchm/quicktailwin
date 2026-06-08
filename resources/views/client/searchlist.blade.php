@@ -742,7 +742,7 @@ function bannerSlider(banners, interval = 4000) {
     if (!empty($kwData['top_heading'])) {
         $defaultHeading=  $kwData['top_heading'];
     }else{
-     $defaultHeading = 'Trusted'. $keyword . ' in ' . ucwords($city);
+     $defaultHeading = 'Trusted '. $keyword . ' in ' . ucwords($city);
     }    
     @endphp
 

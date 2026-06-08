@@ -631,7 +631,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
     if (!empty($kwData['top_heading'])) {
         $defaultHeading=  $kwData['top_heading'];
     }else{
-     $defaultHeading = 'Trusted'. $keyword;
+     $defaultHeading = 'Trusted '. $keyword;
     }    
     @endphp
     <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mt-4 mx-4">
