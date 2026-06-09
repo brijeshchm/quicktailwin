@@ -138,51 +138,64 @@ padding:0px;
                 </div>
 
                 <div class="form-group">
-                    <label class="col-md-2 control-label">About</label>
+                    <label class="col-md-2 control-label">About What is {{$keyword->keyword}}</label>
                     <div class="col-md-8">
                         <textarea class="form-control summernote" name="courseabout" rows="5" placeholder="Enter About Section">{{ $keyword->courseabout }}</textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Paragraph 1</label>
+                    <label class="col-md-2 control-label">Paragraph 1 (Benefits)</label>
                     <div class="col-md-8">
                         <input class="form-control" name="paragraph1" value="{{ $keyword->paragraph1 }}" placeholder="Enter paragraph 1">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Paragraph 2</label>
+                    <label class="col-md-2 control-label">Paragraph 2 (Eligibility)</label>
                     <div class="col-md-8">
                         <input class="form-control" name="paragraph2" value="{{ $keyword->paragraph2 }}" placeholder="Enter paragraph 2">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Paragraph 3</label>
+                    <label class="col-md-2 control-label">Paragraph 3 (Service Duration)</label>
                     <div class="col-md-8">
                         <input class="form-control" name="paragraph3" value="{{ $keyword->paragraph3 }}" placeholder="Enter paragraph 3">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="meta_keywords" class="col-md-2 control-label">paragraph4</label>
+                    <label for="meta_keywords" class="col-md-2 control-label">Paragraph 4 (Price near)</label>
                     <div class="col-md-8">
                         <input class="form-control" name="paragraph4" placeholder="Enter paragraph4" value="{{ $keyword->paragraph4 }}"> 
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="meta_keywords" class="col-md-2 control-label">paragraph5</label>
+                    <label for="meta_keywords" class="col-md-2 control-label">Paragraph 5(Career Opportunities)</label>
                     <div class="col-md-8">
                         <input class="form-control" name="paragraph5" placeholder="Enter paragraph5" value="{{ $keyword->paragraph5 }}"> 
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="meta_keywords" class="col-md-2 control-label">paragraph6</label>
+                    <label for="meta_keywords" class="col-md-2 control-label">Paragraph 6 (Salary growth)</label>
                     <div class="col-md-8">
-                        <input class="form-control" name="paragraph6" placeholder="Enter paragraph6" value="{{ $keyword->paragraph6 }}"> 
+                        <input class="form-control" name="paragraph6" placeholder="Enter paragraph 6" value="{{ $keyword->paragraph6 }}"> 
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="meta_keywords" class="col-md-2 control-label">Paragraph 7 (Why Choose)</label>
+                    <div class="col-md-8">
+                        <input class="form-control" name="paragraph7" placeholder="Enter paragraph 7" value="{{ $keyword->paragraph7 }}"> 
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="meta_keywords" class="col-md-2 control-label">Paragraph 8 (Conclusion  Details)</label>
+                    <div class="col-md-8">
+                        <input class="form-control" name="paragraph8" placeholder="Enter paragraph 8" value="{{ $keyword->paragraph8 }}"> 
+                    </div>
+                </div>
+
                  <div class="form-group text-center">
                     <div class="col-md-8 col-md-offset-2">
                         <button type="submit" class="btn btn-primary">
@@ -334,6 +347,8 @@ padding:0px;
                     <textarea class="form-control" name="faqa5" placeholder="Enter FAQ Answer 5">{{ $keyword->faqa5 }}</textarea>
                 </div>
             </div>
+
+
             <div class="form-group">
                 <label for="top_description" class="col-md-2 control-label">FAQ Question 6</label>
                 <div class="col-md-8">
@@ -347,6 +362,70 @@ padding:0px;
                     <textarea class="form-control" name="faqa6" placeholder="Enter FAQ Answer 6">{{ $keyword->faqa6 }}</textarea>
                 </div>
             </div>
+            
+
+            <div class="form-group">
+                <label for="top_description" class="col-md-2 control-label">FAQ Question 7</label>
+                <div class="col-md-8">
+                    <input class="form-control" name="faqq7" placeholder="Enter FAQ Question 7" value="{{ $keyword->faqq7 }}">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="top_description" class="col-md-2 control-label">FAQ Answer 7</label>
+                <div class="col-md-8">
+                    <textarea class="form-control" name="faqa7" placeholder="Enter FAQ Answer 7">{{ $keyword->faqa7 }}</textarea>
+                </div>
+            </div>
+            
+
+            <div class="form-group">
+                <label for="top_description" class="col-md-2 control-label">FAQ Question 8</label>
+                <div class="col-md-8">
+                    <input class="form-control" name="faqq8" placeholder="Enter FAQ Question 8" value="{{ $keyword->faqq8 }}">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="top_description" class="col-md-2 control-label">FAQ Answer 8</label>
+                <div class="col-md-8">
+                    <textarea class="form-control" name="faqa8" placeholder="Enter FAQ Answer 8">{{ $keyword->faqa8 }}</textarea>
+                </div>
+            </div>
+            
+
+            <div class="form-group">
+                <label for="top_description" class="col-md-2 control-label">FAQ Question 9</label>
+                <div class="col-md-8">
+                    <input class="form-control" name="faqq9" placeholder="Enter FAQ Question 9" value="{{ $keyword->faqq9 }}">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="top_description" class="col-md-2 control-label">FAQ Answer 9</label>
+                <div class="col-md-8">
+                    <textarea class="form-control" name="faqa9" placeholder="Enter FAQ Answer 9">{{ $keyword->faqa9 }}</textarea>
+                </div>
+            </div>
+            
+
+            <div class="form-group">
+                <label for="top_description" class="col-md-2 control-label">FAQ Question 10</label>
+                <div class="col-md-8">
+                    <input class="form-control" name="faqq10" placeholder="Enter FAQ Question 10" value="{{ $keyword->faqq10 }}">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="top_description" class="col-md-2 control-label">FAQ Answer 10</label>
+                <div class="col-md-8">
+                    <textarea class="form-control" name="faqa10" placeholder="Enter FAQ Answer 10">{{ $keyword->faqa10 }}</textarea>
+                </div>
+            </div>
+            
+
+
+
              <div class="form-group text-center">
                     <div class="col-md-8 col-md-offset-2">
                         <button type="submit" class="btn btn-primary">

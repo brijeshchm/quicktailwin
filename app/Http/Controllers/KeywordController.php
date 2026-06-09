@@ -1871,6 +1871,8 @@ class KeywordController extends Controller
 			$kwObj->paragraph4 = $request->input('paragraph4');
 			$kwObj->paragraph5 = $request->input('paragraph5');
 			$kwObj->paragraph6 = $request->input('paragraph6');
+			$kwObj->paragraph7 = $request->input('paragraph7');
+			$kwObj->paragraph8 = $request->input('paragraph8');
 
 
 			if ($kwObj->isDirty()) {
@@ -2066,6 +2068,18 @@ class KeywordController extends Controller
 			$kwObj->faqa5 = $request->input('faqa5');
 			$kwObj->faqq6 = $request->input('faqq6');
 			$kwObj->faqa6 = $request->input('faqa6');
+
+			$kwObj->faqq7 = $request->input('faqq7');
+			$kwObj->faqa7 = $request->input('faqa7');
+
+			$kwObj->faqq8 = $request->input('faqq8');
+			$kwObj->faqa8 = $request->input('faqa8');
+
+			$kwObj->faqq9 = $request->input('faqq9');
+			$kwObj->faqa9 = $request->input('faqa9');
+
+			$kwObj->faqq10 = $request->input('faqq10');
+			$kwObj->faqa10 = $request->input('faqa10');
 
 
 			if ($kwObj->isDirty()) {

@@ -720,7 +720,7 @@ function bannerSlider(banners, interval = 4000) {
             <div class="w-full h-[2px] bg-teal-500 mt-3 mb-5"></div>
             <div class="text-gray-800 leading-relaxed mb-5">{!! $kwData['courseabout'] !!}</div>
             <ul class="space-y-3">
-                @foreach(['paragraph1','paragraph2','paragraph3','paragraph4','paragraph5','paragraph6'] as $p)
+                @foreach(['paragraph1','paragraph2','paragraph3','paragraph4','paragraph5','paragraph6','paragraph7','paragraph8'] as $p)
                 @if(!empty($kwData[$p]))
                 <li class="flex items-start gap-2 text-gray-800">
                     <span class="text-orange-500 mt-1">✔</span>
