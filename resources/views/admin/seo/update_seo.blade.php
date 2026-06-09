@@ -145,52 +145,52 @@ padding:0px;
                 </div>
 
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Paragraph 1 (Benefits)</label>
+                    <label class="col-md-2 control-label">Paragraph 1</label>
                     <div class="col-md-8">
                         <input class="form-control" name="paragraph1" value="{{ $keyword->paragraph1 }}" placeholder="Enter paragraph 1">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Paragraph 2 (Eligibility)</label>
+                    <label class="col-md-2 control-label">Paragraph 2</label>
                     <div class="col-md-8">
                         <input class="form-control" name="paragraph2" value="{{ $keyword->paragraph2 }}" placeholder="Enter paragraph 2">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Paragraph 3 (Service Duration)</label>
+                    <label class="col-md-2 control-label">Paragraph 3</label>
                     <div class="col-md-8">
                         <input class="form-control" name="paragraph3" value="{{ $keyword->paragraph3 }}" placeholder="Enter paragraph 3">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="meta_keywords" class="col-md-2 control-label">Paragraph 4 (Price near)</label>
+                    <label for="meta_keywords" class="col-md-2 control-label">Paragraph 4 </label>
                     <div class="col-md-8">
                         <input class="form-control" name="paragraph4" placeholder="Enter paragraph4" value="{{ $keyword->paragraph4 }}"> 
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="meta_keywords" class="col-md-2 control-label">Paragraph 5(Career Opportunities)</label>
+                    <label for="meta_keywords" class="col-md-2 control-label">Paragraph 5</label>
                     <div class="col-md-8">
                         <input class="form-control" name="paragraph5" placeholder="Enter paragraph5" value="{{ $keyword->paragraph5 }}"> 
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="meta_keywords" class="col-md-2 control-label">Paragraph 6 (Salary growth)</label>
+                    <label for="meta_keywords" class="col-md-2 control-label">Paragraph 6 </label>
                     <div class="col-md-8">
                         <input class="form-control" name="paragraph6" placeholder="Enter paragraph 6" value="{{ $keyword->paragraph6 }}"> 
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="meta_keywords" class="col-md-2 control-label">Paragraph 7 (Why Choose)</label>
+                    <label for="meta_keywords" class="col-md-2 control-label">Paragraph 7 </label>
                     <div class="col-md-8">
                         <input class="form-control" name="paragraph7" placeholder="Enter paragraph 7" value="{{ $keyword->paragraph7 }}"> 
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="meta_keywords" class="col-md-2 control-label">Paragraph 8 (Conclusion  Details)</label>
+                    <label for="meta_keywords" class="col-md-2 control-label">Paragraph 8 </label>
                     <div class="col-md-8">
                         <input class="form-control" name="paragraph8" placeholder="Enter paragraph 8" value="{{ $keyword->paragraph8 }}"> 
                     </div>

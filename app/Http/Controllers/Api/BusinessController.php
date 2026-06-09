@@ -233,7 +233,7 @@ class BusinessController extends Controller
 
 		$cid = $request->input('city');
 		$zid = $request->input('zone');
-		$zones = DB::table('zones')->where('city_id', $cid)->get();
+		$zones = DB::table('zones')->where('city_id', $cid)->orderBy('zone','asc')->get();
 
 		if ($zones) {
 			echo '<option value="">Select zone</option>';
