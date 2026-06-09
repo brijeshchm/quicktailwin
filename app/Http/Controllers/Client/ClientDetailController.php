@@ -134,7 +134,7 @@ class ClientDetailController extends Controller
  
 
         $govDocs = [];
-        if($certificate['cin_no']){
+       if (isset($certificate['cin_no']) && !empty($certificate['cin_no'])) {
         $govDocs = [
             ['title' => 'CIN',   'no' => $certificate['cin_no']   ?? null, 'img' => $certificate['cin_certificate']   ?? null, 'tileBg' => 'linear-gradient(135deg,#1e3a8a,#2563eb)',  'color' => '#1d4ed8'],
             ['title' => 'MSME',  'no' => $certificate['msme_no']  ?? null, 'img' => $certificate['msme_certificate']  ?? null, 'tileBg' => 'linear-gradient(135deg,#78350f,#b45309)',  'color' => '#92400e'],
