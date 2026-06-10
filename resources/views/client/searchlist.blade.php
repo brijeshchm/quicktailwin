@@ -276,12 +276,7 @@ function bannerSlider(banners, interval = 4000) {
     </div>
 </div>
 
-                        <!-- <p class="text-sm text-gray-500 mt-1">
-                            Showing <span class="font-semibold text-gray-800" x-text="filteredCount"></span>
-                            
-                            results for
-                            <span class="font-semibold text-blue-700">{{ $keyword }} in {{ ucfirst($city) }}</span>
-                        </p> -->
+                        
             </div>
 
             {{-- Controls --}}
@@ -402,7 +397,7 @@ function bannerSlider(banners, interval = 4000) {
                      data-category="{{ strtolower(is_array($business['category'] ?? '') ? implode(',', $business['category']) : ($business['category'] ?? '')) }}"
                      data-rating="{{ $business['rating'] ?? 4.0 }}"
                      data-verified="{{ ($business['verified'] ?? false) ? '1' : '0' }}"
-                     data-open="{{ ($business['isOpen'] ?? false) ? '1' : '0' }}"
+                     data-open="{{ ($business['active_status'] ?? false) ? '1' : '0' }}"
                      data-reviews="{{ $business['reviewCount'] ?? 0 }}"
                      x-show="shouldShow($el)">
                     <x-business-card :business="$business" :index="$globalIndex" :view="'list'" />

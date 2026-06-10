@@ -158,7 +158,7 @@ class CitySlugController extends Controller
         $name     = $b['business_name'] ?? 'Business Name';
         $id       = $b['business_id'] ?? $index;
 
-  $gallery = is_array($b['gallery'] ?? null)
+        $gallery = is_array($b['gallery'] ?? null)
             ? $b['gallery']
             : [];
 
@@ -175,7 +175,7 @@ class CitySlugController extends Controller
             'reviewCount'   => (int)   ($b['comment_count'] ?? $b['review_count'] ?? 0),
             'address'       => $b['address'] ?? '',
             'city'          => $b['city'] ?? '',
-            'openUntil'     => $b['openUntil'] ?? $b['open_until'] ?? '8:00 PM',
+            'openUntil'     => $b['openUntil'] ?? $b['open_until'] ?? '9:00 AM',
             'isOpen'        => $b['isOpen'] ?? $b['is_open'] ?? true,
             'verified'      => $b['verified'] ?? $b['trusted_status'] ?? false,
             'trending'      => $b['trending'] ?? false,

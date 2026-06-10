@@ -1,10 +1,7 @@
 @props(['business', 'index' => 0, 'view' => 'list'])
 
 @php
-
-
- 
-    $colorPalette = [
+ $colorPalette = [
         'from-violet-500 to-indigo-600',
         'from-emerald-500 to-teal-600',
         'from-orange-500 to-amber-600',
@@ -24,7 +21,7 @@
 
     $rating = $business['rating'] ?? 4.0;
     $reviewCount = $business['reviewCount'] ?? 0;
-    $isOpen = $business['isOpen'] ?? true;
+    $isOpen = $business['active_status'] ?? true;
     $verified = $business['verified'] ?? false;
     $trending = $business['trending'] ?? false;
     $topSearch = $business['topSearch'] ?? false;
@@ -32,12 +29,12 @@
     $address = $business['address'] ?? '';
     $city = $business['city'] ?? '';
     $established = $business['established'] ?? '';
-    $description = $business['description'] ?? '';
+ 
     $tags = $business['tags'] ?? [];
     $category = is_array($business['category'] ?? '') ? $business['category'] : [$business['category'] ?? ''];
     $phone = $business['phone'] ?? '';
     $slug = $business['business_slug'] ?? '';
-    $openUntil = $business['openUntil'] ?? '8:00 PM';
+    $openUntil = $business['openUntil'] ?? '9:00 AM';
 
     $filledStars = round($rating);
 
@@ -389,10 +386,7 @@ document.addEventListener('DOMContentLoaded', () => {
             📍 {{ $address }}
         </p>
         @endif
-
-        @if($description)
-        <p class="text-[11px] text-gray-500 line-clamp-2 flex-1 mb-4">{!! strip_tags($description) !!}</p>
-        @endif
+ 
 
         <div class="mt-auto pt-1 flex items-center gap-1.5">
             <a href="tel:{{ $phone }}" class="flex-1 flex items-center justify-center gap-1 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-[10px] font-semibold transition-colors">📞 Call</a>

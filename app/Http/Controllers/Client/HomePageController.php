@@ -52,7 +52,7 @@ class HomePageController extends Controller
             $pool->as('repairs')->withoutVerifying()->get('https://api.quickdials.com/api/website/repairsServices'),
             $pool->as('wedding')->withoutVerifying()->get('https://api.quickdials.com/api/website/weddingPlanning'),
         ]);
-
+		$homeData = [];
         $homeData    = $responses['home']->json() ?? [];    
 	  
         $repairsData = $responses['repairs']->json() ?? [];
