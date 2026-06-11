@@ -5,12 +5,14 @@
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 @foreach ($clients as $client)
-<url>     
-      <loc>{{ url('business-details/'.$client->business_slug) }}</loc>
+  @if(!empty($client->business_slug))
+<url>       
+      <loc>{{ route('business.details', $client->business_slug) }}</loc>      
       <lastmod>{{ \Carbon\Carbon::parse($client->updated_at)->toAtomString() }}</lastmod>    
       <changefreq>weekly</changefreq>
       <priority>0.80</priority>
 </url>
+@endif
 @endforeach 
  
 </urlset>
