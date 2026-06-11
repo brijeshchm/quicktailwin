@@ -1413,7 +1413,7 @@ class BackEndClientsController extends Controller
 					if (!file_exists($destinationPath)) {
 						mkdir($destinationPath, 0777, true);
 					}
-					for ($i = 0; $i < 22; $i++) {
+					for ($i = 0; $i < 30; $i++) {
 						$field = 'image' . ($i + 1);
 						if ($request->hasFile($field)) {
 

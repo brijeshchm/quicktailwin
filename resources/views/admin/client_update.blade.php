@@ -851,7 +851,7 @@
                      <input type="hidden" name="business_id" value="{{$client->id}}">
                      <input type="hidden" name="upload_pics" value="upload_pics">
                     <div class="row mb-3">
-                        <?php for($i=0;$i<25;$i++){                          
+                        <?php for($i=0;$i<30;$i++){                          
                       ?>
                       <div class="col-md-4 col-lg-4" id="image{{$i+1}}">
                       @if(empty($picture[$i]['large']['name']))
