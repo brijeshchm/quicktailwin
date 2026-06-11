@@ -1344,6 +1344,20 @@ class BackEndClientsController extends Controller
 		$width = $width ?? imagesx($src);
 		$height = $height ?? imagesy($src);
 
+
+		$originalWidth = imagesx($src);
+		$originalHeight = imagesy($src);
+
+		// If image is smaller than 500px in width or height
+		if ($originalWidth < 540 || $originalHeight < 500) {
+		$width = 1200;
+		$height = 1000;
+		} else {
+		$width = $width ?? $originalWidth;
+		$height = $height ?? $originalHeight;
+		}
+
+
 		$dst = imagecreatetruecolor($width, $height);
 		imagealphablending($dst, false);
 		imagesavealpha($dst, true);
