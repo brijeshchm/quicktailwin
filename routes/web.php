@@ -516,8 +516,8 @@ Route::get('/sanctum/csrf-cookie', function (Request $request) {
 
 
 
-Route::get('/business-details/{slug}', [App\Http\Controllers\Client\ClientDetailController::class, 'index'])->name('business.details');
-Route::get('/business-details', [App\Http\Controllers\Client\ClientDetailController::class, 'businessDetails'])->name('lists.business');
+Route::get('/businessdetails/{slug}', [App\Http\Controllers\Client\ClientDetailController::class, 'index'])->name('business.details');
+Route::get('/businessdetails', [App\Http\Controllers\Client\ClientDetailController::class, 'businessDetails'])->name('lists.business');
 
 Route::post('/review', [App\Http\Controllers\Client\ReviewController::class, 'store']);
 Route::get('/client/logout', [App\Http\Controllers\LogoutController::class, 'clientLogout']);

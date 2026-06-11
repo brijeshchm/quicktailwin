@@ -86,7 +86,7 @@ class BusinessDashboardController extends Controller
         $businessName = $clientDetails->business_name ?? 'Our Company';
         $address = $clientDetails->address ?? '';
         $map = $clientDetails->business_map ?? '';
-        $profileUrl = url('business-details/' . ($clientDetails->business_slug ?? ''));
+        $profileUrl = url('business/' . ($clientDetails->business_slug ?? ''));
 
         // Transform Data (Fast Way)
         $leads->getCollection()->transform(function ($lead) use ($businessName, $address, $map, $profileUrl, $avgRating, $ratingCount) {

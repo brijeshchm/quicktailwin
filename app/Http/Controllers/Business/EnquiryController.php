@@ -483,7 +483,7 @@ class EnquiryController extends Controller
 		$businessName = $clientDetails->business_name ?? 'Our Company';
 		$address = $clientDetails->address ?? '';
 		$map = $clientDetails->business_map ?? '';
-		$profileUrl = url('business-details/' . ($clientDetails->business_slug ?? ''));
+		$profileUrl = url('businessDetails/' . ($clientDetails->business_slug ?? ''));
 
 		// Transform Data (Fast Way)
 		$leads->getCollection()->transform(function ($lead) use ($businessName, $address, $map, $profileUrl, $avgRating, $ratingCount) {
@@ -633,7 +633,7 @@ class EnquiryController extends Controller
 			$businessName = $client->business_name ?? 'our company';
 			$addressText = $client->address ?? '';
 			$mapText = !empty($client->business_map) ? '\n Directions: ' . $client->business_map : '';
-			$profile_url = 'https://www.quickdials.com/business-details/' . $client->business_slug;
+			$profile_url = 'https://www.quickdials.com/businessdetails/' . $client->business_slug;
 
 			foreach ($leads as $val) {
 
@@ -778,7 +778,7 @@ class EnquiryController extends Controller
 		$businessName = $clientDetails->business_name ?? 'Our Company';
 		$address = $clientDetails->address ?? '';
 		$map = $clientDetails->business_map ?? '';
-		$profileUrl = url('business-details/' . ($clientDetails->business_slug ?? ''));
+		$profileUrl = url('businessdetails/' . ($clientDetails->business_slug ?? ''));
 
 		// Transform Data (Fast Way)
 		$leads->getCollection()->transform(function ($lead) use ($businessName, $address, $map, $profileUrl, $avgRating, $ratingCount) {
@@ -914,7 +914,7 @@ class EnquiryController extends Controller
 		$businessName = $clientDetails->business_name ?? 'Our Company';
 		$address = $clientDetails->address ?? '';
 		$map = $clientDetails->business_map ?? '';
-		$profileUrl = url('business-details/' . ($clientDetails->business_slug ?? ''));
+		$profileUrl = url('businessdetails/' . ($clientDetails->business_slug ?? ''));
 
 		// Transform Data (Fast Way)
 		$leads->getCollection()->transform(function ($lead) use ($businessName, $address, $map, $profileUrl, $avgRating, $ratingCount) {

@@ -54,11 +54,11 @@ class CitySlugController extends Controller
             $response = Http::timeout(5)
                ->withoutVerifying()->get('https://api.quickdials.com/api/website/checkCity', ['city' => $city]);			 
 
+                  
             if (!$response->successful()) return false;
 
             $data = $response->json();
-			
-		 
+					 
             return ($data['status'] ?? false) === true;
         } catch (\Throwable $e) {
             return false;
@@ -75,13 +75,9 @@ class CitySlugController extends Controller
         try {
             $response = Http::timeout(5)
                ->withoutVerifying()->get('https://api.quickdials.com/api/website/getKeyword', ['keyword' => $slug]);
-				
-				 
+                 
             if (!$response->successful()) return false;
-
-            $data = $response->json();
-			 
-		 
+            $data = $response->json();			 		 
             return ($data['status'] ?? false) === true;
         } catch (\Throwable $e) {
             return false;
