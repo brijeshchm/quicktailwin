@@ -1350,8 +1350,8 @@ class BackEndClientsController extends Controller
 
 		// If image is smaller than 500px in width or height
 		if ($originalWidth < 540 || $originalHeight < 500) {
-		$width = 1200;
-		$height = 1000;
+		$width = 900;
+		$height = 800;
 		} else {
 		$width = $width ?? $originalWidth;
 		$height = $height ?? $originalHeight;
