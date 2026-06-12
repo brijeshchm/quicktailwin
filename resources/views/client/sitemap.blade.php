@@ -77,27 +77,28 @@
 </url> 
 @foreach ($keywords as $keyword)
 <url>
-<loc>{{ route('showCity', $keyword->slug) }}</loc>     
-<lastmod>{{ $keyword->updated_at ? \Carbon\Carbon::parse($keyword->updated_at)->toAtomString() : now()->toAtomString() }}</lastmod> 
-<changefreq>weekly</changefreq>
-<priority>0.80</priority>
+    <loc>{{ route('showCity', $keyword->slug) }}</loc>
+    <lastmod>{{ \Carbon\Carbon::parse($keyword->updated_at ?? now())->toAtomString() }}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
 </url>
-@endforeach 
+@endforeach
 
 @foreach ($categories as $category)
-<url>     
-<loc>{{ route('categories.show', $category->parent_slug) }}</loc>
-<lastmod>{{ $keyword->updated_at ? \Carbon\Carbon::parse($keyword->updated_at)->toAtomString() : now()->toAtomString() }}</lastmod> 
-<changefreq>weekly</changefreq>
-<priority>0.80</priority>
+<url>
+    <loc>{{ route('categories.show', $category->parent_slug) }}</loc>
+    <lastmod>{{ \Carbon\Carbon::parse($category->updated_at ?? now())->toAtomString() }}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
 </url>
-@endforeach 
+@endforeach
+
 @foreach ($childCategories as $child)
-<url>     
-<loc>{{ route('child.show', $child->child_slug) }}</loc>   
-<lastmod>{{ $keyword->updated_at ? \Carbon\Carbon::parse($keyword->updated_at)->toAtomString() : now()->toAtomString() }}</lastmod>     
-<changefreq>weekly</changefreq>
-<priority>0.80</priority>
+<url>
+    <loc>{{ route('child.show', $child->child_slug) }}</loc>
+    <lastmod>{{ \Carbon\Carbon::parse($child->updated_at ?? now())->toAtomString() }}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
 </url>
-@endforeach     
+@endforeach
 </urlset>

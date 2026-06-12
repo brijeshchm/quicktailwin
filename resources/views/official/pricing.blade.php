@@ -1,9 +1,7 @@
-
 @extends('client.layouts.app')
 @section('title', 'Package Price Quick Dials- Local search, IT Training, Service, overseas education')
 @section('description', 'Package Price Dials- Local search, IT Training, Service, overseas education')
-@section('keyword', 'Package Price Dials- Local search, IT Training, Service, overseas education')
-
+@section('keywords', 'Package Price Dials- Local search, IT Training, Service, overseas education')
 @section('content') 
 
  

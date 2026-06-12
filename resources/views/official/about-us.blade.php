@@ -1,16 +1,9 @@
 @extends('client.layouts.app')
- 
-
 @section('title', 'About QuickDials — India\'s Trusted Service Marketplace & Lead Platform')
-
 @section('description', 'QuickDials connects 1M+ customers with verified businesses across IT, weddings, home services, healthcare, real estate, finance, travel & more. Get quality leads, real reviews, and direct customer connections')
-
-@section('keyword', 'About QuickDials, lead management software, service marketplace india, business listing, get business leads')
-
-
-
+@section('keywords', 'About QuickDials, lead management software, service marketplace india, business listing, get business leads')
 @section('content')
- @include('client.components.banner-section')
+@include('client.components.banner-section')
  
 
  

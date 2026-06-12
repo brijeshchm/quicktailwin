@@ -1,23 +1,11 @@
- 
-
 @extends('client.layouts.app')
- 
-
 @section('title', 'Blog | QuickDials - Business, Education & Local Service Insights')
-
 @section('description', 'Explore the QuickDials blog for the latest updates, business tips, education guides, career advice, local service insights, digital marketing trends, technology news, and helpful articles to grow your business and stay informed.')
-
-@section('keyword', 'QuickDials blog, business blog India, local business tips, education articles, career guidance, digital marketing tips, technology news, startup tips, local services blog, IT training guides, business growth strategies, online business directory blog, QuickDials articles')
-
-
- @section('content') 
-
-     @include('client.components.banner-section')
+@section('keywords', 'QuickDials blog, business blog India, local business tips, education articles, career guidance, digital marketing tips, technology news, startup tips, local services blog, IT training guides, business growth strategies, online business directory blog, QuickDials articles')
+@section('content') 
+@include('client.components.banner-section')
 <style>
- 
-/* ══════════════════════════════════════════
-   SCROLL PROGRESS BAR
-══════════════════════════════════════════ */
+
 #scroll-progress {
     position: fixed;
     top: 0; left: 0; right: 0;

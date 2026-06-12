@@ -1,11 +1,7 @@
 @extends('client.layouts.app')
-
 @section('title', 'Privacy Policy | QuickDials - User Data & Privacy Protection')
-
 @section('description', 'Read the QuickDials Privacy Policy to learn how we collect, use, store, and protect your personal data under the Digital Personal Data Protection Act 2023, IT Act 2000, and applicable Indian privacy laws.')
-
-@section('keyword', 'QuickDials privacy policy, DPDP Act 2023 compliance, user data protection India, data security policy, personal information policy, cookies policy, online privacy policy, business listing privacy, grievance officer, data fiduciary obligations')
-
+@section('keywords', 'QuickDials privacy policy, DPDP Act 2023 compliance, user data protection India, data security policy, personal information policy, cookies policy, online privacy policy, business listing privacy, grievance officer, data fiduciary obligations')
 @section('content')
 
     <style>

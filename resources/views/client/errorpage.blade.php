@@ -1,7 +1,7 @@
 @extends('client.layouts.appError')
 @section('title', 'Oops !Page Not Found')
 @section('description', 'Oops !Page Not Found')
-@section('keyword', 'Oops !Page Not Found') 
+@section('keywords', 'Oops !Page Not Found') 
 @section('content')	
 
    

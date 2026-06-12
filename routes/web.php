@@ -13,16 +13,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\ServiceController;
 use App\Http\Controllers\User\VouchersController;
- 
-//Route::auth();
-//Auth::routes();
-
- 
-
-
- 
-
- 
+  
 Route::middleware('auth:guest')->group(function () {
 		Route::get('dashboard',       [ProfileController::class, 'dashbord'])->name('user.show.dashbord');
 		Route::get('user/personal-details',       [ProfileController::class, 'edit'])->name('user.personal.details');
@@ -96,12 +87,10 @@ Route::middleware('auth:clients')->group(function () {
 	Route::get('/business-owners/get-Discussion', [App\Http\Controllers\Business\BusinessDiscussionController::class, 'getDiscussion']);
 	Route::get('/business-owners/get-paginated-assigned-keywords', [App\Http\Controllers\Business\BusinessKeywordController::class, 'getPaginatedAssignedKeywords']);
 
-	//Route::get('/business-owners/get-paginated-payment-history',[App\Http\Controllers\Business\BusinessOwnerController::class, 'getPaginatedPaymentHistory']);
-
+	 
 	Route::post('/business-owners/export-excel', [App\Http\Controllers\Business\EnquiryController::class, 'getLeadsExcel']);
 
-	//Route::post('/business-owners/discussion',[App\Http\Controllers\Client\BusinessDiscussionController::class, 'discussion']);
-
+	 
 	Route::get('/business/personal-details', [App\Http\Controllers\Business\PersonalDetailsController::class, 'personalDetails']);
 	Route::get('/business/profileInfo', [App\Http\Controllers\Business\ProfileController::class, 'profileInfo']);
 	Route::post('/business/saveProfileInfo/{id}', [App\Http\Controllers\Business\ProfileController::class, 'saveProfileInfo']);
@@ -156,8 +145,6 @@ Route::middleware('auth:clients')->group(function () {
 	Route::get('/business/review/editReview/{id}', [App\Http\Controllers\Business\ReviewController::class, 'getReviewEdit']);
 	Route::post('/business/review/update-review/{id}', [App\Http\Controllers\Business\ReviewController::class, 'updateReviewEdit']);
 
-
-	///
 
 	Route::post('/business/pauseLead', [App\Http\Controllers\Business\EnquiryController::class, 'pauseLead']);
 	Route::post('/business/scrapLead', [App\Http\Controllers\Business\EnquiryController::class, 'scrapLead']);
@@ -279,17 +266,7 @@ Route::post('/register', [App\Http\Controllers\Auth\AuthController::class, 'regi
 //businees
 Route::get('/business-owners', [App\Http\Controllers\Client\BusinessOwnerController::class, 'index'])->name('login');
 Route::post('/business-owners', [App\Http\Controllers\Client\BusinessOwnerController::class, 'store'])->name('business-owners.submit');
-
-//Route::get('/sitemap.xml', [App\Http\Controllers\SitemapsController::class, 'index']);
-//Route::get('/sitemap-city.xml', [App\Http\Controllers\SitemapsController::class, 'city']);
-//Route::get('/sitemap-blog.xml', [App\Http\Controllers\SitemapsController::class, 'blog']);
-
-//Route::get('/sitemap-online.xml',[App\Http\Controllers\SitemapsController::class, 'online']);
-
-// Route::get('/sitemap-keyword.xml',[App\Http\Controllers\SitemapsController::class, 'keyword']);
-
-//Route::get('/sitemap-allcity.xml',[App\Http\Controllers\SitemapsController::class, 'allcity']);
-
+ 
 
 
 Route::get('/sitemap-blog.xml', function () {
@@ -331,14 +308,11 @@ Route::get('/sitemap.xml', function () {
 });
  
 
-Route::get('/sitemap-online.xml', function () {
-
- 
-		$keywords =  DB::table('keyword')
+Route::get('/sitemap-online.xml', function () { 
+	$keywords =  DB::table('keyword')
 			->where('seo_type', '1')
 			->select('slug', 'updated_at')
-			->get();
-	 
+			->get(); 
 
 	return response()
 		->view('client.sitemap_online', compact('keywords'))
@@ -424,35 +398,11 @@ Route::get('/quickdialssitemap.xml', function () {
 	return response()->view('client.quickdialssitemap')
 	->header('Content-Type', 'application/xml; charset=UTF-8');
 });
-
  
-
-
-		
-
-
-
-//Route::get('/ads/study-abroad', [App\Http\Controllers\Client\LandingPageController::class, 'studyabroad']);
 Route::post('/apiddd/lead/add', [App\Http\Controllers\Client\HomePageController::class, 'addLadsss']);
 
-
-// Route::get('/coaching/distance-education',[App\Http\Controllers\Client\LandingPageController::class, 'distance_education']);
-// Route::get('/coaching/foreign-language',[App\Http\Controllers\Client\LandingPageController::class, 'foreign_language']);
-// Route::get('/coaching/multimedia',[App\Http\Controllers\Client\LandingPageController::class, 'multimedia']);
-// Route::get('/coaching/it-training',[App\Http\Controllers\Client\LandingPageController::class, 'it_training']);
-// Route::get('/coaching/iit-entrance-exam',[App\Http\Controllers\Client\LandingPageController::class, 'iit_entrance_exam']);
-//Route::get('/coaching/entrance-exam-coaching', [App\Http\Controllers\Client\LandingPageController::class, 'entrance_exam_coaching']);
- // Route::get('/coaching/thank',[App\Http\Controllers\Client\LandingPageController::class, 'thankyou']);
-
-//Route::get('/ads/entrance-exam-coaching', [App\Http\Controllers\Client\LandingPageController::class, 'entranceexamcoaching']);
-// Route::get('/ads/distance-education',[App\Http\Controllers\Client\LandingPageController::class, 'distanceeducation']);
-//Route::get('/ads/it-training', [App\Http\Controllers\Client\LandingPageController::class, 'ittraining']);
-// Route::get('/free-course/landing',[App\Http\Controllers\Client\LandingPageController::class, 'index']);
-
-//Route::get('/email', [App\Http\Controllers\EmailController::class, 'index']);
-
 Route::get('/about-us', [App\Http\Controllers\Official\OfficialController::class, 'about'])->name('about.us');
-//Route::get('/news', [App\Http\Controllers\Official\OfficialController::class, 'news']);
+ 
 Route::get('/rss', [App\Http\Controllers\Official\OfficialController::class, 'rss']);
 Route::get('/features', [App\Http\Controllers\Official\OfficialController::class, 'features']);
 Route::get('/faq', [App\Http\Controllers\Official\OfficialController::class, 'faq']);
@@ -479,7 +429,7 @@ Route::get('/', [App\Http\Controllers\Client\HomePageController::class, 'index']
  
 Route::post('/newsletter', [App\Http\Controllers\Client\HomePageController::class, 'newsletter']);
 
-// Route::get('/{html}.html', [App\Http\Controllers\Client\HomePageController::class, 'callsssHtml']);
+ 
 Route::get('/business-services', [App\Http\Controllers\Client\HomePageController::class, 'businessServices'])->name('business.services');
 Route::get('/getKWList', [App\Http\Controllers\Client\HomePageController::class, 'getKWList']);
 Route::get('/getCityKWList', [App\Http\Controllers\Client\HomePageController::class, 'getCityKWList']);

@@ -1,21 +1,10 @@
 @extends('client.layouts.app')
 @section('title', 'QuickDials - Trusted Local Business Listings')
-
 @section('description', 'Explore the best services with QuickDials. Find verified businesses, contact details, reviews, ratings, photos, addresses, and trusted local service providers near you.')
-
-@section('keyword',  'best top services, verified businesses, local business directory, QuickDials listings, reviews and ratings, nearby services, trusted businesses, contact details, local search engine')
-
-
+@section('keywords',  'best top services, verified businesses, local business directory, QuickDials listings, reviews and ratings, nearby services, trusted businesses, contact details, local search engine')
 @section('content')	
-
 @include('client.components.banner-section')
-  
-
-<div class="min-h-screen bg-slate-50">
-
-    {{-- ════════════════════════════════
-         PAGE HEADER
-    ════════════════════════════════ --}}
+<div class="min-h-screen bg-slate-50">  
     <div class="bg-slate-900 text-white py-12">
         <div class="container mx-auto px-4">
             <div class="flex items-center gap-2 text-slate-400 text-sm mb-3">

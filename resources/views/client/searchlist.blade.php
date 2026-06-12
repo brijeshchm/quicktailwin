@@ -1,16 +1,9 @@
 @extends('client.layouts.app')
 @section('title', $metaTitle ?? $keyword . ' in ' . ucfirst($city) . ' | QuickDials')
-
 @section('description', $metaDescription ?? 'Find the best ' . $keyword . ' in ' . ucfirst($city) . ' with QuickDials. Discover verified businesses, addresses, phone numbers, reviews, ratings, photos, maps, and top local services near you.')
-
-@section('keyword', $metaKeywords ?? $keyword . ' in ' . ucfirst($city) . ', best ' . $keyword . ' in ' . ucfirst($city) . ', top ' . $keyword . ' near me, verified ' . $keyword . ', local business directory, QuickDials, business listings in ' . ucfirst($city) . ', reviews and ratings, contact details, nearby services, top businesses in ' . ucfirst($city))
-
-@section('content')
-
- {{-- In your layout <head> or @push('styles') --}}
-<style>
-
-  
+@section('keywords', $metaKeywords ?? $keyword . ' in ' . ucfirst($city) . ', best ' . $keyword . ' in ' . ucfirst($city) . ', top ' . $keyword . ' near me, verified ' . $keyword . ', local business directory, QuickDials, business listings in ' . ucfirst($city) . ', reviews and ratings, contact details, nearby services, top businesses in ' . ucfirst($city))
+@section('content') 
+<style>  
     #enquiry-modal { display: none; }
     #enquiry-modal.open { display: flex; }
     body.modal-open { overflow: hidden; }
@@ -26,12 +19,8 @@
     border-radius: 0 9999px 9999px 0;
     transition: transform 0.1s linear;
 }
-</style>
-
-{{-- In your layout <body> --}}
-<div id="scroll-progress"></div>
-
-{{-- In @push('scripts') --}}
+</style> 
+<div id="scroll-progress"></div> 
 <script>
 window.addEventListener('scroll', () => {
     const scrolled = window.scrollY;

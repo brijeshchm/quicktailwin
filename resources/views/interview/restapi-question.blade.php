@@ -2,7 +2,7 @@
 @section('title')
 Quick Dials- Business Services
 @endsection 
-@section('keyword')
+@section('keywords')
 Quick Dials-  Business Services list 
 @endsection
 @section('description'),  

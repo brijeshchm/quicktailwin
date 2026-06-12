@@ -1,25 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@yield('title')</title>
-    <meta name="keywords" content="@yield('keyword')">
-    <meta name="description" content="@yield('description')">     
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
-   {{-- Canonical URL --}}
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>@yield('title')</title>
+<meta name="keywords" content="@yield('keywords')">
+<meta name="description" content="@yield('description')">     
+<meta name="csrf-token" content="{{ csrf_token() }}" />  
 @if (request()->is('/'))
-    <link rel="canonical" href="https://www.quickdials.com/" />
+<link rel="canonical" href="https://www.quickdials.com/" />
 @elseif (View::hasSection('canonical'))
-    @yield('canonical')
+@yield('canonical')
 @else
-    <link rel="canonical" href="{{ url()->current() }}" />
+<link rel="canonical" href="{{ url()->current() }}" />
 @endif
-{{-- Meta Robots --}}
 @if (View::hasSection('meta_robots'))
-    @yield('meta_robots')
+@yield('meta_robots')
 @else
-    <meta name="robots" content="index, follow">
+<meta name="robots" content="index, follow">
 @endif
 <meta name="author" content="Quick Dials">
 <meta property="og:title" content="@yield('title', 'Quick Dials')" />
@@ -27,22 +25,17 @@
 <meta property="og:url" content="{{ url()->current() }}" />
 <meta property="og:type" content="website" />
 <meta property="og:image" content="@yield('og_image', asset('client/images/quickdials-og.png'))" />
-<!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="@yield('title')" />
 <meta name="twitter:description" content="@yield('description')" />
 <meta name="twitter:image" content="@yield('og_image', asset('client/images/quickdials-og.png'))" />
-<!-- GEO Dynamic -->
 <meta name="geo.region" content="@yield('geo_region', 'IN')" />
 <meta name="geo.placename" content="@yield('geo_city', 'India')" />
 <meta name="geo.position" content="@yield('geo_position', '')" />
-<!-- Verification -->
 <meta name="google-site-verification" content="O8A-LG3YpW7vOcPtVP9OuNrEcLfLf1kW2tTVpFpHNxM" />
 <meta name="msvalidate.01" content="456AED0115D50D42C4F3A79DAB89D41D" />
-<!-- Favicon -->
 <link rel="shortcut icon" href="{{ asset('client/images/favicon.png') }}" type="image/png" />
-       <!------Google Analytic Script End----->
-      
+<!------Google Analytic Script End----->
 <script>
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -50,7 +43,6 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "wgjukc5z45");
 </script>
-
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -58,8 +50,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-KZF3WGSW');</script>
 <!-- End Google Tag Manager -->
-
-
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-KF6W10RN9L"></script>
 <script>
@@ -68,9 +58,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   gtag('js', new Date());
   gtag('config', 'G-KF6W10RN9L');
 </script>
-
-   @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <style>
+@vite(['resources/css/app.css', 'resources/js/app.js'])
+<style>
         
         @keyframes pulse-ring {
             0% { transform: scale(1); opacity: 0.6; }

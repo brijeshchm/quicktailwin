@@ -1,13 +1,9 @@
 @extends('client.layouts.app')
 @section('title', 'Quick Dials- Local search, IT Training, Service, overseas education')
 @section('description', 'Quick Dials- Local search, IT Training, Service, overseas education')
-@section('keyword', 'Quick Dials- Local search, IT Training, Service, overseas education')
-
+@section('keywords', 'Quick Dials- Local search, IT Training, Service, overseas education')
 @section('content')
-
- 
-  <!-- Start Slider Area -->
-  <div id="home" class="slider-area">
+<div id="home" class="slider-area">
     <div class="bend niceties preview-2">
       <div id="ensign-nivoslider" class="slides">
         <img loading="lazy" src="{{asset('public/official/img/slider/Quick Dials.jpg')}}" alt="Quick Dial" title="#slider-direction-1" />        

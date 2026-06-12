@@ -1,13 +1,8 @@
 @extends('client.layouts.app')
 @section('title', 'QuickDials - Trusted Local Business Listings')
-
 @section('description', 'Explore the best services with QuickDials. Find verified businesses, contact details, reviews, ratings, photos, addresses, and trusted local service providers near you.')
-
-@section('keyword',  'best top services, verified businesses, local business directory, QuickDials listings, reviews and ratings, nearby services, trusted businesses, contact details, local search engine')
-
-
+@section('keywords',  'best top services, verified businesses, local business directory, QuickDials listings, reviews and ratings, nearby services, trusted businesses, contact details, local search engine')
 @section('content')	
-
 @include('client.components.banner-section')
   
 <style>

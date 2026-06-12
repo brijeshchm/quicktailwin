@@ -5,10 +5,8 @@
 <title>@yield('title')</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta content="@yield('keyword')" name="keywords">
-<meta content="@yield('description')" name="description">
- 
- 
+<meta content="@yield('keywords')" name="keywords">
+<meta content="@yield('description')" name="description"> 
 <link rel="icon" href="{{asset('client/images/favicon.png')}}" type="image/x-icon">
 <link rel="stylesheet" href="{{asset('interview/css/tdcss.css')}}">
 <link rel="stylesheet" href="{{asset('interview/lib/style.css')}}">

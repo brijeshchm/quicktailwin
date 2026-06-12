@@ -1,8 +1,7 @@
 @extends('client.layouts.app')
- @section('title', 'Advertise Quick Dials Quick Dials- Local search, IT Training, Playschool, overseas education.')
+@section('title', 'Advertise Quick Dials Quick Dials- Local search, IT Training, Playschool, overseas education.')
 @section('description', 'Advertise Quick Dials- Local search, IT Training, Playschool, overseas education.')
-@section('keyword', 'Advertise Quick Dials- Local search, IT Training, Playschool, overseas education.')
-
+@section('keywords', 'Advertise Quick Dials- Local search, IT Training, Playschool, overseas education.')
 @section('content')	
 
   <link href="{{asset('public/official/css/style.css')}}" rel="stylesheet">

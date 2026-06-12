@@ -1,12 +1,8 @@
 @extends('client.layouts.appError')
 @section('title', 'Oops !Page Not Found')
 @section('description', 'Oops !Page Not Found')
-@section('keyword', 'Oops !Page Not Found')
-
-
-@section('content')	
-
-   
+@section('keywords', 'Oops !Page Not Found')
+@section('content')   
 <section class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 px-4">
     <div class="max-w-2xl mx-auto text-center">
 

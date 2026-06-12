@@ -1,10 +1,7 @@
 @extends('client.layouts.app')
-
 @section('title', 'Copyright Policy | QuickDials - Content Usage & Protection Policy')
-
 @section('description', 'Read the QuickDials Copyright Policy to understand content ownership, intellectual property rights, permitted usage, copyright infringement reporting, and protection of digital content published on QuickDials.')
-
-@section('keyword', 'QuickDials copyright policy, copyright protection, intellectual property rights, content usage policy, digital copyright, copyright infringement, website content protection, QuickDials legal policy, business listing content policy, online content rights')
+@section('keywords', 'QuickDials copyright policy, copyright protection, intellectual property rights, content usage policy, digital copyright, copyright infringement, website content protection, QuickDials legal policy, business listing content policy, online content rights')
 @section('content')
 
 @php

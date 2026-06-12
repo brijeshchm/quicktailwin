@@ -63,12 +63,10 @@
                 </svg>
                 Back
             </button>
-
             <p class="text-sm text-gray-500 mb-4 text-center">
-                We sent a 6-digit code to<br>
+                We sent a 6-digit code to 202525 <br>
                 <span id="otp-email-display" class="font-semibold text-gray-800"></span>
             </p>
-
             {{-- OTP boxes --}}
             <div class="flex gap-2 justify-center mb-1" id="otp-inputs">
                 <input type="text" inputmode="numeric" maxlength="1" data-idx="0"

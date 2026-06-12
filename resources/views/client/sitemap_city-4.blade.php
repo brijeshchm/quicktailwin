@@ -4,48 +4,19 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-@foreach ($keywords as $keyword)
-<url>
-<loc>{{ route('city.slug', ['city_slug' => 'greater-noida','service_slug' => $keyword->slug ]) }}</loc>
-<lastmod>{{ \Carbon\Carbon::parse($keyword->updated_at)->toAtomString() }}</lastmod>    
-<changefreq>weekly</changefreq>
-<priority>0.80</priority>
-</url>
-@endforeach 
+@php
+    $cities = ['greater-noida', 'gurgaon', 'mumbai', 'chandigarh', 'meerut'];
+@endphp
 
-@foreach ($keywords as $keyword)
-<url>
-<loc>{{ route('city.slug', ['city_slug' => 'gurgaon','service_slug' => $keyword->slug ]) }}</loc>
-<lastmod>{{ \Carbon\Carbon::parse($keyword->updated_at)->toAtomString() }}</lastmod>    
-<changefreq>weekly</changefreq>
-<priority>0.80</priority>
-</url>
-@endforeach 
- @foreach ($keywords as $keyword)
-<url>
-<loc>{{ route('city.slug', ['city_slug' => 'mumbai','service_slug' => $keyword->slug ]) }}</loc>
-<lastmod>{{ \Carbon\Carbon::parse($keyword->updated_at)->toAtomString() }}</lastmod>    
-<changefreq>weekly</changefreq>
-<priority>0.80</priority>
-</url>
-@endforeach 
-@foreach ($keywords as $keyword)
-<url>
-<loc>{{ route('city.slug', ['city_slug' => 'chandigarh','service_slug' => $keyword->slug ]) }}</loc>
-<lastmod>{{ \Carbon\Carbon::parse($keyword->updated_at)->toAtomString() }}</lastmod>
-<changefreq>weekly</changefreq>
-<priority>0.80</priority>
-</url>
-@endforeach    
-
-
-@foreach ($keywords as $keyword)
-<url>
-      <loc>{{ route('city.slug', ['city_slug' => 'meerut','service_slug' => $keyword->slug ]) }}</loc>
-      <lastmod>{{ \Carbon\Carbon::parse($keyword->updated_at)->toAtomString() }}</lastmod>    
-      <changefreq>weekly</changefreq>
-      <priority>0.80</priority>
-</url>
+@foreach ($cities as $city)
+    @foreach ($keywords as $keyword)
+    <url>
+        <loc>{{ route('city.slug', ['city_slug' => $city, 'service_slug' => $keyword->slug]) }}</loc>
+        <lastmod>{{ \Carbon\Carbon::parse($keyword->updated_at)->toAtomString() }}</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.80</priority>
+    </url>
+    @endforeach
 @endforeach
 
 </urlset>

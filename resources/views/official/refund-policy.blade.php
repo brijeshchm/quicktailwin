@@ -1,11 +1,7 @@
 @extends('client.layouts.app')
-
 @section('title', 'Refund Policy | QuickDials - Cancellation & Refund Terms')
-
 @section('description', 'Read the QuickDials Refund Policy to understand cancellation rules, refund eligibility, payment terms, subscription policies, and refund processing guidelines under Indian consumer protection laws.')
-
-@section('keyword', 'QuickDials refund policy, cancellation policy, payment refund terms, subscription refund, business listing refund, consumer protection india, refund guidelines, online payment policy, service cancellation terms')
-
+@section('keywords', 'QuickDials refund policy, cancellation policy, payment refund terms, subscription refund, business listing refund, consumer protection india, refund guidelines, online payment policy, service cancellation terms')
 @section('content')
 
     <style>

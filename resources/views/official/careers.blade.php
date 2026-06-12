@@ -1,10 +1,8 @@
 
 @extends('client.layouts.app')
 @section('title', 'Careers | Join QuickDials - Build Your Future With Us')
-
 @section('description', 'Explore exciting career opportunities at QuickDials. Join our growing team and build your future in technology, digital marketing, sales, customer support, business development, and more with India’s trusted local business search engine.')
-
-@section('keyword', 'QuickDials careers, jobs at QuickDials, career opportunities India, digital marketing jobs, software developer jobs, sales jobs, customer support jobs, business development careers, local business platform jobs, IT company careers, startup jobs India, QuickDials hiring')
+@section('keywords', 'QuickDials careers, jobs at QuickDials, career opportunities India, digital marketing jobs, software developer jobs, sales jobs, customer support jobs, business development careers, local business platform jobs, IT company careers, startup jobs India, QuickDials hiring')
 @section('content') 
     <style>
         

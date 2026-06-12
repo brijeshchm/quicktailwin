@@ -1,14 +1,10 @@
 @extends('client.layouts.app')
 @section('title','Quick Dials | A Local Search Engine for Businesses')
 @section('description', 'Category local search engine, for Certified Training Institutes near you Quickdials, Hotels, Salons, Real Estate, Travel, Healthcare, Education,Find addresses, phone numbers, reviews and ratings, photos, maps of businesses Find Only Certified Training Institutes')
-@section('keyword','Find Best It Training Centre near You, Find Best It Training Institute near You, Find Top 10 IT Training Institute near You, Find Best Entrance Exam Preparation Centre Near you, Top 10 Entrance Exam Centre Near you, Find Best Distance Education Centre Near You, Find Top 10 Distance Education Centre Near You, Find Best School And Colleges Near You, Find Top 10 school And College Near You, Get Education Loan, GET Free career Counselling, Find Best overseas education consultants Near you, Find Top 10 overseas education consultants Near you')
+@section('keywords','Find Best It Training Centre near You, Find Best It Training Institute near You, Find Top 10 IT Training Institute near You, Find Best Entrance Exam Preparation Centre Near you, Top 10 Entrance Exam Centre Near you, Find Best Distance Education Centre Near You, Find Top 10 Distance Education Centre Near You, Find Best School And Colleges Near You, Find Top 10 school And College Near You, Get Education Loan, GET Free career Counselling, Find Best overseas education consultants Near you, Find Top 10 overseas education consultants Near you')
 @section('content')	
 @include('client.components.banner-section')
-<style>
-/* ══════════════════════════════════════════
-   COLOUR MAP  (mirrors JS COLOR object)
-══════════════════════════════════════════ */
-/* stored as CSS custom-property groups — used by utility classes below */
+<style> 
 .cs-blue   { --bg:#eff6ff; --text:#1d4ed8; --border:#bfdbfe; --dot:#3b82f6; --head:#2563eb; }
 .cs-indigo { --bg:#eef2ff; --text:#4338ca; --border:#c7d2fe; --dot:#6366f1; --head:#4f46e5; }
 .cs-green  { --bg:#ecfdf5; --text:#065f46; --border:#a7f3d0; --dot:#10b981; --head:#059669; }

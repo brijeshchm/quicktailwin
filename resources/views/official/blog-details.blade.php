@@ -1,8 +1,7 @@
-@extends('client.layouts.app')
- 
+@extends('client.layouts.app') 
 @section('title',$blogDetails['meta_title'])
 @section('description', $blogDetails['meta_description'])
-@section('keyword', $blogDetails['meta_keywords'])
+@section('keywords', $blogDetails['meta_keywords'])
 @section('content')
 @include('client.components.banner-section')
  

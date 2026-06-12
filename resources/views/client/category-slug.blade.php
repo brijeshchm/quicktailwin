@@ -1,22 +1,12 @@
 @extends('client.layouts.app')
 @section('title', $metaTitle ?? $keyword . ' | QuickDials - Trusted Local Search')
-
 @section('description', $metaDescription ?? 'Find the best ' . $keyword . ' services with QuickDials. Explore verified businesses, phone numbers, addresses, reviews, ratings, photos, maps, and trusted local service providers near you.')
-
-@section('keyword', $metaKeywords ?? $keyword . ', best ' . $keyword . ', top ' . $keyword . ' services, verified businesses, local business directory, QuickDials, nearby services, reviews and ratings, trusted businesses, contact details, local search engine India')
-
-
-
-
+@section('keywords', $metaKeywords ?? $keyword . ', best ' . $keyword . ', top ' . $keyword . ' services, verified businesses, local business directory, QuickDials, nearby services, reviews and ratings, trusted businesses, contact details, local search engine India')
 @section('content')	
 @include('client.components.banner-section')
-
- @php
- 
- 
+@php
 $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
-
- @endphp
+@endphp
 
 <div x-show="showAd" x-cloak
          class="relative w-full overflow-hidden h-40"

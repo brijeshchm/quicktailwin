@@ -1,16 +1,10 @@
 @extends('client.layouts.app')
 @section('title', $metaTitle ?? 'Find Top Clinics & Doctors Near You | Aura Health')
 @section('description', $metaDescription ?? 'Book verified specialists across India. Compare clinics by rating, location & specialty. Trusted by 10k+ patients.')
-@section('keyword', $metaKeywords ?? 'Find Best It Training Centre near You, Find Best It Training Institute near You, Find Top 10 IT Training Institute near You, Find Best Entrance Exam Preparation Centre Near you, Top 10 Entrance Exam Centre Near you, Find Best Distance Education Centre Near You, Find Top 10 Distance Education Centre Near You, Find Best School And Colleges Near You, Find Top 10 school And College Near You, Get Education Loan, GET Free career Counselling, Find Best overseas education consultants Near you, Find Top 10 overseas education consultants Near you')
-@section('content')	 
- 
+@section('keywords', $metaKeywords ?? 'Find Best It Training Centre near You, Find Best It Training Institute near You, Find Top 10 IT Training Institute near You, Find Best Entrance Exam Preparation Centre Near you, Top 10 Entrance Exam Centre Near you, Find Best Distance Education Centre Near You, Find Top 10 Distance Education Centre Near You, Find Best School And Colleges Near You, Find Top 10 school And College Near You, Get Education Loan, GET Free career Counselling, Find Best overseas education consultants Near you, Find Top 10 overseas education consultants Near you')
+@section('content')	  
 @include('client.components.banner-section')
- 
- 
-
-<div class="flex flex-col min-h-screen">
-
-    {{-- ============ HERO ============ --}}
+<div class="flex flex-col min-h-screen"> 
     <section class="relative bg-gradient-to-b from-sidebar to-white pt-16 sm:pt-24 pb-20 sm:pb-32 overflow-hidden">
         <div class="absolute -top-40 -right-40 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
         <div class="absolute top-40 -left-40 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none"></div>

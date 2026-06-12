@@ -2,8 +2,7 @@
 @extends('client.layouts.app')
 @section('title', 'FAQ Quick Dials- Local search, IT Training, Service, overseas education')
 @section('description', 'FAQ Quick Dials- Local search, IT Training, Service, overseas education')
-@section('keyword', 'FAQ Quick Dials- Local search, IT Training, Service, overseas education')
-
+@section('keywords', 'FAQ Quick Dials- Local search, IT Training, Service, overseas education')
 @section('content') 
 <div class="about-bg page-hearder-area">
     <div class="official-overly"></div> 
