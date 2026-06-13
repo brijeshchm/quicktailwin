@@ -129,6 +129,8 @@ select.ef-input { padding-left:1rem; }
                             <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" style="z-index:1;">📞</span>
                             <input type="tel" name="phone" placeholder="Enter phone number"
                                    class="ef-input" style="padding-left:2.25rem;" maxlength="16" required>
+
+                                   
                         </div>
                     </div>
                 </div>

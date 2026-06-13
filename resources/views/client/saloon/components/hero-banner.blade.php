@@ -263,16 +263,17 @@
                                     <label class="hf-label">Mobile Number *</label>
                                     <div class="flex gap-1.5">
                                         <div class="px-3 py-2.5 rounded-lg border-2 border-stone-200 bg-stone-50 text-sm font-bold text-stone-700">+91</div>
-                                        <input type="tel" class="hf-input flex-1" placeholder="98765 43210" maxlength="10"
+                                        <input type="tel" class="hf-input flex-1" placeholder="98765 43210" maxlength="16"
                                                x-model="form.phone"
-                                               @input="form.phone = $event.target.value.replace(/\D/g,'').slice(0,10)">
+                                               @input="form.phone = $event.target.value.replace(/\D/g,'').slice(0,16)"
+                                                @keydown="phoneKeydown($event)">
                                     </div>
                                     <div class="text-[11px] text-stone-400 mt-1">OTP verification at the last step</div>
                                 </div>
                             </div>
 
                             <button class="hf-cta mt-4"
-                                    :disabled="!form.name.trim() || form.phone.length !== 10"
+                                    :disabled="!form.name.trim() || form.phone.length !== 16"
                                     @click="goStep(2, 1)">
                                 Continue to Treatment →
                             </button>

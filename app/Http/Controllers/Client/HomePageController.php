@@ -225,7 +225,7 @@ class HomePageController extends Controller
 
 	public function saveEnquiryWithoutZone(Request $request)
 	{
- dd($request->all());
+ 
 			$validator = Validator::make($request->all(), [
 				'name' => 'required|regex:/^[\pL\s\-]+$/u|min:3|max:32',
 				'email' => 'required|regex:/^[^\s()<>@,;:\/]+@\w[\w\.-]+\.[a-z]{2,}$/i',
@@ -296,7 +296,7 @@ class HomePageController extends Controller
 			}
 			if ($request->appointment) {
 
-			
+
 				$lead->appointment = $request->appointment;
 			}
 			$phone = ltrim($request->input('phone'), '0');

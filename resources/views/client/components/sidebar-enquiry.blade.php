@@ -201,7 +201,8 @@
                    x-model="form.phone"
                    placeholder="Enter Phone"
                    class="w-full text-xs border rounded-lg pl-7 pr-3 py-1.5 outline-none transition-all placeholder-gray-400 bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
-                   :class="errors.phone ? 'border-red-400 ring-2 ring-red-100' : 'border-gray-200'">
+                   :class="errors.phone ? 'border-red-400 ring-2 ring-red-100' : 'border-gray-200'" maxlength="16" @input="form.phone = $event.target.value.replace(/\D/g,'').slice(0,10)"
+                    @keydown="phoneKeydown($event)">
         </div>
     </div>
     <p x-show="errors.phone" x-text="errors.phone" class="text-[10px] text-red-500 mt-0.5"></p>

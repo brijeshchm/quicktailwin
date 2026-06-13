@@ -863,11 +863,6 @@ function bannerSlider(banners, interval = 4000) {
     </div>
     @endif
 
-
- 
-
-     
-
 </div>
 
 <script>

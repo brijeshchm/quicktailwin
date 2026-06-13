@@ -242,7 +242,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+// ── Reusable phone keydown handler ──────────────────
+window.phoneKeydown = function(e, onEnter) {
+    const v = e.target.value;
+    const k = e.keyCode;
 
+    if (v.length !== 0 && k === 13) { if (onEnter) onEnter(); return; }
+    if (v.length === 0 && k === 13) { e.preventDefault(); return; }
+    if (v.length === 0 && (k === 48 || k === 96)) { e.preventDefault(); return; }
+    if ([46, 8, 9, 27, 13, 110, 190].includes(k)) return;
+    if ([65, 86, 67].includes(k) && (e.ctrlKey || e.metaKey)) return;
+    if (k >= 35 && k <= 40) return;
+    if ((e.shiftKey || k < 48 || k > 57) && (k < 96 || k > 105)) {
+        e.preventDefault();
+    }
+};
 
 
 document.addEventListener('keydown', function(e) {

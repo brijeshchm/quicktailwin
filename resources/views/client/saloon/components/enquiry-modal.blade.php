@@ -145,13 +145,13 @@
                             </div>
                             <input
                                 type="tel"
-                                x-model="form.phone"
-                                @input="form.phone = form.phone.replace(/\D/g,'').slice(0, phoneDigits)"
-                                placeholder="98765 43210"
+                                x-model="form.phone"                                
+                                placeholder="Enter phone no"
                                 inputmode="numeric"
                                 :maxlength="phoneDigits"
                                 class="w-full rounded-xl border-[1.5px] border-slate-200 bg-white px-3.5 py-2.5 text-sm transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20"
-                                :class="errors.phone ? 'border-red-400' : ''"
+                                :class="errors.phone ? 'border-red-400' : ''" @input="form.phone = $event.target.value.replace(/\D/g,'').slice(0,16)"
+                                @keydown="phoneKeydown($event)"
                             >
                         </div>
                         <p x-show="errors.phone" class="mt-1 text-xs text-red-500" x-text="errors.phone?.[0]"></p>
