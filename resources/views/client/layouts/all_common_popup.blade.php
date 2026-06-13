@@ -1,0 +1,671 @@
+<style>
+.step-dot { width:1.75rem;height:1.75rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;transition:all .3s; }
+.step-dot.done    { background:white;color:#2563eb; }
+.step-dot.active  { background:white;color:#1d4ed8;box-shadow:0 0 0 3px rgba(255,255,255,.4); }
+.step-dot.pending { background:rgba(255,255,255,.2);color:rgba(255,255,255,.6); }
+.step-line { flex:1;height:2px;margin:.875rem .375rem;border-radius:9999px;transition:background .5s; }
+.ef-input { width:100%;padding:.625rem 1rem .625rem 2.25rem;border-radius:.75rem;border:1.5px solid rgba(37,99,235,.18);background:rgba(37,99,235,.04);font-size:.875rem;outline:none;color:#1e3a8a;transition:all .2s; }
+.ef-input:focus { border-color:#2563eb;box-shadow:0 0 0 4px rgba(37,99,235,.1);background:white; }
+select.ef-input { padding-left:1rem; }
+.cc-wrapper       { position:relative;flex-shrink:0; }
+.cc-trigger       { display:flex;align-items:center;gap:5px;height:100%;padding:0 10px;border:1.5px solid rgba(37,99,235,.18);border-radius:.75rem;background:rgba(37,99,235,.04);cursor:pointer;white-space:nowrap;font-size:.8rem;font-weight:700;color:#1e3a8a;transition:all .2s;min-width:80px; }
+.cc-trigger:hover { border-color:#2563eb;background:white; }
+.cc-trigger img   { width:20px;height:14px;object-fit:cover;border-radius:2px;flex-shrink:0; }
+.cc-trigger svg   { width:10px;height:10px;color:#6b7280;transition:transform .2s;flex-shrink:0; }
+.cc-trigger.open svg { transform:rotate(180deg); }
+.cc-dropdown      { display:none;position:absolute;top:calc(100% + 4px);left:0;width:240px;background:white;border:1.5px solid #e2e8f0;border-radius:.75rem;box-shadow:0 10px 40px rgba(0,0,0,.12);z-index:9999; }
+.cc-dropdown.open { display:block; }
+.cc-search-wrap   { padding:8px;border-bottom:1px solid #f1f5f9;position:sticky;top:0;background:white; }
+.cc-search        { width:100%;padding:6px 10px 6px 30px;border:1px solid #e2e8f0;border-radius:8px;font-size:.75rem;outline:none;background:#f8fafc;color:#1e3a8a; }
+.cc-search:focus  { border-color:#2563eb;background:white; }
+.cc-search-icon   { position:absolute;left:18px;top:50%;transform:translateY(-50%);width:12px;height:12px;color:#9ca3af;pointer-events:none; }
+.cc-list          { max-height:200px;overflow-y:auto; }
+.cc-item          { display:flex;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;font-size:.75rem;color:#374151;transition:background .15s; }
+.cc-item:hover    { background:#eff6ff; }
+.cc-item.active   { background:#eff6ff;color:#1d4ed8;font-weight:600; }
+.cc-item img      { width:22px;height:15px;object-fit:cover;border-radius:2px;flex-shrink:0; }
+.cc-item .cc-name { flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+.cc-item .cc-code { color:#6b7280;font-size:.7rem;font-family:monospace;flex-shrink:0; }
+.cc-empty         { padding:12px;text-align:center;font-size:.75rem;color:#9ca3af;font-style:italic; }
+.phone-row        { display:flex;gap:6px;align-items:stretch; }
+.phone-row .cc-wrapper { align-self:stretch; }
+.phone-row .cc-trigger { height:100%; }
+.phone-input-wrap { flex:1;position:relative; }
+.otp-box { width:2.75rem;height:3.5rem;text-align:center;font-size:1.25rem;font-weight:900;border-radius:.75rem;border:1.5px solid rgba(37,99,235,.2);background:rgba(37,99,235,.02);color:#1d4ed8;outline:none;transition:all .2s; }
+.otp-box.filled { border-color:#2563eb;background:rgba(37,99,235,.07);box-shadow:0 0 0 4px rgba(37,99,235,.1); }
+</style>
+
+{{-- ✅ Unique prefix: pf = popup form --}}
+<div data-enquiry-form id="pf-form" class="rounded-2xl border overflow-y-auto" style="border-color:rgba(59,130,246,.15);">
+
+    {{-- Header --}}
+    <div class="px-6 py-5" style="background:linear-gradient(135deg,#2563EB 0%,#0891b2 100%);">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="font-bold text-white text-lg">Make an Enquiry</h3>
+            <button onclick="document.getElementById('enquiry-modal').classList.remove('open')"
+                    class="w-8 h-8 rounded-full flex items-center justify-center text-white/70 hover:text-white"
+                    style="background:rgba(255,255,255,.12);">✕</button>
+        </div>
+        <div class="flex items-center gap-0">
+            @foreach(['Contact','Details','Message','Verify'] as $si => $label)
+            <div class="flex items-center flex-1 last:flex-none">
+                <div class="flex flex-col items-center gap-1">
+                    <div class="step-dot {{ $si===0?'active':'pending' }}" data-dot="{{ $si+1 }}">{{ $si+1 }}</div>
+                    <span class="text-[9px] font-semibold {{ $si===0?'text-white':'text-white/50' }}">{{ $label }}</span>
+                </div>
+                @if($si < 3)
+                <div class="step-line" data-line="{{ $si+1 }}"></div>
+                @endif
+            </div>
+            @endforeach
+        </div>
+    </div>
+
+    <div class="bg-white px-6 py-5">
+
+        {{-- ── STEP 1 ── --}}
+        <div data-step="1">
+            <p class="text-sm font-semibold text-gray-500 mb-4">Step 1 — Your contact details</p>
+            <div class="space-y-3">
+
+                <input type="hidden" name="lead_form"    value="1">
+                <input type="hidden" name="kw_text"      id="pf-kw-text"  value="{{ $keywordList ?? '' }}">
+                <input type="hidden" name="city_id"      id="pf-city-id-hidden" value="">
+                <input type="hidden" name="from_page"    value="{{ request()->path() }}">
+                <input type="hidden" name="country_code" id="pf-country-code" value="91">
+
+                {{-- Name --}}
+                <div>
+                    <label class="text-xs font-semibold text-gray-500 mb-1 block">Full Name *</label>
+                    <div class="relative">
+                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">👤</span>
+                        <input type="text" name="name" placeholder="Enter full name" class="ef-input" required>
+                    </div>
+                </div>
+
+                {{-- Phone + Country Code --}}
+                <div>
+                    <label class="text-xs font-semibold text-gray-500 mb-1 block">Mobile Number *</label>
+                    <div class="phone-row">
+                        {{-- ✅ Unique IDs: pf-cc-* --}}
+                        <div class="cc-wrapper" id="pf-cc-wrapper">
+                            <button type="button" class="cc-trigger" id="pf-cc-trigger" aria-haspopup="listbox">
+                                <img id="pf-cc-flag" src="https://flagcdn.com/w40/in.png" alt="IN"
+                                     onerror="this.src='https://flagcdn.com/w40/un.png'">
+                                <span id="pf-cc-label">+91</span>
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </button>
+                            <div class="cc-dropdown" id="pf-cc-dropdown" role="listbox">
+                                <div class="cc-search-wrap" style="position:relative;">
+                                    <svg class="cc-search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z"/>
+                                    </svg>
+                                    <input type="text" id="pf-cc-search" class="cc-search" placeholder="Search country or code…" autocomplete="off">
+                                </div>
+                                <div class="cc-list" id="pf-cc-list"></div>
+                            </div>
+                        </div>
+                        <div class="phone-input-wrap">
+                            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" style="z-index:1;">📞</span>
+                            <input type="tel" name="phone" placeholder="Enter phone number"
+                                   class="ef-input" style="padding-left:2.25rem;" maxlength="16" required>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Email --}}
+                <div>
+                    <label class="text-xs font-semibold text-gray-500 mb-1 block">Email Address *</label>
+                    <div class="relative">
+                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">✉️</span>
+                        <input type="email" name="email" placeholder="Enter email" class="ef-input" required>
+                    </div>
+                </div>
+
+                <button data-next class="w-full py-3 mt-2 rounded-xl font-bold text-white text-sm"
+                        style="background:#2563eb;">Continue →</button>
+            </div>
+        </div>
+
+        {{-- ── STEP 2 ── --}}
+        <div data-step="2" class="hidden">
+            <p class="text-sm font-semibold text-gray-500 mb-4">Step 2 — Booking details</p>
+            <div class="space-y-3">
+
+                {{-- ✅ City Search — unique IDs: pf-city-* --}}
+                <div>
+                    <label class="text-xs font-semibold text-gray-500 mb-1 block">Location *</label>
+                    <div class="relative" id="pf-city-wrapper">
+                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none z-10">📍</span>
+                        <input type="text"
+                               id="pf-city-input"
+                               name="location"
+                               placeholder="Search city…"
+                               autocomplete="off"
+                               class="ef-input">
+                        <input type="hidden" id="pf-city-id" name="location_id">
+                        <div id="pf-city-dropdown"
+                             class="hidden absolute z-50 left-0 right-0 mt-1 bg-white border border-gray-200 rounded-xl shadow-xl max-h-48 overflow-y-auto">
+                            <div id="pf-city-list"></div>
+                        </div>
+                    </div>
+                    <p id="pf-city-error" class="text-xs text-red-500 mt-1 hidden">Please select a city</p>
+                </div>
+
+                {{-- Age --}}
+                <div>
+                    <label class="text-xs font-semibold text-gray-500 mb-1 block">Age Range</label>
+                    <select name="age" id="pf-age" class="ef-input" style="padding-left:1rem;">
+                        <option value="">Select Age Range</option>
+                        @foreach(['Under 20','20 – 24','25 – 29','30 – 34','35 – 39','40 – 44','45 – 49','50 – 54','55 – 59','60+'] as $age)
+                        <option value="{{ $age }}" {{ $age === '25 – 29' ? 'selected' : '' }}>{{ $age }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                {{-- When to Start --}}
+                <div>
+                    <label class="text-xs font-semibold text-gray-500 mb-1 block">When do you want to Start?</label>
+                    <select name="whenToStart" id="pf-plan" class="ef-input" style="padding-left:1rem;">
+                        @foreach(['Immediately','Within 1 Week','Within 1 Month','Within 3 Months','Within 6 Months','Just Exploring'] as $timeline)
+                        <option value="{{ $timeline }}" {{ $timeline === 'Immediately' ? 'selected' : '' }}>{{ $timeline }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="flex gap-2 mt-2">
+                    <button data-back class="flex-1 py-2.5 rounded-xl font-semibold text-blue-600 border border-blue-200 hover:bg-blue-50 text-sm">← Back</button>
+                    <button data-next class="flex-1 py-2.5 rounded-xl font-semibold text-white text-sm" style="background:#2563eb;">Continue →</button>
+                </div>
+            </div>
+        </div>
+
+        {{-- ── STEP 3 ── --}}
+        <div data-step="3" class="hidden">
+            <p class="text-sm font-semibold text-gray-500 mb-4">Step 3 — Additional message</p>
+            <div class="space-y-3">
+
+                {{-- ✅ Service Search — unique IDs: pf-svc-* --}}
+                <div>
+                    <label class="text-xs font-semibold text-gray-500 mb-1 block">Service</label>
+                    <div class="relative" id="pf-svc-wrapper">
+                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none z-10">🔍</span>
+                        <input type="text"
+                               id="pf-svc-input"
+                               placeholder="Search service…"
+                               autocomplete="off"
+                               class="ef-input">
+                        <input type="hidden" id="pf-svc-value" name="kw_text">
+                        <div id="pf-svc-dropdown"
+                             class="hidden absolute z-50 left-0 right-0 mt-1 bg-white border border-gray-200 rounded-xl shadow-xl max-h-48 overflow-y-auto">
+                            <div id="pf-svc-list"></div>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Message --}}
+                <div>
+                    <label class="text-xs font-semibold text-gray-500 mb-1 block">Message (optional)</label>
+                    <textarea name="comment" rows="3" placeholder="Any special requests or questions…"
+                              class="ef-input resize-none" style="padding-left:1rem;"></textarea>
+                </div>
+
+                <div class="flex gap-2 mt-2">
+                    <button data-back class="flex-1 py-2.5 rounded-xl font-semibold text-blue-600 border border-blue-200 hover:bg-blue-50 text-sm">← Back</button>
+                    <button data-send class="flex-1 py-2.5 rounded-xl font-semibold text-white text-sm flex items-center justify-center gap-1.5" style="background:#2563eb;">
+                        Send Enquiry ✓
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        {{-- ── STEP 4 — OTP ── --}}
+        <div data-step="4" class="hidden">
+            <div class="text-center mb-4">
+                <div class="w-10 h-10 mx-auto mb-2 rounded-full flex items-center justify-center text-xl" style="background:rgba(37,99,235,.08);">🔒</div>
+                <p class="text-sm font-bold text-gray-800">Verify your mobile</p>
+                <p class="text-xs text-gray-400 mt-0.5">OTP sent to your number</p>
+            </div>
+            <div class="flex gap-2 justify-center mb-4">
+                @for($o=0;$o<5;$o++)
+                <input type="text" inputmode="numeric" maxlength="1" class="otp-box">
+                @endfor
+            </div>
+            <div class="flex gap-2">
+                <button data-back   class="flex-1 py-2.5 rounded-xl font-semibold text-blue-600 border border-blue-200 hover:bg-blue-50 text-sm">← Back</button>
+                <button data-verify class="flex-1 py-2.5 rounded-xl font-semibold text-white text-sm" style="background:#2563eb;">Verify &amp; Submit</button>
+            </div>
+        </div>
+
+        {{-- Success --}}
+        <div data-success class="hidden flex flex-col items-center py-8 text-center gap-4">
+            <div class="w-16 h-16 rounded-full flex items-center justify-center text-3xl" style="background:rgba(37,99,235,.08);">✅</div>
+            <div>
+                <p class="font-bold text-gray-900 text-lg">Enquiry Sent!</p>
+                <p class="text-sm text-gray-400 mt-1">We'll get back to you within 24 hours.</p>
+            </div>
+            <button onclick="location.reload()" class="px-5 py-2 rounded-full text-sm font-semibold text-blue-600 border border-blue-200 hover:bg-blue-50">
+                New Enquiry
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<script>
+(function() {
+'use strict';
+
+const CSRF = () => document.querySelector('meta[name="csrf-token"]')?.content || '';
+
+// ════════════════════════════════════════════════
+// 1. COUNTRY CODE PICKER — prefix: pf-cc-
+// ════════════════════════════════════════════════
+(function initPFCountryPicker() {
+    const trigger    = document.getElementById('pf-cc-trigger');
+    const dropdown   = document.getElementById('pf-cc-dropdown');
+    const searchInp  = document.getElementById('pf-cc-search');
+    const list       = document.getElementById('pf-cc-list');
+    const flagImg    = document.getElementById('pf-cc-flag');
+    const label      = document.getElementById('pf-cc-label');
+    const hiddenCode = document.getElementById('pf-country-code');
+
+    if (!trigger || !hiddenCode) return;
+
+    function renderList(items) {
+        list.innerHTML = '';
+        if (!items.length) {
+            list.innerHTML = '<div class="cc-empty">No country found</div>';
+            return;
+        }
+        items.forEach(c => {
+            const div = document.createElement('div');
+            div.className = 'cc-item' + (
+                String(c.phonecode) === String(hiddenCode.value) &&
+                c.sortname === flagImg.alt ? ' active' : ''
+            );
+            div.setAttribute('role', 'option');
+            div.innerHTML = `
+                <img src="https://flagcdn.com/w40/${c.sortname.toLowerCase()}.png"
+                     alt="${c.sortname}" onerror="this.src='https://flagcdn.com/w40/un.png'">
+                <span class="cc-name">${c.country_name}</span>
+                <span class="cc-code">+${c.phonecode}</span>`;
+            div.addEventListener('mousedown', e => { e.preventDefault(); selectCountry(c); });
+            list.appendChild(div);
+        });
+    }
+
+    function selectCountry(c) {
+        flagImg.src       = `https://flagcdn.com/w40/${c.sortname.toLowerCase()}.png`;
+        flagImg.alt       = c.sortname;
+        label.textContent = `+${c.phonecode}`;
+        hiddenCode.value  = c.phonecode;
+        closeDD();
+        renderList(CC_COUNTRIES);
+    }
+
+    function openDD() {
+        dropdown.classList.add('open');
+        trigger.classList.add('open');
+        searchInp.value = '';
+        renderList(CC_COUNTRIES);
+        setTimeout(() => searchInp.focus(), 50);
+    }
+    function closeDD() {
+        dropdown.classList.remove('open');
+        trigger.classList.remove('open');
+    }
+
+    trigger.addEventListener('click', e => {
+        e.stopPropagation();
+        dropdown.classList.contains('open') ? closeDD() : openDD();
+    });
+
+    searchInp.addEventListener('input', () => {
+        const q = searchInp.value.toLowerCase().trim();
+        renderList(!q ? CC_COUNTRIES : CC_COUNTRIES.filter(c =>
+            c.country_name.toLowerCase().includes(q) ||
+            String(c.phonecode).includes(q) ||
+            c.sortname.toLowerCase().includes(q)
+        ));
+    });
+
+    document.addEventListener('click', e => {
+        const w = document.getElementById('pf-cc-wrapper');
+        if (w && !w.contains(e.target)) closeDD();
+    });
+
+    renderList(CC_COUNTRIES);
+})();
+
+
+// ════════════════════════════════════════════════
+// 2. CITY SEARCH — prefix: pf-city-
+//    Default: $zones | 2+ chars: API
+// ════════════════════════════════════════════════
+(function initPFCitySearch() {
+    const DEFAULT_ZONES = @js(collect($zones ?? [])->map(fn($z) => [
+        'id'   => is_array($z) ? ($z['id']         ?? null) : ($z->id         ?? null),
+        'name' => is_array($z) ? ($z['cityDetails'] ?? '')  : ($z->cityDetails ?? ''),
+    ])->filter(fn($z) => !empty($z['name']))->values()->all());
+
+    const input    = document.getElementById('pf-city-input');
+    const hidden   = document.getElementById('pf-city-id');
+    const dropdown = document.getElementById('pf-city-dropdown');
+    const listEl   = document.getElementById('pf-city-list');
+    const wrapper  = document.getElementById('pf-city-wrapper');
+    const errorEl  = document.getElementById('pf-city-error');
+
+    if (!input) return;
+
+    let _timer = null, _searched = false;
+
+    function loading() {
+        listEl.innerHTML = `<div class="px-3 py-2 text-xs text-gray-400 flex items-center gap-2">
+            <svg class="animate-spin w-3 h-3 flex-shrink-0" viewBox="0 0 24 24" fill="none">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"/>
+            </svg>Searching…</div>`;
+        dropdown.classList.remove('hidden');
+    }
+
+    function render(items) {
+        listEl.innerHTML = '';
+        if (!items.length) {
+            listEl.innerHTML = '<div class="px-3 py-2 text-xs text-gray-400 italic">No cities found</div>';
+            dropdown.classList.remove('hidden');
+            return;
+        }
+        items.forEach(z => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'w-full text-left px-3 py-2 text-xs hover:bg-blue-50 hover:text-blue-700 text-gray-700 flex items-center gap-2 cursor-pointer';
+            btn.innerHTML = `<span>📍</span><span>${z.name}</span>`;
+            btn.addEventListener('mousedown', e => {
+                e.preventDefault();
+                input.value  = z.name;
+                hidden.value = z.id || z.name;
+                dropdown.classList.add('hidden');
+                if (errorEl) errorEl.classList.add('hidden');
+                _searched = false;
+            });
+            listEl.appendChild(btn);
+        });
+        dropdown.classList.remove('hidden');
+    }
+
+    function filtered(q) {
+        if (!q) return DEFAULT_ZONES.slice(0, 30);
+        return DEFAULT_ZONES.filter(z => (z.name||'').toLowerCase().includes(q.toLowerCase())).slice(0, 30);
+    }
+
+    async function fetchCities(q) {
+        loading();
+        try {
+            const res  = await fetch(`/location/getAjaxCity?q=${encodeURIComponent(q)}`, {
+                headers: { 'X-Requested-With': 'XMLHttpRequest', 'X-CSRF-TOKEN': CSRF() }
+            });
+            const data = await res.json();
+            const raw  = Array.isArray(data.data) ? data.data : Array.isArray(data) ? data : [];
+            const mapped = raw.map(i => ({
+                id:   i.id ?? null,
+                name: i.cityDetails ?? i.city ?? i.name ?? '',
+            })).filter(c => c.name);
+            _searched = true;
+            render(mapped.length ? mapped : filtered(q));
+        } catch {
+            render(filtered(q));
+        }
+    }
+
+    input.addEventListener('focus', () => {
+        if (!input.value.trim()) { _searched = false; render(DEFAULT_ZONES.slice(0, 30)); }
+        else dropdown.classList.remove('hidden');
+    });
+
+    input.addEventListener('input', () => {
+        const q = input.value.trim();
+        hidden.value = '';
+        clearTimeout(_timer);
+        if (q.length < 2) { _searched = false; render(filtered(q)); return; }
+        loading();
+        _timer = setTimeout(() => fetchCities(q), 350);
+    });
+
+    document.addEventListener('click', e => {
+        if (wrapper && !wrapper.contains(e.target)) dropdown.classList.add('hidden');
+    });
+})();
+
+
+// ════════════════════════════════════════════════
+// 3. SERVICE SEARCH — prefix: pf-svc-
+//    API: /service/getAjaxKeyword
+// ════════════════════════════════════════════════
+(function initPFServiceSearch() {
+    const input    = document.getElementById('pf-svc-input');
+    const hidden   = document.getElementById('pf-svc-value');
+    const dropdown = document.getElementById('pf-svc-dropdown');
+    const listEl   = document.getElementById('pf-svc-list');
+    const wrapper  = document.getElementById('pf-svc-wrapper');
+
+    if (!input) return;
+
+    let _timer = null;
+
+    function loading() {
+        listEl.innerHTML = `<div class="px-3 py-2 text-xs text-gray-400 flex items-center gap-2">
+            <svg class="animate-spin w-3 h-3 flex-shrink-0" viewBox="0 0 24 24" fill="none">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"/>
+            </svg>Searching…</div>`;
+        dropdown.classList.remove('hidden');
+    }
+
+    function render(items) {
+        listEl.innerHTML = '';
+        if (!items.length) {
+            listEl.innerHTML = '<div class="px-3 py-2 text-xs text-gray-400 italic">No services found</div>';
+            dropdown.classList.remove('hidden');
+            return;
+        }
+        items.forEach(s => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'w-full text-left px-3 py-2 text-xs hover:bg-blue-50 hover:text-blue-700 text-gray-700 flex items-center gap-2 cursor-pointer';
+            btn.innerHTML = `<span>🔍</span><span>${s.label}</span>`;
+            btn.addEventListener('mousedown', e => {
+                e.preventDefault();
+                input.value  = s.label;
+                hidden.value = s.value;
+                // Also sync main kw_text hidden input
+                const kwMain = document.getElementById('pf-kw-text');
+                if (kwMain) kwMain.value = s.value;
+                dropdown.classList.add('hidden');
+            });
+            listEl.appendChild(btn);
+        });
+        dropdown.classList.remove('hidden');
+    }
+
+    async function fetchServices(q) {
+        loading();
+        try {
+            const res  = await fetch(`/service/getAjaxKeyword?q=${encodeURIComponent(q)}`, {
+                headers: { 'X-Requested-With': 'XMLHttpRequest', 'X-CSRF-TOKEN': CSRF() }
+            });
+            const data = await res.json();
+            const raw  = Array.isArray(data.keywords) ? data.keywords
+                       : Array.isArray(data.data)     ? data.data
+                       : Array.isArray(data)           ? data : [];
+            render(raw.map(i => ({
+                value: i.slug ?? i.value ?? '',
+                label: i.keyword ?? i.label ?? i.name ?? '',
+            })).filter(s => s.label));
+        } catch {
+            listEl.innerHTML = '<div class="px-3 py-2 text-xs text-gray-400 italic">Error loading</div>';
+        }
+    }
+
+    input.addEventListener('input', () => {
+        const q = input.value.trim();
+        hidden.value = '';
+        clearTimeout(_timer);
+        if (q.length < 2) { dropdown.classList.add('hidden'); return; }
+        loading();
+        _timer = setTimeout(() => fetchServices(q), 350);
+    });
+
+    input.addEventListener('focus', () => {
+        if (input.value.trim().length >= 2) dropdown.classList.remove('hidden');
+    });
+
+    document.addEventListener('click', e => {
+        if (wrapper && !wrapper.contains(e.target)) dropdown.classList.add('hidden');
+    });
+})();
+
+
+// ════════════════════════════════════════════════
+// 4. MULTI-STEP FORM LOGIC
+// ════════════════════════════════════════════════
+document.querySelectorAll('[data-enquiry-form]').forEach(form => {
+    const steps    = form.querySelectorAll('[data-step]');
+    const dots     = form.querySelectorAll('[data-dot]');
+    const lines    = form.querySelectorAll('[data-line]');
+    const otpBoxes = form.querySelectorAll('.otp-box');
+    let current = 1;
+
+    const show = n => {
+        current = n;
+        steps.forEach(s => s.classList.toggle('hidden', +s.dataset.step !== n));
+        dots.forEach(d => {
+            const dn = +d.dataset.dot;
+            d.className = 'step-dot ' + (dn < n ? 'done' : dn === n ? 'active' : 'pending');
+            d.textContent = dn < n ? '✓' : String(dn);
+        });
+        lines.forEach(l => {
+            l.style.background = +l.dataset.line < n ? 'rgba(255,255,255,.7)' : 'rgba(255,255,255,.2)';
+        });
+    };
+
+    const showErr = (input, msg) => {
+        removeErr(input);
+        const p = document.createElement('p');
+        p.className = 'error-msg text-xs text-red-500 mt-1';
+        p.textContent = msg;
+        input.closest('.relative, div')?.appendChild(p);
+        input.classList.add('border-red-500');
+    };
+    const removeErr = input => {
+        input.classList.remove('border-red-500');
+        input.closest('.relative, div')?.querySelector('.error-msg')?.remove();
+    };
+
+    const validate = n => {
+        const stepEl = form.querySelector(`[data-step="${n}"]`);
+        let valid = true;
+
+        stepEl.querySelectorAll('[required]').forEach(inp => {
+            removeErr(inp);
+            const val = inp.value.trim();
+            if (!val) { showErr(inp, 'This field is required'); valid = false; return; }
+            if (inp.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+                showErr(inp, 'Enter a valid email'); valid = false;
+            }
+            if (inp.type === 'tel' && !/^[0-9]{10,15}$/.test(val.replace(/[\s+\-()]/g, ''))) {
+                showErr(inp, 'Enter a valid 10-digit number'); valid = false;
+            }
+        });
+
+        // ✅ Step 2: validate city
+        if (n === 2) {
+            const ci = document.getElementById('pf-city-input');
+            const ce = document.getElementById('pf-city-error');
+            if (ci && !ci.value.trim()) {
+                if (ce) ce.classList.remove('hidden');
+                valid = false;
+            }
+        }
+
+        return valid;
+    };
+
+    form.querySelectorAll('[data-next]').forEach(btn => {
+        btn.addEventListener('click', () => { if (validate(current)) show(current + 1); });
+    });
+    form.querySelectorAll('[data-back]').forEach(btn => {
+        btn.addEventListener('click', () => show(current - 1));
+    });
+
+    form.querySelectorAll('[data-send]').forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const orig = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = 'Sending…';
+            const fd = new FormData();
+            form.querySelectorAll('input, textarea, select').forEach(el => {
+                if (el.name) fd.append(el.name, el.value);
+            });
+            try {
+                const res  = await fetch('/client/lead/saveEnquiry', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': CSRF(),
+                        'Accept':       'application/json',
+                    },
+                    body: fd,
+                });
+                const data = await res.json();
+                if (data.success) {
+                    steps.forEach(s => s.classList.add('hidden'));
+                    form.querySelector('[data-success]')?.classList.remove('hidden');
+                } else {
+                    if (data.errors) {
+                        Object.entries(data.errors).forEach(([field, msgs]) => {
+                            const inp = form.querySelector(`[name="${field}"]`);
+                            if (inp) showErr(inp, msgs[0]);
+                        });
+                        if (data.errors.name || data.errors.email || data.errors.phone) show(1);
+                    }
+                    alert(data.message || 'Please fix the errors and try again.');
+                }
+            } catch {
+                alert('Network error. Please check your connection.');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = orig;
+            }
+        });
+    });
+
+    otpBoxes.forEach((box, i) => {
+        box.addEventListener('input', () => {
+            box.value = box.value.replace(/\D/g, '').slice(-1);
+            box.classList.toggle('filled', !!box.value);
+            if (box.value && i < otpBoxes.length - 1) otpBoxes[i + 1].focus();
+        });
+        box.addEventListener('keydown', e => {
+            if (e.key === 'Backspace' && !box.value && i > 0) otpBoxes[i - 1].focus();
+        });
+    });
+
+    form.querySelectorAll('[data-verify]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const otp = Array.from(otpBoxes).map(b => b.value).join('');
+            if (otp.length < 5) { alert('Please enter complete OTP'); return; }
+            steps.forEach(s => s.classList.add('hidden'));
+            form.querySelector('[data-success]')?.classList.remove('hidden');
+        });
+    });
+
+    form.querySelectorAll('input, textarea, select').forEach(el => {
+        el.addEventListener('input', () => removeErr(el));
+    });
+});
+
+})(); // end wrapper IIFE
+</script>

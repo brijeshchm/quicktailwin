@@ -478,6 +478,8 @@ Route::get('/categories', [HomePageController::class, 'category'])->name('catego
 Route::get('/child', [HomePageController::class, 'child'])->name('child.list');
 Route::get('/categories/{slug}', [HomePageController::class, 'categories'])->name('categories.show');
 Route::get('/child/{slug}', [HomePageController::class, 'childSlus'])->name('child.show');
+Route::get('location/getAjaxCity', [HomePageController::class, 'getAjaxLocation'])->name('get.location');
+Route::get('service/getAjaxKeyword', [HomePageController::class, 'getAjaxKeyword'])->name('search.keyword');
 
 Route::get('/get-zones/{city_id}', [HomePageController::class, 'getZones'])->name('zones.get');
 Route::get('payment/checkout', [App\Http\Controllers\Client\WebsiteRazorpayController::class, 'razCheckOut'])->name('raz.checkout');;

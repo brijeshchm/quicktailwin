@@ -255,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         @endif
                     </div>
                     @if($established)
-                    <p class="text-[10px] sm:text-xs text-gray-400 mt-0.5">Est. {{ $established }}</p>
+                    <p class="text-[10px] sm:text-sm text-gray-400 mt-0.5">Est. {{ $established }}</p>
                     @endif
                 </div>
 
@@ -269,7 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             {{-- Rating --}}
             <div class="flex items-center gap-1.5 sm:gap-2 mt-1.5 flex-wrap">
-                <span class="bg-emerald-500 text-white text-[10px] sm:text-xs font-bold px-1.5 py-0.5 rounded-md">{{ number_format($rating, 1) }}</span>
+                <span class="bg-emerald-500 text-white text-[10px] sm:text-sm font-bold px-1.5 py-0.5 rounded-md">{{ number_format($rating, 1) }}</span>
                 <div class="flex items-center gap-0.5">
                     @for($i = 1; $i <= 5; $i++)
                     <svg class="w-3.5 h-3.5 {{ $i <= $filledStars ? 'fill-amber-400 text-amber-400' : 'fill-gray-200 text-gray-200' }}" viewBox="0 0 20 20" fill="currentColor">
@@ -277,15 +277,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     </svg>
                     @endfor
                 </div>
-                <span class="text-[10px] sm:text-xs text-gray-400">({{ $reviewCount }})</span>
+                <span class="text-[10px] sm:text-sm text-gray-400">({{ $reviewCount }})</span>
                 @if($openUntil)
-                <span class="hidden sm:inline text-xs text-gray-400">🕐 Open Hrs {{ $openUntil }}</span>
+                <span class="hidden sm:inline text-sm text-gray-400">🕐 Open Hrs {{ $openUntil }}</span>
                 @endif
             </div>
 
             {{-- Address --}}
             @if($address || $city)
-            <p class="text-[10px] sm:text-xs text-gray-500 mt-1.5 flex items-start gap-1">
+            <p class="text-[10px] sm:text-sm text-gray-500 mt-1.5 flex items-start gap-1">
                 <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3 flex-shrink-0 text-indigo-400 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                 <span class="line-clamp-1">{{ collect([$address, $city])->filter()->implode(', ') }}</span>
             </p>
@@ -293,14 +293,14 @@ document.addEventListener('DOMContentLoaded', () => {
  
             {{-- Description --}}
             @if($business['overviewBusiness'])
-            <p class="sm:block text-xs text-gray-500 mt-1 line-clamp-1">{!! $business['overviewBusiness'] !!} </p>
+            <p class="sm:block text-sm text-gray-500 mt-1 line-clamp-1">{!! $business['overviewBusiness'] !!} </p>
             @endif
 
             {{-- Tags/Category --}}
             @if(count($category) > 0)
             <div class="flex items-center gap-1.5 mt-2 flex-wrap">
                 @foreach(array_slice($category, 0, 5) as $tag)
-                <span class="text-[9px] sm:text-[11px] text-indigo-600 bg-indigo-50 border border-indigo-100 px-1.5 sm:px-2 py-0.5 rounded-full font-medium">{{ $tag }}</span>
+                <span class="text-[9px] sm:text-sm text-indigo-600 bg-indigo-50 border border-indigo-100 px-1.5 sm:px-2 py-0.5 rounded-full font-medium">{{ $tag }}</span>
                 @endforeach
             </div>
             @endif
@@ -361,7 +361,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <p class="text-[11px] text-gray-400 mb-3">{{ implode(', ', array_slice($category, 0, 2)) }}</p>
 
         <div class="flex items-center gap-2 mb-3">
-            <span class="bg-emerald-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-md">{{ number_format($rating, 1) }}</span>
+            <span class="bg-emerald-500 text-white text-sm font-bold px-1.5 py-0.5 rounded-md">{{ number_format($rating, 1) }}</span>
             <div class="flex items-center gap-0.5">
                 @for($i = 1; $i <= 5; $i++)
                 <svg class="w-3.5 h-3.5 {{ $i <= $filledStars ? 'fill-amber-400 text-amber-400' : 'fill-gray-200 text-gray-200' }}" viewBox="0 0 20 20" fill="currentColor">
@@ -369,7 +369,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </svg>
                 @endfor
             </div>
-            <span class="text-xs text-gray-400">({{ $reviewCount }})</span>
+            <span class="text-sm text-gray-400">({{ $reviewCount }})</span>
         </div>
 
         <div class="flex flex-wrap gap-1 mb-3">

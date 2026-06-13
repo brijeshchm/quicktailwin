@@ -68,7 +68,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
     'percent' => $totalReviews > 0 ? round(($starCounts[$s] / $totalReviews) * 100) : 0
 ]);
 @endphp
-
+@include('client.layouts.common_country_data');
 <div class="min-h-screen bg-gray-50 flex flex-col mt-4"
      x-data="listingPage()" x-init="init()">
 
@@ -158,10 +158,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
 </div>
 
 
-                <!-- <p class="text-sm text-gray-500 mt-1">
-                    Showing <span class="font-semibold text-gray-800" x-text="filteredCount"></span> results for
-                    <span class="font-semibold text-blue-700">{{ $keyword }}</span>
-                </p> -->
+            
             </div>
 
             {{-- Controls --}}
@@ -246,6 +243,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
         {{-- Main content --}}
         <main class="flex-1 min-w-0">
  
+
           
 
             <div id="listings-container" x-show="filteredCount > 0">
@@ -313,7 +311,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
         <div class="relative w-full max-w-md overflow-hidden"
              style="border-radius:1.75rem;"
              onclick="event.stopPropagation()">
-            @include('client.layouts.enquiry-popup-form', [
+            @include('client.layouts.enquiry_common_popup', [
                 'keywordList' => $keyword,
                 'planOptions' => '',
                 'formId' => 'modal'
@@ -321,7 +319,6 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
         </div>
     </div>
 @endif
-
 
 
  

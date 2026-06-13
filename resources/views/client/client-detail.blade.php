@@ -104,7 +104,7 @@ select.ef-input { padding-left:1rem; }
  
 
 {{-- Scroll progress --}}
-
+@include('client.layouts.common_country_data');
 
 {{-- ════════════════════════════════════════
      HERO BANNER
@@ -302,7 +302,7 @@ select.ef-input { padding-left:1rem; }
 
             {{-- Right: Enquiry Form (sidebar version) --}}
             <div class="reveal-r" id="enquiry-sidebar">
-                @include('client.layouts.enquiry_common_popup', ['keywordList' => $keywordList, 'planOptions' => $planOptions, 'formId' => 'sidebar'])
+                @include('client.layouts.all_common_sidebar_form', ['keywordList' => '', 'planOptions' => $planOptions, 'formId' => 'sidebar'])
                 
             </div>
         </div>
@@ -1196,7 +1196,7 @@ function selectCert(i) {
      style="background:rgba(10,15,40,.75);backdrop-filter:blur(14px);"
      onclick="if(event.target===this)this.classList.remove('open')">
     <div class="relative w-full max-w-md overflow-hidden" style="border-radius:1.75rem;" onclick="event.stopPropagation()">
-        @include('client.layouts.enquiry_common_popup', ['keywordList' => $keywordList, 'planOptions' => $planOptions, 'formId' => 'modal'])
+        @include('client.layouts.all_common_popup', ['keywordList' => '', 'planOptions' => $planOptions, 'formId' => 'modal'])
     </div>
 </div>
 {{-- Show modal by adding .open = display:flex --}}

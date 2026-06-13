@@ -90,8 +90,7 @@
         
     </div>
 </div>
-
-{{-- ════════════ STYLES ════════════ --}}
+ 
 <style>
     @media (max-width: 640px) {
         .sticky-mob-bar { display: flex !important; }
@@ -99,7 +98,7 @@
     }
 </style>
 
-{{-- ════════════ ALPINE.JS STATE ════════════ --}}
+ 
 <script>
 function spaHub() {
     return {

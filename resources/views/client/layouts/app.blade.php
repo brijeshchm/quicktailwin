@@ -234,7 +234,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 
- 
     <main>
       
         @yield('content')
@@ -244,10 +243,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     @include('client.layouts.footer')
  
 <script>
-    
-
-// ─── Auto Detect City by Location ─────────────────────────────────────────
-function applyDetectedCity(cityName) {
+    function applyDetectedCity(cityName) {
     if (!cityName) return;
     const formatted = cityName
         .split('-')
@@ -257,52 +253,60 @@ function applyDetectedCity(cityName) {
 
     heroSelectedCity = lower;
 
-    // Update all city labels
     ['hero-city-label', 'sticky-city-label', 'mobile-city-label'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.textContent = formatted;
     });
 
-    // Re-render city list with new selection highlighted
-    renderHeroCityList(CITIES);
+    // renderHeroCityList(CITIES);
 }
 
-function detectCityFromIP() {
+// ─── Fallback: geolocation-db.com (JSONP) ─────────────────────────────────
+ function detectCityFromGeolocationDB() {
+    const script = document.createElement('script');
+
+    // ✅ Must be named exactly 'callback' — geolocation-db hardcodes this
+    window.callback = function(location) {
+        // Cleanup
+        delete window.callback;
+        if (document.head.contains(script)) document.head.removeChild(script);
+
+        if (!location.city || location.city === 'Not found') return;
+        applyDetectedCity(location.city);
+    };
+
+    script.onerror = function() {
+        delete window.callback;
+        if (document.head.contains(script)) document.head.removeChild(script);
+        // Both APIs failed — keep default city
+    };
+
+    script.src = 'https://geolocation-db.com/jsonp';
+    document.head.appendChild(script);
+}
+// ─── Primary: ipapi.co ────────────────────────────────────────────────────
+function detectCity() {
     fetch('https://ipapi.co/json/')
-        .then(res => res.json())
+        .then(res => {
+            if (!res.ok) throw new Error('ipapi failed');
+            return res.json();
+        })
         .then(data => {
-            if (data.city) applyDetectedCity(data.city);
+            if (data.city) {
+                applyDetectedCity(data.city);
+            } else {
+                throw new Error('no city in response');
+            }
         })
         .catch(() => {
-            // Keep default city (Bangalore) if all fails
+            // ipapi failed — try geolocation-db as fallback
+            detectCityFromGeolocationDB();
         });
 }
-
-function detectCityFromCoords(lat, lng) {
-  
-    fetch(`https://ipapi.co/json/`)
-        .then(res => res.json())
-        .then(data => {
-            if (data.city) applyDetectedCity(data.city);
-        })
-        .catch(() => detectCityFromIP());
-}
-
-// ─── Start detection ───────────────────────────────────────────────────────
-if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-        position => detectCityFromCoords(position.coords.latitude, position.coords.longitude),
-        error    => detectCityFromIP(),   // denied or error → fallback to IP
-        { timeout: 5000 }
-    );
-} else {
-    detectCityFromIP();
-}
-
  
+detectCity();
 </script>
-
-
+ 
 
  
 </body>

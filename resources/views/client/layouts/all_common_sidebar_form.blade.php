@@ -44,12 +44,12 @@ select.ef-input { padding-left:1rem; }
 .otp-box.filled { border-color:#2563eb;background:rgba(37,99,235,.07);box-shadow:0 0 0 4px rgba(37,99,235,.1); }
 </style>
 
-<div data-enquiry-form class="rounded-2xl border overflow-y-auto" style="border-color:rgba(59,130,246,.15);">
+<div data-all-enquiry-form class="rounded-2xl border overflow-y-auto" style="border-color:rgba(59,130,246,.15);">
 
     {{-- Header --}}
     <div class="px-6 py-5" style="background:linear-gradient(135deg,#2563EB 0%,#0891b2 100%);">
         <div class="flex items-center justify-between mb-4">
-            <h3 class="font-bold text-white text-lg">Make an Enquiry pop</h3>
+            <h3 class="font-bold text-white text-lg">Make an Enquiry</h3>
             <button onclick="document.getElementById('enquiry-modal').classList.remove('open')"
                     class="w-8 h-8 rounded-full flex items-center justify-center text-white/70 hover:text-white"
                     style="background:rgba(255,255,255,.12);">✕</button>
@@ -80,8 +80,8 @@ select.ef-input { padding-left:1rem; }
 
                 {{-- Hidden tracking --}}
                 <input type="hidden" name="lead_form" value="1">
-                <input type="hidden" name="kw_text"   value="{{ $keywordList ?? '' }}">
-                <input type="hidden" name="city_id"   class="city" value="{{ $city ?? '' }}">
+                
+                <input type="hidden" name="city_id"   class="city" value="">
                 <input type="hidden" name="from_page" value="{{ request()->path() }}">
                 
                 <input type="hidden" name="country_code" id="ef-country-code" value="91">
@@ -132,6 +132,8 @@ select.ef-input { padding-left:1rem; }
                         </div>
                     </div>
                 </div>
+
+                
                 {{-- Email --}}
                 <div>
                     <label class="text-xs font-semibold text-gray-500 mb-1 block">Email Address *</label>
@@ -149,82 +151,81 @@ select.ef-input { padding-left:1rem; }
             </div>
         </div>
 
-        {{-- ── STEP 2 ── --}}
-        <div data-step="2" class="hidden">
-            <p class="text-sm font-semibold text-gray-500 mb-4">Step 2 — Booking details</p>
-            <div class="space-y-3">
+        
+         {{-- ── STEP 2 ── --}}
+<div data-step="2" class="hidden">
+    <p class="text-sm font-semibold text-gray-500 mb-4">Step 2 — Booking details</p>
+    <div class="space-y-3">
 
-                {{-- Location --}}
-                {{-- Location --}}
-<div>
-    <label class="text-xs font-semibold text-gray-500 mb-1 block">Location</label>
-    <div class="relative" id="popup-city-wrapper">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none z-10">📍</span>
+        {{-- Location --}}
+        @include('client.layouts.location-search', ['mode' => 'vanilla', 'label' => 'Location', 'required' => true])
 
-        <input type="text"
-               id="popup-city-input"
-               name="location"
-               placeholder="Search city…"
-               autocomplete="off"
-               class="ef-input pr-9">
+        {{-- Age Range --}}
+        <div>
+            <label class="text-xs font-semibold text-gray-500 mb-1 block">Age Range</label>
+            <select name="age" id="ef-age" class="ef-input" style="padding-left:1rem;">
+                <option value="">Select Age Range</option>
+                @foreach(['Under 20','20 – 24','25 – 29','30 – 34','35 – 39','40 – 44','45 – 49','50 – 54','55 – 59','60+'] as $age)
+                <option value="{{ $age }}" {{ $age === '25 – 29' ? 'selected' : '' }}>
+                    {{ $age }}
+                </option>
+                @endforeach
+            </select>
+            <p id="err-age" class="text-xs text-red-500 mt-1 hidden"></p>
+        </div>
 
-        <input type="hidden" id="popup-city-id" name="location_id">
+        {{-- When to Start --}}
+        <div>
+            <label class="text-xs font-semibold text-gray-500 mb-1 block">When do you want to Start?</label>
+            <select name="whenToStart" id="ef-plan" class="ef-input" style="padding-left:1rem;">
+                @foreach(['Immediately','Within 1 Week','Within 1 Month','Within 3 Months','Within 6 Months','Just Exploring'] as $timeline)
+                <option value="{{ $timeline }}" {{ $timeline === 'Immediately' ? 'selected' : '' }}>
+                    {{ $timeline }}
+                </option>
+                @endforeach
+            </select>
+        </div>
 
-        {{-- Dropdown --}}
-        <div id="popup-city-dropdown"
-             class="hidden absolute z-50 left-0 right-0 mt-1 bg-white border border-gray-200 rounded-xl shadow-xl max-h-48 overflow-y-auto">
-
-            {{-- Loading --}}
-            <div id="popup-city-loading" class="hidden px-3 py-2 text-xs text-gray-400 italic flex items-center gap-2">
-                <svg class="animate-spin w-3 h-3 flex-shrink-0" viewBox="0 0 24 24" fill="none">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"/>
-                </svg>
-                Searching…
-            </div>
-
-            <div id="popup-city-list"></div>
+        <div class="flex gap-2 mt-2">
+            <button data-back class="flex-1 py-2.5 rounded-xl font-semibold text-blue-600 border border-blue-200 hover:bg-blue-50 text-sm">← Back</button>
+            <button data-next class="flex-1 py-2.5 rounded-xl font-semibold text-white text-sm" style="background:#2563eb;">Continue →</button>
         </div>
     </div>
-    <p id="popup-city-error" class="text-xs text-red-500 mt-1 hidden">Please select a city</p>
 </div>
-
-                  <div>
-    <label class="text-xs font-semibold text-gray-500 mb-1 block">Age Range</label>
-    <select name="age" id="ef-age" class="ef-input" style="padding-left:1rem;">
-        <option value="">Select Age Range</option>
-        @foreach(['Under 20','20 – 24','25 – 29','30 – 34','35 – 39','40 – 44','45 – 49','50 – 54','55 – 59','60+'] as $age)
-        <option value="{{ $age }}" {{ $age === '25 – 29' ? 'selected' : '' }}>{{ $age }}</option>
-        @endforeach
-    </select>
-    <p id="err-age" class="text-xs text-red-500 mt-1 hidden"></p>
-</div>
-                {{-- When to start --}}
-                <div>
-                    <label class="text-xs font-semibold text-gray-500 mb-1 block">When do you want to Start?</label>
-                    <select name="whenToStart" class="ef-input">
-                        @foreach(['Immediately','Within 1 Week','Within 1 Month','Within 3 Months','Within 6 Months','Just Exploring'] as $timeline)
-                        <option>{{ $timeline }}</option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="flex gap-2 mt-2">
-                    <button data-back  class="flex-1 py-2.5 rounded-xl font-semibold text-blue-600 border border-blue-200 hover:bg-blue-50 text-sm">← Back</button>
-                    <button data-next  class="flex-1 py-2.5 rounded-xl font-semibold text-white text-sm" style="background:#2563eb;">Continue →</button>
-                </div>
-            </div>
-        </div>
-
         {{-- ── STEP 3 ── --}}
         <div data-step="3" class="hidden">
+
+
             <p class="text-sm font-semibold text-gray-500 mb-4">Step 3 — Additional message</p>
+
             <div class="space-y-3">
+{{-- Service search in Step 3 --}}
+<div>
+    <label class="text-xs font-semibold text-gray-500 mb-1 block">Service *</label>
+    <div class="relative" style="position:relative;">
+        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none z-10">🔍</span>
+        <input type="text"
+               id="side-service-input"
+               placeholder="Search service…"
+               autocomplete="off"
+               class="ef-input">
+        <input type="hidden" id="side-kw_text-id" name="kw_text">
+        <div id="side-kw_text-dropdown"
+             class="hidden absolute z-50 left-0 right-0 mt-1 bg-white border border-gray-200 rounded-xl shadow-xl max-h-48 overflow-y-auto">
+            <div id="side-kw_text-list"></div>
+        </div>
+    </div>
+    <p id="err-service" class="text-xs text-red-500 mt-1 hidden"></p>
+</div>
+
                 <div>
-                    <label class="text-xs font-semibold text-gray-500 mb-1 block">Message </label>
+                    <label class="text-xs font-semibold text-gray-500 mb-1 block">Message</label>
                     <textarea name="comment" rows="3" placeholder="Any special requests or questions…"
                               class="ef-input resize-none" style="padding-left:1rem;"></textarea>
                 </div>
+
+
+
                 <div class="flex gap-2 mt-2">
                     <button data-back class="flex-1 py-2.5 rounded-xl font-semibold text-blue-600 border border-blue-200 hover:bg-blue-50 text-sm">← Back</button>
                     <button data-send class="flex-1 py-2.5 rounded-xl font-semibold text-white text-sm flex items-center justify-center gap-1.5" style="background:#2563eb;">
@@ -266,195 +267,11 @@ select.ef-input { padding-left:1rem; }
 
     </div>
 </div>
+ 
 
 <script>
-
 /* ════════════════════════════════════════════════
-   POPUP FORM — CITY SEARCH
-   Default: shows $zones passed from PHP
-   On 2+ chars: calls /location/getAjaxCity API
-   ════════════════════════════════════════════════ */
-(function initPopupCitySearch() {
-
-    // ── Default zones from PHP (passed via blade) ──
-    const DEFAULT_ZONES = @js(collect($zones ?? [])->map(fn($z) => [
-        'id'   => is_array($z) ? ($z['id'] ?? null)          : ($z->id ?? null),
-        'name' => is_array($z) ? ($z['cityDetails'] ?? '')    : ($z->cityDetails ?? ''),
-    ])->filter(fn($z) => !empty($z['name']))->values()->all());
-
-    const input    = document.getElementById('popup-city-input');
-    const hidden   = document.getElementById('popup-city-id');
-    const dropdown = document.getElementById('popup-city-dropdown');
-    const listEl   = document.getElementById('popup-city-list');
-    const loadEl   = document.getElementById('popup-city-loading');
-    const errorEl  = document.getElementById('popup-city-error');
-    const wrapper  = document.getElementById('popup-city-wrapper');
-
-    if (!input) return;
-
-    let _timer      = null;
-    let _hasSearched = false;
-    let _apiResults  = [];
-
-    const csrf = () => document.querySelector('meta[name="csrf-token"]')?.content || '';
-
-    // ── Render city list ──
-    function renderList(items) {
-        listEl.innerHTML = '';
-
-        if (!items.length) {
-            listEl.innerHTML = '<div class="px-3 py-2 text-xs text-gray-400 italic">No cities found</div>';
-            showDropdown();
-            return;
-        }
-
-        items.forEach(zone => {
-            const btn = document.createElement('button');
-            btn.type      = 'button';
-            btn.className = 'w-full text-left px-3 py-2 text-xs hover:bg-blue-50 hover:text-blue-700 text-gray-700 flex items-center gap-2 cursor-pointer transition-colors';
-            btn.innerHTML = `
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-3 h-3 text-gray-400 flex-shrink-0">
-                    <path fill-rule="evenodd" d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.975 16.975 0 001.144-.742 19.58 19.58 0 002.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 00-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 002.682 2.282 16.975 16.975 0 001.145.742zM12 13.5a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
-                </svg>
-                <span>${zone.name}</span>`;
-
-            btn.addEventListener('mousedown', (e) => {
-                e.preventDefault();
-                selectCity(zone);
-            });
-
-            listEl.appendChild(btn);
-        });
-
-        showDropdown();
-    }
-
-    // ── Select a city ──
-    function selectCity(zone) {
-        input.value  = zone.name;
-        hidden.value = zone.id || zone.name;
-        hideDropdown();
-        hideError();
-        _hasSearched = false;
-        _apiResults  = [];
-    }
-
-    // ── Show/hide dropdown ──
-    function showDropdown() {
-        dropdown.classList.remove('hidden');
-    }
-    function hideDropdown() {
-        dropdown.classList.add('hidden');
-        loadEl.classList.add('hidden');
-        loadEl.classList.remove('flex');
-    }
-
-    // ── Show/hide loading ──
-    function showLoading() {
-        listEl.innerHTML = '';
-        loadEl.classList.remove('hidden');
-        loadEl.classList.add('flex');
-        showDropdown();
-    }
-    function hideLoading() {
-        loadEl.classList.add('hidden');
-        loadEl.classList.remove('flex');
-    }
-
-    // ── Error helpers ──
-    function showError() { errorEl.classList.remove('hidden'); }
-    function hideError() { errorEl.classList.add('hidden'); }
-
-    // ── Get filtered defaults ──
-    function getFilteredDefaults(q) {
-        if (!q) return DEFAULT_ZONES.slice(0, 30);
-        return DEFAULT_ZONES
-            .filter(z => (z.name || '').toLowerCase().includes(q.toLowerCase()))
-            .slice(0, 30);
-    }
-
-    // ── Fetch from API ──
-    async function fetchCities(q) {
-        showLoading();
-        try {
-            const res  = await fetch(
-                `/location/getAjaxCity?q=${encodeURIComponent(q)}`,
-                {
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest',
-                        'X-CSRF-TOKEN':     csrf(),
-                    }
-                }
-            );
-            const data = await res.json();
-
-            const raw = Array.isArray(data.data) ? data.data
-                      : Array.isArray(data)       ? data
-                      : [];
-
-            _apiResults = raw.map(item => ({
-                id:   item.id          ?? null,
-                name: item.cityDetails ?? item.city ?? item.name ?? '',
-            })).filter(c => c.name);
-
-            _hasSearched = true;
-            hideLoading();
-
-            // API has results → show them, else fall back to filtered defaults
-            renderList(_apiResults.length > 0 ? _apiResults : getFilteredDefaults(q));
-
-        } catch (e) {
-            hideLoading();
-            // Network error → fall back to filtered defaults silently
-            renderList(getFilteredDefaults(q));
-        }
-    }
-
-    // ── On input ──
-    input.addEventListener('input', () => {
-        const q = input.value.trim();
-        hidden.value = '';   // reset selection on new typing
-        hideError();
-
-        clearTimeout(_timer);
-
-        if (q.length < 2) {
-            // Short query — show filtered defaults immediately
-            _hasSearched = false;
-            _apiResults  = [];
-            renderList(getFilteredDefaults(q));
-            return;
-        }
-
-        // Show loading then debounce API
-        showLoading();
-        _timer = setTimeout(() => fetchCities(q), 350);
-    });
-
-    // ── On focus — show defaults immediately ──
-    input.addEventListener('focus', () => {
-        const q = input.value.trim();
-        if (!q) {
-            _hasSearched = false;
-            renderList(DEFAULT_ZONES.slice(0, 30));
-        } else if (!_hasSearched) {
-            renderList(getFilteredDefaults(q));
-        } else {
-            showDropdown();
-        }
-    });
-
-    // ── Close on outside click ──
-    document.addEventListener('click', (e) => {
-        if (!wrapper.contains(e.target)) hideDropdown();
-    });
-
-})();
-
-
-
-/* ════════════════════════════════════════════════
-   COUNTRY CODE PICKER — pure vanilla JS
+   COUNTRY CODE PICKER
    ════════════════════════════════════════════════ */
 (function initCountryPicker() {
     const trigger    = document.getElementById('cc-trigger');
@@ -465,9 +282,8 @@ select.ef-input { padding-left:1rem; }
     const label      = document.getElementById('cc-label');
     const hiddenCode = document.getElementById('ef-country-code');
 
-    if (!trigger) return;
+    if (!trigger || !hiddenCode) return;
 
-    // ── Render list ──
     function renderList(items) {
         list.innerHTML = '';
         if (!items.length) {
@@ -476,15 +292,18 @@ select.ef-input { padding-left:1rem; }
         }
         items.forEach(c => {
             const div = document.createElement('div');
-            div.className = 'cc-item' + (c.phonecode == hiddenCode.value && c.sortname === flagImg.alt ? ' active' : '');
-            div.setAttribute('role','option');
+            div.className = 'cc-item' + (
+                String(c.phonecode) === String(hiddenCode.value) &&
+                c.sortname === flagImg.alt ? ' active' : ''
+            );
+            div.setAttribute('role', 'option');
             div.innerHTML = `
                 <img src="https://flagcdn.com/w40/${c.sortname.toLowerCase()}.png"
                      alt="${c.sortname}"
                      onerror="this.src='https://flagcdn.com/w40/un.png'">
                 <span class="cc-name">${c.country_name}</span>
                 <span class="cc-code">+${c.phonecode}</span>`;
-            div.addEventListener('mousedown', (e) => {
+            div.addEventListener('mousedown', e => {
                 e.preventDefault();
                 selectCountry(c);
             });
@@ -492,72 +311,284 @@ select.ef-input { padding-left:1rem; }
         });
     }
 
-    // ── Select country ──
     function selectCountry(c) {
-        flagImg.src        = `https://flagcdn.com/w40/${c.sortname.toLowerCase()}.png`;
-        flagImg.alt        = c.sortname;
-        label.textContent  = `+${c.phonecode}`;
-        hiddenCode.value   = c.phonecode;
+        flagImg.src       = `https://flagcdn.com/w40/${c.sortname.toLowerCase()}.png`;
+        flagImg.alt       = c.sortname;
+        label.textContent = `+${c.phonecode}`;
+        hiddenCode.value  = c.phonecode;
         closeDropdown();
-        // re-render to update active state
         renderList(CC_COUNTRIES);
     }
 
-    // ── Open / close ──
     function openDropdown() {
         dropdown.classList.add('open');
         trigger.classList.add('open');
         searchInp.value = '';
         renderList(CC_COUNTRIES);
-        searchInp.focus();
+        setTimeout(() => searchInp.focus(), 50);
     }
+
     function closeDropdown() {
         dropdown.classList.remove('open');
         trigger.classList.remove('open');
     }
 
-    trigger.addEventListener('click', (e) => {
+    trigger.addEventListener('click', e => {
         e.stopPropagation();
         dropdown.classList.contains('open') ? closeDropdown() : openDropdown();
     });
 
-    // ── Search ──
- 
-
-
     searchInp.addEventListener('input', () => {
-    const q = searchInp.value.toLowerCase().trim();
-    const filtered = !q ? CC_COUNTRIES : CC_COUNTRIES.filter(c =>
-        c.country_name.toLowerCase().includes(q) ||
-        String(c.phonecode).includes(q) ||
-        c.sortname.toLowerCase().includes(q)   // ✅ was c.phonecode
-    );
-    renderList(filtered);
-});
-
-
-    // ── Close on outside click ──
-    document.addEventListener('click', (e) => {
-        if (!trigger.closest('#cc-wrapper').contains(e.target)) closeDropdown();
+        const q = searchInp.value.toLowerCase().trim();
+        const filtered = !q ? CC_COUNTRIES : CC_COUNTRIES.filter(c =>
+            c.country_name.toLowerCase().includes(q) ||
+            String(c.phonecode).includes(q) ||
+            c.sortname.toLowerCase().includes(q)
+        );
+        renderList(filtered);
     });
 
-    // ── Init: render India selected ──
+    document.addEventListener('click', e => {
+        const wrapper = document.getElementById('cc-wrapper');
+        if (wrapper && !wrapper.contains(e.target)) closeDropdown();
+    });
+
     renderList(CC_COUNTRIES);
 })();
 
 
 /* ════════════════════════════════════════════════
-   ENQUIRY FORM MULTI-STEP LOGIC
+   CITY SEARCH — /location/getAjaxCity
+   Default shows zones, API fires on 2+ chars
+   ════════════════════════════════════════════════ */
+(function initCitySearch() {
+    const DEFAULT_ZONES = @js(collect($zones ?? [])->map(fn($z) => [
+        'id'   => is_array($z) ? ($z['id']          ?? null) : ($z->id          ?? null),
+        'name' => is_array($z) ? ($z['cityDetails']  ?? '')  : ($z->cityDetails  ?? ''),
+    ])->filter(fn($z) => !empty($z['name']))->values()->all());
+
+    const input    = document.getElementById('ef-city-input');
+    const hidden   = document.getElementById('ef-city-id');
+    const dropdown = document.getElementById('ef-city-dropdown');
+    const listEl   = document.getElementById('ef-city-list');
+    const wrapper  = document.getElementById('ef-city-wrapper');
+
+    if (!input) return;
+
+    let _timer       = null;
+    let _hasSearched = false;
+
+    const csrf = () => document.querySelector('meta[name="csrf-token"]')?.content || '';
+
+    // ── Loading row ──
+    function showLoading() {
+        listEl.innerHTML = `
+            <div class="px-3 py-2 text-xs text-gray-400 italic flex items-center gap-2">
+                <svg class="animate-spin w-3 h-3 flex-shrink-0" viewBox="0 0 24 24" fill="none">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"/>
+                </svg>Searching…
+            </div>`;
+        dropdown.classList.remove('hidden');
+    }
+
+    function renderList(items) {
+        listEl.innerHTML = '';
+        if (!items.length) {
+            listEl.innerHTML = '<div class="px-3 py-2 text-xs text-gray-400 italic">No cities found</div>';
+            dropdown.classList.remove('hidden');
+            return;
+        }
+        items.forEach(zone => {
+            const btn = document.createElement('button');
+            btn.type      = 'button';
+            btn.className = 'w-full text-left px-3 py-2 text-xs hover:bg-blue-50 hover:text-blue-700 text-gray-700 flex items-center gap-2 cursor-pointer';
+            btn.innerHTML = `<span>🔍</span><span>${zone.name}</span>`;
+            btn.addEventListener('mousedown', e => {
+                e.preventDefault();
+                input.value  = zone.name;
+                hidden.value = zone.id || zone.name;
+                dropdown.classList.add('hidden');
+                _hasSearched = false;
+            });
+            listEl.appendChild(btn);
+        });
+        dropdown.classList.remove('hidden');
+    }
+
+    function getFiltered(q) {
+        if (!q) return DEFAULT_ZONES.slice(0, 30);
+        return DEFAULT_ZONES.filter(z =>
+            (z.name || '').toLowerCase().includes(q.toLowerCase())
+        ).slice(0, 30);
+    }
+
+    async function fetchCities(q) {
+        showLoading();
+        try {
+            const res  = await fetch(`/location/getAjaxCity?q=${encodeURIComponent(q)}`, {
+                headers: { 'X-Requested-With': 'XMLHttpRequest', 'X-CSRF-TOKEN': csrf() }
+            });
+            const data = await res.json();
+            const raw  = Array.isArray(data.data) ? data.data : Array.isArray(data) ? data : [];
+            const mapped = raw.map(i => ({
+                id:   i.id          ?? null,
+                name: i.cityDetails ?? i.city ?? i.name ?? '',
+            })).filter(c => c.name);
+
+            _hasSearched = true;
+            renderList(mapped.length ? mapped : getFiltered(q));
+        } catch {
+            renderList(getFiltered(q));
+        }
+    }
+
+    input.addEventListener('focus', () => {
+        if (!input.value.trim()) {
+            _hasSearched = false;
+            renderList(DEFAULT_ZONES.slice(0, 30));
+        } else {
+            dropdown.classList.remove('hidden');
+        }
+    });
+
+    input.addEventListener('input', () => {
+        const q = input.value.trim();
+        hidden.value = '';
+        clearTimeout(_timer);
+
+        if (q.length < 2) {
+            _hasSearched = false;
+            renderList(getFiltered(q));
+            return;
+        }
+        showLoading();
+        _timer = setTimeout(() => fetchCities(q), 350);
+    });
+
+    document.addEventListener('click', e => {
+        if (wrapper && !wrapper.contains(e.target)) dropdown.classList.add('hidden');
+    });
+})();
+
+
+ 
+(function initServiceSearch() {
+    const input    = document.getElementById('side-service-input');
+    const hidden   = document.getElementById('side-kw_text-id');
+    const dropdown = document.getElementById('side-kw_text-dropdown');
+    const listEl   = document.getElementById('side-kw_text-list');
+
+    if (!input) return;
+
+    let _timer = null;
+    const csrf = () => document.querySelector('meta[name="csrf-token"]')?.content || '';
+
+    // ── Make dropdown position correctly ──
+    // The dropdown has `absolute` but parent needs `relative`
+    input.parentElement.style.position = 'relative';
+
+    function showLoading() {
+        listEl.innerHTML = `
+            <div class="px-3 py-2 text-xs text-gray-400 italic flex items-center gap-2">
+                <svg class="animate-spin w-3 h-3 flex-shrink-0" viewBox="0 0 24 24" fill="none">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"/>
+                </svg>Searching…
+            </div>`;
+        dropdown.classList.remove('hidden');
+    }
+
+    function renderList(items) {
+        listEl.innerHTML = '';
+        if (!items.length) {
+            listEl.innerHTML = '<div class="px-3 py-2 text-xs text-gray-400 italic">No services found</div>';
+            dropdown.classList.remove('hidden');
+            return;
+        }
+        items.forEach(svc => {
+            const btn = document.createElement('button');
+            btn.type      = 'button';
+            btn.className = 'w-full text-left px-3 py-2 text-xs hover:bg-blue-50 hover:text-blue-700 text-gray-700 flex items-center gap-2 cursor-pointer';
+            btn.innerHTML = `<span>🔍</span><span>${svc.label}</span>`;
+            btn.addEventListener('mousedown', e => {
+                e.preventDefault();
+                input.value  = svc.label;
+                hidden.value = svc.value;
+                // Also update the main kw_text hidden input if it exists
+                const kwMain = document.querySelector('input[name="kw_text"]');
+                if (kwMain) kwMain.value = svc.value;
+                dropdown.classList.add('hidden');
+            });
+            listEl.appendChild(btn);
+        });
+        dropdown.classList.remove('hidden');
+    }
+
+    async function fetchServices(q) {
+        showLoading();
+        try {
+            const res  = await fetch(`/service/getAjaxKeyword?q=${encodeURIComponent(q)}`, {
+                headers: { 'X-Requested-With': 'XMLHttpRequest', 'X-CSRF-TOKEN': csrf() }
+            });
+            const data = await res.json();
+
+            // Handle {keywords:[]} or {data:[]} or plain array
+            const raw = Array.isArray(data.keywords) ? data.keywords
+                      : Array.isArray(data.data)     ? data.data
+                      : Array.isArray(data)           ? data
+                      : [];
+
+            const mapped = raw.map(i => ({
+                value: i.slug    ?? i.value ?? i.keyword ?? '',
+                label: i.keyword ?? i.label ?? i.name    ?? '',
+            })).filter(s => s.label);
+
+            renderList(mapped);
+        } catch {
+            listEl.innerHTML = '<div class="px-3 py-2 text-xs text-gray-400 italic">Error loading services</div>';
+            dropdown.classList.remove('hidden');
+        }
+    }
+
+    input.addEventListener('input', () => {
+        const q = input.value.trim();
+        hidden.value = '';
+        clearTimeout(_timer);
+
+        if (q.length < 2) {
+            dropdown.classList.add('hidden');
+            return;
+        }
+        showLoading();
+        _timer = setTimeout(() => fetchServices(q), 350);
+    });
+
+    input.addEventListener('focus', () => {
+        if (input.value.trim().length >= 2) {
+            dropdown.classList.remove('hidden');
+        }
+    });
+
+    document.addEventListener('click', e => {
+        if (!input.closest('div')?.contains(e.target)) {
+            dropdown.classList.add('hidden');
+        }
+    });
+})();
+
+
+/* ════════════════════════════════════════════════
+   MULTI-STEP FORM LOGIC
    ════════════════════════════════════════════════ */
 (function () {
-    document.querySelectorAll('[data-enquiry-form]').forEach(form => {
+    document.querySelectorAll('[data-all-enquiry-form]').forEach(form => {
         const steps    = form.querySelectorAll('[data-step]');
         const dots     = form.querySelectorAll('[data-dot]');
         const lines    = form.querySelectorAll('[data-line]');
         const otpBoxes = form.querySelectorAll('.otp-box');
         let current = 1;
 
-        // ── Show step ──
         const show = (n) => {
             current = n;
             steps.forEach(s => s.classList.toggle('hidden', +s.dataset.step !== n));
@@ -573,7 +604,6 @@ select.ef-input { padding-left:1rem; }
             });
         };
 
-        // ── Error helpers ──
         const showError = (input, msg) => {
             removeError(input);
             const err = document.createElement('p');
@@ -582,54 +612,57 @@ select.ef-input { padding-left:1rem; }
             input.closest('.relative, div')?.appendChild(err);
             input.classList.add('border-red-500');
         };
+
         const removeError = (input) => {
             input.classList.remove('border-red-500');
             input.closest('.relative, div')?.querySelector('.error-msg')?.remove();
         };
 
-        // ── Validate step ──
-       
- 
-const validateStep = (n) => {
-    const stepEl = form.querySelector(`[data-step="${n}"]`);
-    let valid = true;
+        const validateStep = (n) => {
+            const stepEl = form.querySelector(`[data-step="${n}"]`);
+            let valid = true;
 
-    stepEl.querySelectorAll('[required]').forEach(input => {
-        removeError(input);
-        const val = input.value.trim();
-        if (!val) { showError(input, 'This field is required'); valid = false; return; }
-        if (input.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
-            showError(input, 'Enter a valid email'); valid = false;
-        }
-        if (input.type === 'tel' && !/^[0-9]{10,15}$/.test(val.replace(/[\s+\-()]/g, ''))) {
-            showError(input, 'Enter a valid 10-digit number'); valid = false;
-        }
-    });
+            stepEl.querySelectorAll('[required]').forEach(input => {
+                removeError(input);
+                const val = input.value.trim();
+                if (!val) { showError(input, 'This field is required'); valid = false; return; }
+                if (input.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+                    showError(input, 'Enter a valid email'); valid = false;
+                }
+                if (input.type === 'tel' && !/^[0-9]{10,15}$/.test(val.replace(/[\s+\-()]/g, ''))) {
+                    showError(input, 'Enter a valid 10-digit number'); valid = false;
+                }
+            });
 
-    // ✅ Extra: validate city on step 2
-    if (n === 2) {
-        const cityInput = document.getElementById('popup-city-input');
-        const cityError = document.getElementById('popup-city-error');
-        if (cityInput && !cityInput.value.trim()) {
-            cityError?.classList.remove('hidden');
-            valid = false;
-        }
-    }
+            // ✅ Step 2: validate city
+            if (n === 2) {
+                const cityInput = document.getElementById('ef-city-input');
+                if (cityInput && !cityInput.value.trim()) {
+                    showError(cityInput, 'Please enter your city');
+                    valid = false;
+                }
+            }
 
-    return valid;
-};
+            // ✅ Step 3: validate service
+            if (n === 3) {
+                const svcInput = document.getElementById('side-service-input');
+                if (svcInput && !svcInput.value.trim()) {
+                    showError(svcInput, 'Please select a service');
+                    valid = false;
+                }
+            }
 
-        // ── Next ──
+            return valid;
+        };
+
         form.querySelectorAll('[data-next]').forEach(btn => {
             btn.addEventListener('click', () => { if (validateStep(current)) show(current + 1); });
         });
 
-        // ── Back ──
         form.querySelectorAll('[data-back]').forEach(btn => {
             btn.addEventListener('click', () => show(current - 1));
         });
 
-        // ── Send (AJAX) ──
         form.querySelectorAll('[data-send]').forEach(btn => {
             btn.addEventListener('click', async () => {
                 const orig = btn.innerHTML;
@@ -646,7 +679,7 @@ const validateStep = (n) => {
                         method : 'POST',
                         headers: {
                             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content ?? '',
-                            'Accept'       : 'application/json',
+                            'Accept':       'application/json',
                         },
                         body: fd,
                     });
@@ -673,25 +706,22 @@ const validateStep = (n) => {
             });
         });
 
-        // ── Success ──
         const showSuccess = () => {
             steps.forEach(s => s.classList.add('hidden'));
             form.querySelector('[data-success]')?.classList.remove('hidden');
         };
 
-        // ── OTP boxes ──
         otpBoxes.forEach((box, i) => {
             box.addEventListener('input', () => {
                 box.value = box.value.replace(/\D/g, '').slice(-1);
                 box.classList.toggle('filled', !!box.value);
                 if (box.value && i < otpBoxes.length - 1) otpBoxes[i + 1].focus();
             });
-            box.addEventListener('keydown', (e) => {
+            box.addEventListener('keydown', e => {
                 if (e.key === 'Backspace' && !box.value && i > 0) otpBoxes[i - 1].focus();
             });
         });
 
-        // ── Verify OTP ──
         form.querySelectorAll('[data-verify]').forEach(btn => {
             btn.addEventListener('click', () => {
                 const otp = Array.from(otpBoxes).map(b => b.value).join('');
@@ -700,11 +730,13 @@ const validateStep = (n) => {
             });
         });
 
-        // ── Clear errors on input ──
         form.querySelectorAll('input, textarea, select').forEach(el => {
             el.addEventListener('input', () => removeError(el));
         });
     });
 })();
 </script>
+
+
+
  

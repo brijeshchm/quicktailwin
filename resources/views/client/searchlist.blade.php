@@ -67,7 +67,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
 
 //   echo "<pre>";print_r($keywordBanners);die;
 @endphp
-
+@include('client.layouts.common_country_data');
 <div class="min-h-screen bg-gray-50 flex flex-col mt-4"
      x-data="listingPage()" x-init="init()">
 
@@ -279,18 +279,13 @@ function bannerSlider(banners, interval = 4000) {
                     </select>
                     <span class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-xs">▾</span>
                 </div>
-
-               
-
-                 <button @click="showFilters = !showFilters"
+                <button @click="showFilters = !showFilters"
                         class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium border transition-all"
                         :class="showFilters ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-gray-600 border-gray-200 hover:border-indigo-300 hover:text-indigo-600'">
                     ⚙ Filters
                     <span x-show="activeFilterCount > 0" x-text="activeFilterCount"
                           class="w-4 h-4 bg-red-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center"></span>
                 </button>
-
-
                  <div class="flex items-center bg-gray-100 rounded-xl p-0.5">
                     <button @click="view = 'list'; applyFilters()"
                             class="p-1.5 rounded-lg transition-all"
@@ -349,20 +344,10 @@ function bannerSlider(banners, interval = 4000) {
                 <button x-show="search" @click="search = ''; applyFilters()" class="text-gray-400 hover:text-gray-600">✕</button>
             </div>
         </div>
-    </div>
-
-    {{-- Two-column body --}}
-    <div class="flex-1 w-full flex gap-5 px-4 sm:px-6 py-5 items-start">
-
-        {{-- Main content --}}
+    </div>  
+    <div class="flex-1 w-full flex gap-5 px-4 sm:px-6 py-5 items-start"> 
         <main class="flex-1 min-w-0">
- 
-          
-
             <div id="listings-container" x-show="filteredCount > 0">
-
-            
-
 @if(!empty($businesses))
     @php
         $adInterval = 4;
@@ -432,12 +417,7 @@ function bannerSlider(banners, interval = 4000) {
         </div>
     </div>
 @endif
-
-
-
- 
-
-                <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-700 my-3 shadow-md">
+ <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-700 my-3 shadow-md">
                     <div class="relative px-5 py-4 flex items-center gap-5 flex-wrap sm:flex-nowrap">
                         <div class="flex-1 min-w-0">
                             <div class="flex items-center gap-2 mb-0.5 flex-wrap">

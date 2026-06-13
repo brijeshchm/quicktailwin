@@ -11,11 +11,7 @@
     ];
  
     $rotatingWords = ['Renewal', 'Serenity', 'Balance', 'Bliss', 'Harmony'];
-    // $services = [
-    //     'Swedish Massage', 'Hot Stone Therapy', 'Ayurvedic Ritual',
-    //     'Aromatherapy', 'Hydrotherapy', 'Facial Glow',
-    //     'Signature 3-Hour Retreat', "Couple's Retreat", 'Nail & Polish',
-    // ];
+     
     $timeSlots = [
         '9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM',
         '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM', '6:00 PM',
@@ -258,9 +254,10 @@
                                 <div>
                                     <label class="hf-label">Full Name *</label>
                                     <input type="text" class="hf-input" placeholder="Enter Name" x-model="form.name">                                    
-                                    <input type="hidden" x.model="form.from_page" value="spa hub">
-                                    <input type="hidden" x.model="form.lead_form" value="1">                                   
-                                    <input type="hidden" x.model="form.location_id"   value="none">
+                                                                                                  
+                                    <input type="hidden" x-model="form.from_page" value="spa-hub">
+                                    <input type="hidden" x-model="form.lead_form" value="1">
+                                    <input type="hidden" x-model="form.location_id">
                                     
                                 </div>
                                 <div>
@@ -273,6 +270,63 @@
                                     </div>
                                     <div class="text-[11px] text-stone-400 mt-1">OTP verification at the last step</div>
                                 </div>
+
+                                <div>
+    <label class="text-[10px] font-semibold text-gray-500 mb-0.5 block">Your Location</label>
+    <div class="relative">
+        <span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 z-10 pointer-events-none">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-3.5 h-3.5">
+                <path fill-rule="evenodd" d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.975 16.975 0 001.144-.742 19.58 19.58 0 002.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 00-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 002.682 2.282 16.975 16.975 0 001.145.742zM12 13.5a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+            </svg>
+        </span>
+
+        {{-- ✅ Pure Alpine — no vanilla JS IDs needed --}}
+        <input type="text"
+               x-model="form.location"
+               @input="onCityInput()"
+               @focus="showCities = true"
+               @blur="setTimeout(() => showCities = false, 200)"
+               placeholder="Search city or pincode…"
+               autocomplete="off"
+               class="w-full text-xs border rounded-lg pl-7 pr-3 py-1.5 outline-none transition-all placeholder-gray-400 bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
+               :class="errors.location ? 'border-red-400 ring-2 ring-red-100' : 'border-gray-200'">
+
+        {{-- Dropdown --}}
+        <div x-show="showCities"
+             x-cloak
+             class="absolute z-50 left-0 right-0 mt-1 bg-white border border-gray-200 rounded-xl shadow-xl max-h-48 overflow-y-auto">
+
+            {{-- Loading state --}}
+            <template x-if="cityLoading">
+                <div class="px-3 py-2 text-xs text-gray-400 italic flex items-center gap-2">
+                    <svg class="animate-spin w-3 h-3" viewBox="0 0 24 24" fill="none">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"/>
+                    </svg>
+                    Searching…
+                </div>
+            </template>
+
+            {{-- Empty --}}
+            <template x-if="!cityLoading && cities.length === 0">
+                <div class="px-3 py-2 text-xs text-gray-400 italic">No cities found</div>
+            </template>
+
+            {{-- Results --}}
+            <template x-for="zone in cities" :key="zone.id ?? zone.name">
+                <button type="button"
+                        @mousedown.prevent="selectCity(zone)"
+                        class="w-full text-left px-3 py-2 text-xs hover:bg-indigo-50 hover:text-indigo-700 text-gray-700 flex items-center gap-2 cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-3 h-3 text-gray-400 flex-shrink-0">
+                        <path fill-rule="evenodd" d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.975 16.975 0 001.144-.742 19.58 19.58 0 002.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 00-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 002.682 2.282 16.975 16.975 0 001.145.742zM12 13.5a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+                    </svg>
+                    <span x-text="zone.name"></span>
+                </button>
+            </template>
+        </div>
+    </div>
+    <p x-show="errors.location" x-text="errors.location" class="text-[10px] text-red-500 mt-0.5"></p>
+</div>
                             </div>
 
                             <button class="hf-cta mt-4"
@@ -295,7 +349,7 @@
                                     <select class="hf-select" x-model="form.kw_text">
                                         <option value="">— Choose a Service —</option>
                                         @foreach($services as $s)
-                                            <option value="{{ $s->id }}">{{ $s->keyword }}</option>
+                                            <option value="{{ $s->slug }}">{{ $s->keyword }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -303,7 +357,7 @@
                                 <div class="grid grid-cols-2 gap-2.5">
                                     <div>
                                         <label class="hf-label">Date *</label>
-                                        <input type="date" class="hf-select" :min="today" x-model="form.date">
+                                        <input type="date" class="hf-select" :min="today" x-model="form.appointment">
                                     </div>
                                     <div>
                                         <label class="hf-label">Time *</label>
@@ -342,7 +396,7 @@
                                     ← Back
                                 </button>
                                 <button class="hf-cta flex-1"
-                                        :disabled="!form.kw_text || !form.date || !form.time"
+                                        :disabled="!form.kw_text || !form.appointment || !form.time"
                                         @click="sendOtp(); goStep(3, 2)">
                                     Verify with OTP →
                                 </button>
@@ -539,129 +593,206 @@
 
     {{-- ════════════ ALPINE STATE ════════════ --}}
     <script>
-        function heroBanner() {
-            return {
-                // Word rotation
-                words: @json($rotatingWords),
-                wordIdx: 0,
-                visible: true,
 
-                // Form state
-                step: 1,
-                formDir: 'right',
-                form: {
-                    name: '', phone: '', kw_text: '', date: '',from_page:'',lead_form:'',location_id:'', time: '', remark: '',
-                },
-                otp: ['', '', '', '', '', ''],
-                demoOtp: '',
-                otpError: '',
-                resendTimer: 0,
-                today: new Date().toISOString().split('T')[0],
+function heroBanner() {
+    return {
+        // ── Word rotation ──────────────────────────────
+        words:   @json($rotatingWords),
+        wordIdx: 0,
+        visible: true,
 
-                init() {
-                    // Word rotation interval
-                    setInterval(() => {
-                        this.visible = false;
-                        setTimeout(() => {
-                            this.wordIdx = (this.wordIdx + 1) % this.words.length;
-                            this.visible = true;
-                        }, 350);
-                    }, 3000);
-                },
+        // ── Form state ─────────────────────────────────
+        step:    1,
+        formDir: 'right',
+        form: {
+            name: '', phone: '', kw_text: '',
+            from_page: 'spa-hub', lead_form: 1,
+            location: '', location_id: '',
+            date: '', time: '', remark: '',
+        },
+        errors: {},
 
-                // Computed summary for Step 4
-                get summary() {
-                    const items = [
-                        { label: '👤 Name',      value: this.form.name },
-                        { label: '📱 Mobile',    value: '+91 ' + this.form.phone },
-                        { label: '🌸 Treatment', value: this.form.kw_text },
-                        { label: '📅 Date',      value: new Date(this.form.date + 'T00:00:00').toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' }) },
-                        { label: '⏰ Time',      value: this.form.time },
-                    ];
-                    if (this.form.remark) items.push({ label: '📝 Notes', value: this.form.remark });
-                    return items;
-                },
+        // ── OTP ────────────────────────────────────────
+        otp:         ['', '', '', '', '', ''],
+        demoOtp:     '',
+        otpError:    '',
+        resendTimer: 0,
+        today:       new Date().toISOString().split('T')[0],
 
-                scrollTo(id) {
-                    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-                },
+        // ── City search state ──────────────────────────
+        showCities:   false,
+        cityLoading:  false,
+        cities:       [],
+        _cityTimer:   null,
+        _hasSearched: false,
 
-                share() {
-                    if (navigator.share) {
-                        navigator.share({
-                            title: '{{ $spa['name'] }}',
-                            text:  'Book a luxury spa experience!',
-                            url:   window.location.href,
-                        });
-                    } else {
-                        navigator.clipboard?.writeText(window.location.href);
-                        alert('Link copied to clipboard!');
+        // ── City search methods ────────────────────────
+        onCityInput() {
+            this.showCities         = true;
+            this.form.location_id   = '';
+            this.errors.location    = '';
+
+            const q = (this.form.location || '').trim();
+            clearTimeout(this._cityTimer);
+
+            if (q.length < 2) {
+                this.cities      = [];
+                this.cityLoading = false;
+                return;
+            }
+
+            this.cityLoading = true;
+            this._cityTimer  = setTimeout(() => this.fetchCities(q), 350);
+        },
+
+        async fetchCities(q) {
+            try {
+                const csrf = document.querySelector('meta[name="csrf-token"]')?.content || '';
+                const res  = await fetch(`/location/getAjaxCity?q=${encodeURIComponent(q)}`, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRF-TOKEN':     csrf,
                     }
-                },
+                });
+                const data = await res.json();
 
-                goStep(next, current) {
-                    this.formDir = next > current ? 'right' : 'left';
-                    this.step    = next;
-                },
+                const raw = Array.isArray(data.data) ? data.data
+                          : Array.isArray(data)       ? data
+                          : [];
 
-                sendOtp() {
-                    this.demoOtp     = String(Math.floor(100000 + Math.random() * 900000));
-                    this.resendTimer = 30;
-                    this.otp         = ['', '', '', '', '', ''];
-                    this.otpError    = '';
+                this.cities = raw.map(item => ({
+                    id:   item.id          ?? null,
+                    name: item.cityDetails ?? item.city ?? item.name ?? '',
+                })).filter(c => c.name);
 
-                    const tick = setInterval(() => {
-                        this.resendTimer--;
-                        if (this.resendTimer <= 0) clearInterval(tick);
-                    }, 1000);
-                },
+                this._hasSearched = true;
+            } catch (e) {
+                this.cities = [];
+            } finally {
+                this.cityLoading = false;
+            }
+        },
 
-                handleOtpInput(idx, val) {
-                    const v = val.replace(/\D/g, '').slice(-1);
-                    this.otp[idx] = v;
-                    if (v && idx < 5) this.$refs[`otp${idx + 1}`]?.focus();
-                },
+        selectCity(zone) {
+            this.form.location    = zone.name;
+            this.form.location_id = zone.id || zone.name;
+            this.showCities       = false;
+            this.errors.location  = '';
+            this.cities           = [];
+            this._hasSearched     = false;
+        },
 
-                handleOtpKey(idx, e) {
-                    if (e.key === 'Backspace' && !this.otp[idx] && idx > 0) {
-                        this.$refs[`otp${idx - 1}`]?.focus();
-                    }
-                },
+        // ── Init ───────────────────────────────────────
+        init() {
+            setInterval(() => {
+                this.visible = false;
+                setTimeout(() => {
+                    this.wordIdx = (this.wordIdx + 1) % this.words.length;
+                    this.visible = true;
+                }, 350);
+            }, 3000);
+        },
 
-                verifyOtp() {
-                    if (this.otp.join('') === this.demoOtp) {
-                        this.otpError = '';
-                        this.goStep(4, 3);
-                        this.submitBooking(); // Optional: send to backend
-                    } else {
-                        this.otpError = 'Incorrect OTP. Please try again.';
-                    }
-                },
+        // ── Summary for Step 4 ─────────────────────────
+        get summary() {
+            const items = [
+                { label: '👤 Name',      value: this.form.name },
+                { label: '📱 Mobile',    value: '+91 ' + this.form.phone },
+                { label: '🌸 Treatment', value: this.form.kw_text },
+                { label: '📅 Date',      value: new Date(this.form.appointment + 'T00:00:00').toLocaleDateString('en-IN', { weekday:'short', day:'numeric', month:'short' }) },
+                { label: '⏰ Time',      value: this.form.time },
+            ];
+            if (this.form.location)  items.push({ label: '📍 City',  value: this.form.location });
+            if (this.form.remark)    items.push({ label: '📝 Notes', value: this.form.remark });
+            return items;
+        },
 
-                async submitBooking() {
-                    try {
-                        await fetch('{{  url("/client/lead/saveEnquiry") }}', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                            },
-                            body: JSON.stringify(this.form),
-                        });
-                    } catch (err) {
-                        console.error('Booking submit error:', err);
-                    }
-                },
+        scrollTo(id) {
+            document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+        },
 
-                reset() {
-                    this.step    = 1;
-                    this.form    = { name: '', phone: '', kw_text: '', date: '', time: '', remark: '' };
-                    this.otp     = ['', '', '', '', '', ''];
-                    this.demoOtp = '';
-                    this.otpError = '';
-                    this.resendTimer = 0;
-                },
-            };
-        }
-    </script>
+        share() {
+            if (navigator.share) {
+                navigator.share({
+                    title: '{{ $spa['name'] }}',
+                    text:  'Book a luxury spa experience!',
+                    url:   window.location.href,
+                });
+            } else {
+                navigator.clipboard?.writeText(window.location.href);
+                alert('Link copied to clipboard!');
+            }
+        },
+
+        goStep(next, current) {
+            this.formDir = next > current ? 'right' : 'left';
+            this.step    = next;
+        },
+
+        sendOtp() {
+            this.demoOtp     = String(Math.floor(100000 + Math.random() * 900000));
+            this.resendTimer = 30;
+            this.otp         = ['', '', '', '', '', ''];
+            this.otpError    = '';
+
+            const tick = setInterval(() => {
+                this.resendTimer--;
+                if (this.resendTimer <= 0) clearInterval(tick);
+            }, 1000);
+        },
+
+        handleOtpInput(idx, val) {
+            const v = val.replace(/\D/g, '').slice(-1);
+            this.otp[idx] = v;
+            if (v && idx < 5) this.$refs[`otp${idx + 1}`]?.focus();
+        },
+
+        handleOtpKey(idx, e) {
+            if (e.key === 'Backspace' && !this.otp[idx] && idx > 0) {
+                this.$refs[`otp${idx - 1}`]?.focus();
+            }
+        },
+
+        verifyOtp() {
+            if (this.otp.join('') === this.demoOtp) {
+                this.otpError = '';
+                this.goStep(4, 3);
+                this.submitBooking();
+            } else {
+                this.otpError = 'Incorrect OTP. Please try again.';
+            }
+        },
+
+        async submitBooking() {
+            try {
+                await fetch('{{ url("/client/lead/saveEnquiry") }}', {
+                    method:  'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                    },
+                    body: JSON.stringify(this.form),
+                });
+            } catch (err) {
+                console.error('Booking submit error:', err);
+            }
+        },
+
+        reset() {
+            this.step        = 1;
+            this.formDir     = 'right';
+            this.form        = { name:'', phone:'', kw_text:'', from_page:'spa-hub', lead_form:1, location:'', location_id:'', appointment:'', time:'', remark:'' };
+            this.otp         = ['', '', '', '', '', ''];
+            this.demoOtp     = '';
+            this.otpError    = '';
+            this.resendTimer = 0;
+            this.cities      = [];
+            this.showCities  = false;
+            this.errors      = {};
+        },
+    };
+}
+
+
+</script>
 </section>

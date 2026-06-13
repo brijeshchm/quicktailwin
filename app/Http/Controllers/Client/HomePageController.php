@@ -225,15 +225,14 @@ class HomePageController extends Controller
 
 	public function saveEnquiryWithoutZone(Request $request)
 	{
- 
+ dd($request->all());
 			$validator = Validator::make($request->all(), [
 				'name' => 'required|regex:/^[\pL\s\-]+$/u|min:3|max:32',
 				'email' => 'required|regex:/^[^\s()<>@,;:\/]+@\w[\w\.-]+\.[a-z]{2,}$/i',
 				'phone' => 'required|numeric',
 				//	'phone' 	=> 'required|regex:/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im',				
 				'kw_text' => 'required',
-				// 'terms' => 'accepted',
-				// 'code' => 'required',
+				 
 			]);
 
 			if ($validator->fails()) {
@@ -249,7 +248,8 @@ class HomePageController extends Controller
 			$lead->name = $name;
 			$lead->email = $request->input('email');
 			$lead->lead_form = $request->input('lead_form');
-			$lead->plan = $request->input('plan');
+			$lead->plan = $request->input('whenToStart');
+			$lead->age = $request->input('age');
 			$lead->from_page = filter_var($request->input('from_page'), FILTER_SANITIZE_STRING);
 
 			$citySlug = $request->input('city_id');
@@ -291,13 +291,21 @@ class HomePageController extends Controller
 			if ($request->frmcheck) {
 				$lead->frmcheck = json_encode($request->frmcheck);
 			}
+			if ($request->location) {
+				$lead->area = $request->location;
+			}
+			if ($request->appointment) {
+
+			
+				$lead->appointment = $request->appointment;
+			}
 			$phone = ltrim($request->input('phone'), '0');
 			$phone = trim($phone);
 			$newmobile = preg_replace('/\s+/', '', $phone);
 			$lead->mobile = $newmobile;
-			// if ($request->input(key: 'code')) {
-			// 	$lead->code = $request->input(key: 'code');
-			// }
+			if ($request->country_code) {
+				$lead->code = $request->country_code;
+			}
 			$kw_text = filter_var($request->input('kw_text'), FILTER_SANITIZE_STRING);
 			$kw_text = preg_replace('/[^A-Za-z0-9]/', ' ', $kw_text);
 			$kw_text = preg_replace('/\s+/', ' ', str_replace('&', '', trim($kw_text)));
@@ -318,6 +326,7 @@ class HomePageController extends Controller
 				$lead->status_id = $status->id;
 				$lead->status_name = $status->name;
 			}
+
 			$lead->remark = htmlspecialchars(strip_tags(trim($request->input('comment'))));
 			$lead->created_by = 101;
 			 
@@ -1019,7 +1028,7 @@ class HomePageController extends Controller
 		}
 	}
 
-	/**
+	/*
 	 * Remove the specified resource from storage.
 	 *
 	 * @param  int  $id
@@ -1046,7 +1055,7 @@ class HomePageController extends Controller
 
 
 
-	/**
+	/*
 	 * Remove the specified resource from storage.
 	 *
 	 * @param  int  $id
@@ -1087,7 +1096,7 @@ class HomePageController extends Controller
 		return response()->json(['status' => 1, 'message' => $html]);
 	}
 
-	/**
+	/*
 	 * Remove the specified resource from storage.
 	 *
 	 * @param  int  $id
@@ -1138,7 +1147,7 @@ Instead of limiting learning to theory, the course takes you through:.",
 	}
 
 
-	/**
+	/*
 	 * Get matches trainers based on ajax.
 	 *
 	 * @param  string
@@ -1270,7 +1279,7 @@ Instead of limiting learning to theory, the course takes you through:.",
 		}
 	}
 
-	/**
+	/*
 	 * Remove the specified resource from storage.
 	 *
 	 * @param  int  $id
@@ -1286,7 +1295,7 @@ Instead of limiting learning to theory, the course takes you through:.",
 		return response()->json(['status' => 1, 'message' => $kwdsList]);
 	}
 
-	/**
+	/*
 	 * Remove the specified resource from storage.
 	 *
 	 * @param  int  $id
@@ -1302,23 +1311,10 @@ Instead of limiting learning to theory, the course takes you through:.",
 		return response()->json(['status' => 1, 'message' => $citiesList]);
 	}
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function callHtml($html)
-	{
-		if (view()->exists('client.html.' . $html)) {
-			return view('client.html.' . $html);
-		} else {
-			return view('410');
-		}
-	}
-
+	 
 	 
 
-	/**
+	/*
 	 * Display a listing of the client categories resource.
 	 *
 	 * @return \Illuminate\Http\Response
@@ -1354,7 +1350,7 @@ Instead of limiting learning to theory, the course takes you through:.",
 
 		return view('client.courseprogram_client', ['cateoryClient' => $cateoryClient, 'subcategory' => $subcategory, 'part_id' => $part_id, 'city' => $city]);
 	}
-	/**
+	/*
 	 * Display a listing of the client categories resource.
 	 *
 	 * @return \Illuminate\Http\Response
@@ -1418,7 +1414,7 @@ Instead of limiting learning to theory, the course takes you through:.",
 
 	 
 
-	/**
+	/*
 	 * Display a listing of the clients of categories resource.
 	 *
 	 * @return \Illuminate\Http\Response
@@ -1609,7 +1605,7 @@ Instead of limiting learning to theory, the course takes you through:.",
 		}
 	}
 
-	/**
+	/*
 	 * Subscribe to our newsletter
 	 *
 	 */
@@ -2014,7 +2010,7 @@ $reviews =  [
             ['name' => 'Sanjay R.', 'rating' => 5, 'created_at' => '2024-10-30', 'treatment' => 'Swedish Massage',    'text' => "My first spa experience and Serenity made it unforgettable. The Swedish massage was deeply relaxing, the environment thoughtful. I've been back twice already.",                                                  'color' => '#db2777'],
         ];
  
-$services = keyword::where('child_category_id','293')->get();
+		$services = keyword::where('child_category_id','293')->get();
  
   	return view('client.spa-hub', compact('spa','reviews','services'));
 	}
@@ -2060,6 +2056,130 @@ $reviews =  [
 		return response()->json($zones);
 	}
 
+	public function getAjaxLocation(Request $request)
+	{
+
+		header("Access-Control-Allow-Origin: *");
+		header('Access-Control-Allow-Credentials: true');
+ 
+
+		 $cid = trim($request->input('q'));
+
+
+		$zoneResults = collect();
+
+		if (!empty($cid)) {
+
+			$zoneResults = DB::table('zones')
+				->join('citylists', 'citylists.id', '=', 'zones.city_id')
+				->where(function ($q) use ($cid) {
+					$q->where('zones.zone', 'LIKE', "{$cid}%")
+						->orWhere('citylists.city', 'LIKE', "{$cid}%")
+						->orWhere('zones.city_id', $cid)
+						->orWhere('zones.pincode', 'LIKE', "{$cid}%");
+				})
+				->select(
+					'zones.id as zone_id',
+					'zones.zone',
+					'citylists.id as city_id',
+					'citylists.city as cityName',
+					'zones.pincode'
+				)
+				->orderBy('zones.zone', 'asc')
+				->distinct()
+				->get();
+
+		} else {
+
+			$defaultCities = collect([
+				'Hyderabad',
+				'Patna',
+				'Gorakhpur',
+				'Faridabad',
+				'Delhi',
+				'Noida',
+				'Ghaziabad',
+				'Mumbai',
+				'Pune',
+				'Meerut',
+				'Bangalore',
+				'Indore',
+				'Kanpur',
+				'Chennai',
+				'Kolkata',
+				'Coimbatore',
+				'Prayagraj'
+			]);
+
+			$zoneResults = DB::table('zones')
+				->join('citylists', 'citylists.id', '=', 'zones.city_id')
+				->whereIn('citylists.city', $defaultCities)
+				->select(
+					DB::raw('MIN(zones.id) as zone_id'),
+					DB::raw('MIN(zones.zone) as zone'),
+					'citylists.id as city_id',
+					'citylists.city as cityName',
+					DB::raw('NULL as pincode')
+				)
+				->groupBy('citylists.id', 'citylists.city')
+				->orderBy('zone', 'asc')
+				->orderBy('citylists.city')
+				->get();
+		}
+
+		// -------- TRANSFORM USING COLLECTION --------
+		$data = $zoneResults->map(function ($zone) {
+
+			$cityDetails = collect([
+				$zone->zone ?? null,
+				$zone->cityName ?? null,
+			])->filter()->implode(', ');
+
+			if (!empty($zone->pincode)) {
+				$cityDetails .= ' - ' . $zone->pincode;
+			}
+
+			return [
+				'id' => $zone->zone_id,
+				'city' => $zone->cityName,
+				'cityDetails' => ucfirst($cityDetails)
+			];
+
+		})->unique('cityDetails')->values();
+
+		return response()->json([
+			'status' => true,
+			'message' => 'Successfully',
+			'data' => $data
+		], 200);
+		
+	}
+
+	public function getAjaxKeyword(Request $request)
+	{
+
+		header("Access-Control-Allow-Origin: *");
+		header('Access-Control-Allow-Credentials: true');
+	 
+			$query = DB::table('keyword')
+				->select('keyword.keyword', 'keyword.slug', 'keyword.id');
+			$str = '';
+			if ($request->input('q') != "") {
+				$str = trim($request->input('q'));
+				$query = $query->orWhere('keyword.keyword', 'LIKE', '%' . $str . '%');
+				$query = $query->orderBy(DB::raw("CASE WHEN keyword.keyword LIKE '" . $str . "%' THEN 1 ELSE 2 END"));
+
+				$query = $query->distinct()->get();
+			}
+			 
+		
+		return response()->json([
+			'status' => true,
+			'message' => 'Successfully',
+			'data' => $query
+		], 200);
+		
+	}
 
 
 
