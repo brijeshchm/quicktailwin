@@ -56,9 +56,9 @@
             $contactInfo = [
                 [
                     'label'     => 'Phone',
-                    'value'     => '+91-75-9543-9543',
+                    'value'     => '+91-75-5943-5943',
                     'sub'       => 'Mon–Fri, 10am–7pm EST',
-                    'href'      => 'tel:+917595439543',
+                    'href'      => 'tel:+917559435943',
                     'iconBg'    => 'bg-violet-50',
                     'iconColor' => 'text-violet-600',
                     'icon'      => 'phone',
@@ -178,11 +178,11 @@
                                 </div>
 
                                 <div class="flex flex-col gap-2">
-                                    <a href="tel:+917595439543" class="flex items-center gap-2 text-sm font-medium text-violet-600 hover:opacity-70 transition-opacity">
+                                    <a href="tel:+917559435943" class="flex items-center gap-2 text-sm font-medium text-violet-600 hover:opacity-70 transition-opacity">
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                                         </svg>
-                                        +91-75-9543-9543
+                                        +91-75-5943-5943
                                     </a>
                                     <a href="mailto:info@quickdials.com" class="flex items-center gap-2 text-sm font-medium text-violet-600 hover:opacity-70 transition-opacity">
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -221,7 +221,7 @@
                         'city'     => 'Bangalore',
                         'country'  => 'India',
                         'address'  => 'UNIT 101 OXFORD TOWERS, 139/88 HAL OLD AIRPORT RD, H.A.L II Stage, Bangalore North, Bangalore- 560008, Karnataka',
-                        'phone'    => '+91-75-9543-9543',
+                        'phone'    => '+91-75-5943-5943',
                         'hours'    => 'Mon–Fri, 10am–7pm EST',
                         'flag'     => '🇮🇳',
                         'gradient' => 'from-blue-500 to-indigo-500',
@@ -234,7 +234,7 @@
                         'city'     => 'Noida',
                         'country'  => 'India',
                         'address'  => 'G-13, Sector-3, Noida, UP, India, 201301',
-                        'phone'    => '+91-75-9543-9543',
+                        'phone'    => '+91-75-5943-5943',
                         'hours'    => 'Mon–Fri, 10am–7pm GMT',
                         'flag'     => '🇮🇳',
                         'gradient' => 'from-rose-500 to-pink-500',
