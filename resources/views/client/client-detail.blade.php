@@ -133,7 +133,7 @@ select.ef-input { padding-left:1rem; }
                 {{-- Name --}}
                 <h1 class="text-2xl md:text-5xl font-extrabold text-white leading-tight tracking-tight"
                     style="text-shadow:0 2px 30px rgba(30,58,138,.6);">
-                    {{ $clientsList['business_name'] ?? 'Business Name' }}
+                    {{ ucfirst($clientsList['business_name']) ?? 'Business Name' }}
                 </h1>
             </div>
             <div class="flex flex-wrap items-center gap-3 text-white/80 text-xs font-medium">

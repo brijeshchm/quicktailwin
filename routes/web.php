@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\ServiceController;
 use App\Http\Controllers\User\VouchersController;
+use App\Http\Controllers\User\RewardController;
   
 Route::middleware('auth:guest')->group(function () {
 		Route::get('dashboard',       [ProfileController::class, 'dashbord'])->name('user.show.dashbord');
@@ -20,6 +21,12 @@ Route::middleware('auth:guest')->group(function () {
 		Route::post('user/profile/update',     [ProfileController::class, 'autosave'])->name('user.profile.autosave');          
 		Route::get('user/service',          [ServiceController::class, 'service'])->name('user.service.index');         
 		Route::get('user/vouchers',         [VouchersController::class, 'vouchers'])->name('user.vouchers.index');
+		Route::get('user/rewards',         [RewardController::class, 'index'])->name('user.rewards.index');
+Route::post('/rewards/redeem',                      [RewardController::class, 'redeem'])->name('user.rewards.redeem');
+    Route::post('/rewards/redemptions/{redemption}/confirm', [RewardController::class, 'confirmRedemption'])->name('user.rewards.confirm');
+
+		Route::get('user/admin-dashboard',         [VouchersController::class, 'adminDashboard'])->name('user.admindashboard.index');	
+		
 
 Route::post('user/autosave-avatar', [ProfileController::class, 'autosaveAvatar'])->name('user.profile.autosave-avatar');
         

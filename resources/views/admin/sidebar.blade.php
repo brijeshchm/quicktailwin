@@ -110,6 +110,21 @@
                         </li>	
 						
 						@endif
+                        @if(Auth::user()->current_user_can('administrator') )
+						<li>
+                            <a href="#"><i class="fa fa-user fa-fw"></i> rewards<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{url('/developer/rewards')}}"><i class=""></i> All rewards</a>
+                                </li>
+							    
+                              
+							 
+                            </ul>
+                            
+                        </li>	
+						
+						@endif
 						
 					  @if(Auth::user()->current_user_can('administrator') || Auth::user()->current_user_can('manager') || Auth::user()->current_user_can('all_city') )
                         <li>

@@ -872,7 +872,12 @@ foreach($servicesRelated as $service) {
         '@context'    => 'https://schema.org/',
         '@type'       => 'Course',
         'name'        => $service['title']        ?? $keyword ?? '',
-        'description' => $service['meta_description'] ?? 'Find best ' . ($service['title'] ?? '') . ' near you on QuickDials.',
+        'description' => $service['
+        
+        
+        
+        
+        '] ?? 'Find best ' . ($service['title'] ?? '') . ' near you on QuickDials.',
         'image'       => asset('client/images/quickdials-og.png'),
         'url'         => route('showCity', $service['url'] ?? ''),
         'provider'    => [

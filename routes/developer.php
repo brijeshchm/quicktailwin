@@ -112,7 +112,7 @@ Route::post('/update-user/{id}',[App\Http\Controllers\userController::class, 'up
 	
 	Route::post('/keyword/edit',[App\Http\Controllers\KeywordController::class, 'edit'])->middleware('auth');
 		
-	Route::get('/get-child-category/{id}',[App\Http\Controllers\KeywordController::class, 'editIcon'])->middleware('auth');
+	Route::get('/keyword/editIcon/{id}',[App\Http\Controllers\KeywordController::class, 'editIcon'])->middleware('auth');
 	Route::post('/keyword/updateIcon/{id}',[App\Http\Controllers\KeywordController::class, 'updateIcon'])->middleware('auth');
 	Route::get('/keyword/icon_del/{id}', [App\Http\Controllers\KeywordController::class, 'deleteIcon']);
 	Route::post('/keyword/update',[App\Http\Controllers\KeywordController::class, 'update'])->middleware('auth');
@@ -559,4 +559,10 @@ Route::post('seoCity/editSaveSeoCity/{id}', [App\Http\Controllers\SeoCityControl
 Route::get('seoCity/status/{id}/{val}', [App\Http\Controllers\SeoCityController::class, 'status'])->middleware('auth:developer');
 Route::get('seoCity/get-seoCity', [App\Http\Controllers\SeoCityController::class, 'getSeoCityPagination'])->middleware('auth:developer');
 Route::get('seoCity/delete/{id}', [App\Http\Controllers\SeoCityController::class, 'delete'])->middleware('auth:developer');
+
+use App\Http\Controllers\RewardItemController;
  
+Route::get('/rewards',                [RewardItemController::class, 'index'])->name('rewards.index');
+Route::post('/rewards',               [RewardItemController::class, 'store'])->name('rewards.store');
+Route::put('/rewards/{reward}',       [RewardItemController::class, 'update'])->name('rewards.update');
+Route::delete('/rewards/{reward}',    [RewardItemController::class, 'destroy'])->name('rewards.destroy');

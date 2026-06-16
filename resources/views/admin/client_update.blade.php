@@ -134,6 +134,11 @@
         <div class="sidebar-item" onclick="showContent('information')">
             <i class="fa fa-phone"></i><a href="#information"> Business Information</a>
         </div>
+          <div class="sidebar-item" onclick="showContent('businessOverview')">
+            <i class="fa fa-info-circle"></i><a href="#businessOverview">Business Overview</a>
+        </div>
+
+
         <div class="sidebar-item" onclick="showContent('businessLocation')">
             <i class="fa fa-map-marker"></i><a href="#businessLocation">Business Location</a>
         </div>
@@ -647,6 +652,61 @@
         </div>
     </div>
 
+<div class="section-content" id="businessOverview">
+        <div class="form-container">
+            <h4>Business Overview</h4>
+           
+			<form class="form-horizontal"  action="" onsubmit="return ClientController.ediSaveBusinessInfo(this,<?php echo (isset($client->id)? $client->id:""); ?>)" method="POST">
+				{{csrf_field()}}
+				<div class="form-group col-md-12">
+					<div class="col-md-12">
+					 <label>Business Description:</label>                
+                    
+          <textarea name="business_description" type="text" class="form-control" placeholder="Please enter business Description">
+            
+        {{ old('business_description',(isset($client)) ? $client->business_description:"")}}
+        </textarea>
+                   
+               
+					</div>
+				</div>
+				<div class="form-group col-md-12">
+					<div class="col-md-12">
+					 <label>Business Overview:</label>                    
+          <textarea name="business_overview" type="text" class="form-control summernote" placeholder="Please enter business overview">
+            {{ old('business_overview',(isset($client)) ? $client->business_overview:"")}}
+        
+        
+        </textarea>
+                   
+               
+					</div>
+				</div>
+
+         
+			
+			 
+			 
+				 
+				 
+			
+			 
+
+				 
+   		 
+				<div class="form-group"> 
+					<div class="col-sm-12"> 
+					<input type="hidden" name="contact_info" value="contact_info">
+					<div class="col-sm-offset-2 col-sm-4 text-right">
+						<input type="submit" value="SAVE" class="btn btn-warning">
+					</div>
+					</div>
+				</div>
+			</form>
+					 
+	 
+        </div>
+    </div>
 
     <div class="section-content" id="businessLocation">
         <div class="form-container">
@@ -3356,4 +3416,17 @@ function per_select_zone(per_city,per_zone){
 });
   </script>
 
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<script type="text/javascript">
+$('.summernote').summernote({
+height: 500
+});
+</script>
 <?php echo View::make('admin/footer'); ?>

@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAddressRequest;
 use App\Models\Client\Address;
 use App\Models\Guest;
+use App\Models\RedeemableItem;
+use App\Models\Client;
+use App\Models\CoinTransaction;
+use App\Models\Redemption;
 use App\Models\Voucher;
 use App\Models\ParentCategory;
 use Illuminate\Http\Request;
@@ -61,6 +65,40 @@ class VouchersController extends Controller
 ];
         return view('user.profile.vouchers', compact('user','vouchers','categories'));
     }
+
+
+
+
+    /**
+     * Show addresses page
+     */
+    public function rewards()
+    {
+           $user         = Auth::user();
+        $activeItems  = RedeemableItem::where('is_active', true)->get();
+        $businesses   = Client::all();
+        $redemptions  = Redemption::where('user_id', $user->id)
+                            ->latest()->get();
+        $transactions = CoinTransaction::where('user_id', $user->id)
+                            ->latest()->take(50)->get();
+
+        $minRewardPoints = $activeItems->isNotEmpty()
+            ? $activeItems->min('coins_required')
+            : 500;
+
+        $progressPercent = $minRewardPoints > 0
+            ? min(100, round(($user->coin_balance / $minRewardPoints) * 100))
+            : 0;
+
+        return view('user.rewards.rewards', compact(
+            'user', 'activeItems', 'businesses',
+            'redemptions', 'transactions',
+            'minRewardPoints', 'progressPercent'
+        ));
+       
+    }
+
+
 
     /**
      * Claim a voucher (AJAX)
@@ -199,6 +237,52 @@ class VouchersController extends Controller
             ->with('success', 'Addresses saved successfully!');
     }
 
+
+	public function adminDashboard()
+    {
+        $user = Guest::find(1);
+        // $client = Auth::guard('clients')->user();
+ 
+        // $addresses = $client->addresses()->latest()->get();
+ $categories = ParentCategory::get();
+         $vouchers = [
+    (object)[
+        'category_id' => 'keyword',
+        'title' => '20% Off on Health Checkup',
+        'code' => 'HEALTH500',
+        'type' => 'flat',
+        'value' => 20,
+        'min_order' => 2000,
+        'brand' => 'Apollo',
+        'valid_until' => now()->addDays(30),
+        'description' => 'Valid on full body checkup packages',
+    ],
+
+    (object)[
+        'category_id' => 'keyword',
+        'title' => '20% Off on Pharmacy',
+        'code' => 'PHARMA20',
+        'type' => 'percentage',
+        'value' => 20,
+        'max_discount' => 300,
+        'brand' => 'MedPlus',
+        'valid_until' => now()->addDays(7),
+        'description' => 'On all medicines and wellness products',
+    ],
+
+    (object)[
+        'category_id' => 'keyword',
+        'title' => 'Flat ₹150 Off',
+        'code' => 'EAT150',
+        'type' => 'flat',
+        'value' => 150,
+        'min_order' => 500,
+        'brand' => 'Zomato',
+        'valid_until' => now()->addDays(15),
+    ],
+];
+        return view('user.profile.admindashboard', compact('user','vouchers','categories'));
+    }
 
 
 

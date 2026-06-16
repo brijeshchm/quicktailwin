@@ -4,8 +4,7 @@
 @section('keywords','business categories, local business directory India, QuickDials categories, verified business listings, IT training institutes, hotels, salons, healthcare services, travel services, real estate services, education services, local search engine India, top businesses near me')
 @section('content')	
 @include('client.components.banner-section')
-   
-
+@include('client.layouts.common_country_data');
  
 <div class="bg-slate-900 text-white py-12">
     <div class="container mx-auto px-4">

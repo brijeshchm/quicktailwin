@@ -36,7 +36,7 @@ class KeywordController extends Controller
 		$this->versions = $versions;
 	}
 
-	/**
+	/*
 	 * Display a listing of the resource.
 	 *
 	 * @return \Illuminate\Http\Response
@@ -91,7 +91,7 @@ class KeywordController extends Controller
 
 
 
-	/**
+	/*
 	 * Store a newly created resource in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
@@ -169,7 +169,7 @@ class KeywordController extends Controller
 	}
 
 
-	/**
+	/*
 	 * Show the form for editing the specified resource.
 	 *
 	 * @param  int  $id
@@ -191,7 +191,7 @@ class KeywordController extends Controller
 		}
 	}
 
-	/**
+	/*
 	 * Show the form for editing the specified resource.
 	 *
 	 * @param  int  $id
@@ -328,7 +328,7 @@ class KeywordController extends Controller
 			return response()->json(['status' => 1, 'kwDetails' => $kwDetails, 'bkts' => $bkts, 'searchBucketCityZone' => $searchBucketCityZone]);
 		}
 	}
-	/**
+	/*
 	 * Show the form for editing the specified resource.
 	 *
 	 * @param  int  $id
@@ -438,7 +438,7 @@ class KeywordController extends Controller
 
 
 
-	/**
+	/*
 	 * Show the form for editing the specified resource.
 	 *
 	 * @param  int  $id
@@ -714,7 +714,7 @@ class KeywordController extends Controller
 			return response()->json(['status' => 1, 'message' => $html]);
 		}
 	}
-	/**
+	/*
 	 * Show the form for editing the specified resource.
 	 *
 	 * @param  int  $id
@@ -783,7 +783,7 @@ class KeywordController extends Controller
 		}
 	}
 
-	/**
+	/*
 	 * Show the form for editing the specified resource.
 	 *
 	 * @param  int  $id
@@ -903,7 +903,7 @@ class KeywordController extends Controller
 		}
 	}
 
-	/**
+	/*
 	 * Return the zones(id,name) associated to the specified city id.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
@@ -980,7 +980,7 @@ class KeywordController extends Controller
 	}
 
 
-	/**
+	/*
 	 * Remove the specified resource from storage.
 	 *
 	 * @param  int  $id
@@ -997,7 +997,7 @@ class KeywordController extends Controller
 		return response()->json(['status' => 1, 'message' => $citiesList]);
 	}
 
-	/**
+	/*
 	 * Update the specified resource in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request

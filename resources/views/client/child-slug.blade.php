@@ -9,7 +9,7 @@
 $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
 
  @endphp
-
+@include('client.layouts.common_country_data');
 <div x-show="showAd" x-cloak
          class="relative w-full overflow-hidden h-40"
          style="background-image: url('{{ $bgImage }}'); background-size: cover; background-position: center;">

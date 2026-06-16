@@ -13,6 +13,7 @@
             ['key' => 'service', 'label' => 'Service',        'route' => 'user.service.index'],
             // ['key' => 'doctor', 'label' => 'Doctor',        'route' => 'user.doctor.index'],
             ['key' => 'vouchers', 'label' => 'Vouchers',        'route' => 'user.vouchers.index'],
+            ['key' => 'rewards', 'label' => 'rewards',        'route' => 'user.rewards.index'],
              
         ];
     @endphp

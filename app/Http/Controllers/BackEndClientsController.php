@@ -822,16 +822,10 @@ class BackEndClientsController extends Controller
 						'area' => 'nullable|string|max:255',
 						'pincode' => 'nullable|digits:6',
 						'address' => 'nullable|string|max:500',
-						'landmark' => 'nullable|string|max:255',
-
-					 
-						'business_intro' => 'nullable|string|max:2000',
-					 
-						'business_map' => 'nullable|string|max:255',
-
-
-				 
-						'website' => 'nullable|url|max:255',
+						'landmark' => 'nullable|string|max:255',					 
+						'business_intro' => 'nullable|string|max:2000',					 
+						'business_map' => 'nullable|string|max:255',						 
+						'website' => ['regex:/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i'],
 
 						'time' => 'nullable|array',
 						// 'time.*.from' => 'nullable|date_format:H:i',
