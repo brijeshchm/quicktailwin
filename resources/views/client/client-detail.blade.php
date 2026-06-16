@@ -104,7 +104,7 @@ select.ef-input { padding-left:1rem; }
  
 
 {{-- Scroll progress --}}
-@include('client.layouts.common_country_data');
+@include('client.layouts.common_country_data')
 
 {{-- ════════════════════════════════════════
      HERO BANNER

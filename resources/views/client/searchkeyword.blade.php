@@ -68,7 +68,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
     'percent' => $totalReviews > 0 ? round(($starCounts[$s] / $totalReviews) * 100) : 0
 ]);
 @endphp
-@include('client.layouts.common_country_data');
+@include('client.layouts.common_country_data')
 <div class="min-h-screen bg-gray-50 flex flex-col mt-4"
      x-data="listingPage()" x-init="init()">
 
