@@ -449,6 +449,7 @@ if(!empty($clientcheck)){
                 ['url' => 'user/personal-details',  'icon' => 'user',     'label' => 'My Profile'],
                 ['url' => 'user/service',  'icon' => 'gear',     'label' => 'Service'],
                 ['url' => 'user/service',  'icon' => 'star',     'label' => 'Notifications'],
+                ['url' => 'user/admin-dashboard',  'icon' => 'star',     'label' => 'dashboard'],
                 ['url' => 'privacy-policy',    'icon' => 'envelope', 'label' => 'Policy'],
                 ['url' => 'user/help',          'icon' => 'book',     'label' => 'Help'],
                 

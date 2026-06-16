@@ -101,13 +101,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         .hidden-init { display: none; }
     </style>    
-</head>
-<body class="min-h-screen bg-white text-gray-900 antialiased">
-    <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KZF3WGSW"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 
+    
 @php
      
     $serviceName = !empty($metaTitle)
@@ -144,7 +139,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     $schemas[] = [
         '@context' => 'https://schema.org',
         '@type'    => 'Organization',
-        'name'     => 'QuickDials',
+        'name'     => 'QuickDials Internet Pvt Ltd',
         'url'      => url('/'),
         'logo'     => asset('client/images/small-logo.jpg'),
         'sameAs'   => [
@@ -156,6 +151,75 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             'https://www.youtube.com/@quickdialsofficial/',
         ],
     ];
+ $schemas[] = [
+    '@context'    => 'https://schema.org',
+    '@type'       => 'LocalBusiness',
+    'name'        => 'Quickdials Pvt Ltd.',
+    'image'       => asset('client/images/small-logo.jpg'),
+    '@id'         => 'https://www.quickdials.com/#localbusiness',
+    'url'         => 'https://www.quickdials.com/',
+    'telephone'   => '91-7559435943',
+    'priceRange'  => '₹1000 - ₹1,00,000',
+    'description' => 'QuickDials, local search engine India, local business directory India, online business directory, business listing website, top businesses near me, IT training institutes near me, coaching centres near me, hotels near me, salons near me, healthcare services, real estate services, travel agencies, schools and colleges near me, certified institutes, education consultants, local business listings, business reviews and ratings, trusted local services, find businesses near me.',
+
+    'address' => [
+        '@type'          => 'PostalAddress',
+        'streetAddress'  => 'UNIT 101 OXFORD TOWERS, 139/88 HAL OLD AIRPORT RD, H.A.L II Stage, Bangalore North, Bangalore- 560008, Karnataka',
+        'addressLocality'=> 'Bangalore',
+        'postalCode'     => '560008',
+        'addressCountry' => 'IN',
+    ],
+
+    'geo' => [
+        '@type'     => 'GeoCoordinates',
+        'latitude'  => 12.9594,
+        'longitude' => 77.6462,
+    ],
+
+    'openingHoursSpecification' => [
+        '@type'      => 'OpeningHoursSpecification',
+        'dayOfWeek'  => [
+            'Monday', 'Tuesday', 'Wednesday',
+            'Thursday', 'Friday', 'Saturday', 'Sunday',
+        ],
+        'opens'  => '00:00',
+        'closes' => '23:59',
+    ],
+
+    'sameAs' => [
+        'https://www.facebook.com/quickdialsofficial/',
+        'https://x.com/Quickdials',
+        'https://www.linkedin.com/company/quickdialsoffical/',
+        'https://www.pinterest.com/quickdialsoffical/',
+        'https://www.instagram.com/quickdialsoffical/',
+        'https://www.youtube.com/@quickdialsofficial/',
+    ],
+
+    'serviceArea' => [
+        '@type' => 'Country',
+        'name'  => 'India',
+    ],
+
+    'areaServed' => [
+        ['@type' => 'City', 'name' => 'Noida'],
+        ['@type' => 'City', 'name' => 'Delhi'],
+        ['@type' => 'City', 'name' => 'Hyderabad'],
+        ['@type' => 'City', 'name' => 'Chennai'],
+        ['@type' => 'City', 'name' => 'Kolkata'],
+        ['@type' => 'City', 'name' => 'Ahmedabad'],
+        ['@type' => 'City', 'name' => 'Jaipur'],
+        ['@type' => 'City', 'name' => 'Gurgaon'],
+        ['@type' => 'City', 'name' => 'Lucknow'],
+        ['@type' => 'City', 'name' => 'Chandigarh'],
+        ['@type' => 'City', 'name' => 'Indore'],
+        ['@type' => 'City', 'name' => 'Pune'],
+        ['@type' => 'City', 'name' => 'Mumbai'],
+        ['@type' => 'City', 'name' => 'Bangalore'],
+      
+    ],
+];
+ 
+
 
     // ---- 2. SERVICE (only if service data exists) ----
     if (!empty($serviceName)) {
@@ -228,6 +292,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 ) !!}
 </script>
 @endif
+</head>
+<body class="min-h-screen bg-white text-gray-900 antialiased">
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KZF3WGSW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
   
     @include('client.layouts.navbar')

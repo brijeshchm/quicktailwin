@@ -222,7 +222,7 @@ function bannerSlider(banners, interval = 4000) {
                 <div itemscope itemtype="https://schema.org/Product" class="space-y-2">
 
     {{-- Required: Product Name --}}
-    <meta itemprop="name" content="{{ $productName ?? $serviceName ?? 'QuickDials Service' }}">
+    <meta itemprop="name" content="{{ $keyword ?? $metaTitle ?? 'QuickDials review Service' }}">
 
     {{-- Required: Product Image --}}
     @if(!empty($kwData['key_icon']))
@@ -845,7 +845,7 @@ function bannerSlider(banners, interval = 4000) {
             @endforeach
         </ul>
     </div>
-
+ 
     {{-- Related Services --}}
     @if(!empty($servicesRelated))
     <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mt-4 mb-4 mx-4">
@@ -862,6 +862,58 @@ function bannerSlider(banners, interval = 4000) {
         </ul>
     </div>
     @endif
+
+
+ @php
+$schemasCourse = [];
+
+foreach($servicesRelated as $service) {
+    $schemasCourse[] = [
+        '@context'    => 'https://schema.org/',
+        '@type'       => 'Course',
+        'name'        => $service['title']        ?? $keyword ?? '',
+        'description' => $service['meta_description'] ?? 'Find best ' . ($service['title'] ?? '') . ' near you on QuickDials.',
+        'image'       => asset('client/images/quickdials-og.png'),
+        'url'         => route('showCity', $service['url'] ?? ''),
+        'provider'    => [
+            '@type'  => 'Organization',
+            'name'   => 'QuickDials',
+            'sameAs' => 'https://www.quickdials.com',
+            'url'    => 'https://www.quickdials.com',
+        ],
+        'offers' => [
+            '@type'        => 'Offer',
+            'price'        => '0',
+            'priceCurrency'=> 'INR',
+            'availability' => 'https://schema.org/InStock',
+            'url'          => route('showCity', $service['url'] ?? ''),
+        ],
+        'hasCourseInstance' => [
+            '@type'          => 'CourseInstance',
+            'courseMode'     => 'online',
+            'courseWorkload' => 'PT1H',
+            'instructor'     => [
+                '@type' => 'Person',
+                'name'  => 'QuickDials Expert',
+            ],
+            'startDate' => now()->format('Y-m-d'),
+            'endDate'   => now()->addYear()->format('Y-m-d'),
+        ],
+        'educationalLevel'    => 'Beginner',
+        'inLanguage'          => 'en',
+        'teaches'             => $relatedCategory ?? $service['title'] ?? '',
+        'coursePrerequisites' => $keyword ?? '',
+    ];
+}
+@endphp
+
+{{-- Output Schema --}}
+@if(!empty($schemasCourse))
+<script type="application/ld+json">
+{!! json_encode($schemasCourse, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
+</script>
+@endif
+
 
 </div>
 
