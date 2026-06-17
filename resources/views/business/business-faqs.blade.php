@@ -104,7 +104,7 @@ div.dataTables_paginate ul.pagination {
                 <div class="tab-pane fade show active profile-edit pt-3" id="profile-edit">
                
             <form class="buss_location" id="faqForm" method="POST" 
-    onsubmit="return businessController.saveBusinessFaqs(this,<?php echo (isset($client->id)? $client->id:""); ?>)">
+    onsubmit="return businessFaqController.saveBusinessFaqs(this,<?php echo (isset($client->id)? $client->id:""); ?>)">
     
     <input type="hidden" name="client_id" value="{{$client->id}}"> 
 
@@ -158,7 +158,7 @@ div.dataTables_paginate ul.pagination {
   
 
   <script>
-const businessController = {
+const businessFaqController = {
 
     saveBusinessFaqs: function(form, clientId) {
         var formData = new FormData(form);
