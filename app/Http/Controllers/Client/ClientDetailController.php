@@ -98,7 +98,23 @@ class ClientDetailController extends Controller
             }
         }
         
+        $faqs = [];
 
+        $clientFaq = $clientsList['faqs'] ?? [];
+
+        if (!empty($clientFaq)) {
+            for ($i = 1; $i <= 10; $i++) {
+                $q = $clientFaq["faqq{$i}"] ?? null;
+                $a = $clientFaq["faqa{$i}"] ?? null;
+
+                if (!empty($q) && !empty($a)) {
+                    $faqs[] = [
+                        'q' => $q,
+                        'a' => $a,
+                    ];
+                }
+            }
+        }
 
 
              // Certifications (up to 10)
@@ -199,7 +215,7 @@ class ClientDetailController extends Controller
             'comment', 'areaBusiness', 'overviewBusiness',
             'relatedList', 'keywordList', 'gallery', 'hImages', 'vImages',
             'assignKeyword', 'certifications', 'govDocs', 'reviews',
-            'gradients', 'bgColors', 'iconColors', 'planOptions',
+            'gradients', 'bgColors', 'iconColors', 'planOptions','faqs',
             'googleMapUrl', 'mapSrc', 'yearsExp', 'yearEst','recentActivitys',
             'todayDay', 'hours','linearGradients'
         ));
