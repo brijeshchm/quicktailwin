@@ -262,8 +262,8 @@
                 <ul class="space-y-3">
                     @foreach([
                         ['name' => 'Home',                      'route'=>route('home')],
-                        ['name' => 'About Us',                  'route'=>route('about.us')],
-                        ['name' => 'Contact Us',               'route'=>route('contact.us')],
+                        ['name' => 'About Us',                  'route'=>route('aboutUs')],
+                        ['name' => 'Contact Us',               'route'=>route('contactUs')],
                         ['name' => 'Careers',                   'route'=>route('careers')],
                         ['name' => 'Interviews',                   'route'=>route('interviews')],
                         ['name' => 'Blog',                      'route'=>route('blog.show')],
@@ -323,8 +323,8 @@
                     @foreach([
                         ['name' => 'Add your Business',  'href' => 'business-owners','route'=>route('login')],
                         ['name' => 'Claim your Business','href' => 'business-owners','route'=>route('login')],
-                        ['name' => 'Advertise with Us',  'href' => 'contact-us','route'=>route('contact.us')],
-                        ['name' => 'Business Support',   'href' => 'contact-us','route'=>route('contact.us')],
+                        ['name' => 'Advertise with Us',  'href' => 'contact-us','route'=>route('contactUs')],
+                        ['name' => 'Business Support',   'href' => 'contact-us','route'=>route('contactUs')],
                         ['name' => 'Pricing',            'href' => 'pricing','route'=>route('pricing')],
                     ] as $link)
                         <li>

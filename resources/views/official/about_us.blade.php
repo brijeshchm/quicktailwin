@@ -1,5 +1,5 @@
 @extends('client.layouts.app')
-@section('title', 'About QuickDials — India's Trusted Service Marketplace & Lead Platform')
+@section('title', 'About QuickDials — Indias Trusted Service Marketplace & Lead Platform')
 @section('description', 'QuickDials connects 1M+ customers with verified businesses across IT, weddings, home services, healthcare, real estate, finance, travel & more. Get quality leads, real reviews, and direct customer connections')
 @section('keywords', 'About QuickDials, lead management software, service marketplace india, business listing, get business leads')
 @section('content')
@@ -172,7 +172,7 @@
 
                     {{-- CTA --}}
                     <div class="reveal-scale d-3 flex-shrink-0">
-                        <a href="{{ config('app.url') }}contact-us"
+                        <a href="{{ route('contactUs') }}"
                            class="hero-cta inline-flex items-center gap-2 px-5 py-3 rounded-xl
                                   font-semibold text-white text-sm shadow-lg cursor-pointer"
                            style="background:linear-gradient(135deg,#6366f1 0%,#8b5cf6 50%,#a855f7 100%);">
@@ -452,7 +452,7 @@
                         </p>
 
                         <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
-                            <a href="{{ config('app.url') }}business-owners"
+                            <a href="{{ route('login') }}"
                                class="cta-btn-white inline-flex items-center gap-2 px-6 py-3 rounded-xl
                                       bg-white text-violet-700 font-bold text-sm shadow-lg">
                                 ✉️ Get in Touch
@@ -461,7 +461,7 @@
                                     <path d="M9 5l7 7-7 7"/>
                                 </svg>
                             </a>
-                            <a href="{{ config('app.url') }}careers"
+                            <a href="{{ route('homw') }}"
                                class="cta-btn-ghost inline-flex items-center gap-2 px-6 py-3 rounded-xl
                                       border border-white/30 bg-white/10 text-white font-semibold text-sm">
                                 View Open Roles
