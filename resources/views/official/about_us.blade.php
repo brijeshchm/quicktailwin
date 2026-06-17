@@ -461,7 +461,7 @@
                                     <path d="M9 5l7 7-7 7"/>
                                 </svg>
                             </a>
-                            <a href="{{ route('homw') }}"
+                            <a href="{{ route('home') }}"
                                class="cta-btn-ghost inline-flex items-center gap-2 px-6 py-3 rounded-xl
                                       border border-white/30 bg-white/10 text-white font-semibold text-sm">
                                 View Open Roles
