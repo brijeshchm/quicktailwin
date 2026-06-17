@@ -507,7 +507,7 @@
                                     <a href="mailto:grievance@quickdials.com" class="btn-purple inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold text-white transition-all duration-200 hover:scale-105 hover:shadow-md">
                                         Grievance Officer
                                     </a>
-                                    <a href="{{ route('contact.us') }}" class="btn-purple inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold text-white transition-all duration-200 hover:scale-105 hover:shadow-md">
+                                    <a href="{{ route('contactUs') }}" class="btn-purple inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold text-white transition-all duration-200 hover:scale-105 hover:shadow-md">
                                         Contact Us
                                     </a>
                                 </div>
