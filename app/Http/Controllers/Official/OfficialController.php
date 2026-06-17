@@ -42,7 +42,7 @@ class OfficialController extends Controller
         $clients = Client::get()->count();
         $keyword = Keyword::get()->count();
         $citieslists = Citieslists::get()->count();
-        return view('official.about-us', ['clients' => $clients, 'keyword' => $keyword, 'citieslists' => $citieslists]);
+        return view('official.about_us', ['clients' => $clients, 'keyword' => $keyword, 'citieslists' => $citieslists]);
     }
     /**
      * Show the application dashboard.
