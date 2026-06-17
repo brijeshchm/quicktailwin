@@ -4,13 +4,7 @@
 @section('keywords', $blogDetails['meta_keywords'])
 @section('content')
 @include('client.components.banner-section')
- 
 
-<?php 
-
- 
-
-?>
 <style> 
 :root {
     --accent:  #2563eb;

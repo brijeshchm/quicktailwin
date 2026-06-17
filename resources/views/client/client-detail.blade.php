@@ -1041,7 +1041,7 @@ function selectCert(i) {
                 @if(!empty($overviewBusiness['heading']))
                 <h2 class="text-3xl font-semibold text-gray-900 mb-6">{{ $overviewBusiness['heading'] }}</h2>
                 <div class="text-gray-700 leading-relaxed space-y-4">
-                    <p>{{ $overviewBusiness['paragraph'] ?? '' }}</p>
+                    <p> {!! $overviewBusiness['paragraph'] !!}</p>
                     <p class="font-medium text-gray-800">{{ $overviewBusiness['paragraph1'] ?? '' }}</p>
                 </div>
                 @endif
