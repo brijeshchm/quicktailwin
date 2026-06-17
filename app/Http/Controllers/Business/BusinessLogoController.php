@@ -236,8 +236,109 @@ private function saveImageSmart($file, $destinationPath, $width = null, $height 
     return $finalName;
 }
 
-	 
+
 public function saveGallary(Request $request)
+{
+    $client = Client::findOrFail($request->business_id);
+    $oldImages = !empty($client->pictures) ? unserialize($client->pictures) : [];
+    $images = [];
+    $imagesToDelete = []; // track files to physically delete
+
+    $filePath = getFolderStructure();
+    $destinationPath = public_path($filePath);
+
+    if (!file_exists($destinationPath)) {
+        mkdir($destinationPath, 0777, true);
+    }
+
+    for ($i = 0; $i < 21; $i++) {
+
+        $field       = 'image' . ($i + 1);
+        $removeFlag  = $request->input('remove_image' . ($i + 1), '0');
+
+        // ════════════════════════════════════
+        // CASE 1: New file uploaded
+        // ════════════════════════════════════
+        if ($request->hasFile($field)) {
+
+            $file = $request->file($field);
+            $ext  = strtolower($file->getClientOriginalExtension());
+            $baseFile = time() . '_' . $i;
+
+            if ($ext === 'svg') {
+                $finalName = $baseFile . '.svg';
+                $file->move($destinationPath, $finalName);
+            } else {
+                $finalName = $this->saveImageSmart($file, $destinationPath, 850, 600);
+            }
+
+            $images[$i]['large'] = [
+                'name'   => $finalName,
+                'alt'    => $finalName,
+                'width'  => '',
+                'height' => '',
+                'src'    => $filePath . '/' . $finalName
+            ];
+
+            // ── If there was an old image in this slot, mark for deletion ──
+            if (isset($oldImages[$i]['large']['src'])) {
+                $imagesToDelete[] = $oldImages[$i]['large']['src'];
+            }
+
+        }
+        // ════════════════════════════════════
+        // CASE 2: User clicked remove (no new file uploaded)
+        // ════════════════════════════════════
+        elseif ($removeFlag === '1') {
+
+            // Mark old image for physical deletion
+            if (isset($oldImages[$i]['large']['src'])) {
+                $imagesToDelete[] = $oldImages[$i]['large']['src'];
+            }
+
+            // Do NOT add to $images — slot becomes empty
+            continue;
+
+        }
+        // ════════════════════════════════════
+        // CASE 3: No file, no removal flag → keep old image
+        // ════════════════════════════════════
+        else {
+            if (isset($oldImages[$i])) {
+                $images[$i] = $oldImages[$i];
+            }
+        }
+    }
+
+    // ── Save updated picture array ──
+    $client->pictures = count($images) ? serialize($images) : '';
+    $client->save();
+
+    // ════════════════════════════════════
+    // PHYSICALLY DELETE REMOVED/REPLACED IMAGES
+    // ════════════════════════════════════
+    foreach ($imagesToDelete as $src) {
+        $oldPath = public_path($src);
+        if (file_exists($oldPath)) {
+            unlink($oldPath);
+        }
+    }
+
+    $msg = 'Profile gallery updated successfully!';
+
+    // ── AJAX response (since frontend uses fetch) ──
+    if ($request->ajax() || $request->wantsJson()) {
+        return response()->json([
+            'status' => true,
+            'msg'    => $msg
+        ]);
+    }
+
+    $request->session()->flash('success_msg', $msg);
+    return redirect("/business/gallery-pictures");
+}
+	 
+public function saveGallary___old(Request $request)
 {
      
 	 

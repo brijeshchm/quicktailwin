@@ -121,6 +121,14 @@
           <span>Business Location</span>
         </a>
         </li> 
+         <li class="nav-item">
+        <a class="nav-link <?php if(Request::segment(2)=='business-overview') { echo "active"; } ?>" href="{{url('business/business-overview')}}">
+          <i class="bi bi-building"></i>
+          <span>Business Overview</span>
+        </a>
+        </li>  
+
+
         <li class="nav-item">
         <a class="nav-link <?php if(Request::segment(2)=='business-certificate') { echo "active"; } ?>" href="{{url('business/business-certificate')}}">
           <i class="bi bi-patch-check"></i>
@@ -146,6 +154,7 @@
           <span>Faqs</span>
         </a>
         </li>     
+          
 
 
         <li class="nav-item">

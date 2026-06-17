@@ -472,58 +472,130 @@ jQuery(document).on('click', '#razor-pay-now', function (e) {
   var businessController = (function(){
 		return {
 			checked_Ids:[],	
-			editProfileInfo:function(THIS,id){			     
+			editProfileInfo: function (THIS, id) {
 			var $this = $(THIS);
-			var form = new FormData(THIS);	
-				$.ajax({
-					url:"/business/saveProfileInfo/"+id,
-					type:"POST",					   
-					dataType:"json",	
-					data:form,
-					cache: false,
-					contentType: false, 
-                    processData: false,                      
-					success:function(data){
-					  	
-						if(data.status){
-                           	$("#messaged").modal("show");                        							 
-						$('#messaged .modal-title').text("Profile Information");	
-						$('#messaged .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
-						$('#messaged').modal({keyboard:false,backdrop:'static'});
-						$('#messaged').css({'width':'100%'});					
-					 
-						setInterval(function() {
-						$("#messaged").modal("hide");
-						}, 3000);	
-						}else{
-                               	$('#messaged .modal-title').text("Profile Information");	
-						$('#messaged .modal-body').html("<div class='alert alert-danger'>"+data.msg+"</div>");			
-						$('#messaged').modal({keyboard:false,backdrop:'static'});
-						$('#messaged').css({'width':'100%'});	 	
-						}
-					},
-					error:function(jqXHR, textStatus, errorThrown){
-							var response = JSON.parse(jqXHR.responseText);	
-							if(response.status){						 
-							var errors = response.errors;						 
-							$('.profile_info').find('.form-group').removeClass('has-error');
-							$('.profile_info').find('.help-block').remove();
-							for (var key in errors) {
-							if(errors.hasOwnProperty(key)){	
+			var form  = new FormData(THIS);
 
-							var el = $('.profile_info').find('*[name="'+key+'"]');
-							$('<span class="help-block"><strong>'+errors[key][0]+'</strong></span>').insertAfter(el);
-							el.closest('.form-group').addClass('has-error');
-							}
-							}				 
-							}else{
-							alert('Something went wrong');
-							}
-			 
+			$.ajax({
+				url: "/business/saveProfileInfo/" + id,
+				type: "POST",
+				dataType: "json",
+				data: form,
+				cache: false,
+				contentType: false,
+				processData: false,
+				success: function (data) {
+
+					if (data.status) {
+						$('.profile_info').find('.form-group').removeClass('has-error');
+						$('.profile_info').find('.help-block').remove();
+
+						showAutoSaveStatus('✅ ' + data.msg, 'success');
+
+						// $("#messaged").modal("show");
+						// $('#messaged .modal-title').text("Profile Information");
+						// $('#messaged .modal-body').html("<div class='alert alert-success'>" + data.msg + "</div>");
+						// $('#messaged').modal({ keyboard: false, backdrop: 'static' });
+						// $('#messaged').css({ 'width': '100%' });
+
+						setInterval(function () {
+							$("#messaged").modal("hide");
+						}, 3000);
+
+					} else {
+						showAutoSaveStatus('❌ ' + data.msg, 'danger');
+
+						// $('#messaged .modal-title').text("Profile Information");
+						// $('#messaged .modal-body').html("<div class='alert alert-danger'>" + data.msg + "</div>");
+						// $('#messaged').modal({ keyboard: false, backdrop: 'static' });
+						// $('#messaged').css({ 'width': '100%' });
 					}
-				}); 
-				 return false;	
-			},
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+					var response = JSON.parse(jqXHR.responseText);
+
+					showAutoSaveStatus('❌ Validation error', 'danger');
+
+					if (response.errors) {
+						var errors = response.errors;
+						$('.profile_info').find('.form-group').removeClass('has-error');
+						$('.profile_info').find('.help-block').remove();
+
+						for (var key in errors) {
+							if (errors.hasOwnProperty(key)) {
+								var el = $('.profile_info').find('*[name="' + key + '"]');
+								$('<span class="help-block"><strong>' + errors[key][0] + '</strong></span>').insertAfter(el);
+								el.closest('.form-group').addClass('has-error');
+							}
+						}
+					} else {
+						alert('Something went wrong');
+					}
+				}
+			});
+			return false;
+		},
+			saveBusinessOverview: function (THIS, id) {
+    var $this = $(THIS);
+
+    
+
+    var form = new FormData(THIS);
+
+    $.ajax({
+        url: "/business/saveBusinessOverview/" + id,
+        type: "POST",
+        dataType: "json",
+        data: form,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+
+            if (data.status) {
+                $('.buss_location').find('.form-group').removeClass('has-error');
+                $('.buss_location').find('.help-block').remove();
+
+                showAutoSaveStatus('✅ ' + data.msg, 'success');
+
+            
+
+                setInterval(function () {
+                    $("#messaged").modal("hide");
+                }, 3000);
+
+            } else {
+                showAutoSaveStatus('❌ ' + data.msg, 'danger');
+
+               
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            var response = JSON.parse(jqXHR.responseText);
+
+            showAutoSaveStatus('❌ Validation error', 'danger');
+
+            if (response.errors) {
+                var errors = response.errors;
+                $('.buss_location').find('.form-group').removeClass('has-error');
+                $('.buss_location').find('.help-block').remove();
+
+                for (var key in errors) {
+                    if (errors.hasOwnProperty(key)) {
+                        var el = $('.buss_location').find('*[name="' + key + '"]');
+                        $('<span class="help-block"><strong>' + errors[key][0] + '</strong></span>').insertAfter(el);
+                        el.closest('.form-group').addClass('has-error');
+                    }
+                }
+            } else {
+                alert('Something went wrong');
+            }
+        }
+    });
+    return false;
+},
+
+
 			editSaveSocials:function(THIS,id){			     
 			var $this = $(THIS);
 			var form = new FormData(THIS);	
@@ -735,61 +807,7 @@ jQuery(document).on('click', '#razor-pay-now', function (e) {
 				}); 
 				 return false;	
 			},
-			saveBusinessFaqs:function(THIS,id){			     
-			var $this = $(THIS);
-			var form = new FormData(THIS);	
-				$.ajax({
-					url:"/business/saveBusinessFaqs/"+id,
-					type:"POST",					   
-					dataType:"json",	
-					data:form,
-					cache: false,
-					contentType: false, 
-                    processData: false,                      
-					success:function(data){
-					  	
-						if(data.status){
-                        
-						$("#messaged").modal("show");                        							 
-						$('#messaged .modal-title').text("Business Location");	
-						$('#messaged .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
-						$('#messaged').modal({keyboard:false,backdrop:'static'});
-						$('#messaged').css({'width':'100%'});					
-						dataTableAssignedZones.ajax.reload( null, false );  
-						setInterval(function() {
-						$("#messaged").modal("hide");
-						}, 3000);	 
-							 
-						}else{
-							$("#messaged").modal("show");                        							 
-							$('#messaged .modal-title').text("Business Location");	
-							$('#messaged .modal-body').html("<div class='alert alert-danger'>"+data.msg+"</div>");			
-							$('#messaged').modal({keyboard:false,backdrop:'static'});
-							$('#messaged').css({'width':'100%'});
-								
-						}
-					},
-					error:function(jqXHR, textStatus, errorThrown){
-							var response = JSON.parse(jqXHR.responseText);	
-							if(response.status){						 
-							var errors = response.errors;						 
-							$('.buss_location').find('.form-group').removeClass('has-error');
-							$('.buss_location').find('.help-block').remove();
-							for (var key in errors) {
-							if(errors.hasOwnProperty(key)){	
-							var el = $('.buss_location').find('*[name="'+key+'"]');
-							$('<span class="help-block"><strong>'+errors[key][0]+'</strong></span>').insertAfter(el);
-							el.closest('.form-group').addClass('has-error');
-							}
-							}				 
-							}else{
-							alert('Something went wrong');
-							}
 			 
-					}
-				}); 
-				 return false;	
-			},
 			
 			saveKeywordAssign:function(THIS,id){			     
 			var $this = $(THIS);
@@ -1039,64 +1057,71 @@ jQuery(document).on('click', '#razor-pay-now', function (e) {
 var profileController = (function(){
 		return {
 			checked_Ids:[],	
-			editPersonaleDetailsSave:function(THIS,id){
-			  
-			var $this = $(THIS);
-			var form = new FormData(THIS);			 
-				$.ajax({
-					url:"/business/savePersonalDetails/"+id,
-					type:"POST",					   
-					dataType:"json",	
-					data:form,
-					cache: false,
-					contentType: false, 
-                    processData: false,                      
-					success:function(data){
-					    	
-						if(data.status){
-						 $("#messaged").modal("show");      
-                         $('#messaged .modal-title').text("Personal Details");	
-						$('#messaged .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
-						$('#messaged').modal({keyboard:false,backdrop:'static'});
-						$('#messaged').css({'width':'100%'});
-						setInterval(function() {
-						$("#messaged").modal("hide");
-						}, 3000);
-						}else{
-						 
-						$("#messaged").modal("show");      
-                        $('#messaged .modal-title').text("Personal Details");	
-						$('#messaged .modal-body').html("<div class='alert alert-danger'>"+data.msg+"</div>");			
-						$('#messaged').modal({keyboard:false,backdrop:'static'});
-						$('#messaged').css({'width':'100%'}); 	
-						}
-					},
-					error:function(jqXHR, textStatus, errorThrown){
-					   // ;			
-						var response = JSON.parse(jqXHR.responseText);
-						if(response.status){ 
-						
-                            var errors = response.errors;						 
-                            $('.personal_details').find('.form-group').removeClass('has-error');
-                            $('.personal_details').find('.help-block').remove();
-                            for (var key in errors) {
-                            if(errors.hasOwnProperty(key)){	
-                            
-                            var el = $('.personal_details').find('*[name="'+key+'"]');
-                            $('<span class="help-block"><strong>'+errors[key][0]+'</strong></span>').insertAfter(el);
-                            el.closest('.form-group').addClass('has-error');
-                            }
-                            }
-						
-							//showValidationErrors($this,response.errors);						 
-						}else{
-							alert('Something went wrong');
-						}
-						 
-					}
-				}); 
-				 return false;	
-			},
+			editPersonaleDetailsSave: function (THIS, id) {
+
+    var $this = $(THIS);
+    var form  = new FormData(THIS);
+
+    $.ajax({
+        url: "/business/savePersonalDetails/" + id,
+        type: "POST",
+        dataType: "json",
+        data: form,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+
+            if (data.status) {
+                // ── Clear previous validation errors ──
+                $('.personal_details').find('.form-group').removeClass('has-error');
+                $('.personal_details').find('.help-block').remove();
+
+                showAutoSaveStatus('✅ ' + data.msg, 'success');
+
+                // $("#messaged").modal("show");
+                // $('#messaged .modal-title').text("Personal Details");
+                // $('#messaged .modal-body').html("<div class='alert alert-success'>" + data.msg + "</div>");
+                // $('#messaged').modal({ keyboard: false, backdrop: 'static' });
+                // $('#messaged').css({ 'width': '100%' });
+                setInterval(function () {
+                    $("#messaged").modal("hide");
+                }, 3000);
+
+            } else {
+                showAutoSaveStatus('❌ ' + data.msg, 'danger');
+
+                // $("#messaged").modal("show");
+                // $('#messaged .modal-title').text("Personal Details");
+                // $('#messaged .modal-body').html("<div class='alert alert-danger'>" + data.msg + "</div>");
+                // $('#messaged').modal({ keyboard: false, backdrop: 'static' });
+                // $('#messaged').css({ 'width': '100%' });
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            var response = JSON.parse(jqXHR.responseText);
+
+            showAutoSaveStatus('❌ Validation error', 'danger');
+
+            if (response.errors) {
+                var errors = response.errors;
+                $('.personal_details').find('.form-group').removeClass('has-error');
+                $('.personal_details').find('.help-block').remove();
+
+                for (var key in errors) {
+                    if (errors.hasOwnProperty(key)) {
+                        var el = $('.personal_details').find('*[name="' + key + '"]');
+                        $('<span class="help-block"><strong>' + errors[key][0] + '</strong></span>').insertAfter(el);
+                        el.closest('.form-group').addClass('has-error');
+                    }
+                }
+            } else {
+                alert('Something went wrong');
+            }
+        }
+    });
+    return false;
+},
 		 saveProfileLogo:function(THIS,id){			  
 			var $this = $(THIS);
 			var form = new FormData(THIS);			 	 

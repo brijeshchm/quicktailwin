@@ -116,8 +116,8 @@ select.ef-input { padding-left:1rem; }
         <img loading="lazy" decoding="async" src="{{ $clientsList['profile_banner'] ?? asset('images/banner-gallery.jpg') }}"
              alt="{{ $clientsList['business_name'] ?? '' }}"
              class="hero-img absolute inset-0 w-full h-full object-cover" style="transform:scale(1.06);">
-        <div class="hero-overlay-l"></div>
-        <div class="hero-overlay-b"></div>
+        <div class="hero-overlay-l opacity-0"></div>
+        <div class="hero-overlay-b "></div>
 
         <div class="absolute bottom-0 left-0 right-0 px-6 md:px-16 pb-6 md:pb-8 z-10">
             <div class="flex items-center gap-4 md:gap-5 mb-3">
@@ -1034,6 +1034,8 @@ function selectCert(i) {
             <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">{{ $areaBusiness['paragraph'] ?? '' }}</p>
         </div>
         @endif
+
+        
         <div class="grid md:grid-cols-12 gap-10 items-start">
             <div class="md:col-span-8 reveal">
                 @if(!empty($overviewBusiness['heading']))

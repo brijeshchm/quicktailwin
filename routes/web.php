@@ -171,6 +171,8 @@ Route::middleware('auth:clients')->group(function () {
 	Route::get('/business/package', [App\Http\Controllers\Business\AccountController::class, 'package']);
 	Route::get('/business/account-settings', [App\Http\Controllers\Business\AccountController::class, 'accountSettings']);
 	Route::get('/business/business-location', [App\Http\Controllers\Business\BusinessLocationController::class, 'businessLocation']);
+	Route::get('/business/business-overview', [App\Http\Controllers\Business\BusinessController::class, 'businessOverview']);
+	Route::post('/business/saveBusinessOverview/{id}', [App\Http\Controllers\Business\BusinessController::class, 'saveBusinessOverview']);
 
 
 	Route::get('/business/buy-package', [App\Http\Controllers\Business\AccountController::class, 'buyPackage']);
@@ -203,7 +205,7 @@ Route::middleware('auth:clients')->group(function () {
 
 	Route::get('/business/keywords', [App\Http\Controllers\Business\BusinessKeywordController::class, 'keywords']);
 	Route::get('/business/faqs', [App\Http\Controllers\Business\BusinessController::class, 'businessFaqs']);
-	Route::get('/business/saveBusinessFaqs/{id}', [App\Http\Controllers\Business\BusinessController::class, 'saveBusinessFaqs']);
+	Route::post('/business/saveBusinessFaqs/{id}', [App\Http\Controllers\Business\BusinessController::class, 'saveBusinessFaqs']);
 
 
 	Route::post('/business/saveKeywordAssign/{id}', [App\Http\Controllers\Business\BusinessKeywordController::class, 'saveKeywordAssign']);

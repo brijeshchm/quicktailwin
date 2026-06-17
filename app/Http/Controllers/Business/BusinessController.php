@@ -424,14 +424,10 @@ class BusinessController extends Controller
 
 	public function saveBusinessFaqs(Request $request, $id)
 	{
-dd($request->all());
+ 
 		if ($request->ajax()) {
 			try {
-				if (!($request->user()->current_user_can('administrator') || $request->user()->current_user_can('client_update'))) {
-					$status = false;
-					$msg = 'Unauthorised Permission';
-					$code = 400;
-				}
+				 
 				if (!is_null($id)) {
 
 					$client = Client::withTrashed()->where('id', $id)->first();
@@ -495,4 +491,73 @@ dd($request->all());
 	}
   
 	
+
+
+	public function businessOverview(Request $request)
+	{
+		$clientID = auth()->guard('clients')->user()->id;
+		$client = Client::find($clientID);
+		$search = [];
+		if ($request->has('search')) {
+			$search = $request->input('search');
+		}
+	 
+		return view('business.business-overview', ['search' => $search, 'client' => $client]);
+	}
+/*
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function saveBusinessOverview(Request $request, $id)
+	{
+
+		if ($request->ajax()) {
+			try {
+				 
+				if (!is_null($id)) {
+
+					$client = Client::withTrashed()->where('id', $id)->first();
+					$validator = Validator::make($request->all(), [
+						 				 
+						'business_description' => 'nullable|string|max:2000',					 
+						 
+					]);
+
+
+					if ($validator->fails()) {
+						$errorsBag = $validator->getMessageBag()->toArray();
+						return response()->json(['status' => 1, 'errors' => $errorsBag], 400);
+					}
+
+
+				 
+					$client->business_description = $request->input('business_description');
+					$client->business_overview = $request->input('business_overview');
+				 
+				 
+					if ($client->save()) {
+						$status = true;
+						$msg = 'Busineess overview Updated Successfully';
+						$code = 200;
+					} else {
+						$status = false;
+						$msg = 'Busineess overview Not Updated';
+						$code = 400;
+					}
+
+				}
+			} catch (Exception $e) {
+				$status = false;
+				$msg = $e->getMessage();
+				$code = 400;
+			}
+			return response()->json(['status' => $status, 'msg' => $msg], $code);
+		}
+	}
+	
+
+
 }

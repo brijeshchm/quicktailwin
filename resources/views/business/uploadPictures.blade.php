@@ -42,37 +42,40 @@ Find Only Certified Training Institutes, Coaching Centers near you on Estivaledg
                   <form  id="imageform" method="post" enctype="multipart/form-data">
                      {{csrf_field()}}
                      <input type="hidden" name="business_id" value="{{$client->id}}">
-                    <div class="row mb-3">
-                        <?php for($i=0;$i<21;$i++){
+                       <div class="row mb-3">
+                        <?php for($i=0;$i<21;$i++){ ?>
+                        <div class="col-md-4 col-lg-4" id="image{{$i+1}}">
 
-                          
-                      ?>
-                      <div class="col-md-4 col-lg-4" id="image{{$i+1}}">
-                      @if(empty($picture[$i]['large']['name']))
-                      <input type="file" class="form-control fff" name="image{{$i+1}}" accept=".jpg,.jpeg,.png,.webp,.svg">
-                      
-                      @endif
-                      <span class="img-help">
-                        @if(isset($picture[$i]['large']['src'])&&!empty($picture[$i]['large']['src']))
-                        <img loading="lazy" src="{{asset('/'.$picture[$i]['large']['src'])}}" style="height:75px;width:75px;">
-                        <a href="javascript:void(0)" class="remove-thumbnail btn btn-danger btn-sm" data-srno="image{{$i+1}}" title="remove"><i class="bi bi-trash" aria-hidden="true"></i></a>
-                        @endif
-                      </span>
-                       <div class="pt-2"></div>                        
-                      </div>
-                      <?php  } ?>
-                    <!-- <div class="text-center">
-                      <button type="submit" class="btn btn-primary" name="fourth_form_submit" value="Save &amp; Exit">Save Changes</button>
-                    </div> -->
+                            @if(empty($picture[$i]['large']['name']))
+                                <input type="file" class="form-control fff" name="image{{$i+1}}" accept=".jpg,.jpeg,.png,.webp,.svg">
+                            @endif
+
+                            {{-- Track whether this slot was removed --}}
+                            <input type="hidden" name="remove_image{{$i+1}}" id="remove_flag_{{$i+1}}" value="0">
+
+                            <span class="img-help">
+                                @if(isset($picture[$i]['large']['src']) && !empty($picture[$i]['large']['src']))
+                                <img loading="lazy" src="{{asset('/'.$picture[$i]['large']['src'])}}" style="height:75px;width:75px;">
+                                <a href="javascript:void(0)" 
+                                  class="remove-thumbnail btn btn-danger btn-sm" 
+                                  data-srno="image{{$i+1}}" 
+                                  data-slot="{{$i+1}}" 
+                                  title="remove">
+                                    <i class="bi bi-trash" aria-hidden="true"></i>
+                                </a>
+                                @endif
+                            </span>
+                            <div class="pt-2"></div>
+                        </div>
+                        <?php } ?>
+                    </div>
+                   
+              
 
 
-
-                      <!-- <div id="pageLoader" style="display:none;">
-                      <div class="loader"></div>
-                    </div> -->
-
-
-                  </form><!-- End Profile Edit Form -->
+                  </form>
+                  
+                   
                 </div>
               </div><!-- End Bordered Tabs -->
             </div>
@@ -114,9 +117,101 @@ Find Only Certified Training Institutes, Coaching Centers near you on Estivaledg
 
   </script>
 
+<script>
+let autoSaveTimer = null;
+const form     = document.getElementById('imageform');
+const clientId = "{{ isset($client->id) ? $client->id : '' }}";
 
+// ── Track removed slots ──
+document.addEventListener('click', function (e) {
+    const btn = e.target.closest('.remove-thumbnail');
+    if (!btn) return;
 
-  <script>
+    const slot = btn.dataset.slot;
+    const containerId = btn.dataset.srno;
+    const container = document.getElementById(containerId);
+
+    // if (!confirm('Remove this image?')) return;
+
+    // ── Mark this slot as removed ──
+    const removeFlag = document.getElementById('remove_flag_' + slot);
+    if (removeFlag) removeFlag.value = '1';
+
+    // ── Visually remove preview + show file input again ──
+    const imgSpan = container.querySelector('.img-help');
+    if (imgSpan) imgSpan.remove();
+
+    
+
+    // ── Trigger auto-save immediately on removal ──
+    clearTimeout(autoSaveTimer);
+    autoSaveTimer = setTimeout(autoSaveForm, 500);
+});
+
+// ── Normal change trigger (file selection) ──
+form.addEventListener('change', function (e) {
+    // Ignore hidden remove flags triggering twice
+    if (e.target.type === 'hidden') return;
+
+    clearTimeout(autoSaveTimer);
+    autoSaveTimer = setTimeout(autoSaveForm, 800);
+});
+
+function autoSaveForm() {
+    const formData = new FormData(form);
+    showLoader();
+
+    fetch("{{ url('business/saveGallary') }}", {
+        method: "POST",
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+        },
+        body: formData
+    })
+    .then(async (res) => {
+        if (!res.ok) {
+            const errorData = await res.json();
+            throw errorData;
+        }
+        return res.json();
+    })
+    .then(data => {
+        hideLoader();
+        if (data.status) {
+            console.log('Auto-saved ✔');
+
+            $("#messaged").modal("show");
+            $('#messaged .modal-title').text("Successfully");
+            $('#messaged .modal-body').html("<div class='alert alert-success'>" + data.msg + "</div>");
+            $('#messaged').modal({ keyboard: false, backdrop: 'static' });
+            setInterval(function () {
+                $("#messaged").modal("hide");
+            }, 3000);
+
+        } else {
+            console.warn('Auto-save failed');
+        }
+    })
+    .catch((err) => {
+        hideLoader();
+        if (err.errors) {
+            let errorHtml = "<div class='alert alert-danger'><ul>";
+            Object.keys(err.errors).forEach(function (key) {
+                errorHtml += "<li>" + err.errors[key][0] + "</li>";
+            });
+            errorHtml += "</ul></div>";
+
+            $("#messaged").modal("show");
+            $('#messaged .modal-title').text("Validation Error");
+            $('#messaged .modal-body').html(errorHtml);
+        } else {
+            console.error("Unexpected Error:", err);
+        }
+    });
+}
+</script>
+
+  <!-- <script>
     let autoSaveTimer = null;
 
     const form = document.getElementById('imageform');
@@ -205,6 +300,6 @@ Find Only Certified Training Institutes, Coaching Centers near you on Estivaledg
 
         });
     }
-  </script>
+  </script> -->
 
  @endsection
