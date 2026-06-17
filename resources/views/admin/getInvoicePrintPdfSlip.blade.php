@@ -377,8 +377,8 @@ body{
     <div class="header-inner">
 
       <div class="h-left">
-        <img src="https://www.quickdials.com/client/images/small-logo.png" alt="Quick Dials">
-        <div class="co-name">Quick Dials Pvt. Ltd.</div>
+        <img src="https://www.quickdials.com/client/images/small-logo.png" alt="QuickDials">
+        <div class="co-name">QuickDials Pvt. Ltd.</div>
         <div class="co-info">
           G-13, Third Floor, Sector-3, Noida, U.P. India — 201301<br>
           📞 +91-75-9543-9543 &nbsp;|&nbsp;
@@ -592,7 +592,7 @@ body{
       <div class="sig-box">
         <div class="sig-line"></div>
         <div class="sig-label">Authorised Signatory</div>
-        <div class="sig-name">Quick Dials Pvt. Ltd.</div>
+        <div class="sig-name">QuickDials Pvt. Ltd.</div>
       </div>
     </div>
 
@@ -611,7 +611,7 @@ body{
       </div>
       <div class="fo-thank">
         <div class="ty">Thank You!</div>
-        <div class="team">Team Quick Dials Pvt. Ltd.</div>
+        <div class="team">Team QuickDials Pvt. Ltd.</div>
       </div>
     </div>
     <div class="fo-divider"></div>

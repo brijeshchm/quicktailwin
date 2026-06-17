@@ -8,7 +8,7 @@
     <meta name="author" content="">     
     <link href="{{asset('client/images/favicon.png')}}" rel="icon">
 	<meta name="csrf-token" content="<?php echo csrf_token(); ?>">
-    <title>Quick Dials</title>
+    <title>QuickDials</title>
 	 <!-- SCRIPT-ANGULAR-JS -->
     <script src="<?php echo asset('admin/node_modules/angular/angular.min.js') ?>"></script>
     <!-- Bootstrap Core CSS -->
@@ -68,7 +68,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{url('developer/dashboard')}}">Quick Dials</a>
+                <a class="navbar-brand" href="{{url('developer/dashboard')}}">QuickDials</a>
             </div>
             <!-- /.navbar-header -->
 

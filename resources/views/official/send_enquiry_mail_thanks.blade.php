@@ -25,11 +25,11 @@
                             </tr>
                             <tr style="height:60.0pt">
                                 <td width="55%" style="width:55.0%;border:none;padding:0in 7.5pt 0in 7.5pt;height:60.0pt">
-                                    <p class="MsoNormal" style="line-height:0%"><span style="font-size:1.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333"><a href="http://Quick Dials.com/" title="Quick Dials" target="_blank"><span style="text-decoration:none"><img loading="lazy" border="0" id="m_-3031551356041827469_x0000_i1025" src="http://www.quickdials.com/public/assets/images/logo.png" alt="Quick Dials" class="CToWUd" width="100px"></span></a>
+                                    <p class="MsoNormal" style="line-height:0%"><span style="font-size:1.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333"><a href="http://QuickDials.com/" title="QuickDials" target="_blank"><span style="text-decoration:none"><img loading="lazy" border="0" id="m_-3031551356041827469_x0000_i1025" src="http://www.quickdials.com/public/assets/images/logo.png" alt="QuickDials" class="CToWUd" width="100px"></span></a>
                                         </span><u></u><u></u></p>
                                 </td>
                                 <td width="45%" style="border:none;padding:0in 7.5pt 0in 0in;height:60.0pt">
-                                    <p class="MsoNormal" align="right" style="text-align:right;line-height:0%"><span style="font-size:1.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333"><a href="http://Quick Dials.com/" title="Quick Dials" target="_blank"><span style="text-decoration:none"><img loading="lazy" border="0" width="56%" height="auto" id="m_-3031551356041827469_x0000_i1026" src="http://Quick Dials.com/public/assets/images/ISO_9001_Logo.png" alt="ISO" class="CToWUd"></span></a>
+                                    <p class="MsoNormal" align="right" style="text-align:right;line-height:0%"><span style="font-size:1.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333"><a href="http://QuickDials.com/" title="QuickDials" target="_blank"><span style="text-decoration:none"><img loading="lazy" border="0" width="56%" height="auto" id="m_-3031551356041827469_x0000_i1026" src="http://QuickDials.com/public/assets/images/ISO_9001_Logo.png" alt="ISO" class="CToWUd"></span></a>
                                         </span><u></u><u></u></p>
                                 </td>
                                 <td style="border:none;padding:0in 0in 0in 0in;height:60.0pt"></td>
@@ -43,7 +43,7 @@
                                         <tbody>
                                             <tr>
                                                 <td style="background:#232222;padding:12.5pt 6.0pt 12.5pt 6.0pt">
-                                                    <p class="MsoNormal" align="center" style="text-align:center"><span style="font-size:14.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:white">Enquiry From Quick Dials.</span><u></u><u></u></p>
+                                                    <p class="MsoNormal" align="center" style="text-align:center"><span style="font-size:14.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:white">Enquiry From QuickDials.</span><u></u><u></u></p>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -109,7 +109,7 @@
                                                                             </tr>
                                                                             <tr>
                                                                                 <td style="padding:11.25pt 0in 11.25pt 0in">
-                                                                                    <p class="MsoNormal"><strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">Contact Details of Quick Dials:</span></strong><u></u><u></u></p>
+                                                                                    <p class="MsoNormal"><strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">Contact Details of QuickDials:</span></strong><u></u><u></u></p>
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>
@@ -121,7 +121,7 @@
                                                                             <tr>
                                                                                 <td style="padding:0in 0in 0in 0in">
                                                                                     <p class="MsoNormal"><strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">Email ID :</span></strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">
-          info@Quick Dials.com</span><u></u><u></u></p>
+          info@quickdials.com</span><u></u><u></u></p>
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>
@@ -152,7 +152,7 @@
                                                 <td style="padding:22.5pt 15.0pt 22.5pt 15.0pt">
                                                     <div>
                                                         <p class="MsoNormal" style="line-height:18.75pt"><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">Regards,<br>
-      Quick Dials (P) Ltd. </span><u></u><u></u></p>
+      QuickDials (P) Ltd. </span><u></u><u></u></p>
                                                     </div>
                                                 </td>
                                             </tr>

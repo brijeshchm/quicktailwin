@@ -116,7 +116,7 @@
                         <p class="text-xs font-bold uppercase tracking-widest text-violet-600 mb-4">Policy Summary</p>
                         <div class="space-y-3">
                             @foreach([
-                                ['Copyright Owner', 'Quick Dials Pvt Ltd'],
+                                ['Copyright Owner', 'QuickDials Pvt Ltd'],
                                 ['Scope', 'Global'],
                                 ['Takedown', '30 days'],
                                 ['Jurisdiction', 'India'],
@@ -145,7 +145,7 @@
                     </div>
                     <div class="space-y-4 text-gray-600 leading-relaxed">
                         <p>
-                            Quick Dials Pvt Ltd (<strong class="text-gray-900">"Quick Dials"</strong>,
+                            QuickDials Pvt Ltd (<strong class="text-gray-900">"QuickDials"</strong>,
                             <strong class="text-gray-900">"we"</strong>, <strong class="text-gray-900">"us"</strong>,
                             or <strong class="text-gray-900">"our"</strong>) respects the intellectual property rights of others
                             and expects users of our platform to do the same.
@@ -174,13 +174,13 @@
                     <div class="space-y-4 text-gray-600 leading-relaxed">
                         <p>
                             The QuickDials platform and all of its original content, features, and functionality are owned by
-                            Quick Dials Pvt Ltd and are protected by international copyright, trademark, patent, trade secret,
+                            QuickDials Pvt Ltd and are protected by international copyright, trademark, patent, trade secret,
                             and other intellectual property or proprietary rights laws.
                         </p>
                         <p>
                             Unless explicitly stated otherwise, you may not reproduce, distribute, create derivative works of,
                             publicly display, publicly perform, republish, download, store, or transmit any of the material on
-                            our platform without prior written consent from Quick Dials Pvt Ltd.
+                            our platform without prior written consent from QuickDials Pvt Ltd.
                         </p>
                         <div class="bg-violet-50 border border-violet-200 rounded-xl p-5 mt-6">
                             <p class="text-sm font-semibold text-violet-700 mb-3 flex items-center gap-2">
@@ -235,10 +235,10 @@
                         <h2 class="text-xl font-bold text-gray-900">Copyright Takedown Notice</h2>
                     </div>
                     <div class="space-y-4 text-gray-600 leading-relaxed">
-                        <p>Quick Dials Pvt Ltd takes copyright infringement seriously. If you believe that any content on our platform infringes your copyright, you may submit a written takedown notice.</p>
+                        <p>QuickDials Pvt Ltd takes copyright infringement seriously. If you believe that any content on our platform infringes your copyright, you may submit a written takedown notice.</p>
                         <p>
                             The description of the work believed to be infringed, with adequate information to identify the work, must be provided.
-                            Quick Dials responds to all valid notices within <strong class="text-gray-900">30 business days</strong>.
+                            QuickDials responds to all valid notices within <strong class="text-gray-900">30 business days</strong>.
                         </p>
                         <div class="bg-violet-50/60 border border-violet-200 rounded-xl p-5 mt-2">
                             <p class="text-sm font-semibold text-gray-900 mb-3">Your notice must include:</p>
@@ -264,7 +264,7 @@
                         <h2 class="text-xl font-bold text-gray-900">Jurisdiction</h2>
                     </div>
                     <div class="space-y-4 text-gray-600 leading-relaxed">
-                        <p>This Copyright Policy shall be governed by and construed in accordance with the laws of India, without regard to its conflict of law provisions. Quick Dials Pvt Ltd is registered and operates under the jurisdiction of Indian law.</p>
+                        <p>This Copyright Policy shall be governed by and construed in accordance with the laws of India, without regard to its conflict of law provisions. QuickDials Pvt Ltd is registered and operates under the jurisdiction of Indian law.</p>
                         <p>For disputes arising from this policy, you agree to submit to the exclusive jurisdiction of the courts located in Bangalore, Karnataka, India. This policy applies globally to all users of the QuickDials platform regardless of geographic location.</p>
                         <div class="flex flex-wrap gap-3 mt-4">
                             @foreach(['Information Technology Act, 2000', 'Copyright Act, 1957', 'DMCA Compliant', 'GDPR Aware'] as $tag)

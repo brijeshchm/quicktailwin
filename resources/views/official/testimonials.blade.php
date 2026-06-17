@@ -1,5 +1,5 @@
 @extends('client.layouts.app')
-@section('title', 'Testimonials Quick Dials- Local search, IT Training, Service, overseas education')
+@section('title', 'Testimonials QuickDials- Local search, IT Training, Service, overseas education')
 @section('description', 'Testimonials Dials- Local search, IT Training, Service, overseas education')
 @section('keywords', 'Testimonials Dials- Local search, IT Training, Service, overseas education')
 @section('content')

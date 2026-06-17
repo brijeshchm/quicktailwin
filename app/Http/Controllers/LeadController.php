@@ -1957,7 +1957,7 @@ class LeadController extends Controller
 							if (null != $client->email || '' != $client->email) {
 								$this->sendLeadEmail($client, $leadDetail[0]);
 							}
-							/* $smsMessage = "Enquiry on Quick Dials:
+							/* $smsMessage = "Enquiry on QuickDials:
 							%0D%0AName: ".$leadDetail[0]->name."
 							%0D%0ALooking For: ".$leadDetail[0]->kw_text."
 							%0D%0AIn City: ".$leadDetail[0]->city."
@@ -1966,7 +1966,7 @@ class LeadController extends Controller
 							%0D%0AArea: ".$leadDetail[0]->area."
 							%0D%0ARemark: ".$leadDetail[0]->remark."
 							%0D%0A--
-							%0D%0AQuick Dials"; */
+							%0D%0AQuickDials"; */
 							$smsMessage = "Dear Institute,";
 							$smsMessage .= "%0D%0A%0D%0A";
 							$smsMessage .= $leadDetail[0]->name . " enquired for " . $leadDetail[0]->kw_text . " Training.";
@@ -1976,7 +1976,7 @@ class LeadController extends Controller
 							$smsMessage .= "%0D%0AMob: " . $leadDetail[0]->mobile;
 							$smsMessage .= "%0D%0ACity: " . $leadDetail[0]->city;
 							$smsMessage .= "%0D%0AArea: " . $leadDetail[0]->area;
-							$smsMessage .= "%0D%0A- Quick Dials Team";
+							$smsMessage .= "%0D%0A- QuickDials Team";
 							//	sendSMS($client->mobile,$smsMessage);
 							//	if(!empty($client->sec_mobile))
 							//	sendSMS($client->sec_mobile,$smsMessage);

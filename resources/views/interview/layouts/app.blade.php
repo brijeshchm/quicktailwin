@@ -25,10 +25,10 @@
     <meta content="All, FOLLOW" name="BINGBots" />
     <meta content="All, FOLLOW" name="YAHOOBots" />
     <meta content="All, FOLLOW" name="GoogleBots" />
-    <meta name="copyright" content="Quick Dials">
-    <meta name="author" content="Quick Dials" />
+    <meta name="copyright" content="QuickDials">
+    <meta name="author" content="QuickDials" />
     <meta http-equiv="CACHE-CONTROL" content="PUBLIC" />
-    <meta name="publisher" content="Quick Dials" />
+    <meta name="publisher" content="QuickDials" />
     <meta name="identifier-URL" content="{{url('/')}}">
     <meta name="msvalidate.01" content="456AED0115D50D42C4F3A79DAB89D41D" />
     <!-- <meta name="p:domain_verify" content="6b026cb56a0cbb53c2811890ecdc5b07"/> -->
@@ -47,14 +47,14 @@
     <meta property="og:title" content="@yield('title')" />
     <meta property="og:description" content="@yield('description')" />
     <meta property="og:url" content="{{ URL::current() }}" />
-    <meta property="og:site_name" content="Quick Dials" />
-    <meta name="application-name" content="Quick Dials" />
+    <meta property="og:site_name" content="QuickDials" />
+    <meta name="application-name" content="QuickDials" />
     <meta property="fb:app_id" content="https://www.facebook.com/quickindofficial/" />
     <meta property="og:image" content="{{asset('client/images/favicon.png')}}" />
     <meta property="og:image:secure_url" content="{{asset('client/images/favicon.png')}}" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="628" />
-    <meta property="og:image:alt" content="Quick Dials" />
+    <meta property="og:image:alt" content="QuickDials" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="@yield('title')" />
     <meta name="twitter:keyword" content="@yield('keyword')" />
@@ -136,7 +136,7 @@ function getStyleValue(elmnt,style) {
     <div class="bar left" style="width:100%;overflow:hidden;height:44px">
        <a href="javascript:void(0);" class="topnav-icons fa fa-menu hide-large left bar-item button active" onclick="open_menu('tutorials')" title="Menu"></a>
     
-      <a class="bar-item logo-hover" href="{{url('')}}" ><img src="<?php echo asset('client/images/small-logo.png'); ?>" alt="Quick Dials" style="width: 140px;
+      <a class="bar-item logo-hover" href="{{url('')}}" ><img src="<?php echo asset('client/images/small-logo.png'); ?>" alt="QuickDials" style="width: 140px;
     margin-top: -27px;"/></a>
       <a class="bar-item button" href="{{url('interviews/php-interview-question-answer')}}" title='php interview question answer'>PHP Interview header</a>
       <a class="bar-item button" href="{{url('interviews/mysql-interview-question-answer')}}" title='mysql-interview-question-answer'>Mysql Interview</a>

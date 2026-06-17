@@ -19,7 +19,7 @@
     <div class="container">
       <div class="row align-items-center padding-invoice-em-top">
         <div class="col-sm-4 text-sm-left mb-3 mb-sm-0">
-          <img id="logo" src="https://www.quickdials.com/client/images/small-logo.jpg" title="Quick Dials" alt="Quick Dials Logo" width="250" />
+          <img id="logo" src="https://www.quickdials.com/client/images/small-logo.jpg" title="QuickDials" alt="QuickDials Logo" width="250" />
         </div>
         <div class="col-sm-8 text-sm-left">
           <div class="header-info-section">

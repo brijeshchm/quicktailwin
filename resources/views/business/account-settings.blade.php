@@ -1,6 +1,6 @@
 @extends('business.layouts.app')
 @section('title')
-  Quick Dials | package
+  QuickDials | package
 @endsection
 @section('keyword')
   Find Best It Training Centre near You, Find Best It Training Institute near You, Find Top 10 IT Training Institute near

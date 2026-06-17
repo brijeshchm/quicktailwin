@@ -1,14 +1,14 @@
 @extends('business.layouts.app')
 
 @section('title')
-    Certificate Quick Dials
+    Certificate QuickDials
 @endsection
 @section('keyword')
     Certificate
 
 @endsection
 @section('description')
-    Find Only Certified Training Institutes, Coaching Centers near you on Quick Dials and Get Free counseling, Free Demo
+    Find Only Certified Training Institutes, Coaching Centers near you on QuickDials and Get Free counseling, Free Demo
     Classes, and Get Placement Assistence.
 @endsection
 @section('content')

@@ -1,5 +1,5 @@
 @extends('client.layouts.app')
-@section('title', 'Refund Policy Quick Dials- Local search, IT Training, Service, overseas education')
+@section('title', 'Refund Policy QuickDials- Local search, IT Training, Service, overseas education')
 @section('description', 'Refund Policy Dials- Local search, IT Training, Service, overseas education')
 @section('keywords', 'Refund Policy Dials- Local search, IT Training, Service, overseas education')
 @section('content')

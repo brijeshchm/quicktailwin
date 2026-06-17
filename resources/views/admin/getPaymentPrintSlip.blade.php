@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Quick Dials — Order <?php echo date('d-m-Y H:i:s'); ?></title>
+<title>QuickDials — Order <?php echo date('d-m-Y H:i:s'); ?></title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap');
 
@@ -399,8 +399,8 @@
   <div class="inv-header">
     <div class="header-top">
       <div class="brand-block">
-        <img src="https://www.quickdials.com/client/images/small-logo.png" alt="Quick Dials">
-        <h1>Quick Dials Internet Pvt. Ltd.</h1>
+        <img src="https://www.quickdials.com/client/images/small-logo.png" alt="QuickDials">
+        <h1>QuickDials Internet Pvt. Ltd.</h1>
         <p>
           Pillar No.33, NH-19, Faridabad, Haryana<br>
           📞 +91-75-5943-5943 &nbsp;|&nbsp; ✉ info@quickdials.com &nbsp;|&nbsp; 🌐 www.quickdials.com
@@ -417,7 +417,7 @@
   <!-- ══ GREETING ══ -->
   <div class="greeting-strip">
     <div class="dot"></div>
-    Dear <strong>&nbsp;<?php echo $paymentuprint->business_name ?></strong>, &nbsp;— Thank you for choosing Quick Dials!.
+    Dear <strong>&nbsp;<?php echo $paymentuprint->business_name ?></strong>, &nbsp;— Thank you for choosing QuickDials!.
   </div>
 
   <!-- ══ BODY ══ -->
@@ -573,7 +573,7 @@
     </div>
     <div class="thank-block">
       <div class="thank-text">Thank You!</div>
-      <div class="team-text">Team Quick Dials Internet Pvt. Ltd.</div>
+      <div class="team-text">Team QuickDials Internet Pvt. Ltd.</div>
     </div>
   </div>
 

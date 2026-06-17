@@ -11,7 +11,7 @@
 
     <meta name="robots" content="noindex, follow">
 
-    <meta name="author" content="Quick Dials">
+    <meta name="author" content="QuickDials">
     <meta property="og:title" content="Quickdials Payment checkout" />
     <meta property="og:description" content="Quickdials Payment checkout" />
     <meta property="og:url" content="{{ url()->current() }}" />
@@ -783,7 +783,7 @@ jQuery(document).ready(function ($) {
         var razorpay_options = {
             key: key_id,
             amount: merchant_total,
-            name: 'Quick Dials Pvt Ltd',
+            name: 'QuickDials Pvt Ltd',
             description: 'Package Pay',
             image: 'https://www.quickdials.com/client/images/small-logo.jpg',
             netbanking: true,
@@ -811,7 +811,7 @@ jQuery(document).ready(function ($) {
                         merchant_total: merchant_total,
                         merchant_amount: merchant_amount,
                         currency_code_id: currency_code_id,
-                        pay: 'Quick Dials Pvt Ltd',
+                        pay: 'QuickDials Pvt Ltd',
                         email: email,
                         phone: phone,
                         billing_country: billing_country,

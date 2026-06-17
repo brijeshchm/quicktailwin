@@ -219,7 +219,7 @@ hr{
 				</tr>
 			</table>			
 			<address>
-				<b style="font-size: 18px;">Quick Dials Pvt Ltd</b>
+				<b style="font-size: 18px;">QuickDials Pvt Ltd</b>
 				<p> G-13, Sector-3 Noida, U.P, India </p>
 				<p>Phone : 120-49999</p>
 				<p>Email : info@quickdials.com</p>

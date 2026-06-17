@@ -1,6 +1,6 @@
  
 @extends('client.layouts.app')
-@section('title', $metaTitle ?? 'Quick Dials | A Local Search Engine for Businesses')
+@section('title', $metaTitle ?? 'QuickDials | A Local Search Engine for Businesses')
 @section('description', $metaDescription ?? 'Category local search engine, for Certified Training Institutes near you Quickdials, Hotels, Salons, Real Estate, Travel, Healthcare, Education,Find addresses, phone numbers, reviews and ratings, photos, maps of businesses Find Only Certified Training Institutes')
 @section('keywords', $metaKeywords ?? 'Find Best It Training Centre near You, Find Best It Training Institute near You, Find Top 10 IT Training Institute near You, Find Best Entrance Exam Preparation Centre Near you, Top 10 Entrance Exam Centre Near you, Find Best Distance Education Centre Near You, Find Top 10 Distance Education Centre Near You, Find Best School And Colleges Near You, Find Top 10 school And College Near You, Get Education Loan, GET Free career Counselling, Find Best overseas education consultants Near you, Find Top 10 overseas education consultants Near you')
 @section('content')
@@ -684,7 +684,7 @@ select.form-input { padding-left:1rem; }
 <section class="py-16 bg-gray-100">
     <div class="max-w-7xl mx-auto px-4 text-center">
         <h2 class="reveal text-3xl font-bold mb-2">Powerful Features for Your Business</h2>
-        <p class="reveal text-gray-500 mb-10">Discover how Quick Dials can transform your workforce management</p>
+        <p class="reveal text-gray-500 mb-10">Discover how QuickDials can transform your workforce management</p>
         <div class="grid md:grid-cols-3 gap-6">
             @foreach($features as $i => $feat)
             <div class="reveal bg-white rounded-2xl p-6 shadow-md hover:shadow-xl
@@ -705,14 +705,14 @@ select.form-input { padding-left:1rem; }
 <section class="bg-gray-100">
     <div class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-10 text-center">
         <h2 class="reveal text-2xl md:text-3xl font-bold">
-            How Quick Dials help You to Grow your Business
+            How QuickDials help You to Grow your Business
         </h2>
     </div>
     <div class="max-w-7xl mx-auto px-4 py-12 grid md:grid-cols-2 gap-10">
         <div class="reveal">
-            <h3 class="text-xl font-semibold mb-3">How Quick Dials help You to Grow your Business?</h3>
-            <p class="text-gray-600 mb-4">Quick Dials helps grow your business by boosting local visibility, generating quality leads, and connecting you with customers searching for your services.</p>
-            <h4 class="font-semibold mb-2">What is Quick Dials?</h4>
+            <h3 class="text-xl font-semibold mb-3">How QuickDials help You to Grow your Business?</h3>
+            <p class="text-gray-600 mb-4">QuickDials helps grow your business by boosting local visibility, generating quality leads, and connecting you with customers searching for your services.</p>
+            <h4 class="font-semibold mb-2">What is QuickDials?</h4>
             <p class="text-gray-600 mb-4">A platform designed for students, parents, and professionals seeking reliable information across India's diverse education and industrial sectors.</p>
             <ul class="space-y-2">
                 @foreach(['Education: Schools, coaching centers, institutions','Manufacturing: Automotive, pharma, textiles','Service Industries: IT, finance, tourism, healthcare','Core Sectors: Electricity, steel, refinery, cement'] as $item)
@@ -731,7 +731,7 @@ select.form-input { padding-left:1rem; }
             </ul>
         </div>
         <div class="reveal" style="transition-delay:.2s;">
-            <h3 class="text-xl font-semibold mb-3">Why choose Quick Dials for growing your business?</h3>
+            <h3 class="text-xl font-semibold mb-3">Why choose QuickDials for growing your business?</h3>
             <ul class="space-y-2 mb-6">
                 @foreach(['Unique work module different from others','Conversion-focused system','Manually verified leads','Organic + inorganic lead generation','Strong channel partnerships','Double verified leads by experts'] as $item)
                 <li class="flex items-start gap-2 text-gray-700">

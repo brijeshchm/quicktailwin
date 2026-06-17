@@ -195,7 +195,7 @@ jQuery(document).on('click', '#razor-pay-now', function (e) {
 
     var currency_code_id = jQuery('form#razorpay-frm-payment').find('input#currency').val();
       var key_id = jQuery('form#razorpay-frm-payment').find('input#RAZOR_KEY_ID').val();
-    var store_name = 'Quick Dials Pvt Ltd';
+    var store_name = 'QuickDials Pvt Ltd';
     var store_description = 'Package Pay';
     var store_logo = 'https://www.quickdials.com/client/images/small-logo.jpg';
     var email = jQuery('form#razorpay-frm-payment').find('input#billing-email').val();

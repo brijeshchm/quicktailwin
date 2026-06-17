@@ -19,8 +19,8 @@
 @else
 <meta name="robots" content="index, follow">
 @endif
-<meta name="author" content="Quick Dials">
-<meta property="og:title" content="@yield('title', 'Quick Dials')" />
+<meta name="author" content="QuickDials">
+<meta property="og:title" content="@yield('title', 'QuickDials')" />
 <meta property="og:description" content="@yield('description')" />
 <meta property="og:url" content="{{ url()->current() }}" />
 <meta property="og:type" content="website" />

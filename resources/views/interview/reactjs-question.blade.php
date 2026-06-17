@@ -1,12 +1,12 @@
  @extends('interview.layouts.app')
 @section('title')
-Quick Dials- Business Services
+QuickDials- Business Services
 @endsection 
 @section('keywords')
-Quick Dials-  Business Services list 
+QuickDials-  Business Services list 
 @endsection
 @section('description'),  
-Quick Dials- Business Services POPULAR CATEGORIES, B2B & BUSINESS SERVICES
+QuickDials- Business Services POPULAR CATEGORIES, B2B & BUSINESS SERVICES
 @endsection
 
 

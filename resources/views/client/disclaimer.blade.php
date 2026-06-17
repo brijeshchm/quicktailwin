@@ -1,7 +1,7 @@
 @extends('client.layouts.app')
-@section('title', 'Quick Dials- Local search, IT Training, Playschool, overseas education, Business owners')
-@section('description', 'Quick Dials- Local search, IT Training, Playschool, overseas education, Business owners')
-@section('keywords', 'Quick Dials- Local search, IT Training, Playschool, overseas education, Business owners')
+@section('title', 'QuickDials- Local search, IT Training, Playschool, overseas education, Business owners')
+@section('description', 'QuickDials- Local search, IT Training, Playschool, overseas education, Business owners')
+@section('keywords', 'QuickDials- Local search, IT Training, Playschool, overseas education, Business owners')
 
 @section('content')	
 <div class="container">

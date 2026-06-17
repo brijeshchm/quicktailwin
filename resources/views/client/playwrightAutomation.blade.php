@@ -1,5 +1,5 @@
 @extends('client.layouts.app')
-@section('title', 'Quick Dials | A Local Search Engine for Businesses')
+@section('title', 'QuickDials | A Local Search Engine for Businesses')
 @section('description', 'Find Only Certified Training Institutes, Coaching Centers near you on quickdials and Get Free counseling, Free Demo Classes, and Get Placement Assistence.')
 @section('keywords', 'Find Best It Training Centre near You, Find Best It Training Institute near You, Find Top 10 IT Training Institute near You, Find Best Entrance Exam Preparation Centre Near you, Top 10 Entrance Exam Centre Near you, Find Best Distance Education Centre Near You, Find Top 10 Distance Education Centre Near You, Find Best School And Colleges Near You, Find Top 10 school And College Near You, Get Education Loan, GET Free career Counselling, Find Best overseas education consultants Near you, Find Top 10 overseas education consultants Near you.')
 @section('content')
@@ -8,7 +8,7 @@
 {
  "@context": "https://schema.org",
  "@type": "WebPage",
- "name": "{{ $key ?? 'Quick Dials' }}",
+ "name": "{{ $key ?? 'QuickDials' }}",
  "description": "{{ $descrip ?? $key .' in India' }}",
  "url": "{{ url()->current() }}"
 } 

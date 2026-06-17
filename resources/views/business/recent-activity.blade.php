@@ -1,12 +1,12 @@
 @extends('business.layouts.app')
 @section('title')
-    Recent Activity Quick Dials
+    Recent Activity QuickDials
 @endsection
 @section('keyword')
     Recent Activity
 @endsection
 @section('description')
-    Find Only Certified Training Institutes, Coaching Centers near you on Quick Dials and Get Free counseling, Free Demo
+    Find Only Certified Training Institutes, Coaching Centers near you on QuickDials and Get Free counseling, Free Demo
     Classes, and Get Placement Assistence.
 @endsection
 @section('content')

@@ -170,7 +170,7 @@ class BusinessController extends Controller
 				$client->save();
 				$client = Client::find($clientID);
 
-				$smsMessage = "Thanks for registering with Quick Dials.
+				$smsMessage = "Thanks for registering with QuickDials.
 				%0D%0ALogin %26 Update your profile to get more leads to grow your business.
 				%0D%0A%0D%0ABusiness Name:" . $client->business_name . "
 				%0D%0AURL:www.quickdials.com

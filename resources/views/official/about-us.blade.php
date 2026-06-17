@@ -1,5 +1,5 @@
 @extends('client.layouts.app')
-@section('title', 'About QuickDials — India\'s Trusted Service Marketplace & Lead Platform')
+@section('title', 'About QuickDials — India's Trusted Service Marketplace & Lead Platform')
 @section('description', 'QuickDials connects 1M+ customers with verified businesses across IT, weddings, home services, healthcare, real estate, finance, travel & more. Get quality leads, real reviews, and direct customer connections')
 @section('keywords', 'About QuickDials, lead management software, service marketplace india, business listing, get business leads')
 @section('content')
@@ -227,10 +227,10 @@
                         </div>
                         <p class="reveal text-xl sm:text-2xl font-bold text-gray-400 leading-snug"
                            style="transition-delay:.08s;">
-                            "Quick Dials was started with the objective of making the search for a service easy
+                            "QuickDials was started with the objective of making the search for a service easy
                             and reliable. The idea behind it is to bring users and service providers together on
                             a single platform. The idea here is the establishment of a basis of trust, quality,
-                            and ease. Quick Dials would like users to save time and make even the most difficult
+                            and ease. QuickDials would like users to save time and make even the most difficult
                             choices with ease."
                         </p>
                     </div>
@@ -253,7 +253,7 @@
                         </div>
                         <p class="reveal text-xl sm:text-2xl font-bold text-gray-400 leading-snug"
                            style="transition-delay:.08s;">
-                            "Quick Dials uses technology to match users with the right services based on their
+                            "QuickDials uses technology to match users with the right services based on their
                             real needs. It does not show random results. The platform focuses on genuine listings,
                             correct details, and real user interest. This helps users get better results and
                             helps service providers get serious leads."
