@@ -202,6 +202,8 @@ Route::middleware('auth:clients')->group(function () {
 
 
 	Route::get('/business/keywords', [App\Http\Controllers\Business\BusinessKeywordController::class, 'keywords']);
+	Route::get('/business/faqs', [App\Http\Controllers\Business\BusinessController::class, 'businessFaqs']);
+	Route::get('/business/saveBusinessFaqs/{id}', [App\Http\Controllers\Business\BusinessController::class, 'saveBusinessFaqs']);
 
 
 	Route::post('/business/saveKeywordAssign/{id}', [App\Http\Controllers\Business\BusinessKeywordController::class, 'saveKeywordAssign']);

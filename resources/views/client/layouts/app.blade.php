@@ -148,7 +148,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             'https://www.linkedin.com/company/quickdialsoffical/',
             'https://www.pinterest.com/quickdialsoffical/',
             'https://www.instagram.com/quickdialsoffical/',
-            'https://www.youtube.com/@quickdialsofficial/',
+            'https://www.youtube.com/@quickdialsofficial',
         ],
     ];
  $schemas[] = [
@@ -185,15 +185,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         'opens'  => '00:00',
         'closes' => '23:59',
     ],
-
-    'sameAs' => [
-        'https://www.facebook.com/quickdialsofficial/',
-        'https://x.com/Quickdials',
-        'https://www.linkedin.com/company/quickdialsoffical/',
-        'https://www.pinterest.com/quickdialsoffical/',
-        'https://www.instagram.com/quickdialsoffical/',
-        'https://www.youtube.com/@quickdialsofficial/',
-    ],
+ 
 
     'serviceArea' => [
         '@type' => 'Country',

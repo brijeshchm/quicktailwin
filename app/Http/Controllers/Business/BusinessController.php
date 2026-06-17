@@ -342,7 +342,7 @@ class BusinessController extends Controller
 		return view('business.buyPackage', ['search' => $search, 'client' => $client]);
 	}
 
-	/**
+	/*
 	 * Export assigned leads.
 	 */
 	public function getLeadsExcel(Request $request)
@@ -377,7 +377,7 @@ class BusinessController extends Controller
 	}
 
 
-	/**
+	/*
 	 * Handling client remark
 	 *
 	 * @param  int  $id
@@ -408,4 +408,91 @@ class BusinessController extends Controller
 		}
 
 	}
+	
+	public function businessFaqs(Request $request)
+	{
+		$clientID = auth()->guard('clients')->user()->id;
+		$client = Client::find($clientID);
+		$search = [];
+		if ($request->has('search')) {
+			$search = $request->input('search');
+		}
+		
+		return view('business.business-faqs', ['search' => $search, 'client' => $client, 'clientID' => $clientID]);
+	}
+
+
+	public function saveBusinessFaqs(Request $request, $id)
+	{
+dd($request->all());
+		if ($request->ajax()) {
+			try {
+				if (!($request->user()->current_user_can('administrator') || $request->user()->current_user_can('client_update'))) {
+					$status = false;
+					$msg = 'Unauthorised Permission';
+					$code = 400;
+				}
+				if (!is_null($id)) {
+
+					$client = Client::withTrashed()->where('id', $id)->first();
+					$validator = Validator::make($request->all(), [
+						 				 
+						'faqq1' => 'nullable|string|max:2000',					 
+						 
+					]);
+
+
+					if ($validator->fails()) {
+						$errorsBag = $validator->getMessageBag()->toArray();
+						return response()->json(['status' => 1, 'errors' => $errorsBag], 400);
+					}
+
+
+				 
+					$client->faqq1 = $request->input('faqq1');
+					$client->faqa1 = $request->input('faqa1');
+					$client->faqq2 = $request->input('faqq2');
+					$client->faqa2 = $request->input('faqa2');
+					$client->faqq3 = $request->input('faqq3');
+					$client->faqa3 = $request->input('faqa3');
+					$client->faqq4 = $request->input('faqq4');
+					$client->faqa4 = $request->input('faqa4');
+					$client->faqq5 = $request->input('faqq5');
+					$client->faqa5 = $request->input('faqa5');
+					$client->faqq6 = $request->input('faqq6');
+					$client->faqa6 = $request->input('faqa6');
+
+					$client->faqq7 = $request->input('faqq7');
+					$client->faqa7 = $request->input('faqa7');
+
+					$client->faqq8 = $request->input('faqq8');
+					$client->faqa8 = $request->input('faqa8');
+
+					$client->faqq9 = $request->input('faqq9');
+					$client->faqa9 = $request->input('faqa9');
+
+					$client->faqq10 = $request->input('faqq10');
+					$client->faqa10 = $request->input('faqa10');
+				 
+					if ($client->save()) {
+						$status = true;
+						$msg = 'Busineess overview Updated Successfully';
+						$code = 200;
+					} else {
+						$status = false;
+						$msg = 'Busineess overview Not Updated';
+						$code = 400;
+					}
+
+				}
+			} catch (Exception $e) {
+				$status = false;
+				$msg = $e->getMessage();
+				$code = 400;
+			}
+			return response()->json(['status' => $status, 'msg' => $msg], $code);
+		}
+	}
+  
+	
 }

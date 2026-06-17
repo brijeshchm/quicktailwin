@@ -735,6 +735,61 @@ jQuery(document).on('click', '#razor-pay-now', function (e) {
 				}); 
 				 return false;	
 			},
+			saveBusinessFaqs:function(THIS,id){			     
+			var $this = $(THIS);
+			var form = new FormData(THIS);	
+				$.ajax({
+					url:"/business/saveBusinessFaqs/"+id,
+					type:"POST",					   
+					dataType:"json",	
+					data:form,
+					cache: false,
+					contentType: false, 
+                    processData: false,                      
+					success:function(data){
+					  	
+						if(data.status){
+                        
+						$("#messaged").modal("show");                        							 
+						$('#messaged .modal-title').text("Business Location");	
+						$('#messaged .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
+						$('#messaged').modal({keyboard:false,backdrop:'static'});
+						$('#messaged').css({'width':'100%'});					
+						dataTableAssignedZones.ajax.reload( null, false );  
+						setInterval(function() {
+						$("#messaged").modal("hide");
+						}, 3000);	 
+							 
+						}else{
+							$("#messaged").modal("show");                        							 
+							$('#messaged .modal-title').text("Business Location");	
+							$('#messaged .modal-body').html("<div class='alert alert-danger'>"+data.msg+"</div>");			
+							$('#messaged').modal({keyboard:false,backdrop:'static'});
+							$('#messaged').css({'width':'100%'});
+								
+						}
+					},
+					error:function(jqXHR, textStatus, errorThrown){
+							var response = JSON.parse(jqXHR.responseText);	
+							if(response.status){						 
+							var errors = response.errors;						 
+							$('.buss_location').find('.form-group').removeClass('has-error');
+							$('.buss_location').find('.help-block').remove();
+							for (var key in errors) {
+							if(errors.hasOwnProperty(key)){	
+							var el = $('.buss_location').find('*[name="'+key+'"]');
+							$('<span class="help-block"><strong>'+errors[key][0]+'</strong></span>').insertAfter(el);
+							el.closest('.form-group').addClass('has-error');
+							}
+							}				 
+							}else{
+							alert('Something went wrong');
+							}
+			 
+					}
+				}); 
+				 return false;	
+			},
 			
 			saveKeywordAssign:function(THIS,id){			     
 			var $this = $(THIS);

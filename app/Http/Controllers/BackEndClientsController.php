@@ -768,7 +768,7 @@ class BackEndClientsController extends Controller
 	}
 
 
-	/**
+	/*
 	 * Update the specified resource in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
@@ -934,7 +934,143 @@ class BackEndClientsController extends Controller
 		}
 	}
 
-	/**
+	/*
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function ediSaveBusinessOverView(Request $request, $id)
+	{
+
+		if ($request->ajax()) {
+			try {
+				if (!($request->user()->current_user_can('administrator') || $request->user()->current_user_can('client_update'))) {
+					$status = false;
+					$msg = 'Unauthorised Permission';
+					$code = 400;
+				}
+				if (!is_null($id)) {
+
+					$client = Client::withTrashed()->where('id', $id)->first();
+					$validator = Validator::make($request->all(), [
+						 				 
+						'business_description' => 'nullable|string|max:2000',					 
+						 
+					]);
+
+
+					if ($validator->fails()) {
+						$errorsBag = $validator->getMessageBag()->toArray();
+						return response()->json(['status' => 1, 'errors' => $errorsBag], 400);
+					}
+
+
+				 
+					$client->business_description = $request->input('business_description');
+					$client->business_overview = $request->input('business_overview');
+				 
+				 
+					if ($client->save()) {
+						$status = true;
+						$msg = 'Busineess overview Updated Successfully';
+						$code = 200;
+					} else {
+						$status = false;
+						$msg = 'Busineess overview Not Updated';
+						$code = 400;
+					}
+
+				}
+			} catch (Exception $e) {
+				$status = false;
+				$msg = $e->getMessage();
+				$code = 400;
+			}
+			return response()->json(['status' => $status, 'msg' => $msg], $code);
+		}
+	}
+	/*
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function ediSaveBusinessFAQ(Request $request, $id)
+	{
+
+		if ($request->ajax()) {
+			try {
+				if (!($request->user()->current_user_can('administrator') || $request->user()->current_user_can('client_update'))) {
+					$status = false;
+					$msg = 'Unauthorised Permission';
+					$code = 400;
+				}
+				if (!is_null($id)) {
+
+					$client = Client::withTrashed()->where('id', $id)->first();
+					$validator = Validator::make($request->all(), [
+						 				 
+						'faqq1' => 'nullable|string|max:2000',					 
+						 
+					]);
+
+
+					if ($validator->fails()) {
+						$errorsBag = $validator->getMessageBag()->toArray();
+						return response()->json(['status' => 1, 'errors' => $errorsBag], 400);
+					}
+
+
+				 
+					$client->faqq1 = $request->input('faqq1');
+					$client->faqa1 = $request->input('faqa1');
+					$client->faqq2 = $request->input('faqq2');
+					$client->faqa2 = $request->input('faqa2');
+					$client->faqq3 = $request->input('faqq3');
+					$client->faqa3 = $request->input('faqa3');
+					$client->faqq4 = $request->input('faqq4');
+					$client->faqa4 = $request->input('faqa4');
+					$client->faqq5 = $request->input('faqq5');
+					$client->faqa5 = $request->input('faqa5');
+					$client->faqq6 = $request->input('faqq6');
+					$client->faqa6 = $request->input('faqa6');
+
+					$client->faqq7 = $request->input('faqq7');
+					$client->faqa7 = $request->input('faqa7');
+
+					$client->faqq8 = $request->input('faqq8');
+					$client->faqa8 = $request->input('faqa8');
+
+					$client->faqq9 = $request->input('faqq9');
+					$client->faqa9 = $request->input('faqa9');
+
+					$client->faqq10 = $request->input('faqq10');
+					$client->faqa10 = $request->input('faqa10');
+				 
+					if ($client->save()) {
+						$status = true;
+						$msg = 'Busineess overview Updated Successfully';
+						$code = 200;
+					} else {
+						$status = false;
+						$msg = 'Busineess overview Not Updated';
+						$code = 400;
+					}
+
+				}
+			} catch (Exception $e) {
+				$status = false;
+				$msg = $e->getMessage();
+				$code = 400;
+			}
+			return response()->json(['status' => $status, 'msg' => $msg], $code);
+		}
+	}
+
+	/*
 	 * Update the specified resource in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request

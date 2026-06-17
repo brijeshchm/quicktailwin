@@ -1753,7 +1753,7 @@ Instead of limiting learning to theory, the course takes you through:.",
 			]);
 
 		$response = $res->successful() ? $res->json() : null;
-	
+ 
 
         if (!$response) {
             abort(410);

@@ -140,6 +140,12 @@
           <span>Recent Activity</span>
         </a>
         </li>     
+        <li class="nav-item">
+        <a class="nav-link <?php if(Request::segment(2)=='faqs') { echo "active"; } ?>" href="{{url('business/faqs')}}">
+          <i class="bi bi-question"></i>
+          <span>Faqs</span>
+        </a>
+        </li>     
 
 
         <li class="nav-item">

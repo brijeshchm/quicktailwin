@@ -137,6 +137,9 @@
           <div class="sidebar-item" onclick="showContent('businessOverview')">
             <i class="fa fa-info-circle"></i><a href="#businessOverview">Business Overview</a>
         </div>
+          <div class="sidebar-item" onclick="showContent('businessFaq')">
+            <i class="fa fa-question-circle"></i><a href="#businessFaq">FAQs</a>
+        </div>
 
 
         <div class="sidebar-item" onclick="showContent('businessLocation')">
@@ -656,7 +659,7 @@
         <div class="form-container">
             <h4>Business Overview</h4>
            
-			<form class="form-horizontal"  action="" onsubmit="return ClientController.ediSaveBusinessInfo(this,<?php echo (isset($client->id)? $client->id:""); ?>)" method="POST">
+			<form class="form-horizontal"  action="" onsubmit="return ClientController.ediSaveBusinessOverView(this,<?php echo (isset($client->id)? $client->id:""); ?>)" method="POST">
 				{{csrf_field()}}
 				<div class="form-group col-md-12">
 					<div class="col-md-12">
@@ -682,21 +685,176 @@
                
 					</div>
 				</div>
-
-         
-			
 			 
-			 
-				 
-				 
-			
-			 
-
-				 
    		 
 				<div class="form-group"> 
 					<div class="col-sm-12"> 
-					<input type="hidden" name="contact_info" value="contact_info">
+					<input type="hidden" name="business_overView" value="business_overView">
+					<div class="col-sm-offset-2 col-sm-4 text-right">
+						<input type="submit" value="SAVE" class="btn btn-warning">
+					</div>
+					</div>
+				</div>
+			</form>
+					 
+	 
+        </div>
+    </div>
+
+<div class="section-content" id="businessFaq">
+        <div class="form-container">
+            <h4>Business FAQ</h4>
+           
+			<form class="form-horizontal"  action="" onsubmit="return ClientController.ediSaveBusinessFAQ(this,<?php echo (isset($client->id)? $client->id:""); ?>)" method="POST">
+				{{csrf_field()}}
+
+<div class="form-group">
+                <label for="top_description" class="col-md-2 control-label">FAQ Question 1</label>
+                <div class="col-md-8">
+                    <input class="form-control" name="faqq1" placeholder="Enter FAQ Question 1" value="{{ old('faqq1',(isset($client)) ? $client->faqq1:"")}}">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="top_description" class="col-md-2 control-label">FAQ Answer 1</label>
+                <div class="col-md-8">
+                    <textarea class="form-control" name="faqa1" placeholder="Enter FAQ Answer 1">{{ old('faqa1',(isset($client)) ? $client->faqa1:"")}}</textarea>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="top_description" class="col-md-2 control-label">FAQ Question 2</label>
+                <div class="col-md-8">
+                    <input class="form-control" name="faqq2" placeholder="Enter FAQ Question 2" value="{{ old('faqq2',(isset($client)) ? $client->faqq2:"")}}">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="top_description" class="col-md-2 control-label">FAQ Answer 2</label>
+                <div class="col-md-8">
+                    <textarea class="form-control" name="faqa2" placeholder="Enter FAQ Answer 2">{{ old('faqa2',(isset($client)) ? $client->faqa2:"")}}</textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="top_description" class="col-md-2 control-label">FAQ Question 3</label>
+                <div class="col-md-8">
+                    <input class="form-control" name="faqq3" placeholder="Enter FAQ Question 3" value="{{ old('faqq3',(isset($client)) ? $client->faqq3:"")}}">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="top_description" class="col-md-2 control-label">FAQ Answer 3</label>
+                <div class="col-md-8">
+                    <textarea class="form-control" name="faqa3" placeholder="Enter FAQ Answer 3">{{ old('faqa3',(isset($client)) ? $client->faqa3:"")}}</textarea>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="top_description" class="col-md-2 control-label">FAQ Question 4</label>
+                <div class="col-md-8">
+                    <input class="form-control" name="faqq4" placeholder="Enter FAQ Question 4" value="{{ old('faqq4',(isset($client)) ? $client->faqq4:"")}}">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="top_description" class="col-md-2 control-label">FAQ Answer 4</label>
+                <div class="col-md-8">
+                    <textarea class="form-control" name="faqa4" placeholder="Enter FAQ Answer 4">{{ old('faqa4',(isset($client)) ? $client->faqa4:"")}}</textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="top_description" class="col-md-2 control-label">FAQ Question 5</label>
+                <div class="col-md-8">
+                    <input class="form-control" name="faqq5" placeholder="Enter FAQ Question 5" value="{{ old('faqq5',(isset($client)) ? $client->faqq5:"")}}">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="top_description" class="col-md-2 control-label">FAQ Answer 5</label>
+                <div class="col-md-8">
+                    <textarea class="form-control" name="faqa5" placeholder="Enter FAQ Answer 5">{{ old('faqa5',(isset($client)) ? $client->faqa5:"")}}</textarea>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="top_description" class="col-md-2 control-label">FAQ Question 6</label>
+                <div class="col-md-8">
+                    <input class="form-control" name="faqq6" placeholder="Enter FAQ Question 6" value="{{ old('faqq6',(isset($client)) ? $client->faqq6:"")}}">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="top_description" class="col-md-2 control-label">FAQ Answer 6</label>
+                <div class="col-md-8">
+                    <textarea class="form-control" name="faqa6" placeholder="Enter FAQ Answer 6">{{ old('faqa6',(isset($client)) ? $client->faqa6:"")}}</textarea>
+                </div>
+            </div>
+            
+
+            <div class="form-group">
+                <label for="top_description" class="col-md-2 control-label">FAQ Question 7</label>
+                <div class="col-md-8">
+                    <input class="form-control" name="faqq7" placeholder="Enter FAQ Question 7" value="{{ old('faqq7',(isset($client)) ? $client->faqq7:"")}}">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="top_description" class="col-md-2 control-label">FAQ Answer 7</label>
+                <div class="col-md-8">
+                    <textarea class="form-control" name="faqa7" placeholder="Enter FAQ Answer 7">{{ old('faqa7',(isset($client)) ? $client->faqa7:"")}}</textarea>
+                </div>
+            </div>
+            
+
+            <div class="form-group">
+                <label for="top_description" class="col-md-2 control-label">FAQ Question 8</label>
+                <div class="col-md-8">
+                    <input class="form-control" name="faqq8" placeholder="Enter FAQ Question 8" value="{{ old('faqq8',(isset($client)) ? $client->faqq8:"")}}">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="top_description" class="col-md-2 control-label">FAQ Answer 8</label>
+                <div class="col-md-8">
+                    <textarea class="form-control" name="faqa8" placeholder="Enter FAQ Answer 8">{{ old('faqa8',(isset($client)) ? $client->faqa8:"")}}</textarea>
+                </div>
+            </div>
+            
+
+            <div class="form-group">
+                <label for="top_description" class="col-md-2 control-label">FAQ Question 9</label>
+                <div class="col-md-8">
+                    <input class="form-control" name="faqq9" placeholder="Enter FAQ Question 9" value="{{ old('faqq9',(isset($client)) ? $client->faqq9:"")}}">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="top_description" class="col-md-2 control-label">FAQ Answer 9</label>
+                <div class="col-md-8">
+                    <textarea class="form-control" name="faqa9" placeholder="Enter FAQ Answer 9">{{ old('faqa9',(isset($client)) ? $client->faqa9:"")}}</textarea>
+                </div>
+            </div>
+            
+
+            <div class="form-group">
+                <label for="top_description" class="col-md-2 control-label">FAQ Question 10</label>
+                <div class="col-md-8">
+                    <input class="form-control" name="faqq10" placeholder="Enter FAQ Question 10" value="{{ old('faqq10',(isset($client)) ? $client->faqq10:"")}}">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="top_description" class="col-md-2 control-label">FAQ Answer 10</label>
+                <div class="col-md-8">
+                    <textarea class="form-control" name="faqa10" placeholder="Enter FAQ Answer 10">{{ old('faqa10',(isset($client)) ? $client->faqa10:"")}}</textarea>
+                </div>
+            </div>       	 
+			 
+   		 
+				<div class="form-group"> 
+					<div class="col-sm-12"> 
+					<input type="hidden" name="business_faq" value="business_faq">
 					<div class="col-sm-offset-2 col-sm-4 text-right">
 						<input type="submit" value="SAVE" class="btn btn-warning">
 					</div>
