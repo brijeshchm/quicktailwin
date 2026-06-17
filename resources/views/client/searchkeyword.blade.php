@@ -445,11 +445,12 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
                         </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        @if($quickBusinesses)
                         @foreach($quickBusinesses ?? [] as $qb)
                         <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group">
                             <div class="relative w-full h-48 overflow-hidden rounded-t-2xl bg-gray-100">
                                 <img loading="lazy"
-            decoding="async" src="{{ $qb['image'] ?? '' }}" alt="{{ $qb['name'] ?? '' }}" 
+            decoding="async" src="{{ $qb['image'] ?? '' }}" alt="{{ $qb['name'] ?? $keyword }}" 
                                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" >
                             </div>
                             <div class="p-5">
@@ -477,6 +478,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
                             </div>
                         </div>
                         @endforeach
+                        @endif
                     </div>
                 </div>
             </div>
