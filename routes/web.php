@@ -410,12 +410,12 @@ Route::get('/quickdialssitemap.xml', function () {
  
 Route::post('/apiddd/lead/add', [App\Http\Controllers\Client\HomePageController::class, 'addLadsss']);
 
-Route::get('/about-us', [App\Http\Controllers\Official\OfficialController::class, 'about'])->name('about.us');
+Route::get('/about-us', [App\Http\Controllers\Official\OfficialController::class, 'about'])->name('aboutUs');
  
 Route::get('/rss', [App\Http\Controllers\Official\OfficialController::class, 'rss']);
 Route::get('/features', [App\Http\Controllers\Official\OfficialController::class, 'features']);
 Route::get('/faq', [App\Http\Controllers\Official\OfficialController::class, 'faq']);
-Route::get('/contact-us', [App\Http\Controllers\Official\OfficialController::class, 'contact'])->name('contact.us');
+Route::get('/contact-us', [App\Http\Controllers\Official\OfficialController::class, 'contact'])->name('contactUs');
 Route::get('/careers', [App\Http\Controllers\Official\OfficialController::class, 'careers'])->name('careers');
 //Route::post('/api/careers/apply', [App\Http\Controllers\Official\OfficialController::class, 'apply'])->name('careers.apply');
 Route::get('/pricing', [App\Http\Controllers\Official\OfficialController::class, 'pricing'])->name('pricing');
