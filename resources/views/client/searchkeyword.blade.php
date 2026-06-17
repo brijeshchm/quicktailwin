@@ -414,7 +414,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
     
     <img 
         src="{{ $kwData['key_icon'] ?? $kwData['child_icon'] ??'' }}" 
-        alt="{{ $qb['name'] ?? '' }}"
+        alt="{{ $keyword }}"
         class="w-8 h-8 object-contain group-hover:scale-105 transition-transform duration-500"
         loading="lazy"
         decoding="async">
