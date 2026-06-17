@@ -1277,7 +1277,7 @@ class KeywordController extends Controller
 				if (!empty($lead->icon)) {
 					$vicons = json_decode($lead->icon, true);
 
-					$icons = '<img loading="lazy" src="' . asset('public/' . $vicons['src']) . '" width="70px">';
+					$icons = '<img loading="lazy" alt="lazy" src="' . asset('public/' . $vicons['src']) . '" width="70px">';
 				} else {
 					$icons = "";
 				}

@@ -165,7 +165,7 @@ class ChildCategoryController extends Controller
 
 					if (is_array($cicons) && isset($cicons['child_banner']['src'])) {
 						$imgPath = asset($cicons['child_banner']['src']);
-						$catImg = '<img loading="lazy" src="' . $imgPath . '" width="100">';
+						$catImg = '<img loading="lazy" alt="lazy" src="' . $imgPath . '" width="100">';
 					}
 				}
 
@@ -179,7 +179,7 @@ class ChildCategoryController extends Controller
 					if (is_array($vicons) && isset($vicons['pc_icon']['src'])) {
 						$iconPath = asset($vicons['pc_icon']['src']);
 
-						$catIcon = '<img loading="lazy" src="' . $iconPath . '" width="100">';
+						$catIcon = '<img loading="lazy" alt="lazy" src="' . $iconPath . '" width="100">';
 					}
 				}
 

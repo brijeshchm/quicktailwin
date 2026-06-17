@@ -96,7 +96,7 @@
                         class="relative cursor-pointer overflow-hidden rounded-xl bg-slate-200"
                         :class="i === 0 ? 'col-start-1 row-span-2' : (i === 1 ? 'col-start-2 row-start-1' : 'col-start-2 row-start-2')"
                     >
-                        <img :src="item.img" alt="" class="h-full w-full object-cover transition-transform duration-500 hover:scale-105">
+                        <img :src="item.img" alt="img" class="h-full w-full object-cover transition-transform duration-500 hover:scale-105">
                         <template x-if="item.is_video">
                             <span class="absolute inset-0 flex items-center justify-center bg-black/30 text-xl text-white">▶</span>
                         </template>
@@ -113,7 +113,7 @@
                         @click="openGallery()"
                         class="relative h-[110px] cursor-pointer overflow-hidden rounded-xl bg-slate-200"
                     >
-                        <img :src="item.img" alt="" class="h-full w-full object-cover transition-transform duration-500 hover:scale-105">
+                        <img :src="item.img" alt="img" class="h-full w-full object-cover transition-transform duration-500 hover:scale-105">
                         <template x-if="item.is_video">
                             <span class="absolute inset-0 flex items-center justify-center bg-black/30 text-xl text-white">▶</span>
                         </template>
@@ -131,7 +131,7 @@
                         class="relative cursor-pointer overflow-hidden rounded-xl bg-slate-200"
                         :class="i === 0 ? 'col-start-2 row-span-2' : (i === 1 ? 'col-start-1 row-start-1' : 'col-start-1 row-start-2')"
                     >
-                        <img :src="item.img" alt="" class="h-full w-full object-cover transition-transform duration-500 hover:scale-105">
+                        <img :src="item.img" alt="item" class="h-full w-full object-cover transition-transform duration-500 hover:scale-105">
                         <template x-if="item.is_video">
                             <span class="absolute inset-0 flex items-center justify-center bg-black/30 text-xl text-white">▶</span>
                         </template>
@@ -148,7 +148,7 @@
                         @click="openGallery()"
                         class="relative h-[130px] cursor-pointer overflow-hidden rounded-xl bg-slate-200"
                     >
-                        <img :src="item.img" alt="" class="h-full w-full object-cover transition-transform duration-500 hover:scale-105">
+                        <img :src="item.img" alt="item" class="h-full w-full object-cover transition-transform duration-500 hover:scale-105">
                         <template x-if="item.is_video">
                             <span class="absolute inset-0 flex items-center justify-center bg-black/30 text-xl text-white">▶</span>
                         </template>
@@ -294,7 +294,7 @@
                             class="group relative mb-1.5 cursor-pointer overflow-hidden rounded-lg shadow-[0_2px_12px_rgba(0,0,0,0.4)] transition-all duration-200 hover:scale-[1.02] hover:shadow-[0_8px_32px_rgba(249,115,22,0.35)]"
                             :style="`break-inside: avoid; height: ${Math.round(item.h * 0.48)}px;`"
                         >
-                            <img :src="item.img" alt="" loading="lazy" class="h-full w-full object-cover">
+                            <img :src="item.img" alt="item" loading="lazy" class="h-full w-full object-cover">
                             <template x-if="item.is_video">
                                 <div class="absolute inset-0 flex items-center justify-center">
                                     <div class="flex h-11 w-11 items-center justify-center rounded-full border-[2.5px] border-white/75 bg-black/55 pl-1 text-base text-white backdrop-blur-sm">▶</div>
@@ -396,7 +396,7 @@
                         ? 'border-orange-500 scale-110 shadow-[0_0_0_2px_rgba(249,115,22,0.4)]'
                         : 'border-white/15'"
                 >
-                    <img :src="thumb.img" alt="" class="h-full w-full object-cover">
+                    <img :src="thumb.img" alt="thum" class="h-full w-full object-cover">
                     <template x-if="thumb.is_video">
                         <div class="absolute inset-0 flex items-center justify-center bg-black/30 text-[10px] text-white">▶</div>
                     </template>

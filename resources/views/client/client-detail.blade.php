@@ -542,10 +542,7 @@ select.ef-input { padding-left:1rem; }
 
                         {{-- Document image --}}
                         @if(!empty($doc['img']))
-                        <!-- <div class="rounded-xl overflow-hidden"
-                             style="box-shadow:0 2px 12px rgba(0,0,0,.08);border:1px solid rgba(0,0,0,.06);">
-                            <img src="{{ asset($doc['img']) }}" alt="{{ $doc['title'] }}" class="w-full block">
-                        </div> -->
+                     
 
                            <div class="group rounded-xl overflow-hidden mx-auto w-full max-w-xs cursor-pointer
                 shadow-md border border-black/5
@@ -614,14 +611,7 @@ select.ef-input { padding-left:1rem; }
     </div>
 @endif
  
-<!-- 
-	@if(!empty($first['img']))
-<div class="rounded-2xl overflow-hidden"
-     style="box-shadow:0 2px 20px rgba(0,0,0,.08);">
-    <img src="{{ asset($first['img']) }}" alt="{{ $first['title'] }}"
-         class="w-full object-cover">
-</div>
-@endif -->
+ 
 
 
                         <div class="flex items-center justify-between mt-3 px-1">

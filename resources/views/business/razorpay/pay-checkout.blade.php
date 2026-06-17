@@ -182,22 +182,21 @@ document.getElementById("merchant_order_id").value = o;
 			<a class="nav-item1 my-mr-5 disabled" data-toggle="tab" href="#payment-student-Detail" role="tab"
 			aria-controls="nav-home" aria-selected="false">
 			
-			<!-- <img loading="lazy" src="" alt="Details" class="img-fluid pay-responsive-img"> -->
+	 
 			
 			<span class="text-payment">Details</span></a>
 			
 			<a class="nav-item1 my-mr-5 line-right-pay active" data-toggle="tab" href="#transaction" role="tab"
 			aria-controls="nav-profile" aria-selected="true">
 			
-			<!-- <img loading="lazy" src="" alt="Verify" class="img-fluid pay-responsive-img "> -->
+	 
 			
 			
 			<div class="text-payment">Verify </div></a>
 			
 			<a class="nav-item1 line-right-pay disabled" data-toggle="tab" href="#payment" role="tab"
 			aria-controls="nav-contact" aria-selected="false">
-			
-			<!-- <img loading="lazy" src="" alt="Payment" class="img-fluid pay-responsive-img"> -->
+		 
 			<div class="text-payment">Payment</div></a>
 
 			</div>
@@ -207,7 +206,7 @@ document.getElementById("merchant_order_id").value = o;
 			<div class="tab-pane fade show active" id="transaction" role="tabpanel" aria-labelledby="transaction">
 			<div class="transaction-section-payment text-center">
 			 
-			<!-- <p class="mb-4">Verfiy your details go next step</p> -->
+	 
 			<div class="table-responsive">
 
 			<table style="width:100%;">

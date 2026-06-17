@@ -245,7 +245,7 @@ class TestimonialsController extends Controller
 				$data[] = [
 					$testimonial->name,
 					$testimonial->title,
-					(isset($large) ? '<img loading="lazy" src="' . url($large) . '" width="50px">' : ""),
+					(isset($large) ? '<img loading="lazy" alt="lazy" src="' . url($large) . '" width="50px">' : ""),
 					$action,
 				];
 			}

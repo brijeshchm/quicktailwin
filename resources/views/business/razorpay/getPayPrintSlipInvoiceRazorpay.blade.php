@@ -25,7 +25,7 @@
           <div class="header-info-section">
             <div class="header-info">
               <div class="header-info-icon">
-                <img src="{{asset('public/printdata/location.svg')}}">
+                <img src="{{asset('public/printdata/location.svg')}}" alt="location">
               </div>
               <div class="header-info-address">
                 <p>G-13, Sector 3, Noida, Uttar Pradesh 201301</p>
@@ -35,7 +35,7 @@
           <div class="header-info-section" style="display:-webkit-box;" >
             <div class="header-info">
               <div class="header-info-icon">
-                <img src="{{asset('public/printdata/phone.svg')}}">
+                <img src="{{asset('public/printdata/phone.svg')}}" alt="phone">
               </div>
               <div class="header-info-address">
                 <p>+91-120-23444333</p>
@@ -43,7 +43,7 @@
             </div>
             <div class="header-info" style="width: 167px;margin-left:0px;">
               <div class="header-info-icon">
-                <img src="{{asset('public/printdata/mobile.svg')}}">
+                <img src="{{asset('public/printdata/mobile.svg')}}" alt="mobile">
               </div>
               <div class="header-info-address">
                 <p>+91-2334444</p>
@@ -51,7 +51,7 @@
             </div>
             <div class="header-info">
               <div class="header-info-icon">
-                <img src="{{asset('public/printdata/Message.svg')}}">
+                <img src="{{asset('public/printdata/Message.svg')}}" alt="message">
               </div>
               <div class="header-info-address">
                 <p>team-accounts@quickdials.com</p>
@@ -59,7 +59,7 @@
             </div>
             <div class="header-info" style="margin-left:0px;">
               <div class="header-info-icon">
-                <img src="{{asset('public/printdata/web.svg')}}">
+                <img src="{{asset('public/printdata/web.svg')}}" alt="web">
               </div>
               <div class="header-info-address">
                 <p>www.quickdials.com</p>

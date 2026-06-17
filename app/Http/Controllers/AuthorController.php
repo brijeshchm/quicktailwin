@@ -233,7 +233,7 @@ class AuthorController extends Controller
 				if (!empty($author->image)) {
 				$vicons = json_decode($author->image, true);
 				 
-				$icons = '<img loading="lazy" src="' . asset('/' . $vicons['src']) . '" width="70px">';
+				$icons = '<img loading="lazy" alt="lazy" src="' . asset('/' . $vicons['src']) . '" width="70px">';
 				} else {
 				$icons = "";
 				}

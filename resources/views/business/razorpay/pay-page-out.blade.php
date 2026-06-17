@@ -302,14 +302,14 @@ foreach($paymentMode as $payment){
 	<div class="googlepayment-barcode-new text-center">
 	<div class="img-logo">
 	<?php  if($payment->mode=='GooglePay'){ ?>
-	<img loading="lazy" src="{{asset('/public/img/pay/google-pay-new-icon.png')}}" class="img-fluid">
+	<img loading="lazy" alt="google" src="{{asset('/public/img/pay/google-pay-new-icon.png')}}" class="img-fluid">
 	<?php  }else if($payment->mode=='PayTm'){ ?>
-	<img loading="lazy" src="{{asset('/public/img/pay/Paytm_logo-new-payment.png')}}" class="img-fluid" style="width: 35%;">
+	<img loading="lazy" alt="payment" src="{{asset('/public/img/pay/Paytm_logo-new-payment.png')}}" class="img-fluid" style="width: 35%;">
 	<?php  }else if($payment->mode=='PhonePay'){ ?>
-	<img loading="lazy" src="{{asset('/public/img/pay/PhonePe.png')}}" class="img-fluid">
+	<img loading="lazy" alt="phone" src="{{asset('/public/img/pay/PhonePe.png')}}" class="img-fluid">
 	
 	<?php  }else if($payment->mode=='UPI'){ ?>
-	<img loading="lazy" src="{{asset('/public/img/pay/upipay.png')}}" class="img-fluid">
+	<img loading="lazy" alt="upipay" src="{{asset('/public/img/pay/upipay.png')}}" class="img-fluid">
 	<?php  } ?>
 	</div>
 

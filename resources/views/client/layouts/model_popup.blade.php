@@ -269,7 +269,7 @@
 							<button type="submit">Submit</button>
 
 					<div class="loaderForm" style="display:none;">
-					<img loading="lazy" decoding="async"src="{{ asset('/public/client/images/btn-ajax-loader.gif')}}" width="20" alt="Loader">
+					<img loading="lazy" decoding="async" src="{{ asset('/public/client/images/btn-ajax-loader.gif')}}" width="20" alt="Loader">
 					Processing...
 					</div>
 						</div>

@@ -820,7 +820,7 @@ class BlogController extends Controller
 				$data[] = [
 					$blog->name,
 					$blog->title,
-					'<img loading="lazy" src="' . url($image) . '" width="50px">',
+					'<img loading="lazy" alt="lazy" src="' . url($image) . '" width="50px">',
 					$status,
 					$action,
 				];

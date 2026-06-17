@@ -37,7 +37,6 @@
 							<img loading="lazy" class="flag-icon selectedFlag"
 								src="https://flagcdn.com/w40/in.png"
 								alt="Flag">
-
 							<input type="text" class="dropwn-input" placeholder="Search country">
 							<span class="clear-icon removeFlag">&#10005;</span>
 							<span class="dropdown-icon">&#9662;</span>
