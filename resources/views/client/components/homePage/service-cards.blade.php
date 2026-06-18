@@ -47,10 +47,10 @@
    style="width:calc((100% - 12px) / 2.2); min-width:120px; max-width:200px;">
 
     <div class="h-[110px] sm:h-[130px] overflow-hidden relative">
-        <img src="{{ $svc['img'] ?? '' }}"
-             alt="{{ $svc['title'] ?? '' }}"
-             loading="lazy"
-             decoding="async"
+        <img loading="lazy"
+             decoding="async" 
+             src="{{ $svc['img'] ?? '' }}"
+             alt="{{ $svc['alt'] ?? '' }}"             
              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-out"/>
 
         <div class="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent" aria-hidden="true"></div>

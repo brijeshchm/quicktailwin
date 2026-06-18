@@ -13,7 +13,7 @@
             <div class="max-w-2xl mx-auto text-center mb-3 overflow-hidden">
                 <h1 class="text-[clamp(1rem,3.5vw,1.5rem)] font-black text-gray-900 leading-snug whitespace-nowrap">
                     Search across
-                    <span class="text-blue-600">'0.9 Crore+'</span>
+                    <span class="text-blue-600">'0.9 K+'</span>
                     <span id="rotating-word" class="text-orange-500 inline-block word-animate">Institutes</span>
                     <span class="text-gray-700">&amp; Services</span>
                 </h1>
@@ -73,6 +73,7 @@
                         {{-- Search button --}}
                         <button
                             onclick="doHeroSearch()"
+                            aria-label="Search"
                             class="rounded-none rounded-r-xl h-11 px-5 text-sm font-bold bg-orange-500 hover:bg-orange-600 text-white border-0 shadow-none flex items-center gap-1.5 shrink-0 transition-colors"
                         >
                             <i data-lucide="search" class="w-4 h-4"></i>
@@ -99,6 +100,7 @@
                         @foreach($homeData['data']['trending'] as $tag)
                             <button
                                 onclick="redirectSearch('{{ $tag['url'] ?? $tag['title'] }}', heroSelectedCity)"
+                                aria-label="Search {{ $tag['url'] }}"
                                 class="text-[11px] bg-gray-100 hover:bg-blue-50 border border-gray-200 hover:border-blue-200 text-gray-500 hover:text-blue-700 px-2.5 py-0.5 rounded-full transition-colors"
                             >{{ $tag['title'] }}</button>
                         @endforeach
@@ -106,6 +108,7 @@
                         @foreach(['AC Repair','Wedding Planner','Home Loan','Dentist','Pizza Near Me'] as $tag)
                             <button
                                 onclick="redirectSearch('{{ Str::slug($tag) }}', heroSelectedCity)"
+                                aria-label="Search {{ Str::slug($tag) }}"
                                 class="text-[11px] bg-gray-100 hover:bg-blue-50 border border-gray-200 hover:border-blue-200 text-gray-500 hover:text-blue-700 px-2.5 py-0.5 rounded-full transition-colors"
                             >{{ $tag }}</button>
                         @endforeach
@@ -163,7 +166,7 @@
             <span class="flex items-center gap-0.5 text-[9px] text-gray-200 mt-0.5">
                 <span class="text-yellow-400 text-[10px]">★</span>
                 <span class="font-semibold">{{ $card['rating'] ?? '' }}</span>
-                <span class="opacity-70">({{ $card['count'] ?? '' }})</span>
+                <span class="opacity-70">({{ $card['count'] ?? '' }} Reviews) </span>
             </span>
         </div>
 

@@ -402,7 +402,7 @@
             <p class="text-gray-500 text-xs">
                  {{ date('Y') }} QuickDials Directory. All rights reserved.
             </p>
-            <span class="text-gray-400 text-xs">Made with precision in India 🇮🇳</span>
+            <span class="text-gray-600 text-base">Made with precision in India 🇮🇳</span>
         </div>
     </div>
 </footer>

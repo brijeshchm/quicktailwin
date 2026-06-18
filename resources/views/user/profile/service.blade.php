@@ -138,7 +138,7 @@
                     </button>
                 @elseif($service->follow_status === 'Meeting Close' || $service->follow_status == 'Sales Close')
                     <button type="button" disabled
-                            class="inline-flex items-center gap-1 bg-gray-100 text-gray-400 text-xs font-semibold px-3 py-1.5 rounded cursor-not-allowed">
+                            class="inline-flex items-center gap-1 bg-gray-100 text-gray-600 text-base font-semibold px-3 py-1.5 rounded cursor-not-allowed">
                         Closed
                     </button>
                 @endif

@@ -310,235 +310,235 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
  
  
 
-// var searchCity       = '';
-// // var heroSelectedCity = '';
-// var cityDetected     = false;  
+var searchCity       = '';
+// var heroSelectedCity = '';
+var cityDetected     = false;  
 
  
-// document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
     
-//     detectCity();
-// });
+    detectCity();
+});
 
  
-// function detectCity() {
+function detectCity() {
 
  
-//     if (navigator.geolocation) {
+    if (navigator.geolocation) {
      
 
-//         navigator.geolocation.getCurrentPosition(
-//             gpsSuccess,    
-//             gpsError,     
-//             {
-//                 timeout           : 10000,   
-//                 maximumAge        : 60000,   
-//                 enableHighAccuracy: false   
-//             }
-//         );
+        navigator.geolocation.getCurrentPosition(
+            gpsSuccess,    
+            gpsError,     
+            {
+                timeout           : 10000,   
+                maximumAge        : 60000,   
+                enableHighAccuracy: false   
+            }
+        );
 
-//     } else {
+    } else {
        
-//         detectCityFromIP();
-//     }
-// }
+        detectCityFromIP();
+    }
+}
 
  
-// async function gpsSuccess(position) {
-//     var lat = position.coords.latitude;
-//     var lon = position.coords.longitude;
+async function gpsSuccess(position) {
+    var lat = position.coords.latitude;
+    var lon = position.coords.longitude;
 
  
 
-//     try {
+    try {
       
-//         var response = await fetch(
-//             'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + lat + '&lon=' + lon,
-//             {
-//                 headers: {                 
-//                     'Accept-Language': 'en',
-//                 }
-//             }
-//         );
+        var response = await fetch(
+            'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + lat + '&lon=' + lon,
+            {
+                headers: {                 
+                    'Accept-Language': 'en',
+                }
+            }
+        );
 
-//         if (!response.ok) throw new Error('Nominatim request failed');
+        if (!response.ok) throw new Error('Nominatim request failed');
 
-//         var data = await response.json();      
-//         var city =
-//             data.address.city      ||
-//             data.address.town      ||
-//             data.address.village   ||
-//             data.address.county    ||
-//             data.address.state_district ||
-//             null;
+        var data = await response.json();      
+        var city =
+            data.address.city      ||
+            data.address.town      ||
+            data.address.village   ||
+            data.address.county    ||
+            data.address.state_district ||
+            null;
 
-//         if (city) {
+        if (city) {
           
-//             applyCity(city);
-//         } else {      
-//             detectCityFromIP();
-//         }
+            applyCity(city);
+        } else {      
+            detectCityFromIP();
+        }
 
-//     } catch (error) {        
-//         detectCityFromIP();
-//     }
-// }
+    } catch (error) {        
+        detectCityFromIP();
+    }
+}
 
 
-// function gpsError(error) {    
-//     detectCityFromIP();
-// }
+function gpsError(error) {    
+    detectCityFromIP();
+}
 
  
-// function detectCityFromIP() {
-//     if (cityDetected) return;     
+function detectCityFromIP() {
+    if (cityDetected) return;     
 
-//     fetch('https://ipapi.co/json/')
-//         .then(function (res) {
-//             if (!res.ok) throw new Error('ipapi.co response error');
-//             return res.json();
-//         })
-//         .then(function (data) {
-//             if (data.city) {            
-//                 applyCity(data.city);
-//             } 
-//         })
-//         .catch(function (err) {       
-//             detectCityFromGeolocationDB();
-//         });
-// }
+    fetch('https://ipapi.co/json/')
+        .then(function (res) {
+            if (!res.ok) throw new Error('ipapi.co response error');
+            return res.json();
+        })
+        .then(function (data) {
+            if (data.city) {            
+                applyCity(data.city);
+            } 
+        })
+        .catch(function (err) {       
+            detectCityFromGeolocationDB();
+        });
+}
 
-// // ── 5. IP DETECTION — Fallback (geolocation-db JSONP) ───
-// function detectCityFromGeolocationDB() {
-//     if (cityDetected) return;    
+// ── 5. IP DETECTION — Fallback (geolocation-db JSONP) ───
+function detectCityFromGeolocationDB() {
+    if (cityDetected) return;    
 
-//     var script = document.createElement('script');
+    var script = document.createElement('script');
 
-//     window.callback = function (location) {
-//         // ── Cleanup script tag ──
-//         delete window.callback;
-//         if (script && document.head.contains(script)) {
-//             document.head.removeChild(script);
-//         }
+    window.callback = function (location) {
+        // ── Cleanup script tag ──
+        delete window.callback;
+        if (script && document.head.contains(script)) {
+            document.head.removeChild(script);
+        }
 
         
 
-//         if (!location || !location.city || location.city === 'Not found') {        
-//             return;
-//         }
+        if (!location || !location.city || location.city === 'Not found') {        
+            return;
+        }
    
-//         applyCity(location.city);
-//     };
+        applyCity(location.city);
+    };
 
-//     script.onerror = function () {
+    script.onerror = function () {
        
-//         delete window.callback;
-//         if (script && document.head.contains(script)) {
-//             document.head.removeChild(script);
-//         }
+        delete window.callback;
+        if (script && document.head.contains(script)) {
+            document.head.removeChild(script);
+        }
       
-//     };
+    };
 
-//     script.src = 'https://geolocation-db.com/jsonp';
-//     document.head.appendChild(script);
-// }
+    script.src = 'https://geolocation-db.com/jsonp';
+    document.head.appendChild(script);
+}
  
-// function applyCity(rawCity) {
-//     if (!rawCity || cityDetected) return;
+function applyCity(rawCity) {
+    if (!rawCity || cityDetected) return;
 
-//     cityDetected = true;  
+    cityDetected = true;  
 
   
-//     var formatted = rawCity
-//         .toLowerCase()
-//         .replace(/-/g, ' ')
-//         .trim()
-//         .split(' ')
-//         .filter(Boolean)
-//         .map(function (word) {
-//             return word.charAt(0).toUpperCase() + word.slice(1);
-//         })
-//         .join(' ');
+    var formatted = rawCity
+        .toLowerCase()
+        .replace(/-/g, ' ')
+        .trim()
+        .split(' ')
+        .filter(Boolean)
+        .map(function (word) {
+            return word.charAt(0).toUpperCase() + word.slice(1);
+        })
+        .join(' ');
 
-//     var cityLower = formatted.toLowerCase();
+    var cityLower = formatted.toLowerCase();
 
-//     searchCity       = formatted;
-//     heroSelectedCity = cityLower;
+    searchCity       = formatted;
+    heroSelectedCity = cityLower;
 
    
-//     ['hero-city-label', 'sticky-city-label', 'mobile-city-label']
-//         .forEach(function (id) {
-//             var el = document.getElementById(id);
-//             if (el) {
-//                 el.textContent = formatted;                
-//             }
-//         });
+    ['hero-city-label', 'sticky-city-label', 'mobile-city-label']
+        .forEach(function (id) {
+            var el = document.getElementById(id);
+            if (el) {
+                el.textContent = formatted;                
+            }
+        });
 
-//     var cityIdInputs = document.querySelectorAll('input[name="city_id"]');
-//     if (cityIdInputs.length > 0) {
-//         cityIdInputs.forEach(function (input) {
-//             input.value = cityLower;
+    var cityIdInputs = document.querySelectorAll('input[name="city_id"]');
+    if (cityIdInputs.length > 0) {
+        cityIdInputs.forEach(function (input) {
+            input.value = cityLower;
             
-//         });
-//     } else {
-//         // ── Auto-create hidden input if none exists ──
-//         var autoInput    = document.createElement('input');
-//         autoInput.type   = 'hidden';
-//         autoInput.name   = 'city_id';
-//         autoInput.id     = 'city_id_auto';
-//         autoInput.value  = cityLower;
-//         document.body.appendChild(autoInput);
+        });
+    } else {
+        // ── Auto-create hidden input if none exists ──
+        var autoInput    = document.createElement('input');
+        autoInput.type   = 'hidden';
+        autoInput.name   = 'city_id';
+        autoInput.id     = 'city_id_auto';
+        autoInput.value  = cityLower;
+        document.body.appendChild(autoInput);
        
-//     }
+    }
 
-//     // ── Update by ID also (if specific id exists) ──
-//     var cityIdById = document.getElementById('city_id');
-//     if (cityIdById) {
-//         cityIdById.value = cityLower;
+    // ── Update by ID also (if specific id exists) ──
+    var cityIdById = document.getElementById('city_id');
+    if (cityIdById) {
+        cityIdById.value = cityLower;
        
-//     }
+    }
 
 
 
 
-//     if (
-//         typeof $  !== 'undefined' &&
-//         typeof $citySelect !== 'undefined' &&
-//         $citySelect && $citySelect.length
-//     ) {
-//         var option = new Option(formatted, cityLower, true, true);
-//         $citySelect.append(option).trigger('change');
+    if (
+        typeof $  !== 'undefined' &&
+        typeof $citySelect !== 'undefined' &&
+        $citySelect && $citySelect.length
+    ) {
+        var option = new Option(formatted, cityLower, true, true);
+        $citySelect.append(option).trigger('change');
          
-//     }
+    }
 
-//     // ── Update plain HTML <select> (if exists) ──
-//     var plainSelect = document.getElementById('city-select');
-//     if (plainSelect) {
-//         var found = false;
-//         for (var i = 0; i < plainSelect.options.length; i++) {
-//             if (plainSelect.options[i].value.toLowerCase() === cityLower) {
-//                 plainSelect.selectedIndex = i;
-//                 found = true;
-//                 break;
-//             }
-//         }
-//         if (!found) {
-//             var newOpt       = document.createElement('option');
-//             newOpt.value     = cityLower;
-//             newOpt.text      = formatted;
-//             newOpt.selected  = true;
-//             plainSelect.appendChild(newOpt);
-//         }
+    // ── Update plain HTML <select> (if exists) ──
+    var plainSelect = document.getElementById('city-select');
+    if (plainSelect) {
+        var found = false;
+        for (var i = 0; i < plainSelect.options.length; i++) {
+            if (plainSelect.options[i].value.toLowerCase() === cityLower) {
+                plainSelect.selectedIndex = i;
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            var newOpt       = document.createElement('option');
+            newOpt.value     = cityLower;
+            newOpt.text      = formatted;
+            newOpt.selected  = true;
+            plainSelect.appendChild(newOpt);
+        }
          
-//     }
+    }
 
-//     // ── Update hidden input (if exists) ──
-//     var hiddenInput = document.getElementById('selected-city');
-//     if (hiddenInput) {
-//         hiddenInput.value = cityLower;
+    // ── Update hidden input (if exists) ──
+    var hiddenInput = document.getElementById('selected-city');
+    if (hiddenInput) {
+        hiddenInput.value = cityLower;
         
-//     }
-// }
+    }
+}
 
 
 

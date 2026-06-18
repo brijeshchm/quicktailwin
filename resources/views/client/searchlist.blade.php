@@ -818,7 +818,7 @@ function bannerSlider(banners, interval = 4000) {
                 <button @click="openFaq = openFaq === {{ $fi }} ? null : {{ $fi }}"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
                   {{ $faq['q'] }} 
-                    <span x-text="openFaq === {{ $fi }} ? '▲' : '▼'" class="text-gray-400 text-xs flex-shrink-0 ml-2"></span>
+                    <span x-text="openFaq === {{ $fi }} ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === {{ $fi }}" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
                    {!! $faq['a'] !!}

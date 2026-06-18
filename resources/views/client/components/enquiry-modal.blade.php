@@ -133,7 +133,7 @@
                     <div>
                         <label class="text-xs font-semibold text-gray-600 mb-1 block">{{ $lbl }}</label>
                         <div class="relative">
-                            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs pointer-events-none">{{ $ico }}</span>
+                            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-600 text-base pointer-events-none">{{ $ico }}</span>
                             <input type="{{ $t }}" x-model="form.{{ $f }}" placeholder="{{ $ph }}"
                                    :class="errors.{{ $f }} ? 'border-red-400 ring-2 ring-red-100' : 'border-gray-200 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100'"
                                    class="w-full text-sm border rounded-xl pl-8 pr-3 py-2.5 outline-none transition-all placeholder-gray-400 bg-white">
@@ -145,7 +145,7 @@
                     <div>
                         <label class="text-xs font-semibold text-gray-600 mb-1 block">Location</label>
                         <div class="relative">
-                            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs pointer-events-none">📍</span>
+                            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-600 text-base pointer-events-none">📍</span>
                             <select x-model="form.location"
                                     :class="errors.location ? 'border-red-400 ring-2 ring-red-100' : 'border-gray-200 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100'"
                                     class="w-full text-sm border rounded-xl pl-8 pr-8 py-2.5 appearance-none outline-none bg-white cursor-pointer transition-all">

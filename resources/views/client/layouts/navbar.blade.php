@@ -133,6 +133,7 @@
 			@if (!Auth::guard('clients')->check() && !Auth::guard('guest')->check())
             <button
                 onclick="openLoginModal()"
+                aria-label="Login or Register"
                 class="flex items-center gap-1.5 px-4 py-3 bg-sky-500 hover:bg-sky-600 text-white text-xs font-semibold rounded-md shadow transition-colors"
             >
                 <i data-lucide="user" class="w-3.5 h-3.5"></i>

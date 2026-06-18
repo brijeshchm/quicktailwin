@@ -117,7 +117,7 @@
                 @foreach($galleryImages as $i => $item)
                 <button onclick="imgGoTo('{{ $sliderId }}', {{ $i }})"
                         id="{{ $sliderId }}-dot-{{ $i }}"
-                        class="rounded-full transition-all duration-300 {{ $i === 0 ? 'w-3 h-1.5 bg-white' : 'w-1.5 h-1.5 bg-white/50' }}">
+                        class="rounded-full transition-all duration-300 {{ $i === 0 ? 'w-11 h-11 bg-white' : 'w-3 h-3 bg-white/50' }}" aria-label="Slide {{ $i }}">
                 </button>
                 @endforeach
             </div>
@@ -237,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <a href="{{ route('business.details', $business['business_slug']) }}">{{ $name }}</a>
                         </h3>
                         @if($verified)
-                        <span class="flex items-center gap-0.5 text-[9px] sm:text-[10px] font-semibold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full border border-emerald-100">
+                        <span class="flex items-center gap-0.5 text-[9px] sm:text-[10px] font-semibold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full border border-emerald-100" aria-label="Verified Business">
                             <svg class="w-2 h-2 sm:w-2.5 sm:h-2.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
                             Verified
                         </span>
@@ -277,7 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </svg>
                     @endfor
                 </div>
-                <span class="text-[10px] sm:text-sm text-gray-400">({{ $reviewCount }})</span>
+                <span class="text-[10px] sm:text-sm text-gray-400">({{ $reviewCount }} Reviews)</span>
                 @if($openUntil)
                 <span class="hidden sm:inline text-sm text-gray-400">🕐 Open Hrs {{ $openUntil }}</span>
                 @endif
@@ -374,10 +374,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         <div class="flex flex-wrap gap-1 mb-3">
             @if($verified)
-            <span class="flex items-center gap-0.5 text-[10px] font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">✓ Verified</span>
+            <span class="flex items-center gap-0.5 text-[10px] font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full" aria-label="Verified Business">✓ Verified</span>
             @endif
             @if($trending)
-            <span class="flex items-center gap-0.5 text-[10px] font-semibold text-orange-600 bg-orange-50 px-2 py-0.5 rounded-full">↗ Trending</span>
+            <span class="flex items-center gap-0.5 text-[10px] font-semibold text-orange-600 bg-orange-50 px-2 py-0.5 rounded-full"  aria-label="Trending">↗ Trending</span>
             @endif
         </div>
 

@@ -100,9 +100,10 @@ $repairItems = is_array($repairsData['data']['repairsServices']) ? $repairsData[
                     <div class="relative overflow-hidden" style="height:100px;">
                         <a href="{{ $catUrl }}">
                             <img src="{{ $service['img'] ?? '' }}"
-                                 alt="{{ $service['title'] ?? '' }}"
+                                 alt="{{ $service['alt'] ?? '' }}"
                                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-out"
                                  loading="lazy"
+                                 decoding="async" 
                                  style="height:100px;"/>
                         </a>
                         {{-- Gradient overlay matching COLOR_MAP --}}

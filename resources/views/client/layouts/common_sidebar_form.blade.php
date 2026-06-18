@@ -332,7 +332,7 @@
                 </div>
 
                 <div class="flex gap-2 pt-0.5">
-                    <button type="button" @click="step = 0" :disabled="loading" class="flex-1 py-2 bg-gray-100 text-gray-600 text-xs font-semibold rounded-xl hover:bg-gray-200 transition-all disabled:opacity-60">← Back</button>
+                    <button type="button" @click="step = 0" :disabled="loading" class="flex-1 py-2 bg-gray-100 text-gray-600 text-base font-semibold rounded-xl hover:bg-gray-200 transition-all disabled:opacity-60">← Back</button>
                     <button type="button" @click="nextStep()" :disabled="loading" class="flex-1 py-2 bg-gradient-to-r from-indigo-600 to-violet-600 text-white text-xs font-bold rounded-xl shadow-lg shadow-indigo-200 hover:from-indigo-700 hover:to-violet-700 transition-all disabled:opacity-60">
                         <span x-show="!loading">Next →</span>
                         <span x-show="loading" x-cloak>Validating…</span>
@@ -357,7 +357,7 @@
                 </div>
 
                 <div class="flex gap-2">
-                    <button type="button" @click="step = 1" :disabled="loading" class="px-3 py-2 bg-gray-100 text-gray-600 text-xs font-semibold rounded-xl hover:bg-gray-200 transition-all disabled:opacity-60">←</button>
+                    <button type="button" @click="step = 1" :disabled="loading" class="px-3 py-2 bg-gray-100 text-gray-600 text-base font-semibold rounded-xl hover:bg-gray-200 transition-all disabled:opacity-60">←</button>
                     <button type="button" @click="submitForm()" :disabled="loading" class="flex-1 py-2 bg-gradient-to-r from-indigo-600 to-violet-600 text-white text-xs font-bold rounded-xl shadow-lg shadow-indigo-200 hover:from-indigo-700 hover:to-violet-700 transition-all disabled:opacity-60">
                         <span x-show="!loading">✉ Submit Enquiry</span>
                         <span x-show="loading" x-cloak class="flex items-center justify-center gap-2">

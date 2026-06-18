@@ -780,7 +780,7 @@
                     </div>
                     <div>
                         <p class="font-semibold text-gray-900 text-sm">{{ $t['name'] }}</p>
-                        <p class="text-gray-400 text-xs">{{ $t['location'] }} · {{ $t['date'] }}</p>
+                        <p class="text-gray-600 text-base">{{ $t['location'] }} · {{ $t['date'] }}</p>
                     </div>
                 </div>
             </div>
