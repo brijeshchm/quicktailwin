@@ -4,9 +4,8 @@
 @section('keywords', $metaKeywords ?? $keyword . ' in ' . ucfirst($city) . ', best ' . $keyword . ' in ' . ucfirst($city) . ', top ' . $keyword . ' near me, verified ' . $keyword . ', local business directory, QuickDials, business listings in ' . ucfirst($city) . ', reviews and ratings, contact details, nearby services, top businesses in ' . ucfirst($city))
 @php
     $allowedCities = [
-        'hyderabad','patna','gorakhpur','faridabad','delhi','noida',
-        'gurgaon','ghaziabad','mumbai','pune','meerut','bangalore',
-        'indore','kanpur','chennai','kolkata','coimbatore','prayagraj'
+        'hyderabad','delhi','noida',
+        'gurgaon','mumbai','bangalore'
     ];
 
     $currentCity = strtolower($city);
