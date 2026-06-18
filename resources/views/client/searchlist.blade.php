@@ -2,6 +2,26 @@
 @section('title', $metaTitle ?? $keyword . ' in ' . ucfirst($city) . ' | QuickDials')
 @section('description', $metaDescription ?? 'Find the best ' . $keyword . ' in ' . ucfirst($city) . ' with QuickDials. Discover verified businesses, addresses, phone numbers, reviews, ratings, photos, maps, and top local services near you.')
 @section('keywords', $metaKeywords ?? $keyword . ' in ' . ucfirst($city) . ', best ' . $keyword . ' in ' . ucfirst($city) . ', top ' . $keyword . ' near me, verified ' . $keyword . ', local business directory, QuickDials, business listings in ' . ucfirst($city) . ', reviews and ratings, contact details, nearby services, top businesses in ' . ucfirst($city))
+@php
+    $allowedCities = [
+        'hyderabad','patna','gorakhpur','faridabad','delhi','noida',
+        'gurgaon','ghaziabad','mumbai','pune','meerut','bangalore',
+        'indore','kanpur','chennai','kolkata','coimbatore','prayagraj'
+    ];
+
+    $currentCity = strtolower($city);
+@endphp
+@section('meta_robots')
+@if(in_array($currentCity, $allowedCities))
+<meta name="robots" content="index, follow">
+@else
+<meta name="robots" content="noindex, follow">
+@endif
+@endsection
+ 
+
+
+ 
 @section('content') 
 <style>  
     #enquiry-modal { display: none; }

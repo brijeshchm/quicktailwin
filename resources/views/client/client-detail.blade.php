@@ -1042,7 +1042,7 @@ function selectCert(i) {
                         🏢 Why Choose Us?
                     </h3>
                     <div class="space-y-6">
-                        @foreach([['👥','Expert Faculty','Industry-experienced trainers'],['🏆','Certification','Industry-recognized certificates'],['🎯','Job-Oriented','Placement assistance & projects']] as $w)
+                        @foreach([['👥','Industry Expert ','best experienced '],['🏆','Certification','Industry certificates'],['🎯','Job-Oriented','Services assistance & projects']] as $w)
                         <div class="flex gap-4">
                             <div class="w-10 h-10 rounded-2xl bg-white flex items-center justify-center shadow-sm text-lg">{{ $w[0] }}</div>
                             <div>

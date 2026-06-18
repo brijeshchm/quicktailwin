@@ -14,7 +14,7 @@
 @else
 <link rel="canonical" href="{{ url()->current() }}" />
 @endif
-@if (View::hasSection('meta_robots'))
+@if(View::hasSection('meta_robots'))
 @yield('meta_robots')
 @else
 <meta name="robots" content="index, follow">
@@ -310,319 +310,247 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
  
  
 
-var searchCity       = '';
-// var heroSelectedCity = '';
-var cityDetected     = false;  
+// var searchCity       = '';
+// // var heroSelectedCity = '';
+// var cityDetected     = false;  
 
  
-document.addEventListener('DOMContentLoaded', function () {
+// document.addEventListener('DOMContentLoaded', function () {
     
-    detectCity();
-});
+//     detectCity();
+// });
 
  
-function detectCity() {
+// function detectCity() {
 
  
-    if (navigator.geolocation) {
+//     if (navigator.geolocation) {
      
 
-        navigator.geolocation.getCurrentPosition(
-            gpsSuccess,    
-            gpsError,     
-            {
-                timeout           : 10000,   
-                maximumAge        : 60000,   
-                enableHighAccuracy: false   
-            }
-        );
+//         navigator.geolocation.getCurrentPosition(
+//             gpsSuccess,    
+//             gpsError,     
+//             {
+//                 timeout           : 10000,   
+//                 maximumAge        : 60000,   
+//                 enableHighAccuracy: false   
+//             }
+//         );
 
-    } else {
+//     } else {
        
-        detectCityFromIP();
-    }
-}
-
- 
-async function gpsSuccess(position) {
-    var lat = position.coords.latitude;
-    var lon = position.coords.longitude;
-
- 
-
-    try {
-      
-        var response = await fetch(
-            'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + lat + '&lon=' + lon,
-            {
-                headers: {                 
-                    'Accept-Language': 'en',
-                }
-            }
-        );
-
-        if (!response.ok) throw new Error('Nominatim request failed');
-
-        var data = await response.json();      
-        var city =
-            data.address.city      ||
-            data.address.town      ||
-            data.address.village   ||
-            data.address.county    ||
-            data.address.state_district ||
-            null;
-
-        if (city) {
-          
-            applyCity(city);
-        } else {      
-            detectCityFromIP();
-        }
-
-    } catch (error) {        
-        detectCityFromIP();
-    }
-}
-
-
-function gpsError(error) {    
-    detectCityFromIP();
-}
-
- 
-function detectCityFromIP() {
-    if (cityDetected) return;     
-
-    fetch('https://ipapi.co/json/')
-        .then(function (res) {
-            if (!res.ok) throw new Error('ipapi.co response error');
-            return res.json();
-        })
-        .then(function (data) {
-            if (data.city) {            
-                applyCity(data.city);
-            } 
-        })
-        .catch(function (err) {       
-            detectCityFromGeolocationDB();
-        });
-}
-
-// ── 5. IP DETECTION — Fallback (geolocation-db JSONP) ───
-function detectCityFromGeolocationDB() {
-    if (cityDetected) return;    
-
-    var script = document.createElement('script');
-
-    window.callback = function (location) {
-        // ── Cleanup script tag ──
-        delete window.callback;
-        if (script && document.head.contains(script)) {
-            document.head.removeChild(script);
-        }
-
-        
-
-        if (!location || !location.city || location.city === 'Not found') {        
-            return;
-        }
-   
-        applyCity(location.city);
-    };
-
-    script.onerror = function () {
-       
-        delete window.callback;
-        if (script && document.head.contains(script)) {
-            document.head.removeChild(script);
-        }
-      
-    };
-
-    script.src = 'https://geolocation-db.com/jsonp';
-    document.head.appendChild(script);
-}
- 
-function applyCity(rawCity) {
-    if (!rawCity || cityDetected) return;
-
-    cityDetected = true;  
-
-  
-    var formatted = rawCity
-        .toLowerCase()
-        .replace(/-/g, ' ')
-        .trim()
-        .split(' ')
-        .filter(Boolean)
-        .map(function (word) {
-            return word.charAt(0).toUpperCase() + word.slice(1);
-        })
-        .join(' ');
-
-    var cityLower = formatted.toLowerCase();
-
-    searchCity       = formatted;
-    heroSelectedCity = cityLower;
-
-   
-    ['hero-city-label', 'sticky-city-label', 'mobile-city-label']
-        .forEach(function (id) {
-            var el = document.getElementById(id);
-            if (el) {
-                el.textContent = formatted;                
-            }
-        });
-
-    var cityIdInputs = document.querySelectorAll('input[name="city_id"]');
-    if (cityIdInputs.length > 0) {
-        cityIdInputs.forEach(function (input) {
-            input.value = cityLower;
-            
-        });
-    } else {
-        // ── Auto-create hidden input if none exists ──
-        var autoInput    = document.createElement('input');
-        autoInput.type   = 'hidden';
-        autoInput.name   = 'city_id';
-        autoInput.id     = 'city_id_auto';
-        autoInput.value  = cityLower;
-        document.body.appendChild(autoInput);
-       
-    }
-
-    // ── Update by ID also (if specific id exists) ──
-    var cityIdById = document.getElementById('city_id');
-    if (cityIdById) {
-        cityIdById.value = cityLower;
-       
-    }
-
-
-
-
-    if (
-        typeof $  !== 'undefined' &&
-        typeof $citySelect !== 'undefined' &&
-        $citySelect && $citySelect.length
-    ) {
-        var option = new Option(formatted, cityLower, true, true);
-        $citySelect.append(option).trigger('change');
-         
-    }
-
-    // ── Update plain HTML <select> (if exists) ──
-    var plainSelect = document.getElementById('city-select');
-    if (plainSelect) {
-        var found = false;
-        for (var i = 0; i < plainSelect.options.length; i++) {
-            if (plainSelect.options[i].value.toLowerCase() === cityLower) {
-                plainSelect.selectedIndex = i;
-                found = true;
-                break;
-            }
-        }
-        if (!found) {
-            var newOpt       = document.createElement('option');
-            newOpt.value     = cityLower;
-            newOpt.text      = formatted;
-            newOpt.selected  = true;
-            plainSelect.appendChild(newOpt);
-        }
-         
-    }
-
-    // ── Update hidden input (if exists) ──
-    var hiddenInput = document.getElementById('selected-city');
-    if (hiddenInput) {
-        hiddenInput.value = cityLower;
-        
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//     function applyDetectedCity(cityName) {
-//     if (!cityName) return;
-//     const formatted = cityName
-//         .split('-')
-//         .map(w => w.charAt(0).toUpperCase() + w.slice(1))
-//         .join(' ');
-//     const lower = formatted.toLowerCase();
-
-//     heroSelectedCity = lower;
-
-//     ['hero-city-label', 'sticky-city-label', 'mobile-city-label'].forEach(id => {
-//         const el = document.getElementById(id);
-//         if (el) el.textContent = formatted;
-//     });
-
-//     // renderHeroCityList(CITIES);
+//         detectCityFromIP();
+//     }
 // }
 
  
+// async function gpsSuccess(position) {
+//     var lat = position.coords.latitude;
+//     var lon = position.coords.longitude;
+
+ 
+
+//     try {
+      
+//         var response = await fetch(
+//             'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + lat + '&lon=' + lon,
+//             {
+//                 headers: {                 
+//                     'Accept-Language': 'en',
+//                 }
+//             }
+//         );
+
+//         if (!response.ok) throw new Error('Nominatim request failed');
+
+//         var data = await response.json();      
+//         var city =
+//             data.address.city      ||
+//             data.address.town      ||
+//             data.address.village   ||
+//             data.address.county    ||
+//             data.address.state_district ||
+//             null;
+
+//         if (city) {
+          
+//             applyCity(city);
+//         } else {      
+//             detectCityFromIP();
+//         }
+
+//     } catch (error) {        
+//         detectCityFromIP();
+//     }
+// }
 
 
+// function gpsError(error) {    
+//     detectCityFromIP();
+// }
 
-// // ─── Fallback: geolocation-db.com (JSONP) ─────────────────────────────────
-//  function detectCityFromGeolocationDB() {
-//     const script = document.createElement('script');
+ 
+// function detectCityFromIP() {
+//     if (cityDetected) return;     
 
-//     // ✅ Must be named exactly 'callback' — geolocation-db hardcodes this
-//     window.callback = function(location) {
-//         // Cleanup
+//     fetch('https://ipapi.co/json/')
+//         .then(function (res) {
+//             if (!res.ok) throw new Error('ipapi.co response error');
+//             return res.json();
+//         })
+//         .then(function (data) {
+//             if (data.city) {            
+//                 applyCity(data.city);
+//             } 
+//         })
+//         .catch(function (err) {       
+//             detectCityFromGeolocationDB();
+//         });
+// }
+
+// // ── 5. IP DETECTION — Fallback (geolocation-db JSONP) ───
+// function detectCityFromGeolocationDB() {
+//     if (cityDetected) return;    
+
+//     var script = document.createElement('script');
+
+//     window.callback = function (location) {
+//         // ── Cleanup script tag ──
 //         delete window.callback;
-//         if (document.head.contains(script)) document.head.removeChild(script);
+//         if (script && document.head.contains(script)) {
+//             document.head.removeChild(script);
+//         }
 
-//         if (!location.city || location.city === 'Not found') return;
-//         console.log(location);
-//         applyDetectedCity(location.city);
+        
+
+//         if (!location || !location.city || location.city === 'Not found') {        
+//             return;
+//         }
+   
+//         applyCity(location.city);
 //     };
 
-//     script.onerror = function() {
+//     script.onerror = function () {
+       
 //         delete window.callback;
-//         if (document.head.contains(script)) document.head.removeChild(script);
-//         // Both APIs failed — keep default city
+//         if (script && document.head.contains(script)) {
+//             document.head.removeChild(script);
+//         }
+      
 //     };
 
 //     script.src = 'https://geolocation-db.com/jsonp';
 //     document.head.appendChild(script);
 // }
-// // ─── Primary: ipapi.co ────────────────────────────────────────────────────
-// function detectCity() {
-//     fetch('https://ipapi.co/json/')
-//         .then(res => {
-//             if (!res.ok) throw new Error('ipapi failed');
-//             return res.json();
-//         })
-//         .then(data => {
-//             console.log(data);
-//             if (data.city) {
-//                 applyDetectedCity(data.city);
-//             } else {
-//                 throw new Error('no city in response');
-//             }
-//         })
-//         .catch(() => {
-//             // ipapi failed — try geolocation-db as fallback
-//             detectCityFromGeolocationDB();
-//         });
-// }
  
-// detectCity();
+// function applyCity(rawCity) {
+//     if (!rawCity || cityDetected) return;
+
+//     cityDetected = true;  
+
+  
+//     var formatted = rawCity
+//         .toLowerCase()
+//         .replace(/-/g, ' ')
+//         .trim()
+//         .split(' ')
+//         .filter(Boolean)
+//         .map(function (word) {
+//             return word.charAt(0).toUpperCase() + word.slice(1);
+//         })
+//         .join(' ');
+
+//     var cityLower = formatted.toLowerCase();
+
+//     searchCity       = formatted;
+//     heroSelectedCity = cityLower;
+
+   
+//     ['hero-city-label', 'sticky-city-label', 'mobile-city-label']
+//         .forEach(function (id) {
+//             var el = document.getElementById(id);
+//             if (el) {
+//                 el.textContent = formatted;                
+//             }
+//         });
+
+//     var cityIdInputs = document.querySelectorAll('input[name="city_id"]');
+//     if (cityIdInputs.length > 0) {
+//         cityIdInputs.forEach(function (input) {
+//             input.value = cityLower;
+            
+//         });
+//     } else {
+//         // ── Auto-create hidden input if none exists ──
+//         var autoInput    = document.createElement('input');
+//         autoInput.type   = 'hidden';
+//         autoInput.name   = 'city_id';
+//         autoInput.id     = 'city_id_auto';
+//         autoInput.value  = cityLower;
+//         document.body.appendChild(autoInput);
+       
+//     }
+
+//     // ── Update by ID also (if specific id exists) ──
+//     var cityIdById = document.getElementById('city_id');
+//     if (cityIdById) {
+//         cityIdById.value = cityLower;
+       
+//     }
+
+
+
+
+//     if (
+//         typeof $  !== 'undefined' &&
+//         typeof $citySelect !== 'undefined' &&
+//         $citySelect && $citySelect.length
+//     ) {
+//         var option = new Option(formatted, cityLower, true, true);
+//         $citySelect.append(option).trigger('change');
+         
+//     }
+
+//     // ── Update plain HTML <select> (if exists) ──
+//     var plainSelect = document.getElementById('city-select');
+//     if (plainSelect) {
+//         var found = false;
+//         for (var i = 0; i < plainSelect.options.length; i++) {
+//             if (plainSelect.options[i].value.toLowerCase() === cityLower) {
+//                 plainSelect.selectedIndex = i;
+//                 found = true;
+//                 break;
+//             }
+//         }
+//         if (!found) {
+//             var newOpt       = document.createElement('option');
+//             newOpt.value     = cityLower;
+//             newOpt.text      = formatted;
+//             newOpt.selected  = true;
+//             plainSelect.appendChild(newOpt);
+//         }
+         
+//     }
+
+//     // ── Update hidden input (if exists) ──
+//     var hiddenInput = document.getElementById('selected-city');
+//     if (hiddenInput) {
+//         hiddenInput.value = cityLower;
+        
+//     }
+// }
+
+
+
+
+
+
+
+
+
+
+
+ 
 </script>
  
 
