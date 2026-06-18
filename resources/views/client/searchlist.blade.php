@@ -51,7 +51,7 @@ window.addEventListener('scroll', () => {
 @include('client.components.banner-section')
 @php
 $sortOptions = ['Best Match', 'Highest Rated', 'Most Reviews', 'Newest', 'Name A–Z'];
-$otherCities = ['noida','delhi','gurgaon','faridabad','ghaziabad','mumbai','pune','greater-noida','chandigarh','meerut','ahmedabad','bangalore','lucknow','agra','indore','gorakhpur','kanpur','vijayawada','nashik','varanasi'];
+$otherCities = ['hyderabad','delhi','noida','gurgaon','mumbai','bangalore'];
 
 $starMap = [
     0 => 'star_1.png', 2 => 'star_2.png', 3 => 'star_3.png',
