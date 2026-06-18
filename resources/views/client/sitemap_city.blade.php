@@ -5,9 +5,8 @@
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 @php
-    $cities = ['jalandhar', 'dehradun'];
+$cities = ['jalandhar', 'dehradun'];
 @endphp
-
 @foreach ($cities as $city)
     @foreach ($keywords as $keyword)
     <url>
