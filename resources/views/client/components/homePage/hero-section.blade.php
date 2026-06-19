@@ -154,7 +154,9 @@
     alt="{{ $card['title'] ?? '' }}"
     loading="lazy"
     decoding="async"
-    class="absolute inset-0 w-full h-full object-cover object-center opacity-80 brightness-90 group-hover:opacity-100 group-hover:brightness-110 group-hover:scale-105 transition-all duration-500"
+    width="254"
+    height="155"  
+    class="absolute inset-0 w-full h-full aspect-[254/155] object-cover object-center opacity-80 brightness-90 group-hover:opacity-100 group-hover:brightness-110 group-hover:scale-105 transition-all duration-500"
 />
     <div class="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent"></div>
 
