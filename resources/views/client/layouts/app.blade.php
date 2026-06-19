@@ -128,14 +128,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     );
 
 
-@endphp
-
- 
-@php
-   
-    $schemas = [];
-
-  
+@endphp 
+@php   
+    $schemas = [];  
     $schemas[] = [
         '@context' => 'https://schema.org',
         '@type'    => 'Organization',

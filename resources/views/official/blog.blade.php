@@ -219,6 +219,12 @@
      MAIN LAYOUT
 ════════════════════════════════ --}}
 <main class="container mx-auto px-4 lg:px-8 py-8 lg:py-12">
+  <div class="mx-auto max-w-2xl px-4 py-6 text-center">
+    <h1 id="rotating-heading"
+        class="text-lg font-semibold text-gray-800 transition-opacity duration-500">
+       What Would You Like to Learn Today?
+    </h1>
+</div>
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
 
         {{-- ══════════════════════════════════════

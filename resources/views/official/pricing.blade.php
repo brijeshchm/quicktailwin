@@ -1,7 +1,7 @@
 @extends('client.layouts.app')
-@section('title', 'Package Price QuickDials- Local search, IT Training, Service, overseas education')
-@section('description', 'Package Price Dials- Local search, IT Training, Service, overseas education')
-@section('keywords', 'Package Price Dials- Local search, IT Training, Service, overseas education')
+@section('title', 'Package Price Dials | Local Search, IT Training & Overseas Education')
+@section('description', 'Discover Package Price Dials for local search, IT training, professional services, and overseas education solutions designed for your career and business needs.')
+@section('keywords', 'Package Price Dials, local search, IT training, professional services, overseas education')
 @section('content') 
 
  
@@ -26,22 +26,19 @@
  
 
  
-
-{{-- ══════════════════════════
-     PRICING SECTION
-══════════════════════════ --}}
+ 
 <main>
 <section class="py-20 bg-slate-100/60">
     <div class="container mx-auto px-4 md:px-6">
 
         {{-- Section header --}}
         <div class="text-center mb-14 anim-fade-up">
-            <h2 class="text-3xl md:text-5xl font-bold text-gray-900 leading-snug tracking-tight mb-4">
+            <h1 class="text-3xl md:text-5xl font-bold text-gray-900 leading-snug tracking-tight mb-4">
                 Welcome to
                 <span class="text-indigo-600">
                     QuickDials<sup class="text-amber-500 text-2xl font-normal align-super">™</sup>
                 </span><span class="text-gray-900">.com</span>
-            </h2>
+            </h1>
             <p class="text-gray-500 max-w-2xl mx-auto text-lg leading-relaxed">
                 Pick a plan that suits your business size and how fast you want to grow. Every package gives you easy system access and tools to manage your enquiries smoothly. Higher plans come with more user access and extra coins, which help you reach more customers and handle more requests. All plans are made to keep things simple, clear, and easy to use for your daily business needs.
             </p>
