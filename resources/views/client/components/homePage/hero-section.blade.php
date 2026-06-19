@@ -162,9 +162,9 @@
 
     <div class="relative z-10 p-3.5 flex flex-col justify-between h-full">
         <div>
-            <h3 class="text-white font-black text-sm leading-tight">
+             <h5 class="text-white font-black text-[9px] leading-tight">
                 {{ $card['title'] ?? '' }}
-            </h3>
+            </h5> 
             <span class="flex items-center gap-0.5 text-[9px] text-gray-200 mt-0.5">
                 <span class="text-yellow-400 text-[10px]">★</span>
                 <span class="font-semibold">{{ $card['rating'] ?? '' }}</span>

@@ -3,16 +3,1399 @@
 @section('description', 'Find Only Certified Training Institutes, Coaching Centers near you on quickdials and Get Free counseling, Free Demo Classes, and Get Placement Assistence.')
 @section('keywords', 'Find Best It Training Centre near You, Find Best It Training Institute near You, Find Top 10 IT Training Institute near You, Find Best Entrance Exam Preparation Centre Near you, Top 10 Entrance Exam Centre Near you, Find Best Distance Education Centre Near You, Find Top 10 Distance Education Centre Near You, Find Best School And Colleges Near You, Find Top 10 school And College Near You, Get Education Loan, GET Free career Counselling, Find Best overseas education consultants Near you, Find Top 10 overseas education consultants Near you.')
 @section('content')
+@include('client.components.banner-section')
+<style>
+:root {
+    --qd-primary: #0a5bd3;
+    --qd-primary-dark: #084298;
+    --qd-secondary: #02a8a8;
+    --qd-accent: #ff5f14;
+    --qd-heading: #033967;
+    --qd-text: #25364a;
+    --qd-muted: #667085;
+    --qd-border: #e2e8f0;
+    --qd-soft-bg: #f7faff;
+    --qd-danger: #dc3545;
+    --qd-success: #198754;
+    --qd-white: #ffffff;
+    --qd-shadow: 0 10px 30px rgba(15, 23, 42, 0.09);
+    --qd-radius: 12px;
+}
 
-<script type="application/ld+json">
-{
- "@context": "https://schema.org",
- "@type": "WebPage",
- "name": "{{ $key ?? 'QuickDials' }}",
- "description": "{{ $descrip ?? $key .' in India' }}",
- "url": "{{ url()->current() }}"
-} 
-</script>
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* ---------- Shared page layout ---------- */
+
+.container {
+    width: 100%;
+    max-width: 1170px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.col-xs-12,
+.col-sm-12,
+.col-sm-9,
+.col-sm-3,
+.col-md-12,
+.col-md-9,
+.col-md-3 {
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.third-add-section {
+    margin-top: 18px;
+    overflow: hidden;
+    border-radius: var(--qd-radius);
+    background: var(--qd-white);
+    box-shadow: var(--qd-shadow);
+}
+
+.third-add-section img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 330px;
+    object-fit: cover;
+}
+
+.form-section {
+    margin-top: 20px;
+    padding: 20px 24px;
+    border: 1px solid var(--qd-border);
+    border-radius: var(--qd-radius);
+    background: linear-gradient(135deg, #ffffff 0%, #f5f9ff 100%);
+    box-shadow: var(--qd-shadow);
+}
+
+.removeLeftSpace {
+    margin: 0;
+    padding: 0;
+}
+
+.hdTitle h1 {
+    margin: 0 0 10px;
+    color: var(--qd-heading);
+    font-size: clamp(24px, 3vw, 38px);
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.hdTitle [itemprop="aggregateRating"] {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+    color: #475467;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.hdTitle [itemprop="aggregateRating"] img {
+    width: auto;
+    max-width: 105px;
+    height: 18px;
+    object-fit: contain;
+}
+
+.hdTitle [itemprop="ratingValue"],
+.hdTitle [itemprop="ratingCount"] {
+    color: var(--qd-heading);
+    font-weight: 700;
+}
+
+ 
+
+.reviews-box-main {
+    margin-top: 24px;
+}
+
+.top_description {
+    margin-top: 0 !important;
+    margin-bottom: 20px;
+    padding: 20px 22px;
+    color: var(--qd-heading) !important;
+    border-left: 4px solid var(--qd-primary);
+    border-radius: 8px;
+    background: #f2f7ff;
+}
+
+.top_description p {
+    margin: 0;
+    color: inherit;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+ 
+/* ---------- About accordion ---------- */
+
+.line-content,
+.client-list-first,
+.about-accordian,
+.abt-accordion {
+    width: 100%;
+}
+
+.abt-accordion .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 0;
+    margin-bottom: 18px;
+    overflow: hidden;
+    word-wrap: break-word;
+    border: 1px solid var(--qd-border);
+    border-radius: var(--qd-radius);
+    background: var(--qd-white);
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.08);
+}
+
+.abt-accordion .card-header {
+    padding: 0;
+    border: 0;
+    background: linear-gradient(135deg, #f8fbff, #ffffff);
+}
+
+.abt-accordion .card-header h2 {
+    margin: 0;
+}
+
+.abt-accordion .card-header h2 button,
+.abt-accordion .btn-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 58px;
+    margin: 0;
+    padding: 15px 20px;
+    color: var(--qd-heading);
+    border: 0;
+    border-radius: 0;
+    outline: 0;
+    background: transparent;
+    font: inherit;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.4;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.abt-accordion .btn-link:hover,
+.abt-accordion .btn-link:focus {
+    color: var(--qd-primary);
+    text-decoration: none;
+}
+ 
+
+.abt-accordion .collapse.show {
+    position: relative;
+    display: block;
+}
+
+.abt-accordion .collapse.show::before {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    left: 20px;
+    height: 1px;
+    content: "";
+    background: var(--qd-secondary);
+}
+
+.abt-accordion .card-body {
+    flex: 1 1 auto;
+    padding: 20px 22px;
+    color: #344054 !important;
+    font-size: 14px !important;
+    font-weight: 400;
+    line-height: 1.8;
+}
+
+.about-accordian .card-body p {
+    margin: 0 0 12px;
+    padding: 0;
+    color: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.about-accordian .card-body > ul,
+.about-accordian .card-body ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.about-accordian .card-body ul ul {
+    margin-top: 10px;
+    margin-left: 0;
+    padding-left: 24px;
+}
+
+.about-accordian .card-body li {
+    position: relative;
+    margin: 0 0 10px;
+    padding-left: 20px;
+    color: #344054;
+    font-size: 14px !important;
+    line-height: 1.75;
+    text-align: left;
+}
+
+.about-accordian .card-body li::before {
+    position: absolute;
+    top: 8px;
+    left: 1px;
+    width: 7px;
+    height: 12px;
+    content: "";
+    transform: rotate(45deg);
+    border-right: 2px solid var(--qd-accent);
+    border-bottom: 2px solid var(--qd-accent);
+}
+
+ 
+
+/* ---------- Content cards ---------- */
+
+.category-description {
+    margin-top: 24px;
+    padding: 26px 28px;
+    overflow: hidden;
+    border: 1px solid var(--qd-border);
+    border-radius: var(--qd-radius);
+    background: var(--qd-white);
+    box-shadow: var(--qd-shadow);
+}
+
+.category-description h2,
+.category-description h3,
+.category-description h4,
+.category-description h5 {
+    color: var(--qd-heading);
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.category-description h2 {
+    position: relative;
+    margin: 0 0 20px;
+    padding-bottom: 12px;
+    font-size: clamp(21px, 2.2vw, 29px);
+}
+
+.category-description h2::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 54px;
+    height: 3px;
+    content: "";
+    border-radius: 999px;
+    background: var(--qd-primary);
+}
+
+.category-description h3 {
+    margin: 24px 0 12px;
+    font-size: 20px;
+}
+
+.category-description h4 {
+    margin: 0 0 18px;
+    font-size: 21px;
+}
+
+.category-description h5 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.category-description .card-body {
+    padding: 0;
+    color: var(--qd-text) !important;
+    font-size: 15px !important;
+    line-height: 1.8;
+}
+
+.category-description p {
+    margin: 0 0 14px;
+    padding: 0;
+    color: var(--qd-text);
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.category-description strong {
+    color: #172b4d;
+}
+
+.category-description ul {
+    margin: 12px 0 18px;
+    padding-left: 0;
+    list-style: none;
+}
+
+.category-description ul ul {
+    margin: 14px 0 0;
+    padding-left: 18px;
+}
+
+.category-description li {
+    position: relative;
+    margin-bottom: 10px;
+    padding-left: 26px;
+    color: var(--qd-text);
+    font-size: 15px !important;
+    line-height: 1.7;
+}
+
+.category-description li::before {
+    position: absolute;
+    top: 8px;
+    left: 2px;
+    width: 8px;
+    height: 13px;
+    content: "";
+    transform: rotate(45deg);
+    border-right: 2px solid var(--qd-secondary);
+    border-bottom: 2px solid var(--qd-secondary);
+}
+
+/* ---------- FAQ schema blocks ---------- */
+
+.category-description [itemtype="https://schema.org/FAQPage"] {
+    display: grid;
+    gap: 12px;
+}
+
+.category-description [itemprop="mainEntity"] {
+    padding: 17px 18px;
+    border: 1px solid var(--qd-border);
+    border-radius: 10px;
+    background: var(--qd-soft-bg);
+}
+
+.category-description [itemprop="mainEntity"] h5 {
+    margin-bottom: 8px;
+}
+
+.category-description [itemprop="acceptedAnswer"] {
+    display: block;
+    color: #475467;
+    font-size: 14px;
+    line-height: 1.75;
+}
+
+/* ---------- Pagination ---------- */
+
+.current .btn-info {
+    color: var(--qd-success);
+}
+
+#pagin {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 20px 0;
+    padding: 0;
+    list-style: none;
+}
+
+#pagin li {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    min-height: 36px;
+    margin: 0;
+    padding: 0;
+    border-radius: 7px;
+    background: #c94a30;
+}
+
+#pagin li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 7px 10px;
+    color: var(--qd-white);
+    text-decoration: none;
+}
+
+#pagin li:hover,
+#pagin li.current {
+    background: var(--qd-primary);
+}
+
+/* ---------- Popup overlay ---------- */
+
+.inquiry-popup {
+    
+}
+
+.searchPopup {
+    position: fixed;
+    z-index: 99999;
+    inset: 0;
+   
+    overflow-y: auto;
+    padding: 30px 18px;
+    background: rgba(15, 23, 42, 0.72);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.searchPopup.active,
+.searchPopup.show {
+    display: block;
+}
+
+.searchPopup .dealclosebtn {
+    position: fixed;
+    z-index: 100001;
+    top: 18px;
+    right: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: var(--qd-white);
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.2);
+    text-decoration: none;
+}
+
+.searchPopup .dealclosebtn::before,
+.searchPopup .dealclosebtn::after {
+    position: absolute;
+    width: 19px;
+    height: 2px;
+    content: "";
+    border-radius: 2px;
+    background: #101828;
+}
+
+.searchPopup .dealclosebtn::before {
+    transform: rotate(45deg);
+}
+
+.searchPopup .dealclosebtn::after {
+    transform: rotate(-45deg);
+}
+
+.callback-wrapper {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.9fr) minmax(410px, 1.1fr);
+    width: min(960px, 100%);
+    min-height: 590px;
+    margin: 20px auto;
+    overflow: hidden;
+    border-radius: 18px;
+    background: var(--qd-white);
+    box-shadow: 0 24px 70px rgba(2, 12, 27, 0.34);
+}
+
+.left-panel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 44px 38px;
+    overflow: hidden;
+    color: var(--qd-white);
+    background: linear-gradient(145deg, #073b82 0%, #0a67d8 55%, #02a8a8 115%);
+}
+
+.left-panel::before,
+.left-panel::after {
+    position: absolute;
+    content: "";
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.left-panel::before {
+    top: -90px;
+    right: -70px;
+    width: 220px;
+    height: 220px;
+}
+
+.left-panel::after {
+    bottom: -120px;
+    left: -80px;
+    width: 270px;
+    height: 270px;
+}
+
+.left-panel > * {
+    position: relative;
+    z-index: 1;
+}
+
+.left-panel h2 {
+    margin: 0 0 14px;
+    color: var(--qd-white);
+    font-size: clamp(27px, 3vw, 39px);
+    font-weight: 750;
+    line-height: 1.2;
+}
+
+.left-panel > p {
+    margin: 0 0 28px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.benefits {
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.benefits h4 {
+    margin: 0 0 13px;
+    color: var(--qd-white);
+    font-size: 17px;
+}
+
+.benefits ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.benefits li {
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.96);
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.benefits li:last-child {
+    margin-bottom: 0;
+}
+
+.right-panel {
+    display: flex;
+    flex-direction: column;
+    padding: 36px 40px;
+    background: var(--qd-white);
+}
+
+.right-panel > h2 {
+    margin: 0 0 8px;
+    color: var(--qd-heading);
+    font-size: 28px;
+    font-weight: 750;
+    line-height: 1.25;
+}
+
+.right-panel > p {
+    margin: 0 0 22px;
+    color: var(--qd-muted);
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+.orng {
+    color: var(--qd-accent);
+    font-weight: 700;
+}
+
+.popup-box {
+    width: 100%;
+}
+
+.popupSteps {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.popupSteps span {
+    flex: 1 1 0;
+    height: 5px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: #e8edf4;
+    transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.popupSteps span.active {
+    background: linear-gradient(90deg, var(--qd-primary), var(--qd-secondary));
+}
+
+.popup-step {
+   
+    animation: qdFadeSlide 0.28s ease;
+}
+
+.popup-step.active {
+    display: block;
+}
+
+@keyframes qdFadeSlide {
+    from {
+        opacity: 0;
+        transform: translateY(7px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.popup-step > span {
+    display: block;
+    margin-bottom: 16px;
+    color: var(--qd-heading);
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.popup-form .erbr,
+.popup-form .form-group {
+    position: relative;
+    margin-bottom: 15px;
+    color: #344054;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.popup-form input[type="text"],
+.popup-form input[type="email"],
+.popup-form input[type="tel"],
+.popup-form input[type="number"],
+.popup-form input[type="date"],
+.popup-form select,
+.popup-form textarea,
+.drop-input-wrapper {
+    width: 100%;
+    min-height: 48px;
+    border: 1px solid #d0d5dd;
+    border-radius: 9px;
+    outline: none;
+    background: var(--qd-white);
+    color: #101828;
+    font-size: 14px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.popup-form input[type="text"],
+.popup-form input[type="email"],
+.popup-form input[type="tel"],
+.popup-form input[type="number"],
+.popup-form input[type="date"],
+.popup-form select,
+.popup-form textarea {
+    padding: 11px 13px;
+}
+
+.popup-form textarea {
+    min-height: 115px;
+    resize: vertical;
+}
+
+.popup-form input:focus,
+.popup-form select:focus,
+.popup-form textarea:focus,
+.drop-input-wrapper:focus-within {
+    border-color: var(--qd-primary);
+    box-shadow: 0 0 0 3px rgba(10, 91, 211, 0.12);
+}
+
+.popup-form select {
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 38px;
+    background-image: linear-gradient(45deg, transparent 50%, #667085 50%),
+                      linear-gradient(135deg, #667085 50%, transparent 50%);
+    background-repeat: no-repeat;
+    background-position: calc(100% - 18px) 20px, calc(100% - 13px) 20px;
+    background-size: 5px 5px, 5px 5px;
+}
+
+.popup-form input::placeholder,
+.popup-form textarea::placeholder,
+.dropwn-input::placeholder {
+    color: #98a2b3;
+    opacity: 1;
+}
+
+/* Country code and phone row */
+
+.div-code,
+.drop-number {
+    width: 100%;
+}
+
+.drop-number {
+    display: grid;
+    grid-template-columns: minmax(170px, 0.85fr) minmax(180px, 1.15fr);
+    gap: 10px;
+}
+
+.dropdown {
+    position: relative;
+    min-width: 0;
+}
+
+.drop-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0 !important;
+    padding: 0 34px 0 43px;
+}
+
+.flag-icon {
+    position: absolute;
+    left: 12px;
+    width: 23px;
+    height: 16px;
+    border-radius: 2px;
+    object-fit: cover;
+}
+
+.dropwn-input {
+    width: 100%;
+    height: 46px;
+    padding: 0;
+    border: 0 !important;
+    outline: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.clear-icon,
+.dropdown-icon {
+    position: absolute;
+    right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #667085;
+    cursor: pointer;
+}
+
+.clear-icon {
+    right: 29px;
+   
+    font-size: 12px;
+}
+
+.dropdown-icon {
+    font-size: 14px;
+    pointer-events: none;
+}
+
+.dropdown-list {
+    position: absolute;
+    z-index: 50;
+    top: calc(100% + 5px);
+    right: 0;
+    left: 0;
+    
+    max-height: 220px;
+    overflow-y: auto;
+    border: 1px solid var(--qd-border);
+    border-radius: 9px;
+    background: var(--qd-white);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.15);
+}
+
+.dropdown.open .dropdown-list,
+.dropdown-list.show {
+    display: block;
+}
+
+.dropdown-list > * {
+    padding: 10px 12px;
+    border-bottom: 1px solid #eef2f6;
+    cursor: pointer;
+}
+
+.dropdown-list > *:last-child {
+    border-bottom: 0;
+}
+
+.dropdown-list > *:hover {
+    background: #f4f8ff;
+}
+
+.quick_arrow {
+    margin-bottom: 0 !important;
+}
+
+.quick_arrow input {
+    height: 48px;
+}
+
+/* Checkbox option cards */
+
+.fieldblock {
+    margin-bottom: 16px;
+}
+
+.fieldblock-form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.radio-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 46px;
+    padding: 10px 12px;
+    border: 1px solid #d0d5dd;
+    border-radius: 9px;
+    background: #fff;
+    color: #344054;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+}
+
+.radio-item:hover {
+    transform: translateY(-1px);
+    border-color: #9dbdf0;
+    background: #f7faff;
+}
+
+.radio-item input {
+    width: 17px;
+    height: 17px;
+    margin: 0 9px 0 0;
+    accent-color: var(--qd-primary);
+}
+
+.radio-item:has(input:checked) {
+    border-color: var(--qd-primary);
+    background: #eef5ff;
+    color: #073b82;
+}
+
+/* Form validation */
+
+.erbr.has-error input,
+.erbr.has-error select,
+.erbr.has-error textarea,
+.erbr.has-error .drop-input-wrapper,
+.erbr.has-error .radio-item {
+    border-color: var(--qd-danger) !important;
+}
+
+.erbr.has-error input:focus,
+.erbr.has-error select:focus,
+.erbr.has-error textarea:focus {
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.12);
+}
+
+.help-block {
+    display: block;
+    margin-top: 5px;
+    color: var(--qd-danger);
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+/* Popup buttons and terms */
+
+.btn-center {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-center button {
+    min-width: 120px;
+    min-height: 45px;
+    padding: 10px 18px;
+    border: 1px solid var(--qd-primary);
+    border-radius: 9px;
+    outline: 0;
+    background: var(--qd-primary);
+    color: var(--qd-white);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-center button:hover {
+    transform: translateY(-1px);
+    background: var(--qd-primary-dark);
+    box-shadow: 0 8px 18px rgba(10, 91, 211, 0.22);
+}
+
+.btn-center button:first-child:not(:only-child) {
+    border-color: #d0d5dd;
+    background: var(--qd-white);
+    color: #344054;
+}
+
+.btn-center button:first-child:not(:only-child):hover {
+    background: #f5f7fa;
+    box-shadow: none;
+}
+
+.terms {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 8px;
+    color: #667085;
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.terms input {
+    flex: 0 0 auto;
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    accent-color: var(--qd-primary);
+}
+
+.terms a {
+    color: var(--qd-primary);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.terms a:hover {
+    text-decoration: underline;
+}
+
+.loaderForm {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 8px;
+    color: var(--qd-primary);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.loaderForm img {
+    width: 20px;
+    height: 20px;
+}
+
+/* ---------- Scrollbars ---------- */
+
+.form-container {
+    max-height: 420px;
+    overflow-y: auto;
+    padding-right: 8px;
+    scrollbar-color: var(--qd-primary) #f1f1f1;
+    scrollbar-width: thin;
+}
+
+.form-container::-webkit-scrollbar,
+.dropdown-list::-webkit-scrollbar,
+.searchPopup::-webkit-scrollbar {
+    width: 6px;
+}
+
+.form-container::-webkit-scrollbar-track,
+.dropdown-list::-webkit-scrollbar-track,
+.searchPopup::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: #f1f1f1;
+}
+
+.form-container::-webkit-scrollbar-thumb,
+.dropdown-list::-webkit-scrollbar-thumb,
+.searchPopup::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: linear-gradient(180deg, var(--qd-primary), #0a6adf);
+}
+
+.form-container::-webkit-scrollbar-thumb:hover,
+.dropdown-list::-webkit-scrollbar-thumb:hover,
+.searchPopup::-webkit-scrollbar-thumb:hover {
+    background: var(--qd-primary-dark);
+}
+
+/* ---------- Responsive layout ---------- */
+
+@media (min-width: 768px) {
+    .col-sm-12 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .col-sm-9 {
+        flex: 0 0 75%;
+        max-width: 75%;
+    }
+
+    .col-sm-3 {
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+}
+
+@media (min-width: 992px) {
+    .col-md-12 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .col-md-9 {
+        flex: 0 0 75%;
+        max-width: 75%;
+    }
+
+    .col-md-3 {
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .callback-wrapper {
+        grid-template-columns: 1fr;
+        width: min(660px, 100%);
+    }
+
+    .left-panel {
+        padding: 30px;
+    }
+
+    
+
+    .right-panel {
+        padding: 30px;
+    }
+
+  
+
+    .reviews-box-main {
+        width: 100%;
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .container {
+        padding-right: 12px;
+        padding-left: 12px;
+    }
+
+    .row {
+        margin-right: -12px;
+        margin-left: -12px;
+    }
+
+    .col-xs-12,
+    .col-sm-12,
+    .col-sm-9,
+    .col-sm-3,
+    .col-md-12,
+    .col-md-9,
+    .col-md-3 {
+        padding-right: 12px;
+        padding-left: 12px;
+    }
+
+    .third-add-section {
+        margin-top: 12px;
+        border-radius: 9px;
+    }
+
+    .third-add-section img {
+        min-height: 150px;
+        max-height: 220px;
+    }
+
+    .form-section {
+        margin-top: 14px;
+        padding: 17px;
+    }
+
+    .hdTitle h1 {
+        font-size: 25px;
+    }
+
+    .top_description,
+    .category-description {
+        padding: 18px;
+    }
+
+    .category-description {
+        margin-top: 16px;
+        border-radius: 10px;
+    }
+
+    .category-description h2 {
+        font-size: 22px;
+    }
+
+    .category-description h3 {
+        font-size: 18px;
+    }
+
+    .category-description .card-body,
+    .category-description p,
+    .category-description li {
+        font-size: 14px !important;
+    }
+
+    .abt-accordion .card-header h2 button,
+    .abt-accordion .btn-link {
+        min-height: 52px;
+        padding: 13px 16px;
+        font-size: 16px;
+    }
+
+    .abt-accordion .card-body {
+        padding: 17px;
+    }
+
+    .searchPopup {
+        padding: 10px;
+    }
+
+    .searchPopup .dealclosebtn {
+        top: 12px;
+        right: 12px;
+        width: 38px;
+        height: 38px;
+    }
+
+    .callback-wrapper {
+        margin: 44px auto 15px;
+        border-radius: 13px;
+    }
+
+    .left-panel {
+        padding: 24px 20px;
+    }
+
+    .left-panel h2 {
+        font-size: 25px;
+    }
+
+    .left-panel > p {
+        margin-bottom: 0;
+    }
+
+    .right-panel {
+        padding: 24px 20px;
+    }
+
+    .right-panel > h2 {
+        font-size: 24px;
+    }
+
+    .drop-number,
+    .fieldblock-form {
+        grid-template-columns: 1fr;
+    }
+
+    .btn-center {
+        justify-content: stretch;
+    }
+
+    .btn-center button {
+        flex: 1 1 140px;
+    }
+}
+
+@media (max-width: 479.98px) {
+    .form-section,
+    .category-description,
+    .top_description {
+        padding: 15px;
+    }
+
+    .hdTitle h1 {
+        font-size: 22px;
+    }
+
+    .right-panel,
+    .left-panel {
+        padding: 20px 16px;
+    }
+
+    .popup-form input[type="text"],
+    .popup-form input[type="email"],
+    .popup-form input[type="tel"],
+    .popup-form input[type="number"],
+    .popup-form input[type="date"],
+    .popup-form select,
+    .popup-form textarea,
+    .drop-input-wrapper {
+        font-size: 16px;
+    }
+
+    .btn-center {
+        flex-direction: column;
+    }
+
+    .btn-center button {
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
+
+
+.abt-accordion .card {
+border-radius: 0;
+border: 1px solid rgba(179, 179, 179, 0.45);
+margin-bottom: 10px;
+max-width: 960px;
+border-radius: 0;
+box-shadow: 0 0 5px 3px #d4d4d466;
+}
+
+
+.card {
+position: relative;
+display: -ms-flexbox;
+display: flex;
+-ms-flex-direction: column;
+flex-direction: column;
+min-width: 0;
+word-wrap: break-word;
+background-color: #fff;
+background-clip: border-box;
+border: 1px solid rgba(0, 0, 0, .125);
+border-radius: .25rem;
+}
+
+.abt-accordion .card .card-header {
+padding: 7px;
+background: none;
+border: none;
+}
+
+.card-header:first-child {
+border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+}
+
+.abt-accordion .card .card-header h2 button {
+display: flex;
+align-items: center;
+justify-content: space-between;
+width: 100%;
+text-decoration: none;
+border-radius: 0;
+font-weight: 700;
+margin-left: 3%;
+}
+
+.abt-accordion .card .collapse.show {
+position: relative;
+visibility:visible;
+}
+
+.card-body {
+-ms-flex: 1 1 auto;
+flex: 1 1 auto;
+padding: 1.25rem;
+font-weight: 400;
+font-size: 13px !important;
+margin-bottom: 0;
+line-height: 1.7;
+padding-left: 1.5em;
+color: #212529 !important;
+}
+
+.about-accordian .card-body p {
+padding-left: 0;
+margin-bottom: 0;
+}
+
+.card-body p {
+font-weight: 400;
+font-size: 13px;
+margin-bottom: 10px;
+line-height: 1.7;
+padding-left: 1.5em;
+}
+
+.about-accordian ul {
+list-style: none;
+}
+
+.about-accordian .card-body ul li:first-child {
+margin-top: 0;
+}
+
+.about-accordian .card-body ul li {
+position: relative;
+font-weight: 400;
+font-size: 13px !important;
+line-height: 1.7;
+margin-left: 0;
+margin-bottom: 11px;
+margin-top: 10px;
+text-align: justify;
+}
+
+.about-accordian .card-body ul ul {
+position: relative;
+font-weight: 400;
+font-size: 13px !important;
+line-height: 1.7;
+margin-left: 22px;
+}
+
+.about-accordian ul {
+list-style: none;
+}
+ 
+</style>
+ 
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12 third-add-section">
@@ -24,133 +1407,50 @@
 			</div>
 		</div>
 	</div>
-	<?php 
-		if (!empty($keyword) ) { ?>
+	 
  
 
 	<div class="container">
 		<div class="form-section">
 			<div class="removeLeftSpace">
 				<div class="hdTitle">
-					@if(!empty($keyword))
-								<?php
-						$rating = $keyword->ratingvalue;
-						$stars = 'star_4.75_new.png';
-						$ext = '.png';
-						switch ($rating) {
-							case 0:
-								$stars = 'star_1' . $ext;
-								break;
-							case 2:
-								$stars = 'star_2' . $ext;
-								break;
-							case 3:
-								$stars = 'star_3' . $ext;
-								break;
-							case 3.5:
-								$stars = 'star_3.5_new' . $ext;
-								break;
-							case 4:
-								$stars = 'star_4' . $ext;
-								break;
-							case 4.5:
-								$stars = 'star_4.5_new' . $ext;
-								break;
-							case 4.75:
-								$stars = 'star_4.75_new' . $ext;
-								break;
-							case 5:
-								$stars = 'star_5_new' . $ext;
-								break;
-						}
-										?>
+					 
 								<div itemscope itemtype="https://schema.org/Product" style="font-size: 12px;font-weight: 500;">
 									<div class="text-primary" itemprop="name">
-										<h1 title="<?php  if (!empty($keyword->h1)) { $key = preg_replace('/{{city}}/i', ucfirst($city), $keyword->h1);
-							echo trim($key); } ?> "><?php  if (!empty($keyword->h1)) { $key = preg_replace('/{{city}}/i', ucfirst($area), $keyword->h1);
-							echo trim($key); } ?></h1>
+										<h1 title="Playwright Automation Course in Noida ">Playwright Automation Course in Noida</h1>
 									</div>
 									<div itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-										<img loading="lazy" itemprop="image" src="{{ asset('client/images/' . $stars) }}"
+										<img loading="lazy" itemprop="image" src="{{ asset('client/images/star_4.75_new.png') }}"
 											alt="5 Star Rating: Very Good" />
-										<span itemprop="ratingValue"><?php if (!empty($keyword->ratingvalue)) {
-							echo number_format((float) $keyword->ratingvalue, 1, '.', '');
-						} else {
-							echo "1.0";
-						} ?></span> out of <span itemprop="bestRating"></span>based on <span itemprop="ratingCount">{{$keyword->ratingcount }}</span> ratings
+										<span itemprop="ratingValue">4.75</span> out of <span itemprop="bestRating"></span>based on <span itemprop="ratingCount">314</span> ratings
 									</div>
 								</div>
-					@endif
+				 
 					<div class="keyword-cotegory-text">				 
-
-					<script type="application/ld+json">
-					{
-					"@context": "https://schema.org",
-					"@type": "BreadcrumbList",
-					"itemListElement": [
-					{
-						"@type": "ListItem",
-						"position": 1,
-						"name": "Home",
-						"item": "{{ url('/') }}"
-					},
-					{
-						"@type": "ListItem",
-						"position": 2,
-						"name": "noida",
-						"item": "{{ url(generate_slug(strtolower('noida'))) }}"
-					},
-					{
-						"@type": "ListItem",
-						"position": 3,
-						"name": "{{ $keyword->keyword }}",
-						"item": "{{ url(generate_slug(strtolower('noida')).'/'.$keyword->slug) }}"
-					}
-					]
-					}
-					</script>
+ 
 					</div>
 				</div>
 			</div>
-			<div class="removeRightSpace">
-				<div class="btn btn-primary top-btn">Send Enquiry</div>
-			</div>
+			 
 		</div>
 
 	</div>
  
-	<script>
-		$(document).ready(function () {
-			$('.proceedBtn').click(function () {
-				$('.proceedBtn').hide();
-				$('.stopprocess').show();
-				$('.formDiv').slideDown();
-			});
-
-			$('.stopprocess').click(function () {
-				$('.stopprocess').removeAttr("style");
-				$('.proceedBtn').show();
-				$('.formDiv').slideUp();
-			});
-
-			$('[data-toggle="tooltip"]').tooltip();
-		});
-	</script>
 
 	<div class="container">
 
 		<div class="col-sm-9 col-md-9 reviews-box-main mainContainer">
-			<a href="#top"></a>
 
-			@if(isset($keyword) && null != $keyword->top_description)
-				<div class="col-xs-12 top_description" style="margin-top:20px;color:#033967">
+	 
+				<div class="col-xs-12 top_description" >
 				 
-					<p title="<?php if (!empty($keyword->keyword)) { echo $keyword->keyword; } ?> "><?php  if (!empty($keyword->top_description)) {
-					$keydescription = $keyword->top_description; echo trim($keydescription); } ?>
+					<p>
+						If you are planning to step into automation testing or switch from manual to automation, this Playwright Automation Training in Noida is designed to help you actually work with automation, not just learn it. Most courses teach you syntax. This one focuses on execution. You will understand how automation behaves in real projects, how scripts fail, how to debug them, and how to handle situations where things don’t work on the first attempt
+			
 					 
 				</p>					 
 				</div>
-			@endif
+			 
 			 
 		<div class="services">
 			<div id="recentSearchContainer">
@@ -158,150 +1458,11 @@
 		</div>
  
 			 
-				<?php 
-						if (!empty($keyword->heading)) {
-
-					$i = 0;
-					$i++;	?>
-
+		 
 				<div class="col-sm-12 col-md-12 reviews-box-1 line-content">
 					<div class="client-list-first">
 						<style>
-							.abt-accordion .card {
-								border-radius: 0;
-								border: 1px solid rgba(179, 179, 179, 0.45);
-								margin-bottom: 10px;
-								max-width: 960px;
-								border-radius: 0;
-								box-shadow: 0 0 5px 3px #d4d4d466;
-							}
-
-
-							.card {
-								position: relative;
-								display: -ms-flexbox;
-								display: flex;
-								-ms-flex-direction: column;
-								flex-direction: column;
-								min-width: 0;
-								word-wrap: break-word;
-								background-color: #fff;
-								background-clip: border-box;
-								border: 1px solid rgba(0, 0, 0, .125);
-								border-radius: .25rem;
-							}
-
-							.abt-accordion .card .card-header {
-								padding: 7px;
-								background: none;
-								border: none;
-							}
-
-							.card-header:first-child {
-								border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
-							}
-
-							.abt-accordion .card .card-header h2 button {
-								display: flex;
-								align-items: center;
-								justify-content: space-between;
-								width: 100%;
-								text-decoration: none;
-								border-radius: 0;
-								font-weight: 700;
-								margin-left: 3%;
-							}
-
-							.abt-accordion .card .collapse.show {
-								position: relative;
-							}
-
-							.card-body {
-								-ms-flex: 1 1 auto;
-								flex: 1 1 auto;
-								padding: 1.25rem;
-								font-weight: 400;
-								font-size: 13px !important;
-								margin-bottom: 0;
-								line-height: 1.7;
-								padding-left: 1.5em;
-								color: #212529 !important;
-							}
-
-							.about-accordian .card-body p {
-								padding-left: 0;
-								margin-bottom: 0;
-							}
-
-							.card-body p {
-								font-weight: 400;
-								font-size: 13px;
-								margin-bottom: 10px;
-								line-height: 1.7;
-								padding-left: 1.5em;
-							}
-
-							.about-accordian ul {
-								list-style: none;
-							}
-
-							.about-accordian .card-body ul li:first-child {
-								margin-top: 0;
-							}
-
-							.about-accordian .card-body ul li {
-								position: relative;
-								font-weight: 400;
-								font-size: 13px !important;
-								line-height: 1.7;
-								margin-left: 0;
-								margin-bottom: 11px;
-								margin-top: 10px;
-								text-align: justify;
-							}
-
-							.about-accordian .card-body ul ul {
-								position: relative;
-								font-weight: 400;
-								font-size: 13px !important;
-								line-height: 1.7;
-								margin-left: 22px;
-							}
-
-							.about-accordian ul {
-								list-style: none;
-							}
-
-							.abt-accordion .card .collapse.show::before {
-								content: '';
-								width: 94%;
-								height: 1px;
-								position: absolute;
-								top: 0;
-								left: 0;
-								background-color: #02b0af;
-								margin-left: 3%;
-							}
-
-							.about-accordian .card-body ul ul li {
-								margin-bottom: 0;
-								margin-top: 0;
-							}
-
-							.about-accordian ul ul p::before {
-								content: " ";
-								position: absolute;
-								top: 3px;
-								left: -16px;
-								display: inline-block;
-								-webkit-transform: rotate(45deg);
-								-ms-transform: rotate(45deg);
-								transform: rotate(45deg);
-								height: 1em;
-								width: .5em;
-								border-bottom: .2em solid #ff5f14;
-								border-right: .2em solid #ff5f14;
-							}
+							
 						</style>
 
 						<div class="about-accordian">
@@ -311,85 +1472,56 @@
 								<div class="card">
 									<div class="card-header" id="abthdgOne">
 										<h2 class="mb-0"><button type="button" class="btn-link"
-												data-target="#heading_4"
+												data-target="#heading_1"
 												data-parent="#courseAcrdMain">
-												<span>{!!$keyword->heading!!}</span> </button> </h2>
+												<span>About Playwright Automation Course</span> </button> </h2>
 									</div>
-									<div id="heading_4" class="collapse <?php if ($i == 1) {
-						echo "show";
-					} ?>" aria-labelledby="abthdgOne">
+									<div id="heading_1" class="collapse show" aria-labelledby="abthdgOne">
 										<div class="card-body">
 											<ul>
 
-												@if($keyword->courseabout)
-																			<li style="font-size: 13px;">
-																				<?php $courseabout = $keyword->courseabout;
-													echo trim($courseabout); ?>
+											 
+													<li style="font-size: 13px;">
+											 This Playwright Automation Course in Noida is built around real-world testing practices.
+Instead of limiting learning to theory, the course takes you through
 
 																			</li>
-												@endif
-												<ul>
-													@if($keyword->paragraph1)
-																					<li>
-																						<p style="font-size: 13px;">
-																							<?php $paragraph1 = $keyword->paragraph1;
-														echo trim($paragraph1); ?>
+											 
+					<ul>
+				 
+					<li>
+					<p style="font-size: 13px;">
+				 Writing your first automation script
 
-																						</p>
-																					</li>
+					</p>
+					</li>
 
-													@endif
-													@if($keyword->paragraph2)
-																					<li>
-																						<p style="font-size: 13px;">
-																							<?php $paragraph2 = $keyword->paragraph2;
-														echo trim($paragraph2); ?>
+			 
+				 
+					<li>
+					<p style="font-size: 13px;">
+				 Handling real-time execution challenges
 
-																						</p>
-																					</li>
-													@endif
-
-													@if($keyword->paragraph3)
-																					<li>
-																						<p style="font-size: 13px;">
-																							<?php $paragraph3 =$keyword->paragraph3;
-														echo trim($paragraph3); ?>
-
-																						</p>
-																					</li>
-													@endif
-
-													@if($keyword->paragraph4)
-																					<li>
-																						<p style="font-size: 13px;">
-																							<?php $paragraph4 = $keyword->paragraph4;
-														echo trim($paragraph4); ?>
-																						</p>
-																					</li>
-													@endif
-
-													@if($keyword->paragraph5)
-																					<li>
-																						<p style="font-size: 13px;">
-																							<?php $paragraph5 = $keyword->paragraph5;
-														echo trim($paragraph5); ?>
-																						</p>
-																					</li>
-													@endif
-
-
-													@if($keyword->paragraph6)
-																					<li>
-																						<p style="font-size: 13px;">
-
-																							<?php $paragraph6 = $keyword->paragraph6;
-														echo trim($paragraph6); ?>
-																						</p>
-																					</li>
-													@endif
-												</ul>
-											</ul>
-											<p>The goal is simple: Make you job-ready, not just course-complete.</p>
+					</p>
+					</li>
+		 
+					<li>
+					<p style="font-size: 13px;">
+					 Managing test flows and failures
+					</p>
+					</li>
+				 
+					<li>
+					<p style="font-size: 13px;">
+					 Understanding how testing actually works in production environments
+					</p>
+					</li>
+				 
+				 
+				 
+					</ul>
+					</ul>
+					<p>The goal is simple: Make you job-ready, not just course-complete.</p>
 										</div>
 									</div>
 								</div>
@@ -397,24 +1529,9 @@
 						</div>
 					</div>
 				</div>
-			<?php  } ?>
 			 
-			<style>
-				.current .btn-info {
-					color: green;
-				}
-
-				#pagin li {
-					display: inline-block;
-					padding: 6px;
-					margin: 5px;
-					background-color: #C94A30;
-				}
-
-				#pagin li a {
-					color: #fff;
-				}
-			</style>
+			 
+		 
 			 
 
  
@@ -825,80 +1942,71 @@ A practical starting point for automation testing
 
 
 		</div>
-	  
-	 
-	@if(!empty($keyword->faqq1))
-		<div class="container">
-			<div class="category-description">
-				<h4>FAQ:- <?php  if (!empty($keyword->keyword)) {
-					$key = preg_replace('/{{city}}/i', ucfirst($area), $keyword->keyword); echo trim($key); } ?> in <?php echo $area; ?></h4>
-				<div itemscope itemtype="https://schema.org/FAQPage">
-					<?php if (!empty($keyword->faqq1)) { ?>
-					<div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-						<h5 itemprop="name"><strong><?php  if (!empty($keyword->faqq1)) {
-						$faqq1 = preg_replace('/{{city}}/i', $area, $keyword->faqq1);
-						echo trim($faqq1);
-					} ?>?</strong></h5><div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer" style="display: block;"><div itemprop="text"><?php  if (!empty($keyword->faqa1)) {
-						$faqa1 = preg_replace('/{{city}}/i', $area, $keyword->faqa1);
-						echo trim($faqa1);
-					} ?></div></div></div>
-					<?php } ?><?php if (!empty($keyword->faqq2)) { ?>
-					<div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-						<h5 itemprop="name"><strong><?php  if (!empty($keyword->faqq2)) {
-						$faqq2 = preg_replace('/{{city}}/i', $area, $keyword->faqq2);
-						echo trim($faqq2);
-					} ?>?</strong></h5><div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-						<div itemprop="text"><?php  if (!empty($keyword->faqa2)) {
-						$faqa2 = preg_replace('/{{city}}/i', $area, $keyword->faqa2);
-						echo trim($faqa2);
-					} ?></div></div></div>
-					<?php } ?><?php if (!empty($keyword->faqq3)) { ?>
-					<div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-						<h5 itemprop="name"><strong><?php  if (!empty($keyword->faqq3)) {
-						$faqq3 = preg_replace('/{{city}}/i', $area, $keyword->faqq3);
-						echo trim($faqq3);
-					} ?>?</strong></h5><div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-							<div itemprop="text"><?php  if (!empty($keyword->faqa3)) {
-						$faqa3 = preg_replace('/{{city}}/i', $area, $keyword->faqa3);
-						echo trim($faqa3);
-					} ?></div></div></div>
-					<?php } ?><?php if (!empty($keyword->faqq4)) { ?>
-					<div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-						<h5 itemprop="name"><strong><?php  if (!empty($keyword->faqq4)) {
-						$faqq4 = preg_replace('/{{city}}/i', $area, $keyword->faqq4);
-						echo trim($faqq4);
-					} ?>?</strong></h5>
-						<div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-							<div itemprop="text"><?php  if (!empty($keyword->faqa4)) {
-						$faqa4 = preg_replace('/{{city}}/i', $area, $keyword->faqa4);
-						echo trim($faqa4);
-					} ?></div></div></div>
-					<?php } ?><?php if (!empty($keyword->faqq5)) { ?>
-					<div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-						<h5 itemprop="name"><strong><?php  if (!empty($keyword->faqq5)) {
-						$faqq5 = preg_replace('/{{city}}/i', $area, $keyword->faqq5);
-						echo trim($faqq5);
-					} ?>?</strong></h5><div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-						<div itemprop="text"><?php  if (!empty($keyword->faqa5)) {
-						$faqa5 = preg_replace('/{{city}}/i', $area, $keyword->faqa5);
-						echo trim($faqa5);
-					} ?></div></div></div>
-					<?php } ?><?php if (!empty($keyword->faqq6)) { ?>
-					<div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-						<h5 itemprop="name"><strong><?php  if (!empty($keyword->faqq6)) {
-						$faqq6 = preg_replace('/{{city}}/i', $area, $keyword->faqq6);
-						echo trim($faqq6);
-					} ?>?</strong></h5><div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-						<div itemprop="text"><?php  if (!empty($keyword->faqa6)) {
-						$faqa6 = preg_replace('/{{city}}/i', $area, $keyword->faqa6);
-						echo trim($faqa6);
-					} ?></div></div></div>
-					<?php } ?>
-				</div></div></div>
-	@endif
-	 
-	 
-	<?php } ?>
+	   <div class="mx-auto max-w-7xl px-4">
+		<div class="category-description my-6">
+			<h4 class="mb-4 text-lg font-bold text-gray-800">FAQ:- Playwright Automation Course in {{ $area ?? 'Noida' }}</h4>
+
+			<div itemscope itemtype="https://schema.org/FAQPage" class="space-y-3">
+
+				<div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" class="rounded-lg border border-gray-200 p-4">
+					<h5 itemprop="name" class="font-semibold text-gray-800">
+						<strong>Do I need coding knowledge to start?</strong>
+					</h5>
+					<div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer" class="mt-2">
+						<div itemprop="text" class="text-sm leading-6 text-gray-600">
+							No. Basic understanding helps, but everything is taught from scratch.
+						</div>
+					</div>
+				</div>
+
+				<div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" class="rounded-lg border border-gray-200 p-4">
+					<h5 itemprop="name" class="font-semibold text-gray-800">
+						<strong>Is this course beginner-friendly?</strong>
+					</h5>
+					<div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer" class="mt-2">
+						<div itemprop="text" class="text-sm leading-6 text-gray-600">
+							Yes. It starts from the basics and gradually moves to advanced topics.
+						</div>
+					</div>
+				</div>
+
+				<div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" class="rounded-lg border border-gray-200 p-4">
+					<h5 itemprop="name" class="font-semibold text-gray-800">
+						<strong>Will I work on real projects?</strong>
+					</h5>
+					<div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer" class="mt-2">
+						<div itemprop="text" class="text-sm leading-6 text-gray-600">
+							Yes. You will practice on real-world scenarios.
+						</div>
+					</div>
+				</div>
+
+				<div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" class="rounded-lg border border-gray-200 p-4">
+					<h5 itemprop="name" class="font-semibold text-gray-800">
+						<strong>Is online training available?</strong>
+					</h5>
+					<div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer" class="mt-2">
+						<div itemprop="text" class="text-sm leading-6 text-gray-600">
+							Yes. Both online and offline options are available.
+						</div>
+					</div>
+				</div>
+
+				<div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" class="rounded-lg border border-gray-200 p-4">
+					<h5 itemprop="name" class="font-semibold text-gray-800">
+						<strong>What makes this different?</strong>
+					</h5>
+					<div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer" class="mt-2">
+						<div itemprop="text" class="text-sm leading-6 text-gray-600">
+							The focus is on practical implementation, not just completing topics.
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+ 
 	 
 
 	 
@@ -945,414 +2053,8 @@ A practical starting point for automation testing
 		}
 	</style>
 
-	<script type="text/javascript">
-		document.addEventListener('input', function (e) {
+ 
 
-			// ✅ run only for mobile field inside autoLeadForm
-			if (!e.target.matches('.autoLeadForm input[name="mobile"]')) return;
-
-			let form = e.target.closest('.autoLeadForm');
-			if (!form) return;
-
-			let formData = new FormData(form);
-
-			let name = formData.get('name');
-			let mobile = formData.get('mobile');
-			let kw_text = formData.get('kw_text');
-			let city_id = formData.get('city_id');
-			let from_page = formData.get('from_page');
-
-			if (name && mobile && mobile.length >= 10 && mobile.length <= 16) {
-
-				fetch('lead/auto-form-save', {
-					method: 'POST',
-					headers: {
-						'Accept': 'application/json',
-						'X-CSRF-TOKEN': '{{ csrf_token() }}'
-					},
-					body: formData
-				})
-					.then(res => res.json())
-					.then(data => {
-						// console.log('Saved', data);
-					})
-					.catch(err => {
-						console.error('Error:', err);
-					});
-			}
-		});
-	</script>
-
-	<div class="searchPopup">
-		<a href="javascript:void(0);" class="dealclosebtn">&nbsp;</a>
-
-
-		<div class="callback-wrapper">
-			<div class="left-panel">
-				<h2>Begin your journey with QuickDials</h2>
-				<p><strong>Connect with trusted experts effortlessly</strong></p>
-				<div class="benefits">
-					<h4>Trust & Benefits:</h4>
-					<ul>
-						<li>✔ Shared only with selected experts</li>
-						<li>✔ Get Free Expert Online Counseling</li>
-						<li>✔ Industry-Certified Instructors</li>
-						<li>✔ Book Your Free Education Demo Class</li>
-						<li>✔ Get Fees & Discounts</li>
-					</ul>
-				</div>
-			</div>
-			<div class="right-panel">
-				<h2>Need Expert Advice ?</h2>
-				<p>Fill this form to Grab the best Deals on "<span
-						class="orng"><?php echo isset($searchedKW) ? $searchedKW : ''; ?> In {{Request::segment(1)}}</span>"
-				</p>
-
-				<div class="popup-box">
-
-
-
-					<!-- Progress -->
-					<div class="popupSteps">
-						<span class="active"></span>
-						<span></span>
-						<!-- <span></span> -->
-						<span></span>
-					</div>
-
-					 
-					<form class="popup-form" id="leadForm" onsubmit="return homeController.saveTwoEnquiry(this)"
-						method="POST">
-
-						<!-- STEP 1 -->
-						<div class="popup-step active">
-							<span>Your Details</span>
-
-							<div class="erbr">
-								<input type="text" name="name" placeholder="Full Name">
-							</div>
-							<div class="erbr">
-								<input type="email" name="email" value="{{ old('email') }}" placeholder="Email">
-							</div>
-
-
-							<input type="hidden" name="lead_form" value="1" />
-							<input type="hidden" name="kw_text" id="kw_text"
-								value=" playwright-automation" />
-							<input type="hidden" name="city_id" id="city_id" class="city" value="noida" />
-							<input type="hidden" name="from_page" id="from_page" value="{{ request()->path() }}">
-
-
-							<div class="div-code">
-								<div class="drop-number dropwn">
-									<div class="dropdown">
-										<div class="drop-input-wrapper form-group">
-											<img loading="lazy" class="flag-icon selectedFlag" src="https://flagcdn.com/w40/in.png"
-												alt="Flag">
-
-											<input type="text" class="dropwn-input" placeholder="Search country">
-											<span class="clear-icon removeFlag">&#10005;</span>
-											<span class="dropdown-icon">&#9662;</span>
-										</div>
-										<div class="erbr">
-											<input type="hidden" class="countryCode" name="code">
-										</div>
-										<div class="dropdown-list"></div>
-									</div>
-
-									<div class="quick_arrow form-group erbr">
-										<input type="tel" class="quick-remove" name="mobile" maxlength="15"
-											placeholder="Phone No*">
-									</div>
-								</div>
-							</div>
-							<div class="erbr">
-								What is your <strong>Location?</strong>
-								<select name="location" class="select2_location">
-						<option value="noida">Noida</option>			 
-								</select>
-							</div>
-
-
-							<div class="btn-center">
-								<button type="button" onclick="validateStep(this, 1)">Save & Continue</button>
-							</div>
-						</div>
-						<!-- STEP 2 -->
-						<div class="popup-step">
-							
-							<input type="hidden" name="kw_text" id="kw_text"
-								value="playwright-automation" />
-							<div class="fieldblock">
-
-								<div class="erbr">
-									@if($keyword->form_type == 'form_edu')
-
-										<div class="fieldblock-form">
-
-											<label class="radio-item">
-												<input type="checkbox" name="frmcheck[]" value="fresher">
-												<span>Fresher</span>
-											</label>
-
-											<label class="radio-item">
-												<input type="checkbox" name="frmcheck[]" value="online" checked>
-												<span>Online</span>
-											</label>
-
-											<label class="radio-item">
-												<input type="checkbox" name="frmcheck[]" value="offline">
-												<span>Offline</span>
-											</label>
-
-											<label class="radio-item">
-												<input type="checkbox" name="frmcheck[]" value="crashcourse">
-												<span>Crash Course</span>
-											</label>
-										</div>
-									@elseif($keyword->form_type == 'form_pg')
-
-										<div class="fieldblock-form">
-											<label class="radio-item">
-												<input type="checkbox" name="frmcheck[]" value="shared">
-												<span>Shared</span>
-											</label>
-
-											<label class="radio-item">
-												<input type="checkbox" name="frmcheck[]" value="single">
-												<span>Single</span>
-											</label>
-
-											<label class="radio-item">
-												<input type="checkbox" name="frmcheck[]" value="male">
-												<span>Male</span>
-											</label>
-
-											<label class="radio-item">
-												<input type="checkbox" name="frmcheck[]" value="female">
-												<span>Female</span>
-											</label>
-										</div>
-									@elseif($keyword->form_type == 'form_doctor')
-
-										<link
-											href="{{asset('vendor/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css')}}"
-											rel="stylesheet">
-										<link href="{{asset('admin/vendor/datepicker/jquery-ui.css')}}" rel="stylesheet">
-										<link href="{{asset('business/assets/css/daterangepicker.css')}}" rel="stylesheet">
-
-
-										<div class="fieldblock-form">
-											<label class="radio-item">
-												<span>Appointment</span>
-											</label>
-											<div class="form-group input-icon">
-											<input type="hidden" name="frmcheck[]" value="none">	
-
-												<input type="text" name="appointment" placeholder="Select Date"
-													class="appointment">
-
-												<link rel="stylesheet"
-													href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-												<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-
-												<script>
-													$(document).ready(function () {
-														$('.appointment').datepicker({
-															minDate: 0,
-															dateFormat: 'yy-mm-dd',
-															changeMonth: true,
-															changeYear: true
-														});
-													});
-												</script>
-											</div>
-										</div>
-
-									@elseif($keyword->form_type == 'form_serv')
-
-										<div class="fieldblock-form">
-											<label class="radio-item">
-												<input type="checkbox" name="frmcheck[]" value="ac_split">
-												<span>AC Split</span>
-											</label>
-
-											<label class="radio-item">
-												<input type="checkbox" name="frmcheck[]" value="ac_window">
-												<span>AC Window</span>
-											</label>
-
-											<label class="radio-item">
-												<input type="checkbox" name="frmcheck[]" value="freez_single_door">
-												<span>Freeze Single Door</span>
-											</label>
-										</div>
-									@else
-										<div class="fieldblock-form">
-											<input type="hidden" name="frmcheck[]" value="none">
-
-										</div>
-									@endif
-								</div>
-							</div>
-
-							<div class="erbr">
-								What’s your <strong>Age</strong>
-								<select name="age" class="select2_age">
-									<option value="">Select Age*</option>
-									@for($i = 1; $i < 100; $i += 2)
-										<option value="{{$i}}" {{ $i == 19 ? 'selected' : '' }}>{{ $i }} + Age</option>
-									@endfor
-								</select>
-							</div>
-							<div class="erbr">
-								When you want to <strong>Start</strong>
-								<select name="plan" class="select2_plane">
-									<option value="Immediate" selected>Immediate</option>
-									<option value="Within week">Within Week</option>
-									<option value="Within months">Within Months </option>
-									<option value="Not planned yet">Not Planned Yet</option>
-								</select>
-							</div>
-
-
-							<div class="erbr">
-
-								<select name="experience">
-
-									<option value="">Select Experience*</option>
-
-									@for($i = 1; $i < 50; $i += 2)
-										<option value="{{$i}}" {{ $i == 3 ? 'selected' : '' }}>{{ $i }} + Exp</option>
-									@endfor
-								</select>
-							</div>
-
-
-							<div class="btn-center">
-								<button type="button" onclick="prevPopupStep()">Back</button>
-								<button type="button" onclick="validateStep(this,2)">Save & Continue</button>
-							</div>
-						</div>
-
-						<!-- STEP 3 -->
-						<div class="popup-step">
-							<span>Confirm</span>
-							<div class="erbr">
-								<textarea name="remark" placeholder="Enter Remarks"></textarea>
-							</div>
-
-							<div class="terms">
-								<input type="checkbox" name="terms" value="1" checked />
-								I agree to the Quickdials terms and conditions <a href="{{ route('terms.conditions') }}">Terms
-									& Conditions</a>
-							</div>
-
-							<div class="btn-center">
-								<button type="button" onclick="prevPopupStep()">Back</button>
-								<button type="submit">Submit</button>
-							<div class="loaderForm" style="display:none;">
-							<img src="/public/client/images/btn-ajax-loader.gif" width="20">
-							Processing...
-							</div>
-							</div>
-						</div>
-
-					</form>
-				</div>
-
-			</div>
-		</div>
-	</div>
-	<script>
-
-		let currentPopupStep = 0;
-		const popupSteps = document.querySelectorAll(".popup-step");
-
-		const popupIndicators = document.querySelectorAll(".popupSteps span");
-
-
-		function validateStep(THIS, step) {
-
-			var $this = $(THIS);
-			let form = document.getElementById('leadForm');
-			let formData = new FormData(form);
-
-			// add extra value
-			formData.append('step', step);
-
-			fetch('/form/validate-step', {
-				method: 'POST',
-				headers: {
-					'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-				},
-				body: formData
-			})
-				.then(res => res.json())
-				.then(res => {
-					if (res.status) {
-						nextPopupStep();
-					} else {
-						showsErrors($('#leadForm'), res.errors);
-					}
-				});
-		}
-
-
-
-
-		function showsErrors($form, errors) {
-
-			// remove old errors
-			$form.find('.erbr').removeClass('has-error');
-			$form.find('.help-block').remove();
-
-			$.each(errors, function (key, messages) {
-
-				if (key === 'frmcheck') {
-
-					$input = $form.find('input[name="frmcheck[]"]');
-
-				} else {
-					let name = key.replace(/\./g, '\\.');
-					$input = $form.find('[name="' + name + '"]');
-				}
-
-				if ($input.length) {
-					let $wrapper = $input.closest('.erbr');
-
-					$wrapper.addClass('has-error');
-
-					$wrapper.append(
-						'<span class="help-block"><strong>' + messages[0] + '</strong></span>'
-					);
-				}
-			});
-		}
-
-
-
-		function nextPopupStep() {
-
-			if (currentPopupStep < popupSteps.length - 1) {
-				popupSteps[currentPopupStep].classList.remove("active");
-				popupIndicators[currentPopupStep].classList.remove("active");
-				currentPopupStep++;
-				popupSteps[currentPopupStep].classList.add("active");
-				popupIndicators[currentPopupStep].classList.add("active");
-			}
-		}
-
-		function prevPopupStep() {
-			if (currentPopupStep > 0) {
-				popupSteps[currentPopupStep].classList.remove("active");
-				indicators[currentPopupStep].classList.remove("active");
-				currentPopupStep--;
-				popupSteps[currentPopupStep].classList.add("active");
-				indicators[currentPopupStep].classList.add("active");
-			}
-		}
-
-
-	</script>
+	 
+	 
 @endsection
