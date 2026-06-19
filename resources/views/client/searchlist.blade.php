@@ -17,10 +17,6 @@
 <meta name="robots" content="noindex, follow">
 @endif
 @endsection
- 
-
-
- 
 @section('content') 
 <style>  
     #enquiry-modal { display: none; }
@@ -103,14 +99,11 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
      x-show="showAd"
      x-cloak
      class="relative w-full overflow-hidden h-48 group rounded-lg shadow-md">
-
-    {{-- Slides --}}
+   
     <template x-for="(banner, idx) in banners" :key="banner.id">
         <div class="absolute inset-0 w-full h-full transition-opacity duration-700 ease-in-out"
              :class="idx === current ? 'opacity-100 z-10' : 'opacity-0 z-0'"
-             :aria-hidden="idx !== current">
-
-            {{-- Clickable wrapper if client_slug exists --}}
+             :aria-hidden="idx !== current">        
             <template x-if="banner.click_url">
                 <a :href="banner.click_url" rel="noopener sponsored" class="block w-full h-full">
                     <img :src="banner.image_url"
@@ -368,8 +361,7 @@ function bannerSlider(banners, interval = 4000) {
             <div id="listings-container" x-show="filteredCount > 0">
 @if(!empty($businesses))
     @php
-        $adInterval = 4;
-        // Chunk into groups of 5 for inline ad placement
+        $adInterval = 4;   
         $businessChunks = collect($businesses)->chunk($adInterval);
     @endphp
 
@@ -397,12 +389,8 @@ function bannerSlider(banners, interval = 4000) {
             @endforeach
         </div>
 
-        {{-- Inline ad between chunks (not after the last one) --}}
+      
         @if(!$loop->last)
-             
-
-
-
             <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-700 my-3 shadow-md">
                     <div class="relative px-5 py-4 flex items-center gap-5 flex-wrap sm:flex-nowrap">
                         <div class="flex-1 min-w-0">
@@ -527,7 +515,7 @@ function bannerSlider(banners, interval = 4000) {
     <img 
         src="{{ $kwData['key_icon'] ?? $kwData['child_icon'] ??'' }}" 
         alt="{{ $keyword }}"
-        class="w-8 h-8 object-contain group-hover:scale-105 transition-transform duration-500"
+        class="w-16 h-16 object-contain group-hover:scale-105 transition-transform duration-500"
         loading="lazy"
         decoding="async">
 </div>
@@ -1007,11 +995,4 @@ function listingPage() {
     }
 }
 </script>
-  
-
-{{-- Modal: REMOVED `hidden`, controlled fully by CSS --}}
-
-
-
-
 @endsection
