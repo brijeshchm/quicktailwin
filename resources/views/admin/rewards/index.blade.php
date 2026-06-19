@@ -1,4 +1,6 @@
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <?php echo View::make('admin/header'); ?>
+
 <div id="page-wrapper">
 
 <style>
@@ -87,6 +89,9 @@
     color: #9ca3af;
 }
 
+/* ── AJAX validation error styling ── */
+.is-invalid { border-color:#dc3545 !important; }
+.field-error { font-size:.75rem; margin-top:4px; }
 
 </style>
 
@@ -105,7 +110,8 @@
         </div>
     </div>
 
-    {{-- ── Flash Messages ── --}}
+    {{-- ── Flash Messages (server-rendered, kept for non-JS fallback / first load) ── --}}
+    <div id="flashContainer">
     @if(session('success'))
     <div class="alert alert-success alert-dismissible">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -118,8 +124,10 @@
         {{ session('error') }}
     </div>
     @endif
+    </div>
 
     {{-- ── Item Grid ── --}}
+    <div id="rewardsGrid">
     @if($items->isEmpty())
     <div class="empty-box">
         <i class="glyphicon glyphicon-cog" style="font-size:3rem;color:#9ca3af;opacity:.4;display:block;margin-bottom:12px"></i>
@@ -135,11 +143,16 @@
             <div class="panel panel-default {{ !$item->is_active ? 'card-inactive' : '' }}"
                 style="border-radius:10px; overflow:hidden; border:none;
                        box-shadow:0 1px 4px rgba(0,0,0,.1); margin-bottom:0">
-
+   
                 {{-- Image --}}
                 <div class="reward-img-wrap">
                     @if($item->image_url)
-                        <img src="{{ $item->image_url }}" alt="{{ $item->name }}"
+
+                 @php                    
+                    $image_url = json_decode($item->image_url);
+ 
+                    @endphp
+                        <img src="{{ asset($image_url->rewards->src) }}" alt="{{ $image_url->rewards->alt }}"
                             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                         <div style="display:none;width:100%;height:100%;align-items:center;justify-content:center">
                             <i class="glyphicon glyphicon-picture" style="font-size:2.5rem;color:#9ca3af;opacity:.4"></i>
@@ -176,21 +189,17 @@
                     <button class="btn btn-default btn-sm" onclick="openModal({{ $item->id }})">
                         <i class="glyphicon glyphicon-pencil"></i> Edit
                     </button>
-                    <form method="POST"
-                        action="{{ route('developer.rewards.destroy', $item) }}"
-                        onsubmit="return confirm('Delete this item?')"
-                        style="display:inline">
-                        @csrf @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">
-                            <i class="glyphicon glyphicon-trash"></i> Delete
-                        </button>
-                    </form>
+                    <button type="button" class="btn btn-danger btn-sm"
+                        onclick="deleteItem({{ $item->id }}, this)">
+                        <i class="glyphicon glyphicon-trash"></i> Delete
+                    </button>
                 </div>
             </div>
         </div>
         @endforeach
     </div>
     @endif
+    </div><!-- /#rewardsGrid -->
 </div>
 
 {{-- ════════════════════════════════════════
@@ -211,7 +220,8 @@
             </div>
 
             {{-- Form --}}
-            <form id="rewardForm" method="POST" enctype="multipart/form-data">
+            <form id="rewardForm" method="POST" enctype="multipart/form-data"
+                action="{{ route('developer.rewards.store') }}">
                 @csrf
                 <span id="methodField"></span>
 
@@ -283,7 +293,6 @@
                                     <p class="text-muted" style="font-size:.72rem; margin-bottom:6px">
                                         Override coins per city. Cities not listed use defaults above.
                                     </p>
-                                 
 
                                 <div id="cityHeader" class="city-row city-row-header"
                                 style="display:none; padding:0 4px; margin-bottom:2px">
@@ -466,7 +475,9 @@
     const ALL_ITEMS  = @json($items);
     const STORE_URL  = "{{ route('developer.rewards.store') }}";
     const UPDATE_URL = function(id){ return '/developer/rewards/' + id; };
-      const CITY_LIST  = @json($citylist->pluck('city'));
+    const DELETE_URL = function(id){ return '/developer/rewards/' + id; };
+    const CITY_LIST  = @json($citylist->pluck('city'));
+    const CSRF_TOKEN = "{{ csrf_token() }}";
 </script>
 
 <script>
@@ -484,6 +495,7 @@ function openModal(id) {
     document.getElementById('cityPricesContainer').innerHTML = '';
     document.getElementById('cityHeader').style.display = 'none';
     document.getElementById('methodField').innerHTML    = '';
+    clearValidationErrors();
     resetPreview();
     clearCategory();
 
@@ -504,7 +516,7 @@ function openModal(id) {
         document.getElementById('f_image_url').value      = item.image_url      || '';
         document.getElementById('f_is_active').checked    = !!item.is_active;
 
-        if (item.id) selectCategory(item.id);
+        if (item.category) selectCategory(item.category);
         (item.city_prices || []).forEach(function(cp){ addCityRow(cp); });
         updatePreview();
 
@@ -527,6 +539,128 @@ $('#rewardModal').on('hidden.bs.modal', function(){
     editingId = null;
 });
 
+/* ════════════════ AJAX FORM SUBMIT (Create / Update) ════════════════ */
+$('#rewardForm').on('submit', function(e){
+    e.preventDefault();
+
+    var form      = this;
+    var formData  = new FormData(form);
+    var url       = form.action;
+    var $btn      = $('#submitBtn');
+    var $label    = $('#submitLabel');
+    var originalLabel = $label.text();
+
+    clearValidationErrors();
+    $btn.prop('disabled', true);
+    $label.text('Saving...');
+
+    $.ajax({
+        url: url,
+        method: 'POST',                 // Laravel reads _method=PUT from FormData for edits
+        data: formData,
+        processData: false,
+        contentType: false,
+        headers: {
+            'X-CSRF-TOKEN': CSRF_TOKEN,
+            'Accept': 'application/json'
+        },
+        success: function(res) {
+            $('#rewardModal').modal('hide');
+            showFlash('success', (res && res.message) ? res.message : (editingId ? 'Item updated.' : 'Item created.'));
+            refreshGrid();
+        },
+        error: function(xhr) {
+            if (xhr.status === 422 && xhr.responseJSON && xhr.responseJSON.errors) {
+                var errors = xhr.responseJSON.errors;
+                Object.keys(errors).forEach(function(field){
+                    var input = form.querySelector('[name="' + field + '"]');
+                    if (input) {
+                        input.classList.add('is-invalid');
+                        var msg = document.createElement('p');
+                        msg.className = 'field-error text-danger';
+                        msg.textContent = errors[field][0];
+                        input.parentNode.appendChild(msg);
+                    }
+                });
+                showFlash('error', 'Please fix the highlighted fields.');
+            } else {
+                showFlash('error', 'Something went wrong. Please try again.');
+                console.error('Reward save error:', xhr.status, xhr.responseText);
+            }
+        },
+        complete: function() {
+            $btn.prop('disabled', false);
+            $label.text(originalLabel);
+        }
+    });
+});
+
+function clearValidationErrors() {
+    document.querySelectorAll('#rewardForm .is-invalid').forEach(function(el){
+        el.classList.remove('is-invalid');
+    });
+    document.querySelectorAll('#rewardForm .field-error').forEach(function(el){
+        el.remove();
+    });
+}
+
+/* ════════════════ AJAX DELETE ════════════════ */
+function deleteItem(id, btn) {
+    if (!confirm('Delete this item?')) return;
+
+    var $btn = $(btn).prop('disabled', true);
+
+    $.ajax({
+        url: DELETE_URL(id),
+        method: 'POST',
+        data: { _method: 'DELETE', _token: CSRF_TOKEN },
+        headers: { 'Accept': 'application/json' },
+        success: function(res) {
+            showFlash('success', (res && res.message) ? res.message : 'Item deleted.');
+            refreshGrid();
+        },
+        error: function(xhr) {
+            showFlash('error', 'Could not delete item. Please try again.');
+            console.error('Delete error:', xhr.status, xhr.responseText);
+            $btn.prop('disabled', false);
+        }
+    });
+}
+
+/* ════════════════ FLASH MESSAGE (no reload) ════════════════ */
+function showFlash(type, message) {
+    var cls  = type === 'success' ? 'alert-success' : 'alert-danger';
+    var icon = type === 'success' ? 'glyphicon-ok-circle' : 'glyphicon-exclamation-sign';
+    var html =
+        '<div class="alert ' + cls + ' alert-dismissible">' +
+            '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
+            '<i class="glyphicon ' + icon + '"></i> ' + message +
+        '</div>';
+    $('#flashContainer').html(html);
+    setTimeout(function(){ $('#flashContainer .alert').fadeOut(); }, 4000);
+}
+
+/* ════════════════ REFRESH GRID WITHOUT FULL PAGE RELOAD ════════════════ */
+function refreshGrid() {
+    $.ajax({
+        url: window.location.href,
+        method: 'GET',
+        headers: { 'Accept': 'text/html' },
+        success: function(html) {
+            var $newGrid = $(html).find('#rewardsGrid').first();
+            if ($newGrid.length) {
+                $('#rewardsGrid').replaceWith($newGrid);
+            } else {
+                // fallback if selector fails for any reason
+                window.location.reload();
+            }
+        },
+        error: function() {
+            window.location.reload();
+        }
+    });
+}
+
 /* ════════════════ LIVE PREVIEW ════════════════ */
 function updatePreview() {
     var name   = document.getElementById('f_name').value;
@@ -542,12 +676,12 @@ function updatePreview() {
     var ph  = document.getElementById('previewPlaceholder');
 
     if (imgUrl) {
-        img.src          = imgUrl;
-        img.style.display   = 'block';
-        ph.style.display    = 'none';
+        img.src            = imgUrl;
+        img.style.display  = 'block';
+        ph.style.display   = 'none';
     } else {
-        img.style.display   = 'none';
-        ph.style.display    = 'inline';
+        img.style.display  = 'none';
+        ph.style.display   = 'inline';
     }
 }
 
@@ -583,7 +717,6 @@ document.getElementById('f_image_file').addEventListener('change', function(){
 });
 
 /* ════════════════ CITY PRICE ROWS ════════════════ */
- /* ════════════════ CITY PRICE ROWS ════════════════ */
 function addCityRow(data) {
     data = data || {};
     var container = document.getElementById('cityPricesContainer');
@@ -636,7 +769,6 @@ function removeCityRow(i) {
     var row = document.getElementById('cityRow_' + i);
     if (row) row.parentNode.removeChild(row);
 
-    // Also remove custom input if exists
     var customRow = document.getElementById('cityCustomRow_' + i);
     if (customRow) customRow.parentNode.removeChild(customRow);
 
@@ -645,11 +777,9 @@ function removeCityRow(i) {
     }
 }
 
-// Show custom input if "Other" selected
 function checkCustomCity(select, i) {
     var existingCustom = document.getElementById('cityCustomRow_' + i);
     if (existingCustom) existingCustom.parentNode.removeChild(existingCustom);
-    // no "Other" option needed since list is dynamic
 }
 
 /* ════════════════ CATEGORY DROPDOWN ════════════════ */
@@ -694,7 +824,6 @@ function selectCategory(name) {
         }
     });
 
-    // Close BS3 dropdown
     $('#catDropdownWrap').removeClass('open');
 }
 
@@ -729,4 +858,5 @@ function escHtml(str) {
 </script>
 
 </div><!-- /#page-wrapper -->
+
 <?php echo View::make('admin/footer'); ?>
