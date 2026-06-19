@@ -104,7 +104,9 @@ $repairItems = is_array($repairsData['data']['repairsServices']) ? $repairsData[
                                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-out"
                                  loading="lazy"
                                  decoding="async" 
-                                 style="height:100px;"/>
+                                width="198"
+                                height="100"  
+                                />
                         </a>
                         {{-- Gradient overlay matching COLOR_MAP --}}
                         <div class="absolute inset-0 pointer-events-none"

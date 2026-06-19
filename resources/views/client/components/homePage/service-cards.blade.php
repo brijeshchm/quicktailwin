@@ -50,8 +50,10 @@
         <img loading="lazy"
              decoding="async" 
              src="{{ $svc['img'] ?? '' }}"
-             alt="{{ $svc['alt'] ?? '' }}"             
-             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-out"/>
+             alt="{{ $svc['alt'] ?? '' }}"   
+            width="200"
+            height="130"          
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-out"/>
 
         <div class="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent" aria-hidden="true"></div>
 

@@ -13,6 +13,8 @@
                 <a href="{{ route('blog.details', $blog['url']) }}" target="_blank" rel="noopener noreferrer">
                     <div class="relative w-full h-[150px] overflow-hidden">
                         <img src="{{ $blog['img'] ?? '' }}" alt="{{ $blog['alt'] ?? $blog['title'] ?? '' }}"
+                            width="398"
+                            height="150" 
                              class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy"/>
                     </div>
                 </a>
