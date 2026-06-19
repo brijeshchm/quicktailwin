@@ -231,50 +231,36 @@ function bannerSlider(banners, interval = 4000) {
                 <h1 class="text-lg font-bold text-gray-900 leading-tight">{{ $keyword }} in {{ ucfirst($city) }}</h1>
  
                 <div itemscope itemtype="https://schema.org/Product" class="space-y-2">
+                    {{-- Aggregate Rating --}}
+                    <div itemprop="aggregateRating"
+                        itemscope
+                        itemtype="https://schema.org/AggregateRating"
+                        class="flex items-center gap-2 text-sm">
 
-    {{-- Required: Product Name --}}
-    <meta itemprop="name" content="{{ $keyword ?? $metaTitle ?? 'QuickDials review Service' }}">
+                        <img src="{{ asset('client/images/' . $starImg) }}"
+                            alt="{{ $ratingValue }} out of 5 stars"
+                            class="lazy-image h-4 w-auto"
+                            width="80"
+                            height="16"
+                            loading="lazy"
+                            decoding="async"
+                            >
 
-    {{-- Required: Product Image --}}
-    @if(!empty($kwData['key_icon']))
-        <meta itemprop="image" content="{{ $kwData['key_icon'] ?? $kwData['child_icon'] ??'' }}">
-    @endif
+                        <span class="font-semibold text-gray-900">
+                            <span itemprop="ratingValue">{{ $ratingValue }}</span>
+                        </span>
 
-    {{-- Optional: Description --}}
-    @if(!empty($metaDescription))
-        <meta itemprop="description" content="{{ $metaDescription }}">
-    @endif
+                        <span class="text-gray-500">out of</span>
 
-    {{-- Aggregate Rating --}}
-    <div itemprop="aggregateRating"
-         itemscope
-         itemtype="https://schema.org/AggregateRating"
-         class="flex items-center gap-2 text-sm">
+                        <span itemprop="bestRating">5</span>
 
-        <img src="{{ asset('client/images/' . $starImg) }}"
-             alt="{{ $ratingValue }} out of 5 stars"
-             class="lazy-image h-4 w-auto"
-             width="80"
-             height="16"
-             loading="lazy"
-            decoding="async"
-             >
+                        <span class="text-gray-500">based on</span>
 
-        <span class="font-semibold text-gray-900">
-            <span itemprop="ratingValue">{{ $ratingValue }}</span>
-        </span>
+                        <span itemprop="ratingCount">{{ $ratingCount }}</span>
 
-        <span class="text-gray-500">out of</span>
-
-        <span itemprop="bestRating">5</span>
-
-        <span class="text-gray-500">based on</span>
-
-        <span itemprop="ratingCount">{{ $ratingCount }}</span>
-
-        <span class="text-gray-500">ratings</span>
-    </div>
-</div>
+                        <span class="text-gray-500">ratings</span>
+                    </div>
+                </div>
 
                         
             </div>
@@ -348,7 +334,7 @@ function bannerSlider(banners, interval = 4000) {
         {{-- Search --}}
         <div class="w-full py-2.5 flex items-center gap-3">
             <div class="flex-1 flex items-center bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 gap-2 hover:border-indigo-300 focus-within:border-indigo-400 focus-within:ring-2 focus-within:ring-indigo-100 transition-all">
-                <span class="text-gray-400 flex-shrink-0">🔍</span>
+                 
                 <input type="text" placeholder="Search {{ $keyword }}…"
                        x-model="search" @input="applyFilters()"
                        class="flex-1 text-sm text-gray-800 placeholder-gray-400 bg-transparent outline-none min-w-0 border-gray-200">
@@ -841,7 +827,7 @@ function bannerSlider(banners, interval = 4000) {
 
     {{-- Other Cities --}}
     <div class="bg-white rounded-2xl p-6 mt-4 mx-4">
-        <h2 class="text-base font-bold text-gray-900 mb-3 flex items-center gap-2">🔍 Find {{ $keyword }} in Other City</h2>
+        <h2 class="text-base font-bold text-gray-900 mb-3 flex items-center gap-2"> Find {{ $keyword }} in Other City</h2>
         <ul class="flex flex-wrap gap-2 text-sm text-gray-600">
             @foreach($otherCities as $i => $c)
             <li class="flex items-center">
@@ -859,7 +845,7 @@ function bannerSlider(banners, interval = 4000) {
     {{-- Related Services --}}
     @if(!empty($servicesRelated))
     <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mt-4 mb-4 mx-4">
-        <h2 class="text-lg sm:text-xl md:text-2xl font-semibold text-blue-900">🔍 Find Services Related to {{ $keyword }}</h2>
+        <h2 class="text-lg sm:text-xl md:text-2xl font-semibold text-blue-900">Find Services Related to {{ $keyword }}</h2>
         <ul class="flex flex-wrap gap-2 text-sm text-gray-600">
             @foreach($servicesRelated as $i => $service)
             <li class="flex items-center">

@@ -1107,7 +1107,7 @@ class HomePageController extends Controller
 	{
 		$keyword = array(
 			'ratingvalue' => '4.75',
-			'ratingcount' => 'city314',
+			'ratingcount' => '314',
 			'slug' => "playwright-automation-training-in-noida",
 			'meta_title' => "Top Playwright Automation Training Institute in Noida",
 			'keyword' => "playwright automation",
@@ -1138,6 +1138,7 @@ Instead of limiting learning to theory, the course takes you through:.",
 			'faqa4' => "Yes. Both online and offline options are available.",
 			'faqq5' => "What makes this different",
 			'faqa5' => "The focus is on practical implementation, not just completing topics",
+			'reviews' => 2,
 
 
 		);
