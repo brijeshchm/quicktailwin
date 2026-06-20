@@ -124,7 +124,7 @@ class ParentCategoryController extends Controller
 	}
 
 
-	/**
+	/*
 	 * Show the form for editing the specified resource.
 	 *
 	 * @param  int  $id
@@ -144,7 +144,7 @@ class ParentCategoryController extends Controller
 		}
 	}
 
-	/**
+	/*
 	 * Update the specified resource in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request

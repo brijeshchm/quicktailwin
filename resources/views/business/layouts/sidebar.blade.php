@@ -135,6 +135,7 @@
           <span>Certificate</span>
         </a>
         </li> 
+
         <li class="nav-item">
         <a class="nav-link <?php if(Request::segment(2)=='business-award') { echo "active"; } ?>" href="{{url('business/business-award')}}">
           <i class="bi bi-award"></i>
@@ -142,12 +143,22 @@
         </a>
         </li> 
 
+
+        <li class="nav-item">
+        <a class="nav-link <?php if(Request::segment(2)=='rewards-dashboard') { echo "active"; } ?>" href="{{url('business/rewards-dashboard')}}">
+          <i class="bi bi-gift"></i>
+          <span>Rewards</span>
+        </a>
+        </li> 
+  
         <li class="nav-item">
         <a class="nav-link <?php if(Request::segment(2)=='recent-activity') { echo "active"; } ?>" href="{{url('business/recent-activity')}}">
           <i class="bi bi-activity"></i>
           <span>Recent Activity</span>
         </a>
-        </li>     
+        </li>   
+        
+        
         <li class="nav-item">
         <a class="nav-link <?php if(Request::segment(2)=='faqs') { echo "active"; } ?>" href="{{url('business/faqs')}}">
           <i class="bi bi-question"></i>
@@ -164,7 +175,9 @@
         </a>
         </li> 
      
-      <li class="nav-item">
+    
+
+       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#account-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-person-check"></i><span>Pay Account</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
@@ -193,6 +206,7 @@
           
         </ul>
       </li> 
+
       <li class="nav-heading"></li>
     
 

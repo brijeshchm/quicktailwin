@@ -27,10 +27,11 @@
                 <h2 class="text-2xl font-semibold text-gray-800">
                     Vouchers &amp; Offers for You
                 </h2>
-                <a href="{{ route('user.rewards.index') }}"
+                <a href="{{ route('user.vouchers.my') }}"
                    class="text-sm text-blue-600 hover:underline font-medium flex items-center gap-1">
                     <i data-lucide="ticket" class="w-4 h-4"></i>
-                    My Vouchers                 </a>
+                    My Vouchers 2300
+                </a>
             </div>
 
             {{-- 🏷️ Category Filter Tabs --}}

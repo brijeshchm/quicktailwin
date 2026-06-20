@@ -24,6 +24,7 @@ use App\Models\Zone;
 use App\Models\Lead;
 use App\Models\User;
 use App\Models\Keyword;
+use App\Models\Redemption;
 use App\Models\LeadFollowUp;
 use App\Models\Status;
 use App\Models\AssignedLead;
@@ -503,8 +504,7 @@ class CertificateController extends Controller
 
 
 	}
-
-
+	  
 
 	private function saveImageSmart($file, $destinationPath, $width = null, $height = null)
 	{

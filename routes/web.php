@@ -181,6 +181,24 @@ Route::middleware('auth:clients')->group(function () {
 
 	Route::get('/business/get-billing-history', [App\Http\Controllers\Business\InvoiceController::class, 'getBillingHistory']);
 
+
+	Route::get('/business/rewards-dashboard', [App\Http\Controllers\Business\RewardsController::class, 'getBusinessRewardsDashboard']);
+ 
+ 
+    Route::post('business/enquiries/{enquiry}/accept', [App\Http\Controllers\Business\RewardsController::class, 'acceptEnquiry'])
+        ->name('enquiries.accept');
+ 
+    Route::post('business/enquiries/{enquiry}/complete', [App\Http\Controllers\Business\RewardsController::class, 'completeEnquiry'])
+        ->name('enquiries.complete');
+ 
+    Route::post('business/redemptions/{redemption}/complete', [App\Http\Controllers\Business\RewardsController::class, 'completeRedemption'])
+        ->name('redemptions.complete');
+
+
+ 
+
+
+
 	//Route::get('/business/getinvoiceBillingPrintPdf/{id}',[App\Http\Controllers\Business\InvoiceController::class, 'getinvoiceBillingPrintPdf']);
 	Route::get(
 		'business/getinvoiceBillingPrintPdf/{id}',

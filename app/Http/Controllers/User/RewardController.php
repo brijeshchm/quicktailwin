@@ -20,27 +20,49 @@ class RewardController extends Controller
     
  public function index()
     {
-        $user         = Auth::user();
-        $activeItems  = RedeemableItem::where('is_active', true)->get();
-        $businesses   = Guest::all();
-        $redemptions  = Redemption::where('user_id', $user->id)
-                            ->latest()->get();
+
+  $user = Auth::user();
+ 
+        $rewards = [
+            'balance'      => $user->reward_balance ?? 0,
+            'totalEarned'  => $user->total_earned ?? 0,
+            'totalRedeemed' => $user->total_redeemed ?? 0,
+        ];
+ 
+        $items = RedeemableItem::where('is_active', true)          
+            ->get();
+ 
+        $businesses = Guest::all();
+ 
+        $redemptions = Redemption::where('user_id', $user->id)
+            ->latest()
+            ->get();
+ 
+            
         $transactions = CoinTransaction::where('user_id', $user->id)
-                            ->latest()->take(50)->get();
-
-        $minRewardPoints = $activeItems->isNotEmpty()
-            ? $activeItems->min('coins_required')
+            ->latest()
+            ->get();
+ 
+        $minRewardPoints = $items->count() > 0
+            ? $items->min('coins_required')
             : 500;
+ 
+        $progressPercent = min(100, $rewards['balance'] > 0
+            ? ($rewards['balance'] / max($minRewardPoints, 1)) * 100
+            : 0);
+ 
+        return view('user.rewards.index', [
+            'rewards'          => $rewards,
+            'items'            => $items,
+            'businesses'       => $businesses,
+            'redemptions'      => $redemptions,
+            'transactions'     => $transactions,
+            'minRewardPoints'  => $minRewardPoints,
+            'progressPercent'  => $progressPercent,
+        ]);
 
-        $progressPercent = $minRewardPoints > 0
-            ? min(100, round(($user->coin_balance / $minRewardPoints) * 100))
-            : 0;
 
-        return view('user.rewards.index', compact(
-            'user', 'activeItems', 'businesses',
-            'redemptions', 'transactions',
-            'minRewardPoints', 'progressPercent'
-        ));
+       
     }
 
     public function redeem(Request $request)

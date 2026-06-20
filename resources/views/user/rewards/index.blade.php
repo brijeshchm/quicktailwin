@@ -23,92 +23,161 @@
 
         {{-- 📝 Right: Vouchers --}}
         <div class="lg:col-span-9">
-            <div class="flex items-center justify-between mb-5 pt-4">
-                <h2 class="text-2xl font-semibold text-gray-800">
-                    Vouchers &amp; Offers for You
-                </h2>
-                <a href="{{ route('user.vouchers.my') }}"
-                   class="text-sm text-blue-600 hover:underline font-medium flex items-center gap-1">
-                    <i data-lucide="ticket" class="w-4 h-4"></i>
-                    My Vouchers 2300
-                </a>
-            </div>
 
+<style>
+    .rw-hero {
+        background: linear-gradient(135deg, #f59e0b, #fbbf24, #fcd34d);
+        border-radius: 1rem;
+        padding: 2.5rem;
+        color: #fff;
+        box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.1);
+        position: relative;
+        overflow: hidden;
+    }
+    .rw-hero-icon-bg {
+        position: absolute;
+        top: -1rem; right: -1rem;
+        font-size: 16rem;
+        opacity: .15;
+        color: #fff;
+        pointer-events: none;
+    }
+    .rw-balance-num {
+        font-size: 4rem;
+        font-weight: 800;
+        letter-spacing: -.02em;
+    }
+    @media (min-width: 768px) {
+        .rw-balance-num { font-size: 5.5rem; }
+    }
+    .rw-stats-box {
+        background: rgba(255,255,255,.2);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255,255,255,.3);
+        border-radius: .75rem;
+        padding: 1.5rem;
+        min-width: 250px;
+    }
+    .progress-white > .progress-bar { background-color: #fff; }
+    .progress-track-dark { background-color: rgba(0,0,0,.2); }
 
+    .reward-card {
+        border: 1px solid #fde68a;
+        box-shadow: 0 .25rem .5rem rgba(0,0,0,.05);
+        transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .reward-card.can-afford:hover { transform: translateY(-4px); }
+    .reward-card.cannot-afford { opacity: .8; border-color: #dee2e6; }
+    .reward-img-wrap {
+        height: 10rem;
+        background-color: #f1f3f5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+    }
+    .reward-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .reward-category-badge {
+        position: absolute; top: .5rem; left: .5rem;
+        background-color: rgba(255,255,255,.9);
+        backdrop-filter: blur(4px);
+    }
+    .gem-amber { color: #f59e0b; }
+    .btn-amber {
+        background-color: #f59e0b;
+        border-color: #f59e0b;
+        color: #1a1a1a;
+    }
+    .btn-amber:hover { background-color: #d97706; border-color: #d97706; color: #1a1a1a; }
 
+    .choice-pill {
+        border: 1px solid #dee2e6;
+        border-radius: 50rem;
+        padding: .35rem .9rem;
+        font-size: .85rem;
+        background: #fff;
+        cursor: pointer;
+        transition: all .15s ease;
+    }
+    .choice-pill:hover { background-color: #f8f9fa; }
+    .choice-pill.selected {
+        border-color: #f59e0b;
+        background-color: #fffbeb;
+        color: #b45309;
+        box-shadow: 0 0 0 1px #f59e0b;
+    }
 
+    .biz-option {
+        display: flex; align-items: center; gap: .75rem;
+        width: 100%; text-align: left;
+        border: 1px solid #dee2e6;
+        border-radius: .5rem;
+        padding: .75rem;
+        background: #fff;
+        cursor: pointer;
+        transition: all .15s ease;
+    }
+    .biz-option:hover { background-color: #f8f9fa; }
+    .biz-option.selected {
+        border-color: #f59e0b;
+        background-color: #fffbeb;
+        box-shadow: 0 0 0 1px #f59e0b;
+    }
+    .biz-logo-sm {
+        width: 2.5rem; height: 2.5rem; border-radius: .5rem;
+        background-color: #f1f3f5;
+        display: flex; align-items: center; justify-content: center;
+        overflow: hidden; flex-shrink: 0;
+    }
+    .biz-logo-sm img { width: 100%; height: 100%; object-fit: cover; }
 
-{{-- resources/views/rewards/index.blade.php --}}
-<x-app-layout>
-<div class="container mx-auto px-4 py-8 md:py-12 max-w-6xl">
+    .history-scroll { max-height: 600px; overflow-y: auto; }
+    .line-clamp-1 { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+    .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+</style>
+ 
+<div class="container py-4 py-md-5" style="max-width: 1140px;">
 
-    {{-- Header --}}
-    <div class="mb-8">
-        <h1 class="text-3xl font-bold font-serif mb-2">Rewards Wallet</h1>
-        <p class="text-gray-500">Earn coins on every service, redeem them for free perks.</p>
+    <div class="mb-4">
+        <h1 class="fs-2 fw-bold mb-2" style="font-family: 'Georgia', serif;">Rewards Wallet</h1>
+        <p class="text-muted">Earn coins on every service, redeem them for free perks.</p>
     </div>
 
-    {{-- Flash Messages --}}
-    @if(session('success'))
-        <div class="mb-6 bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg text-sm flex items-center gap-2">
-            <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-            </svg>
-            {{ session('success') }}
-        </div>
-    @endif
-    @if(session('error'))
-        <div class="mb-6 bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg text-sm">
-            {{ session('error') }}
-        </div>
-    @endif
-
-    {{-- ===== BALANCE HERO ===== --}}
-    <div class="bg-gradient-to-br from-amber-500 via-amber-400 to-amber-300 rounded-2xl p-8 md:p-12 text-white shadow-lg mb-8 relative overflow-hidden">
-        <div class="absolute top-0 right-0 p-10 opacity-10 pointer-events-none">
-            <svg class="w-64 h-64" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>
-            </svg>
-        </div>
-
-        <div class="relative z-10 flex flex-col md:flex-row items-center md:items-start justify-between gap-8">
-            <div class="text-center md:text-left">
-                <p class="text-amber-50 font-medium mb-2 uppercase tracking-widest text-sm">Available Balance</p>
-                <div class="flex items-center justify-center md:justify-start gap-4">
-                    <svg class="w-12 h-12 md:w-16 md:h-16 fill-white drop-shadow-sm" viewBox="0 0 24 24">
-                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                    </svg>
-                    <span class="text-6xl md:text-8xl font-black tracking-tighter drop-shadow-md">
-                        {{ number_format($user->coin_balance) }}
-                    </span>
+    {{-- Balance Hero --}}
+    <div class="rw-hero mb-4">
+        <i class="bi bi-gem rw-hero-icon-bg"></i>
+        <div class="row align-items-center g-4 position-relative">
+            <div class="col-md-6 text-center text-md-start">
+                <p class="text-uppercase fw-medium mb-2" style="letter-spacing:.15em; font-size:.8rem; color:#fffbeb;">Available Balance</p>
+                <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-3">
+                    <i class="bi bi-gem-fill" style="font-size: 3rem;"></i>
+                    <span class="rw-balance-num">{{ $rewards['balance'] }}</span>
                 </div>
             </div>
-
-            <div class="bg-white/20 backdrop-blur-md rounded-xl p-6 w-full md:w-auto min-w-[250px] border border-white/30">
-                <div class="space-y-4">
-                    <div class="flex justify-between items-center">
-                        <span class="text-sm font-medium text-amber-50">Total Earned</span>
-                        <span class="font-bold">{{ number_format($user->total_earned) }}</span>
+            <div class="col-md-6 d-flex justify-content-center justify-content-md-end">
+                <div class="rw-stats-box w-100" style="max-width: 320px;">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="small fw-medium" style="color:#fffbeb;">Total Earned</span>
+                        <span class="fw-bold">{{ $rewards['totalEarned'] }}</span>
                     </div>
-                    <div class="flex justify-between items-center">
-                        <span class="text-sm font-medium text-amber-50">Total Redeemed</span>
-                        <span class="font-bold">{{ number_format($user->total_redeemed) }}</span>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="small fw-medium" style="color:#fffbeb;">Total Redeemed</span>
+                        <span class="fw-bold">{{ $rewards['totalRedeemed'] }}</span>
                     </div>
-                    <div class="pt-4 border-t border-white/20">
-                        <div class="flex justify-between text-xs mb-2">
+                    <div class="pt-3 border-top" style="border-color: rgba(255,255,255,.2) !important;">
+                        <div class="d-flex justify-content-between small mb-2">
                             <span>Progress to next reward</span>
-                            <span>{{ $progressPercent }}%</span>
+                            <span>{{ number_format($progressPercent, 0) }}%</span>
                         </div>
-                        {{-- Progress Bar --}}
-                        <div class="h-2 bg-black/20 rounded-full overflow-hidden">
-                            <div class="h-full bg-white rounded-full transition-all duration-500"
-                                style="width: {{ $progressPercent }}%"></div>
+                        <div class="progress progress-track-dark progress-white" style="height: .5rem;">
+                            <div class="progress-bar" style="width: {{ $progressPercent }}%;"></div>
                         </div>
-                        <p class="text-xs text-amber-50 mt-2">
-                            @if($user->coin_balance >= $minRewardPoints)
+                        <p class="small mt-2 mb-0" style="color:#fffbeb;">
+                            @if ($rewards['balance'] >= $minRewardPoints)
                                 You have enough coins for a reward!
                             @else
-                                {{ number_format($minRewardPoints - $user->coin_balance) }} more coins to unlock rewards
+                                {{ $minRewardPoints - $rewards['balance'] }} more coins to unlock rewards
                             @endif
                         </p>
                     </div>
@@ -117,425 +186,442 @@
         </div>
     </div>
 
-    {{-- ===== MY REDEMPTIONS ===== --}}
-    @if($redemptions->isNotEmpty())
-    <div class="mb-8">
-        <div class="flex items-center gap-2 mb-4">
-            <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
-            </svg>
-            <h2 class="text-xl font-bold font-serif">My Redemptions</h2>
+    {{-- My Redemptions --}}
+    @if (!empty($redemptions))
+    <div class="mb-4">
+        <div class="d-flex align-items-center gap-2 mb-3">
+            <i class="bi bi-box-seam text-warning"></i>
+            <h2 class="fs-4 fw-bold mb-0" style="font-family: 'Georgia', serif;">My Redemptions</h2>
         </div>
-        <div class="bg-white border rounded-xl overflow-hidden shadow-sm divide-y">
-            @foreach($redemptions as $r)
-            <div class="p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <div class="min-w-0">
-                    <p class="font-medium text-gray-900">{{ $r->item_name }}</p>
-                    <p class="text-xs text-gray-400 mt-0.5">
-                        {{ $r->business_name }}
-                        @if($r->city) • {{ $r->city }} @endif
-                        • {{ $r->created_at->format('M d, Y') }}
-                    </p>
-                </div>
-                <div class="flex items-center gap-3 shrink-0">
-                    @if($r->status === 'pending')
-                        <span class="inline-flex items-center gap-1 bg-slate-100 text-slate-600 text-xs font-medium px-3 py-1.5 rounded-full border border-slate-200">
-                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                            </svg>
-                            Awaiting completion
-                        </span>
-
-                    @elseif($r->status === 'completed')
-                        <span class="inline-flex items-center bg-blue-50 text-blue-600 text-xs font-medium px-3 py-1.5 rounded-full border border-blue-200">
-                            Business marked complete
-                        </span>
-                        <form method="POST" action="{{ route('rewards.confirm', $r) }}">
-                            @csrf
-                            <button type="submit"
-                                class="bg-amber-500 hover:bg-amber-600 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition">
-                                Confirm completion
-                            </button>
-                        </form>
-
-                    @elseif($r->status === 'confirmed')
-                        <span class="inline-flex items-center gap-1 bg-green-50 text-green-600 text-xs font-medium px-3 py-1.5 rounded-full border border-green-200">
-                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                            </svg>
-                            Confirmed
-                        </span>
-                    @endif
-                </div>
-            </div>
-            @endforeach
-        </div>
-    </div>
-    @endif
-
-    {{-- ===== MAIN GRID ===== --}}
-    <div class="grid md:grid-cols-3 gap-8">
-
-        {{-- REDEEM REWARDS --}}
-        <div class="md:col-span-2">
-            <div class="flex items-center gap-2 mb-6">
-                <svg class="w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2l1.09 3.26L16 6l-2.91.74L12 10l-1.09-3.26L8 6l2.91-.74L12 2z"/>
-                </svg>
-                <h2 class="text-xl font-bold font-serif">Redeem Rewards</h2>
-            </div>
-
-            @if($activeItems->isNotEmpty())
-            <div class="grid sm:grid-cols-2 gap-6">
-                @foreach($activeItems as $item)
-                @php
-                    $cityPrices  = $item->city_prices ?? [];
-                    $allCosts    = collect($cityPrices)->pluck('coins_required')->push($item->coins_required);
-                    $minCost     = $allCosts->min();
-                    $canAfford   = $user->coin_balance >= $minCost;
-                    $coinsNeeded = $minCost - $user->coin_balance;
-                    $hasCityPricing = count($cityPrices) > 0;
-
-                    // Matching businesses
-                    $matchingBiz = $businesses->filter(function($b) use ($item) {
-                        if (!$item->category) return true;
-                        return strtolower(trim($b->category)) === strtolower(trim($item->category));
-                    });
-                @endphp
-                <div class="flex flex-col bg-white rounded-xl border overflow-hidden shadow-sm transition-all
-                    {{ $canAfford ? 'border-amber-200 shadow-md hover:-translate-y-1' : 'opacity-80' }}">
-
-                    {{-- Image --}}
-                    <div class="h-40 bg-gray-100 flex items-center justify-center relative overflow-hidden">
-                        @if($item->image_url)
-                            <img src="{{ $item->image_url }}" alt="{{ $item->name }}"
-                                class="object-cover w-full h-full"
-                                onerror="this.style.display='none'">
-                        @else
-                            <svg class="w-12 h-12 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                    d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5z"/>
-                            </svg>
-                        @endif
-                        @if($item->category)
-                            <span class="absolute top-2 left-2 bg-white/90 text-gray-800 text-xs font-medium px-2 py-1 rounded-full border">
-                                {{ $item->category }}
-                            </span>
-                        @endif
-                    </div>
-
-                    {{-- Content --}}
-                    <div class="p-4 flex-1 flex flex-col">
-                        <h3 class="font-bold text-gray-900 text-lg mb-1 truncate">{{ $item->name }}</h3>
-                        <p class="text-sm text-gray-500 line-clamp-2 flex-1 mb-4">{{ $item->description }}</p>
-
-                        {{-- Coin cost --}}
-                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg mb-3">
-                            <div class="flex items-center gap-1.5">
-                                <svg class="w-5 h-5 {{ $canAfford ? 'text-amber-500 fill-amber-400' : 'text-gray-400' }}" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                                </svg>
-                                <span class="font-bold text-lg">
-                                    {{ $hasCityPricing ? 'from '.$minCost : $item->coins_required }}
-                                </span>
-                            </div>
-                            @if(!$canAfford)
-                                <span class="text-xs text-gray-400">Need {{ number_format($coinsNeeded) }} more</span>
+        <div class="card">
+            <div class="card-body p-0">
+                <div class="list-group list-group-flush">
+                    @foreach ($redemptions as $r)
+                    <div class="list-group-item p-3 d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3">
+                        <div class="text-truncate">
+                            <p class="fw-medium mb-0">{{ $r->item_name }}</p>
+                            <p class="text-muted small mb-0">
+                                {{ $r->business_name }}{{ $r->city ? ' • ' . $r->city : '' }} • {{ $r->created_at->format('M j, Y') }}
+                            </p>
+                        </div>
+                        <div class="d-flex align-items-center gap-2 flex-shrink-0">
+                            @if ($r->status === 'pending')
+                                <span class="badge badge-soft-slate fw-normal"><i class="bi bi-clock me-1"></i> Awaiting completion</span>
+                            @elseif ($r->status === 'completed')
+                                <span class="badge badge-soft-blue fw-normal">Business marked complete</span>
+                                <button
+                                    type="button"
+                                    class="btn btn-sm btn-amber js-confirm-redemption"
+                                    data-id="{{ $r->id }}"
+                                    data-url="{{ route('redemptions.confirm', $r->id) }}"
+                                >
+                                    Confirm completion
+                                </button>
+                            @elseif ($r->status === 'confirmed')
+                                <span class="badge badge-soft-green fw-normal"><i class="bi bi-check-circle-fill me-1"></i> Confirmed</span>
                             @endif
-                        </div>
-
-                        {{-- Redeem Button → opens modal --}}
-                        @if($canAfford)
-                            <button
-                                onclick="openRedeemModal({{ $item->id }})"
-                                class="w-full bg-amber-500 hover:bg-amber-600 text-white font-semibold py-2 rounded-lg transition text-sm">
-                                Redeem Now
-                            </button>
-                        @else
-                            <button disabled
-                                class="w-full bg-gray-100 text-gray-400 font-semibold py-2 rounded-lg text-sm cursor-not-allowed">
-                                Not enough coins
-                            </button>
-                        @endif
-                    </div>
-                </div>
-                @endforeach
-            </div>
-
-            @else
-            <div class="p-10 text-center bg-gray-50 border-2 border-dashed rounded-xl">
-                <svg class="w-12 h-12 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                        d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/>
-                </svg>
-                <h3 class="font-semibold text-gray-700 mb-1">No rewards available</h3>
-                <p class="text-sm text-gray-400">Keep earning coins to unlock rewards.</p>
-            </div>
-            @endif
-        </div>
-
-        {{-- TRANSACTION HISTORY --}}
-        <div>
-            <div class="flex items-center gap-2 mb-6">
-                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
-                <h2 class="text-xl font-bold font-serif">History</h2>
-            </div>
-            <div class="bg-white border rounded-xl overflow-hidden shadow-sm">
-                @if($transactions->isNotEmpty())
-                <div class="divide-y max-h-[600px] overflow-y-auto">
-                    @foreach($transactions as $tx)
-                    <div class="p-4 flex items-center justify-between">
-                        <div class="min-w-0 flex-1 mr-3">
-                            <p class="font-medium text-sm text-gray-900 truncate">{{ $tx->description }}</p>
-                            <p class="text-xs text-gray-400">{{ $tx->created_at->format('M d, Y') }}</p>
-                        </div>
-                        <div class="font-bold text-sm shrink-0 flex items-center gap-1
-                            {{ $tx->type === 'earned' ? 'text-green-600' : 'text-amber-600' }}">
-                            {{ $tx->type === 'earned' ? '+' : '-' }}{{ number_format($tx->points) }}
-                            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                            </svg>
                         </div>
                     </div>
                     @endforeach
                 </div>
-                @else
-                <div class="p-8 text-center text-gray-400 text-sm">No transactions yet.</div>
-                @endif
+            </div>
+        </div>
+    </div>
+    @endif
+
+    <div class="row g-4">
+        {{-- Redeemable Items --}}
+        <div class="col-md-8">
+            <div class="d-flex align-items-center gap-2 mb-3">
+                <i class="bi bi-stars text-warning"></i>
+                <h2 class="fs-4 fw-bold mb-0" style="font-family: 'Georgia', serif;">Redeem Rewards</h2>
+            </div>
+
+            @if (!empty($items))
+            <div class="row g-3">
+                @foreach ($items as $item)
+                    @php
+                        $itemCityPrices = $item->cityPrices ?? collect();
+                        $allCosts = $itemCityPrices->pluck('coins_required')->push($item->coins_required);
+                        $minCost = $allCosts->min();
+                        $hasCityPricing = $itemCityPrices->count() > 0;
+                        $canAfford = $rewards['balance'] >= $minCost;
+                        $coinsNeeded = $minCost - $rewards['balance'];
+
+                    @endphp
+
+                    @php
+    $itemCityPrices = $item->cityPrices ?? collect();
+    $allCosts = $itemCityPrices->pluck('coins_required')->push($item->coins_required);
+    $minCost = $allCosts->min();
+    $hasCityPricing = $itemCityPrices->count() > 0;
+    $canAfford = $rewards['balance'] >= $minCost;
+    $coinsNeeded = $minCost - $rewards['balance'];
+
+    $cityPricesPayload = $itemCityPrices->map(function ($cp) {
+        return ['city' => $cp->city, 'coinsRequired' => $cp->coins_required];
+    })->values();
+
+    $itemPayload = json_encode([
+        'id' => $item->id,
+        'name' => $item->name,
+        'category' => $item->category,
+        'coinsRequired' => $item->coins_required,
+        'cityPrices' => $cityPricesPayload,
+    ]);
+@endphp
+                    <div class="col-sm-6">
+                        <div class="card reward-card h-100 d-flex flex-column {{ $canAfford ? 'can-afford' : 'cannot-afford' }}">
+                            <div class="reward-img-wrap">
+                                @if ($item->image_url)
+                                    <img src="{{ $item->image_url }}" alt="{{ $item->name }}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                    <div style="display:none;" class="position-absolute top-0 start-0 w-100 h-100 align-items-center justify-content-center">
+                                        <i class="bi bi-image text-muted opacity-25" style="font-size:2.5rem;"></i>
+                                    </div>
+                                @else
+                                    <i class="bi bi-image text-muted opacity-25" style="font-size:2.5rem;"></i>
+                                @endif
+                                @if ($item->category)
+                                    <span class="badge reward-category-badge text-dark fw-medium">{{ $item->category }}</span>
+                                @endif
+                            </div>
+                            <div class="card-body flex-grow-1">
+                                <h5 class="card-title fs-6 line-clamp-1 mb-2">{{ $item->name }}</h5>
+                                <p class="text-muted small line-clamp-2 mb-0">{{ $item->description }}</p>
+                            </div>
+                            <div class="card-footer bg-white border-0 pt-0 d-flex flex-column gap-2">
+                                <div class="d-flex align-items-center justify-content-between p-2 rounded" style="background-color:#f8f9fa;">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <i class="bi bi-gem-fill {{ $canAfford ? 'gem-amber' : 'text-muted' }}"></i>
+                                        <span class="fw-bold fs-5">{{ $hasCityPricing ? 'from ' . $minCost : $item->coins_required }}</span>
+                                    </div>
+                                    @if (!$canAfford)
+                                        <span class="text-muted small">Need {{ $coinsNeeded }} more</span>
+                                    @endif
+                                </div>
+                                <button
+                                    type="button"
+                                    class="btn w-100 js-open-redeem {{ $canAfford ? 'btn-amber' : 'btn-secondary' }}"
+                                    {{ $canAfford ? '' : 'disabled' }}
+                                  
+                                    data-item="{{ htmlspecialchars($itemPayload, ENT_QUOTES, 'UTF-8') }}"
+                                >
+                                    {{ $canAfford ? 'Redeem Now' : 'Not enough coins' }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            @else
+            <div class="col-12 p-5 text-center border border-dashed rounded-3" style="background-color:#f8f9fa;">
+                <i class="bi bi-gift text-muted d-block mb-3" style="font-size:2.5rem; opacity:.5;"></i>
+                <h3 class="fs-6 fw-semibold mb-1">No rewards available</h3>
+                <p class="text-muted small mb-0">Keep earning coins to unlock rewards in the future.</p>
+            </div>
+            @endif
+        </div>
+
+        {{-- Transaction History --}}
+        <div class="col-md-4">
+            <div class="d-flex align-items-center gap-2 mb-3">
+                <i class="bi bi-clock-history text-muted"></i>
+                <h2 class="fs-4 fw-bold mb-0" style="font-family: 'Georgia', serif;">History</h2>
+            </div>
+            <div class="card">
+                <div class="card-body p-0">
+                    @if ($transactions->count() > 0)
+                    <div class="list-group list-group-flush history-scroll">
+                        @foreach ($transactions as $tx)
+                        <div class="list-group-item d-flex align-items-center justify-content-between">
+                            <div>
+                                <p class="fw-medium small mb-0">{{ $tx->description }}</p>
+                                <p class="text-muted small mb-0" style="font-size:.7rem;">{{ $tx->created_at->format('M j, Y') }}</p>
+                            </div>
+                            <div class="fw-bold d-flex align-items-center gap-1 {{ $tx->type === 'earned' ? 'text-success' : 'text-warning' }}">
+                                {{ $tx->type === 'earned' ? '+' : '-' }}{{ $tx->points }}
+                                <i class="bi bi-gem-fill" style="font-size:.7rem;"></i>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                    @else
+                    <div class="p-4 text-center text-muted">No transactions yet.</div>
+                    @endif
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-{{-- ===== REDEEM MODAL ===== --}}
-<div id="redeemModal" class="hidden fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
-    <div class="bg-white rounded-xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
-
-        <div class="p-6 border-b flex items-center justify-between">
-            <div>
-                <h2 class="text-xl font-bold font-serif">Choose a Business</h2>
-                <p id="modalDesc" class="text-sm text-gray-500 mt-0.5"></p>
+{{-- Redeem Modal --}}
+<div class="modal fade" id="redeemModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" style="max-width: 560px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Choose a business</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <button onclick="closeRedeemModal()" class="text-gray-400 hover:text-gray-600 transition">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                </svg>
-            </button>
-        </div>
+            <div class="modal-body">
+                <p class="text-muted small mb-3" id="redeemDescription"></p>
 
-        {{-- City selector --}}
-        <div id="citySelectorWrap" class="hidden px-6 pt-4">
-            <p class="text-sm font-medium text-gray-700 mb-1">Select your city</p>
-            <p class="text-xs text-gray-400 mb-2">Pricing varies by city for this reward.</p>
-            <div id="cityButtons" class="flex flex-wrap gap-2"></div>
-            <p id="cityError" class="hidden text-xs text-red-500 mt-2"></p>
-        </div>
+                <div id="cityPriceSection" class="mb-3 d-none">
+                    <p class="small fw-medium mb-1">Select your city</p>
+                    <p class="text-muted small mb-2">Pricing varies by city for this reward.</p>
+                    <div id="cityPills" class="d-flex flex-wrap gap-2 mb-2"></div>
+                    <p class="text-danger small mb-0 d-none" id="cityPriceWarning"></p>
+                </div>
 
-        {{-- Business list --}}
-        <div id="businessList" class="p-6 space-y-2 max-h-[50vh] overflow-y-auto"></div>
+                <div id="businessList" class="d-flex flex-column gap-2"></div>
 
-        {{-- Form --}}
-        <form id="redeemForm" method="POST" action="{{ route('user.rewards.redeem') }}">
-            @csrf
-            <input type="hidden" name="item_id" id="f_item_id">
-            <input type="hidden" name="business_id" id="f_business_id">
-            <input type="hidden" name="city" id="f_city">
-
-            <div class="px-6 pb-6 flex justify-end gap-3 border-t pt-4">
-                <button type="button" onclick="closeRedeemModal()"
-                    class="border border-gray-300 text-gray-700 hover:bg-gray-50 px-4 py-2 rounded-lg text-sm font-medium transition">
-                    Cancel
-                </button>
-                <button type="submit" id="redeemSubmitBtn" disabled
-                    class="bg-amber-500 hover:bg-amber-600 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold px-5 py-2 rounded-lg text-sm transition">
-                    Redeem
-                </button>
+                <div id="noBusinessesMsg" class="p-4 text-center border border-dashed rounded-3 d-none" style="background-color:#f8f9fa;">
+                    <i class="bi bi-shop text-muted d-block mb-2" style="font-size:2rem; opacity:.5;"></i>
+                    <p class="text-muted small mb-0">No businesses are currently available for this reward. Please check back later.</p>
+                </div>
             </div>
-        </form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-amber" id="confirmRedeemBtn" disabled>Redeem</button>
+            </div>
+        </div>
     </div>
 </div>
-
-{{-- Data for JS --}}
+ 
 <script>
-    const ITEMS      = @json($activeItems);
-    const BUSINESSES = @json($businesses);
-    const USER_COINS = {{ $user->coin_balance }};
-</script>
+document.addEventListener('DOMContentLoaded', function () {
+    // ---- Server-provided data ----
+    
+@php
+    $businessesPayload = $businesses->map(function ($b) {
+        return [
+            'id' => $b->id,
+            'name' => $b->name,
+            'logoUrl' => $b->logo_url,
+            'category' => $b->category,
+            'rating' => $b->rating,
+            'reviewCount' => $b->review_count,
+            'location' => $b->location,
+            'isVerified' => (bool) $b->is_verified,
+        ];
+    });
+@endphp
 
-@push('scripts')
-<script>
-let activeItem       = null;
-let selectedBizId    = null;
-let selectedCity     = null;
+    const customerBalance = {{ $rewards['balance'] }};
+    const redeemUrl = "{{ route('user.rewards.redeem') }}";
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
-const modal          = document.getElementById('redeemModal');
-const businessList   = document.getElementById('businessList');
-const cityWrap       = document.getElementById('citySelectorWrap');
-const cityButtons    = document.getElementById('cityButtons');
-const cityError      = document.getElementById('cityError');
-const submitBtn      = document.getElementById('redeemSubmitBtn');
+    // ---- Modal state ----
+    let selectedItem = null;
+    let selectedCity = null;
+    let selectedBusinessId = null;
+ const businesses = @json($businessesPayload);
+    const modalEl = document.getElementById('redeemModal');
+    const modal = new bootstrap.Modal(modalEl);
+    const descEl = document.getElementById('redeemDescription');
+    const cityPriceSection = document.getElementById('cityPriceSection');
+    const cityPills = document.getElementById('cityPills');
+    const cityPriceWarning = document.getElementById('cityPriceWarning');
+    const businessListEl = document.getElementById('businessList');
+    const noBusinessesMsg = document.getElementById('noBusinessesMsg');
+    const confirmBtn = document.getElementById('confirmRedeemBtn');
 
-function openRedeemModal(itemId) {
-    activeItem    = ITEMS.find(i => i.id === itemId);
-    selectedBizId = null;
-    selectedCity  = null;
+    function normalizeCategory(s) {
+        return (s || '').trim().toLowerCase();
+    }
 
-    document.getElementById('f_item_id').value  = itemId;
-    document.getElementById('f_business_id').value = '';
-    document.getElementById('f_city').value     = '';
+    function effectiveCoins() {
+        if (!selectedItem) return 0;
+        if (selectedCity) {
+            const cp = (selectedItem.cityPrices || []).find(c => c.city === selectedCity);
+            if (cp) return cp.coinsRequired;
+        }
+        return selectedItem.coinsRequired;
+    }
 
-    // Description
-    const cat = activeItem.category;
-    document.getElementById('modalDesc').textContent = cat
-        ? `Select a ${cat} business to redeem "${activeItem.name}" with.`
-        : `Select a business to redeem "${activeItem.name}" with.`;
+    function renderCityPills() {
+        const cps = selectedItem.cityPrices || [];
+        if (cps.length === 0) {
+            cityPriceSection.classList.add('d-none');
+            return;
+        }
+        cityPriceSection.classList.remove('d-none');
+        cityPills.innerHTML = '';
 
-    // City prices
-    const cityPrices = activeItem.city_prices || [];
-    if (cityPrices.length > 0) {
-        cityWrap.classList.remove('hidden');
-        cityButtons.innerHTML = '';
+        const standardPill = document.createElement('button');
+        standardPill.type = 'button';
+        standardPill.className = 'choice-pill' + (selectedCity === null ? ' selected' : '');
+        standardPill.textContent = `Standard (${selectedItem.coinsRequired} coins)`;
+        standardPill.addEventListener('click', () => { selectedCity = null; refreshModal(); });
+        cityPills.appendChild(standardPill);
 
-        // Standard option
-        const stdBtn = makeBtn(
-            `Standard (${activeItem.coins_required} coins)`,
-            () => selectCity(null, activeItem.coins_required)
-        );
-        stdBtn.id = 'cityBtn_standard';
-        cityButtons.appendChild(stdBtn);
-
-        cityPrices.forEach(cp => {
-            const btn = makeBtn(
-                `${cp.city} (${cp.coins_required} coins)`,
-                () => selectCity(cp.city, cp.coins_required)
-            );
-            btn.id = `cityBtn_${cp.city}`;
-            cityButtons.appendChild(btn);
+        cps.forEach(cp => {
+            const pill = document.createElement('button');
+            pill.type = 'button';
+            pill.className = 'choice-pill' + (selectedCity === cp.city ? ' selected' : '');
+            pill.textContent = `${cp.city} (${cp.coinsRequired} coins)`;
+            pill.addEventListener('click', () => { selectedCity = cp.city; refreshModal(); });
+            cityPills.appendChild(pill);
         });
 
-        // Auto-select standard
-        selectCity(null, activeItem.coins_required);
-    } else {
-        cityWrap.classList.add('hidden');
-        selectedCity = null;
+        const coins = effectiveCoins();
+        if (customerBalance < coins) {
+            cityPriceWarning.textContent = `You need ${coins - customerBalance} more coins for this city.`;
+            cityPriceWarning.classList.remove('d-none');
+        } else {
+            cityPriceWarning.classList.add('d-none');
+        }
     }
 
-    renderBusinessList();
-    updateSubmitBtn();
-    modal.classList.remove('hidden');
-}
+    function renderBusinessList() {
+        const matching = businesses.filter(b =>
+            !selectedItem.category || normalizeCategory(b.category) === normalizeCategory(selectedItem.category)
+        );
 
-function closeRedeemModal() {
-    modal.classList.add('hidden');
-    activeItem = selectedBizId = selectedCity = null;
-}
+        businessListEl.innerHTML = '';
 
-modal.addEventListener('click', e => { if (e.target === modal) closeRedeemModal(); });
+        if (matching.length === 0) {
+            businessListEl.classList.add('d-none');
+            noBusinessesMsg.classList.remove('d-none');
+            return;
+        }
 
-function selectCity(city, cost) {
-    selectedCity = city;
-    document.getElementById('f_city').value = city ?? '';
+        businessListEl.classList.remove('d-none');
+        noBusinessesMsg.classList.add('d-none');
 
-    // Update button styles
-    const allBtns = cityButtons.querySelectorAll('button');
-    allBtns.forEach(b => b.classList.remove('border-amber-500','bg-amber-50','text-amber-700','ring-1','ring-amber-500'));
-    const activeId = city ? `cityBtn_${city}` : 'cityBtn_standard';
-    const active   = document.getElementById(activeId);
-    if (active) active.classList.add('border-amber-500','bg-amber-50','text-amber-700','ring-1','ring-amber-500');
+        matching.forEach(b => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'biz-option' + (selectedBusinessId === b.id ? ' selected' : '');
 
-    // Check affordability
-    const canAfford = USER_COINS >= cost;
-    cityError.classList.toggle('hidden', canAfford);
-    if (!canAfford) cityError.textContent = `You need ${cost - USER_COINS} more coins for this selection.`;
+            const logoHtml = b.logoUrl
+                ? `<img src="${b.logoUrl}" alt="${b.name}">`
+                : `<i class="bi bi-shop text-muted"></i>`;
 
-    renderBusinessList();
-    updateSubmitBtn();
-}
+            const verifiedHtml = b.isVerified
+                ? `<i class="bi bi-patch-check-fill text-warning" style="font-size:.85rem;"></i>`
+                : '';
 
-function renderBusinessList() {
-    if (!activeItem) return;
-    const norm = s => s.trim().toLowerCase();
-    const matched = activeItem.category
-        ? BUSINESSES.filter(b => norm(b.category) === norm(activeItem.category))
-        : BUSINESSES;
-
-    businessList.innerHTML = '';
-    if (matched.length === 0) {
-        businessList.innerHTML = `
-            <div class="p-6 text-center bg-gray-50 border border-dashed rounded-xl">
-                <svg class="w-10 h-10 text-gray-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
-                <p class="text-sm text-gray-400">No businesses available for this reward.</p>
-            </div>`;
-        return;
+            btn.innerHTML = `
+                <div class="biz-logo-sm">${logoHtml}</div>
+                <div class="flex-grow-1 text-truncate">
+                    <div class="d-flex align-items-center gap-1">
+                        <span class="fw-semibold text-truncate">${b.name}</span>
+                        ${verifiedHtml}
+                    </div>
+                    <div class="d-flex align-items-center gap-3 text-muted small mt-1">
+                        <span><i class="bi bi-star-fill text-warning" style="font-size:.7rem;"></i> ${b.rating} (${b.reviewCount})</span>
+                        <span class="text-truncate"><i class="bi bi-geo-alt" style="font-size:.7rem;"></i> ${b.location}</span>
+                    </div>
+                </div>
+            `;
+            btn.addEventListener('click', () => { selectedBusinessId = b.id; refreshModal(); });
+            businessListEl.appendChild(btn);
+        });
     }
 
-    matched.forEach(b => {
-        const div = document.createElement('button');
-        div.type  = 'button';
-        div.className = 'w-full text-left flex items-center gap-3 p-3 rounded-lg border border-gray-200 hover:bg-amber-50 hover:border-amber-300 transition-colors business-btn';
-        div.dataset.id = b.id;
-        div.innerHTML = `
-            <div class="w-10 h-10 rounded-md bg-gray-100 flex items-center justify-center shrink-0 overflow-hidden">
-                ${b.logo_url
-                    ? `<img src="${b.logo_url}" alt="${b.name}" class="object-cover w-full h-full">`
-                    : `<svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                            d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>`}
-            </div>
-            <div class="min-w-0 flex-1">
-                <div class="flex items-center gap-1.5">
-                    <span class="font-semibold text-gray-900 truncate">${b.name}</span>
-                    ${b.is_verified ? `<svg class="w-4 h-4 text-amber-500 shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>` : ''}
-                </div>
-                <div class="flex items-center gap-3 text-xs text-gray-400 mt-0.5">
-                    <span>⭐ ${b.rating} (${b.review_count})</span>
-                    <span class="truncate">📍 ${b.location}</span>
-                </div>
-            </div>`;
-        div.addEventListener('click', () => selectBusiness(b.id, div));
-        businessList.appendChild(div);
+    function refreshModal() {
+        renderCityPills();
+        renderBusinessList();
+
+        const coins = effectiveCoins();
+        const canConfirm = selectedBusinessId !== null && customerBalance >= coins;
+        confirmBtn.disabled = !canConfirm;
+        confirmBtn.textContent = selectedItem ? `Redeem for ${coins} coins` : 'Redeem';
+    }
+
+    document.querySelectorAll('.js-open-redeem').forEach(btn => {
+        btn.addEventListener('click', function () {
+            selectedItem = JSON.parse(this.dataset.item);
+            selectedCity = null;
+            selectedBusinessId = null;
+
+            descEl.textContent = selectedItem.category
+                ? `Select a ${selectedItem.category} business to redeem "${selectedItem.name}" with.`
+                : `Select a business to redeem "${selectedItem.name}" with.`;
+
+            refreshModal();
+            modal.show();
+        });
     });
-}
 
-function selectBusiness(id, el) {
-    selectedBizId = id;
-    document.getElementById('f_business_id').value = id;
-    document.querySelectorAll('.business-btn').forEach(b => {
-        b.classList.remove('border-amber-500','bg-amber-50','ring-1','ring-amber-500');
+    confirmBtn.addEventListener('click', function () {
+        if (!selectedItem || selectedBusinessId === null) return;
+
+        confirmBtn.disabled = true;
+        confirmBtn.textContent = 'Redeeming...';
+
+        const payload = {
+            item_id: selectedItem.id,
+            business_id: selectedBusinessId,
+        };
+        if (selectedCity) payload.city = selectedCity;
+
+        fetch(redeemUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken,
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify(payload),
+        })
+        .then(res => res.json().then(data => ({ ok: res.ok, data })))
+        .then(({ ok, data }) => {
+            if (ok && data.success) {
+                modal.hide();
+                window.location.reload(); // refresh balance, item availability, redemptions list
+            } else {
+                alert(data.message || 'Redemption failed.');
+                confirmBtn.disabled = false;
+                confirmBtn.textContent = `Redeem for ${effectiveCoins()} coins`;
+            }
+        })
+        .catch(() => {
+            alert('Something went wrong. Please try again.');
+            confirmBtn.disabled = false;
+            confirmBtn.textContent = `Redeem for ${effectiveCoins()} coins`;
+        });
     });
-    el.classList.add('border-amber-500','bg-amber-50','ring-1','ring-amber-500');
-    updateSubmitBtn();
-}
 
-function updateSubmitBtn() {
-    if (!activeItem) { submitBtn.disabled = true; return; }
-    const cityPrices = activeItem.city_prices || [];
-    const cp = cityPrices.find(c => c.city === selectedCity);
-    const cost = cp ? cp.coins_required : activeItem.coins_required;
-    const ok   = selectedBizId !== null && USER_COINS >= cost;
-    submitBtn.disabled = !ok;
-    submitBtn.textContent = ok ? `Redeem for ${cost} coins` : 'Redeem';
-}
+    // ---- Confirm completion (customer confirms business finished the service) ----
+    document.querySelectorAll('.js-confirm-redemption').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const url = this.dataset.url;
+            const originalText = this.innerHTML;
+            this.disabled = true;
+            this.innerHTML = 'Confirming...';
 
-function makeBtn(label, onClick) {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'px-3 py-1.5 rounded-full text-sm border border-gray-200 hover:bg-amber-50 transition-colors';
-    btn.textContent = label;
-    btn.addEventListener('click', onClick);
-    return btn;
-}
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken,
+                    'Accept': 'application/json',
+                },
+            })
+            .then(res => res.json().then(data => ({ ok: res.ok, data })))
+            .then(({ ok, data }) => {
+                if (ok && data.success) {
+                    window.location.reload();
+                } else {
+                    this.disabled = false;
+                    this.innerHTML = originalText;
+                    alert(data.message || 'Could not confirm.');
+                }
+            })
+            .catch(() => {
+                this.disabled = false;
+                this.innerHTML = originalText;
+                alert('Something went wrong. Please try again.');
+            });
+        });
+    });
+});
 </script>
-@endpush
-</x-app-layout>
+ 
+ 
+
+
+
 
 
 
@@ -551,7 +637,7 @@ function makeBtn(label, onClick) {
     </div>
 </div>
 
-@push('scripts')
+ 
 <script>
 async function claimVoucher(voucherId, btn) {
     btn.disabled = true;
@@ -602,6 +688,6 @@ function showToast(msg, type = 'success') {
     setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 300); }, 2800);
 }
 </script>
-@endpush
+ 
 
 @endsection
