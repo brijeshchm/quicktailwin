@@ -289,13 +289,9 @@ select.ef-input { padding-left:1rem; }
                 {{-- Website + Social --}}
                 <div class="flex flex-wrap items-center gap-3">
                     @if(!empty($clientsList['website']))
-                    <a href="{{ $clientsList['website'] }}" target="_blank"
-                       class="flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-700 transition-colors">
-                        <div class="w-9 h-9 rounded-full flex items-center justify-center" style="background:rgba(37,99,235,.08);">
-                            🌐
-                        </div>
+                     
                         {{ $clientsList['website'] }}
-                    </a>
+                    
                     @endif
                 </div>
             </div>
@@ -950,7 +946,7 @@ function selectCert(i) {
                             <div class="w-6 h-6 rounded-md flex items-center justify-center shrink-0 mt-0.5 text-sm"
                                  style="background:{{ $color }}18;">{{ $icon }}</div>
                             @if($href)
-                            <a href="{{ $href }}" class="text-xs text-gray-600 hover:text-blue-600 transition-colors leading-snug">{{ $text }}</a>
+                            <span class="text-xs text-gray-600 hover:text-blue-600 transition-colors leading-snug">{{ $text }} </span>
                             @else
                             <p class="text-xs text-gray-500 leading-snug">{{ $text }}</p>
                             @endif
