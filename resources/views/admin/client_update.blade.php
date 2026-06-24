@@ -358,9 +358,7 @@
 					<div class="form-group col-md-6">
 						<div class="col-md-12"> 
 						 <label>Address:</label>
-                    <textarea type="text" class="form-control" name="personal_address"   placeholder="Enter personal address">{{ old('personal_address',(isset($client)) ? $client->personal_address:"")}} </textarea>
-                   
-                   
+                    <textarea type="text" class="form-control" name="personal_address"   placeholder="Enter personal address">{{ old('personal_address',(isset($client)) ? $client->personal_address:"")}} </textarea>                  
 						</div>
 					</div>	
 
@@ -709,25 +707,13 @@
 					<div class="col-md-12">
 					 <label>Business Description:</label>                
                     
-          <textarea name="business_description" type="text" class="form-control" placeholder="Please enter business Description">
-            
-        {{ old('business_description',(isset($client)) ? $client->business_description:"")}}
-        </textarea>
-                   
-               
+          <textarea name="business_description" type="text" class="form-control" placeholder="Please enter business Description">{{ old('business_description',(isset($client)) ? $client->business_description:"")}}</textarea>
 					</div>
 				</div>
 				<div class="form-group col-md-12">
 					<div class="col-md-12">
 					 <label>Business Overview:</label>                    
-          <textarea name="business_overview" type="text" class="form-control summernote" placeholder="Please enter business overview">
-            {{ old('business_overview',(isset($client)) ? $client->business_overview:"")}}
-        
-        
-        </textarea>
-                   
-               
-					</div>
+          <textarea name="business_overview" type="text" class="form-control summernote" placeholder="Please enter business overview">{{ old('business_overview',(isset($client)) ? $client->business_overview:"")}}</textarea></div>
 				</div>
 			 
    		 
@@ -762,7 +748,7 @@
             <div class="form-group">
                 <label for="top_description" class="col-md-2 control-label">FAQ Answer 1</label>
                 <div class="col-md-8">
-                    <textarea class="form-control" name="faqa1" placeholder="Enter FAQ Answer 1">{{ old('faqa1',(isset($client)) ? $client->faqa1:"")}}</textarea>
+                  <textarea class="form-control" name="faqa1" placeholder="Enter FAQ Answer 1">{{ old('faqa1',(isset($client)) ? $client->faqa1:"")}}</textarea>
                 </div>
             </div>
             
