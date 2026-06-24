@@ -337,11 +337,36 @@ class CitySlugController extends Controller
             ['day'=>'Sunday',    'hours'=>'Closed'],
         ];
  
-        $title = $clientsList['meta_title']??"";
-        $keyword = $clientsList['meta_keyword']??"";
-       $description = $clientsList['meta_description']??"";
+   
+
+
+
+
+
+        $metaTitle = !empty($clientsList['meta_title'])
+        ? $clientsList['meta_title']
+        : ($clientsList['business_name'] ?? '') . ' | ' . ($clientsList['city'] ?? '') . ' | QuickDials';
+
+        $metaKeywords = !empty($clientsList['meta_keywords'])
+        ? $clientsList['meta_keywords']
+        : ($clientsList['business_name'] ?? '') . ' | QuickDials';
+
+        $relatedSearches = $data['related_searches'] ?? [];
+        $services        = array_values(array_slice($relatedSearches, 0, 4));
+        $serviceText     = implode(', ', $services);
+
+        $metaDescription = !empty($clientsList['meta_description'])
+        ? $clientsList['meta_description']
+        : ($clientsList['business_name'] ?? '') . ' in ' . ($clientsList['city'] ?? '') .
+        ' - ' . $serviceText .
+        '. View address, photos, reviews and contact details on QuickDials.';
+
+
+
+
+
         return view('client.client-detail', compact(
-            'slug', 'clientsList', 'keywordList','certificate','title','keyword','description',
+            'slug', 'clientsList', 'keywordList','certificate','metaTitle','metaKeywords','metaDescription',
             'comment', 'areaBusiness', 'overviewBusiness',
             'relatedList', 'gallery', 'hImages', 'vImages',
             'assignKeyword', 'certifications', 'govDocs', 'reviews',

@@ -134,6 +134,9 @@
         <div class="sidebar-item" onclick="showContent('information')">
             <i class="fa fa-phone"></i><a href="#information"> Business Information</a>
         </div>
+          <div class="sidebar-item" onclick="showContent('businessMeta')">
+            <i class="fa fa-info-circle"></i><a href="#businessMeta">Business Meta</a>
+        </div>
           <div class="sidebar-item" onclick="showContent('businessOverview')">
             <i class="fa fa-info-circle"></i><a href="#businessOverview">Business Overview</a>
         </div>
@@ -524,19 +527,7 @@
 					</div>
 				</div>
 			
-				
-				<div class="form-group col-md-12">
-					<div class="col-sm-12"> 
-					
-                    <label>Business Info:</label>
-                   
-                     <textarea name="business_intro" class="form-control" id="about"   rows="7">{{ old('business_intro',(isset($client->business_intro)) ? $client->business_intro:"")}}</textarea>
-                    
-              
-               
-            
-					</div>
-				</div>
+				 
 				 
 				 
 				<div class="form-group col-md-6">
@@ -644,6 +635,59 @@
 				<div class="form-group"> 
 					<div class="col-sm-12"> 
 					<input type="hidden" name="contact_info" value="contact_info">
+					<div class="col-sm-offset-2 col-sm-4 text-right">
+						<input type="submit" value="SAVE" class="btn btn-warning">
+					</div>
+					</div>
+				</div>
+			</form>
+					 
+	 
+        </div>
+    </div>
+<div class="section-content" id="businessMeta">
+        <div class="form-container">
+            <h4>Business Meta</h4>
+           
+			<form class="form-horizontal"  action="" onsubmit="return ClientController.ediSaveBusinessMeta(this,<?php echo (isset($client->id)? $client->id:""); ?>)" method="POST">
+				{{csrf_field()}}
+				<div class="form-group col-md-12">
+					<div class="col-md-12">
+					 <label>Meta Title:</label>  
+           <textarea name="meta_title" type="text" class="form-control" placeholder="Please enter meta title">{{ old('meta_title',(isset($client)) ? $client->meta_title:"")}}</textarea>               
+					</div>
+				</div>
+				<div class="form-group col-md-12">
+					<div class="col-md-12">
+					 <label>Meta Keyword:</label>                    
+          <textarea name="meta_keywords" type="text" class="form-control" placeholder="Please enter meta keyword">{{ old('meta_keywords',(isset($client)) ? $client->meta_keywords:"")}}</textarea>              
+					</div>
+				</div>
+
+        <div class="form-group col-md-12">
+					<div class="col-md-12">
+					 <label>Meta Description:</label>                    
+          <textarea name="meta_description" type="text" class="form-control" placeholder="Please enter meta description">{{ old('meta_description',(isset($client)) ? $client->meta_description:"")}}</textarea>              
+					</div>
+				</div>
+			 
+
+         <div class="form-group col-md-12">
+					<div class="col-md-12">
+					 <label>Business Intro:</label>                    
+          <textarea name="business_intro" type="text" class="form-control summernote" placeholder="Please enter meta intro">
+            {{ old('business_intro',(isset($client)) ? $client->business_intro:"")}}
+        
+        
+        </textarea>
+                   
+               
+					</div>
+				</div>
+   		 
+				<div class="form-group"> 
+					<div class="col-sm-12"> 
+					<input type="hidden" name="business_meta" value="business_meta">
 					<div class="col-sm-offset-2 col-sm-4 text-right">
 						<input type="submit" value="SAVE" class="btn btn-warning">
 					</div>

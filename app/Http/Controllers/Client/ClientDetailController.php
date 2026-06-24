@@ -197,17 +197,23 @@ class ClientDetailController extends Controller
         $overviewBusiness= $data['overview_business'] ?? [];
         $relatedSearches = $data['related_searches']  ?? [];
  
+        $metaTitle = !empty($clientsList['meta_title'])
+        ? $clientsList['meta_title']
+        : ($clientsList['business_name'] ?? '') . ' | ' . ($clientsList['city'] ?? '') . ' | QuickDials';
 
- 
-        $metaTitle = $clientsList['business_name'] .'|'. $clientsList['city']. '| '.'QuickDials';
-        $metaKeywords =$clientsList['business_name'] .'| '.'QuickDials';
+        $metaKeywords = !empty($clientsList['meta_keywords'])
+        ? $clientsList['meta_keywords']
+        : ($clientsList['business_name'] ?? '') . ' | QuickDials';
 
-        $relatedSearches = $data['related_searches'] ?? []; 
-        $services = array_values(array_slice($relatedSearches, 0, 4)); 
-        $serviceText = implode(', ', $services);
-        $metaDescription = $clientsList['business_name'] . ' in ' . $clientsList['city'] .
-            ' - ' . $serviceText .
-            '. View address, photos, reviews and contact details on QuickDials.';
+        $relatedSearches = $data['related_searches'] ?? [];
+        $services        = array_values(array_slice($relatedSearches, 0, 4));
+        $serviceText     = implode(', ', $services);
+
+        $metaDescription = !empty($clientsList['meta_description'])
+        ? $clientsList['meta_description']
+        : ($clientsList['business_name'] ?? '') . ' in ' . ($clientsList['city'] ?? '') .
+        ' - ' . $serviceText .
+        '. View address, photos, reviews and contact details on QuickDials.';
 
  
         return view('client.client-detail', compact(

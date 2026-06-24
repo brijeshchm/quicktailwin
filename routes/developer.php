@@ -442,6 +442,7 @@ Route::get('/business_keyword/getKeywords/{id}',[App\Http\Controllers\BusinessKe
 	Route::post('/clients/update/{id}',[App\Http\Controllers\BackEndClientsController::class, 'update'])->middleware('auth');
 	Route::post('/clients/editSavePersonalDetails/{id}',[App\Http\Controllers\BackEndClientsController::class, 'editSavePersonalDetails'])->middleware('auth:developer');
 	Route::post('/clients/ediSaveBusinessInfo/{id}',[App\Http\Controllers\BackEndClientsController::class, 'ediSaveBusinessInfo'])->middleware('auth:developer');
+	Route::post('/clients/ediSaveBusinessMeta/{id}',[App\Http\Controllers\BackEndClientsController::class, 'ediSaveBusinessMeta'])->middleware('auth:developer');
 	Route::post('/clients/ediSaveBusinessFAQ/{id}',[App\Http\Controllers\BackEndClientsController::class, 'ediSaveBusinessFAQ'])->middleware('auth:developer');
 	Route::post('/clients/ediSaveBusinessOverView/{id}',[App\Http\Controllers\BackEndClientsController::class, 'ediSaveBusinessOverView'])->middleware('auth:developer');
 	Route::post('/clients/clientConversionStatus/{id}',[App\Http\Controllers\BackEndClientsController::class, 'clientConversionStatus'])->middleware('auth:developer');

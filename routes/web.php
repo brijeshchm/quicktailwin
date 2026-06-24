@@ -452,8 +452,6 @@ Route::get('/privacy-policy', [App\Http\Controllers\Official\OfficialController:
 Route::get('/copyright-policy', [App\Http\Controllers\Official\OfficialController::class, 'copyrightpolicy'])->name('copyright.policy');
 Route::get('/refund-policy', [App\Http\Controllers\Official\OfficialController::class, 'refundPolicy'])->name('refund.policy');
 
-
-
 Route::get('/', [App\Http\Controllers\Client\HomePageController::class, 'index'])->name('home');
  
 Route::post('/newsletter', [App\Http\Controllers\Client\HomePageController::class, 'newsletter']);

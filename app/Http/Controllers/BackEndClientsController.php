@@ -823,7 +823,7 @@ class BackEndClientsController extends Controller
 						'pincode' => 'nullable|digits:6',
 						'address' => 'nullable|string|max:500',
 						'landmark' => 'nullable|string|max:255',					 
-						'business_intro' => 'nullable|string|max:2000',					 
+					 				 
 						'business_map' => 'nullable|string|max:255',						 
 					 
 
@@ -906,7 +906,7 @@ class BackEndClientsController extends Controller
 					$client->address = $request->input('address');
 					$client->landmark = $request->input('landmark');
 					$client->address = $request->input('address');
-					$client->business_intro = $request->input('business_intro');
+				 
 				 
 					$client->website = $request->input('website');
 					$client->business_map = $request->input('business_map');
@@ -914,6 +914,66 @@ class BackEndClientsController extends Controller
 					if($request->input('time')){
 					$client->time = json_encode($request->input('time'));
 					}
+					if ($client->save()) {
+						$status = true;
+						$msg = 'Busineess Information Updated Successfully';
+						$code = 200;
+					} else {
+						$status = false;
+						$msg = 'Busineess Information Not Updated';
+						$code = 400;
+					}
+
+				}
+			} catch (Exception $e) {
+				$status = false;
+				$msg = $e->getMessage();
+				$code = 400;
+			}
+			return response()->json(['status' => $status, 'msg' => $msg], $code);
+		}
+	}
+	/*
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function ediSaveBusinessMeta(Request $request, $id)
+	{
+
+		if ($request->ajax()) {
+			try {
+				if (!($request->user()->current_user_can('administrator') || $request->user()->current_user_can('client_update'))) {
+					$status = false;
+					$msg = 'Unauthorised Permission';
+					$code = 400;
+				}
+				if (!is_null($id)) {
+
+					$client = Client::withTrashed()->where('id', $id)->first();
+					$validator = Validator::make($request->all(), [				 
+
+						'meta_title' => 'nullable|string|max:75',
+						'meta_keywords' => 'nullable|string|max:275',					 
+						'meta_description' => 'nullable|string|max:170',
+				 					 
+					]);
+
+
+					if ($validator->fails()) {
+						$errorsBag = $validator->getMessageBag()->toArray();
+						return response()->json(['status' => 1, 'errors' => $errorsBag], 400);
+					}
+
+				 
+ 
+					$client->meta_title = $request->input('meta_title');
+					$client->meta_keywords = $request->input('meta_keywords');
+					$client->meta_description = $request->input('meta_description');
+					$client->business_intro = $request->input('business_intro');
+				 
 					if ($client->save()) {
 						$status = true;
 						$msg = 'Busineess Information Updated Successfully';
