@@ -229,17 +229,29 @@ class HomePageController extends Controller
         // Single batched query instead of one query per client.
         $keywordsByClient = [];
 
-		if ($clientIds->isNotEmpty()) {
-			$keywordsByClient = DB::table('assigned_kwds')
-				->join('keyword', 'keyword.id', '=', 'assigned_kwds.kw_id')
-				->join('child_category', 'child_category.id', '=', 'assigned_kwds.child_cat_id')
-				->select('assigned_kwds.client_id', 'keyword.keyword', 'child_category.child_category as child_category_name')
-				->whereIn('assigned_kwds.client_id', $clientIds)
-				->get()
-				->groupBy('client_id')
-				->map(fn ($group) => $group->toArray())
-				->toArray();
-		}
+	 if ($clientIds->isNotEmpty()) {
+    $keywordsByClient = DB::table('assigned_kwds')
+        ->join('keyword', 'keyword.id', '=', 'assigned_kwds.kw_id')
+        ->join(
+            'child_category',
+            'child_category.id',
+            '=',
+            'assigned_kwds.child_cat_id'
+        )
+        ->select(
+            'assigned_kwds.client_id',
+            'keyword.keyword',
+            'child_category.child_category as child_category_name'
+        )
+        ->whereIn('assigned_kwds.client_id', $clientIds)
+        ->orderBy('assigned_kwds.id', 'desc')
+        ->get()
+        ->groupBy('client_id')
+        ->map(function ($group) {
+            return $group->take(3)->values()->toArray();
+        })
+        ->toArray();
+}
 		
  
 
