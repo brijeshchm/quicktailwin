@@ -225,7 +225,7 @@ function bannerSlider(banners, interval = 4000) {
                     <a href="{{ route('child.show', $childSlug) }}" class="hover:text-indigo-600">{{ $childCat }}</a>
                     <span>›</span>
                     @endif
-                    <span class="text-gray-600">{{ $keyword }} in {{ $area }}</span>
+                    <span class="text-gray-600">{{ $keyword }} in {{ $city }}</span>
                 </nav>
 
                 <h1 class="text-lg font-bold text-gray-900 leading-tight">{{ $keyword }} in {{ ucfirst($city) }}</h1>
@@ -761,7 +761,7 @@ function bannerSlider(banners, interval = 4000) {
     if (!empty($kwData['bottom_heading'])) {
         $bottom_heading=  $kwData['bottom_heading'];
     }else{
-     $bottom_heading = 'Find the Best '.$keyword . ' in ' . ucwords($area);
+     $bottom_heading = 'Find the Best '.$keyword . ' in ' . ucwords($city);
     }    
     @endphp
 
@@ -780,7 +780,7 @@ function bannerSlider(banners, interval = 4000) {
     if (!empty($kwData['extra_heading'])) {
         $extra_heading=  $kwData['extra_heading'];
     }else{
-     $extra_heading = $keyword . ' in ' . ucwords($area);
+     $extra_heading = $keyword . ' in ' . ucwords($city);
     }    
     @endphp
 
