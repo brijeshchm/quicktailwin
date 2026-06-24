@@ -361,10 +361,7 @@ class CitySlugController extends Controller
         ' - ' . $serviceText .
         '. View address, photos, reviews and contact details on QuickDials.';
 
-
-
-
-
+        
         return view('client.client-detail', compact(
             'slug', 'clientsList', 'keywordList','certificate','metaTitle','metaKeywords','metaDescription',
             'comment', 'areaBusiness', 'overviewBusiness',

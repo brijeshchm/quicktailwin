@@ -53,6 +53,7 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
+    'website' => env('ASSET_URL', 'https://www.quickdials.com/'),
 
     /*
     |--------------------------------------------------------------------------

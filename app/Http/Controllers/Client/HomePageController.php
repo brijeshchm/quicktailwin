@@ -28,6 +28,7 @@ use App\Models\Status;
 use App\Models\Zone;
 use App\Models\Contacts;
 use App\Models\Client\Comment;
+use Illuminate\Support\Str;
 use Illuminate\Http\Client\Pool;
 use Illuminate\Support\Facades\Http;
 
@@ -38,27 +39,372 @@ use Illuminate\Support\Facades\Cache;
 // use Illuminate\Support\Facades\Cache;
 class HomePageController extends Controller
 {
-	/**
+	/*
 	 * Display a listing of the resource.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-
-
 	public function index()
-	{
- 		$responses = Http::pool(fn (Pool $pool) => [
-            $pool->as('home')->withoutVerifying()->get('https://api.quickdials.com/api/website/homePage'),
-            $pool->as('repairs')->withoutVerifying()->get('https://api.quickdials.com/api/website/repairsServices'),
-            $pool->as('wedding')->withoutVerifying()->get('https://api.quickdials.com/api/website/weddingPlanning'),
-        ]);
-		$homeData = [];
-        $homeData    = $responses['home']->json() ?? [];    
-	  
-        $repairsData = $responses['repairs']->json() ?? [];
-        $weddingData = $responses['wedding']->json() ?? [];
-         return view('client.index', compact('homeData', 'repairsData', 'weddingData'));
-	}
+    {
+        $weddingPlanning    = $this->getWeddingPlanning();
+        $repairsServices    = $this->getRepairsServices();
+        $homePage           = $this->getHomePage();
+        $bannerKeyword      = $this->getBannerKeyword();
+        $featuredBusinesses = $this->getFeaturedBusinesses();
+        $businessOwners     = $this->getBusinessOwners();
+        $popularSearches    = $this->getPopularSearches();
+        $trending           = $this->getTrending();
+        $blogPageList       = $this->getBlogList();
+//  dd($featuredBusinesses);
+        return view('client.index', compact(
+            'blogPageList',
+            'trending',
+            'popularSearches',
+            'businessOwners',
+            'featuredBusinesses',
+            'bannerKeyword',
+            'homePage',
+            'repairsServices',
+            'weddingPlanning'
+        ));
+    }
+ 
+    /*
+     * Static "wedding planning" keyword tiles.
+     */
+    private function getWeddingPlanning(): array
+    {
+       $base = config('app.website') . 'popular/';
+  
+        return [
+            ['url' => 'catering-services', 'img' => $base . 'Catering-Services.jpg', 'alt' => 'Catering Services', 'title' => 'Catering Services', 'type' => 'keyword'],
+            ['url' => 'banquet-hall', 'img' => $base . 'Banquet-Halls.jpg', 'alt' => 'Banquet Halls', 'title' => 'Banquet Halls', 'type' => 'keyword'],
+            ['url' => 'stage-decorators', 'img' => $base . 'Stage-Decorators.jpg', 'alt' => 'Stage Decorators', 'title' => 'Stage Decorators', 'type' => 'keyword'],
+            ['url' => 'makeup-artists', 'img' => $base . 'makeup-artists.jpg', 'alt' => 'Indian Makeup Artists', 'title' => 'Makeup Artists', 'type' => 'keyword'],
+            ['url' => 'mehendi-artists', 'img' => $base . 'Mehendi-Artists.jpg', 'alt' => 'Indian Mehendi Artists', 'title' => 'Mehendi Artists', 'type' => 'keyword'],
+            ['url' => 'bridal-wear', 'img' => $base . 'Bridal-Wear.jpg', 'alt' => 'Indian Bridal Wear', 'title' => 'Indian Bridal Wear', 'type' => 'keyword'],
+        ];
+    }
+ 
+    /**
+     * Static "repairs" keyword tiles with rating/count.
+     */
+    private function getRepairsServices(): array
+    {
+       
+		$base = config('app.website') . 'popular/';
+	 
+ 
+        return [
+            ['url' => 'ac-repair-service', 'img' => $base . 'AC-Service.jpg', 'alt' => 'AC Service', 'title' => 'AC Service', 'type' => 'keyword', 'rating' => '4.8', 'count' => '397'],
+            ['url' => 'car-service', 'img' => $base . 'car-services.jpg', 'alt' => 'Car Services', 'title' => 'Car Services', 'type' => 'keyword', 'rating' => '4.5', 'count' => '359'],
+            ['url' => 'laundry-service', 'img' => $base . 'washing-machines.jpg', 'alt' => 'Laundry Services', 'title' => 'Laundry Services', 'type' => 'keyword', 'rating' => '3.5', 'count' => '199'],
+            ['url' => 'electricity-service', 'img' => $base . 'Electricity-Services.jpg', 'alt' => 'Electrician Services', 'title' => 'Electrician Services', 'type' => 'keyword', 'rating' => '4.8', 'count' => '475'],
+            ['url' => 'hotels', 'img' => $base . 'Hotel-Services.jpg', 'alt' => 'Hotels', 'title' => 'Hotels', 'type' => 'keyword', 'rating' => '4.8', 'count' => '475'],
+            ['url' => 'health-wellness', 'img' => $base . 'Fitness-Services.jpg', 'alt' => 'Health & Fitness', 'title' => 'Health & Fitness', 'type' => 'keyword', 'rating' => '4', 'count' => '374'],
+            ['url' => 'electrician', 'img' => $base . 'Electricity-Services.jpg', 'alt' => 'Electrician', 'title' => 'Electrician', 'type' => 'keyword', 'rating' => '4.8', 'count' => '375'],
+            ['url' => 'plumber', 'img' => $base . 'Plumber.jpg', 'alt' => 'Plumber', 'title' => 'Plumber', 'type' => 'keyword', 'rating' => '4.8', 'count' => '90'],
+            ['url' => 'carpenters', 'img' => $base . 'carpenter.jpg', 'alt' => 'Carpenters', 'title' => 'Carpenters', 'type' => 'keyword', 'rating' => '4.8', 'count' => '463'],
+            ['url' => 'washing-machine-repairs', 'img' => $base . 'washing-machines.jpg', 'alt' => 'Washing machine repairs', 'title' => 'Washing machine repairs', 'type' => 'keyword', 'rating' => '4.8', 'count' => '463'],
+            ['url' => 'cctv-installation-training', 'img' => config('app.website') . 'img/CCTV-security.png', 'alt' => 'CCTV Installation', 'title' => 'CCTV installation', 'type' => 'keyword', 'rating' => '4.8', 'count' => '463'],
+        ];
+    }
+ 
+    /**
+     * Static homepage category/child tiles.
+     */
+    private function getHomePage(): array
+    {
+         
+
+		$img     = config('app.website') . 'img/';
+		$popular = config('app.website') . 'popular/';
+		$images  = config('app.website') . 'images/';
+ 
+        return [
+            ['url' => 'professional-courses', 'img' => $img . 'it_training.svg', 'alt' => 'IT Professional Courses', 'title' => 'Professional Courses', 'type' => 'categories', 'rating' => '4', 'count' => '434'],
+            ['url' => 'wedding-planning', 'img' => $img . 'wedding.png', 'alt' => 'Wedding pannel', 'title' => 'Wedding pannel', 'type' => 'keyword', 'rating' => '4', 'count' => '234'],
+            ['url' => 'electric-services', 'img' => $img . 'electric-services.png', 'alt' => 'Electric Services', 'title' => 'Electric Services', 'type' => 'child', 'rating' => '3.5', 'count' => '377'],
+            ['url' => 'entrance-exams-coaching', 'img' => $popular . 'government-exam.png', 'alt' => 'Government exam coaching', 'title' => 'Government exam', 'type' => 'child', 'rating' => '3.5', 'count' => '229'],
+            ['url' => 'study-abroad', 'img' => $img . 'study-abroad.svg', 'alt' => 'Study Abroad', 'title' => 'Study Abroad', 'type' => 'child', 'rating' => '5', 'count' => '399'],
+            ['url' => 'spa-hub', 'img' => $img . 'Spa & Beauty.png', 'alt' => 'Spa & Beauty', 'title' => 'Spa & Beauty', 'type' => 'keyword', 'rating' => '5', 'count' => '325'],
+            ['url' => 'repair-services', 'img' => $img . 'Repairs-Services.svg', 'alt' => 'Repair Services', 'title' => 'Repair Services', 'type' => 'child', 'rating' => '5', 'count' => '389'],
+            ['url' => 'packers-and-movers', 'img' => $popular . 'Packers-movers.png', 'alt' => 'Packers & Movers', 'title' => 'Packers & Movers', 'type' => 'child', 'rating' => '3.5', 'count' => '199'],
+            ['url' => 'professional-courses', 'img' => $popular . 'Professional.png', 'alt' => 'Professional Course', 'title' => 'Professional', 'type' => 'categories', 'rating' => '3.5', 'count' => '149'],
+            ['url' => 'contractors', 'img' => $img . 'contractors.png', 'alt' => 'Contractors Property', 'title' => 'Contractors', 'type' => 'child', 'rating' => '3.5', 'count' => '167'],
+            ['url' => 'collages-and-Institutions', 'img' => $popular . 'Education.png', 'alt' => 'collages and Institutions', 'title' => 'Education', 'type' => 'categories', 'rating' => '3.5', 'count' => '197'],
+            ['url' => 'rent-or-buy', 'img' => $img . 'rent_buy.svg', 'alt' => 'Rent or Buy', 'title' => 'Rent & Buy', 'type' => 'child', 'rating' => '3.5', 'count' => '329'],
+            ['url' => 'sports-academy', 'img' => $popular . 'sports.png', 'alt' => 'Sport Academy', 'title' => 'Sport Academy', 'type' => 'child', 'rating' => '3.5', 'count' => '539'],
+            ['url' => 'medical', 'img' => $img . 'Medical.png', 'alt' => 'Medical Medician', 'title' => 'Medical', 'type' => 'child', 'rating' => '3.5', 'count' => '269'],
+            ['url' => 'loan-service', 'img' => $popular . 'Loan.png', 'alt' => 'Loan Service', 'title' => 'Loan', 'type' => 'child', 'rating' => '3.5', 'count' => '69'],
+            ['url' => 'dance-classes', 'img' => $popular . 'Dancing.png', 'alt' => 'Dancing Class', 'title' => 'Dancing', 'type' => 'child', 'rating' => '3.5', 'count' => '79'],
+            ['url' => 'yoga-classes', 'img' => $popular . 'Yoga.png', 'alt' => 'Yoga Class', 'title' => 'Yoga', 'type' => 'child', 'rating' => '3.5', 'count' => '89'],
+            ['url' => 'security-system', 'img' => $img . 'CCTV-security.png', 'alt' => 'CCTV Security', 'title' => 'CCTV Security', 'type' => 'child', 'rating' => '3.5', 'count' => '109'],
+            ['url' => 'tours-and-travels', 'img' => $images . 'tour-travels.png', 'alt' => 'Tours & Travels', 'title' => 'Tours & Travels', 'type' => 'keyword', 'rating' => '3.5', 'count' => '49'],
+        ];
+    }
+ 
+    /**
+     * Static homepage banner tiles (webp variants).
+     */
+    private function getBannerKeyword(): array
+    {
+		$img     = config('app.website') . 'img/';
+		$popular = config('app.website') . 'popular/';
+		$images  = config('app.website') . 'images/';
+ 
+        return [
+            ['url' => 'repair-services', 'img' => $img . 'Repairs-Services.webp', 'alt' => 'Repair Services', 'title' => 'Repair Services', 'type' => 'child', 'rating' => '5', 'count' => '389'],
+            ['url' => 'rent-or-buy', 'img' => $img . 'Rent-buy.webp', 'alt' => 'Rent Or Buy', 'title' => 'Rent & Buy', 'type' => 'child', 'rating' => '3.5', 'count' => '329'],
+            ['url' => 'packers-and-movers', 'img' => $img . 'Packers-movers.webp', 'alt' => 'Packers & Movers', 'title' => 'Packers & Movers', 'type' => 'child', 'rating' => '3.5', 'count' => '199'],
+            ['url' => 'tours-and-travels', 'img' => $images . 'tour-travels.webp', 'alt' => 'Tours & Travels', 'title' => 'Tours & Travels', 'type' => 'keyword', 'rating' => '3.5', 'count' => '49'],
+            ['url' => 'professional-courses', 'img' => $popular . 'IT-Training.webp', 'alt' => 'Professional Courses', 'title' => 'Professional Courses', 'type' => 'categories', 'rating' => '4', 'count' => '434'],
+            ['url' => 'doctor', 'img' => $img . 'Doctor.webp', 'alt' => 'Doctor Clinic', 'title' => 'Doctor', 'type' => 'keyword', 'rating' => '4', 'count' => '234'],
+            ['url' => 'electric-services', 'img' => $img . 'electric-services.png', 'alt' => 'Electric Services', 'title' => 'Electric Services', 'type' => 'child', 'rating' => '3.5', 'count' => '377'],
+            ['url' => 'entrance-exams-coaching', 'img' => $img . 'government-exam.webp', 'alt' => 'Government exam', 'title' => 'Government exam', 'type' => 'child', 'rating' => '3.5', 'count' => '229'],
+            ['url' => 'study-abroad', 'img' => $img . 'study-abroad.svg', 'alt' => 'Study Abroad', 'title' => 'Study Abroad', 'type' => 'child', 'rating' => '5', 'count' => '399'],
+            ['url' => 'spa-and-beauty', 'img' => $img . 'Spa-Beauty.webp', 'alt' => 'Spa & Beauty', 'title' => 'Spa & Beauty', 'type' => 'child', 'rating' => '5', 'count' => '325'],
+            ['url' => 'professional-courses', 'img' => $img . 'Professional.webp', 'alt' => 'Professional Course', 'title' => 'Professional', 'type' => 'categories', 'rating' => '3.5', 'count' => '149'],
+            ['url' => 'contractors', 'img' => $img . 'contractors.webp', 'alt' => 'Contractors Builder', 'title' => 'Contractors', 'type' => 'child', 'rating' => '3.5', 'count' => '167'],
+            ['url' => 'collages-and-Institutions', 'img' => $img . 'Education.webp', 'alt' => 'Education collages', 'title' => 'Education', 'type' => 'categories', 'rating' => '3.5', 'count' => '197'],
+            ['url' => 'sports-academy', 'img' => $img . 'sports.webp', 'alt' => 'Sport Academy', 'title' => 'Sport Academy', 'type' => 'child', 'rating' => '3.5', 'count' => '539'],
+            ['url' => 'medical', 'img' => $img . 'Medical.png', 'alt' => 'Medical', 'title' => 'Medical', 'type' => 'child', 'rating' => '3.5', 'count' => '269'],
+            ['url' => 'loan-service', 'img' => $img . 'Loan.webp', 'alt' => 'Loan Service', 'title' => 'Loan', 'type' => 'child', 'rating' => '3.5', 'count' => '69'],
+            ['url' => 'dance-classes', 'img' => $img . 'Dancing.webp', 'alt' => 'Dancing Class performance', 'title' => 'Dancing', 'type' => 'child', 'rating' => '3.5', 'count' => '79'],
+            ['url' => 'yoga-classes', 'img' => $img . 'Yoga.webp', 'alt' => 'Yoga', 'title' => 'Yoga', 'type' => 'child', 'rating' => '3.5', 'count' => '89'],
+            ['url' => 'security-system', 'img' => $img . 'CCTV-security.png', 'alt' => 'CCTV Security', 'title' => 'CCTV Security', 'type' => 'child', 'rating' => '3.5', 'count' => '109'],
+            ['url' => 'web-technologies', 'img' => $images . 'Web-Designers.png', 'alt' => 'Web Designers', 'title' => 'Web Designers', 'type' => 'child', 'rating' => '3.5', 'count' => '106'],
+        ];
+    }
+ 
+    /**
+     * Top 8 featured clients (platinum > diamond > gold > silver > rest),
+     * with logo, gallery, rating, and assigned keywords resolved.
+     *
+     * NOTE: keyword lookup is batched in a single query to avoid N+1
+     * (previously one query per client inside the map() callback).
+     */
+    private function getFeaturedBusinesses()
+    {
+        $clientsList = DB::table('clients')
+            ->join('assigned_kwds', 'clients.id', '=', 'assigned_kwds.client_id')
+            ->join('keyword', 'assigned_kwds.kw_id', '=', 'keyword.id')
+            ->leftJoin(DB::raw('(
+                SELECT
+                    comment_client_ID,
+                    SUM(rating) AS rating,
+                    COUNT(comment_ID) AS comment_count
+                FROM comments
+                GROUP BY comment_client_ID
+            ) c'), 'c.comment_client_ID', '=', 'clients.id')
+            ->select(
+                'clients.*',
+                'clients.id as client_id',
+                'clients.business_slug',
+                'clients.client_type',
+                DB::raw('MAX(c.rating) as rating'),
+                DB::raw('MAX(c.comment_count) as comment_count')
+            )
+            ->where('clients.active_status', '1')
+            ->where('logo', '!=', '')
+            ->whereNotNull('logo')
+            ->where('pictures', '!=', '')
+            ->where('business_slug', '!=', '')
+            ->whereNotNull('pictures')
+            ->groupBy('clients.id')
+            ->orderByRaw("
+                CASE MAX(clients.client_type)
+                    WHEN 'platinum' THEN 1
+                    WHEN 'diamond' THEN 2
+                    WHEN 'gold' THEN 3
+                    WHEN 'silver' THEN 4
+                    ELSE 5
+                END
+            ")
+            ->limit(8)
+            ->get();
+ 
+        $clientIds = $clientsList->pluck('client_id');
+ 
+        // Single batched query instead of one query per client.
+        $keywordsByClient = [];
+
+		if ($clientIds->isNotEmpty()) {
+			$keywordsByClient = DB::table('assigned_kwds')
+				->join('keyword', 'keyword.id', '=', 'assigned_kwds.kw_id')
+				->join('child_category', 'child_category.id', '=', 'assigned_kwds.child_cat_id')
+				->select('assigned_kwds.client_id', 'keyword.keyword', 'child_category.child_category as child_category_name')
+				->whereIn('assigned_kwds.client_id', $clientIds)
+				->get()
+				->groupBy('client_id')
+				->map(fn ($group) => $group->toArray())
+				->toArray();
+		}
+		
+ 
+
+        $certifiedImg = config('app.website') . 'img/q_verified.gif';
+        $trustedImg   = config('app.website') . 'img/q_trust.gif';
+        $gstImg       = config('app.website') . 'img/q_gst.gif';
+ 
+        return $clientsList->map(function ($client) use ($keywordsByClient, $certifiedImg, $trustedImg, $gstImg) {
+ 
+            $logoImage = 'client/images/default_pp_small.png';
+            $altLogo   = 'Business Logo';
+ 
+            if (!empty($client->logo)) {
+                $cicons = @unserialize($client->logo);
+                if (is_array($cicons) && !empty($cicons['large']['src'])) {
+                    $logoImage = config('app.website') . $cicons['large']['src'];
+                    $altLogo   = $cicons['large']['alt'] ?? $altLogo;
+                }
+            }
+ 
+            $galleryArray = [];
+            if (!empty($client->pictures)) {
+                $galleryList = @unserialize($client->pictures);
+                if (is_array($galleryList)) {
+                    foreach ($galleryList as $value) {
+                        $galleryArray[] = ['galley' => $value];
+                    }
+                }
+            }
+ 
+            $avgRating = '0';
+            if ($client->rating && $client->comment_count) {
+                $avgRating = number_format($client->rating / $client->comment_count, 1, '.', '');
+            }
+ 
+            return [
+                'business_id'       => $client->client_id,
+                'business_name'     => $client->business_name,
+                'business_slug'     => $client->business_slug,
+                'logo'              => $logoImage,
+                'altLogo'           => $altLogo,
+                'gallery'           => $galleryArray,
+                'certifications'    => $client->certifications,
+                'sirName'           => $client->sirName,
+                'first_name'        => $client->first_name,
+                'middle_name'       => $client->middle_name,
+                'last_name'         => $client->last_name,
+                'certified_status'  => $client->certified_status,
+                'trusted_status'    => $client->trusted_status,
+                'gst_status'        => $client->gst_status,
+                'certified_img'     => $certifiedImg,
+                'trusted_img'       => $trustedImg,
+                'gst_img'           => $gstImg,
+                'website'           => $client->website,
+                'verified'          => $client->verified,
+                'trending'          => $client->trending,
+                'topSearch'         => $client->topSearch,
+                'featured'          => $client->featured,
+                'description'       => $client->description,
+                'city'              => $client->city,
+                'state'             => $client->state,
+                'area'              => $client->area,
+                'zone'              => $client->zone,
+                'address'           => $client->address,
+                'pincode'           => $client->pincode,
+                'country'           => $client->country,
+                'year_of_estb'      => $client->year_of_estb,
+                'landmark'          => $client->landmark,
+                'mapUrl'            => 'https://maps.google.com/?q=' . generate_slug($client->address),
+                'whatsapp'          => '7559435943',
+                'call'              => '917559435943',
+                'rating'            => $client->rating,
+                'openUntil'         => $client->openUntil,
+                'avgRating'         => $avgRating,
+                'comment_count'     => $client->comment_count,
+               	'keywords' => $keywordsByClient[$client->client_id] ?? [],
+            ];
+        });
+    }
+ 
+    /**
+     * Aggregate platform stats shown in the "trusted by" / stats strip.
+     */
+    private function getBusinessOwners(): array
+    {
+        return [
+            'GrowClient'        => Client::count() . ' +',
+            'Suppliers'         => ChildCategory::count() . ' +',
+            'ProductsServices'  => Citieslists::count() . ' K+',
+            'Keyword'           => Keyword::count() . ' +',
+            'Store'             => ParentCategory::count() . ' +',
+            'Platform'          => ParentCategory::count() . ' K+',
+        ];
+    }
+ 
+    /**
+     * Static "popular searches" tiles.
+     */
+    private function getPopularSearches(): array
+    {
+        $popular = config('app.website') . 'popular/';
+ 
+        return [
+            ['url' => 'computer-courses', 'img' => $popular . 'IT-Training.jpg', 'alt' => 'computer courses', 'title' => 'computer courses', 'type' => 'categories', 'rating' => '3.5', 'count' => '139'],
+            ['url' => 'entrance-exams-coaching', 'img' => $popular . 'Entrance-Exam.jpg', 'alt' => 'Entrance exam', 'title' => 'Entrance exam', 'type' => 'child', 'rating' => '3.5', 'count' => '99'],
+            ['url' => 'packers-and-movers', 'img' => $popular . 'Packers-Movers.jpg', 'alt' => 'Packers & Movers', 'title' => 'Packers & Movers', 'type' => 'child', 'rating' => '3.5', 'count' => '132'],
+            ['url' => 'interior-designer', 'img' => $popular . 'Interior-design.jpg', 'alt' => 'Interior Design', 'title' => 'Interior Design', 'type' => 'keyword', 'rating' => '3.5', 'count' => '192'],
+            ['url' => 'real-estate', 'img' => $popular . 'real-estate-agent.jpg', 'alt' => 'Real Estate Agents', 'title' => 'Real Estate Agents', 'type' => 'child', 'rating' => '3.5', 'count' => '239'],
+            ['url' => 'carpenters', 'img' => $popular . 'carpenter.jpg', 'alt' => 'Carpenters', 'title' => 'Carpenters', 'type' => 'keyword', 'rating' => '3.5', 'count' => '123'],
+            ['url' => 'wedding-planning', 'img' => $popular . 'Bridal-Wear.jpg', 'alt' => 'Bridal Wear', 'title' => 'Bridal Wear', 'type' => 'keyword', 'rating' => '3.5', 'count' => '119'],
+        ];
+    }
+ 
+    /**
+     * Static "trending" list (no images, just text tiles).
+     */
+    private function getTrending(): array
+    {
+        return [
+            ['url' => 'ac-repair-service', 'title' => 'AC Repair Service', 'type' => 'keyword', 'rating' => '3.5', 'count' => '199'],
+            ['url' => 'banquet-hall', 'title' => 'Wedding Planning', 'type' => 'keyword', 'rating' => '3.5', 'count' => '778'],
+            ['url' => 'clinical-research', 'title' => 'Clinical', 'type' => 'keyword', 'rating' => '4', 'count' => '374'],
+            ['url' => 'home-loan', 'title' => 'Home Loan', 'type' => 'keyword', 'rating' => '4.75', 'count' => '475'],
+            ['url' => 'carpenters', 'title' => 'Carpenters', 'type' => 'keyword', 'rating' => '4.75', 'count' => '463'],
+        ];
+    }
+ 
+    /**
+     * Latest 3 published blog posts, formatted for the homepage blog widget.
+     */
+    private function getBlogList(): array
+    {
+        $blogPageList = [];
+ 
+        $blogDetails = Blogdetails::where('status', '1')
+            ->orderBy('id', 'DESC')
+            ->limit(3)
+            ->get();
+ 
+        foreach ($blogDetails as $key => $blog) {
+            $image = '';
+            $alt   = '';
+ 
+            if (!empty($blog->image)) {
+                $imageData = @unserialize($blog->image);
+                if (is_array($imageData) && !empty($imageData['large']['src'])) {
+                    $image = config('app.website') . $imageData['large']['src'];
+                    $alt   = $blog->name;
+                }
+            }
+ 
+            $description = strip_tags($blog->description ?? '');
+            $description = Str::limit($description, 220, '...');
+ 
+            $blogPageList[$key] = [
+                'url'         => $blog->slug,
+                'img'         => $image,
+                'alt'         => $alt,
+                'title'       => $blog->name,
+                'description' => ucfirst($description),
+            ];
+        }
+ 
+        return $blogPageList;
+    }
 
 	public function saveEnquiry(Request $request)
 	{

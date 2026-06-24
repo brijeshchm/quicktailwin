@@ -1,7 +1,7 @@
 {{-- ─────────────────────────────────────────
     FEATURED BUSINESSES  (with ImageSlider)
 ───────────────────────────────────────── --}}
-@if(!empty($homeData['data']['featuredBusinesses']))
+@if(!empty($featuredBusinesses))
  
 {{-- ImageSlider styles (scoped, no external deps) --}}
 <style>
@@ -62,11 +62,11 @@
         </div>
  
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            @foreach($homeData['data']['featuredBusinesses'] as $bizIdx => $biz)
+            @foreach($featuredBusinesses as $bizIdx => $biz)
  
             @php
                
-                $baseUrl   = 'https://www.quickdials.com/';
+                $baseUrl   = config('app.website');
                 $defaultImg = $baseUrl . 'client/images/default_pp_small.png';
                 $gallery   = $biz['gallery'] ?? [];
  
@@ -177,9 +177,9 @@
                         {{-- Keywords --}}
                         @if(!empty($biz['keywords']))
                         <div class="flex items-center gap-1 flex-wrap">
-                            @foreach(array_slice($biz['keywords'], 0, 3) as $kw)
+                            @foreach($biz['keywords'] as $kw)
                             <span class="text-[9px] sm:text-[11px] text-indigo-600 bg-indigo-50 border border-indigo-100 px-1.5 sm:px-2 py-0.5 rounded-full font-medium">
-                                {{ $kw['keyword'] ?? $kw }}
+                                {{ $kw->keyword ?? "" }}
                             </span>
                             @endforeach
                         </div>

@@ -1,5 +1,5 @@
  
-@if(!empty($repairsData['data']['repairsServices']))
+@if(!empty($repairsServices))
  
 @php
 $repairGradients = [
@@ -20,7 +20,7 @@ $repairGradients = [
     'rgba(217,119,6,0.6)',    // amber
     'rgba(234,179,8,0.6)',    // yellow
 ];
-$repairItems = is_array($repairsData['data']['repairsServices']) ? $repairsData['data']['repairsServices'] : [];
+ 
 @endphp
  
 <section class="py-4 bg-white border-b border-gray-100">
@@ -74,7 +74,7 @@ $repairItems = is_array($repairsData['data']['repairsServices']) ? $repairsData[
                  class="flex gap-3 overflow-x-auto pb-2"
                  style="scroll-behavior:smooth; scrollbar-width:none; -ms-overflow-style:none;">
  
-                @foreach($repairItems as $i => $service)
+                @foreach($repairsServices as $i => $service)
 
 
                   @php

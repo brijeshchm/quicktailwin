@@ -1,14 +1,14 @@
 {{-- ─────────────────────────────────────────
     BLOG SECTION
 ───────────────────────────────────────── --}}
-@if(!empty($homeData['data']['blogList']))
+@if(!empty($blogPageList))
 <div class="py-10 bg-white border-t border-gray-100">
     <div class="max-w-7xl mx-auto px-4">
         <div class="text-center mb-8">
             <h5 class="text-2xl font-bold text-gray-900 mb-2">Blog</h5>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            @foreach($homeData['data']['blogList'] as $blog)
+            @foreach($blogPageList as $blog)
             <div class="rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300">
                 <a href="{{ route('blog.details', $blog['url']) }}" target="_blank" rel="noopener noreferrer">
                     <div class="relative w-full h-[150px] overflow-hidden">

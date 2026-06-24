@@ -3,7 +3,7 @@
 ───────────────────────────────────────── --}}
 
 
-@if(!empty($homeData['data']['popularSearches']))
+@if(!empty($popularSearches))
 <section class="py-4 bg-gray-50 border-y border-gray-100">
     <div class="w-full px-4 md:px-8">
         <div class="flex items-center justify-between mb-3">
@@ -32,7 +32,7 @@
                  onmouseenter="svcPaused=true" onmouseleave="svcPaused=false"
                  class="flex gap-3 overflow-x-auto pb-2"
                  style="scroll-behavior:smooth; scrollbar-width:none; -ms-overflow-style:none;">
-                @foreach($homeData['data']['popularSearches'] as $svc)
+                @foreach($popularSearches as $svc)
                  @php
                 $popSUrl = match($svc['type'] ?? '') {
                 'keyword'    => route('showCity',        $svc['url']),

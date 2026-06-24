@@ -96,8 +96,8 @@
                     <span class="text-gray-400 text-[11px] font-medium">Trending:</span>
                    
                     
-                    @if(!empty($homeData['data']['trending']))
-                        @foreach($homeData['data']['trending'] as $tag)
+                    @if(!empty($trending))
+                        @foreach($trending as $tag)
                             <button
                                 onclick="redirectSearch('{{ $tag['url'] ?? $tag['title'] }}', heroSelectedCity)"
                                 aria-label="Search {{ $tag['url'] }}"
@@ -133,11 +133,11 @@
             <div id="slider-track" class="flex slider-track" style="gap:4px">
                 @php
                 $colorMap = ['bg-blue-600','bg-indigo-600','bg-rose-800','bg-violet-700','bg-teal-600','bg-orange-500','bg-rose-600','bg-amber-600','bg-indigo-600','bg-rose-800','bg-teal-600','bg-amber-600','bg-blue-600','bg-orange-500','bg-violet-700','bg-blue-600'];
-                $bannerKeywords = $homeData['data']['bannerKeyword'] ?? [];
+              
                 
                 @endphp
-
-                @foreach($bannerKeywords as $i => $card)
+                @if($bannerKeyword)
+                @foreach($bannerKeyword as $i => $card)
 
                 @php
                 $catUrl = match($card['type'] ?? '') {
@@ -181,6 +181,7 @@
 
 </a>
                 @endforeach
+                @endif
             </div>
 
             <div class="flex justify-center gap-1.5 pt-2 pb-1" id="slider-dots"></div>
@@ -213,18 +214,6 @@ const CITIES = cityNames.map(name => ({
     cityDetails: name
 }));
 
-// function renderHeroCityList(list, q = '') {
-//     const el = document.getElementById('hero-city-list');
-//     el.innerHTML = list.map(city => `
-//         <button onclick="selectHeroCity('${city.city}')"
-//             class="w-full text-left px-4 py-2 text-xs transition-colors font-medium flex items-center gap-2
-//                    ${city.city === heroSelectedCity ? 'text-blue-700 bg-blue-50' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'}">
-//             ${city.city === heroSelectedCity
-//                 ? '<span class="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></span>'
-//                 : '<i data-lucide="map-pin" class="w-3 h-3 text-blue-500"></i>'}
-//             ${city.cityDetails} 
-//         </button>`).join('');
-// }
 
 function renderHeroCityList(list, q = '') {
     const el = document.getElementById('hero-city-list');
@@ -279,16 +268,7 @@ function toggleHeroCity() {
         chevron.style.transform = '';
     }
 }
-
-
-// function toggleHeroCity() {
-//     const panel   = document.getElementById('hero-city-panel');
-//     const chevron = document.getElementById('hero-city-chevron');
-//     const hidden  = panel.classList.contains('hidden');
-//     panel.classList.toggle('hidden', !hidden);
-//     chevron.style.transform = hidden ? 'rotate(180deg)' : '';
-//     if (hidden) { document.getElementById('hero-city-search').focus(); }
-// }
+ 
 
 let heroCityTimeout = null;
 function filterHeroCities(q) {

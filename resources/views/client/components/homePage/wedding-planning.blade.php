@@ -1,7 +1,7 @@
 {{-- ─────────────────────────────────────────
     WEDDING PLANNING
 ───────────────────────────────────────── --}}
-@if(!empty($weddingData['data']['weddingPlanning']))
+@if(!empty($weddingPlanning))
 <section class="relative overflow-hidden py-4 border-b border-yellow-900/50">
     {{-- Golden gradient background --}}
     <div class="absolute inset-0 bg-gradient-to-r from-[#7a4f00] via-[#b87800] to-[#7a4f00]"></div>
@@ -27,7 +27,7 @@
         </div>
  
         <div class="grid grid-cols-6 gap-2">
-            @foreach($weddingData['data']['weddingPlanning'] as $i => $ws)
+            @foreach($weddingPlanning as $i => $ws)
              @php
                 $catUrl = match($ws['type'] ?? '') {
                 'keyword'    => route('showCity',        $ws['url']),
