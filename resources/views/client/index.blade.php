@@ -1,8 +1,8 @@
  
 @extends('client.layouts.app')
 @section('title', 'QuickDials - India’s Trusted Local Business Search Engine')
-@section('description', 'QuickDials is India’s leading local business search engine to discover top-rated IT training institutes, hotels, salons, healthcare services, real estate, travel agencies, schools, colleges, and more near you. Find verified business listings, addresses, phone numbers, reviews, ratings, photos, and maps across India.')
-@section('keywords', 'QuickDials, local business directory India, business listing website, IT training institutes near me, coaching centres near me, hotels near me, salons near me, healthcare services, real estate services, travel agencies, schools and colleges near me, certified institutes, education consultants, online business directory, local search engine India, top businesses near me, business reviews and ratings')
+@section('description', 'QuickDials is India’s leading local business search engine to discover top-rated IT training institutes, Wedding, healthcare services, real estate, schools, more near you.')
+@section('keywords', 'QuickDials, Local business directory in India, Business listing, IT Training Institutes near me, Coaching centres near me, Hotels near me, Salons near me, Healthcare services, Schools & Colleges near me, Business reviews, ratings, contact, and address')
 @section('content')
 @include('client.components.homePage.hero-section')
 @include('client.components.homePage.category-grid')
