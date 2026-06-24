@@ -157,17 +157,13 @@ class CitySlugController extends Controller
         $gallery = is_array($b['gallery'] ?? null)
             ? $b['gallery']
             : [];
-
-
-            $overviewBusiness = $b['overviewBusiness'][0];
- 
-
+            $overviewBusiness = $b['overviewBusiness'][0]; 
         return [
             'id'            => $id,
             'name'          => $name,
             'business_slug' => $b['business_slug'] ?? '',
             'category'      => array_slice($category, 0, 5),
-            'rating'        => (float) ($b['avgRating'] ?? 4.0),
+            'rating'        => (float) ($b['avgRating'] ?? 0),
             'reviewCount'   => (int)   ($b['comment_count'] ?? $b['review_count'] ?? 0),
             'address'       => $b['address'] ?? '',
             'city'          => $b['city'] ?? '',
