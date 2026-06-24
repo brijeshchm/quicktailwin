@@ -266,7 +266,7 @@ select.ef-input { padding-left:1rem; }
                 </span>
                 <h2 class="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight text-gray-900">
                     {{ $clientsList['business_name'] ?? '' }}<br>
-                    <span style="color:#2563eb;">in {{ $clientsList['city'] ?? 'India' }}</span>
+                    <span style="color:#2563eb;"></span>
                 </h2>
                 <p class="text-gray-600 leading-relaxed">{!! $clientsList['business_intro'] ?? '' !!}</p>
 
