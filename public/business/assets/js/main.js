@@ -475,7 +475,7 @@ jQuery(document).on('click', '#razor-pay-now', function (e) {
 			editProfileInfo: function (THIS, id) {
 			var $this = $(THIS);
 			var form  = new FormData(THIS);
-
+ 
 			$.ajax({
 				url: "/business/saveProfileInfo/" + id,
 				type: "POST",
@@ -535,7 +535,7 @@ jQuery(document).on('click', '#razor-pay-now', function (e) {
 			});
 			return false;
 		},
-			saveBusinessOverview: function (THIS, id) {
+	saveBusinessOverview: function (THIS, id) {
     var $this = $(THIS);
 
     
@@ -594,7 +594,69 @@ jQuery(document).on('click', '#razor-pay-now', function (e) {
     });
     return false;
 },
+		saveBusinessMeta: function (THIS, id) {
+			var $this = $(THIS);
+			var form  = new FormData(THIS);
+ 
+			$.ajax({
+				url: "/business/saveBusinessMeta/" + id,
+				type: "POST",
+				dataType: "json",
+				data: form,
+				cache: false,
+				contentType: false,
+				processData: false,
+				success: function (data) {
 
+					if (data.status) {
+						$('.profile_info').find('.form-group').removeClass('has-error');
+						$('.profile_info').find('.help-block').remove();
+
+						showAutoSaveStatus('✅ ' + data.msg, 'success');
+
+						// $("#messaged").modal("show");
+						// $('#messaged .modal-title').text("Profile Information");
+						// $('#messaged .modal-body').html("<div class='alert alert-success'>" + data.msg + "</div>");
+						// $('#messaged').modal({ keyboard: false, backdrop: 'static' });
+						// $('#messaged').css({ 'width': '100%' });
+
+						setInterval(function () {
+							$("#messaged").modal("hide");
+						}, 3000);
+
+					} else {
+						showAutoSaveStatus('❌ ' + data.msg, 'danger');
+
+						// $('#messaged .modal-title').text("Profile Information");
+						// $('#messaged .modal-body').html("<div class='alert alert-danger'>" + data.msg + "</div>");
+						// $('#messaged').modal({ keyboard: false, backdrop: 'static' });
+						// $('#messaged').css({ 'width': '100%' });
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+					var response = JSON.parse(jqXHR.responseText);
+
+					showAutoSaveStatus('❌ Validation error', 'danger');
+
+					if (response.errors) {
+						var errors = response.errors;
+						$('.profile_info').find('.form-group').removeClass('has-error');
+						$('.profile_info').find('.help-block').remove();
+
+						for (var key in errors) {
+							if (errors.hasOwnProperty(key)) {
+								var el = $('.profile_info').find('*[name="' + key + '"]');
+								$('<span class="help-block"><strong>' + errors[key][0] + '</strong></span>').insertAfter(el);
+								el.closest('.form-group').addClass('has-error');
+							}
+						}
+					} else {
+						alert('Something went wrong');
+					}
+				}
+			});
+			return false;
+		},
 
 			editSaveSocials:function(THIS,id){			     
 			var $this = $(THIS);

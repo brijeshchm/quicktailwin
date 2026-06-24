@@ -166,19 +166,12 @@ Find Only Certified Training Institutes, Coaching Centers near you on QuickDials
         <label>Address:</label>
         <textarea name="address" class="form-control auto-save-field" style="height: 100px">{{ old('address',(isset($client)) ? $client->address:"")}}</textarea>
     </div>
-
-    <div class="form-group">
-        <label>Business Info:</label>
-        <textarea name="business_intro" class="form-control auto-save-field" id="about" rows="7">{{ old('business_intro',(isset($client->business_intro)) ? $client->business_intro:"")}}</textarea>
-    </div>
-
     <div class="form-group">              
         <label>Certifications:</label>                                
         <input name="certifications" type="text" class="form-control auto-save-field" value="{{ old('certifications', $client->certifications ?? '') }}" placeholder="Enter Certifications Comma separated if more than">
         <label>Google Map :</label>
         <input name="business_map" type="text" class="form-control auto-save-field" value="{{ old('business_map', $client->business_map ?? '') }}" placeholder="Enter business Map">
     </div>
-
     <?php
     $days = ['monday','tuesday','wednesday','thursday','friday','saturday','sunday'];
     $times = ["24:00" => "Open 24 Hrs", "00:00" => "Closed"];
@@ -245,9 +238,7 @@ Find Only Certified Training Institutes, Coaching Centers near you on QuickDials
 		var city 	= '<?php echo $client->city_id; ?>';	 
     var zone 	= '<?php echo $client->zone_id; ?>';	 
 
-    console.log('state',state);
-    console.log('city',city);
-    console.log('zone',zone);
+  
 		get_city(state,city); 
     select_zone(city,zone); 
 	}	 

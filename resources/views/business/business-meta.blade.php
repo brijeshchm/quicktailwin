@@ -1,9 +1,9 @@
 @extends('business.layouts.app')
 @section('title')
-Business overview | QuickDials
+Business Meta | QuickDials
 @endsection 
 @section('keyword')
-Business Overview | QuickDials
+Business Meta | QuickDials
 @endsection
 @section('description')
 Find Only Certified Training Institutes, Coaching Centers near you on QuickDials and Get Free counseling, Free Demo Classes, and Get Placement Assistence.
@@ -82,7 +82,7 @@ div.dataTables_paginate ul.pagination {
               <!-- Bordered Tabs -->
               <ul class="nav nav-tabs nav-tabs-bordered">
                 <li class="nav-item">
-                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-edit">Business Overview</button>
+                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-edit">Business Meta</button>
                 </li>
               </ul>
               <div class="tab-content pt-2">
@@ -91,24 +91,32 @@ div.dataTables_paginate ul.pagination {
                  <div class="tab-pane fade show active profile-edit pt-3" id="profile-edit">
 
                   <form class="buss_location" id="businessOverviewForm" method="POST" 
-                      onsubmit="return businessController.saveBusinessOverview(this,<?php echo (isset($client->id)? $client->id:""); ?>)">
+                      onsubmit="return businessController.saveBusinessMeta(this,<?php echo (isset($client->id)? $client->id:""); ?>)">
                       <input type="hidden" name="client_id" value="{{$client->id}}"> 
-
-                      {{-- Auto-save status --}}
-                  
+            
 
                       <div class="form-group">
-                          <label for="city">Business Description:</label>
-                          <textarea name="business_description" type="text" class="form-control auto-save-field" placeholder="Please enter business Description">{{ old('business_description',(isset($client)) ? $client->business_description:"")}}</textarea>               
+                          <label for="meta title">Meta Title:</label>
+                          <textarea name="meta_title" type="text" class="form-control auto-save-field" placeholder="Please enter meta title">{{ old('meta_title',(isset($client)) ? $client->meta_title:"")}}</textarea>               
                       </div>
 
                       <div class="form-group">
-                          <label>Business Overview:</label>                    
-                          <textarea name="business_overview" type="text" class="form-control summernote auto-save-field" placeholder="Please enter business overview">{{ old('business_overview',(isset($client)) ? $client->business_overview:"")}}</textarea>
+                          <label>Meta Keyword:</label>                    
+                          <textarea name="meta_keywords" type="text" class="form-control auto-save-field" placeholder="Please enter meta keywords">{{ old('meta_keywords',(isset($client)) ? $client->meta_keywords:"")}}</textarea>
+                      </div>
+                      <div class="form-group">
+                          <label>Meta Description:</label>                    
+                          <textarea name="meta_description" type="text" class="form-control auto-save-field" placeholder="Please enter meta description">{{ old('meta_description',(isset($client)) ? $client->meta_description:"")}}</textarea>
+                      </div>
+
+
+                          <div class="form-group">
+                          <label>Business Intro:</label>                    
+                          <textarea name="business_intro" type="text" class="form-control summernote auto-save-field" placeholder="Please enter meta description">{{ old('business_intro',(isset($client)) ? $client->business_intro:"")}}</textarea>
                       </div>
                       
                       <div class="text-center"> 
-                          <input type="hidden" name="business_overView" value="businessOverView">
+                          <input type="hidden" name="business_meta" value="businessMeta">
                           <button type="submit" class="btn btn-primary">Save & Continue</button>
                       </div>
     <div id="autoSaveStatus" style="display:none;"></div>
@@ -186,8 +194,8 @@ $('.summernote').summernote({
 
 function triggerBusinessOverviewAutoSave() {
     var form = document.getElementById('businessOverviewForm');
-    if (typeof businessController !== 'undefined' && businessController.saveBusinessOverview) {
-        businessController.saveBusinessOverview(form, clientId);
+    if (typeof businessController !== 'undefined' && businessController.saveBusinessMeta) {
+        businessController.saveBusinessMeta(form, clientId);
         showAutoSaveStatus('Saving...', 'info');
     }
 }

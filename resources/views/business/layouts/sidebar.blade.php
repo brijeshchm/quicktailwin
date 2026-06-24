@@ -122,6 +122,12 @@
         </a>
         </li> 
          <li class="nav-item">
+        <a class="nav-link <?php if(Request::segment(2)=='business-meta') { echo "active"; } ?>" href="{{url('business/business-meta')}}">
+          <i class="bi bi-meta"></i>
+          <span>Business Meta</span>
+        </a>
+        </li>  
+         <li class="nav-item">
         <a class="nav-link <?php if(Request::segment(2)=='business-overview') { echo "active"; } ?>" href="{{url('business/business-overview')}}">
           <i class="bi bi-building"></i>
           <span>Business Overview</span>

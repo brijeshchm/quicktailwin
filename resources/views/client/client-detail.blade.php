@@ -178,7 +178,7 @@ select.ef-input { padding-left:1rem; }
 {{-- ════════════════════════════════════════
      STICKY ACTION BAR (desktop)
 ════════════════════════════════════════ --}}
-<div class="hidden md:block sticky-bar">
+<div class="hidden md:block">
     <div class="w-full px-8 md:px-16 py-3 flex flex-wrap gap-2 items-center">
         <!-- <a href="tel:+917559435943">
             <button class="glow-pulse flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold text-sm text-white" style="background:#16a34a;">

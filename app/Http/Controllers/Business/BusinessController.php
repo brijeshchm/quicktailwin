@@ -504,7 +504,7 @@ class BusinessController extends Controller
 	 
 		return view('business.business-overview', ['search' => $search, 'client' => $client]);
 	}
-/*
+	/*
 	 * Update the specified resource in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
@@ -536,6 +536,77 @@ class BusinessController extends Controller
 				 
 					$client->business_description = $request->input('business_description');
 					$client->business_overview = $request->input('business_overview');
+				 
+				 
+					if ($client->save()) {
+						$status = true;
+						$msg = 'Busineess overview Updated Successfully';
+						$code = 200;
+					} else {
+						$status = false;
+						$msg = 'Busineess overview Not Updated';
+						$code = 400;
+					}
+
+				}
+			} catch (Exception $e) {
+				$status = false;
+				$msg = $e->getMessage();
+				$code = 400;
+			}
+			return response()->json(['status' => $status, 'msg' => $msg], $code);
+		}
+	}
+	
+
+
+	public function businessMeta(Request $request)
+	{
+		$clientID = auth()->guard('clients')->user()->id;
+		$client = Client::find($clientID);
+		$search = [];
+		if ($request->has('search')) {
+			$search = $request->input('search');
+		}
+	 
+		return view('business.business-meta', ['search' => $search, 'client' => $client]);
+	}
+	/*
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function saveBusinessMeta(Request $request, $id)
+	{
+ 
+		if ($request->ajax()) {
+			try {
+				 
+				if (!is_null($id)) {
+
+					$client = Client::withTrashed()->where('id', $id)->first();
+					$validator = Validator::make($request->all(), [
+						 				 					
+						'meta_title' => 'nullable|string|max:75',
+						'meta_keywords' => 'nullable|string|max:275',					 
+						'meta_description' => 'nullable|string|max:170',		 
+						 
+					]);
+
+
+					if ($validator->fails()) {
+						$errorsBag = $validator->getMessageBag()->toArray();
+						return response()->json(['status' => 1, 'errors' => $errorsBag], 400);
+					}
+
+
+				 
+					$client->meta_title = $request->input('meta_title');
+					$client->meta_keywords = $request->input('meta_keywords');
+					$client->meta_description = $request->input('meta_description');
+					$client->business_intro = $request->input('business_intro');
 				 
 				 
 					if ($client->save()) {

@@ -171,9 +171,12 @@ Route::middleware('auth:clients')->group(function () {
 	Route::get('/business/package', [App\Http\Controllers\Business\AccountController::class, 'package']);
 	Route::get('/business/account-settings', [App\Http\Controllers\Business\AccountController::class, 'accountSettings']);
 	Route::get('/business/business-location', [App\Http\Controllers\Business\BusinessLocationController::class, 'businessLocation']);
+	
 	Route::get('/business/business-overview', [App\Http\Controllers\Business\BusinessController::class, 'businessOverview']);
 	Route::post('/business/saveBusinessOverview/{id}', [App\Http\Controllers\Business\BusinessController::class, 'saveBusinessOverview']);
 
+	Route::get('/business/business-meta', [App\Http\Controllers\Business\BusinessController::class, 'businessMeta']);
+	Route::post('/business/saveBusinessMeta/{id}', [App\Http\Controllers\Business\BusinessController::class, 'saveBusinessMeta']);
 
 	Route::get('/business/buy-package', [App\Http\Controllers\Business\AccountController::class, 'buyPackage']);
 

@@ -9,10 +9,7 @@ Find Best It Training Centre near You, Find Best It Training Institute near You,
 @section('description')
 Find Only Certified Training Institutes, Coaching Centers near you on QuickDials and Get Free counseling, Free Demo Classes, and Get Placement Assistence.
 @endsection
-@section('content')	
- 
-
-  
+@section('content')	  
 <style>
     .help-block{  
     color: #ff0000;

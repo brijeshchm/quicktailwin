@@ -95,8 +95,7 @@ class ProfileController extends Controller
 				'zone' => 'required',
 				'country' => 'required',
 				'pincode' => 'required',
-
-			 
+		 
 				'website' => 'nullable|string|max:150',
 				'time' => 'nullable|array',
 				// 'time.*.from' => 'nullable|date_format:H:i',
