@@ -19,7 +19,7 @@
     $words = explode(' ', $name);
     $initials = strtoupper(substr($words[0], 0, 1) . (isset($words[1]) ? substr($words[1], 0, 1) : ''));
 
-    $rating = $business['rating'] ?? 4.0;
+    $rating = $business['rating'] ?? 0;
     $reviewCount = $business['reviewCount'] ?? 0;
     $isOpen = $business['active_status'] ?? true;
     $verified = $business['verified'] ?? false;
