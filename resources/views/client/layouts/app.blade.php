@@ -56,8 +56,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
+
   gtag('config', 'G-KF6W10RN9L');
 </script>
+
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 <style>
         
