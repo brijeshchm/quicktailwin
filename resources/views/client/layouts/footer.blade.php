@@ -236,8 +236,11 @@
                         @foreach($section['links'] as $i => $link)
  
                            @php
+                             $noCitySlugs = ['business-services'];  
                             $slugUrl = match($link['type'] ?? '') {
-                            'keyword'    => route('city.slug', ['city_slug'    => 'bangalore','service_slug' => $link['slug']]),
+                             'keyword' => in_array($link['slug'], $noCitySlugs)
+                            ? route('showCity', $link['slug'])
+                            : route('city.slug', ['city_slug' => 'bangalore', 'service_slug' => $link['slug']]),                            
                             'child'      => route('child.show',      $link['slug']),
                             'categories' => route('categories.show', $link['slug'])
                         

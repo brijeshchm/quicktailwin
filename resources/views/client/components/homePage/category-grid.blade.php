@@ -5,17 +5,13 @@
     <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
 
         @foreach($homePage as $cat)
-
         @php
         $catUrl = match($cat['type'] ?? '') {       
         'keyword'    => route('showCity', $cat['url']),
         'child'      => route('child.show',      $cat['url']),
-        'categories' => route('categories.show', $cat['url'])
-      
+        'categories' => route('categories.show', $cat['url'])      
         };
         @endphp
-
- 
         <a href="{{ $catUrl }}"
            class="flex flex-col items-center gap-2 p-3 rounded-2xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/50 transition-all group text-center block">
             <div class="w-12 h-12 rounded-xl overflow-hidden bg-gray-100 flex items-center justify-center">
