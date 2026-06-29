@@ -45,7 +45,8 @@
                     >
                         <div class="p-2 border-b border-gray-100">
                             <div class="flex items-center gap-1.5 bg-gray-50 rounded-lg px-2.5 py-1.5 border border-gray-200 focus-within:border-blue-300 focus-within:bg-white transition-colors">
-                                <i data-lucide="search" class="w-3.5 h-3.5 text-gray-400 shrink-0"></i>
+
+                              
                                 <input
                                     id="sticky-city-search"
                                     type="text"
@@ -90,8 +91,8 @@
                 <button
                     onclick="doStickySearch()"
                     class="shrink-0 bg-orange-500 hover:bg-orange-600 text-white h-12 px-3.5 rounded-r-xl flex items-center gap-1.5 text-xs font-bold transition-colors"
-                >
-                    <i data-lucide="search" class="w-3.5 h-3.5"></i>
+                >                     
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="search" aria-hidden="true" class="lucide lucide-search w-3.5 h-3.5"><path d="m21 21-4.34-4.34"></path><circle cx="11" cy="11" r="8"></circle></svg>
                     Search
                 </button>
             </div>

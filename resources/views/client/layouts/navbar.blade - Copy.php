@@ -642,6 +642,7 @@ if(!empty($clientcheck)){
                 class="shrink-0 bg-orange-500 hover:bg-orange-600 text-white h-9 px-3 rounded-r-xl flex items-center transition-colors"
             >
                 <i data-lucide="search" class="w-3.5 h-3.5"></i>
+                
             </button>
         </div>
 

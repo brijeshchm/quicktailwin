@@ -282,8 +282,10 @@ function bannerSlider(banners, interval = 4000) {
             {{-- Controls --}}
             <div class="flex items-center gap-2 flex-wrap">
                 <div class="relative">
-                    <select x-model="sortBy" @change="applyFilters()"
-                            class="appearance-none pl-3 pr-7 py-1.5 text-xs font-medium text-gray-700 bg-gray-50 border border-gray-200 rounded-xl outline-none cursor-pointer hover:border-indigo-300 transition-colors">
+                    <label for="sort-businesses" class="sr-only">
+                    Sort businesses
+                    </label>
+                    <select x-model="sortBy" @change="applyFilters()" class="appearance-none pl-3 pr-7 py-1.5 text-xs font-medium text-gray-700 bg-gray-50 border border-gray-200 rounded-xl outline-none cursor-pointer hover:border-indigo-300 transition-colors">
                         @foreach($sortOptions as $opt)
                         <option>{{ $opt }}</option>
                         @endforeach

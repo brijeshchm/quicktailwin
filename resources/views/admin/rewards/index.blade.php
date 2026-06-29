@@ -152,7 +152,7 @@
                     $image_url = json_decode($item->image_url);
  
                     @endphp
-                        <img src="{{ asset($image_url->rewards->src) }}" alt="{{ $image_url->rewards->alt }}"
+                        <img src="{{ asset($image_url->rewards->src) }}" alt="{{ $image_url->rewards->alt }}" 
                             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                         <div style="display:none;width:100%;height:100%;align-items:center;justify-content:center">
                             <i class="glyphicon glyphicon-picture" style="font-size:2.5rem;color:#9ca3af;opacity:.4"></i>

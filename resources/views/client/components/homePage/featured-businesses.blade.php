@@ -116,7 +116,7 @@
                              loading="lazy"
                             width="307"
                             height="160" 
-                            
+                             />
                         @endforeach
                     </div>
  
