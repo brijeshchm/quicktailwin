@@ -61,7 +61,7 @@
     <div class="relative z-10 flex gap-3 sm:gap-5 items-start p-3 sm:p-5 pl-4 sm:pl-6">
         {{-- Avatar --}}
         <div class="relative flex-shrink-0">
-    <div class="w-24 h-24 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br {{ $color }} overflow-hidden shadow-lg">
+    <div class="w-24 h-24 sm:w-24 sm:h-30 rounded-2xl bg-gradient-to-br {{ $color }} overflow-hidden shadow-lg">
 
         @if(!empty($business['gallery']))
         @php
@@ -96,17 +96,13 @@
             {{-- Prev --}}
             <button onclick="imgSlide('{{ $sliderId }}', -1)"
                     class="absolute left-1 top-1/2 -translate-y-1/2 z-10 w-5 h-5 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center text-white transition-all">
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
-                </svg>
+               <span aria-hidden="true">‹</span>
             </button>
 
             {{-- Next --}}
             <button onclick="imgSlide('{{ $sliderId }}', 1)"
                     class="absolute right-1 top-1/2 -translate-y-1/2 z-10 w-5 h-5 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center text-white transition-all">
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-                </svg>
+                <span aria-hidden="true">›</span>
             </button>
 
             {{-- Counter --}}
@@ -119,7 +115,7 @@
                 @foreach($galleryImages as $i => $item)
                 <button onclick="imgGoTo('{{ $sliderId }}', {{ $i }})"
                         id="{{ $sliderId }}-dot-{{ $i }}"
-                        class="rounded-full transition-all duration-300 {{ $i === 0 ? 'w-11 h-11 bg-white' : 'w-3 h-3 bg-white/50' }}" aria-label="Slide {{ $i }}">
+                        class="rounded-full transition-all duration-300 " aria-label="Slide {{ $i }}">
                 </button>
                 @endforeach
             </div>
