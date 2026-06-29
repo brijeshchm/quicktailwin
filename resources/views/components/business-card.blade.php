@@ -65,9 +65,6 @@
 
         @if(!empty($business['gallery']))
         @php
-
-
-
             $galleryImages = array_values(array_filter($business['gallery'], fn($g) => !empty($g['galley']['large'])));
             $sliderId = 'slider-' . ($business['id'] ?? uniqid());
             $total = count($galleryImages);
@@ -83,8 +80,11 @@
                 <div class="flex-shrink-0 w-full h-full">
                     <img
                         src="{{ asset($img['src']) }}"
-                        alt="{{ $img['alt'] ?? '' }}"
-                        loading="{{ $i === 0 ? 'eager' : 'lazy' }}"
+                        alt="{{ $img['alt'] ?? '' }}"                      
+                        width="320"
+                        height="180"
+                        loading="lazy"
+                        decoding="async"
                         class="w-full h-full object-cover"
                     />
                 </div>
