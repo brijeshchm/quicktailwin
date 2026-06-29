@@ -8,7 +8,7 @@
 
         @php
         $catUrl = match($cat['type'] ?? '') {       
-        'keyword'    => route('city.slug', ['city_slug'=> 'bangalore','service_slug' => $cat['url']]),
+        'keyword'    => route('showCity', $cat['url']),
         'child'      => route('child.show',      $cat['url']),
         'categories' => route('categories.show', $cat['url'])
       
