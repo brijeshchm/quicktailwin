@@ -313,24 +313,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
     {{-- Action Buttons --}}
     <div class="relative z-10 px-3 sm:px-5 pb-3 sm:pb-4 pl-4 sm:pl-6">
-        <div class="flex items-center gap-1.5 sm:gap-2 w-full">
-            <a  class="flex-1 flex items-center justify-center gap-1 sm:gap-1.5 py-1.5 sm:py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-[10px] sm:text-xs font-semibold shadow-sm shadow-indigo-200 transition-colors">
+            
+        @php
+            $actionClass = 'flex items-center justify-center gap-1 rounded-xl py-2 text-[10px] font-semibold text-white transition sm:text-xs';
+        @endphp
+
+        <div class="grid w-full grid-cols-4 gap-2">
+            <!-- <a href="tel:{{ $business['mobile'] ?? '' }}"
+            class="{{ $actionClass }} bg-indigo-600 hover:bg-indigo-700">
                 📞 <span>Call</span>
-            </a>
-            <a target="_blank" rel="noopener noreferrer"
-               class="flex-1 flex items-center justify-center gap-1 sm:gap-1.5 py-1.5 sm:py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-[10px] sm:text-xs font-semibold shadow-sm shadow-emerald-200 transition-colors">
+            </a> -->
+
+            <a href="https://wa.me/917559435943"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="{{ $actionClass }} bg-emerald-500 hover:bg-emerald-600">
                 💬 <span>WhatsApp</span>
             </a>
-            <button onclick="document.getElementById('enquiry-modal').classList.add('open')"
-               class="flex-1 relative flex items-center justify-center gap-1 sm:gap-1.5 py-1.5 sm:py-2 rounded-xl bg-violet-600 hover:bg-violet-700 text-white text-[10px] sm:text-xs font-semibold shadow-sm shadow-violet-200 transition-colors">
+
+            <button type="button"
+                    onclick="document.getElementById('enquiry-modal').classList.add('open')"
+                    class="{{ $actionClass }} bg-violet-600 hover:bg-violet-700">
                 ✉ <span>Enquiry</span>
             </button>
-            <a href="{{ route('business.details', $business['business_slug']) }}" target="_blank" rel="noopener noreferrer"
-               class="flex-1 flex items-center justify-center gap-1 sm:gap-1.5 py-1.5 sm:py-2 rounded-xl bg-sky-500 hover:bg-sky-600 text-white text-[10px] sm:text-xs font-semibold shadow-sm shadow-sky-200 transition-colors">
+
+            <a href="{{ route('business.details', $business['business_slug']) }}"
+            class="{{ $actionClass }} bg-sky-500 hover:bg-sky-600">
                 🗺 <span>View</span>
             </a>
         </div>
-    </div>
+     </div>
 </div>
 
 @else
