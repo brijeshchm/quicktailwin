@@ -33,13 +33,18 @@
                  class="flex gap-3 overflow-x-auto pb-2"
                  style="scroll-behavior:smooth; scrollbar-width:none; -ms-overflow-style:none;">
                 @foreach($popularSearches as $svc)
-                 @php
-                $popSUrl = match($svc['type'] ?? '') {            
-                'keyword'    => route('city.slug', ['city_slug'=> 'bangalore','service_slug' => $svc['url']]),
-                'child'      => route('child.show',      $svc['url']),
-                'categories' => route('categories.show', $svc['url'])
+                 
+                @php
+                    $noCitySlugs = ['wedding-planning'];  
 
-                };
+                    $popSUrl = match($svc['type'] ?? '') {
+                        'keyword' => in_array($svc['url'], $noCitySlugs)
+                            ? route('showCity', $svc['url'])
+                            : route('city.slug', ['city_slug' => 'bangalore', 'service_slug' => $svc['url']]),
+                        'child'      => route('child.show', $svc['url']),
+                        'categories' => route('categories.show', $svc['url']),
+                        default      => '#',
+                    };
                 @endphp
                  <a href="{{ $popSUrl }}"
    title="{{ $svc['title'] ?? '' }}"
