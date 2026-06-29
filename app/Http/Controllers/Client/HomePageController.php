@@ -379,7 +379,7 @@ class HomePageController extends Controller
         ];
     }
  
-    /**
+    /*
      * Latest 3 published blog posts, formatted for the homepage blog widget.
      */
     private function getBlogList(): array
@@ -2302,7 +2302,7 @@ Instead of limiting learning to theory, the course takes you through:.",
 		];
 
 		$bigDay = [
-			['name' => 'Stage Decorators',       'slug' => 'stage-decorators',       'img' => 'popular/Stage_Decorators.webp'],
+			['name' => 'Stage Decorators',       'slug' => 'stage-decorators',       'img' => 'popular/Stage_Decorators.png'],
 			['name' => 'Wedding Caterers',       'slug' => 'wedding-caterers',       'img' => 'popular/Wedding_Caterers.png'],
 			['name' => 'Cold Pyro & Fog Matka',  'slug' => 'cold-pyro-fog-matka',    'img' => 'popular/Cold_Pyro_Fog_Matka.png'],
 			['name' => 'DJ Services',            'slug' => 'dj-services',            'img' => 'popular/DJ_Services.png'],
