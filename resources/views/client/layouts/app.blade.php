@@ -297,79 +297,79 @@ var searchCity       = '';
 // var heroSelectedCity = '';
 // var stickySelectedCity = '';
 var cityDetected     = false;   
-document.addEventListener('DOMContentLoaded', function () {    
-    detectCity();
+
+// ── Global state (must be declared, was previously implicit/undefined) ──
+var cityDetected = false;
+var searchCity = '';
+ 
+ 
+
+document.addEventListener('DOMContentLoaded', function () {
+    // No geolocation permission prompt on page load.
+    // Go straight to IP-based detection, which requires no browser permission.
+    detectCityFromIP();
 });
 
- 
-function detectCity() {
-
- 
-    if (navigator.geolocation) {
-     
-
-        navigator.geolocation.getCurrentPosition(
-            gpsSuccess,    
-            gpsError,     
-            {
-                timeout           : 10000,   
-                maximumAge        : 60000,   
-                enableHighAccuracy: false   
-            }
-        );
-
-    } else {
-       
-        detectCityFromIP();
+// ── Call this ONLY from an explicit user action ──────────────────────
+// e.g. <button onclick="requestPreciseLocation()">📍 Use my exact location</button>
+function requestPreciseLocation() {
+    if (!navigator.geolocation) {
+        return;
     }
+
+    navigator.geolocation.getCurrentPosition(
+        gpsSuccess,
+        gpsError,
+        {
+            timeout: 10000,
+            maximumAge: 60000,
+            enableHighAccuracy: false,
+        }
+    );
 }
 
- 
 async function gpsSuccess(position) {
     var lat = position.coords.latitude;
     var lon = position.coords.longitude;
 
     try {
-      
         var response = await fetch(
             'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + lat + '&lon=' + lon,
             {
-                headers: {                 
+                headers: {
                     'Accept-Language': 'en',
-                }
+                },
             }
         );
 
         if (!response.ok) throw new Error('Nominatim request failed');
 
-        var data = await response.json();      
+        var data = await response.json();
         var city =
-            data.address.city      ||
-            data.address.town      ||
-            data.address.village   ||
-            data.address.county    ||
+            data.address.city ||
+            data.address.town ||
+            data.address.village ||
+            data.address.county ||
             data.address.state_district ||
             null;
 
-        if (city) {          
+        if (city) {
             applyCity(city);
-        } else {      
+        } else {
             detectCityFromIP();
         }
-
-    } catch (error) {        
+    } catch (error) {
         detectCityFromIP();
     }
 }
 
-
-function gpsError(error) {    
+function gpsError(error) {
     detectCityFromIP();
 }
 
- 
+// ── IP-based detection (no permission prompt required) ───────────────
 function detectCityFromIP() {
-    if (cityDetected) return;     
+    if (cityDetected) return;
 
     fetch('https://ipapi.co/json/')
         .then(function (res) {
@@ -377,56 +377,28 @@ function detectCityFromIP() {
             return res.json();
         })
         .then(function (data) {
-            if (data.city) {            
+            if (data.city) {
                 applyCity(data.city);
-            } 
+            } else {
+                applyDefaultCity();
+            }
         })
-        .catch(function (err) {       
-            detectCityFromGeolocationDB();
+        .catch(function () {
+            applyDefaultCity();
         });
 }
 
-// ── 5. IP DETECTION — Fallback (geolocation-db JSONP) ───
-function detectCityFromGeolocationDB() {
-    if (cityDetected) return;    
-
-    var script = document.createElement('script');
-
-    window.callback = function (location) {
-        // ── Cleanup script tag ──
-        delete window.callback;
-        if (script && document.head.contains(script)) {
-            document.head.removeChild(script);
-        }
-
-        
-
-        if (!location || !location.city || location.city === 'Not found') {        
-            return;
-        }
-   
-        applyCity(location.city);
-    };
-
-    script.onerror = function () {
-       
-        delete window.callback;
-        if (script && document.head.contains(script)) {
-            document.head.removeChild(script);
-        }
-      
-    };
-
-    script.src = 'https://geolocation-db.com/jsonp';
-    document.head.appendChild(script);
+// ── Safe default if all detection fails — no third-party JSONP script ──
+function applyDefaultCity() {
+    if (cityDetected) return;
+    applyCity('Bangalore'); // confirm/replace with your actual site default
 }
- 
+
 function applyCity(rawCity) {
     if (!rawCity || cityDetected) return;
 
-    cityDetected = true;  
+    cityDetected = true;
 
-  
     var formatted = rawCity
         .toLowerCase()
         .replace(/-/g, ' ')
@@ -440,57 +412,46 @@ function applyCity(rawCity) {
 
     var cityLower = formatted.toLowerCase();
 
-    searchCity       = formatted;
+    searchCity = formatted;
     heroSelectedCity = cityLower;
     stickySelectedCity = formatted;
- 
-   
-    ['hero-city-label', 'sticky-city-label', 'mobile-city-label']
-        .forEach(function (id) {
-            var el = document.getElementById(id);
-            if (el) {
-                el.textContent = formatted;                
-            }
-        });
+
+    ['hero-city-label', 'sticky-city-label', 'mobile-city-label'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) {
+            el.textContent = formatted;
+        }
+    });
 
     var cityIdInputs = document.querySelectorAll('input[name="city_id"]');
     if (cityIdInputs.length > 0) {
         cityIdInputs.forEach(function (input) {
             input.value = cityLower;
-            
         });
     } else {
-        // ── Auto-create hidden input if none exists ──
-        var autoInput    = document.createElement('input');
-        autoInput.type   = 'hidden';
-        autoInput.name   = 'city_id';
-        autoInput.id     = 'city_id_auto';
-        autoInput.value  = cityLower;
+        var autoInput = document.createElement('input');
+        autoInput.type = 'hidden';
+        autoInput.name = 'city_id';
+        autoInput.id = 'city_id_auto';
+        autoInput.value = cityLower;
         document.body.appendChild(autoInput);
-       
     }
 
-    // ── Update by ID also (if specific id exists) ──
     var cityIdById = document.getElementById('city_id');
     if (cityIdById) {
         cityIdById.value = cityLower;
-       
     }
 
-
-
-
     if (
-        typeof $  !== 'undefined' &&
+        typeof $ !== 'undefined' &&
         typeof $citySelect !== 'undefined' &&
-        $citySelect && $citySelect.length
+        $citySelect &&
+        $citySelect.length
     ) {
         var option = new Option(formatted, cityLower, true, true);
         $citySelect.append(option).trigger('change');
-         
     }
 
-    // ── Update plain HTML <select> (if exists) ──
     var plainSelect = document.getElementById('city-select');
     if (plainSelect) {
         var found = false;
@@ -502,31 +463,19 @@ function applyCity(rawCity) {
             }
         }
         if (!found) {
-            var newOpt       = document.createElement('option');
-            newOpt.value     = cityLower;
-            newOpt.text      = formatted;
-            newOpt.selected  = true;
+            var newOpt = document.createElement('option');
+            newOpt.value = cityLower;
+            newOpt.text = formatted;
+            newOpt.selected = true;
             plainSelect.appendChild(newOpt);
         }
-         
     }
 
-    // ── Update hidden input (if exists) ──
     var hiddenInput = document.getElementById('selected-city');
     if (hiddenInput) {
         hiddenInput.value = cityLower;
-        
     }
 }
-
-
-
-
-
-
-
-
-
 
 
  
