@@ -128,7 +128,7 @@
                     class="flex items-center gap-1 border border-gray-200 rounded-lg px-2 py-1.5 bg-white hover:border-indigo-400 transition-all text-xs focus:outline-none focus:ring-2 focus:ring-indigo-100 h-full min-w-[72px]">
                 <img :src="'https://flagcdn.com/w40/' + ccFlag + '.png'"
                 :alt="ccFlag ? ccFlag.toUpperCase() + ' flag' : 'Country flag'"
-                     onerror="this.src='https://flagcdn.com/w40/un.png'"
+                     loading="lazy" decoding="async"
                      class="w-4 h-3 object-cover rounded-sm flex-shrink-0">
                 <span class="font-semibold text-gray-700" x-text="'+' + form.country_code"></span>
                 <svg class="w-2.5 h-2.5 text-gray-400 transition-transform duration-200"
@@ -176,7 +176,7 @@
                                         ? 'bg-indigo-50 text-indigo-700 font-semibold' : ''">
                             <img :src="'https://flagcdn.com/w40/' + c.sortname.toLowerCase() + '.png'"
                             :alt="ccFlag ? ccFlag.toUpperCase() + ' flag' : 'Country flag'"
-                                 onerror="this.src='https://flagcdn.com/w40/un.png'"
+                                 loading="lazy" decoding="async"
                                  class="w-5 h-3.5 object-cover rounded-sm flex-shrink-0">
                             <span class="flex-1 text-left truncate" x-text="c.country_name"></span>
                             <span class="text-gray-400 font-mono text-[10px] flex-shrink-0"

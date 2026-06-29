@@ -127,8 +127,7 @@ select.ef-input { padding-left:1rem; }
                             border:2px solid rgba(255,255,255,.35);background:rgba(255,255,255,.1);backdrop-filter:blur(14px);">
                     <img src="{{ $clientsList['logo'] ?? asset('client/images/default_pp_small.png') }}"
                          alt="{{ $clientsList['business_name'] ?? '' }}"
-                         class="w-full h-full object-cover"
-                         onerror="this.style.display='none'">
+                         class="w-full h-full object-cover" loading="lazy" decoding="async">
                 </div>
                 {{-- Name --}}
                 <h1 class="text-2xl md:text-5xl font-extrabold text-white leading-tight tracking-tight"
@@ -156,8 +155,7 @@ select.ef-input { padding-left:1rem; }
         @if($hImages)    
         @foreach($hImages as $i => $img)
             <img src="{{ $img }}" alt="Gallery" class="tile-img {{ $i===0?'active':'' }}"
-                 data-h-slide="{{ $i }}"
-                 onerror="this.src='{{ asset('images/gallery.jpg') }}'">
+                 data-h-slide="{{ $i }}" loading="lazy" decoding="async">
             @endforeach
             @endif
             <div class="absolute bottom-2 left-3 flex items-center gap-1.5 z-10" id="h-dots"></div>
@@ -166,8 +164,7 @@ select.ef-input { padding-left:1rem; }
         @if($vImages)   
         @foreach($vImages as $i => $img)
             <img src="{{ $img }}" alt="Gallery" class="tile-img {{ $i===0?'active':'' }}"
-                 data-v-slide="{{ $i }}"
-                 onerror="this.src='{{ asset('images/gallery.jpg') }}'">
+                 data-v-slide="{{ $i }}" loading="lazy" decoding="async">
             @endforeach
             @endif
             <div class="absolute bottom-2 right-3 flex flex-col items-center gap-1 z-10" id="v-dots"></div>
@@ -362,8 +359,7 @@ select.ef-input { padding-left:1rem; }
         <div class="gallery-grid-item reveal d-{{ min($i%6,5) }} {{ $i===0?'col-span-2 row-span-2':'' }}"
              style="aspect-ratio:{{ $i===0?'1/1':'4/3' }};border:1px solid rgba(59,130,246,.1);"
              onclick="openLightbox({{ $i }})">
-            <img src="{{ $img }}" alt="Gallery {{ $i+1 }}"
-                 onerror="this.src='{{ asset('images/small-gallery.jpg') }}'">
+            <img src="{{ $img }}" alt="Gallery {{ $i+1 }}" loading="lazy" decoding="async">
             <div class="gallery-overlay"></div>
             <div class="absolute inset-0 flex items-end p-2 opacity-0 hover:opacity-100 transition-opacity">
                 <span class="text-white text-[10px] font-bold rounded-full px-2 py-0.5 bg-white/20 backdrop-blur-sm">View</span>
@@ -1272,8 +1268,7 @@ function selectCert(i) {
             @foreach($gallery as $i => $img)
             <div class="gallery-grid-item {{ $i===0?'col-span-1 row-span-2':'' }}"
                  onclick="closeLightbox();openLightbox({{ $i }})">
-                <img src="{{ $img }}" alt="Gallery {{ $i+1 }}"
-                     onerror="this.src='{{ asset('images/small-gallery.jpg') }}'">
+                <img src="{{ $img }}" alt="Gallery {{ $i+1 }}" loading="lazy" decoding="async">
                 <div class="gallery-overlay"></div>
             </div>
             @endforeach

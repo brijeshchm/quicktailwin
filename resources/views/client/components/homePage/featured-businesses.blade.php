@@ -113,10 +113,10 @@
                         <img src="{{ $imgSrc }}"
                              alt="{{ $biz['business_name'] ?? 'Gallery' }}"
                              class="{{ $imgIdx === 0 ? 'active' : '' }}"
-                             loading="{{ $imgIdx === 0 ? 'eager' : 'lazy' }}"
-                               width="307"
-                                height="160" 
-                             onerror="this.src='{{ $defaultImg }}'"/>
+                             loading="lazy"
+                            width="307"
+                            height="160" 
+                            
                         @endforeach
                     </div>
  

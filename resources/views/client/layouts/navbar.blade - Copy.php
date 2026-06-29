@@ -13,7 +13,7 @@
                 src="{{ asset('client/images/small-logo.png') }}"
                 alt="QuickDials"
                 class="h-12 w-auto sm:h-10 md:h-12 lg:h-14 object-contain"
-                onerror="this.onerror=null;this.src='{{ asset('client/images/small-logo.png') }}'"
+                loading="lazy" decoding="async"
             />
         </a>
 
@@ -200,7 +200,7 @@ if(!empty($guests)){
             <img loading="lazy"
                  src="{{ $profileImg }}"
                  alt="{{ $businessName }}"
-                 onerror="this.src='{{ asset('client/images/user.png') }}'"
+                 loading="lazy" decoding="async"
                  class="w-9 h-9 rounded-full object-cover border-2 border-white shadow-sm">
 
             {{-- Online indicator --}}
@@ -235,7 +235,7 @@ if(!empty($guests)){
         <div class="px-4 py-3.5 bg-gradient-to-br from-indigo-50 to-blue-50 border-b border-gray-100">
             <div class="flex items-center gap-3">
                 <img src="{{ $profileImg }}"
-                     onerror="this.src='{{ asset('client/images/user.png') }}'"
+                     loading="lazy" decoding="async"
                      alt="{{ $businessName }}"
                      class="w-11 h-11 rounded-full object-cover border-2 border-white shadow-md shrink-0">
                 <div class="min-w-0 flex-1">
@@ -398,7 +398,7 @@ if(!empty($clientcheck)){
             <img loading="lazy"
                  src="{{ $profileImg }}"
                  alt="{{ $businessName }}"
-                 onerror="this.src='{{ asset('client/images/user.png') }}'"
+                 loading="lazy" decoding="async"
                  class="w-9 h-9 rounded-full object-cover border-2 border-white shadow-sm">
 
             {{-- Online indicator --}}
@@ -433,7 +433,7 @@ if(!empty($clientcheck)){
         <div class="px-4 py-3.5 bg-gradient-to-br from-indigo-50 to-blue-50 border-b border-gray-100">
             <div class="flex items-center gap-3">
                 <img src="{{ $profileImg }}"
-                     onerror="this.src='{{ asset('client/images/user.png') }}'"
+                     loading="lazy" decoding="async"
                      alt="{{ $businessName }}"
                      class="w-11 h-11 rounded-full object-cover border-2 border-white shadow-md shrink-0">
                 <div class="min-w-0 flex-1">

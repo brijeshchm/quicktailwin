@@ -349,8 +349,7 @@
                 <div class="h-48 bg-gray-100 relative flex items-center justify-center text-6xl overflow-hidden">
                     <img src="{{ $item['img'] }}"
                         alt="{{ $item['name'] }}"
-                        onerror="this.src='{{ asset('images/default.jpg') }}'"
-                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                 </div>
 
                 <div class="p-4 text-center font-medium text-sm">{{ $item['name'] }}</div>

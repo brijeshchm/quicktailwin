@@ -95,7 +95,7 @@ select.ef-input { padding-left:1rem; }
                         <div class="cc-wrapper" id="pf-cc-wrapper">
                             <button type="button" class="cc-trigger" id="pf-cc-trigger" aria-haspopup="listbox">
                                 <img id="pf-cc-flag" src="https://flagcdn.com/w40/in.png" alt="IN"
-                                     onerror="this.src='https://flagcdn.com/w40/un.png'">
+                                   
                                 <span id="pf-cc-label">+91</span>
                                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
@@ -298,7 +298,8 @@ const CSRF = () => document.querySelector('meta[name="csrf-token"]')?.content ||
             div.setAttribute('role', 'option');
             div.innerHTML = `
                 <img src="https://flagcdn.com/w40/${c.sortname.toLowerCase()}.png"
-                     alt="${c.sortname}" onerror="this.src='https://flagcdn.com/w40/un.png'">
+                     alt="${c.sortname}" loading="lazy"
+                        decoding="async">
                 <span class="cc-name">${c.country_name}</span>
                 <span class="cc-code">+${c.phonecode}</span>`;
             div.addEventListener('mousedown', e => { e.preventDefault(); selectCountry(c); });
