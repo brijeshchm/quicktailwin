@@ -21,6 +21,8 @@
 
     $rating = $business['rating'] ?? 0;
     $reviewCount = $business['reviewCount'] ?? 0;
+
+  
     $isOpen = $business['active_status'] ?? true;
     $verified = $business['verified'] ?? false;
     $trending = $business['trending'] ?? false;
@@ -290,12 +292,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span class="line-clamp-1">{{ collect([$address, $city])->filter()->implode(', ') }}</span>
             </p>
             @endif
- 
-            {{-- Description --}}
-            @if($business['overviewBusiness'])
-            <p class="sm:block text-sm text-gray-500 mt-1 line-clamp-1">{!! $business['overviewBusiness'] !!} </p>
+         
+            @if(!empty($business['businessDescription']))
+            <p class="sm:block text-sm text-gray-500 mt-1 line-clamp-1">
+            {!! $business['businessDescription'] !!}
+            </p>
             @endif
-
+                
+              
             {{-- Tags/Category --}}
             @if(count($category) > 0)
             <div class="flex items-center gap-1.5 mt-2 flex-wrap">

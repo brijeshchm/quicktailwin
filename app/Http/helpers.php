@@ -1490,7 +1490,57 @@ function saveImageSmart($file, $destinationPath, $width = null, $height = null)
 				return $o;
 	}
  
+ 
 
+
+  function isOpen(): bool
+    {
+        $row = todayRow();
+        if (!$row) return false;
+
+        $now =   time();
+        return $now->hour >= $row['open'] && $now->hour < $row['close'];
+    }
+
+    /**
+     * Get the hours row that applies to today (or null if none matches).
+     */
+     function todayRow(): ?array
+    {
+        $timezone     = 'Asia/Kolkata';
+        $todayDow = now();
+        foreach (hours() as $row) {
+            if (in_array($todayDow, $row['days'], true)) {
+                return $row;
+            }
+        }
+        return null;
+    }
+
+	function hours(){
+
+	   
+    $hours = [
+        ['days' => [1, 2, 3, 4, 5], 'open' => 9,  'close' => 21, 'label' => 'Monday – Friday', 'time' => '9:00 AM – 9:00 PM'],
+        ['days' => [6],             'open' => 8,  'close' => 22, 'label' => 'Saturday',        'time' => '8:00 AM – 10:00 PM'],
+        ['days' => [0],             'open' => 10, 'close' => 20, 'label' => 'Sunday',          'time' => '10:00 AM – 8:00 PM'],
+        ['days' => [],              'open' => 10, 'close' => 19, 'label' => 'Public Holidays', 'time' => '10:00 AM – 7:00 PM'],
+    ];
+
+	return $hours;
+	}
+    function rowsWithToday(): array
+    {
+
+	$timezone     = 'Asia/Kolkata';
+        $todayDow = now();
+
+        return array_map(function ($row) use ($todayDow) {
+            return $row + ['is_today' => in_array($todayDow, $row['days'], true)];
+        }, hours());
+    }
+
+	
  function getOverViewBusiness()
 {
 	 $map = [
@@ -1938,54 +1988,3 @@ function saveImageSmart($file, $destinationPath, $width = null, $height = null)
         ];
 	return $map;
 }
-
-
-
-  function isOpen(): bool
-    {
-        $row = todayRow();
-        if (!$row) return false;
-
-        $now =   time();
-        return $now->hour >= $row['open'] && $now->hour < $row['close'];
-    }
-
-    /**
-     * Get the hours row that applies to today (or null if none matches).
-     */
-     function todayRow(): ?array
-    {
-        $timezone     = 'Asia/Kolkata';
-        $todayDow = now();
-        foreach (hours() as $row) {
-            if (in_array($todayDow, $row['days'], true)) {
-                return $row;
-            }
-        }
-        return null;
-    }
-
-	function hours(){
-
-	   
-    $hours = [
-        ['days' => [1, 2, 3, 4, 5], 'open' => 9,  'close' => 21, 'label' => 'Monday – Friday', 'time' => '9:00 AM – 9:00 PM'],
-        ['days' => [6],             'open' => 8,  'close' => 22, 'label' => 'Saturday',        'time' => '8:00 AM – 10:00 PM'],
-        ['days' => [0],             'open' => 10, 'close' => 20, 'label' => 'Sunday',          'time' => '10:00 AM – 8:00 PM'],
-        ['days' => [],              'open' => 10, 'close' => 19, 'label' => 'Public Holidays', 'time' => '10:00 AM – 7:00 PM'],
-    ];
-
-	return $hours;
-	}
-    function rowsWithToday(): array
-    {
-
-	$timezone     = 'Asia/Kolkata';
-        $todayDow = now();
-
-        return array_map(function ($row) use ($todayDow) {
-            return $row + ['is_today' => in_array($todayDow, $row['days'], true)];
-        }, hours());
-    }
-
-	

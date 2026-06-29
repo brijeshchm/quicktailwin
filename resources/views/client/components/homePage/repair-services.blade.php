@@ -78,8 +78,8 @@ $repairGradients = [
 
 
                   @php
-                $catUrl = match($service['type'] ?? '') {
-                'keyword'    => route('showCity',        $service['url']),
+                $catUrl = match($service['type'] ?? '') {              
+                'keyword'    => route('city.slug', ['city_slug'=> 'bangalore','service_slug' => $service['url']]),
                 'child'      => route('child.show',      $service['url']),
                 'categories' => route('categories.show', $service['url'])
 

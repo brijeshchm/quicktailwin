@@ -77,9 +77,9 @@ class HomePageController extends Controller
        $base = config('app.website') . 'popular/';
   
         return [
-            ['url' => 'catering-services', 'img' => $base . 'Catering-Services.jpg', 'alt' => 'Catering Services', 'title' => 'Catering Services', 'type' => 'keyword'],
-            ['url' => 'banquet-hall', 'img' => $base . 'Banquet-Halls.jpg', 'alt' => 'Banquet Halls', 'title' => 'Banquet Halls', 'type' => 'keyword'],
-            ['url' => 'stage-decorators', 'img' => $base . 'Stage-Decorators.jpg', 'alt' => 'Stage Decorators', 'title' => 'Stage Decorators', 'type' => 'keyword'],
+            ['url' => 'catering-services', 'img' => $base . 'Catering-Services.webp', 'alt' => 'Catering Services', 'title' => 'Catering Services', 'type' => 'keyword'],
+            ['url' => 'banquet-hall', 'img' => $base . 'Banquet-Halls.webp', 'alt' => 'Banquet Halls', 'title' => 'Banquet Halls', 'type' => 'keyword'],
+            ['url' => 'stage-decorators', 'img' => $base . 'Stage-Decorators.webp', 'alt' => 'Stage Decorators', 'title' => 'Stage Decorators', 'type' => 'keyword'],
             ['url' => 'makeup-artists', 'img' => $base . 'makeup-artists.jpg', 'alt' => 'Indian Makeup Artists', 'title' => 'Makeup Artists', 'type' => 'keyword'],
             ['url' => 'mehendi-artists', 'img' => $base . 'Mehendi-Artists.jpg', 'alt' => 'Indian Mehendi Artists', 'title' => 'Mehendi Artists', 'type' => 'keyword'],
             ['url' => 'bridal-wear', 'img' => $base . 'Bridal-Wear.jpg', 'alt' => 'Indian Bridal Wear', 'title' => 'Indian Bridal Wear', 'type' => 'keyword'],
@@ -106,7 +106,7 @@ class HomePageController extends Controller
             ['url' => 'plumber', 'img' => $base . 'Plumber.jpg', 'alt' => 'Plumber', 'title' => 'Plumber', 'type' => 'keyword', 'rating' => '4.8', 'count' => '90'],
             ['url' => 'carpenters', 'img' => $base . 'carpenter.jpg', 'alt' => 'Carpenters', 'title' => 'Carpenters', 'type' => 'keyword', 'rating' => '4.8', 'count' => '463'],
             ['url' => 'washing-machine-repairs', 'img' => $base . 'washing-machines.jpg', 'alt' => 'Washing machine repairs', 'title' => 'Washing machine repairs', 'type' => 'keyword', 'rating' => '4.8', 'count' => '463'],
-            ['url' => 'cctv-installation-training', 'img' => config('app.website') . 'img/CCTV-security.png', 'alt' => 'CCTV Installation', 'title' => 'CCTV installation', 'type' => 'keyword', 'rating' => '4.8', 'count' => '463'],
+            ['url' => 'cctv-installation-training', 'img' => config('app.website') . 'img/CCTV-security.webp', 'alt' => 'CCTV Installation', 'title' => 'CCTV installation', 'type' => 'keyword', 'rating' => '4.8', 'count' => '463'],
         ];
     }
  
@@ -124,7 +124,7 @@ class HomePageController extends Controller
         return [
             ['url' => 'professional-courses', 'img' => $img . 'it_training.svg', 'alt' => 'IT Professional Courses', 'title' => 'Professional Courses', 'type' => 'categories', 'rating' => '4', 'count' => '434'],
             ['url' => 'wedding-planning', 'img' => $img . 'wedding.png', 'alt' => 'Wedding pannel', 'title' => 'Wedding pannel', 'type' => 'keyword', 'rating' => '4', 'count' => '234'],
-            ['url' => 'electric-services', 'img' => $img . 'electric-services.png', 'alt' => 'Electric Services', 'title' => 'Electric Services', 'type' => 'child', 'rating' => '3.5', 'count' => '377'],
+            ['url' => 'electric-services', 'img' => $img . 'electric-services.webp', 'alt' => 'Electric Services', 'title' => 'Electric Services', 'type' => 'child', 'rating' => '3.5', 'count' => '377'],
             ['url' => 'entrance-exams-coaching', 'img' => $popular . 'government-exam.png', 'alt' => 'Government exam coaching', 'title' => 'Government exam', 'type' => 'child', 'rating' => '3.5', 'count' => '229'],
             ['url' => 'study-abroad', 'img' => $img . 'study-abroad.svg', 'alt' => 'Study Abroad', 'title' => 'Study Abroad', 'type' => 'child', 'rating' => '5', 'count' => '399'],
             ['url' => 'spa-hub', 'img' => $img . 'Spa & Beauty.png', 'alt' => 'Spa & Beauty', 'title' => 'Spa & Beauty', 'type' => 'keyword', 'rating' => '5', 'count' => '325'],
@@ -135,11 +135,11 @@ class HomePageController extends Controller
             ['url' => 'collages-and-Institutions', 'img' => $popular . 'Education.png', 'alt' => 'collages and Institutions', 'title' => 'Education', 'type' => 'categories', 'rating' => '3.5', 'count' => '197'],
             ['url' => 'rent-or-buy', 'img' => $img . 'rent_buy.svg', 'alt' => 'Rent or Buy', 'title' => 'Rent & Buy', 'type' => 'child', 'rating' => '3.5', 'count' => '329'],
             ['url' => 'sports-academy', 'img' => $popular . 'sports.png', 'alt' => 'Sport Academy', 'title' => 'Sport Academy', 'type' => 'child', 'rating' => '3.5', 'count' => '539'],
-            ['url' => 'medical', 'img' => $img . 'Medical.png', 'alt' => 'Medical Medician', 'title' => 'Medical', 'type' => 'child', 'rating' => '3.5', 'count' => '269'],
+            ['url' => 'medical', 'img' => $img . 'Medical.webp', 'alt' => 'Medical Medician', 'title' => 'Medical', 'type' => 'child', 'rating' => '3.5', 'count' => '269'],
             ['url' => 'loan-service', 'img' => $popular . 'Loan.png', 'alt' => 'Loan Service', 'title' => 'Loan', 'type' => 'child', 'rating' => '3.5', 'count' => '69'],
             ['url' => 'dance-classes', 'img' => $popular . 'Dancing.png', 'alt' => 'Dancing Class', 'title' => 'Dancing', 'type' => 'child', 'rating' => '3.5', 'count' => '79'],
             ['url' => 'yoga-classes', 'img' => $popular . 'Yoga.png', 'alt' => 'Yoga Class', 'title' => 'Yoga', 'type' => 'child', 'rating' => '3.5', 'count' => '89'],
-            ['url' => 'security-system', 'img' => $img . 'CCTV-security.png', 'alt' => 'CCTV Security', 'title' => 'CCTV Security', 'type' => 'child', 'rating' => '3.5', 'count' => '109'],
+            ['url' => 'security-system', 'img' => $img . 'CCTV-security.webp', 'alt' => 'CCTV Security', 'title' => 'CCTV Security', 'type' => 'child', 'rating' => '3.5', 'count' => '109'],
             ['url' => 'tours-and-travels', 'img' => $images . 'tour-travels.png', 'alt' => 'Tours & Travels', 'title' => 'Tours & Travels', 'type' => 'keyword', 'rating' => '3.5', 'count' => '49'],
         ];
     }
@@ -160,7 +160,7 @@ class HomePageController extends Controller
             ['url' => 'tours-and-travels', 'img' => $images . 'tour-travels.webp', 'alt' => 'Tours & Travels', 'title' => 'Tours & Travels', 'type' => 'keyword', 'rating' => '3.5', 'count' => '49'],
             ['url' => 'professional-courses', 'img' => $popular . 'IT-Training.webp', 'alt' => 'Professional Courses', 'title' => 'Professional Courses', 'type' => 'categories', 'rating' => '4', 'count' => '434'],
             ['url' => 'doctor', 'img' => $img . 'Doctor.webp', 'alt' => 'Doctor Clinic', 'title' => 'Doctor', 'type' => 'keyword', 'rating' => '4', 'count' => '234'],
-            ['url' => 'electric-services', 'img' => $img . 'electric-services.png', 'alt' => 'Electric Services', 'title' => 'Electric Services', 'type' => 'child', 'rating' => '3.5', 'count' => '377'],
+            ['url' => 'electric-services', 'img' => $img . 'electric-services.webp', 'alt' => 'Electric Services', 'title' => 'Electric Services', 'type' => 'child', 'rating' => '3.5', 'count' => '377'],
             ['url' => 'entrance-exams-coaching', 'img' => $img . 'government-exam.webp', 'alt' => 'Government exam', 'title' => 'Government exam', 'type' => 'child', 'rating' => '3.5', 'count' => '229'],
             ['url' => 'study-abroad', 'img' => $img . 'study-abroad.svg', 'alt' => 'Study Abroad', 'title' => 'Study Abroad', 'type' => 'child', 'rating' => '5', 'count' => '399'],
             ['url' => 'spa-and-beauty', 'img' => $img . 'Spa-Beauty.webp', 'alt' => 'Spa & Beauty', 'title' => 'Spa & Beauty', 'type' => 'child', 'rating' => '5', 'count' => '325'],
@@ -168,12 +168,12 @@ class HomePageController extends Controller
             ['url' => 'contractors', 'img' => $img . 'contractors.webp', 'alt' => 'Contractors Builder', 'title' => 'Contractors', 'type' => 'child', 'rating' => '3.5', 'count' => '167'],
             ['url' => 'collages-and-Institutions', 'img' => $img . 'Education.webp', 'alt' => 'Education collages', 'title' => 'Education', 'type' => 'categories', 'rating' => '3.5', 'count' => '197'],
             ['url' => 'sports-academy', 'img' => $img . 'sports.webp', 'alt' => 'Sport Academy', 'title' => 'Sport Academy', 'type' => 'child', 'rating' => '3.5', 'count' => '539'],
-            ['url' => 'medical', 'img' => $img . 'Medical.png', 'alt' => 'Medical', 'title' => 'Medical', 'type' => 'child', 'rating' => '3.5', 'count' => '269'],
+            ['url' => 'medical', 'img' => $img . 'Medical.webp', 'alt' => 'Medical', 'title' => 'Medical', 'type' => 'child', 'rating' => '3.5', 'count' => '269'],
             ['url' => 'loan-service', 'img' => $img . 'Loan.webp', 'alt' => 'Loan Service', 'title' => 'Loan', 'type' => 'child', 'rating' => '3.5', 'count' => '69'],
             ['url' => 'dance-classes', 'img' => $img . 'Dancing.webp', 'alt' => 'Dancing Class performance', 'title' => 'Dancing', 'type' => 'child', 'rating' => '3.5', 'count' => '79'],
             ['url' => 'yoga-classes', 'img' => $img . 'Yoga.webp', 'alt' => 'Yoga', 'title' => 'Yoga', 'type' => 'child', 'rating' => '3.5', 'count' => '89'],
-            ['url' => 'security-system', 'img' => $img . 'CCTV-security.png', 'alt' => 'CCTV Security', 'title' => 'CCTV Security', 'type' => 'child', 'rating' => '3.5', 'count' => '109'],
-            ['url' => 'web-technologies', 'img' => $images . 'Web-Designers.png', 'alt' => 'Web Designers', 'title' => 'Web Designers', 'type' => 'child', 'rating' => '3.5', 'count' => '106'],
+            ['url' => 'security-system', 'img' => $img . 'CCTV-security.webp', 'alt' => 'CCTV Security', 'title' => 'CCTV Security', 'type' => 'child', 'rating' => '3.5', 'count' => '109'],
+            ['url' => 'web-technologies', 'img' => $images . 'Web-Designers.webp', 'alt' => 'Web Designers', 'title' => 'Web Designers', 'type' => 'child', 'rating' => '3.5', 'count' => '106'],
         ];
     }
  
@@ -355,7 +355,7 @@ class HomePageController extends Controller
         $popular = config('app.website') . 'popular/';
  
         return [
-            ['url' => 'computer-courses', 'img' => $popular . 'IT-Training.jpg', 'alt' => 'computer courses', 'title' => 'computer courses', 'type' => 'categories', 'rating' => '3.5', 'count' => '139'],
+            ['url' => 'computer-courses', 'img' => $popular . 'IT-Training.webp', 'alt' => 'computer courses', 'title' => 'computer courses', 'type' => 'categories', 'rating' => '3.5', 'count' => '139'],
             ['url' => 'entrance-exams-coaching', 'img' => $popular . 'Entrance-Exam.jpg', 'alt' => 'Entrance exam', 'title' => 'Entrance exam', 'type' => 'child', 'rating' => '3.5', 'count' => '99'],
             ['url' => 'packers-and-movers', 'img' => $popular . 'Packers-Movers.jpg', 'alt' => 'Packers & Movers', 'title' => 'Packers & Movers', 'type' => 'child', 'rating' => '3.5', 'count' => '132'],
             ['url' => 'interior-designer', 'img' => $popular . 'Interior-design.jpg', 'alt' => 'Interior Design', 'title' => 'Interior Design', 'type' => 'keyword', 'rating' => '3.5', 'count' => '192'],
@@ -2254,7 +2254,7 @@ Instead of limiting learning to theory, the course takes you through:.",
         ];
  
        $categories = [
-			['name' => 'Banquet Halls',     'slug' => 'banquet-hall',     'img' => '/popular/Banquet-Halls.jpg'],
+			['name' => 'Banquet Halls',     'slug' => 'banquet-hall',     'img' => '/popular/Banquet-Halls.webp'],
 			['name' => 'Decor & Flowers',   'slug' => 'flower-decoration',     'img' => '/popular/Flower_Decoration.jpg'],
 			['name' => 'Invitation Cards',  'slug' => 'invitation-cards',  'img' => '/popular/Invitation_Cards_pre.png'],
 			['name' => 'Caterers & Food',   'slug' => 'caterers-food',     'img' => '/popular/Caterers_Food.png'],
@@ -2302,7 +2302,7 @@ Instead of limiting learning to theory, the course takes you through:.",
 		];
 
 		$bigDay = [
-			['name' => 'Stage Decorators',       'slug' => 'stage-decorators',       'img' => 'popular/Stage_Decorators.png'],
+			['name' => 'Stage Decorators',       'slug' => 'stage-decorators',       'img' => 'popular/Stage_Decorators.webp'],
 			['name' => 'Wedding Caterers',       'slug' => 'wedding-caterers',       'img' => 'popular/Wedding_Caterers.png'],
 			['name' => 'Cold Pyro & Fog Matka',  'slug' => 'cold-pyro-fog-matka',    'img' => 'popular/Cold_Pyro_Fog_Matka.png'],
 			['name' => 'DJ Services',            'slug' => 'dj-services',            'img' => 'popular/DJ_Services.png'],

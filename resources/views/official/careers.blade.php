@@ -142,12 +142,7 @@
     </a>
 </section>
 
-{{-- ══════════════════════════
-     FOOTER
-══════════════════════════ --}}
-<footer class="bg-slate-900 text-slate-400 py-7 text-center text-sm">
-    <p>&copy; {{ date('Y') }} QuickDials Internet Pvt Ltd. All rights reserved.</p>
-</footer>
+ 
 
 {{-- ══════════════════════════
      APPLY MODAL (Alpine)

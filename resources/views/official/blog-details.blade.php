@@ -497,6 +497,8 @@
             </div>
             @endif
 
+
+
             {{-- ── TAGS ── --}}
             @if(count($blogList))
             <div class="reveal mt-10 pt-6 border-t border-gray-200">

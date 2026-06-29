@@ -234,10 +234,10 @@
                     <h4 class="text-xs font-black text-gray-900 uppercase tracking-wider mb-3">{{ $section['heading'] }}</h4>
                     <p class="text-xs text-gray-500 leading-relaxed">
                         @foreach($section['links'] as $i => $link)
-
+ 
                            @php
                             $slugUrl = match($link['type'] ?? '') {
-                            'keyword'    => route('showCity',        $link['slug']),
+                            'keyword'    => route('city.slug', ['city_slug'    => 'bangalore','service_slug' => $link['slug']]),
                             'child'      => route('child.show',      $link['slug']),
                             'categories' => route('categories.show', $link['slug'])
                         
@@ -281,8 +281,7 @@
                     @endforeach
                 </ul>
             </div>
-
-            {{-- Col 2: Popular Categories --}}
+          
             <div>
                 
                 <ul class="space-y-2">
@@ -297,8 +296,8 @@
                     ] as $link)
 
                         @php
-                        $catUrl = match($link['type'] ?? '') {
-                        'keyword'    => route('showCity',        $link['slug']),
+                        $catUrl = match($link['type'] ?? '') {                         
+                        'keyword'    => route('city.slug', ['city_slug'=> 'bangalore','service_slug' => $link['slug']]),
                         'child'      => route('child.show',      $link['slug']),
                         'categories' => route('categories.show', $link['slug'])
 

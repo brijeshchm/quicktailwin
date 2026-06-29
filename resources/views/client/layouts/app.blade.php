@@ -51,7 +51,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-KZF3WGSW');</script>
 <!-- End Google Tag Manager -->
  
-
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 <style>
         
@@ -288,33 +287,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KZF3WGSW"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
-
-  
-    @include('client.layouts.navbar')
-
-
-
-    <main>
-      
-        @yield('content')
-
-    </main>
-
-    @include('client.layouts.footer')
- 
-
-
+@include('client.layouts.navbar')
+<main>
+@yield('content')
+</main>
+@include('client.layouts.footer')
 <script>
- 
- 
-
 var searchCity       = '';
 // var heroSelectedCity = '';
-var cityDetected     = false;  
-
- 
-document.addEventListener('DOMContentLoaded', function () {
-    
+// var stickySelectedCity = '';
+var cityDetected     = false;   
+document.addEventListener('DOMContentLoaded', function () {    
     detectCity();
 });
 
@@ -346,8 +329,6 @@ async function gpsSuccess(position) {
     var lat = position.coords.latitude;
     var lon = position.coords.longitude;
 
- 
-
     try {
       
         var response = await fetch(
@@ -370,8 +351,7 @@ async function gpsSuccess(position) {
             data.address.state_district ||
             null;
 
-        if (city) {
-          
+        if (city) {          
             applyCity(city);
         } else {      
             detectCityFromIP();
@@ -462,7 +442,8 @@ function applyCity(rawCity) {
 
     searchCity       = formatted;
     heroSelectedCity = cityLower;
-
+    stickySelectedCity = formatted;
+ 
    
     ['hero-city-label', 'sticky-city-label', 'mobile-city-label']
         .forEach(function (id) {

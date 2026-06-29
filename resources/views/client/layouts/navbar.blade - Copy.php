@@ -23,13 +23,13 @@
             class="flex-1 max-w-xl relative hidden md:block opacity-0 pointer-events-none transition-all duration-200"
             style="transform-origin: left center;"
         >
-            <div class="flex bg-white rounded-xl border border-gray-200 shadow-md h-12 overflow-visible">
+            <div class="flex bg-white rounded-xl border border-gray-200 shadow-md h-9 overflow-visible">
 
                 {{-- City selector --}}
                 <div id="sticky-city-dropdown" class="relative shrink-0">
                     <button
                         id="sticky-city-btn"
-                        class="flex items-center gap-1 h-12 px-2.5 text-xs font-semibold text-blue-700 border-r border-gray-200 hover:bg-blue-50 transition-colors whitespace-nowrap rounded-l-xl"
+                        class="flex items-center gap-1 h-9 px-2.5 text-xs font-semibold text-blue-700 border-r border-gray-200 hover:bg-blue-50 transition-colors whitespace-nowrap rounded-l-xl"
                         onclick="toggleStickyCity()"
                     >
                         <i data-lucide="map-pin" class="w-3 h-3 text-blue-500"></i>
@@ -89,7 +89,7 @@
                 {{-- Search button --}}
                 <button
                     onclick="doStickySearch()"
-                    class="shrink-0 bg-orange-500 hover:bg-orange-600 text-white h-12 px-3.5 rounded-r-xl flex items-center gap-1.5 text-xs font-bold transition-colors"
+                    class="shrink-0 bg-orange-500 hover:bg-orange-600 text-white h-9 px-3.5 rounded-r-xl flex items-center gap-1.5 text-xs font-bold transition-colors"
                 >
                     <i data-lucide="search" class="w-3.5 h-3.5"></i>
                     Search
@@ -732,8 +732,8 @@ const desktopNav  = document.getElementById('desktop-nav');
 
 window.addEventListener('scroll', () => {
     const y = window.scrollY;
-    const scrolled = y > 0;
-    const showSearch = y > 0;
+    const scrolled = y > 20;
+    const showSearch = y > 200;
 
     navbar.classList.toggle('bg-white/95', scrolled || false);
     navbar.classList.toggle('backdrop-blur-md', scrolled);

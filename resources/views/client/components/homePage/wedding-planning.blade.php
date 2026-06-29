@@ -29,8 +29,8 @@
         <div class="grid grid-cols-6 gap-2">
             @foreach($weddingPlanning as $i => $ws)
              @php
-                $catUrl = match($ws['type'] ?? '') {
-                'keyword'    => route('showCity',        $ws['url']),
+                $catUrl = match($ws['type'] ?? '') {               
+                'keyword'    => route('city.slug', ['city_slug'=> 'bangalore','service_slug' => $ws['url']]),
                 'child'      => route('child.show',      $ws['url']),
                 'categories' => route('categories.show', $ws['url'])
 

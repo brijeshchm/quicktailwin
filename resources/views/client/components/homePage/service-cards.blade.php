@@ -34,8 +34,8 @@
                  style="scroll-behavior:smooth; scrollbar-width:none; -ms-overflow-style:none;">
                 @foreach($popularSearches as $svc)
                  @php
-                $popSUrl = match($svc['type'] ?? '') {
-                'keyword'    => route('showCity',        $svc['url']),
+                $popSUrl = match($svc['type'] ?? '') {            
+                'keyword'    => route('city.slug', ['city_slug'=> 'bangalore','service_slug' => $svc['url']]),
                 'child'      => route('child.show',      $svc['url']),
                 'categories' => route('categories.show', $svc['url'])
 

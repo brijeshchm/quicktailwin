@@ -140,8 +140,8 @@
                 @foreach($bannerKeyword as $i => $card)
 
                 @php
-                $catUrl = match($card['type'] ?? '') {
-                'keyword'    => route('showCity',        $card['url']),
+                $catUrl = match($card['type'] ?? '') {                
+                'keyword'    => route('city.slug', ['city_slug'=> 'bangalore','service_slug' => $card['url']]),
                 'child'      => route('child.show',      $card['url']),
                 'categories' => route('categories.show', $card['url'])
                 };

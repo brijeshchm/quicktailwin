@@ -300,11 +300,11 @@
 
     <div class="grid grid-cols-3 md:grid-cols-6 gap-6 mb-16">
         @foreach([
-    ['name'=>'Banquet Halls',     'slug'=>'banquet-hall',     'img'=>'popular/Banquet-Halls.jpg'],
-    ['name'=>'Catering Services', 'slug'=>'catering-services', 'img'=>'popular/Catering-Services.jpg'],
-    ['name'=>'Stage Decorators',  'slug'=>'stage-decorators',  'img'=>'popular/Stage-Decorators.jpg'],
-    ['name'=>'Photographers',     'slug'=>'photographers',     'img'=>'popular/Photo_and_Videography.jpg'],
-    ['name'=>'Pandits',           'slug'=>'pandits',           'img'=>'popular/Pandits.jpg'],
+    ['name'=>'Banquet Halls',     'slug'=>'banquet-hall',     'img'=>'popular/Banquet-Halls.webp'],
+    ['name'=>'Catering Services', 'slug'=>'catering-services', 'img'=>'popular/Catering-Services.webp'],
+    ['name'=>'Stage Decorators',  'slug'=>'stage-decorators',  'img'=>'popular/Stage-Decorators.webp'],
+    ['name'=>'Photographers',     'slug'=>'photographers',     'img'=>'popular/Photo_and_Videography.webp'],
+    ['name'=>'Pandits',           'slug'=>'pandits',           'img'=>'popular/Pandits.webp'],
     ['name'=>'Invitation Cards',  'slug'=>'invitation-cards',  'img'=>'popular/Invitation_Cards.png'],
 ] as $cat)
     <a href="{{ route('showCity', $cat['slug']) }}" class="group block reveal">
