@@ -313,6 +313,14 @@ Route::get('/sitemap-blog.xml', function () {
 });
 
  
+ 
+
+Route::get('/llms.txt', function () {
+    return response()
+        ->view('client.llms', [], 200)
+        ->header('Content-Type', 'text/plain; charset=UTF-8');
+})->name('llms');
+
 
 Route::get('/sitemap.xml', function () {
  
@@ -458,6 +466,8 @@ Route::get('/refund-policy', [App\Http\Controllers\Official\OfficialController::
 Route::get('/', [App\Http\Controllers\Client\HomePageController::class, 'index'])->name('home');
  
 Route::post('/newsletter', [App\Http\Controllers\Client\HomePageController::class, 'newsletter']);
+Route::get('/news', [App\Http\Controllers\Official\OfficialController::class, 'news'])->name('news.list');
+Route::get('/news/{slug}', [App\Http\Controllers\Official\OfficialController::class, 'newsDetails'])->name('newsDetails');
 
  
 Route::get('/business-services', [App\Http\Controllers\Client\HomePageController::class, 'businessServices'])->name('business.services');
