@@ -130,7 +130,7 @@ class HomePageController extends Controller
             ['url' => 'spa-hub', 'img' => $img . 'Spa & Beauty.png', 'alt' => 'Spa & Beauty', 'title' => 'Spa & Beauty', 'type' => 'keyword', 'rating' => '5', 'count' => '325'],
             ['url' => 'repair-services', 'img' => $img . 'Repairs-Services.svg', 'alt' => 'Repair Services', 'title' => 'Repair Services', 'type' => 'child', 'rating' => '5', 'count' => '389'],
             ['url' => 'packers-and-movers', 'img' => $popular . 'Packers-movers.png', 'alt' => 'Packers & Movers', 'title' => 'Packers & Movers', 'type' => 'child', 'rating' => '3.5', 'count' => '199'],
-            ['url' => 'professional-courses', 'img' => $popular . 'Professional.png', 'alt' => 'Professional Course', 'title' => 'Professional', 'type' => 'categories', 'rating' => '3.5', 'count' => '149'],
+            ['url' => 'professional', 'img' => $popular . 'Professional.png', 'alt' => 'Professional Course', 'title' => 'Professional', 'type' => 'categories', 'rating' => '3.5', 'count' => '149'],
             ['url' => 'contractors', 'img' => $img . 'contractors.png', 'alt' => 'Contractors Property', 'title' => 'Contractors', 'type' => 'child', 'rating' => '3.5', 'count' => '167'],
             ['url' => 'collages-and-Institutions', 'img' => $popular . 'Education.png', 'alt' => 'collages and Institutions', 'title' => 'Education', 'type' => 'categories', 'rating' => '3.5', 'count' => '197'],
             ['url' => 'rent-or-buy', 'img' => $img . 'rent_buy.svg', 'alt' => 'Rent or Buy', 'title' => 'Rent & Buy', 'type' => 'child', 'rating' => '3.5', 'count' => '329'],
