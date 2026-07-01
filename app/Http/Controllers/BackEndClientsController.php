@@ -1440,8 +1440,8 @@ class BackEndClientsController extends Controller
 					$filename = $this->saveImageSmart(
 						$request->file('logo'),
 						$destinationPath,
-						null,
-						null
+						1000,
+						1000
 					);
 
 					$client->logo = serialize([
