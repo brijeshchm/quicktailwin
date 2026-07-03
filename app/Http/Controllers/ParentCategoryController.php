@@ -190,8 +190,8 @@ class ParentCategoryController extends Controller
 			$category = ParentCategory::orderBy('id','desc');
 			if($request->input('search.value')!=''){
 				$category = $category->where(function($query) use($request){
-				$query->orWhere('parent_category','LIKE','%'.$request->input('search.value').'%');
-			 
+				$query->orWhere('parent_category','LIKE','%'.$request->input('search.value').'%')
+					->orWhere('parent_slug', 'LIKE', '%' . $request->input('search.value') . '%');			 
 				});
 			}
 			$category = $category->paginate($request->input('length'));

@@ -361,6 +361,12 @@
 								<li>
 									<a href="{{url('/developer/blog/blogdetails')}}"   class="<?php if(Request::segment(3)=='blogdetails' || Request::segment(3)=='addBlog' || Request::segment(3)=='editBlog' ){ echo "active"; } ?>"><i class=""></i> Add Blog</a>
 							</li>
+							
+							<li>
+									<a href="{{url('/developer/news/news-list')}}"   class="<?php if(Request::segment(3)=='news-list' || Request::segment(3)=='addNews' || Request::segment(3)=='editNews' ){ echo "active"; } ?>"><i class=""></i> Add News</a>
+							</li>
+
+
 							<li>
 								<a href="{{url('/developer/testimonials/testimonialsdetails')}}"><i class=""></i>Testimonials</a>
 							</li>

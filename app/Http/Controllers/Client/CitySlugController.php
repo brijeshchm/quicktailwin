@@ -126,7 +126,7 @@ class CitySlugController extends Controller
 
 			if (!empty($keycons)) {
 				$key_icon = config('app.website') . $keycons->src;
-				$key_alt = $keywordDetails->keyword;
+				$child_alt = $keywordDetails->keyword;
 			}
 		}
 

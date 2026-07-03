@@ -13,6 +13,8 @@ use App\Models\Client\Client; //model
 use App\Models\Keyword;
  
 use App\Models\Citieslists;
+use App\Models\ChildCategory;
+use App\Models\ParentCategory;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use DB;
@@ -51,7 +53,8 @@ class OfficialController extends Controller
      */
     public function news()
     {
-        return view('official.news');
+        $categories  =  ParentCategory::where('status','1')->get();
+        return view('official.news',compact('categories'));
     }
 
     /**
@@ -248,6 +251,8 @@ class OfficialController extends Controller
             ->orderBy('count', 'DESC')
             ->get();
         }
+
+        
         return view('official.blog-details', compact(
             'blogDetails','blogList','tickerItems','categories',
             'faqs','authorColor','paragraphs','slug'
@@ -269,8 +274,95 @@ class OfficialController extends Controller
         ->groupBy('category_name')
         ->orderBy('count', 'DESC')
         ->get();
-        return view('client.blog-category', ['categories' => $categories,'blogs'=>$blogs]);
+        $childCategory  = ChildCategory::where('child_slug',$slug)->first();
+
+        if (!empty($childCategory->meta_title)) {
+        $meta_title = $childCategory->meta_title;
+        } else {
+        $meta_title = $childCategory->parent_category ." | Find Trusted Services, Businesses & Professionals Near You | Quickdials ";
+
+        }
+
+        if (!empty($childCategory->meta_keywords)) {
+			$meta_keywords = $childCategory->meta_keywords;
+		} else {
+			 
+						
+			$meta_keywords = $childCategory->parent_category . ", " .
+                 $childCategory->parent_category . " near me, " .
+                 "best " . $childCategory->parent_category . ", " .
+                 "top " . $childCategory->parent_category . ", " .
+                 "local " . $childCategory->parent_category . ", " .
+                 "trusted " . $childCategory->parent_category . ", " .
+                 "affordable " . $childCategory->parent_category . ", " .
+                 $childCategory->parent_category . " services, " .
+                 $childCategory->parent_category . " providers, Quickdials";
+
+		}
+
+
+		if (!empty($parentCategory->meta_description)) {
+			$meta_description = $childCategory->meta_description;
+
+
+		} else {
+			 
+			   $meta_description = "Find the best ".$childCategory->parent_category." near you on Quickdials. Compare trusted providers, read reviews, check details, and connect with top-rated businesses and professionals for your needs.";
+
+		}
+
+
+        $child_banner = config('app.website') . 'client/images/computer-courses-training.jpg';
+		$alt = "";
+		$pc_icon ="";
+		if (!empty($childCategory->child_banner)) {
+			$cicons = unserialize($childCategory->child_banner);
+
+			if (!empty($cicons)) {
+				$child_banner = config('app.website') . $cicons['child_banner']['src'];
+				$alt = $cicons['child_banner']['name'];
+			}
+		}if (!empty($childCategory->pc_icon)) {
+			$catIcons = unserialize($childCategory->pc_icon);
+
+			if (!empty($catIcons)) {
+				$pc_icon = config('app.website') . $catIcons['pc_icon']['src'];
+				$alt = $catIcons['pc_icon']['name'];
+			}
+		}
+			
+ $kwData = array(
+			'parent_category' => $childCategory->parent_category,
+			'parent_slug' => $childCategory->parent_slug,
+			'child_banner' => $child_banner,
+			'category_icon' => $pc_icon,
+			'alt' => $alt,
+			'meta_title' => $meta_title,
+			'meta_keywords' => $meta_keywords,
+			'meta_description' => $meta_description,
+			'top_description' => $childCategory->top_description,
+			'bottom_description' => $childCategory->bottom_description,
+			'bottom_heading' => $childCategory->bottom_heading,
+			'top_heading' => $childCategory->top_heading,
+			'faqq1' => $childCategory->faqq1,
+			'faqa1' => $childCategory->faqa1,
+			'faqq2' => $childCategory->faqq2,
+			'faqa2' => $childCategory->faqa2,
+			'faqq3' => $childCategory->faqq3,
+			'faqa3' => $childCategory->faqa3,
+			'faqq4' => $childCategory->faqq4,
+			'faqa4' => $childCategory->faqa4,
+			'faqq5' => $childCategory->faqq5,
+			'faqa5' => $childCategory->faqa5,
+			'ratingvalue' => $childCategory->ratingvalue,
+			'ratingcount' => $childCategory->ratingcount,
+
+		);
+ 
+        return view('client.blog-category', ['categories' => $categories,'blogs'=>$blogs,'kwData'=>$kwData]);
     }
+
+
     public function testimonials()
     {
         $testimonialsdetails = Testimonialsdetail::orderBy('id', 'DESC')->get();

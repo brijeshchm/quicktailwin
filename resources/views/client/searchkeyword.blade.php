@@ -2,6 +2,9 @@
 @section('title', $metaTitle ?? $keyword . ' | QuickDials')
 @section('description', $metaDescription ?? 'Find the best ' . $keyword . ' with QuickDials. Explore verified businesses, phone numbers, addresses, reviews, ratings, photos, maps, and trusted local services near you.')
 @section('keywords', $metaKeywords ?? $keyword . ', best ' . $keyword . ', top ' . $keyword . ' near me, verified ' . $keyword . ', local business directory, QuickDials, business listings, reviews and ratings, contact details, nearby services, trusted businesses, top local services')
+@section('og_image', !empty($kwData['key_icon'])
+    ? asset($kwData['key_icon'])
+    : asset('client/images/quickdials-og.png'))
 @section('content') 
 <style>
 #enquiry-modal { display: none; }

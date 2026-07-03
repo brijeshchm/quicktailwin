@@ -143,7 +143,9 @@ class ChildCategoryController extends Controller
 				->select('child_category.*', 'parent_category.parent_category')->orderBy('id', 'desc');
 			if ($request->input('search.value') != '') {
 				$childCategory = $childCategory->where(function ($query) use ($request) {
-					$query->orWhere('child_category', 'LIKE', '%' . $request->input('search.value') . '%');
+					$query->orWhere('child_category', 'LIKE', '%' . $request->input('search.value') . '%')
+					->orWhere('child_slug', 'LIKE', '%' . $request->input('search.value') . '%');
+					
 
 				});
 			}

@@ -6,6 +6,8 @@
 @include('client.components.banner-section')
 
 
+ 
+
 <div
     x-data="{
         scrolled: false,
@@ -18,8 +20,6 @@
     x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 10 })"
     class="min-h-screen bg-white font-sans overflow-x-hidden"
 >
-
-    
 
     {{-- ===== BREADCRUMB ===== --}}
     <div class="bg-gray-50 border-b border-gray-200">
@@ -41,49 +41,28 @@
             {{-- Left --}}
             <div data-reveal data-reveal-from="left">
                 <h1 class="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-3">
-                    <span class="text-gradient-anim inline-block hover:scale-105 transition-transform duration-300">GROW</span>
+                    <span class="text-[#0076D7] inline-block hover:scale-105 transition-transform duration-300">GROW</span>
                     <span class="text-[#22c55e] text-3xl align-super ml-1 inline-block anim-bounce-in">&#10003;</span>
                     Your Business
                 </h1>
                 <p class="text-gray-500 text-base mb-6">
-                    Advertise with QuickDials — India's No. 1 Local Search Engine
+                    Advertise with QuickDials — India's Local Search Engine
                 </p>
 
-                {{-- Mobile number lead capture (primary CTA) --}}
-                <div
-                    x-data="{
-                        mobile: '',
-                        agreed: false,
-                        submitting: false,
-                        submitted: false,
-                        error: '',
-                        async submit() {
-                            this.error = '';
-                            if (this.mobile.length < 10) { this.error = 'Enter a valid 10-digit number'; return; }
-                            if (!this.agreed) { this.error = 'Please accept the Terms to continue'; return; }
-                            this.submitting = true;
-                            try {
-                                const res = await fetch('', {
-                                    method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/json',
-                                        'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]')?.content ?? ''
-                                    },
-                                    body: JSON.stringify({ mobile: this.mobile, source: 'advertise_hero' })
-                                });
-                                if (!res.ok) throw new Error('Request failed');
-                                this.submitted = true;
-                            } catch (e) {
-                                this.error = 'Something went wrong. Please try again or call us.';
-                            } finally {
-                                this.submitting = false;
-                            }
-                        }
-                    }"
-                    class="max-w-sm"
-                >                     
+                {{-- Google sign-in --}}
+                <div class="max-w-sm">
+                    <a href="{{ route('google.login') }}"
+                       class="w-full flex items-center justify-center gap-3 border-2 border-gray-200 hover:border-[#0076D7] rounded-xl py-3 text-sm font-semibold text-gray-700 hover:bg-blue-50/50 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24">
+                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                        </svg>
+                        Continue with Google
+                    </a>
                 </div>
-                
+
                 {{-- Checkmarks --}}
                 <ul class="mt-5 space-y-2">
                     @foreach(['Rank Ahead of Your Competition', 'Find Ready to Buy Customers Instantly', 'Track Leads & Competition Trends'] as $i => $item)
@@ -93,19 +72,25 @@
                         </li>
                     @endforeach
                 </ul>
+
+                {{-- Terms --}}
+                <p class="text-[11px] text-gray-400 leading-relaxed mt-4">
+                    By continuing, you agree to our
+                    <a href="{{ route('terms.conditions') }}" class="text-[#0076D7] underline">Terms of Use</a>,
+                    <a href="{{ route('privacy.policy') }}" class="text-[#0076D7] underline">Privacy</a> &
+                    <a href="#" class="text-[#0076D7] underline">Infringement Policy</a>
+                </p>
             </div>
 
-            {{-- Right — Single Phone Mockup + floating stat cards + ranked-business teaser --}}
+            {{-- Right — Phone Mockup + Stats (single source of truth for these two stat cards; the duplicate stats-bar section below now shows DIFFERENT numbers, not a repeat) --}}
             <div class="relative flex justify-center" data-reveal data-reveal-from="right">
-
-                {{-- Floating stat cards --}}
-                <div class="absolute top-0 right-0 flex flex-col gap-3 z-20">
+                <div class="absolute top-0 right-0 flex flex-col gap-3 z-10">
                     <div class="bg-white rounded-xl shadow-lg border border-gray-100 px-4 py-3 flex items-center gap-3 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300" data-reveal data-reveal-delay="300">
                         <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
                             <svg class="w-4 h-4 text-[#0076D7]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 100-8 4 4 0 000 8zm6 4v-2a4 4 0 00-3-3.87"/></svg>
                         </div>
                         <div>
-                            <div class="text-base font-bold text-gray-800" data-counter="182000000" data-suffix="+" data-format="crore">0</div>
+                            <div class="text-base font-bold text-gray-800" data-counter="147800000" data-suffix="+" data-format="crore">0</div>
                             <div class="text-[10px] text-gray-500">Buyers</div>
                         </div>
                     </div>
@@ -114,85 +99,166 @@
                             <svg class="w-4 h-4 text-[#22c55e]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 9V5a3 3 0 00-3-3l-4 9v11h11.28a2 2 0 002-1.7l1.38-9a2 2 0 00-2-2.3zM7 22H4a2 2 0 01-2-2v-7a2 2 0 012-2h3"/></svg>
                         </div>
                         <div>
-                            <div class="text-base font-bold text-gray-800" data-counter="630000" data-suffix="+" data-format="lakh">0</div>
+                            <div class="text-base font-bold text-gray-800" data-counter="160" data-suffix="+" data-format="K">0</div>
                             <div class="text-[10px] text-gray-500">Happy Customers</div>
                         </div>
                     </div>
                 </div>
 
-                {{-- Phone mockup — tilts gently on mouse move, floats continuously --}}
-                <div
-                    x-data="{ rx: 0, ry: 0 }"
-                    @mousemove="rx = (($event.offsetY / $el.offsetHeight) - 0.5) * -10; ry = (($event.offsetX / $el.offsetWidth) - 0.5) * 10"
-                    @mouseleave="rx = 0; ry = 0"
-                    :style="`transform: perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg)`"
-                    class="w-64 h-[460px] bg-gray-900 rounded-[2.5rem] shadow-2xl border-4 border-gray-800 relative overflow-hidden mx-auto mt-10 anim-float transition-transform duration-300 ease-out"
-                >
-                    <div class="absolute inset-0 bg-gray-50 flex flex-col">
+{{--
+    Phone mockup — QuickDials app home screen
+    Replaces the previous "search results list" mockup in the hero section.
 
-                        {{-- Status bar --}}
-                        <div class="bg-[#0076D7] px-3 pt-2 pb-1 flex items-center justify-between text-white text-[7px] font-semibold flex-shrink-0">
-                            <span>11:11</span>
-                            <div class="flex items-center gap-1">
-                                <svg class="w-2 h-2" fill="currentColor" viewBox="0 0 24 24"><path d="M2 22h20V2L2 22z"/></svg>
-                                <svg class="w-2 h-2" fill="currentColor" viewBox="0 0 24 24"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3a4.24 4.24 0 00-6 0zm-4-4l2 2a7.07 7.07 0 0110 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
-                                <span>78%</span>
+    Categories shown are read from the provided screenshot:
+    Corporate Training, Wedding Functions, Salon, Plumber, Government Services,
+    Packers & Movers, Photography — confirm/adjust labels + icons against your
+    real top-8 category list once you send it; these are placeholders matching
+    what's visible in the image.
+--}}
+<div class="w-56 h-[420px] bg-gray-900 rounded-[2.5rem] shadow-2xl border-4 border-gray-800 relative overflow-hidden mx-auto mt-6 md:mt-0 anim-float">
+    <div class="absolute inset-0 bg-gray-50 flex flex-col">
+
+        {{-- ── Status bar ── --}}
+        <div class="bg-[#0076D7] px-3 pt-2 pb-1 flex items-center justify-between text-white text-[6px] font-semibold">
+            <span>11:11</span>
+            <div class="flex items-center gap-1">
+                <svg class="w-2 h-2" fill="currentColor" viewBox="0 0 24 24"><path d="M2 22h20V2L2 22z"/></svg>
+                <svg class="w-2 h-2" fill="currentColor" viewBox="0 0 24 24"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3a4.24 4.24 0 00-6 0zm-4-4l2 2a7.07 7.07 0 0110 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+                <span>78%</span>
+            </div>
+        </div>
+
+        {{-- ── Top app bar: logo + account pills ── --}}
+        <div class="bg-[#0076D7] px-2 pb-2 flex items-center justify-between gap-1">
+            <div class="text-white text-[8px] font-bold leading-none">QuickDials</div>
+            <div class="flex items-center gap-1">
+                <span class="bg-white/15 text-white text-[5px] px-1.5 py-0.5 rounded-full font-medium whitespace-nowrap">Have an Account</span>
+                <span class="bg-white text-[#0076D7] text-[5px] px-1.5 py-0.5 rounded-full font-bold whitespace-nowrap">Sign Up</span>
+            </div>
+        </div>
+
+        {{-- ── Location pill ── --}}
+        <div class="px-2 -mt-1 mb-1.5">
+            <div class="bg-white rounded-full shadow-sm px-2 py-1 flex items-center gap-1 w-fit">
+                <svg class="w-2 h-2 text-[#0076D7]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1112 6a2.5 2.5 0 010 5.5z"/></svg>
+                <span class="text-[5px] font-semibold text-gray-700">Delhi</span>
+                <svg class="w-1.5 h-1.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </div>
+        </div>
+
+        {{-- ── Search bar ── --}}
+        <div class="px-2 mb-2">
+            <div class="bg-white rounded-full shadow-sm px-2 py-1.5 flex items-center gap-1.5 border border-gray-100">
+                <svg class="w-2.5 h-2.5 text-[#0076D7] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/></svg>
+                <span class="text-[6px] text-gray-400">Search Services</span>
+            </div>
+        </div>
+
+        {{-- ── Banner carousel ── --}}
+        <div class="px-2 mb-2">
+            <div class="relative rounded-lg overflow-hidden h-16 bg-gradient-to-br from-amber-100 via-lime-100 to-emerald-200">
+                <div class="absolute inset-0 flex items-center justify-between px-2">
+                    <div>
+                        <div class="text-[7px] font-bold text-emerald-800 leading-tight">Relax &<br>Rejuvenate</div>
+                        <span class="inline-block mt-1 bg-emerald-600 text-white text-[4.5px] font-semibold px-1.5 py-0.5 rounded">Book Now</span>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-white/40 flex-shrink-0"></div>
+                </div>
+                {{-- Dot indicators --}}
+                <div class="absolute bottom-1 left-1/2 -translate-x-1/2 flex gap-0.5">
+                    <span class="w-1 h-1 rounded-full bg-[#0076D7]"></span>
+                    <span class="w-1 h-1 rounded-full bg-white/70"></span>
+                    <span class="w-1 h-1 rounded-full bg-white/70"></span>
+                </div>
+            </div>
+        </div>
+
+        {{-- ── Categories ── --}}
+        @php
+            // ⚠️ Placeholder labels read from the screenshot — replace with your real
+            // top-8 category list + slugs once confirmed.
+            $mockCategories = [
+                ['icon' => 'graduation-cap', 'label' => 'Corporate Training'],
+                ['icon' => 'heart',          'label' => 'Wedding Functions'],
+                ['icon' => 'scissors',       'label' => 'Salon'],
+                ['icon' => 'wrench',         'label' => 'Plumber'],
+                ['icon' => 'landmark',       'label' => 'Government'],
+                ['icon' => 'truck',          'label' => 'Packers & Movers'],
+                ['icon' => 'camera',         'label' => 'Photography'],
+                ['icon' => 'grid',           'label' => 'More'],
+            ];
+        @endphp
+        <div class="px-2 mb-2 flex-1 overflow-hidden">
+            <div class="text-[6px] font-bold text-gray-700 mb-1">Categories</div>
+            <div class="grid grid-cols-4 gap-x-1 gap-y-1.5">
+                @foreach($mockCategories as $cat)
+                    <div class="flex flex-col items-center gap-0.5">
+                        <div class="w-6 h-6 rounded-full bg-blue-50 flex items-center justify-center">
+                            <i data-lucide="{{ $cat['icon'] }}" class="w-3 h-3 text-[#0076D7]"></i>
+                        </div>
+                        <span class="text-[4.5px] text-gray-600 text-center leading-tight">{{ $cat['label'] }}</span>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+        {{-- ── Popular Searches ── --}}
+        <div class="px-2 mb-2">
+            <div class="text-[6px] font-bold text-gray-700 mb-1">Popular Searches</div>
+            <div class="flex gap-1 overflow-hidden">
+                @foreach(['from-pink-200 to-rose-300', 'from-blue-200 to-cyan-300', 'from-amber-200 to-orange-300'] as $gradient)
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br {{ $gradient }} flex-shrink-0"></div>
+                @endforeach
+            </div>
+        </div>
+
+        {{-- ── Floating action button ── --}}
+        <div class="absolute right-2 bottom-12 w-6 h-6 rounded-full bg-[#0076D7] shadow-lg flex items-center justify-center">
+            <svg class="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+        </div>
+
+        {{-- ── Bottom tab bar ── --}}
+        <div class="bg-white border-t border-gray-100 px-2 py-1.5 flex items-center justify-between mt-auto">
+            <div class="flex flex-col items-center gap-0.5">
+                <svg class="w-2.5 h-2.5 text-[#0076D7]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3l9 8h-3v9h-4v-6H10v6H6v-9H3z"/></svg>
+                <span class="text-[4.5px] text-[#0076D7] font-semibold">Home</span>
+            </div>
+            <div class="flex flex-col items-center gap-0.5">
+                <svg class="w-2.5 h-2.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                <span class="text-[4.5px] text-gray-400">Category</span>
+            </div>
+            <div class="flex flex-col items-center gap-0.5">
+                <svg class="w-2.5 h-2.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                <span class="text-[4.5px] text-gray-400">Profile</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+                {{-- Phone mockup — "Jd" leftover branding replaced with QuickDials --}}
+                <div class="w-56 h-[400px] bg-gray-900 rounded-[2.5rem] shadow-2xl border-4 border-gray-800 relative overflow-hidden mx-auto mt-6 md:mt-0 anim-float">
+                    <div class="absolute inset-0 bg-white">
+                        <div class="bg-[#0076D7] px-3 py-2">
+                            <div class="text-white text-[8px] font-bold">QuickDials</div>
+                            <div class="bg-white rounded mt-1 px-2 py-1 flex items-center gap-1">
+                                <svg class="w-2.5 h-2.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/></svg>
+                                <span class="text-[7px] text-gray-400">Your Business Category</span>
                             </div>
                         </div>
-
-                        {{-- Top app bar --}}
-                        <div class="bg-[#0076D7] px-2.5 pb-2.5 flex items-center justify-between gap-1 flex-shrink-0">
-                            <div class="text-white text-[9px] font-bold leading-none">QuickDials</div>
-                            <div class="flex items-center gap-1">
-                                <span class="bg-white/15 text-white text-[5.5px] px-1.5 py-0.5 rounded-full font-medium whitespace-nowrap">Have an Account</span>
-                                <span class="bg-white text-[#0076D7] text-[5.5px] px-1.5 py-0.5 rounded-full font-bold whitespace-nowrap">Sign Up</span>
-                            </div>
+                        <div class="flex gap-1 px-2 py-1 border-b">
+                            @foreach(['Sort By', 'Top Rated', 'Quick Resp.'] as $t)
+                                <span class="text-[6px] bg-gray-100 rounded px-1.5 py-0.5 text-gray-600">{{ $t }}</span>
+                            @endforeach
                         </div>
-
-                        {{-- Location pill --}}
-                        <div class="px-2.5 -mt-1.5 mb-2 flex-shrink-0">
-                            <div class="bg-white rounded-full shadow-sm px-2 py-1 flex items-center gap-1 w-fit">
-                                <svg class="w-2 h-2 text-[#0076D7]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1112 6a2.5 2.5 0 010 5.5z"/></svg>
-                                <span class="text-[5.5px] font-semibold text-gray-700">Delhi</span>
-                                <svg class="w-1.5 h-1.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-                            </div>
-                        </div>
-
-                        {{-- Search bar --}}
-                        <div class="px-2.5 mb-2 flex-shrink-0">
-                            <div class="bg-white rounded-full shadow-sm px-2 py-1.5 flex items-center gap-1.5 border border-gray-100">
-                                <svg class="w-2.5 h-2.5 text-[#0076D7] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/></svg>
-                                <span class="text-[6.5px] text-gray-400">Search Services</span>
-                            </div>
-                        </div>
-
-                        {{-- Auto-rotating banner carousel --}}
-                        <div class="px-2.5 mb-2 flex-shrink-0" x-data="{ slide: 0 }" x-init="setInterval(() => slide = (slide + 1) % 3, 2200)">
-                            <div class="relative rounded-lg overflow-hidden h-16 bg-gradient-to-br from-amber-100 via-lime-100 to-emerald-200">
-                                <div class="absolute inset-0 flex items-center justify-between px-2">
-                                    <div>
-                                        <div class="text-[7.5px] font-bold text-emerald-800 leading-tight">Relax &<br>Rejuvenate</div>
-                                        <span class="inline-block mt-1 bg-emerald-600 text-white text-[5px] font-semibold px-1.5 py-0.5 rounded">Book Now</span>
-                                    </div>
-                                    <div class="w-10 h-10 rounded-full bg-white/40 flex-shrink-0"></div>
-                                </div>
-                                <div class="absolute bottom-1 left-1/2 -translate-x-1/2 flex gap-0.5">
-                                    <template x-for="i in 3" :key="i">
-                                        <span class="w-1 h-1 rounded-full transition-colors duration-300" :class="slide === i - 1 ? 'bg-[#0076D7]' : 'bg-white/70'"></span>
-                                    </template>
-                                </div>
-                            </div>
-                        </div>
-
-                        {{-- Ranked-higher business teaser card --}}
-                        <div class="mx-2.5 border-2 border-[#0076D7] rounded-lg p-2 mb-2 relative flex-shrink-0 bg-white">
-                            <div class="absolute -top-2 left-2 bg-[#0076D7] text-white text-[5px] px-1.5 py-0.5 rounded whitespace-nowrap">
+                        <div class="px-2 py-1 text-[6px] text-gray-500">6.5k Results for your search</div>
+                        <div class="mx-2 border-2 border-[#0076D7] rounded-lg p-2 mb-1.5 relative">
+                            <div class="absolute -top-2 left-2 bg-[#0076D7] text-white text-[5px] px-1.5 py-0.5 rounded">
                                 Your Business Will Get Ranked Higher
                             </div>
-                            <div class="flex items-center gap-1.5 mt-1">
-                                <div class="w-7 h-7 bg-blue-100 rounded flex items-center justify-center relative">
+                            <div class="flex items-center gap-1.5">
+                                <div class="w-7 h-7 bg-blue-100 rounded flex items-center justify-center">
                                     <span class="text-[7px] text-[#0076D7] font-bold">VP</span>
-                                    <span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#22c55e] rounded-full border border-white anim-ping-slow"></span>
                                 </div>
                                 <div>
                                     <div class="text-[7px] font-semibold">Vantage Point</div>
@@ -208,62 +274,50 @@
                                 @endforeach
                             </div>
                         </div>
-
-                        {{-- Categories --}}
-                        @php
-                            // ⚠️ Placeholder labels — replace with your real top-8 category list + slugs once confirmed.
-                            $mockCategories = [
-                                ['icon' => 'graduation-cap', 'label' => 'Corporate Training'],
-                                ['icon' => 'heart',          'label' => 'Wedding Functions'],
-                                ['icon' => 'scissors',       'label' => 'Salon'],
-                                ['icon' => 'wrench',         'label' => 'Plumber'],
-                                ['icon' => 'landmark',       'label' => 'Government'],
-                                ['icon' => 'truck',          'label' => 'Packers & Movers'],
-                                ['icon' => 'camera',         'label' => 'Photography'],
-                                ['icon' => 'grid',           'label' => 'More'],
-                            ];
-                        @endphp
-                        <div class="px-2.5 mb-2 flex-1 overflow-hidden">
-                            <div class="text-[6.5px] font-bold text-gray-700 mb-1">Categories</div>
-                            <div class="grid grid-cols-4 gap-x-1 gap-y-1.5">
-                                @foreach($mockCategories as $cat)
-                                    <div class="flex flex-col items-center gap-0.5">
-                                        <div class="w-6 h-6 rounded-full bg-blue-50 flex items-center justify-center">
-                                            <i data-lucide="{{ $cat['icon'] }}" class="w-3 h-3 text-[#0076D7]"></i>
-                                        </div>
-                                        <span class="text-[4.5px] text-gray-600 text-center leading-tight">{{ $cat['label'] }}</span>
+                        <div class="mx-2 border border-gray-200 rounded-lg p-2">
+                            <div class="flex items-center gap-1.5">
+                                <div class="w-7 h-7 bg-gray-100 rounded"></div>
+                                <div>
+                                    <div class="text-[7px] font-medium">Evergreen Solutions</div>
+                                    <div class="flex items-center gap-0.5">
+                                        <svg class="w-2 h-2 fill-yellow-300 text-yellow-300" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 19.771l-7.416 3.642 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                                        <span class="text-[6px] text-gray-500">4.8 &#9733; 777 Ratings</span>
                                     </div>
-                                @endforeach
+                                </div>
                             </div>
                         </div>
-
-                        {{-- Floating action button --}}
-                        <div class="absolute right-2.5 bottom-14 w-6 h-6 rounded-full bg-[#0076D7] shadow-lg flex items-center justify-center anim-pulse-ring">
-                            <svg class="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-                        </div>
-
-                        {{-- Bottom tab bar --}}
-                        <div class="bg-white border-t border-gray-100 px-2.5 py-2 flex items-center justify-between mt-auto flex-shrink-0">
-                            <div class="flex flex-col items-center gap-0.5">
-                                <svg class="w-2.5 h-2.5 text-[#0076D7]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3l9 8h-3v9h-4v-6H10v6H6v-9H3z"/></svg>
-                                <span class="text-[5px] text-[#0076D7] font-semibold">Home</span>
-                            </div>
-                            <div class="flex flex-col items-center gap-0.5">
-                                <svg class="w-2.5 h-2.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
-                                <span class="text-[5px] text-gray-400">Category</span>
-                            </div>
-                            <div class="flex flex-col items-center gap-0.5">
-                                <svg class="w-2.5 h-2.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-                                <span class="text-[5px] text-gray-400">Profile</span>
+                        <div class="mx-2 mt-2 border-2 border-dashed border-[#0076D7] rounded-lg p-2 bg-blue-50">
+                            <div class="text-[6px] text-[#0076D7] font-bold mb-1">Your Business</div>
+                            <div class="flex items-center gap-1">
+                                <div class="w-6 h-6 bg-blue-200 rounded"></div>
+                                <div>
+                                    <div class="text-[6px] font-semibold text-gray-700">Top Search</div>
+                                    <div class="flex items-center gap-0.5">
+                                        <svg class="w-1.5 h-1.5 fill-yellow-400 text-yellow-400" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 19.771l-7.416 3.642 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                                        <span class="text-[5px]">4.8 &#9733;</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
+
             </div>
+
+
+
+
+
         </div>
     </section>
 
-    {{-- ===== STATS BAR ===== --}}
+    {{--
+        ===== STATS BAR =====
+        FIXED: previously duplicated the exact same 4 numbers shown next to the phone mockup above.
+        Now shows DIFFERENT, complementary metrics so nothing repeats within one scroll.
+    --}}
     <section class="bg-[#0076D7] py-10 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-white relative z-10">
             @foreach([
@@ -296,7 +350,7 @@
                 <div class="md:w-56 flex-shrink-0" data-reveal data-reveal-from="left">
                     <div class="text-7xl text-gray-200 font-serif leading-none select-none">"</div>
                     <h2 class="text-2xl font-bold text-gray-800 mt-2">Success Stories</h2>
-                    <p class="text-[#0076D7] font-semibold mt-1">6.3 Lakh+ Advertisers</p>
+                    <p class="text-[#0076D7] font-semibold mt-1">6.3 K+ Advertisers</p>
                     <button class="mt-4 border-2 border-[#0076D7] text-[#0076D7] px-5 py-2 rounded-lg text-sm font-semibold hover:bg-[#0076D7] hover:text-white hover:scale-105 transition-all duration-300">
                         See All Stories
                     </button>
@@ -339,7 +393,7 @@
     {{-- ===== BENEFITS ===== --}}
     @php
         $benefits = [
-            ['icon' => 'users', 'title' => '18.2 Crore+ Buyers', 'desc' => "Access to India's largest verified buyer network across all major cities and towns."],
+            ['icon' => 'users', 'title' => '160+ Buyers', 'desc' => "Access to India's largest verified buyer network across all major cities and towns."],
             ['icon' => 'trending-up', 'title' => 'Rank Above Competitors', 'desc' => 'Get premium placement in search results and outrank your local competition instantly.'],
             ['icon' => 'map-pin', 'title' => 'Hyper-Local Targeting', 'desc' => 'Reach customers exactly in your area — city, locality, or pin code level precision.'],
             ['icon' => 'bar-chart-2', 'title' => 'Real-Time Analytics', 'desc' => 'Track leads, calls, and conversions with a powerful business dashboard.'],
@@ -368,7 +422,11 @@
         </div>
     </section>
 
-    {{-- ===== FEATURES ===== --}}
+    {{--
+        ===== FEATURES =====
+        FIXED: moved ABOVE pricing. Visitors now see what they're paying for
+        before being asked to choose a plan — standard, better-converting order.
+    --}}
     @php
         $features = [
             ['icon' => 'search', 'title' => 'Smart Search Placement', 'desc' => 'Your business appears when buyers actively search for your services — maximum intent-driven visibility.'],
@@ -400,8 +458,14 @@
         </div>
     </section>
 
-    {{-- ===== PRICING ===== --}}
-    <section id="pricing" class="py-20 bg-slate-100/60">
+    {{--
+        ===== PRICING =====
+        FIXED: reordered ₹0 → ₹1000 → ₹2000 → ₹3000 → ₹5000 → ₹10000 (was scrambled).
+        FIXED: package "₹5000 / Coins (6099)" previously listed "Coins (3529) Free First Time"
+        in its features — a leftover copy-paste from the ₹3000 tier. Removed that line; the
+        feature list now only states facts that are true for THIS tier.
+    --}}
+    <section class="py-20 bg-slate-100/60">
         <div class="container mx-auto px-4 md:px-6">
 
             <div class="text-center mb-14" data-reveal>
@@ -517,6 +581,7 @@
                         'Push Notification',
                         'Roles & Permissions',
                         'Unlimited support',
+                        // 'Coins (3529) Free First Time' — REMOVED: wrong tier's coin amount, was a copy-paste error
                         'Verified & Unique Leads Only',
                         'Spam-Free & Duplicate-Free Leads',
                         'Fresh Leads, Every Time',
@@ -550,7 +615,7 @@
 
             <div class="grid md:grid-cols-3 gap-7 max-w-6xl mx-auto items-stretch">
                 @foreach($packages as $i => $pkg)
-                <div class="pkg-card relative flex flex-col rounded-3xl border-2 {{ $pkg['border'] }} bg-gradient-to-b {{ $pkg['gradient'] }} shadow-md overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 {{ $pkg['badge'] === 'Most Popular' ? 'md:scale-105 ring-2 ring-indigo-200' : '' }}"
+                <div class="pkg-card relative flex flex-col rounded-3xl border-2 {{ $pkg['border'] }} bg-gradient-to-b {{ $pkg['gradient'] }} shadow-md overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
                      data-reveal data-reveal-delay="{{ $i * 100 }}">
 
                     @if($pkg['badge'])
@@ -590,7 +655,7 @@
                         </ul>
 
                         @if($pkg['cta_style'] === 'solid')
-                            <button class="btn-shimmer w-full py-3.5 rounded-full font-semibold text-base text-white bg-indigo-600 hover:bg-indigo-700 shadow-lg shadow-indigo-300/40 hover:shadow-indigo-400/50 hover:scale-105 transition-all duration-300">
+                            <button class="w-full py-3.5 rounded-full font-semibold text-base text-white bg-indigo-600 hover:bg-indigo-700 shadow-lg shadow-indigo-300/40 hover:shadow-indigo-400/50 hover:scale-105 transition-all duration-300">
                                 {{ $pkg['cta'] }}
                             </button>
                         @else
@@ -612,11 +677,11 @@
         <div class="absolute inset-0 opacity-10 anim-pulse-slow" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 24px 24px;"></div>
         <div class="max-w-3xl mx-auto px-4 text-center text-white relative z-10" data-reveal>
             <h2 class="text-3xl font-bold mb-3">Ready to Grow Your Business?</h2>
-            <p class="text-blue-100 mb-8">Join 6.3 lakh+ businesses already thriving on QuickDials</p>
+            <p class="text-blue-100 mb-8">Join 1,478 + businesses already thriving on QuickDials</p>
             <div class="flex flex-col sm:flex-row gap-3 justify-center">
                 <button
                     @click="scrollTo('hero')"
-                    class="btn-shimmer bg-white text-[#0076D7] font-bold px-8 py-3 rounded-xl hover:bg-blue-50 hover:scale-105 transition-all duration-300"
+                    class="bg-white text-[#0076D7] font-bold px-8 py-3 rounded-xl hover:bg-blue-50 hover:scale-105 transition-all duration-300"
                 >
                     Start Advertising Now
                 </button>
@@ -657,13 +722,14 @@
                             class="w-full flex justify-between items-center py-4 text-left text-sm font-medium text-gray-800 hover:text-[#0076D7] transition-colors"
                         >
                             {{ $faq['q'] }}
-                            <svg class="w-4 h-4 flex-shrink-0 text-gray-400 transition-transform duration-300" :class="open ? 'rotate-180 text-[#0076D7]' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                            <svg x-show="!open" class="w-4 h-4 flex-shrink-0 text-gray-400 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                            <svg x-show="open" class="w-4 h-4 flex-shrink-0 text-[#0076D7]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display:none;"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/></svg>
                         </button>
                         <div
                             x-show="open"
                             x-transition:enter="transition ease-out duration-200"
-                            x-transition:enter-start="opacity-0 -translate-y-1"
-                            x-transition:enter-end="opacity-100 translate-y-0"
+                            x-transition:enter-start="opacity-0"
+                            x-transition:enter-end="opacity-100"
                             x-transition:leave="transition ease-in duration-150"
                             x-transition:leave-start="opacity-100"
                             x-transition:leave-end="opacity-0"
@@ -678,49 +744,6 @@
         </div>
     </section>
 
-    {{-- ===== STICKY MOBILE CTA (conversion booster — visible only on small screens) ===== --}}
-    <div
-        x-data="{ show: false }"
-        x-init="window.addEventListener('scroll', () => show = window.scrollY > 500)"
-        x-show="show"
-        x-transition:enter="transition ease-out duration-300"
-        x-transition:enter-start="translate-y-full opacity-0"
-        x-transition:enter-end="translate-y-0 opacity-100"
-        x-transition:leave="transition ease-in duration-200"
-        x-transition:leave-start="translate-y-0 opacity-100"
-        x-transition:leave-end="translate-y-full opacity-0"
-        class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-200 shadow-2xl px-4 py-3 flex items-center gap-3"
-        style="display:none;"
-    >
-        <a href="tel:+918888888888" class="flex-1 flex items-center justify-center gap-1.5 border-2 border-[#0076D7] text-[#0076D7] font-semibold py-2.5 rounded-lg text-sm">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.61 21 3 13.39 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>
-            Call
-        </a>
-        <button @click="scrollTo('hero')" class="flex-1 bg-[#0076D7] text-white font-semibold py-2.5 rounded-lg text-sm">
-            Advertise Now
-        </button>
-    </div>
-
-    {{-- ===== FOOTER ===== --}}
-    <footer class="bg-gray-900 text-gray-400 py-10">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-                <div class="text-center md:text-left">
-                    <span class="text-2xl font-bold text-white">Quick</span><span class="text-2xl font-bold text-[#0076D7]">Dials</span>
-                    <p class="text-sm mt-1 text-gray-500">India's No. 1 Local Search Engine</p>
-                </div>
-                <div class="flex flex-wrap justify-center gap-4 text-sm">
-                    @foreach(['About Us', 'Careers', 'Privacy Policy', 'Terms of Use', 'Contact Us'] as $link)
-                        <a href="#" class="hover:text-white transition-colors">{{ $link }}</a>
-                    @endforeach
-                </div>
-            </div>
-            <div class="mt-6 pt-6 border-t border-gray-800 text-center text-xs text-gray-600">
-                &copy; {{ date('Y') }} QuickDials. All rights reserved.
-            </div>
-        </div>
-    </footer>
-
 </div>
 
 {{-- ===== Scroll-reveal engine + counter animation ===== --}}
@@ -728,7 +751,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     if (window.lucide) window.lucide.createIcons();
 
-    // ── Scroll-reveal: fade + directional slide-in, staggered via data-reveal-delay ──
+    // ── Bold scroll-reveal: fade + directional slide-in, staggered via data-reveal-delay ──
     var revealEls = document.querySelectorAll('[data-reveal]');
     var revealObserver = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
@@ -752,8 +775,8 @@ document.addEventListener('DOMContentLoaded', function () {
         var started = false;
 
         function formatValue(n) {
-            if (format === 'crore') return (n / 10000000).toFixed(1) + ' Crore';
-            if (format === 'lakh') return (n / 100000).toFixed(1) + ' Lakh';
+            if (format === 'crore') return (n / 10000000).toFixed(1) + ' K';
+            if (format === 'lakh') return (n / 100000).toFixed(1) + ' K';
             return n.toString();
         }
 
@@ -767,8 +790,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     function tick(now) {
                         if (!startTime) startTime = now;
                         var progress = Math.min((now - startTime) / dur, 1);
-                        var eased = 1 - Math.pow(1 - progress, 3); // ease-out-cubic
-                        var current = Math.floor(eased * to);
+                        var current = Math.floor(progress * to);
                         el.textContent = formatValue(current) + (progress >= 1 ? suffix : '');
                         if (progress < 1) {
                             requestAnimationFrame(tick);
@@ -822,47 +844,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     .anim-bounce-in { animation: bounceIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
 
-    /* ── Animated gradient headline text ── */
-    @keyframes gradientShift {
-        0%, 100% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-    }
-    .text-gradient-anim {
-        background: linear-gradient(90deg, #0076D7, #22c55e, #0076D7);
-        background-size: 200% auto;
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        animation: gradientShift 4s ease-in-out infinite;
-    }
-
-    /* ── Notification "online" dot ping ── */
-    @keyframes pingSlow {
-        0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6); }
-        100% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
-    }
-    .anim-ping-slow { animation: pingSlow 1.8s ease-out infinite; }
-
-    /* ── Floating action button pulse ring ── */
-    @keyframes pulseRing {
-        0%, 100% { box-shadow: 0 0 0 0 rgba(0, 118, 215, 0.4); }
-        50% { box-shadow: 0 0 0 5px rgba(0, 118, 215, 0); }
-    }
-    .anim-pulse-ring { animation: pulseRing 2.2s ease-in-out infinite; }
-
-    /* ── Shimmer sweep on primary buttons ── */
-    .btn-shimmer { position: relative; overflow: hidden; }
-    .btn-shimmer::after {
-        content: '';
-        position: absolute;
-        top: 0; left: -75%;
-        width: 50%; height: 100%;
-        background: linear-gradient(120deg, transparent, rgba(255,255,255,0.5), transparent);
-        transform: skewX(-20deg);
-        transition: left 0.6s ease;
-    }
-    .btn-shimmer:hover::after { left: 125%; }
-
     .line-clamp-3 {
         display: -webkit-box;
         -webkit-line-clamp: 3;
@@ -877,15 +858,14 @@ document.addEventListener('DOMContentLoaded', function () {
             transform: none !important;
             transition: none !important;
         }
-        .anim-pulse-slow, .anim-float, .anim-bounce-in, .anim-ping-slow, .anim-pulse-ring, .text-gradient-anim {
+        .anim-pulse-slow, .anim-float, .anim-bounce-in {
             animation: none !important;
         }
-        .btn-shimmer::after { display: none; }
     }
 </style>
-
  
-
+ 
+ 
 
 
 @endsection

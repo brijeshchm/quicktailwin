@@ -660,8 +660,20 @@ var dataTableChildCategorySEO = $('#datatable-Childcategory-seo').dataTable({
 	}
 }).api();
 
-
-
+var dataTableNewsLists = $('#datatable-news-list').dataTable({
+	"fixedHeader": true,
+	"processing":true,
+	"serverSide":true,
+	"paging":true,
+	"ajax":{
+		url:"/developer/news/getNewsdetails",
+		data:function(d){
+			d.page = (d.start/d.length)+1;			 
+			d.columns = null;
+			d.order = null;
+		}
+	}
+}).api();
 
 
 var dataTableClients = $('#datatable-clients').on('draw.dt',function(e,settings){
@@ -3254,6 +3266,271 @@ var dataTableAssignedKeywords = $('#datatable-assigned-keywords').dataTable({
 			
 		};
 	})();
+
+	var newsController = (function(){
+		return {		 		  
+			 
+			 saveNews:function(THIS){	
+			  var $this = $(THIS);
+			var form = new FormData(THIS);			 
+				$.ajax({
+					url:"/developer/news/addNews",
+					type:"POST",					   
+					dataType:"json",	
+					data:form,
+					 cache: false,
+					contentType: false, 
+                    processData: false,                      
+					success:function(data){
+					 	
+						if(data.status){	
+					 					
+						$('#messagemodel .modal-title').text("News Add");	
+						$('#messagemodel .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
+						$('#messagemodel').modal({keyboard:false,backdrop:'static'});
+						$('#messagemodel').css({'width':'100%'});
+							removeValidationErrors($this);
+						 	window.location.href ="/developer/news/news-list";
+						}else{
+							$('#messagemodel .modal-title').text("Meta Information");	
+							$('#messagemodel .modal-body').html("<div class='alert alert-danger'>"+data.msg+"</div>");			
+							$('#messagemodel').modal({keyboard:false,backdrop:'static'});
+							$('#messagemodel').css({'width':'100%'});		 
+							
+						}
+					},
+					error:function(jqXHR, textStatus, errorThrown){
+					 
+						var response = JSON.parse(jqXHR.responseText);
+						if(response.status){ 
+							showValidationErrors($this,response.errors);						 
+						}else{
+							alert('Something went wrong');
+						}
+						 
+					}
+				}); 
+				 return false;	
+			},	
+			 updateNewsMeta:function(THIS,id){	
+			  var $this = $(THIS);
+			var form = new FormData(THIS);			 
+				$.ajax({
+					url:"/developer/news/updateNewsMeta/"+id,
+					type:"POST",					   
+					dataType:"json",	
+					data:form,
+					 cache: false,
+					contentType: false, 
+                    processData: false,                      
+					success:function(data){
+					 	
+						if(data.status){	
+					 					
+						$('#messagemodel .modal-title').text("Meta Information");	
+						$('#messagemodel .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
+						$('#messagemodel').modal({keyboard:false,backdrop:'static'});
+						$('#messagemodel').css({'width':'100%'});
+							removeValidationErrors($this);
+						 
+						}else{
+							$('#messagemodel .modal-title').text("Meta Information");	
+							$('#messagemodel .modal-body').html("<div class='alert alert-danger'>"+data.msg+"</div>");			
+							$('#messagemodel').modal({keyboard:false,backdrop:'static'});
+							$('#messagemodel').css({'width':'100%'});		 
+							
+						}
+					},
+					error:function(jqXHR, textStatus, errorThrown){
+					 
+						var response = JSON.parse(jqXHR.responseText);
+						if(response.status){ 
+							showValidationErrors($this,response.errors);						 
+						}else{
+							alert('Something went wrong');
+						}
+						 
+					}
+				}); 
+				 return false;	
+			},	
+			 updateAboutNews:function(THIS,id){	
+			  var $this = $(THIS);
+			var form = new FormData(THIS);	
+		 
+				$.ajax({
+					url:"/developer/news/updateAboutNews/"+id,
+					type:"POST",					   
+					dataType:"json",	
+					data:form,
+					 cache: false,
+					contentType: false, 
+                    processData: false,                      
+					success:function(data){
+					 	
+						if(data.status){	
+					 					
+						$('#messagemodel .modal-title').text("About News");	
+						$('#messagemodel .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
+						$('#messagemodel').modal({keyboard:false,backdrop:'static'});
+						$('#messagemodel').css({'width':'100%'});
+							removeValidationErrors($this);
+							 
+						}else{
+							$('#messagemodel .modal-title').text("About Blog");	
+							$('#messagemodel .modal-body').html("<div class='alert alert-danger'>"+data.msg+"</div>");			
+							$('#messagemodel').modal({keyboard:false,backdrop:'static'});
+							$('#messagemodel').css({'width':'100%'});		 
+							
+						}
+					},
+					error:function(jqXHR, textStatus, errorThrown){
+					 
+						var response = JSON.parse(jqXHR.responseText);
+						if(response.status){ 
+							showValidationErrors($this,response.errors);						 
+						}else{
+							alert('Something went wrong');
+						}
+						 
+					}
+				}); 
+				 return false;	
+			},	
+			 updatePageContent:function(THIS,id){	
+			  var $this = $(THIS);
+			var form = new FormData(THIS);	
+		 
+				$.ajax({
+					url:"/developer/news/updatePageContent/"+id,
+					type:"POST",					   
+					dataType:"json",	
+					data:form,
+					 cache: false,
+					contentType: false, 
+                    processData: false,                      
+					success:function(data){
+					 	
+						if(data.status){	
+					 					
+						$('#messagemodel .modal-title').text("News Desciption");	
+						$('#messagemodel .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
+						$('#messagemodel').modal({keyboard:false,backdrop:'static'});
+						$('#messagemodel').css({'width':'100%'});
+							removeValidationErrors($this);
+							 
+						}else{
+							$('#messagemodel .modal-title').text("Blog Desciption");	
+							$('#messagemodel .modal-body').html("<div class='alert alert-danger'>"+data.msg+"</div>");			
+							$('#messagemodel').modal({keyboard:false,backdrop:'static'});
+							$('#messagemodel').css({'width':'100%'});		 
+							
+						}
+					},
+					error:function(jqXHR, textStatus, errorThrown){
+					 
+						var response = JSON.parse(jqXHR.responseText);
+						if(response.status){ 
+							showValidationErrors($this,response.errors);						 
+						}else{
+							alert('Something went wrong');
+						}
+						 
+					}
+				}); 
+				 return false;	
+			},	
+			
+			 updateNewsImage:function(THIS,id){	
+			  var $this = $(THIS);
+			var form = new FormData(THIS);	
+		 
+				$.ajax({
+					url:"/developer/news/updateNewsImage/"+id,
+					type:"POST",					   
+					dataType:"json",	
+					data:form,
+					 cache: false,
+					contentType: false, 
+                    processData: false,                      
+					success:function(data){
+					 	
+						if(data.status){	
+					 					
+						$('#messagemodel .modal-title').text("Blog Image");	
+						$('#messagemodel .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
+						$('#messagemodel').modal({keyboard:false,backdrop:'static'});
+						$('#messagemodel').css({'width':'100%'});
+							removeValidationErrors($this);
+							 
+						}else{
+							$('#messagemodel .modal-title').text("Blog Image");	
+							$('#messagemodel .modal-body').html("<div class='alert alert-danger'>"+data.msg+"</div>");			
+							$('#messagemodel').modal({keyboard:false,backdrop:'static'});
+							$('#messagemodel').css({'width':'100%'});		 
+							
+						}
+					},
+					error:function(jqXHR, textStatus, errorThrown){
+					 
+						var response = JSON.parse(jqXHR.responseText);
+						if(response.status){ 
+							showValidationErrors($this,response.errors);						 
+						}else{
+							alert('Something went wrong');
+						}
+						 
+					}
+				}); 
+				 return false;	
+			},	
+			 updateFaqNews:function(THIS,id){	
+			  var $this = $(THIS);
+			var form = new FormData(THIS);	
+		 
+				$.ajax({
+					url:"/developer/news/updateFaqNews/"+id,
+					type:"POST",					   
+					dataType:"json",	
+					data:form,
+					 cache: false,
+					contentType: false, 
+                    processData: false,                      
+					success:function(data){
+					 	
+						if(data.status){	
+					 					
+						$('#messagemodel .modal-title').text("FAQ News");	
+						$('#messagemodel .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
+						$('#messagemodel').modal({keyboard:false,backdrop:'static'});
+						$('#messagemodel').css({'width':'100%'});
+							removeValidationErrors($this);
+						 
+						}else{
+							$('#messagemodel .modal-title').text("FAQ Blog");	
+							$('#messagemodel .modal-body').html("<div class='alert alert-danger'>"+data.msg+"</div>");			
+							$('#messagemodel').modal({keyboard:false,backdrop:'static'});
+							$('#messagemodel').css({'width':'100%'});		 
+							
+						}
+					},
+					error:function(jqXHR, textStatus, errorThrown){
+					 
+						var response = JSON.parse(jqXHR.responseText);
+						if(response.status){ 
+							showValidationErrors($this,response.errors);						 
+						}else{
+							alert('Something went wrong');
+						}
+						 
+					}
+				}); 
+				 return false;	
+			},	
+			
+		};
+	})();
+
 
 
 var bulkLeadController = (function(){

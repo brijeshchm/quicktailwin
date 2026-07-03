@@ -3,6 +3,7 @@
 @section('description', 'Explore the best services with QuickDials. Find verified businesses, contact details, reviews, ratings, photos, addresses, and trusted local service providers near you.')
 @section('keywords',  'best top services, verified businesses, local business directory, QuickDials listings, reviews and ratings, nearby services, trusted businesses, contact details, local search engine')
 @section('content')	
+
 @include('client.components.banner-section')
 <div class="min-h-screen bg-slate-50">  
     <div class="bg-slate-900 text-white py-12">

@@ -531,6 +531,32 @@ Route::get('/blog/del_blog_banner/{id}', [App\Http\Controllers\BlogController::c
 Route::get('blog/status/{id}/{val}',[App\Http\Controllers\BlogController::class, 'status'])->middleware('auth');
 /* developer Blog routing */
 
+
+
+
+
+/* developer Blog routing */
+Route::get('news/news-list', [App\Http\Controllers\NewsController::class, 'index'])->middleware('auth');
+Route::get('news/addNews', [App\Http\Controllers\NewsController::class, 'add'])->middleware('auth');
+Route::post('news/addNews', [App\Http\Controllers\NewsController::class, 'addNews'])->middleware('auth');
+Route::get('news/editNews/{id}', [App\Http\Controllers\NewsController::class, 'edit'])->middleware('auth');
+Route::post('news/updateNewsMeta/{id}', [App\Http\Controllers\NewsController::class, 'updateNewsMeta'])->middleware('auth');
+Route::post('news/updateAboutNews/{id}', [App\Http\Controllers\NewsController::class, 'updateAboutNews'])->middleware('auth');
+Route::post('news/updatePageContent/{id}', [App\Http\Controllers\NewsController::class, 'updatePageContent'])->middleware('auth');
+
+Route::post('news/updateNewsImage/{id}', [App\Http\Controllers\NewsController::class, 'updateNewsImage'])->middleware('auth');
+Route::post('news/updateFaqNews/{id}', [App\Http\Controllers\NewsController::class, 'updateFaqNews'])->middleware('auth');
+Route::get('news/getNewsdetails', [App\Http\Controllers\NewsController::class, 'getPaginationNews'])->middleware('auth');
+Route::get('/news/delete/{id}', [App\Http\Controllers\NewsController::class, 'deleted'])->middleware('auth'); 
+Route::get('/news/del_icon/{id}', [App\Http\Controllers\NewsController::class, 'imageDeleted'])->middleware('auth'); 
+Route::get('/news/del_news_banner/{id}', [App\Http\Controllers\NewsController::class, 'delNewsBanner'])->middleware('auth'); 
+Route::get('news/status/{id}/{val}',[App\Http\Controllers\NewsController::class, 'status'])->middleware('auth');
+/* developer Blog routing */
+
+
+
+
+
 /* developer testimonials routing */
 Route::get('testimonials/testimonialsdetails', [App\Http\Controllers\TestimonialsController::class, 'index'])->middleware('auth');
 Route::match(['get','post'],'testimonials/add', [App\Http\Controllers\TestimonialsController::class, 'add'])->middleware('auth');

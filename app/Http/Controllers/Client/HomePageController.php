@@ -2161,7 +2161,7 @@ Instead of limiting learning to theory, the course takes you through:.",
         ];
  
         return view('client.category-slug', compact(
-            'slug', 'keyword', 'childCategory', 'childSlug',
+            'slug', 'keyword', 'childCategory','kwData', 'childSlug',
             'topDescription', 'bottomDescription','faqs',
             'ratingCount', 'ratingValue', 'stars', 'bgImage',
             'categoryList', 'catColors','metaKeywords',

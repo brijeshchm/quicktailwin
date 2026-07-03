@@ -2,6 +2,9 @@
 @section('title',$blogDetails['meta_title'])
 @section('description', $blogDetails['meta_description'])
 @section('keywords', $blogDetails['meta_keywords'])
+@section('og_image', !empty($blogDetails['blogImage'])
+    ? asset($blogDetails['blogImage'])
+    : asset('client/images/quickdials-og.png'))
 @section('content')
 @include('client.components.banner-section')
 

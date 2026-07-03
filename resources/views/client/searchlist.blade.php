@@ -17,6 +17,9 @@
 <meta name="robots" content="noindex, follow">
 @endif
 @endsection
+@section('og_image', !empty($kwData['key_icon'])
+    ? asset($kwData['key_icon'])
+    : asset('client/images/quickdials-og.png'))
 @section('content') 
 <style>  
     #enquiry-modal { display: none; }

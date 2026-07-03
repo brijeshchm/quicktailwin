@@ -182,6 +182,39 @@ function getFolderBlogStructure()
 }
 
 
+
+
+// FOLDER STRUCTURE GENERATOR
+// **************************
+function getFolderNewsStructure()
+{
+	try {
+		$partial_str = '';
+		$day = date('j');
+		$week = '';
+		if ($day < 11) {
+			$week = 'week_1';
+		} else if ($day >= 11 && $day < 21) {
+			$week = 'week_2';
+		} else if ($day >= 21) {
+			$week = 'week_3';
+		}
+		$partial_str = 'uploads/news/' . date('Y') . '/' . date('m') . '/' . $week;
+		$structure = public_path($partial_str);
+		if (file_exists($structure)) {
+			return $partial_str;
+		} else {
+			if (mkdir($structure, 0755, true)) {
+				return $partial_str;
+			} else {
+				throw new Exception("Folder structure not found.\nUnable to create folder structure.");
+			}
+		}
+	} catch (Exception $e) {
+		return $e->getMessage();
+	}
+}
+
 function getFolderCourseStructure()
 {
 	try {
