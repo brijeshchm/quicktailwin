@@ -10,7 +10,8 @@ use Auth;
 use Illuminate\Http\Request;
 use DB;
 use Hash;
- 
+use Mail;
+use App\Models\Email;
 use App\Models\Permission;
 use App\Models\Capability;
 class AuthController extends Controller
@@ -110,15 +111,148 @@ class AuthController extends Controller
     { 
         return view('auth.login');
     }
-	
 	/**
      * Handle an authentication attempt
      *
      * @return Response
      */
+	public function checklogin(Request $request)
+	{	       
+			 
+		return view('auth.login');	
+		
+	}
+	/*
+     * Handle an authentication attempt
+     *
+     * @return Response
+     */
 	 
+        /**
+     * Handle an authentication attempt
+     *
+     * @return Response
+     */
+	public function getOTP(Request $request){
+		if($request->session()->has('user.email') && $request->session()->has('user.password') && ($request->session()->has('user.mobile') || $request->session()->has('user.otp_to_email')))
+			return response()->view('auth.otp');
+		else
+			return redirect()->intended('/developer/login');
+	}
+	 public function authenticate(Request $request)
+	{
+		
+		 
+		if(!empty(trim($request->input('email'))) && trim($request->input('password'))){	
+ 	
+				$email = Email::all();
 	 
-	public function authenticate(Request $request)
+			$user = User::where('email',$request->input('email'))->select('email','password','user_name','role','id','mobile','remember_token','first_name')->first();
+				  
+			if($user){
+				if (Hash::check(trim($request->input('password')), $user->password)) {
+					 
+					$request->session()->put('user.email', $request->input('email'));
+					$request->session()->put('user.password', $request->input('password'));
+					$request->session()->put('user.remember_token', $user->remember_token);
+					$request->session()->put('user.first_name', $user->first_name); 
+					$request->session()->put('user.mobile', $user->mobile); 
+				 			 		
+					 
+					$user = $request->session()->get('user');
+		 
+				 
+			return view('auth.mobile',compact('email'));
+					
+					
+					return $request->session()->all();
+				}else{
+					return redirect('/developer/check/login')->withErrors(['password'=>'Incorrect Password'])->withInput();
+				}
+			}else{
+				//return 'email not found';
+				return redirect('/developer/check/login')->withErrors(['generic_err'=>'Email ID/Password is incorrect'])->withInput();
+			}
+		}
+		if($request->has('mobile') && $request->input('mobile') != ''){
+			$request->session()->put('user.mobile', $request->input('mobile'));
+			$otp = mt_rand(100000, 999999);
+			$request->session()->put('user.otp', $otp);
+			$message = "{$otp} is Lead Portal Verification Code for {$request->session()->get('user.name')}.";
+	//	echo $request->session()->get('user.mobile');	 echo "<pre>";print_r($message);
+			//$this->sendUandP($message);
+		//	$send = sendSMS($request->session()->get('user.mobile'),$message);
+ 
+			return redirect('/developer/login/otp');
+			//return view('auth.otp',['otp'=>$otp]);
+			//return $request->session()->all();
+		}
+		else if($request->has('otp_to_email') && $request->input('otp_to_email') != ''){
+		    
+		    $emailDetails = Email::where('email',$request->input('otp_to_email'))->first();
+		    
+		    
+		    if(!empty($emailDetails)){
+			// $request->session()->put('user.email', $request->input('otp_to_email'));
+			$otp = mt_rand(100000, 999999);
+			$request->session()->put('client.otp', $otp);
+			$message = "{$otp} is Verification Code for {$request->session()->get('user.name')} from {$request->input('otp_to_email')}.";
+			
+			$headers = "From:otp@estivals.com";
+			
+			// mail($request->input('otp_to_email'),$otp .' OTP ',$message,$headers);
+	 
+
+            $subject  = "{$otp} is QuickDials Verification Code";
+ 
+			Mail::send(
+				'emails.sendotp_to_email',
+				['otp' => $otp, 'name' => $emailDetails->name],
+				function ($m) use ($request, $subject, $emailDetails) {
+					$m->from(env('MAIL_USERNAME'), 'QuickDials');
+					$m->to($emailDetails->email, "")->subject($subject);
+				}
+			);
+
+			
+			 
+			return redirect('/developer/login/otp');
+			
+		}else{
+			//return 'email not found';
+				return redirect('/developer/check/login')->withErrors(['generic_err'=>'Wrong Email ID'])->withInput();
+		}
+		}
+		
+		if($request->has('otp')){
+			if(($request->session()->get('client.otp')==$request->input('otp'))){
+				$user = $request->session()->get('user');
+                // dd($user);
+				if (Auth::attempt(['email' => $user['email'], 'password' => $user['password']], $user['remember_token'])) {
+					$request->session()->forget('user');
+                    if (Auth::guard('developer')->attempt($user)) {
+					return redirect()->intended('/developer/dashboard');
+					}
+					 
+				}
+			}else{
+				return redirect('/developer/login/otp')->withErrors(['otp'=>'Invalid OTP'])->withInput();
+			}
+		}
+		if($request->has('email')&&!$request->has('password')&&$request->has('lgn')){
+			return redirect('/login')->withErrors(['password'=>'Password required'])->withInput();
+		}
+		if($request->has('password')&&!$request->has('email')&&$request->has('lgn')){
+			return redirect('/developer/login')->withErrors(['email'=>'Email required'])->withInput();
+		}
+		if(!$request->has('password')&&!$request->has('email')&&$request->has('lgn')){
+			return redirect('/developer/login')->withErrors(['email'=>'Email required','password'=>'Password required'])->withInput();
+		}
+		//return $request->input('email')."=>".$request->input('password')."=>".$request->input('remember');
+	}
+	
+
+	public function authenticate_old(Request $request)
 	{
  
 		 

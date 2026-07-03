@@ -201,9 +201,33 @@ Route::post('keyword/{id}/banners',         [KeywordBannerController::class, 'up
 	Route::get('form-type/delete/{id}', [App\Http\Controllers\FormTypeController::class, 'destroy'])->middleware('auth:developer');
 	 
 /* form type */
+
+
+
+
+/* form email */
+ 
+	Route::get('email', [App\Http\Controllers\EmailController::class, 'index'])->middleware('auth:developer');
+	Route::get('email/add', [App\Http\Controllers\EmailController::class, 'emailAdd'])->middleware('auth:developer');
+	Route::post('email/saveFormEmail', [App\Http\Controllers\EmailController::class, 'emailSave'])->middleware('auth:developer');
+	Route::get('email/edit/{id}', [App\Http\Controllers\EmailController::class, 'edit'])->middleware('auth:developer');
+	Route::post('email/editSaveEmail/{id}', [App\Http\Controllers\EmailController::class, 'emailEditSave'])->middleware('auth:developer');
+ 
+	Route::get('email/get-email', [App\Http\Controllers\EmailController::class, 'getEmailPagination'])->middleware('auth:developer');
+	Route::get('/email/status/{id}/{val}', [App\Http\Controllers\EmailController::class, 'status'])->middleware('auth:developer');
+
+	Route::get('email/delete/{id}', [App\Http\Controllers\EmailController::class, 'destroy'])->middleware('auth:developer');
+	 
+/* form email */
   
 
-/* form type */
+Route::get('contacts', [App\Http\Controllers\ContactsController::class, 'index'])->middleware('auth:developer');
+Route::get('contacts/get-contacts', [App\Http\Controllers\ContactsController::class, 'getContactsPagination'])->middleware('auth:developer');
+Route::get('contacts/view/{id}', [App\Http\Controllers\ContactsController::class, 'view'])->middleware('auth:developer');
+Route::get('contacts/delete/{id}', [App\Http\Controllers\ContactsController::class, 'destroy'])->middleware('auth:developer');
+	
+
+/* form home_slider */
  
 	Route::get('home_slider', [App\Http\Controllers\HomeSliderController::class, 'index'])->middleware('auth:developer');
 	Route::get('home_slider/add', [App\Http\Controllers\HomeSliderController::class, 'sliderAdd'])->middleware('auth:developer');
@@ -219,7 +243,7 @@ Route::post('keyword/{id}/banners',         [KeywordBannerController::class, 'up
 	 
 /* form type */
 
-/* form type */
+/* form author */
  
 	Route::get('author', [App\Http\Controllers\AuthorController::class, 'index'])->middleware('auth:developer');
 	Route::get('author/add', [App\Http\Controllers\AuthorController::class, 'authorAdd'])->middleware('auth:developer');

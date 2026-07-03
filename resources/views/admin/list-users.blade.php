@@ -31,6 +31,7 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
+                                            <th>Name</th>
                                             <th>User Name</th>
                                             <th>Role</th>
                                             <th>Capabilities</th>
@@ -42,6 +43,7 @@
 										<?php foreach($users as $user): ?>
                                         <tr>
                                             <td><?php echo $user->id; ?></td>
+                                            <td><?php echo $user->first_name; ?></td>
                                             <td><?php echo $user->user_name; ?></td>
                                             <td><?php echo $user->role; ?></td>
                                             <td><?php echo $user->capabilities; ?></td>	

@@ -610,6 +610,42 @@ var dataTableformType = $('#datatable-form-type').dataTable({
 	}
 }).api();
 
+
+var dataTableEmail = $('#datatable-email').dataTable({
+	"fixedHeader": true,
+	"processing":true,
+	"serverSide":true,
+	"paging":true,
+	"responsive":true,
+	"ajax":{
+		url:"/developer/email/get-email",
+		data:function(d){
+			d.page = (d.start/d.length)+1;
+			d.columns = null;
+			d.order = null;
+		}
+	}
+}).api();
+
+
+var dataTableContacts = $('#datatable-contacts').dataTable({
+	"fixedHeader": true,
+	"processing":true,
+	"serverSide":true,
+	"paging":true,
+	"responsive":true,
+	"ajax":{
+		url:"/developer/contacts/get-contacts",
+		data:function(d){
+			d.page = (d.start/d.length)+1;
+			d.columns = null;
+			d.order = null;
+		}
+	}
+}).api();
+
+
+
 var dataTablehomeSlider = $('#datatable-home_slider').dataTable({
 	"fixedHeader": true,
 	"processing":true,
@@ -5034,6 +5070,243 @@ var formTypeController = (function(){
 	})(); 
 
  
+var emailController = (function(){
+		return {
+			checked_Ids:[],				  
+			saveEmail:function(THIS){	
+			  var $this = $(THIS);
+			  var form = new FormData(THIS);		 
+				$.ajax({
+					url:"/developer/email/saveFormEmail",
+					type:"POST",					   
+					dataType:"json",
+					data:form,
+					cache: false,
+					contentType: false, 
+                    processData: false,             
+					success:function(data){	
+					  
+						if(data.status){	
+						 
+						$('#messagemodel .modal-title').text("Email");	
+						$('#messagemodel .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
+						$('#messagemodel').modal({keyboard:false,backdrop:'static'});
+						$('#messagemodel').css({'width':'100%'});
+							removeValidationErrors($this);
+							window.location.href ="/developer/email"; 
+							
+						}else{
+							$('#messagemodel .modal-title').text("email");	
+							$('#messagemodel .modal-body').html("<div class='alert alert-danger'>"+data.msg+"</div>");			
+							$('#messagemodel').modal({keyboard:false,backdrop:'static'});
+							$('#messagemodel').css({'width':'100%'});
+						}
+					},
+					error:function(jqXHR, textStatus, errorThrown){
+					 
+						var response = JSON.parse(jqXHR.responseText);
+						if(response.status){ 
+						
+                            var errors = response.errors;						 
+                            $('.form_email').find('.form-group').removeClass('has-error');
+                            $('.form_email').find('.help-block').remove();
+                            for (var key in errors) {
+                            if(errors.hasOwnProperty(key)){	
+                            
+								var el = $('.form_email').find('*[name="'+key+'"]');
+								$('<span class="help-block"><strong>'+errors[key][0]+'</strong></span>').insertAfter(el);
+								el.closest('.form-group').addClass('has-error');
+                            }
+                            }
+						
+							//showValidationErrors($this,response.errors);						 
+						}else{
+							alert('Something went wrong');
+						}
+						 
+					}
+				}); 
+				 return false;	
+			},
+
+			editSaveEmail:function(THIS,id){	
+			  var $this = $(THIS);
+		 
+			var form = new FormData(THIS);	
+			
+				$.ajax({
+					url:"/developer/email/editSaveEmail/"+id,
+					type:"POST",					   
+					dataType:"json",	
+					data:form,
+					 cache: false,
+					contentType: false, 
+                    processData: false,                      
+					success:function(data){
+					 	
+						if(data.status){	
+					 					
+						$('#messagemodel .modal-title').text("Email");	
+						$('#messagemodel .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
+						$('#messagemodel').modal({keyboard:false,backdrop:'static'});
+						$('#messagemodel').css({'width':'100%'});
+							removeValidationErrors($this);
+							window.location.href ="/developer/email";
+						}else{
+							$('#messagemodel .modal-title').text("Email");	
+							$('#messagemodel .modal-body').html("<div class='alert alert-danger'>"+data.msg+"</div>");			
+							$('#messagemodel').modal({keyboard:false,backdrop:'static'});
+							$('#messagemodel').css({'width':'100%'});		 
+							
+						}
+					},
+					error:function(jqXHR, textStatus, errorThrown){
+					 
+						var response = JSON.parse(jqXHR.responseText);
+						if(response.status){ 
+							showValidationErrors($this,response.errors);						 
+						}else{
+							alert('Something went wrong');
+						}
+						 
+					}
+				}); 
+				 return false;	
+			},		 	 
+			 
+			delete:function(id){
+		 
+			 	if( confirm("Are you sure you want to delete?") ) {	
+				  
+				$.ajax({
+					url:"/developer/email/delete/"+id,
+					type:"GET",
+				 
+					success:function(response){	
+					 
+					if(response.status){
+						$('#messagemodel .modal-title').text("Email Delete");	
+						$('#messagemodel .modal-body').html("<div class='alert alert-success'>"+response.msg+"</div>");			
+						$('#messagemodel').modal({keyboard:false,backdrop:'static'});
+						$('#messagemodel').css({'width':'100%'});
+						dataTableEmail.ajax.reload( null, false );   
+					}else{
+							$('#messagemodel .modal-title').text("seoCity Delete");	
+							$('#messagemodel .modal-body').html("<div class='alert alert-danger'>"+response.msg+"</div>");		
+							$('#messagemodel').modal({keyboard:false,backdrop:'static'});
+							$('#messagemodel').css({'width':'100%'});
+					}						
+					},
+					error:function(response){
+					 	
+						 alert('some error');
+					}
+				});
+				}
+			},
+			status:function(id,val){		 
+			 if(val==true){
+				if(confirm("Are you sure you want to change the status to Active?")){		
+			 
+				$.ajax({
+					url:"/developer/email/status/"+id+"/"+val,
+					type:"GET",					
+					success:function(response){	
+				 
+					if(response.status){
+						$('#messagemodel .modal-title').text("status successfully update");	
+						$('#messagemodel .modal-body').html("<div class='alert alert-success'>"+response.msg+"</div>");			
+						$('#messagemodel').modal({keyboard:false,backdrop:'static'});
+						$('#messagemodel').css({'width':'100%'});
+						dataTableEmail.ajax.reload( null, false );   
+					}else{
+							$('#messagemodel .modal-title').text("Status successfully update");	
+							$('#messagemodel .modal-body').html("<div class='alert alert-danger'>"+response.msg+"</div>");		
+							$('#messagemodel').modal({keyboard:false,backdrop:'static'});
+							$('#messagemodel').css({'width':'100%'});
+					}						
+					},
+					error:function(response){
+				 
+						 alert('some error');
+					}
+				});
+				}
+				
+				}else{
+					if(confirm("Are you sure you want to change the status to Inactive?")){		
+			 
+				$.ajax({
+					url:"/developer/email/status/"+id+"/"+val,
+					type:"GET",					
+					success:function(response){	
+					 	
+					if(response.status){
+						$('#messagemodel .modal-title').text("status successfully update");	
+						$('#messagemodel .modal-body').html("<div class='alert alert-success'>"+response.msg+"</div>");			
+						$('#messagemodel').modal({keyboard:false,backdrop:'static'});
+						$('#messagemodel').css({'width':'100%'});
+						dataTableEmail.ajax.reload( null, false );   
+					}else{
+							$('#messagemodel .modal-title').text("Status successfully update");	
+							$('#messagemodel .modal-body').html("<div class='alert alert-danger'>"+response.msg+"</div>");		
+							$('#messagemodel').modal({keyboard:false,backdrop:'static'});
+							$('#messagemodel').css({'width':'100%'});
+					}						
+					},
+					error:function(response){
+					 	
+						 alert('some error');
+					}
+				});
+				}
+				}
+			}				 
+			
+	};
+	})(); 
+
+
+var contactsController = (function(){
+		return {
+			checked_Ids:[],				  
+			 		 
+			delete:function(id){
+		 
+			 	if( confirm("Are you sure you want to delete?") ) {	
+				  
+				$.ajax({
+					url:"/developer/contacts/delete/"+id,
+					type:"GET",
+				 
+					success:function(response){	
+					 
+					if(response.status){
+						$('#messagemodel .modal-title').text("Contacts Delete");	
+						$('#messagemodel .modal-body').html("<div class='alert alert-success'>"+response.msg+"</div>");			
+						$('#messagemodel').modal({keyboard:false,backdrop:'static'});
+						$('#messagemodel').css({'width':'100%'});
+						dataTableContacts.ajax.reload( null, false );   
+					}else{
+							$('#messagemodel .modal-title').text("seoCity Delete");	
+							$('#messagemodel .modal-body').html("<div class='alert alert-danger'>"+response.msg+"</div>");		
+							$('#messagemodel').modal({keyboard:false,backdrop:'static'});
+							$('#messagemodel').css({'width':'100%'});
+					}						
+					},
+					error:function(response){
+					 	
+						 alert('some error');
+					}
+				});
+				}
+			}
+			 				 
+			
+	};
+	})(); 
+
+
 var homeSliderController = (function(){
 		return {
 			checked_Ids:[],				  

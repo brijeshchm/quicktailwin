@@ -15,10 +15,14 @@
     <style>
         body {
             font-family: 'Lato';
+            background-color: #ccc;
         }
 
         .fa-btn {
             margin-right: 6px;
+        }
+        .login-heading{
+            padding: 15px;
         }
     </style>
 </head>

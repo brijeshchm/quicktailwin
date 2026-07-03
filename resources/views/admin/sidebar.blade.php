@@ -69,6 +69,13 @@
 										<a href="{{url('/developer/new-lead/not-interested')}}"><i class=""></i> Not Interested</a>
 									</li>
 								@endif
+								@if(Auth::user()->current_user_can('administrator'))		
+										<li>
+										<a href="{{url('/developer/contacts')}}"><i class=""></i> Contacts</a>
+									</li>
+								@endif
+
+
 								</ul>
 							</li>
 							@endif
@@ -87,7 +94,9 @@
                                 <li>
                                     <a href="{{url('/developer/form-type')}}"><i class=""></i> Form Type</a>
                                 </li>
-							 
+							    <li>
+                                    <a href="{{url('/developer/email')}}"><i class=""></i> Email</a>
+                                </li>
 						 
                             </ul>
                             

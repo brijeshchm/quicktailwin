@@ -366,7 +366,7 @@
             {{-- Full Name --}}
             <div class="flex flex-col gap-1.5">
                 <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Full Name</label>
-                <input x-model="form.name" type="text" placeholder="Jane Smith"
+                <input x-model="form.name" type="text" placeholder="Enter Name"
                        class="input-focus w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 text-sm placeholder-gray-300"
                        :class="errors.name ? 'border-red-400' : ''" />
                 <p x-show="errors.name" x-text="errors.name" class="text-xs text-red-500 mt-0.5"></p>
@@ -375,7 +375,7 @@
             {{-- Email --}}
             <div class="flex flex-col gap-1.5">
                 <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Email</label>
-                <input x-model="form.email" type="email" placeholder="jane@company.com"
+                <input x-model="form.email" type="email" placeholder="Enter Email"
                        class="input-focus w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 text-sm placeholder-gray-300"
                        :class="errors.email ? 'border-red-400' : ''" />
                 <p x-show="errors.email" x-text="errors.email" class="text-xs text-red-500 mt-0.5"></p>
@@ -386,7 +386,7 @@
         <div class="flex flex-col gap-1.5 mb-3.5">
             <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Mobile</label>
             <input x-model="form.mobile" type="tel" inputmode="numeric" maxlength="10"
-                   placeholder="9876543210"
+                   placeholder="Enter Mobile"
                    @input="form.mobile = form.mobile.replace(/\D/g,'')"
                    class="input-focus w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 text-sm placeholder-gray-300"
                    :class="errors.mobile ? 'border-red-400' : ''" />

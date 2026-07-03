@@ -273,6 +273,14 @@ Route::get('/auth/google/callback', [App\Http\Controllers\ClientAuth\AuthControl
 
 Route::post('/developer/login', [App\Http\Controllers\Auth\AuthController::class, 'authenticate']);
 Route::get('/developer/login', [App\Http\Controllers\Auth\AuthController::class, 'showLoginForm'])->name('developer.login');
+Route::get('/developer/check/login',[App\Http\Controllers\Auth\AuthController::class, 'checklogin']);
+Route::post('/developer/check/login',[App\Http\Controllers\Auth\AuthController::class, 'authenticate']);
+//Route::get('/login/otp',function(){return view('auth.otp');});
+Route::get('/developer/login/otp',[App\Http\Controllers\Auth\AuthController::class,'getOTP']);
+Route::post('/developer/login/otp',[App\Http\Controllers\Auth\AuthController::class,'authenticate']);
+
+
+
 Route::get('/cities/getajaxcities', [App\Http\Controllers\CitiesController::class, 'getAjaxCities']);
 Route::get('/location/getAjaxLocation', [App\Http\Controllers\CitiesController::class, 'getAjaxLocation']);
 Route::get('/location/getAjaxService', [App\Http\Controllers\CitiesController::class, 'getAjaxService']);
