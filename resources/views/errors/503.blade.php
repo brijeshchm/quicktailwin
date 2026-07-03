@@ -23,10 +23,7 @@
 <section class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 px-4">
     <div class="max-w-2xl mx-auto text-center">
 
-        <!-- Big 404 -->
-        <h1 class="text-8xl md:text-9xl font-extrabold text-blue-600 tracking-tight">
-            503
-        </h1>
+ 
 
         <!-- Heading -->
         <h2 class="mt-4 text-3xl md:text-4xl font-bold text-gray-900">
@@ -57,7 +54,7 @@
 
     </main>
 
-
+@include('client.layouts.footer')
  
 </body>
 </html>
