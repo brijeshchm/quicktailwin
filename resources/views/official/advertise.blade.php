@@ -5,6 +5,71 @@
 @section('content')	
 @include('client.components.banner-section')
 
+{{-- Use this only for testing --}}
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    {{-- Alpine.js --}}
+    <script
+        defer
+        src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js">
+    </script>
+
+    {{-- Lucide Icons --}}
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        @keyframes phoneFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .anim-float {
+            animation: phoneFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes pingSlow {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            75%, 100% {
+                transform: scale(1.7);
+                opacity: 0;
+            }
+        }
+
+        .anim-ping-slow {
+            animation: pingSlow 2s infinite;
+        }
+
+        @keyframes pulseRing {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(0, 118, 215, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 0 10px rgba(0, 118, 215, 0);
+            }
+        }
+
+        .anim-pulse-ring {
+            animation: pulseRing 2s infinite;
+        }
+    </style>
+
+   <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+    </script>
 
 <div
     x-data="{
@@ -29,6 +94,9 @@
             <span class="text-gray-700">Advertise your Business</span>
         </div>
     </div>
+ 
+
+
 
     {{-- ===== HERO ===== --}}
     <section class="bg-white relative overflow-hidden" id="hero">
@@ -43,10 +111,10 @@
                 <h1 class="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-3">
                     <span class="text-gradient-anim inline-block hover:scale-105 transition-transform duration-300">GROW</span>
                     <span class="text-[#22c55e] text-3xl align-super ml-1 inline-block anim-bounce-in">&#10003;</span>
-                    Your Business
+                    Your Business with QuickDials
                 </h1>
-                <p class="text-gray-500 text-base mb-6">
-                    Advertise with QuickDials — India's No. 1 Local Search Engine
+                <p class="text-gray-500 text-base mb-6">                  
+                    Advertise on India’s trusted local search platform
                 </p>
 
                 {{-- Mobile number lead capture (primary CTA) --}}
@@ -86,7 +154,7 @@
                 
                 {{-- Checkmarks --}}
                 <ul class="mt-5 space-y-2">
-                    @foreach(['Rank Ahead of Your Competition', 'Find Ready to Buy Customers Instantly', 'Track Leads & Competition Trends'] as $i => $item)
+                    @foreach(['Increase your visibility', 'Outperform your competition', 'And connect instantly with customers who are ready'] as $i => $item)
                         <li class="flex items-center gap-2 text-sm text-gray-700" data-reveal data-reveal-delay="{{ 200 + $i * 100 }}">
                             <svg class="w-4 h-4 text-[#22c55e] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                             {{ $item }}
@@ -150,28 +218,27 @@
                         </div>
 
                         {{-- Location pill --}}
-                        <div class="px-2.5 -mt-1.5 mb-2 flex-shrink-0">
+                        <div class="px-2.5 -mt-1.5 mb-2 flex-shrink-0 flex">
                             <div class="bg-white rounded-full shadow-sm px-2 py-1 flex items-center gap-1 w-fit">
                                 <svg class="w-2 h-2 text-[#0076D7]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1112 6a2.5 2.5 0 010 5.5z"/></svg>
                                 <span class="text-[5.5px] font-semibold text-gray-700">Delhi</span>
                                 <svg class="w-1.5 h-1.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
                             </div>
-                        </div>
-
-                        {{-- Search bar --}}
-                        <div class="px-2.5 mb-2 flex-shrink-0">
-                            <div class="bg-white rounded-full shadow-sm px-2 py-1.5 flex items-center gap-1.5 border border-gray-100">
+                              <div class="bg-white rounded-full shadow-sm px-2 py-1.5 flex items-center gap-1.5 border border-gray-100 w-150">
                                 <svg class="w-2.5 h-2.5 text-[#0076D7] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/></svg>
                                 <span class="text-[6.5px] text-gray-400">Search Services</span>
                             </div>
                         </div>
+
+                        {{-- Search bar --}}
+                      
 
                         {{-- Auto-rotating banner carousel --}}
                         <div class="px-2.5 mb-2 flex-shrink-0" x-data="{ slide: 0 }" x-init="setInterval(() => slide = (slide + 1) % 3, 2200)">
                             <div class="relative rounded-lg overflow-hidden h-16 bg-gradient-to-br from-amber-100 via-lime-100 to-emerald-200">
                                 <div class="absolute inset-0 flex items-center justify-between px-2">
                                     <div>
-                                        <div class="text-[7.5px] font-bold text-emerald-800 leading-tight">Relax &<br>Rejuvenate</div>
+                                        <div class="text-[7.5px] font-bold text-emerald-800 leading-tight">Services &<br>IT Training</div>
                                         <span class="inline-block mt-1 bg-emerald-600 text-white text-[5px] font-semibold px-1.5 py-0.5 rounded">Book Now</span>
                                     </div>
                                     <div class="w-10 h-10 rounded-full bg-white/40 flex-shrink-0"></div>
@@ -182,6 +249,10 @@
                                     </template>
                                 </div>
                             </div>
+
+
+                             
+
                         </div>
 
                         {{-- Ranked-higher business teaser card --}}
@@ -191,23 +262,58 @@
                             </div>
                             <div class="flex items-center gap-1.5 mt-1">
                                 <div class="w-7 h-7 bg-blue-100 rounded flex items-center justify-center relative">
-                                    <span class="text-[7px] text-[#0076D7] font-bold">VP</span>
+                                    <span class="text-[7px] text-[#0076D7] font-bold">ETI</span>
                                     <span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#22c55e] rounded-full border border-white anim-ping-slow"></span>
                                 </div>
                                 <div>
-                                    <div class="text-[7px] font-semibold">Vantage Point</div>
+                                    <div class="text-[7px] font-semibold">ElevateTech India</div>
                                     <div class="flex items-center gap-0.5">
                                         <svg class="w-2 h-2 fill-yellow-400 text-yellow-400" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 19.771l-7.416 3.642 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
-                                        <span class="text-[6px]">4.1 &#9733;</span>
+                                        <span class="text-[6px]">4.6 &#9733;</span>
+                                        <span class="text-[6px]">Lift Manufacturer, Lift Modernization, New Lift Installation</span>
                                     </div>
                                 </div>
                             </div>
+
+
                             <div class="flex gap-1 mt-1.5">
                                 @foreach(['Call Now', 'Send Enquiry', 'Chat'] as $a)
                                     <span class="text-[5px] bg-[#0076D7] text-white rounded px-1 py-0.5">{{ $a }}</span>
                                 @endforeach
                             </div>
                         </div>
+
+
+   {{-- Ranked-higher business teaser card --}}
+                        <div class="mx-2.5 border-2 border-[#0076D7] rounded-lg p-2 mb-2 relative flex-shrink-0 bg-white">
+                            <div class="absolute -top-2 left-2 bg-[#0076D7] text-white text-[5px] px-1.5 py-0.5 rounded whitespace-nowrap">
+                                Your Business Will Get 2nd Ranked Higher
+                            </div>
+                            <div class="flex items-center gap-1.5 mt-1">
+                                <div class="w-7 h-7 bg-blue-100 rounded flex items-center justify-center relative">
+                                    <span class="text-[7px] text-[#0076D7] font-bold">WST</span>
+                                    <span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#22c55e] rounded-full border border-white anim-ping-slow"></span>
+                                </div>
+                                <div>
+                                    <div class="text-[7px] font-semibold">Web Solution Technology</div>
+                                    <div class="flex items-center gap-0.5">
+                                        <svg class="w-2 h-2 fill-yellow-400 text-yellow-400" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 19.771l-7.416 3.642 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                                        <span class="text-[6px]">4.8 &#9733;</span>
+                                        <span class="text-[6px]">Website development, E-commerce website development, Responsive web design, App Developer</span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="flex gap-1 mt-1.5">
+                                @foreach(['Call Now', 'Send Enquiry', 'Chat'] as $a)
+                                    <span class="text-[5px] bg-[#0076D7] text-white rounded px-1 py-0.5">{{ $a }}</span>
+                                @endforeach
+                            </div>
+                        </div>
+
+
+
 
                         {{-- Categories --}}
                         @php
@@ -259,6 +365,10 @@
                         </div>
                     </div>
                 </div>
+
+
+
+
             </div>
         </div>
     </section>
@@ -290,7 +400,7 @@
         ];
         $avatarColors = ['#0076D7', '#22c55e', '#f97316', '#a855f7', '#06b6d4'];
     @endphp
-    <section id="success-stories" class="py-16 bg-gray-50">
+     <section id="success-stories" class="py-16 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-start">
                 <div class="md:w-56 flex-shrink-0" data-reveal data-reveal-from="left">
@@ -612,7 +722,7 @@
         <div class="absolute inset-0 opacity-10 anim-pulse-slow" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 24px 24px;"></div>
         <div class="max-w-3xl mx-auto px-4 text-center text-white relative z-10" data-reveal>
             <h2 class="text-3xl font-bold mb-3">Ready to Grow Your Business?</h2>
-            <p class="text-blue-100 mb-8">Join 6.3 lakh+ businesses already thriving on QuickDials</p>
+            <p class="text-blue-100 mb-8">Join 1.8 K+ businesses already thriving on QuickDials</p>
             <div class="flex flex-col sm:flex-row gap-3 justify-center">
                 <button
                     @click="scrollTo('hero')"
@@ -620,9 +730,9 @@
                 >
                     Start Advertising Now
                 </button>
-                {{-- ⚠️ CONFIRM real phone number — placeholder +918888888888 still unconfirmed --}}
+               
                 <a
-                    href="tel:+918888888888"
+                    href="tel:+917559435943"
                     class="flex items-center justify-center gap-2 border-2 border-white text-white font-semibold px-8 py-3 rounded-xl hover:bg-white/10 hover:scale-105 transition-all duration-300"
                 >
                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.61 21 3 13.39 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>
@@ -644,7 +754,7 @@
         ];
     @endphp
     <section id="faqs" class="py-16 bg-white">
-        <div class="max-w-3xl mx-auto px-4">
+        <div class="mx-auto px-4">
             <div class="text-center mb-10" data-reveal>
                 <h2 class="text-3xl font-bold text-gray-900">Frequently Asked Questions</h2>
                 <p class="text-gray-500 mt-2 text-sm">Everything you need to know before getting started</p>
@@ -700,26 +810,7 @@
             Advertise Now
         </button>
     </div>
-
-    {{-- ===== FOOTER ===== --}}
-    <footer class="bg-gray-900 text-gray-400 py-10">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-                <div class="text-center md:text-left">
-                    <span class="text-2xl font-bold text-white">Quick</span><span class="text-2xl font-bold text-[#0076D7]">Dials</span>
-                    <p class="text-sm mt-1 text-gray-500">India's No. 1 Local Search Engine</p>
-                </div>
-                <div class="flex flex-wrap justify-center gap-4 text-sm">
-                    @foreach(['About Us', 'Careers', 'Privacy Policy', 'Terms of Use', 'Contact Us'] as $link)
-                        <a href="#" class="hover:text-white transition-colors">{{ $link }}</a>
-                    @endforeach
-                </div>
-            </div>
-            <div class="mt-6 pt-6 border-t border-gray-800 text-center text-xs text-gray-600">
-                &copy; {{ date('Y') }} QuickDials. All rights reserved.
-            </div>
-        </div>
-    </footer>
+    
 
 </div>
 
