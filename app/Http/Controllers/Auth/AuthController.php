@@ -196,18 +196,18 @@ class AuthController extends Controller
 			// $request->session()->put('user.email', $request->input('otp_to_email'));
 			$otp = mt_rand(100000, 999999);
 			$request->session()->put('client.otp', $otp);
-			$message = "{$otp} is Verification Code for {$request->session()->get('user.name')} from {$request->input('otp_to_email')}.";
+			$message = "{$otp} is Verification Code for {$request->session()->get('user.first_name')} from {$request->input('otp_to_email')}.";
 			
 			$headers = "From:otp@estivals.com";
 			
 			// mail($request->input('otp_to_email'),$otp .' OTP ',$message,$headers);
 	 
 
-            $subject  = "{$otp} is QuickDials Verification Code";
+            $subject  = "{$otp} is QuickDials Verification Code for {$request->session()->get('user.email')}";
  
 			Mail::send(
 				'emails.sendotp_to_email',
-				['otp' => $otp, 'name' => $emailDetails->name],
+				['otp' => $otp, 'name' => $request->session()->get('user.first_name')],
 				function ($m) use ($request, $subject, $emailDetails) {
 					$m->from(env('MAIL_USERNAME'), 'QuickDials');
 					$m->to($emailDetails->email, "")->subject($subject);
