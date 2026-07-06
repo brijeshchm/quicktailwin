@@ -491,8 +491,12 @@
     <section id="benefits" class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center mb-12" data-reveal>
+                <div class="heading-badge anim-bounce-in">
+                    <i data-lucide="target" class="w-8 h-8 text-[#0076D7]"></i>
+                </div>
                 <h2 class="text-3xl font-bold text-gray-900">Why Advertise on Quick Dials?</h2>
                 <p class="text-gray-500 mt-2 text-sm">India's most trusted local search platform — built to grow your business</p>
+                <div class="heading-underline"></div>
                 </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach($benefits as $i => $b)
@@ -512,45 +516,7 @@
 
 
 
-
-    {{-- ===== FEATURES ===== --}}
-    @php
-        $features = [
-            ['icon' => 'search', 'title' => 'Attract More Potential Customers: ', 'desc' => 'Let your business be discovered by those customers who are looking for your kind of products or services in your area and in different business categories.'],
-            ['icon' => 'thumbs-up', 'title' => 'Business Exposure: ', 'desc' => 'Enhance your online exposure using a professionally maintained listing of your business.'],
-            ['icon' => 'zap', 'title' => 'Quality Lead Generation: ', 'desc' => 'Gain leads which are actual customers who are actively seeking businesses such as yours.'],
-            ['icon' => 'award', 'title' => 'Gain Customer Trust: ', 'desc' => 'Provide a detailed listing of your business along with all the necessary information including business details and customer testimonials.'],
-
-            ['icon' => 'award', 'title' => 'Business Listing Made Easy: ', 'desc' => 'Manage your profile and other listings conveniently using an easy-to-use dashboard.'],
-
-
-            ['icon' => 'award', 'title' => 'Budget-friendly Business Solutions: ', 'desc' => 'Select from a variety of advertising and listing plans tailored for all kinds of businesses'],
-
-         ];
-    @endphp
-    <section id="features" class="py-16 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-12" data-reveal>
-                <h2 class="text-3xl font-bold text-gray-900">Why Advertise on Quick Dials?</h2>
-              
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                @foreach($features as $i => $f)
-                    <div class="flex gap-4 p-6 bg-white rounded-xl border border-gray-100 hover:border-[#0076D7] hover:shadow-lg transition-all duration-300 group"
-                         data-reveal data-reveal-from="{{ $i % 2 === 0 ? 'left' : 'right' }}" data-reveal-delay="{{ $i * 100 }}">
-                        <div class="w-12 h-12 bg-blue-50 group-hover:bg-[#0076D7] rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:scale-110">
-                            <i data-lucide="{{ $f['icon'] }}" class="w-6 h-6 text-[#0076D7] group-hover:text-white transition-colors"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-800 mb-1">{{ $f['title'] }}</h3>
-                            <p class="text-sm text-gray-500 leading-relaxed">{{ $f['desc'] }}</p>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
-    
+ 
 
 
 
@@ -561,9 +527,9 @@
             ['icon' => 'search', 'title' => 'Business Listing Standard: ', 'desc' => 'Create a professional business listing to help customers locate your business easily on the internet.'],
             ['icon' => 'thumbs-up', 'title' => 'Business Listing Premium: ', 'desc' => 'Boost your presence and stand out from others by using premium business listings which will get you more enquiries.'],
             ['icon' => 'zap', 'title' => 'Featured Business Listing:', 'desc' => 'Get your business featured and increase your visibility among others in selected categories.'],
-            ['icon' => 'award', 'title' => 'Leads Generation Solutions: ', 'desc' => 'Generate quality leads for yourself with the help of qualified customer enquiries received via your Quick Dials account.'],
+            ['icon' => 'trending-up', 'title' => 'Leads Generation Solutions: ', 'desc' => 'Generate quality leads for yourself with the help of qualified customer enquiries received via your Quick Dials account.'],
 
-            ['icon' => 'award', 'title' => 'Business Listing Made Easy: ', 'desc' => 'Manage your profile and other listings conveniently using an easy-to-use dashboard.'],
+            ['icon' => 'monitor-stop', 'title' => 'Business Listing Made Easy: ', 'desc' => 'Manage your profile and other listings conveniently using an easy-to-use dashboard.'],
 
  
          ];
@@ -600,9 +566,9 @@
             ['icon' => 'search', 'title' => 'Build Your Business Profile ', 'desc' => 'Register for your business with accurate contact information, services, and other business details.'],
             ['icon' => 'thumbs-up', 'title' => 'Select the Appropriate Plan', 'desc' => 'Get an appropriate listing or advertising plan for your business in accordance with your requirements.'],
             ['icon' => 'zap', 'title' => 'Create Your Business Profile: ', 'desc' => 'Upload pictures of your business including logo, services offered, and working hours to get more customers.'],
-            ['icon' => 'award', 'title' => 'Receive Inquiries from Customers', 'desc' => 'With the active profile, customers will be able to find your business and make inquiries through Quick Dials.'],
+            ['icon' => 'check-check', 'title' => 'Receive Inquiries from Customers', 'desc' => 'With the active profile, customers will be able to find your business and make inquiries through Quick Dials.'],
 
-            ['icon' => 'award', 'title' => 'Start Growing Your Business with Quick Dials ', 'desc' => 'If you aim to boost your brand awareness, bring in more customers from the locality, or get high-quality business leads, then Quick Dials can serve as an effective platform for you. Be part of many businesses who have built their online presence with Quick Dials..'],
+            ['icon' => 'handshake', 'title' => 'Start Growing Your Business with Quick Dials ', 'desc' => 'If you aim to boost your brand awareness, bring in more customers from the locality, or get high-quality business leads, then Quick Dials can serve as an effective platform for you. Be part of many businesses who have built their online presence with Quick Dials..'],
 
  
          ];
@@ -668,44 +634,43 @@
             ['icon' => 'search', 'title' => 'Business Listing', 'desc' => 'List your business and ensure that customers can find out about your services through the Internet.'],
             ['icon' => 'thumbs-up', 'title' => 'Verified Business Listing', 'desc' => 'Gain credibility with customers by creating a verified business listing.'],
             ['icon' => 'zap', 'title' => 'Lead Generation', 'desc' => 'Get genuine leads from customers who are interested in your services and products.'],
-            ['icon' => 'award', 'title' => 'Smart Lead Management', 'desc' => 'Manage all the customer leads using one simple interface.'],
+            ['icon' => 'podium', 'title' => 'Smart Lead Management', 'desc' => 'Manage all the customer leads using one simple interface.'],
 
-            ['icon' => 'award', 'title' => 'Smart Lead Management', 'desc' => 'Manage all the customer leads using one simple interface.'],
+           
 
-
-            ['icon' => 'award', 'title' => 'Business Profile Management', 'desc' => 'Edit your contact info, business hours, services offered, and any other business information you wish to add'],
-
+            ['icon' => 'handshake', 'title' => 'Business Profile Management', 'desc' => 'Edit your contact info, business hours, services offered, and any other business information you wish to add'],
 
 
-            ['icon' => 'award', 'title' => 'Product/Service Offering', 'desc' => 'Promote your products and services to get more customers.'],
+
+            ['icon' => 'monitor-cloud', 'title' => 'Product/Service Offering', 'desc' => 'Promote your products and services to get more customers.'],
 
 
-            ['icon' => 'award', 'title' => 'Photo/Videos', 'desc' => 'Upload photos and videos about your business for customers to see.'],
+            ['icon' => 'camera', 'title' => 'Photo/Videos', 'desc' => 'Upload photos and videos about your business for customers to see.'],
 
 
-            ['icon' => 'award', 'title' => 'Reviews/Ratings', 'desc' => 'Gather customer opinions through their reviews and ratings.'],
+            ['icon' => 'star', 'title' => 'Reviews/Ratings', 'desc' => 'Gather customer opinions through their reviews and ratings.'],
 
 
-['icon' => 'award', 'title' => 'Business Analysis', 'desc' => 'Analyze the number of times your profile has been viewed, customers who have interacted, and other metrics to measure your business`s success.'],
+            ['icon' => 'zodiac-virgo', 'title' => 'Business Analysis', 'desc' => 'Analyze the number of times your profile has been viewed, customers who have interacted, and other metrics to measure your business`s success.'],
 
 
-['icon' => 'award', 'title' => 'Search Visibility', 'desc' => 'Increase your chances of being seen by customers in their search results.'],
+            ['icon' => 'search', 'title' => 'Search Visibility', 'desc' => 'Increase your chances of being seen by customers in their search results.'],
 
-['icon' => 'award', 'title' => 'Integration of Location & Map', 'desc' => 'Help your customers locate you easily through proper addresses and maps.'],
+            ['icon' => 'blocks', 'title' => 'Integration of Location & Map', 'desc' => 'Help your customers locate you easily through proper addresses and maps.'],
 
-['icon' => 'award', 'title' => 'Direct Communication to Customers', 'desc' => 'Enable your customers to connect with you immediately via phone calls, messages, or enquiries.'],
+            ['icon' => 'smartphone-nfc', 'title' => 'Direct Communication to Customers', 'desc' => 'Enable your customers to connect with you immediately via phone calls, messages, or enquiries.'],
 
-['icon' => 'award', 'title' => 'Listing Your Business Multi-Categories', 'desc' => 'List your business in multiple categories so as to increase the visibility of your business.'],
+            ['icon' => 'chart-bar-stacked', 'title' => 'Listing Your Business Multi-Categories', 'desc' => 'List your business in multiple categories so as to increase the visibility of your business.'],
 
-['icon' => 'award', 'title' => 'Promote Your Business', 'desc' => 'Make your business stand out by using promotional tools for your business.'],
+            ['icon' => 'briefcase-business', 'title' => 'Promote Your Business', 'desc' => 'Make your business stand out by using promotional tools for your business.'],
 
-['icon' => 'award', 'title' => 'Customer Support', 'desc' => 'Have all your support needs covered regarding your business listing and account.'],
+            ['icon' => 'headset', 'title' => 'Customer Support', 'desc' => 'Have all your support needs covered regarding your business listing and account.'],
 
-['icon' => 'award', 'title' => 'Responsive Experience', 'desc' => 'Manage your business listings and replies from customers from wherever you may be, anytime.'],
+            ['icon' => 'monitor-smartphone', 'title' => 'Responsive Experience', 'desc' => 'Manage your business listings and replies from customers from wherever you may be, anytime.'],
 
-['icon' => 'award', 'title' => 'Security in One Business Dashboard', 'desc' => 'Have access to all your business data in one business dashboard.'],
+            ['icon' => 'key-round', 'title' => 'Security in One Business Dashboard', 'desc' => 'Have access to all your business data in one business dashboard.'],
 
-['icon' => 'award', 'title' => 'Updating Your Business Profile', 'desc' => 'Update your business profiles regularly for increased visibility to your customers.'],
+            ['icon' => 'user-round-pen', 'title' => 'Updating Your Business Profile', 'desc' => 'Update your business profiles regularly for increased visibility to your customers.'],
 
 
 
@@ -819,73 +784,7 @@
                         'Get 1 Free Service After Every 3 Bookings',
                     ],
                 ],
-                [
-                    'name'        => 'INR ₹ 3000',
-                    'price'       => 'Coins (3529)',
-                    'description' => 'Unlimited Users Access',
-                    'gradient'    => 'from-green-50 to-gray-100',
-                    'border'      => 'border-gray-200',
-                    'badge'       => null,
-                    'icon'        => 'trending-up',
-                    'cta'         => 'Get Started',
-                    'cta_style'   => 'outline',
-                    'features'    => [
-                        'Online system',
-                        'Full access',
-                        'Push Notification',
-                        'Roles & Permissions',
-                        'Coins (3529) Free First Time',
-                        'Verified & Unique Leads Only',
-                        'Spam-Free & Duplicate-Free Leads',
-                        'Fresh Leads, Every Time',
-                        'Get 1 Free Service After Every 3 Bookings',
-                    ],
-                ],
-                [
-                    'name'        => 'INR ₹ 5000',
-                    'price'       => 'Coins (6099)',
-                    'description' => 'Unlimited Users Access',
-                    'gradient'    => 'from-indigo-50 to-indigo-100',
-                    'border'      => 'border-indigo-300',
-                    'badge'       => 'Most Popular',
-                    'icon'        => 'flame',
-                    'cta'         => 'Choose Premium',
-                    'cta_style'   => 'solid',
-                    'features'    => [
-                        'Online system',
-                        'Full access',
-                        'Push Notification',
-                        'Roles & Permissions',
-                        'Unlimited support',
-                        'Verified & Unique Leads Only',
-                        'Spam-Free & Duplicate-Free Leads',
-                        'Fresh Leads, Every Time',
-                        'Get 1 Free Service After Every 3 Bookings',
-                    ],
-                ],
-                [
-                    'name'        => 'INR ₹ 10000',
-                    'price'       => 'Coins (12500)',
-                    'description' => 'Unlimited Users Access',
-                    'gradient'    => 'from-amber-50 to-yellow-50',
-                    'border'      => 'border-amber-200',
-                    'badge'       => 'Best Value',
-                    'icon'        => 'crown',
-                    'cta'         => 'Go Royal',
-                    'cta_style'   => 'outline',
-                    'features'    => [
-                        'Online system',
-                        'Luxury 5-star venue booking',
-                        'Full access',
-                        'Push Notification',
-                        'Roles & Permissions',
-                        'Unlimited support',
-                        'Verified & Unique Leads Only',
-                        'Spam-Free & Duplicate-Free Leads',
-                        'Fresh Leads, Every Time',
-                        'Get 1 Free Service After Every 3 Bookings',
-                    ],
-                ],
+                 
             ];
             @endphp
 
@@ -1190,6 +1089,48 @@ document.addEventListener('DOMContentLoaded', function () {
         50% { box-shadow: 0 0 0 5px rgba(0, 118, 215, 0); }
     }
     .anim-pulse-ring { animation: pulseRing 2.2s ease-in-out infinite; }
+
+    /* ── Section heading icon badge: consistent identity for every heading ── */
+    .heading-badge {
+        position: relative;
+        width: 4rem;
+        height: 4rem;
+        margin: 0 auto 1rem auto;
+        border-radius: 1.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #EAF4FF 0%, #DCEBFF 100%);
+        box-shadow: 0 4px 14px rgba(0, 118, 215, 0.12);
+        transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+    }
+    .heading-badge:hover {
+        transform: translateY(-4px) rotate(-4deg) scale(1.06);
+        box-shadow: 0 10px 24px rgba(0, 118, 215, 0.22);
+    }
+    .heading-badge i { position: relative; z-index: 1; }
+    .heading-badge::after {
+        content: '';
+        position: absolute;
+        inset: -6px;
+        border-radius: 1.5rem;
+        border: 2px solid rgba(0, 118, 215, 0.25);
+        opacity: 0;
+        transform: scale(0.85);
+        transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+    .heading-badge:hover::after { opacity: 1; transform: scale(1); }
+
+    /* ── Underline flourish beneath section headings ── */
+    .heading-underline {
+        width: 56px;
+        height: 4px;
+        margin: 14px auto 0 auto;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #0076D7, #22c55e);
+        background-size: 200% auto;
+        animation: gradientShift 4s ease-in-out infinite;
+    }
 
     /* ── Shimmer sweep on primary buttons ── */
     .btn-shimmer { position: relative; overflow: hidden; }
