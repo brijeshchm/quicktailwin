@@ -5,7 +5,7 @@
 @php
     $allowedCities = [
         'hyderabad','delhi','noida',
-        'gurgaon','mumbai','bangalore'
+        'gurgaon','mumbai','bangalore','online'
     ];
 
     $currentCity = strtolower($city);
