@@ -89,7 +89,10 @@
     {{-- ===== BREADCRUMB ===== --}}
     <div class="bg-gray-50 border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 py-2 flex items-center gap-1 text-xs text-gray-500">
-            <a href="{{ route('home') }}" class="hover:text-[#0076D7]">Home</a>
+            <a href="{{ route('home') }}" class="hover:text-[#0076D7] flex items-center gap-1">
+                <i data-lucide="home" class="w-3 h-3"></i>
+                Home
+            </a>
             <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
             <span class="text-gray-700">Advertise your Business</span>
         </div>
@@ -114,47 +117,18 @@
                     Your Business with QuickDials
                 </h1>
                 <p class="text-gray-500 text-base mb-6">                  
-                    Advertise on India’s trusted local search platform
+                   Get Noticed Fast - Create your business profile, bring in qualified leads, and increase your online visibility, all from one platform
                 </p>
 
                 {{-- Mobile number lead capture (primary CTA) --}}
-                <div
-                    x-data="{
-                        mobile: '',
-                        agreed: false,
-                        submitting: false,
-                        submitted: false,
-                        error: '',
-                        async submit() {
-                            this.error = '';
-                            if (this.mobile.length < 10) { this.error = 'Enter a valid 10-digit number'; return; }
-                            if (!this.agreed) { this.error = 'Please accept the Terms to continue'; return; }
-                            this.submitting = true;
-                            try {
-                                const res = await fetch('', {
-                                    method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/json',
-                                        'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]')?.content ?? ''
-                                    },
-                                    body: JSON.stringify({ mobile: this.mobile, source: 'advertise_hero' })
-                                });
-                                if (!res.ok) throw new Error('Request failed');
-                                this.submitted = true;
-                            } catch (e) {
-                                this.error = 'Something went wrong. Please try again or call us.';
-                            } finally {
-                                this.submitting = false;
-                            }
-                        }
-                    }"
-                    class="max-w-sm"
-                >                     
-                </div>
                 
+                <h2 class="flex items-center gap-2 text-xl font-bold text-gray-800">
+                    <i data-lucide="rocket" class="w-5 h-5 text-[#0076D7]"></i>
+                    Sign Up Today
+                </h2>
                 {{-- Checkmarks --}}
                 <ul class="mt-5 space-y-2">
-                    @foreach(['Increase your visibility', 'Outperform your competition', 'And connect instantly with customers who are ready'] as $i => $item)
+                    @foreach(['Get Connected with Buyers', 'Establish Credibility with Your Business Profile', 'Answer All Inquiries in One Place'] as $i => $item)
                         <li class="flex items-center gap-2 text-sm text-gray-700" data-reveal data-reveal-delay="{{ 200 + $i * 100 }}">
                             <svg class="w-4 h-4 text-[#22c55e] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                             {{ $item }}
@@ -241,7 +215,9 @@
                                         <div class="text-[7.5px] font-bold text-emerald-800 leading-tight">Services &<br>IT Training</div>
                                         <span class="inline-block mt-1 bg-emerald-600 text-white text-[5px] font-semibold px-1.5 py-0.5 rounded">Book Now</span>
                                     </div>
-                                    <div class="w-10 h-10 rounded-full bg-white/40 flex-shrink-0"></div>
+                                    <div class="w-10 h-10 rounded-full bg-white/40 flex-shrink-0 flex items-center justify-center">
+                                        <i data-lucide="graduation-cap" class="w-5 h-5 text-emerald-700/70"></i>
+                                    </div>
                                 </div>
                                 <div class="absolute bottom-1 left-1/2 -translate-x-1/2 flex gap-0.5">
                                     <template x-for="i in 3" :key="i">
@@ -376,13 +352,19 @@
     {{-- ===== STATS BAR ===== --}}
     <section class="bg-[#0076D7] py-10 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-white relative z-10">
+            @php
+                $statIcons = ['grid', 'zap', 'headphones', 'star'];
+            @endphp
             @foreach([
-                ['to' => 50000, 'suffix' => '+', 'label' => 'Active Categories'],
+                ['to' => 379, 'suffix' => '+', 'label' => 'Active Categories'],
                 ['to' => 95, 'suffix' => '%', 'label' => 'Lead Response Rate'],
                 ['to' => 24, 'suffix' => '/7', 'label' => 'Customer Support'],
                 ['to' => 4, 'suffix' => '.8★', 'label' => 'Avg. Advertiser Rating'],
             ] as $i => $stat)
                 <div data-reveal data-reveal-delay="{{ $i * 120 }}">
+                    <div class="w-10 h-10 mx-auto mb-2 bg-white/15 rounded-full flex items-center justify-center">
+                        <i data-lucide="{{ $statIcons[$i] }}" class="w-5 h-5 text-white"></i>
+                    </div>
                     <div class="text-3xl font-bold" data-counter="{{ $stat['to'] }}" data-suffix="{{ $stat['suffix'] }}">0</div>
                     <div class="text-blue-200 text-sm mt-1">{{ $stat['label'] }}</div>
                 </div>
@@ -400,7 +382,7 @@
         ];
         $avatarColors = ['#0076D7', '#22c55e', '#f97316', '#a855f7', '#06b6d4'];
     @endphp
-     <section id="success-stories" class="py-16 bg-gray-50">
+    <!-- <section id="success-stories" class="py-16 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-start">
                 <div class="md:w-56 flex-shrink-0" data-reveal data-reveal-from="left">
@@ -444,25 +426,74 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>-->
 
     {{-- ===== BENEFITS ===== --}}
+    
+    <section id="benefits" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12" data-reveal>
+                <div class="w-16 h-16 mx-auto mb-4 bg-blue-50 rounded-2xl flex items-center justify-center">
+                    <i data-lucide="megaphone" class="w-8 h-8 text-[#0076D7]"></i>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-900">Advertise on Quick Dials: Grow Your Business with Greater Online Visibility</h2>
+              
+                <h4 class="text-gray-500 mt-2 text-sm">Reach More Customers and Grow Faster with Quick Dials</h4>
+<p>In the present-day competitive world of business, an online presence becomes important in order to attract more customers and remain ahead of your competitors. Quick Dials is a reliable business directory service that can help businesses reach out to those who are looking for their products or services. No matter whether you are a startup, a local business, or an already established business, Quick Dials will provide you with all necessary means for development.</p>
+
+            </div>
+         
+        </div>
+    </section>
+
+
+     {{-- ===== CTA BANNER ===== --}}
+    <section class="py-14 bg-[#0076D7] relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 anim-pulse-slow" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 24px 24px;"></div>
+        <div class="max-w-3xl mx-auto px-4 text-center text-white relative z-10" data-reveal>
+            <div class="w-14 h-14 mx-auto mb-4 bg-white/15 rounded-2xl flex items-center justify-center">
+                <i data-lucide="trending-up" class="w-7 h-7 text-white"></i>
+            </div>
+            <h2 class="text-3xl font-bold mb-3">Ready to Grow Your Business?</h2>
+            <p class="text-blue-100 mb-8">Join 1.8 K+ businesses already thriving on QuickDials</p>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center">
+              <a
+    href="{{ route('login') }}"
+    class="btn-shimmer bg-white text-[#0076D7] font-bold px-8 py-3 rounded-xl hover:bg-blue-50 hover:scale-105 transition-all duration-300 inline-flex items-center justify-center gap-2"
+>
+    <i data-lucide="rocket" class="w-4 h-4"></i>
+    Start Advertising Now
+</a>
+               
+                <a
+                    href="tel:+917559435943"
+                    class="flex items-center justify-center gap-2 border-2 border-white text-white font-semibold px-8 py-3 rounded-xl hover:bg-white/10 hover:scale-105 transition-all duration-300"
+                >
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.61 21 3 13.39 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>
+                    Talk to Our Team
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+
     @php
         $benefits = [
-            ['icon' => 'users', 'title' => '18.2 Crore+ Buyers', 'desc' => "Access to India's largest verified buyer network across all major cities and towns."],
-            ['icon' => 'trending-up', 'title' => 'Rank Above Competitors', 'desc' => 'Get premium placement in search results and outrank your local competition instantly.'],
-            ['icon' => 'map-pin', 'title' => 'Hyper-Local Targeting', 'desc' => 'Reach customers exactly in your area — city, locality, or pin code level precision.'],
-            ['icon' => 'bar-chart-2', 'title' => 'Real-Time Analytics', 'desc' => 'Track leads, calls, and conversions with a powerful business dashboard.'],
-            ['icon' => 'shield', 'title' => 'Verified Buyer Leads', 'desc' => 'Only genuine, purchase-intent buyers. No bots, no spam — quality guaranteed.'],
-            ['icon' => 'message-square', 'title' => 'Multi-Channel Reach', 'desc' => 'Connect via call, chat, SMS, and enquiry — whichever your customer prefers.'],
+            ['icon' => 'users', 'title' => 'Attract More Potential Customers: ', 'desc' => "Let your business be discovered by those customers who are looking for your kind of products or services in your area and in different business categories."],
+            ['icon' => 'trending-up', 'title' => 'Business Exposure: ', 'desc' => 'Enhance your online exposure using a professionally maintained listing of your business.'],
+            ['icon' => 'map-pin', 'title' => 'Quality Lead Generation:', 'desc' => 'Gain leads which are actual customers who are actively seeking businesses such as yours.'],
+            ['icon' => 'bar-chart-2', 'title' => 'Gain Customer Trust: ', 'desc' => 'Provide a detailed listing of your business along with all the necessary information including business details and customer testimonials.'],
+            ['icon' => 'shield', 'title' => 'Business Listing Made Easy:', 'desc' => 'Manage your profile and other listings conveniently using an easy-to-use dashboard.'],
+            ['icon' => 'message-square', 'title' => 'Budget-friendly Business Solutions: ', 'desc' => 'Select from a variety of advertising and listing plans tailored for all kinds of businesses.'],
         ];
     @endphp
     <section id="benefits" class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center mb-12" data-reveal>
-                <h2 class="text-3xl font-bold text-gray-900">Why Advertise with QuickDials?</h2>
+                <h2 class="text-3xl font-bold text-gray-900">Why Advertise on Quick Dials?</h2>
                 <p class="text-gray-500 mt-2 text-sm">India's most trusted local search platform — built to grow your business</p>
-            </div>
+                </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach($benefits as $i => $b)
                     <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-[#0076D7]/30 group"
@@ -478,13 +509,207 @@
         </div>
     </section>
 
+
+
+
+
     {{-- ===== FEATURES ===== --}}
     @php
         $features = [
-            ['icon' => 'search', 'title' => 'Smart Search Placement', 'desc' => 'Your business appears when buyers actively search for your services — maximum intent-driven visibility.'],
-            ['icon' => 'thumbs-up', 'title' => 'Rating & Review System', 'desc' => 'Build trust with verified customer reviews and star ratings that convert browsing into buying.'],
-            ['icon' => 'zap', 'title' => 'Instant Lead Delivery', 'desc' => 'Receive buyer enquiries via call, SMS, and app notification — never miss an opportunity.'],
-            ['icon' => 'award', 'title' => 'Verified Business Badge', 'desc' => 'Stand out with a QuickDials verification badge that signals trust and credibility to buyers.'],
+            ['icon' => 'search', 'title' => 'Attract More Potential Customers: ', 'desc' => 'Let your business be discovered by those customers who are looking for your kind of products or services in your area and in different business categories.'],
+            ['icon' => 'thumbs-up', 'title' => 'Business Exposure: ', 'desc' => 'Enhance your online exposure using a professionally maintained listing of your business.'],
+            ['icon' => 'zap', 'title' => 'Quality Lead Generation: ', 'desc' => 'Gain leads which are actual customers who are actively seeking businesses such as yours.'],
+            ['icon' => 'award', 'title' => 'Gain Customer Trust: ', 'desc' => 'Provide a detailed listing of your business along with all the necessary information including business details and customer testimonials.'],
+
+            ['icon' => 'award', 'title' => 'Business Listing Made Easy: ', 'desc' => 'Manage your profile and other listings conveniently using an easy-to-use dashboard.'],
+
+
+            ['icon' => 'award', 'title' => 'Budget-friendly Business Solutions: ', 'desc' => 'Select from a variety of advertising and listing plans tailored for all kinds of businesses'],
+
+         ];
+    @endphp
+    <section id="features" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12" data-reveal>
+                <h2 class="text-3xl font-bold text-gray-900">Why Advertise on Quick Dials?</h2>
+              
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                @foreach($features as $i => $f)
+                    <div class="flex gap-4 p-6 bg-white rounded-xl border border-gray-100 hover:border-[#0076D7] hover:shadow-lg transition-all duration-300 group"
+                         data-reveal data-reveal-from="{{ $i % 2 === 0 ? 'left' : 'right' }}" data-reveal-delay="{{ $i * 100 }}">
+                        <div class="w-12 h-12 bg-blue-50 group-hover:bg-[#0076D7] rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:scale-110">
+                            <i data-lucide="{{ $f['icon'] }}" class="w-6 h-6 text-[#0076D7] group-hover:text-white transition-colors"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-800 mb-1">{{ $f['title'] }}</h3>
+                            <p class="text-sm text-gray-500 leading-relaxed">{{ $f['desc'] }}</p>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    
+
+
+
+
+    {{-- ===== FEATURES ===== --}}
+    @php
+        $features = [
+            ['icon' => 'search', 'title' => 'Business Listing Standard: ', 'desc' => 'Create a professional business listing to help customers locate your business easily on the internet.'],
+            ['icon' => 'thumbs-up', 'title' => 'Business Listing Premium: ', 'desc' => 'Boost your presence and stand out from others by using premium business listings which will get you more enquiries.'],
+            ['icon' => 'zap', 'title' => 'Featured Business Listing:', 'desc' => 'Get your business featured and increase your visibility among others in selected categories.'],
+            ['icon' => 'award', 'title' => 'Leads Generation Solutions: ', 'desc' => 'Generate quality leads for yourself with the help of qualified customer enquiries received via your Quick Dials account.'],
+
+            ['icon' => 'award', 'title' => 'Business Listing Made Easy: ', 'desc' => 'Manage your profile and other listings conveniently using an easy-to-use dashboard.'],
+
+ 
+         ];
+    @endphp
+    <section id="features" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12" data-reveal>
+                <h2 class="text-3xl font-bold text-gray-900">Quick Dials Advertising Plans?</h2>
+              
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                @foreach($features as $i => $f)
+                    <div class="flex gap-4 p-6 bg-white rounded-xl border border-gray-100 hover:border-[#0076D7] hover:shadow-lg transition-all duration-300 group"
+                         data-reveal data-reveal-from="{{ $i % 2 === 0 ? 'left' : 'right' }}" data-reveal-delay="{{ $i * 100 }}">
+                        <div class="w-12 h-12 bg-blue-50 group-hover:bg-[#0076D7] rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:scale-110">
+                            <i data-lucide="{{ $f['icon'] }}" class="w-6 h-6 text-[#0076D7] group-hover:text-white transition-colors"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-800 mb-1">{{ $f['title'] }}</h3>
+                            <p class="text-sm text-gray-500 leading-relaxed">{{ $f['desc'] }}</p>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    
+
+
+
+    {{-- ===== FEATURES ===== --}}
+    @php
+        $features = [
+            ['icon' => 'search', 'title' => 'Build Your Business Profile ', 'desc' => 'Register for your business with accurate contact information, services, and other business details.'],
+            ['icon' => 'thumbs-up', 'title' => 'Select the Appropriate Plan', 'desc' => 'Get an appropriate listing or advertising plan for your business in accordance with your requirements.'],
+            ['icon' => 'zap', 'title' => 'Create Your Business Profile: ', 'desc' => 'Upload pictures of your business including logo, services offered, and working hours to get more customers.'],
+            ['icon' => 'award', 'title' => 'Receive Inquiries from Customers', 'desc' => 'With the active profile, customers will be able to find your business and make inquiries through Quick Dials.'],
+
+            ['icon' => 'award', 'title' => 'Start Growing Your Business with Quick Dials ', 'desc' => 'If you aim to boost your brand awareness, bring in more customers from the locality, or get high-quality business leads, then Quick Dials can serve as an effective platform for you. Be part of many businesses who have built their online presence with Quick Dials..'],
+
+ 
+         ];
+    @endphp
+    <section id="features" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12" data-reveal>
+                <h2 class="text-3xl font-bold text-gray-900">How to Get Started with Quick Dials?</h2>
+              
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                @foreach($features as $i => $f)
+                    <div class="flex gap-4 p-6 bg-white rounded-xl border border-gray-100 hover:border-[#0076D7] hover:shadow-lg transition-all duration-300 group"
+                         data-reveal data-reveal-from="{{ $i % 2 === 0 ? 'left' : 'right' }}" data-reveal-delay="{{ $i * 100 }}">
+                        <div class="w-12 h-12 bg-blue-50 group-hover:bg-[#0076D7] rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:scale-110">
+                            <i data-lucide="{{ $f['icon'] }}" class="w-6 h-6 text-[#0076D7] group-hover:text-white transition-colors"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-800 mb-1">{{ $f['title'] }}</h3>
+                            <p class="text-sm text-gray-500 leading-relaxed">{{ $f['desc'] }}</p>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    
+
+
+     {{-- ===== CTA BANNER ===== --}}
+    <section class="py-14 bg-[#0076D7] relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 anim-pulse-slow" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 24px 24px;"></div>
+        <div class="max-w-3xl mx-auto px-4 text-center text-white relative z-10" data-reveal>
+            <div class="w-14 h-14 mx-auto mb-4 bg-white/15 rounded-2xl flex items-center justify-center">
+                <i data-lucide="rocket" class="w-7 h-7 text-white"></i>
+            </div>
+            <h2 class="text-3xl font-bold mb-3">Ready to Grow Your Business?</h2>
+            <p class="text-blue-100 mb-8">Join 1.8 K+ businesses already thriving on QuickDials</p>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                 <a
+    href="{{ route('login') }}"
+    class="btn-shimmer bg-white text-[#0076D7] font-bold px-8 py-3 rounded-xl hover:bg-blue-50 hover:scale-105 transition-all duration-300 inline-flex items-center justify-center gap-2"
+>
+    <i data-lucide="rocket" class="w-4 h-4"></i>
+    Start Advertising Now
+</a>
+               
+                <a
+                    href="tel:+917559435943"
+                    class="flex items-center justify-center gap-2 border-2 border-white text-white font-semibold px-8 py-3 rounded-xl hover:bg-white/10 hover:scale-105 transition-all duration-300"
+                >
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.61 21 3 13.39 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>
+                    Talk to Our Team
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    {{-- ===== FEATURES ===== --}}
+    @php
+        $features = [
+            ['icon' => 'search', 'title' => 'Business Listing', 'desc' => 'List your business and ensure that customers can find out about your services through the Internet.'],
+            ['icon' => 'thumbs-up', 'title' => 'Verified Business Listing', 'desc' => 'Gain credibility with customers by creating a verified business listing.'],
+            ['icon' => 'zap', 'title' => 'Lead Generation', 'desc' => 'Get genuine leads from customers who are interested in your services and products.'],
+            ['icon' => 'award', 'title' => 'Smart Lead Management', 'desc' => 'Manage all the customer leads using one simple interface.'],
+
+            ['icon' => 'award', 'title' => 'Smart Lead Management', 'desc' => 'Manage all the customer leads using one simple interface.'],
+
+
+            ['icon' => 'award', 'title' => 'Business Profile Management', 'desc' => 'Edit your contact info, business hours, services offered, and any other business information you wish to add'],
+
+
+
+            ['icon' => 'award', 'title' => 'Product/Service Offering', 'desc' => 'Promote your products and services to get more customers.'],
+
+
+            ['icon' => 'award', 'title' => 'Photo/Videos', 'desc' => 'Upload photos and videos about your business for customers to see.'],
+
+
+            ['icon' => 'award', 'title' => 'Reviews/Ratings', 'desc' => 'Gather customer opinions through their reviews and ratings.'],
+
+
+['icon' => 'award', 'title' => 'Business Analysis', 'desc' => 'Analyze the number of times your profile has been viewed, customers who have interacted, and other metrics to measure your business`s success.'],
+
+
+['icon' => 'award', 'title' => 'Search Visibility', 'desc' => 'Increase your chances of being seen by customers in their search results.'],
+
+['icon' => 'award', 'title' => 'Integration of Location & Map', 'desc' => 'Help your customers locate you easily through proper addresses and maps.'],
+
+['icon' => 'award', 'title' => 'Direct Communication to Customers', 'desc' => 'Enable your customers to connect with you immediately via phone calls, messages, or enquiries.'],
+
+['icon' => 'award', 'title' => 'Listing Your Business Multi-Categories', 'desc' => 'List your business in multiple categories so as to increase the visibility of your business.'],
+
+['icon' => 'award', 'title' => 'Promote Your Business', 'desc' => 'Make your business stand out by using promotional tools for your business.'],
+
+['icon' => 'award', 'title' => 'Customer Support', 'desc' => 'Have all your support needs covered regarding your business listing and account.'],
+
+['icon' => 'award', 'title' => 'Responsive Experience', 'desc' => 'Manage your business listings and replies from customers from wherever you may be, anytime.'],
+
+['icon' => 'award', 'title' => 'Security in One Business Dashboard', 'desc' => 'Have access to all your business data in one business dashboard.'],
+
+['icon' => 'award', 'title' => 'Updating Your Business Profile', 'desc' => 'Update your business profiles regularly for increased visibility to your customers.'],
+
+
+
+
         ];
     @endphp
     <section id="features" class="py-16 bg-gray-50">
@@ -536,6 +761,7 @@
                     'gradient'    => 'from-green-50 to-gray-100',
                     'border'      => 'border-gray-200',
                     'badge'       => null,
+                    'icon'        => 'gift',
                     'cta'         => 'Get Started',
                     'cta_style'   => 'outline',
                     'features'    => [
@@ -557,6 +783,7 @@
                     'gradient'    => 'from-indigo-50 to-indigo-100',
                     'border'      => 'border-indigo-300',
                     'badge'       => 'Most Popular',
+                    'icon'        => 'star',
                     'cta'         => 'Choose Premium',
                     'cta_style'   => 'solid',
                     'features'    => [
@@ -578,6 +805,7 @@
                     'gradient'    => 'from-indigo-50 to-indigo-100',
                     'border'      => 'border-indigo-300',
                     'badge'       => null,
+                    'icon'        => 'coins',
                     'cta'         => 'Get Started',
                     'cta_style'   => 'solid',
                     'features'    => [
@@ -598,6 +826,7 @@
                     'gradient'    => 'from-green-50 to-gray-100',
                     'border'      => 'border-gray-200',
                     'badge'       => null,
+                    'icon'        => 'trending-up',
                     'cta'         => 'Get Started',
                     'cta_style'   => 'outline',
                     'features'    => [
@@ -619,6 +848,7 @@
                     'gradient'    => 'from-indigo-50 to-indigo-100',
                     'border'      => 'border-indigo-300',
                     'badge'       => 'Most Popular',
+                    'icon'        => 'flame',
                     'cta'         => 'Choose Premium',
                     'cta_style'   => 'solid',
                     'features'    => [
@@ -640,6 +870,7 @@
                     'gradient'    => 'from-amber-50 to-yellow-50',
                     'border'      => 'border-amber-200',
                     'badge'       => 'Best Value',
+                    'icon'        => 'crown',
                     'cta'         => 'Go Royal',
                     'cta_style'   => 'outline',
                     'features'    => [
@@ -677,6 +908,9 @@
                     <div class="p-8 flex-1 flex flex-col">
 
                         <div class="mb-5">
+                            <div class="w-12 h-12 bg-white/70 rounded-xl flex items-center justify-center mb-3 shadow-sm">
+                                <i data-lucide="{{ $pkg['icon'] }}" class="w-6 h-6 text-indigo-600"></i>
+                            </div>
                             <h3 class="text-2xl font-bold text-gray-900 mb-1">{{ $pkg['name'] }}</h3>
                             <p class="text-gray-500 text-sm">{{ $pkg['description'] }}</p>
                         </div>
@@ -721,15 +955,19 @@
     <section class="py-14 bg-[#0076D7] relative overflow-hidden">
         <div class="absolute inset-0 opacity-10 anim-pulse-slow" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 24px 24px;"></div>
         <div class="max-w-3xl mx-auto px-4 text-center text-white relative z-10" data-reveal>
+            <div class="w-14 h-14 mx-auto mb-4 bg-white/15 rounded-2xl flex items-center justify-center">
+                <i data-lucide="rocket" class="w-7 h-7 text-white"></i>
+            </div>
             <h2 class="text-3xl font-bold mb-3">Ready to Grow Your Business?</h2>
             <p class="text-blue-100 mb-8">Join 1.8 K+ businesses already thriving on QuickDials</p>
             <div class="flex flex-col sm:flex-row gap-3 justify-center">
-                <button
-                    @click="scrollTo('hero')"
-                    class="btn-shimmer bg-white text-[#0076D7] font-bold px-8 py-3 rounded-xl hover:bg-blue-50 hover:scale-105 transition-all duration-300"
-                >
-                    Start Advertising Now
-                </button>
+                 <a
+    href="{{ route('login') }}"
+    class="btn-shimmer bg-white text-[#0076D7] font-bold px-8 py-3 rounded-xl hover:bg-blue-50 hover:scale-105 transition-all duration-300 inline-flex items-center justify-center gap-2"
+>
+    <i data-lucide="rocket" class="w-4 h-4"></i>
+    Start Advertising Now
+</a>
                
                 <a
                     href="tel:+917559435943"
@@ -745,17 +983,25 @@
     {{-- ===== FAQs ===== --}}
     @php
         $faqs = [
-            ['q' => 'How does advertising on QuickDials work?', 'a' => 'When you advertise on QuickDials, your business gets premium placement in search results when buyers look for your products or services. You receive leads as calls, chats, and enquiries directly from interested buyers.'],
-            ['q' => 'How many leads can I expect per month?', 'a' => 'The number of leads depends on your plan, category, and location. On average, our advertisers see 30–200+ leads per month. Highly competitive categories in metros typically receive more leads.'],
-            ['q' => 'Can I upgrade my plan later?', 'a' => 'Yes, you can upgrade your plan at any time. Our team will help you transition seamlessly and your listing will be upgraded immediately.'],
-            ['q' => 'Is there a free trial available?', 'a' => 'We offer a free basic listing to all businesses. You can upgrade to a paid plan anytime to unlock premium ranking, more leads, and advanced analytics.'],
-            ['q' => 'How do I track the performance of my listing?', 'a' => 'Your QuickDials business dashboard shows real-time data on impressions, clicks, calls, and enquiries. You can see exactly how your listing is performing at any time.'],
-            ['q' => 'What kind of support is available?', 'a' => 'All plans include customer support via phone and chat. Growth and Pro plans include a dedicated account manager who helps you maximize your return on investment.'],
+            ['q' => 'Why should I include my business on Quick Dials?', 'a' => 'Including your business on Quick Dials allows you to increase your visibility online, connect with more local clients, and get actual queries regarding your business.'],
+            ['q' => 'How can I begin using Quick Dials?', 'a' => 'All you have to do is just fill in your information, make a profile of your business, and select a package according to your business requirements.'],
+            ['q' => 'Which kind of businesses can sign up for Quick Dials?', 'a' => 'Quick Dials works for all businesses whether it is local stores, service businesses, start-ups, professionals, or well-established enterprises.'],
+            ['q' => 'How will I receive inquiries from customers?', 'a' => 'You will be receiving customer queries through phone calls, inquiry forms, or other ways which are available on your business profile.'],
+            ['q' => 'Am I able to update my business profile whenever I want?', 'a' => 'Yes. You can update your business profile, contacts, services, operating hours, and other details whenever required.'],
+            ['q' => 'Which plan should I choose?', 'a' => 'We have made our plans keeping different business objectives in mind. You can check the features available or consult us for making the best choice.'],
+            ['q' => 'Should my business profile be verified?', 'a' => 'Yes. If your business qualifies then you can get your profile verified for more credibility and customer identification.'],
+            ['q' => 'Can I change my plan?', 'a' => 'Of course. You have the option to change your plan anytime in order to get access to more features and expand your business reach.'],
+            ['q' => 'Can I target customers from specific locations?', 'a' => 'Yes. Based on your choice of the plan, you will be able to focus on your visibility in specific cities that are pertinent to your business.'],
+            ['q' => 'What kind of support do you offer?', 'a' => 'Our dedicated support staff can help you in account set-up, managing your profile and any questions related to your plan.'],
+            ['q' => 'How will I know about my business inquiries?', 'a' => 'Your business dashboard will allow you to keep track of all the inquiries made by your customers.'],
         ];
     @endphp
     <section id="faqs" class="py-16 bg-white">
         <div class="mx-auto px-4">
             <div class="text-center mb-10" data-reveal>
+                <div class="w-14 h-14 mx-auto mb-3 bg-blue-50 rounded-2xl flex items-center justify-center">
+                    <i data-lucide="help-circle" class="w-7 h-7 text-[#0076D7]"></i>
+                </div>
                 <h2 class="text-3xl font-bold text-gray-900">Frequently Asked Questions</h2>
                 <p class="text-gray-500 mt-2 text-sm">Everything you need to know before getting started</p>
             </div>
@@ -764,9 +1010,12 @@
                     <div x-data="{ open: false }" class="border-b border-gray-200 last:border-0">
                         <button
                             @click="open = !open"
-                            class="w-full flex justify-between items-center py-4 text-left text-sm font-medium text-gray-800 hover:text-[#0076D7] transition-colors"
+                            class="w-full flex justify-between items-center gap-3 py-4 text-left text-sm font-medium text-gray-800 hover:text-[#0076D7] transition-colors"
                         >
-                            {{ $faq['q'] }}
+                            <span class="flex items-center gap-2">
+                                <i data-lucide="message-circle-question" class="w-4 h-4 text-[#0076D7] flex-shrink-0"></i>
+                                {{ $faq['q'] }}
+                            </span>
                             <svg class="w-4 h-4 flex-shrink-0 text-gray-400 transition-transform duration-300" :class="open ? 'rotate-180 text-[#0076D7]' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
                         </button>
                         <div
@@ -780,7 +1029,7 @@
                             class="overflow-hidden"
                             style="display:none;"
                         >
-                            <p class="pb-4 text-sm text-gray-600 leading-relaxed">{{ $faq['a'] }}</p>
+                            <p class="pb-4 text-sm text-gray-600 leading-relaxed pl-6">{{ $faq['a'] }}</p>
                         </div>
                     </div>
                 @endforeach
@@ -806,7 +1055,8 @@
             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.61 21 3 13.39 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>
             Call
         </a>
-        <button @click="scrollTo('hero')" class="flex-1 bg-[#0076D7] text-white font-semibold py-2.5 rounded-lg text-sm">
+        <button @click="scrollTo('hero')" class="flex-1 bg-[#0076D7] text-white font-semibold py-2.5 rounded-lg text-sm flex items-center justify-center gap-1.5">
+            <i data-lucide="rocket" class="w-4 h-4"></i>
             Advertise Now
         </button>
     </div>
