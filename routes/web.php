@@ -475,9 +475,10 @@ Route::get('/', [App\Http\Controllers\Client\HomePageController::class, 'index']
  
 Route::post('/newsletter', [App\Http\Controllers\Client\HomePageController::class, 'newsletter']);
 Route::get('/news', [App\Http\Controllers\Official\OfficialController::class, 'news'])->name('news.list');
-Route::get('/news/{slug}', [App\Http\Controllers\Official\OfficialController::class, 'newsDetails'])->name('newsDetails');
+Route::get('/news/{slug}', [App\Http\Controllers\Official\OfficialController::class, 'newsDetails'])->name('news.details');
+Route::get('/news/category/{url}', [App\Http\Controllers\Official\OfficialController::class, 'newsCategory'])->name('news.category');
 
- 
+
 Route::get('/business-services', [App\Http\Controllers\Client\HomePageController::class, 'businessServices'])->name('business.services');
 Route::get('/getKWList', [App\Http\Controllers\Client\HomePageController::class, 'getKWList']);
 Route::get('/getCityKWList', [App\Http\Controllers\Client\HomePageController::class, 'getCityKWList']);
