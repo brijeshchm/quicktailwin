@@ -1,7 +1,3 @@
-{{-- resources/views/layouts/footer.blade.php --}}
-
- 
-
 <footer class="bg-gray-50 pt-10 md:pt-16 pb-8 border-t border-gray-200">
     <div class="w-full px-4 md:px-8">
 
@@ -135,7 +131,7 @@
                             'city_slug'    => 'online',
                             'service_slug' => $service['slug'],
                         ])
-                        : route('showCity', $service['slug']);
+                        : route('city.slug',['city_slug' => 'bangalore', 'service_slug' => $service['slug']]);
                 @endphp
 
                 <a href="{{ $href }}"

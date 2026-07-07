@@ -762,7 +762,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
         <ul class="flex flex-wrap gap-2 text-sm text-gray-600">
             @foreach($servicesRelated as $i => $service)
             <li class="flex items-center">
-                <a href="{{ route('showCity', $service['url'] ) }}" class="hover:text-indigo-600">{{ $service['title'] ?? '' }}</a>
+                <a href="{{ route('city.slug', ['city_slug'=>'bangalore','service_slug' => $service['url']]) }}" class="hover:text-indigo-600">{{ $service['title'] ?? '' }}</a>
                 @if($i !== count($servicesRelated) - 1)
                 <span class="mx-1 text-gray-400">|</span>
                 @endif
