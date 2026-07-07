@@ -5,7 +5,7 @@
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 @php
-    $cities = ['greater-noida', 'gurgaon', 'mumbai', 'chandigarh', 'meerut'];
+    $cities = ['greater-noida', 'gurgaon', 'mumbai', 'chandigarh', 'meerut','srinagar','surat','coimbatore','ludhiana','kolkata'];
 @endphp
 
 @foreach ($cities as $city)

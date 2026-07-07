@@ -76,7 +76,7 @@
 <priority>0.80</priority>
 </url>  
 @php
-    $cities = ['bangalore'];
+    $cities = ['bangalore','ajmer','kolhapur','firozabad','aligarh','bareilly','udaipur','mysuru','visakhapatnam','jamshedpur','jabalpur'];
 @endphp
 
 @foreach ($cities as $city)

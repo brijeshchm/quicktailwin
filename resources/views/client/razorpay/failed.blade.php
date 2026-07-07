@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Payment Declined — QuickDials</title>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <meta name="robots" content="noindex, nofollow">
+    <meta name="robots" content="index, nofollow">
     <link rel="shortcut icon" href="{{ asset('client/images/favicon.png') }}" type="image/png" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>

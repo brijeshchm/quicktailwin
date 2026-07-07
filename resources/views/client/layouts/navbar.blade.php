@@ -796,6 +796,7 @@ let stickyCityTimeout = null;
 function filterStickyCities(q) {
     document.getElementById('sticky-city-clear').classList.toggle('hidden', !q);
     clearTimeout(stickyCityTimeout);
+    
     if (q.length < 1) { renderStickyCityList(FALLBACK_CITIES); return; }
     stickyCityTimeout = setTimeout(async () => {
         try {
