@@ -14,8 +14,7 @@
 @include('client.layouts.navbar')
 <main>
 @yield('content')
-</main> 
-
+</main>
 @include('client.layouts.footer')
 </body>
 </html>

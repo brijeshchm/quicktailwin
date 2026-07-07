@@ -8,9 +8,7 @@
     <meta name="keywords" content="Quickdials Payment checkout">
     <meta name="description" content="Quickdials Payment checkout">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-
     <meta name="robots" content="noindex, follow">
-
     <meta name="author" content="QuickDials">
     <meta property="og:title" content="Quickdials Payment checkout" />
     <meta property="og:description" content="Quickdials Payment checkout" />

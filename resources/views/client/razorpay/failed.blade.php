@@ -9,9 +9,7 @@
     <link rel="shortcut icon" href="{{ asset('client/images/favicon.png') }}" type="image/png" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-
 <body class="bg-slate-50">
-
 @php
     // Safely capture failure details from URL/session if available
     $orderId   = e($_GET['order_id']   ?? '');
@@ -21,7 +19,6 @@
     $supportEmail = 'info@quickdials.com';
     $supportPhone = '+91-XXXXXXXXXX';
 @endphp
-
 <main class="min-h-screen relative overflow-hidden bg-gradient-to-br from-rose-50 via-white to-orange-50">
 
     {{-- Decorative orbs --}}
