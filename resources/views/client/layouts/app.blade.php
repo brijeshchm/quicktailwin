@@ -35,6 +35,14 @@
 <meta name="google-site-verification" content="O8A-LG3YpW7vOcPtVP9OuNrEcLfLf1kW2tTVpFpHNxM" />
 <meta name="msvalidate.01" content="456AED0115D50D42C4F3A79DAB89D41D" />
 <link rel="shortcut icon" href="{{ asset('client/images/favicon.png') }}" type="image/png" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KF6W10RN9L"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-KF6W10RN9L');
+</script>
 <!------Google Analytic Script End----->
 <script>
     (function(c,l,a,r,i,t,y){
@@ -271,16 +279,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
 ) !!}
 </script>
-@endif
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-KF6W10RN9L"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-KF6W10RN9L');
-</script>
+@endif 
 </head>
 <body class="min-h-screen bg-white text-gray-900 antialiased">
     <!-- Google Tag Manager (noscript) -->
