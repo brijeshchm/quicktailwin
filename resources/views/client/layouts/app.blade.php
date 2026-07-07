@@ -34,8 +34,8 @@
 <meta name="geo.position" content="@yield('geo_position', '')" />
 <meta name="google-site-verification" content="O8A-LG3YpW7vOcPtVP9OuNrEcLfLf1kW2tTVpFpHNxM" />
 <meta name="msvalidate.01" content="456AED0115D50D42C4F3A79DAB89D41D" />
-<link rel="shortcut icon" href="{{ asset('client/images/favicon.png') }}" type="image/png" />
-
+<link rel="icon" href="{{ asset('client/images/favicon.png') }}" type="image/png" />
+<link rel="apple-touch-icon" href="{{ asset('favicon.ico') }}" type="image/x-icon" />
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-KF6W10RN9L"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -57,8 +57,7 @@ new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-KZF3WGSW');</script>
-<!-- End Google Tag Manager -->
- 
+<!-- End Google Tag Manager --> 
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 <style>
         
@@ -101,9 +100,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         }
 
         .hidden-init { display: none; }
-    </style>    
-
-    
+    </style>        
 @php
      
     $serviceName = !empty($metaTitle)
