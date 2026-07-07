@@ -15,6 +15,6 @@ class Redemption extends Model
 
     public function user()     { return $this->belongsTo(User::class); }
     public function business() { return $this->belongsTo(Client::class); }
-    public function item()     { return $this->belongsTo(RedeemableItem::class, 'redeemable_item_id'); }
+    public function item()     { return $this->belongsTo(RewardsItem::class, 'redeemable_item_id'); }
    
 }

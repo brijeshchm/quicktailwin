@@ -149,13 +149,35 @@
         </a>
         </li> 
 
-
         <li class="nav-item">
-        <a class="nav-link <?php if(Request::segment(2)=='rewards-dashboard') { echo "active"; } ?>" href="{{url('business/rewards-dashboard')}}">
-          <i class="bi bi-gift"></i>
-          <span>Rewards</span>
+        <a class="nav-link collapsed" data-bs-target="#account-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-gift"></i><span>Rewards</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        </li> 
+        <ul id="account-nav" class="nav-content collapse <?php if(Request::segment(2)=='rewards-dashboard' || Request::segment(2)=='rewards-pending' || Request::segment(2)=='rewards-completed' || Request::segment(2)=='rewards-history'  ){ echo  "show"; }   ?>" data-bs-parent="#sidebar-nav">
+          <li>
+            <a class="<?php if(Request::segment(2)=='rewards-dashboard') { echo "active"; } ?>" href="{{url('business/rewards-dashboard')}}">
+              <i class="bi bi-gear"></i><span>Rewards dashboard</span>
+            </a>
+          </li>
+           
+          <li>
+            <a class="<?php if(Request::segment(2)=='rewards-pending' || Request::segment(2)== 'pay-deposit') { echo "active"; } ?>" href="{{url('business/rewards-pending')}}">
+              <i class="bi bi-currency-rupee"></i><span>Rewards Pending</span>
+            </a>
+          </li>
+          <li>
+            <a class="<?php if(Request::segment(2)=='rewards-completed') { echo "active"; } ?>" href="{{url('business/rewards-completed')}}">
+              <i class="bi bi-circle"></i><span>Rewards Completed</span>
+            </a>
+          </li>
+          <li>
+            <a  class="<?php if(Request::segment(2)=='rewards-history') { echo "active"; } ?>" href="{{url('business/rewards-history')}}">
+              <i class="bi bi-circle"></i><span>Rewards History</span>
+            </a>
+          </li>
+          
+        </ul>
+      </li> 
   
         <li class="nav-item">
         <a class="nav-link <?php if(Request::segment(2)=='recent-activity') { echo "active"; } ?>" href="{{url('business/recent-activity')}}">

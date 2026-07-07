@@ -163,7 +163,7 @@
                     </div>
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <span class="small fw-medium" style="color:#fffbeb;">Total Redeemed</span>
-                        <span class="fw-bold">{{ $rewards['totalRedeemed'] }}</span>
+                        <span class="fw-bold">{{ $rewards['totalUsed'] }}</span>
                     </div>
                     <div class="pt-3 border-top" style="border-color: rgba(255,255,255,.2) !important;">
                         <div class="d-flex justify-content-between small mb-2">

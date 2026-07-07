@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAddressRequest;
 use App\Models\Client\Address;
 use App\Models\Guest;
-use App\Models\RedeemableItem;
+use App\Models\RewardsItem;
 use App\Models\Client;
-use App\Models\CoinTransaction;
+use App\Models\RewardsTransaction;
 use App\Models\Redemption;
 use App\Models\Voucher;
 use App\Models\ParentCategory;
@@ -63,6 +63,11 @@ class VouchersController extends Controller
         'valid_until' => now()->addDays(15),
     ],
 ];
+
+
+$vouchers = RewardsItem::get();
+
+// dd($vouchers);
         return view('user.profile.vouchers', compact('user','vouchers','categories'));
     }
 
@@ -75,11 +80,11 @@ class VouchersController extends Controller
     public function rewards()
     {
            $user         = Auth::user();
-        $activeItems  = RedeemableItem::where('is_active', true)->get();
+        $activeItems  = RewardsItem::where('is_active', true)->get();
         $businesses   = Client::all();
         $redemptions  = Redemption::where('user_id', $user->id)
                             ->latest()->get();
-        $transactions = CoinTransaction::where('user_id', $user->id)
+        $transactions = RewardsTransaction::where('user_id', $user->id)
                             ->latest()->take(50)->get();
 
         $minRewardPoints = $activeItems->isNotEmpty()
@@ -105,9 +110,11 @@ class VouchersController extends Controller
      */
     public function claim(Request $request)
     {
-        $request->validate(['voucher_id' => 'required|exists:vouchers,id']);
+        // dd($request->all());
+        $request->validate(['voucher_id' => 'required|exists:rewards_items,id']);
 
         $user = Auth::user();
+        dd($user);
         $voucher = Voucher::active()->findOrFail($request->voucher_id);
 
         // Already claimed?

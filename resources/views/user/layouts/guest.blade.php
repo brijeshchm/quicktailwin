@@ -42,11 +42,17 @@
 <link rel="shortcut icon" href="{{ asset('client/images/favicon.png') }}" type="image/png" />
        <!------Google Analytic Script End----->
    
- 
-
+<script src="https://cdn.tailwindcss.com"></script>
+<script
+    defer
+    src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js">
+</script>
    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
-        
+        .headd{
+
+
+        }
         @keyframes pulse-ring {
             0% { transform: scale(1); opacity: 0.6; }
             100% { transform: scale(1.6); opacity: 0; }

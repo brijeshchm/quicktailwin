@@ -817,7 +817,7 @@ function clearStickyCitySearch() {
 
 function selectStickyCity(city) {
     stickySelectedCity = city;
- alert(city);
+ 
     document.getElementById('sticky-city-label').textContent = city;
     // document.getElementById('mobile-city-label').textContent = city; 
     document.getElementById('sticky-city-panel').classList.add('hidden');

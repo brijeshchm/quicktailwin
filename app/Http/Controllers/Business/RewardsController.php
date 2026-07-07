@@ -143,6 +143,7 @@ class RewardsController extends Controller
 		 
 	}
 
+
   /**
      * Accept an enquiry (pending -> accepted)
      */
@@ -208,6 +209,265 @@ class RewardsController extends Controller
 
  
 
+    public function getBusinessRewardsPending(Request $request)
+	{		 
+		$clientID = auth()->guard('clients')->user()->id;
+		$client = Client::find($clientID);
+
+
+
+		  $business = Auth::user(); // change to Auth::user()->business if you have a separate Business model
+ 
+    
+ 
+        // ---- Stats ----
+        // $totalRevenue = Lead::where('business_id', $businessId)
+        //     ->where('status', 'completed')
+        //     ->orWhere('status', 'reviewed')
+        //     ->sum('cost');
+		$totalRevenue = DB::table('leads')
+				->join('assigned_leads', 'leads.id', '=', 'assigned_leads.lead_id')
+				->select('leads.*', 'assigned_leads.client_id', 'assigned_leads.lead_id', 'assigned_leads.created_at as created')
+				->orderBy('assigned_leads.created_at', 'desc')
+				->where('assigned_leads.client_id', $clientID)->where('status', 'completed')
+            ->orWhere('status', 'reviewed')->sum('cost');
+
+ 
+        $rewardBalance = $business->reward_balance ?? 0; // adjust to your wallet/coins column
+ 
+        // $completedEnquiries = Lead::where('business_id', $businessId)
+        //     ->whereIn('status', ['completed', 'reviewed'])
+        //     ->count();
+ 		$completedEnquiries = DB::table('leads')
+		->join('assigned_leads', 'leads.id', '=', 'assigned_leads.lead_id')
+		->select('leads.*', 'assigned_leads.client_id', 'assigned_leads.lead_id', 'assigned_leads.created_at as created')
+		->orderBy('assigned_leads.created_at', 'desc')
+		->where('assigned_leads.client_id', $clientID)->whereIn('status', ['completed', 'reviewed'])->count();
+       
+
+		$pendingEnquiries = DB::table('leads')
+		->join('assigned_leads', 'leads.id', '=', 'assigned_leads.lead_id')
+		->select('leads.*', 'assigned_leads.client_id', 'assigned_leads.lead_id', 'assigned_leads.created_at as created')
+		->orderBy('assigned_leads.created_at', 'desc')
+		->where('assigned_leads.client_id', $clientID)->where('status', 'pending')->count();
+ 
+		$averageRating = 0;
+
+		$recentEnquiries = DB::table('leads')
+		->join('assigned_leads', 'leads.id', '=', 'assigned_leads.lead_id')
+		->select('leads.*', 'assigned_leads.client_id', 'assigned_leads.lead_id', 'assigned_leads.cost as assign_cost','assigned_leads.created_at as created')
+		->orderBy('assigned_leads.created_at', 'desc')
+		->where('assigned_leads.client_id', $clientID)->latest()->take(5)->get();
+  
+
+		$allEnquiries = DB::table('leads')
+		->join('assigned_leads', 'leads.id', '=', 'assigned_leads.lead_id')
+		->select('leads.*', 'assigned_leads.client_id', 'assigned_leads.lead_id','assigned_leads.status as assign_status', 'assigned_leads.created_at as created')
+		->orderBy('assigned_leads.created_at', 'desc')
+		->where('assigned_leads.client_id', $clientID)->latest()->latest()->get();
+
+//   dd($clientID);
+        $pendingList = $allEnquiries->where('status', 'pending')->values();
+        $activeList  = $allEnquiries->where('status', 'accepted')->values();
+ dd($pendingList);
+        // ---- Redemptions (reward bookings) ----
+        $allRedemptions = Redemption::where('business_id', $clientID)
+            ->with('customer')
+            ->latest()
+            ->get();
+ 
+        $rewardPendingList  = $allRedemptions->where('status', 'pending')->values();
+        $rewardAwaitingList = $allRedemptions->where('status', 'completed')->values();
+ 
+        return view('business.rewards-pending', [
+            'totalRevenue'        => $totalRevenue,
+            'rewardBalance'       => $rewardBalance,
+            'averageRating'       => $averageRating,
+            'completedEnquiries'  => $completedEnquiries,
+            'pendingEnquiries'    => $pendingEnquiries,
+            'recentEnquiries'     => $recentEnquiries,
+            'pendingList'         => $pendingList,
+            'activeList'          => $activeList,
+            'rewardPendingList'   => $rewardPendingList,
+            'rewardAwaitingList'  => $rewardAwaitingList,
+        ]);
+
+
+
+		 
+	}
+    public function getBusinessRewardsCompleted(Request $request)
+	{		 
+		$clientID = auth()->guard('clients')->user()->id;
+		$client = Client::find($clientID);
+
+
+
+		  $business = Auth::user(); // change to Auth::user()->business if you have a separate Business model
+ 
+    
+ 
+        // ---- Stats ----
+        // $totalRevenue = Lead::where('business_id', $businessId)
+        //     ->where('status', 'completed')
+        //     ->orWhere('status', 'reviewed')
+        //     ->sum('cost');
+		$totalRevenue = DB::table('leads')
+				->join('assigned_leads', 'leads.id', '=', 'assigned_leads.lead_id')
+				->select('leads.*', 'assigned_leads.client_id', 'assigned_leads.lead_id', 'assigned_leads.created_at as created')
+				->orderBy('assigned_leads.created_at', 'desc')
+				->where('assigned_leads.client_id', $clientID)->where('status', 'completed')
+            ->orWhere('status', 'reviewed')->sum('cost');
+
+ 
+        $rewardBalance = $business->reward_balance ?? 0; // adjust to your wallet/coins column
+ 
+        // $completedEnquiries = Lead::where('business_id', $businessId)
+        //     ->whereIn('status', ['completed', 'reviewed'])
+        //     ->count();
+ 		$completedEnquiries = DB::table('leads')
+		->join('assigned_leads', 'leads.id', '=', 'assigned_leads.lead_id')
+		->select('leads.*', 'assigned_leads.client_id', 'assigned_leads.lead_id', 'assigned_leads.created_at as created')
+		->orderBy('assigned_leads.created_at', 'desc')
+		->where('assigned_leads.client_id', $clientID)->whereIn('status', ['completed', 'reviewed'])->count();
+       
+
+		$pendingEnquiries = DB::table('leads')
+		->join('assigned_leads', 'leads.id', '=', 'assigned_leads.lead_id')
+		->select('leads.*', 'assigned_leads.client_id', 'assigned_leads.lead_id', 'assigned_leads.created_at as created')
+		->orderBy('assigned_leads.created_at', 'desc')
+		->where('assigned_leads.client_id', $clientID)->where('status', 'pending')->count();
+ 
+		$averageRating = 0;
+
+		$recentEnquiries = DB::table('leads')
+		->join('assigned_leads', 'leads.id', '=', 'assigned_leads.lead_id')
+		->select('leads.*', 'assigned_leads.client_id', 'assigned_leads.lead_id', 'assigned_leads.cost as assign_cost','assigned_leads.created_at as created')
+		->orderBy('assigned_leads.created_at', 'desc')
+		->where('assigned_leads.client_id', $clientID)->latest()->take(5)->get();
+  
+
+		$allEnquiries = DB::table('leads')
+		->join('assigned_leads', 'leads.id', '=', 'assigned_leads.lead_id')
+		->select('leads.*', 'assigned_leads.client_id', 'assigned_leads.lead_id','assigned_leads.status as assign_status', 'assigned_leads.created_at as created')
+		->orderBy('assigned_leads.created_at', 'desc')
+		->where('assigned_leads.client_id', $clientID)->latest()->latest()->get();
+
+//  dd($allEnquiries);
+        $pendingList = $allEnquiries->where('status', 'pending')->values();
+        $activeList  = $allEnquiries->where('status', 'accepted')->values();
+ 
+        // ---- Redemptions (reward bookings) ----
+        $allRedemptions = Redemption::where('business_id', $clientID)
+            ->with('customer')
+            ->latest()
+            ->get();
+ 
+        $rewardPendingList  = $allRedemptions->where('status', 'pending')->values();
+        $rewardAwaitingList = $allRedemptions->where('status', 'completed')->values();
+ 
+        return view('business.rewards-completed', [
+            'totalRevenue'        => $totalRevenue,
+            'rewardBalance'       => $rewardBalance,
+            'averageRating'       => $averageRating,
+            'completedEnquiries'  => $completedEnquiries,
+            'pendingEnquiries'    => $pendingEnquiries,
+            'recentEnquiries'     => $recentEnquiries,
+            'pendingList'         => $pendingList,
+            'activeList'          => $activeList,
+            'rewardPendingList'   => $rewardPendingList,
+            'rewardAwaitingList'  => $rewardAwaitingList,
+        ]);
+
+
+
+		 
+	}
+    public function getBusinessRewardsHistory(Request $request)
+	{		 
+		$clientID = auth()->guard('clients')->user()->id;
+		$client = Client::find($clientID);
+
+
+
+		  $business = Auth::user(); // change to Auth::user()->business if you have a separate Business model
+ 
+    
+ 
+        // ---- Stats ----
+        // $totalRevenue = Lead::where('business_id', $businessId)
+        //     ->where('status', 'completed')
+        //     ->orWhere('status', 'reviewed')
+        //     ->sum('cost');
+		$totalRevenue = DB::table('leads')
+				->join('assigned_leads', 'leads.id', '=', 'assigned_leads.lead_id')
+				->select('leads.*', 'assigned_leads.client_id', 'assigned_leads.lead_id', 'assigned_leads.created_at as created')
+				->orderBy('assigned_leads.created_at', 'desc')
+				->where('assigned_leads.client_id', $clientID)->where('status', 'completed')
+            ->orWhere('status', 'reviewed')->sum('cost');
+
+ 
+        $rewardBalance = $business->reward_balance ?? 0; // adjust to your wallet/coins column
+ 
+        // $completedEnquiries = Lead::where('business_id', $businessId)
+        //     ->whereIn('status', ['completed', 'reviewed'])
+        //     ->count();
+ 		$completedEnquiries = DB::table('leads')
+		->join('assigned_leads', 'leads.id', '=', 'assigned_leads.lead_id')
+		->select('leads.*', 'assigned_leads.client_id', 'assigned_leads.lead_id', 'assigned_leads.created_at as created')
+		->orderBy('assigned_leads.created_at', 'desc')
+		->where('assigned_leads.client_id', $clientID)->whereIn('status', ['completed', 'reviewed'])->count();
+       
+
+		$pendingEnquiries = DB::table('leads')
+		->join('assigned_leads', 'leads.id', '=', 'assigned_leads.lead_id')
+		->select('leads.*', 'assigned_leads.client_id', 'assigned_leads.lead_id', 'assigned_leads.created_at as created')
+		->orderBy('assigned_leads.created_at', 'desc')
+		->where('assigned_leads.client_id', $clientID)->where('status', 'pending')->count();
+ 
+		$averageRating = 0;
+
+		$recentEnquiries = DB::table('leads')
+		->join('assigned_leads', 'leads.id', '=', 'assigned_leads.lead_id')
+		->select('leads.*', 'assigned_leads.client_id', 'assigned_leads.lead_id', 'assigned_leads.cost as assign_cost','assigned_leads.created_at as created')
+		->orderBy('assigned_leads.created_at', 'desc')
+		->where('assigned_leads.client_id', $clientID)->latest()->take(5)->get();
+  
+
+		$allEnquiries = DB::table('leads')
+		->join('assigned_leads', 'leads.id', '=', 'assigned_leads.lead_id')
+		->select('leads.*', 'assigned_leads.client_id', 'assigned_leads.lead_id','assigned_leads.status as assign_status', 'assigned_leads.created_at as created')
+		->orderBy('assigned_leads.created_at', 'desc')
+		->where('assigned_leads.client_id', $clientID)->latest()->latest()->get();
+
+//  dd($allEnquiries);
+        $pendingList = $allEnquiries->where('status', 'pending')->values();
+        $activeList  = $allEnquiries->where('status', 'accepted')->values();
+ 
+        // ---- Redemptions (reward bookings) ----
+        $allRedemptions = Redemption::where('business_id', $clientID)
+            ->with('customer')
+            ->latest()
+            ->get();
+ 
+        $rewardPendingList  = $allRedemptions->where('status', 'pending')->values();
+        $rewardAwaitingList = $allRedemptions->where('status', 'completed')->values();
+ 
+        return view('business.rewards-history', [
+            'totalRevenue'        => $totalRevenue,
+            'allEnquiries'        => $allEnquiries,
+            'rewardBalance'       => $rewardBalance,
+            'averageRating'       => $averageRating,
+            'completedEnquiries'  => $completedEnquiries,
+            'pendingEnquiries'    => $pendingEnquiries,
+            'recentEnquiries'     => $recentEnquiries,
+            'pendingList'         => $pendingList,
+            'activeList'          => $activeList,
+            'rewardPendingList'   => $rewardPendingList,
+            'rewardAwaitingList'  => $rewardAwaitingList,
+        ]);
+		 
+	}
 
 
 

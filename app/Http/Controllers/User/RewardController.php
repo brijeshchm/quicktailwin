@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAddressRequest;
 use App\Models\Client\Address;
 use App\Models\Guest;
-use App\Models\RedeemableItem;
+use App\Models\RewardsItem;
 use App\Models\Client;
-use App\Models\CoinTransaction;
+use App\Models\RewardsTransaction;
 use App\Models\Redemption;
 use App\Models\Voucher;
 use App\Models\ParentCategory;
@@ -19,17 +19,17 @@ class RewardController extends Controller
 {
     
  public function index()
-    {
+{
 
   $user = Auth::user();
  
         $rewards = [
             'balance'      => $user->reward_balance ?? 0,
-            'totalEarned'  => $user->total_earned ?? 0,
-            'totalRedeemed' => $user->total_redeemed ?? 0,
+            'totalEarned'  => $user->rewards_earnes ?? 0,
+            'totalUsed' => $user->rewards_used ?? 0,
         ];
  
-        $items = RedeemableItem::where('is_active', true)          
+        $items = RewardsItem::where('is_active', true)          
             ->get();
  
         $businesses = Guest::all();
@@ -39,7 +39,7 @@ class RewardController extends Controller
             ->get();
  
             
-        $transactions = CoinTransaction::where('user_id', $user->id)
+        $transactions = RewardsTransaction::where('user_id', $user->id)
             ->latest()
             ->get();
  
@@ -74,7 +74,7 @@ class RewardController extends Controller
         ]);
 
         $user     = Auth::user();
-        $item     = RedeemableItem::findOrFail($request->item_id);
+        $item     = RewardsItem::findOrFail($request->item_id);
         $business = Client::findOrFail($request->business_id);
 
         // Resolve effective cost
@@ -110,7 +110,7 @@ class RewardController extends Controller
             ]);
 
             // Log transaction
-            CoinTransaction::create([
+            RewardsTransaction::create([
                 'user_id'     => $user->id,
                 'type'        => 'redeemed',
                 'points'      => $coinsRequired,
@@ -138,7 +138,7 @@ class RewardController extends Controller
                 $business->owner?->increment('coin_balance', $item->credit_coins);
                 $business->owner?->increment('total_earned', $item->credit_coins);
 
-                CoinTransaction::create([
+                RewardsTransaction::create([
                     'user_id'     => $business->owner_id,
                     'type'        => 'earned',
                     'points'      => $item->credit_coins,
@@ -149,10 +149,5 @@ class RewardController extends Controller
 
         return back()->with('success', 'Completion confirmed. The business has received its reward coins.');
     }
-
- 
-
-    
-
 
 }

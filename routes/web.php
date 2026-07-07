@@ -186,6 +186,9 @@ Route::middleware('auth:clients')->group(function () {
 
 
 	Route::get('/business/rewards-dashboard', [App\Http\Controllers\Business\RewardsController::class, 'getBusinessRewardsDashboard']);
+	Route::get('/business/rewards-pending', [App\Http\Controllers\Business\RewardsController::class, 'getBusinessRewardsPending']);
+	Route::get('/business/rewards-completed', [App\Http\Controllers\Business\RewardsController::class, 'getBusinessRewardsCompleted']);
+	Route::get('/business/rewards-history', [App\Http\Controllers\Business\RewardsController::class, 'getBusinessRewardsHistory']);
  
  
     Route::post('business/enquiries/{enquiry}/accept', [App\Http\Controllers\Business\RewardsController::class, 'acceptEnquiry'])

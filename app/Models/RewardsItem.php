@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class RedeemableItem extends Model
+class RewardsItem extends Model
 {
     
  protected $fillable = [
@@ -12,7 +12,7 @@ class RedeemableItem extends Model
         'coins_required', 'credit_coins',
         'city_prices', 'category', 'is_active'
     ];
-
+	
  
    
 }

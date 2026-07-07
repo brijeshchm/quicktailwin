@@ -56,7 +56,7 @@
         {{-- LEFT: Discount Value (colored) --}}
         <div class="relative w-28 flex-shrink-0 bg-gradient-to-br from-blue-600 to-indigo-700 flex flex-col items-center justify-center p-4 text-white">
             <span class="text-2xl font-extrabold leading-none">
-                {{ $voucher->type === 'percentage' ? rtrim(rtrim(number_format($voucher->value,2),'0'),'.') . '%' : '₹' . rtrim(rtrim(number_format($voucher->value,2),'0'),'.') }}
+                {{ $voucher->coins_required ? rtrim(rtrim(number_format($voucher->coins_required,2),'0'),'.') . '₹' : "0" }}
             </span>
             <span class="text-xs font-medium mt-1 uppercase tracking-wide opacity-90">Off</span>
 
@@ -67,22 +67,30 @@
         <div class="flex-1 p-4">
             <div class="flex items-start justify-between gap-2">
                 <div class="flex-1 min-w-0">
-                    @if($voucher->category_id)
+                    @if($voucher->category)
                         <span class="inline-block text-[10px] font-semibold text-blue-600 bg-blue-50 px-2 py-0.5 rounded uppercase tracking-wide mb-1">
-                            {{ $voucher->category_id }}
+                            {{ $voucher->category }}
                         </span>
                     @endif
                     <h3 class="text-sm font-bold text-gray-900 leading-snug">{{ $voucher->title }}</h3>
-                    @if($voucher->brand)
-                        <p class="text-xs text-gray-500 mt-0.5">by {{ $voucher->brand }}</p>
+                    @if($voucher->description)
+                        <p class="text-xs text-gray-500 mt-0.5">by {{ $voucher->description }}</p>
                     @endif
                 </div>
 
-                @if(!empty($voucher->image))
-                    <img src="{{ asset('storage/' . $voucher->image) }}"
-                         alt="{{ $voucher->brand }}"
-                         class="w-10 h-10 rounded object-cover flex-shrink-0">
-                @endif
+                    @if(!empty($voucher->image_url))
+                    @php
+                    $imageData = json_decode($voucher->image_url);
+
+                    $image = $imageData->rewards->src ?? null;
+                    @endphp
+
+                    @if($image)
+                    <img src="{{ asset($image) }}"
+                    alt="{{ $voucher->title }}"
+                    class="w-10 h-10 rounded object-cover flex-shrink-0">
+                    @endif
+                    @endif
             </div>
 
             @if(!empty($voucher->description))
@@ -102,7 +110,7 @@
                     <span class="text-xs font-mono font-bold text-gray-700 tracking-wider voucher-code">{{ $voucher->code }}</span>
                 </div>
 
-                @if($isClaimed)
+                @if($voucher->is_active)
                     <button type="button" disabled
                             class="claim-btn inline-flex items-center gap-1 bg-green-100 text-green-700 text-xs font-semibold px-3 py-1.5 rounded cursor-default">
                         <i data-lucide="check" class="w-3.5 h-3.5"></i>
@@ -113,7 +121,7 @@
                             onclick="claimVoucher({{ $voucher->id }}, this)"
                             class="claim-btn inline-flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-3 py-1.5 rounded transition">
                         <i data-lucide="plus" class="w-3.5 h-3.5"></i>
-                        Claim
+                        Apply
                     </button>
                 @endif
             </div>
@@ -132,22 +140,12 @@
                 </div>
             @endif
 
-            {{-- 💾 Continue --}}
-            <!-- <form action="" method="POST">
-                @csrf
-                <div class="flex justify-end mt-6">
-                    <button type="submit"
-                            class="inline-flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-medium px-10 py-2.5 rounded transition shadow-md">
-                        Continue dd
-                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                    </button>
-                </div>
-            </form> -->
+           
         </div>
     </div>
 </div>
 
-@push('scripts')
+ 
 <script>
 async function claimVoucher(voucherId, btn) {
     btn.disabled = true;
@@ -198,6 +196,6 @@ function showToast(msg, type = 'success') {
     setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 300); }, 2800);
 }
 </script>
-@endpush
+ 
 
 @endsection
