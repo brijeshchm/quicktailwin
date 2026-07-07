@@ -74,16 +74,21 @@
 <lastmod>2026-04-03T10:30:00+00:00</lastmod> 
 <changefreq>weekly</changefreq>
 <priority>0.80</priority>
-</url> 
-@foreach ($keywords as $keyword)
-<url>
-    <loc>{{ route('showCity', $keyword->slug) }}</loc>
-    <lastmod>{{ \Carbon\Carbon::parse($keyword->updated_at ?? now())->toAtomString() }}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.80</priority>
-</url>
-@endforeach
+</url>  
+@php
+    $cities = ['bangalore'];
+@endphp
 
+@foreach ($cities as $city)
+    @foreach ($keywords as $keyword)
+    <url>
+        <loc>{{ route('city.slug', ['city_slug' => $city, 'service_slug' => $keyword->slug]) }}</loc>
+        <lastmod>{{ \Carbon\Carbon::parse($keyword->updated_at)->toAtomString() }}</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.80</priority>
+    </url>
+    @endforeach
+@endforeach
 @foreach ($categories as $category)
 <url>
     <loc>{{ route('categories.show', $category->parent_slug) }}</loc>
