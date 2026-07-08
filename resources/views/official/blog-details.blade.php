@@ -327,11 +327,18 @@
                              style="background: {{ $authorColor }};">
                             {{ strtoupper(substr($blogDetails['author_name'], 0, 1)) }}
                         </div>
-                        <div>
-                            <p class="text-slate-800 font-semibold text-sm leading-none mb-0.5">
-                                {{ $blogDetails['author_name'] }}
-                            </p>
+                    <div>              
+
+                    <h3 class="text-lg font-bold text-slate-900 mb-1">
+                        {{ $blogDetails['author_name'] }}
+                    </h3>
+                    <p class="text-sm text-gray-500 leading-relaxed">
+                        A seasoned expert in {{ $blogDetails['name'] ?? 'technology' }} with extensive
+                        hands-on experience helping professionals upskill, certify, and advance their
+                        careers in tech and enterprise systems.
+                    </p>
                         </div>
+                        <p> </p>
                     </div>
                     <span class="w-px h-8 bg-gray-200 hidden sm:block"></span>
                     @endif
