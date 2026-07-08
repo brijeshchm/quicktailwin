@@ -1528,14 +1528,16 @@ $reviewList = DB::table('clients')
 			}
 
 
- 
-			$assignedKeywords = DB::table('assigned_kwds')
+  
+
+				$assignedKeywords = DB::table('assigned_kwds')
 				->join('keyword', 'assigned_kwds.kw_id', '=', 'keyword.id')
 				->where('assigned_kwds.client_id', $clientscheck->business_id)
 				->orderBy('keyword', 'asc')
 				->distinct()
-				->pluck('keyword.keyword')
-				->toArray();
+				->pluck('keyword.keyword','keyword.slug');
+ 
+
 			$assignedCity = DB::table('assigned_kwds')
 				->join('citylists', 'assigned_kwds.city_id', '=', 'citylists.id')
 				->where('assigned_kwds.client_id', $clientscheck->business_id)
@@ -1926,7 +1928,7 @@ $reviewList = DB::table('clients')
 
 
 			if (!empty($assignedKeywords)) {
-				$findKeywords = Keyword::select('child_category_id')->where('keyword', $assignedKeywords[0])->first();
+				$findKeywords = Keyword::select('child_category_id')->where('keyword', $assignedKeywords->first())->first();
 
 				$relKeywords = Keyword::select('keyword','slug')->where('child_category_id', $findKeywords->child_category_id)
 					->orderBy('keyword', 'asc')
@@ -2207,9 +2209,9 @@ $reviewList = DB::table('clients')
         $vImages = array_slice($gallery, (int) ceil(count($gallery) / 2)) ?: [
             asset('/images/gallery.jpg'),
         ];
- 
+
         // Services / assigned keywords
-        $assignKeyword = is_array($clientsList['assign_keyword'] ?? null)
+        $assignKeyword = $clientsList['assign_keyword'] 
             ? $clientsList['assign_keyword']
             : [];
  

@@ -67,8 +67,6 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
  <main class="flex-1 min-w-0"> 
         {{-- Course grid --}}
         <div class="flex-1 min-w-0">
-         
-
             <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-6 gap-3">
                 @forelse($childLists as $i => $course)
                     @php
@@ -81,7 +79,7 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
 
                     @endphp
                     <div class="animate-tile" style="animation-delay: {{ $delay }}ms">
-                        <a href="{{ route('showCity', $url) }}" >
+                        <a href="{{ route('city.slug', ['city_slug'=> 'bangalore','service_slug' => $url])}}" >
                             <div class="tile-card group bg-white border border-slate-200 rounded-xl overflow-hidden">
 
                                 {{-- Coloured image strip --}}

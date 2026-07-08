@@ -139,20 +139,19 @@
     @else
     <div class="row">
         @foreach($items as $item)
+
+       
         <div class="col-sm-6 col-md-4" style="margin-bottom:20px">
-            <div class="panel panel-default {{ !$item->is_active ? 'card-inactive' : '' }}"
+            <div class="panel panel-default {{ !$item['is_active'] ? 'card-inactive' : '' }}"
                 style="border-radius:10px; overflow:hidden; border:none;
                        box-shadow:0 1px 4px rgba(0,0,0,.1); margin-bottom:0">
    
                 {{-- Image --}}
                 <div class="reward-img-wrap">
-                    @if($item->image_url)
+                    @if($item['image_url'])
 
-                 @php                    
-                    $image_url = json_decode($item->image_url);
- 
-                    @endphp
-                        <img src="{{ asset($image_url->rewards->src) }}" alt="{{ $image_url->rewards->alt }}" 
+                
+                        <img src="{{ asset($item['image_url']) }}" alt="{{ $item['title'] }}" 
                             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
                         <div style="display:none;width:100%;height:100%;align-items:center;justify-content:center">
                             <i class="glyphicon glyphicon-picture" style="font-size:2.5rem;color:#9ca3af;opacity:.4"></i>
@@ -161,36 +160,36 @@
                         <i class="glyphicon glyphicon-picture" style="font-size:2.5rem;color:#9ca3af;opacity:.4"></i>
                     @endif
 
-                    @if(!$item->is_active)
+                    @if(!$item['is_active'])
                         <span class="badge-inactive">Inactive</span>
                     @endif
-                    @if($item->category)
-                        <span class="badge-category">{{ $item->category }}</span>
+                    @if($item['category'])
+                        <span class="badge-category">{{ $item['category'] }}</span>
                     @endif
                 </div>
 
                 {{-- Body --}}
                 <div class="panel-body" style="padding:14px 14px 8px">
                     <h5 style="font-weight:700;margin:0 0 6px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">
-                        {{ $item->name }}
+                        {{ $item['title'] }}
                     </h5>
                     <p class="text-muted small" style="
                         display:-webkit-box;-webkit-line-clamp:2;
                         -webkit-box-orient:vertical;overflow:hidden;
                         min-height:2.6rem;margin-bottom:8px">
-                        {{ $item->description }}
+                        {{ $item['description'] }}
                     </p>
-                    <p class="text-coin" style="margin:0">{{ number_format($item->coins_required) }} Coins</p>
+                    <p class="text-coin" style="margin:0">{{ number_format($item['coins_required']) }} Coins</p>
                 </div>
 
                 {{-- Footer --}}
                 <div class="panel-footer text-right"
                     style="background:#fff;border-top:1px solid #f3f4f6;padding:8px 14px">
-                    <button class="btn btn-default btn-sm" onclick="openModal({{ $item->id }})">
+                    <button class="btn btn-default btn-sm" onclick="openModal({{ $item['id'] }})">
                         <i class="glyphicon glyphicon-pencil"></i> Edit
                     </button>
                     <button type="button" class="btn btn-danger btn-sm"
-                        onclick="deleteItem({{ $item->id }}, this)">
+                        onclick="deleteItem({{ $item['id'] }}, this)">
                         <i class="glyphicon glyphicon-trash"></i> Delete
                     </button>
                 </div>
@@ -236,11 +235,20 @@
                                 {{-- Name --}}
                                 <div class="form-group">
                                     <label class="control-label small" style="font-weight:600">
-                                        Name <span class="text-danger">*</span>
+                                        Title <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" name="name" id="f_name"
+                                    <input type="text" name="title" id="f_name"
                                         class="form-control" required
-                                        placeholder="e.g. Free Coffee">
+                                        placeholder="Reward Title">
+                                </div>
+
+                                   <div class="form-group">
+                                    <label class="control-label small" style="font-weight:600">
+                                        Code <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" name="code" id="f_code"
+                                        class="form-control" required
+                                        placeholder="Enter Code #QD028">
                                 </div>
 
                                 {{-- Description --}}
@@ -256,11 +264,11 @@
                                     <div class="col-xs-6">
                                         <div class="form-group">
                                             <label class="control-label small" style="font-weight:600">
-                                                Coins Required <span class="text-danger">*</span>
+                                                Coins Required ad <span class="text-danger">*</span>
                                             </label>
                                             <input type="number" name="coins_required"
                                                 id="f_coins_required" min="1" value="100"
-                                                required class="form-control">
+                                                required class="form-control" onblur="handlingCoins()">
                                         </div>
                                     </div>
                                     <div class="col-xs-6">
@@ -269,8 +277,8 @@
                                                 Refund Coins
                                             </label>
                                             <input type="number" name="credit_coins"
-                                                id="f_credit_coins" min="0" value="0"
-                                                class="form-control">
+                                                id="f_credit_coins" min="0" value=""
+                                                class="form-control" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -486,6 +494,8 @@ var editingId  = null;
 var currentCat = '';
 var cityIdx    = 0;
 
+
+
 /* ════════════════ MODAL (Bootstrap 3) ════════════════ */
 function openModal(id) {
     id = id || null;
@@ -509,7 +519,8 @@ function openModal(id) {
         document.getElementById('methodField').innerHTML   =
             '<input type="hidden" name="_method" value="PUT">';
 
-        document.getElementById('f_name').value           = item.name           || '';
+        document.getElementById('f_code').value           = item.code           || '';
+        document.getElementById('f_name').value           = item.title           || '';
         document.getElementById('f_description').value    = item.description    || '';
         document.getElementById('f_coins_required').value = item.coins_required || 100;
         document.getElementById('f_credit_coins').value   = item.credit_coins   || 0;
@@ -676,7 +687,7 @@ function updatePreview() {
     var ph  = document.getElementById('previewPlaceholder');
 
     if (imgUrl) {
-        img.src            = imgUrl;
+        img.src            = "{{ asset('') }}" + imgUrl;
         img.style.display  = 'block';
         ph.style.display   = 'none';
     } else {
@@ -855,6 +866,103 @@ function escHtml(str) {
         .replace(/</g,'&lt;')
         .replace(/>/g,'&gt;');
 }
+
+
+
+function handlingCoins() {
+	
+	var paid_amount = jQuery('#f_coins_required');
+	var paid_am= parseInt(paid_amount.val());
+
+	var coins = jQuery('#f_credit_coins');
+    
+	if( paid_am <= 0 ){
+		alert("paid amount Cannot be Empty");
+		paid_am.val("");
+
+	}
+	 if (100 <= paid_am && paid_am < 500) {
+
+     var coinAmt = parseInt(paid_am/0.90);
+  
+    $('#f_credit_coins').val(coinAmt);
+	 
+
+	}else
+if (500 <= paid_am && paid_am < 1000) {
+
+     var coinAmt = parseInt(paid_am/0.90);
+  
+    $('#f_credit_coins').val(coinAmt);
+	 
+
+	}else 
+	if (1000 <= paid_am && paid_am < 2000) {
+
+     var coinAmt = parseInt(paid_am/0.90);
+  
+    $('#f_credit_coins').val(coinAmt);
+	 
+
+	}else if (2000 <= paid_am && paid_am < 4000) {
+ 
+     var coinAmt = parseInt(paid_am/0.86);
+    $('#f_credit_coins').val(coinAmt);
+	 
+
+	}else if (4000 <= paid_am && paid_am < 6000) {
+ 
+     var coinAmt = parseInt(paid_am/0.84);
+    $('#f_credit_coins').val(coinAmt);
+	 
+
+	}else  if (6000 <= paid_am && paid_am < 8000) {
+ 
+     var coinAmt = parseInt(paid_am/0.82);
+    $('#f_credit_coins').val(coinAmt);
+	 
+
+	}else if (8000 <= paid_am && paid_am < 10000) {
+ 
+     var coinAmt = parseInt(paid_am/0.80);
+    $('#f_credit_coins').val(coinAmt);
+	 
+
+	}else if (10000 <= paid_am && paid_am < 15000) {
+  
+     var coinAmt = parseInt(paid_am/0.78);
+    $('#f_credit_coins').val(coinAmt);	 
+
+	}else if (15000 <= paid_am && paid_am < 20000) {
+ 
+     var coinAmt = parseInt(paid_am/0.75);
+    $('#f_credit_coins').val(coinAmt);
+	 
+
+	}else if (20000 <= paid_am && paid_am < 40000) {
+ 
+     var coinAmt = parseInt(paid_am/0.70);
+    $('#f_credit_coins').val(coinAmt);
+	 
+
+	}else if (40000 <= paid_am && paid_am < 50000) {
+ 
+     var coinAmt = parseInt(paid_am/0.65);
+    $('#f_credit_coins').val(coinAmt); 
+
+	}else if (50000 <= paid_am && paid_am <= 100000) {
+ 
+     var coinAmt = parseInt(paid_am/0.60);
+    $('#f_credit_coins').val(coinAmt);
+	} 
+    else if (100000 <= paid_am && paid_am <= 999999) {
+ 
+     var coinAmt = parseInt(paid_am/0.49);
+    $('#f_credit_coins').val(coinAmt);
+	} 
+}
+
+
 </script>
 
 </div><!-- /#page-wrapper -->

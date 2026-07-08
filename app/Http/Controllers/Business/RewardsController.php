@@ -269,7 +269,7 @@ class RewardsController extends Controller
 //   dd($clientID);
         $pendingList = $allEnquiries->where('status', 'pending')->values();
         $activeList  = $allEnquiries->where('status', 'accepted')->values();
- dd($pendingList);
+ 
         // ---- Redemptions (reward bookings) ----
         $allRedemptions = Redemption::where('business_id', $clientID)
             ->with('customer')

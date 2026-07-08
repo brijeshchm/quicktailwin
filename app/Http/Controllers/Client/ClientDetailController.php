@@ -225,7 +225,6 @@ class ClientDetailController extends Controller
             'googleMapUrl', 'mapSrc', 'yearsExp', 'yearEst','recentActivitys',
             'todayDay', 'hours','linearGradients'
         ));
-	
 	 
 
 	}

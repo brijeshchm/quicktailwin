@@ -8,7 +8,7 @@ class RewardsItem extends Model
 {
     
  protected $fillable = [
-        'name', 'description', 'image_url',
+        'title','code', 'description', 'image_url',
         'coins_required', 'credit_coins',
         'city_prices', 'category', 'is_active'
     ];
