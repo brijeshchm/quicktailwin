@@ -105,7 +105,22 @@ select.ef-input { padding-left:1rem; }
 
 {{-- Scroll progress --}}
 @include('client.layouts.common_country_data')
+@php
+ $starMap = [
+    0 => 'star_1.png', 2 => 'star_2.png', 3 => 'star_3.png',
+    3.5 => 'star_3.5.png', 4 => 'star_4.png', 4.5 => 'star_4.5.png',
+    4.75 => 'star_4.75.png', 5 => 'star_5.png',
+];
+
  
+
+// Calculate star image key
+$starKey = 0;
+foreach ($starMap as $k => $v) {
+    if ($clientsList['rating'] >= $k) $starKey = $k;
+}
+$starImg = $starMap[$starKey] ?? 'star_4.5.png';
+@endphp
 {{-- ════════════════════════════════════════
      HERO BANNER
 ════════════════════════════════════════ --}}
@@ -137,9 +152,37 @@ select.ef-input { padding-left:1rem; }
             </div>
             <div class="flex flex-wrap items-center gap-3 text-white/80 text-xs font-medium">
                 <div class="flex items-center gap-1">
-                    @for($s=0;$s<5;$s++)<span class="text-yellow-400">★</span>@endfor
-                    <span class="font-bold text-white ml-1">{{ $clientsList['rating'] ?? '' }}</span>
-                    <span class="text-white/55">({{ $clientsList['ratingCount'] ?? '' }} reviews)</span>
+                <div itemscope itemtype="https://schema.org/Product" class="space-y-2">                  
+                    <meta itemprop="name" content="{{ $metaTitle ?? $metaTitle ?? 'QuickDials review Service' }}">                   
+                    @if(!empty($kwData['category_icon']))
+                    <meta itemprop="image" content="{{ $clientsList['logo']  ?? asset('client/images/default_pp_small.png') ??'' }}">
+                    @endif                   
+                    @if(!empty($metaDescription))
+                    <meta itemprop="description" content="{{ $metaDescription }}">
+                    @endif 
+                    <div itemprop="aggregateRating"
+                        itemscope
+                        itemtype="https://schema.org/AggregateRating"
+                        class="flex items-center gap-2 text-sm">
+                        <img src="{{ asset('client/images/' . $starImg) }}"
+                        alt="{{ $clientsList['ratingCount'] }} out of 5 stars"
+                        class="lazy-image h-4 w-auto"
+                        width="80"
+                        height="16"
+                        loading="lazy"
+                        decoding="async"
+                        >
+                        <span class="font-semibold text-white-900">
+                        <span itemprop="ratingValue">{{ $clientsList['rating'] }}</span>
+                        </span>
+                        <span class="text-white-500 text-white">out of</span>
+                        <span itemprop="bestRating" >5</span>
+                        <span class="text-white-500">based on</span>
+                        (<span itemprop="ratingCount">{{ number_format($clientsList['ratingCount']) }}</span>
+                        <span class="text-white-500">reviews</span>)
+                    </div>
+                </div>  
+                     
                 </div>
                 <span class="text-[10px] font-bold tracking-wide text-white rounded-full px-2.5 py-0.5 flex items-center gap-1.5" style="background:#16a34a;">
                     <span class="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span>Open Now
@@ -1015,9 +1058,12 @@ function selectCert(i) {
             </div>
             <div class="px-6 py-5">
                 <ul class="flex flex-wrap gap-2">
+                    @php
+                     $city = $clientsList['city']?$clientsList['city']:'bangalore';
+                    @endphp
                     @foreach($relatedList as $i => $item)
                     <li>
-                        <a href="{{ route('city.slug', ['city_slug'=> 'bangalore','service_slug' => $item['slug']])}}" class="text-blue-600 hover:underline text-sm">
+                        <a href="{{ route('city.slug', ['city_slug'=>strtolower($city),'service_slug' => $item['slug']])}}" class="text-blue-600 hover:underline text-sm">
                             {{ $item['title'] }}{{ $i < count($relatedList)-1 ? ' |' : '' }}
                         </a>
                     </li>

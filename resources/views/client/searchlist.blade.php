@@ -220,49 +220,48 @@ function bannerSlider(banners, interval = 4000) {
  
                 <div itemscope itemtype="https://schema.org/Product" class="space-y-2">
 
-    {{-- Required: Product Name --}}
-    <meta itemprop="name" content="{{ $keyword ?? $metaTitle ?? 'QuickDials review Service' }}">
+                    {{-- Required: Product Name --}}
+                    <meta itemprop="name" content="{{ $keyword ?? $metaTitle ?? 'QuickDials review Service' }}">
 
-    {{-- Required: Product Image --}}
-    @if(!empty($kwData['key_icon']))
-        <meta itemprop="image" content="{{ $kwData['key_icon'] ?? $kwData['child_icon'] ??'' }}">
-    @endif
+                    {{-- Required: Product Image --}}
+                    @if(!empty($kwData['key_icon']))
+                    <meta itemprop="image" content="{{ $kwData['key_icon'] ?? $kwData['child_icon'] ??'' }}">
+                    @endif
 
-    {{-- Optional: Description --}}
-    @if(!empty($metaDescription))
-        <meta itemprop="description" content="{{ $metaDescription }}">
-    @endif
+                    {{-- Optional: Description --}}
+                    @if(!empty($metaDescription))
+                    <meta itemprop="description" content="{{ $metaDescription }}">
+                    @endif
+ 
+                    <div itemprop="aggregateRating"
+                        itemscope
+                        itemtype="https://schema.org/AggregateRating"
+                        class="flex items-center gap-2 text-sm">
 
-    {{-- Aggregate Rating --}}
-    <div itemprop="aggregateRating"
-         itemscope
-         itemtype="https://schema.org/AggregateRating"
-         class="flex items-center gap-2 text-sm">
+                        <img src="{{ asset('client/images/' . $starImg) }}"
+                        alt="{{ $ratingValue }} out of 5 stars"
+                        class="lazy-image h-4 w-auto"
+                        width="80"
+                        height="16"
+                        loading="lazy"
+                        decoding="async"
+                        >
 
-        <img src="{{ asset('client/images/' . $starImg) }}"
-             alt="{{ $ratingValue }} out of 5 stars"
-             class="lazy-image h-4 w-auto"
-             width="80"
-             height="16"
-             loading="lazy"
-            decoding="async"
-             >
+                        <span class="font-semibold text-gray-900">
+                        <span itemprop="ratingValue">{{ $ratingValue }}</span>
+                        </span>
 
-        <span class="font-semibold text-gray-900">
-            <span itemprop="ratingValue">{{ $ratingValue }}</span>
-        </span>
+                        <span class="text-gray-500">out of</span>
 
-        <span class="text-gray-500">out of</span>
+                        <span itemprop="bestRating">5</span>
 
-        <span itemprop="bestRating">5</span>
+                        <span class="text-gray-500">based on</span>
 
-        <span class="text-gray-500">based on</span>
+                        <span itemprop="ratingCount">{{ $ratingCount }}</span>
 
-        <span itemprop="ratingCount">{{ $ratingCount }}</span>
-
-        <span class="text-gray-500">ratings</span>
-    </div>
-</div>
+                        <span class="text-gray-500">ratings</span>
+                    </div>
+                </div>
 
                         
             </div>

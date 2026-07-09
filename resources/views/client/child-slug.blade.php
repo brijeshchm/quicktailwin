@@ -47,18 +47,36 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
             </nav>
 
             <h1 class="text-lg sm:text-xl font-bold text-slate-900 leading-tight">{{ $keyword }}</h1>
-
-            {{-- ── Star Rating ── --}}
-            <div class="flex items-center gap-2 text-sm mt-2 flex-wrap">
-                <img  loading="lazy" decoding="async" src="/client/images/{{ $stars }}" alt="{{ $ratingValue }} star rating" class="star-img" />
-                <span class="font-semibold">{{ $ratingValue }}</span>
-                <span class="text-slate-400">out of 5</span>
-                <span class="text-slate-400">based on</span>
-                <span class="font-semibold">{{ number_format($ratingCount) }}</span>
-                <span class="text-slate-400">ratings</span>
-            </div>
-
-           
+                <div itemscope itemtype="https://schema.org/Product" class="space-y-2">                  
+                    <meta itemprop="name" content="{{ $keyword ?? $metaTitle ?? 'QuickDials review Service' }}">                   
+                    @if(!empty($kwData['category_icon']))
+                    <meta itemprop="image" content="{{ $kwData['category_icon'] ?? $kwData['child_icon'] ??'' }}">
+                    @endif                   
+                    @if(!empty($metaDescription))
+                    <meta itemprop="description" content="{{ $metaDescription }}">
+                    @endif 
+                    <div itemprop="aggregateRating"
+                        itemscope
+                        itemtype="https://schema.org/AggregateRating"
+                        class="flex items-center gap-2 text-sm">
+                        <img src="{{ asset('client/images/' . $stars) }}"
+                        alt="{{ $ratingValue }} out of 5 stars"
+                        class="lazy-image h-4 w-auto"
+                        width="80"
+                        height="16"
+                        loading="lazy"
+                        decoding="async"
+                        >
+                        <span class="font-semibold text-gray-900">
+                        <span itemprop="ratingValue">{{ $ratingValue }}</span>
+                        </span>
+                        <span class="text-gray-500">out of</span>
+                        <span itemprop="bestRating">5</span>
+                        <span class="text-gray-500">based on</span>
+                        <span itemprop="ratingCount">{{ number_format($ratingCount) }}</span>
+                        <span class="text-gray-500">ratings</span>
+                    </div>
+                </div>           
         </div>
     </div>
 

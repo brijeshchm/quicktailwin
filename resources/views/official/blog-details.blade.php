@@ -8,6 +8,26 @@
 @section('content')
 @include('client.components.banner-section')
 
+@php
+
+// echo "<pre>";print_r($blogDetails['ratingvalue']);die;
+$starMap = [
+    0 => 'star_1.png', 2 => 'star_2.png', 3 => 'star_3.png',
+    3.5 => 'star_3.5.png', 4 => 'star_4.png', 4.5 => 'star_4.5.png',
+    4.75 => 'star_4.75.png', 5 => 'star_5.png',
+];
+
+$bgImage = $bgImage ?? '/computer-courses-training.jpg';
+
+// Calculate star image key
+$starKey = 0;
+foreach ($starMap as $k => $v) {
+    if ($blogDetails['ratingvalue'] >= $k) $starKey = $k;
+}
+$starImg = $starMap[$starKey] ?? 'star_4.5.png';
+
+@endphp
+
 <style> 
 :root {
     --accent:  #2563eb;
@@ -317,7 +337,42 @@
                 <h1 class="text-3xl lg:text-4xl font-bold text-slate-900 leading-tight mb-5">
                     {{ $blogDetails['title'] ?? '' }}
                 </h1>
+                <div itemscope itemtype="https://schema.org/Product" class="space-y-2">                    
+                    <meta itemprop="name" content="{{ $blogDetails['title'] ?? $blogDetails['meta_title'] ?? 'QuickDials review Service' }}">                  
+                    @if(!empty($blogDetails['blogImage']))
+                    <meta itemprop="image" content="{{ $blogDetails['blogImage'] ? asset($blogDetails['blogImage']): asset('client/images/quickdials-og.png') }}">
+                    @endif
+               
+                    @if(!empty($blogDetails['meta_description']))
+                    <meta itemprop="description" content="{{ $blogDetails['meta_description'] }}">
+                    @endif
+ 
+                    <div itemprop="aggregateRating"
+                        itemscope
+                        itemtype="https://schema.org/AggregateRating"
+                        class="flex items-center gap-2 text-sm">
 
+                        <img src="{{ asset('client/images/' . $starImg) }}"
+                        alt="{{ $blogDetails['ratingvalue'] }} out of 5 stars"
+                        class="lazy-image h-4 w-auto"
+                        width="80"
+                        height="16"
+                        loading="lazy"
+                        decoding="async"
+                        >
+                        <span class="font-semibold text-gray-900">
+                        <span itemprop="ratingValue">{{ $blogDetails['ratingvalue'] }}</span>
+                        </span>
+                        <span class="text-gray-500">out of</span>
+                        <span itemprop="bestRating">5</span>
+                        <span class="text-gray-500">based on</span>
+                        <span itemprop="ratingCount">{{ $blogDetails['ratingcount'] }}</span>
+                        <span class="text-gray-500">ratings</span>
+                    </div>
+                </div>
+
+
+                
                 <div class="flex flex-wrap items-center gap-4 text-sm text-gray-400 mb-5">
                     {{-- Author --}}
                     @if(!empty($blogDetails['author_name']))

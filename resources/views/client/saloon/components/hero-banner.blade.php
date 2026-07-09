@@ -86,6 +86,38 @@
                     The Art of
                 </h1>
 
+                <div itemscope itemtype="https://schema.org/Product" class="space-y-2">                  
+                    <meta itemprop="name" content="{{ $metaTitle ?? $metaTitle ?? 'QuickDials review Service' }}">                   
+                    @if(!empty($kwData['category_icon']))
+                    <meta itemprop="image" content="{{ $kwData['category_icon'] ?? $kwData['child_icon'] ??'' }}">
+                    @endif                   
+                    @if(!empty($metaDescription))
+                    <meta itemprop="description" content="{{ $metaDescription }}">
+                    @endif 
+                    <div itemprop="aggregateRating"
+                        itemscope
+                        itemtype="https://schema.org/AggregateRating"
+                        class="flex items-center gap-2 text-sm">
+                        <img src="{{ asset('client/images/star_4.5.png') }}"
+                        alt="4.5 out of 5 stars"
+                        class="lazy-image h-4 w-auto"
+                        width="80"
+                        height="16"
+                        loading="lazy"
+                        decoding="async"
+                        >
+                        <span class="font-semibold text-gray-900">
+                        <span itemprop="ratingValue">4.5</span>
+                        </span>
+                        <span class="text-gray-500">out of</span>
+                        <span itemprop="bestRating">5</span>
+                        <span class="text-gray-500">based on</span>
+                        <span itemprop="ratingCount">234</span>
+                        <span class="text-gray-500">ratings</span>
+                    </div>
+                </div> 
+
+
                 <div class="hero-word mb-6 transition-all duration-350"
                      :class="visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'">
                     <span class="text-[clamp(3rem,6vw,5.2rem)] font-black leading-none
