@@ -107,7 +107,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         ? $metaTitle
         : "";
 
-    $serviceDescription = 'India leading local business search & service directory | QuickDials.';
+    $serviceDescription = $metaDescription? $metaDescription: 'India’s leading local business search and service directory. Find trusted businesses, services, it training, professionals, and service providers near you with QuickDials..';
     $cityName =$city ?? '';
     if (!empty($childCat) && !empty($childSlug)) {
         $items[] = ['name' => ucfirst($childCat), 'url' => route('child.show', $childSlug)];
@@ -124,8 +124,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         [['name' => 'Home', 'url' => url('/')]],
         $items
     );
-
-
 @endphp 
 @php   
     $schemas = [];  
@@ -312,7 +310,6 @@ function requestPreciseLocation() {
     if (!navigator.geolocation) {
         return;
     }
-
     navigator.geolocation.getCurrentPosition(
         gpsSuccess,
         gpsError,
@@ -341,14 +338,9 @@ async function gpsSuccess(position) {
         if (!response.ok) throw new Error('Nominatim request failed');
 
         var data = await response.json();
-        var city =
-            data.address.city ||
-            data.address.town ||
-            data.address.village ||
-            data.address.county ||
-            data.address.state_district ||
-            null;
-
+        var city = data.address.city ;
+              console.log('data',data);
+ 
         if (city) {
             applyCity(city);
         } else {
@@ -373,6 +365,7 @@ function detectCityFromIP() {
             return res.json();
         })
         .then(function (data) {
+            console.log('detectCityFromIP',city);
             if (data.city) {
                 applyCity(data.city);
             } else {
@@ -387,7 +380,7 @@ function detectCityFromIP() {
 // ── Safe default if all detection fails — no third-party JSONP script ──
 function applyDefaultCity() {
     if (cityDetected) return;
-    applyCity('Bangalore'); // confirm/replace with your actual site default
+    applyCity('bangalore'); // confirm/replace with your actual site default
 }
 
 function applyCity(rawCity) {
@@ -473,8 +466,6 @@ function applyCity(rawCity) {
     }
 }
 
-
- 
 </script>
  
 

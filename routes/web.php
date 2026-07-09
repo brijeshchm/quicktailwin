@@ -461,14 +461,14 @@ Route::get('/contact-us', [App\Http\Controllers\Official\OfficialController::cla
 Route::get('/careers', [App\Http\Controllers\Official\OfficialController::class, 'careers'])->name('careers');
 //Route::post('/api/careers/apply', [App\Http\Controllers\Official\OfficialController::class, 'apply'])->name('careers.apply');
 Route::get('/pricing', [App\Http\Controllers\Official\OfficialController::class, 'pricing'])->name('pricing');
-Route::get('/media', [App\Http\Controllers\Official\OfficialController::class, 'media']);
+
 Route::get('/advertise', [App\Http\Controllers\Official\OfficialController::class, 'advertise']);
 Route::get('/blog', [App\Http\Controllers\Official\OfficialController::class, 'blog'])->name('blog.show');
  
 Route::get('/blog/{slug}', [App\Http\Controllers\Official\OfficialController::class, 'blogdetails'])->name('blog.details');
 Route::get('/blog/category/{url}',[App\Http\Controllers\Official\OfficialController::class, 'blogCategory'])->name('category.blog');
 Route::get('/subscribe', [App\Http\Controllers\Official\OfficialController::class, 'subscribe']);
-Route::get('/testimonials', [App\Http\Controllers\Official\OfficialController::class, 'testimonials']);
+ 
 Route::get('/terms-conditions', [App\Http\Controllers\Official\OfficialController::class, 'termsconditions'])->name('terms.conditions');
 Route::get('/privacy-policy', [App\Http\Controllers\Official\OfficialController::class, 'privacypolicy'])->name('privacy.policy');
 Route::get('/copyright-policy', [App\Http\Controllers\Official\OfficialController::class, 'copyrightpolicy'])->name('copyright.policy');

@@ -192,7 +192,12 @@ class DoctorController extends Controller
         'satisfaction' => 96,
     ];
  
-    return view('client.clinic-details', compact('clinic', 'stats', 'ratingCounts', 'avgRating'));
+        $city = "delhi";
+        $metaTitle = "clinic details Services in Delhi | QuickDials";
+        $metaDescription = "Find trusted clinic details services in Delhi on QuickDials. Explore verified wedding planners, decorators, caterers, photographers, and event experts near you.";
+        $keyword = "clinic details";
+
+    return view('client.clinic-details', compact('clinic', 'stats', 'ratingCounts', 'avgRating','city','metaTitle','metaDescription','keyword'));
 }
 
 }

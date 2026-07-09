@@ -215,7 +215,10 @@ class ClientDetailController extends Controller
         ' - ' . $serviceText .
         '. View address, photos, reviews and contact details on QuickDials.';
 
- 
+        $city = "delhi";      
+   
+        $keyword = $clientsList['business_name'];
+
         return view('client.client-detail', compact(
             'slug', 'response', 'clientsList', 'certificate','metaTitle','metaKeywords','metaDescription',
             'comment', 'areaBusiness', 'overviewBusiness',
@@ -223,7 +226,7 @@ class ClientDetailController extends Controller
             'assignKeyword', 'certifications', 'govDocs', 'reviews',
             'gradients', 'bgColors', 'iconColors', 'planOptions','faqs',
             'googleMapUrl', 'mapSrc', 'yearsExp', 'yearEst','recentActivitys',
-            'todayDay', 'hours','linearGradients'
+            'todayDay', 'hours','linearGradients','city','keyword'
         ));
 	 
 
@@ -250,22 +253,19 @@ class ClientDetailController extends Controller
             ->map(fn ($b, $i) => $this->normalizeBusiness($b, $i))
             ->all();
  
-  $businessOwners = $this->businessOwnersData();
+        $businessOwners = $this->businessOwnersData();
 
         $growthBusiness = $businessOwners['data']['businessOwners'] ?? [];
-        
+
         // ── Chunk businesses for ad insertion every 5 ─────────────────────
         $businessChunks = array_chunk($businesses, 5);
 
-        
- 
-         
-                $city = "";
+        $city = "";
 
         $responseZones = $this->fetchCityData();
         $zones     = $responseZones['data'] ?? [];
 
-        
+
 
          return view('client.business-details', compact(
             'city', 'zones','growthBusiness',

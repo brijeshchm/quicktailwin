@@ -55,7 +55,11 @@ class HomePageController extends Controller
         $popularSearches    = $this->getPopularSearches();
         $trending           = $this->getTrending();
         $blogPageList       = $this->getBlogList();
-//  dd($featuredBusinesses);
+ 
+		$city= "bangalore";
+		$metaTitle ="QuickDials | India’s Leading Local Business Search Directory";
+		$metaDescription  ="QuickDials is India’s trusted local business search and service directory, helping users find verified businesses, services, and professionals near them"; 
+		$keyword = "Quickdials";
         return view('client.index', compact(
             'blogPageList',
             'trending',
@@ -65,7 +69,8 @@ class HomePageController extends Controller
             'bannerKeyword',
             'homePage',
             'repairsServices',
-            'weddingPlanning'
+            'weddingPlanning','city',
+			'metaTitle','metaDescription','keyword'
         ));
     }
  
@@ -1462,47 +1467,13 @@ class HomePageController extends Controller
 	 */
 
 	public function playwrightAutomation(Request $request)
-	{
-		$keyword = array(
-			'ratingvalue' => '4.75',
-			'ratingcount' => '314',
-			'slug' => "playwright-automation-training-in-noida",
-			'meta_title' => "Top Playwright Automation Training Institute in Noida",
-			'keyword' => "playwright automation",
-			'meta_keywords' => "playwright automation, Playwright Automation Training in Noida, Playwright Automation Course in Noida, Playwright Automation Classes in Noida ",
-			'meta_description' => "Join the best Playwright Automation Training in Noida. A comprehensive curriculum designed for beginners and experienced. Start your tech career now.",
-			'h1' => "Playwright Automation Course in Noida",
-			'top_description' => "If you are planning to step into automation testing or switch from manual to automation, this Playwright Automation Training in Noida is designed to help you actually work with automation, not just learn it. Most courses teach you syntax. This one focuses on execution. You will understand how automation behaves in real projects, how scripts fail, how to debug them, and how to handle situations where things don’t work on the first attempt.",
-			'bottom_description' => "Playwright Automation Training in Noida",
-
-			'heading' => "About Playwright Automation Course",
-			'courseabout' => "This Playwright Automation Course in Noida is built around real-world testing practices.
-Instead of limiting learning to theory, the course takes you through:.",
-			'paragraph1' => "Writing your first automation script",
-			'paragraph2' => "Handling real-time execution challenges",
-			'paragraph3' => "Managing test flows and failures",
-			'paragraph4' => "Understanding how testing actually works in production environments",
-			'paragraph5' => "",
-			'paragraph6' => "",
-			'h2' => 'Why Choose the Playwright Automation Course?',
-			'form_type' => "form_edu",
-			'faqq1' => "Do I need coding knowledge to start",
-			'faqa1' => "No. Basic understanding helps, but everything is taught from scratch",
-			'faqq2' => "Is this course beginner-friendly",
-			'faqa2' => "Yes. It starts from the basics and gradually moves to advanced topics",
-			'faqq3' => "Will I work on real projects",
-			'faqa3' => "Yes. You all practice on real-world scenarios",
-			'faqq4' => "Is online training available",
-			'faqa4' => "Yes. Both online and offline options are available.",
-			'faqq5' => "What makes this different",
-			'faqa5' => "The focus is on practical implementation, not just completing topics",
-			'reviews' => 2,
-
-
-		);
+	{		 
 		$city = "noida";
 		$area = "";
-		return view('client.playwrightAutomation', ['keyword' => (object) $keyword, 'city' => $city, 'area' => $area]);
+		$metaTitle = "Playwright Automation Testing Course | Learn Web Test Automation";
+		$metaDescription = "Learn Playwright Automation to create fast, reliable web testing scripts for modern applications. Master end-to-end testing across multiple browsers.";		
+		$keyword = "Play Wright Automation";
+		return view('client.playwrightAutomation', ['city' => $city, 'area' => $area,'keyword'=>$keyword,'metaDescription'=>$metaDescription,'metaTitle'=>$metaTitle]);
 	}
 
 
@@ -1672,298 +1643,8 @@ Instead of limiting learning to theory, the course takes you through:.",
 
 	 
 	 
-
-	/*
-	 * Display a listing of the client categories resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function cityCategories(Request $request, $city, $part_slug)
-	{
-		$part_id = ParentCategory::where('parent_slug', $part_slug)->first();
-		$subcategory = DB::table('keyword')
-			->select('keyword.*', 'keyword.id as key_id', 'keyword.faqq1', 'keyword.faqa1', 'keyword.faqq2', 'keyword.faqa2', 'keyword.faqq3', 'keyword.faqa3', 'keyword.faqq4', 'keyword.faqa4', 'keyword.faqq5', 'keyword.faqa5', 'keyword.meta_title', 'keyword.meta_description', 'keyword.meta_keywords', 'keyword.top_description', 'keyword.bottom_description', 'keyword.ratingvalue', 'keyword.ratingcount')
-			->where('keyword.parent_category_id', $part_id->id)->get();
-
-		$cateoryClient = DB::table('clients')
-			->join('assigned_kwds', 'clients.id', '=', 'assigned_kwds.client_id')
-			->join('keyword', 'assigned_kwds.kw_id', '=', 'keyword.id')
-			->join('citylists', 'assigned_kwds.city_id', '=', 'citylists.id')
-			->leftJoin(DB::raw('(SELECT SUM(rating) AS rating,comment_client_ID,COUNT(comment_ID) AS comment_count FROM comments GROUP BY comment_client_ID) c'), 'c.comment_client_ID', '=', 'clients.id')
-			->select('clients.*', 'citylists.city', 'assigned_kwds.sold_on_position', 'c.rating', 'c.comment_count')
-			->where('citylists.city', 'LIKE', $city)
-			->where('clients.active_status', '1')
-			->where('assigned_kwds.parent_cat_id', $part_id->id)
-			->orderByRaw("
-				CASE clients.client_type
-				WHEN 'platinum' THEN 1
-				WHEN 'diamond' THEN 2
-				WHEN 'gold' THEN 3
-				WHEN 'silver' THEN 4
-				ELSE 5
-				END
-				")
-
-			->groupBy('client_id')
-			->get();
-
-		return view('client.courseprogram_client', ['cateoryClient' => $cateoryClient, 'subcategory' => $subcategory, 'part_id' => $part_id, 'city' => $city]);
-	}
-	/*
-	 * Display a listing of the client categories resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function subcategories(Request $request, $city, $part_slug, $child_slug)
-	{
-		$part_id = ParentCategory::where('parent_slug', $part_slug)->first();
-		$child_id = ChildCategory::where('child_slug', $child_slug)->first();
-
-		$subcategory = DB::table('child_category')
-			->join('parent_category', 'child_category.parent_category_id', '=', 'parent_category.id')
-			->where('parent_category_id', $part_id->id)
-			->select('parent_category.*', 'child_category.*')->limit(24)
-			->get();
-
-
-		$kwdsList = Keyword::where('child_category_id', $child_id->id)
-			->where('parent_category_id', $part_id->id)
-			->select('keyword')
-			->distinct()
-			->get();
-
-
-		$subCateoryClient = DB::table('clients')
-			->join('assigned_kwds', 'clients.id', '=', 'assigned_kwds.client_id')
-			->join('citylists', 'assigned_kwds.city_id', '=', 'citylists.id')
-			->rightJoin(DB::raw('(SELECT SUM(rating) AS rating,comment_client_ID,COUNT(comment_ID) AS comment_count,comment_content  FROM comments GROUP BY comment_client_ID) c'), 'c.comment_client_ID', '=', 'clients.id')
-			//->join('parent_category','assigned_kwds.parent_cat_id','=','parent_category.id')	
-
-			->select('clients.id', 'clients.business_name', 'clients.business_slug', 'clients.website', 'clients.city', 'clients.logo', 'assigned_kwds.*', 'c.rating', 'c.comment_count', 'c.comment_content')
-			->where('assigned_kwds.parent_cat_id', $part_id->id)
-			->where('citylists.city', 'LIKE', $city)
-			->where('assigned_kwds.child_cat_id', $child_id->id)
-			->groupBy('client_id')
-			->get();
-
-
-		$subCateoryClient = DB::table('clients')
-			->join('assigned_kwds', 'clients.id', '=', 'assigned_kwds.client_id')
-			->join('keyword', 'assigned_kwds.kw_id', '=', 'keyword.id')
-			->join('citylists', 'assigned_kwds.city_id', '=', 'citylists.id')
-			->leftJoin(DB::raw('(SELECT SUM(rating) AS rating,comment_client_ID,COUNT(comment_ID) AS comment_count FROM comments GROUP BY comment_client_ID) c'), 'c.comment_client_ID', '=', 'clients.id')
-			->select('clients.*', 'citylists.city', 'assigned_kwds.sold_on_position', 'c.rating', 'c.comment_count')
-			->where('citylists.city', 'LIKE', $city)
-			->where('clients.active_status', '1')
-			->where('assigned_kwds.child_cat_id', $child_id->id)
-			->orderByRaw("
-				CASE clients.client_type
-				WHEN 'platinum' THEN 1
-				WHEN 'diamond' THEN 2
-				WHEN 'gold' THEN 3
-				WHEN 'silver' THEN 4
-				ELSE 5
-				END
-				")
-			->groupBy('client_id')
-			->get();
-		$clientCategories = ClientCategory::all();
-		return view('client.subcourseprogram_client', ['subCateoryClient' => $subCateoryClient, 'subcategory' => $subcategory, 'part_id' => $part_id, 'child_id' => $child_id, 'kwdsList' => $kwdsList, 'city' => $city]);
-	}
-
 	 
-
-	/*
-	 * Display a listing of the clients of categories resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-
-	public function showCityOrService(Request $request, $city = null)
-	{
-		$city = strtolower(str_replace(' ', '-', trim($city)));
-
-
-		try {
-
-			$parent = ParentCategory::where('parent_slug', $city)->first();
-			$child = ChildCategory::where('child_slug', $city)->first();
-			$clientCheck = Client::where('city', ucwords(str_replace("-", " ", $city)))->first();
-			$keywordCheck = Keyword::where('slug', $city)->first();
-			$cityCheck = Citieslists::where('city_slug', $city)->first();
-
-			if (!$parent && !$child && !$clientCheck && !$keywordCheck && !$cityCheck) {
-				return response()->view('client.error410', [], 410);
-			}
-
-			$clientLists = Client::where('logo', '<>', '')->where('business_intro', '<>', '')->limit(12)->get();
-			$checkcity = Client::where('logo', '<>', '')
-				->where('city', ucwords(str_replace("-", " ", $city)))
-				->where('active_status', '1')
-				->whereNull('deleted_at')
-				->get();
-
-			if ($checkcity->isNotEmpty()) {
-				$cityclients = $checkcity;
-				$clientBanner = ChildCategory::whereNotNull('child_banner')->where('child_banner', '!=', '')->first();
-				$keyword = "";
-				return view('client.cityclients', ['cityclients' => $cityclients, 'clientBanner' => $clientBanner, 'keyword' => $keyword]);
-			}
-
-			// --- shared queries ---
-			$reviewsClientsList = DB::table('clients')
-				->join('assigned_kwds', 'clients.id', '=', 'assigned_kwds.client_id')
-				->join('keyword', 'assigned_kwds.kw_id', '=', 'keyword.id')
-				->join('citylists', 'assigned_kwds.city_id', '=', 'citylists.id')
-				->rightJoin(DB::raw('(SELECT SUM(rating) AS rating,comment_client_ID,COUNT(comment_ID) AS comment_count,comment_content FROM comments GROUP BY comment_client_ID) c'), 'c.comment_client_ID', '=', 'clients.id')
-				->select('clients.*', 'citylists.city', 'assigned_kwds.sold_on_position', 'c.rating', 'c.comment_count', 'c.comment_content')
-				->where('keyword.slug', $city)
-				->groupBy('client_id')
-				->get();
-
-			$keywordlist = DB::table('keyword')
-				->join('parent_category', 'keyword.parent_category_id', '=', 'parent_category.id')
-				->join('child_category', 'keyword.child_category_id', '=', 'child_category.id')
-				->select('keyword.*', 'parent_category.*', 'child_category.*', 'keyword.id as key_id', 'keyword.faqq1', 'keyword.faqa1', 'keyword.faqq2', 'keyword.faqa2', 'keyword.faqq3', 'keyword.faqa3', 'keyword.faqq4', 'keyword.faqa4', 'keyword.faqq5', 'keyword.faqa5', 'keyword.meta_title', 'keyword.meta_description', 'keyword.meta_keywords', 'keyword.top_description', 'keyword.bottom_description', 'keyword.ratingvalue', 'keyword.ratingcount', 'keyword.child_category_id')
-				->groupBy('child_category.child_slug')
-				->where('parent_category.parent_slug', $city)->get();
-
-
-			$clientskeyword = DB::table('clients')
-				->join('assigned_kwds', 'clients.id', '=', 'assigned_kwds.client_id')
-				->join('assigned_zones', 'clients.id', '=', 'assigned_zones.client_id')
-				->join('keyword', 'assigned_kwds.kw_id', '=', 'keyword.id')
-				->join('citylists', 'assigned_zones.city_id', '=', 'citylists.id')
-				->leftJoin(DB::raw('(SELECT SUM(rating) AS rating, comment_client_ID, COUNT(comment_ID) AS comment_count FROM comments GROUP BY comment_client_ID) c'), 'c.comment_client_ID', '=', 'clients.id')
-				->select('clients.*', 'citylists.city', 'assigned_kwds.sold_on_position', 'c.rating', 'c.comment_count', 'assigned_zones.*', 'keyword.slug')
-				->where('keyword.slug', $city)
-				->orderByRaw("
-					CASE clients.client_type
-					WHEN 'platinum' THEN 1
-					WHEN 'diamond' THEN 2
-					WHEN 'gold' THEN 3
-					WHEN 'silver' THEN 4
-					ELSE 5
-					END
-					")
-				->groupBy('client_id')
-				->get();
-
-
-
-			// --- 2. Check parent category ---
-			$parentCategories = DB::table('keyword')
-				->join('parent_category', 'keyword.parent_category_id', '=', 'parent_category.id')
-				->join('child_category', 'keyword.child_category_id', '=', 'child_category.id')
-				->select('keyword.*', 'parent_category.*', 'child_category.*', 'parent_category.id as key_id', 'parent_category.faqq1', 'parent_category.faqa1', 'parent_category.faqq2', 'parent_category.faqa2', 'parent_category.faqq3', 'parent_category.faqa3', 'parent_category.faqq4', 'parent_category.faqa4', 'parent_category.faqq5', 'parent_category.faqa5', 'parent_category.meta_title', 'parent_category.meta_description', 'parent_category.meta_keywords', 'parent_category.top_description', 'parent_category.bottom_description', 'parent_category.ratingvalue', 'parent_category.ratingcount', 'keyword.child_category_id')
-				->groupBy('child_category.child_slug')
-				->where('parent_category.parent_slug', $city)->first();
-
-			if (!empty($parentCategories)) {
-				$clientskeyword = DB::table('clients')
-					->join('assigned_kwds', 'clients.id', '=', 'assigned_kwds.client_id')
-					->join('keyword', 'assigned_kwds.kw_id', '=', 'keyword.id')
-					->join('citylists', 'assigned_kwds.city_id', '=', 'citylists.id')
-					->join('parent_category', 'keyword.parent_category_id', '=', 'parent_category.id')
-					->leftJoin(DB::raw('(SELECT SUM(rating) AS rating,comment_client_ID,COUNT(comment_ID) AS comment_count FROM comments GROUP BY comment_client_ID) c'), 'c.comment_client_ID', '=', 'clients.id')
-					->select('clients.*', 'citylists.city', 'assigned_kwds.sold_on_position', 'c.rating', 'c.comment_count', 'keyword.*')
-					->where('parent_category.parent_slug', $city)
-					->orderByRaw("CASE clients.client_type WHEN 'platinum' THEN 1 WHEN 'diamond' THEN 2 WHEN 'gold' THEN 3 WHEN 'silver' THEN 4 ELSE 5 END")
-					->groupBy('client_id')
-					->get();
-
-				return view('client.parentKeyword', ['clientskeyword' => $clientskeyword, 'keyword' => $parentCategories, 'reviewsClientsList' => $reviewsClientsList, 'clientLists' => $clientLists, 'city' => $city, 'keywordlist' => $keywordlist]);
-			}
-
-			// --- 3. Check child category ---
-			$childCategories = DB::table('keyword')
-				->join('parent_category', 'keyword.parent_category_id', '=', 'parent_category.id')
-				->join('child_category', 'keyword.child_category_id', '=', 'child_category.id')
-				->select('keyword.*', 'parent_category.*', 'child_category.*', 'child_category.id as key_id', 'child_category.faqq1', 'child_category.faqa1', 'child_category.faqq2', 'child_category.faqa2', 'child_category.faqq3', 'child_category.faqa3', 'child_category.faqq4', 'child_category.faqa4', 'parent_category.faqq5', 'child_category.faqa5', 'child_category.meta_title', 'child_category.meta_description', 'child_category.meta_keywords', 'child_category.top_description', 'parent_category.bottom_description', 'child_category.ratingvalue', 'child_category.ratingcount', 'keyword.child_category_id')
-				->where('child_category.child_slug', $city)->first();
-
-			if (!empty($childCategories)) {
-				$clientskeyword = DB::table('clients')
-					->join('assigned_kwds', 'clients.id', '=', 'assigned_kwds.client_id')
-					->join('keyword', 'assigned_kwds.kw_id', '=', 'keyword.id')
-					->join('citylists', 'assigned_kwds.city_id', '=', 'citylists.id')
-					->join('child_category', 'keyword.child_category_id', '=', 'child_category.id')
-					->leftJoin(DB::raw('(SELECT SUM(rating) AS rating,comment_client_ID,COUNT(comment_ID) AS comment_count FROM comments GROUP BY comment_client_ID) c'), 'c.comment_client_ID', '=', 'clients.id')
-					->select('clients.*', 'citylists.city', 'assigned_kwds.sold_on_position', 'c.rating', 'c.comment_count', 'keyword.*')
-					->where('child_category.child_slug', $city)
-					->orderByRaw("CASE clients.client_type WHEN 'platinum' THEN 1 WHEN 'diamond' THEN 2 WHEN 'gold' THEN 3 WHEN 'silver' THEN 4 ELSE 5 END")
-					->groupBy('client_id')
-					->get();
-
-				return view('client.childKeyword', ['clientskeyword' => $clientskeyword, 'keyword' => $childCategories, 'reviewsClientsList' => $reviewsClientsList, 'city' => $city, 'keywordlist' => $keywordlist]);
-			}
-
-			// --- 4. Check keyword slug (exact) ---
-			$keyword = DB::table('keyword')
-				->join('child_category', 'keyword.child_category_id', '=', 'child_category.id')
-				->join('parent_category', 'child_category.parent_category_id', '=', 'parent_category.id')
-				->select('keyword.*', 'child_category.*', 'parent_category.*', 'keyword.id as key_id', 'keyword.faqq1', 'keyword.faqa1', 'keyword.faqq2', 'keyword.faqa2', 'keyword.faqq3', 'keyword.faqa3', 'keyword.faqq4', 'keyword.faqa4', 'keyword.faqq5', 'keyword.faqa5', 'keyword.meta_title', 'keyword.meta_description', 'keyword.meta_keywords', 'keyword.top_description', 'keyword.bottom_description', 'keyword.ratingvalue', 'keyword.ratingcount', 'keyword.child_category_id', 'child_category.child_slug', 'keyword.heading', 'keyword.courseabout', 'keyword.paragraph1', 'keyword.paragraph2', 'keyword.paragraph3', 'keyword.paragraph4', 'keyword.paragraph5', 'keyword.paragraph6')
-				->where('keyword.slug', $city)
-				->first();
-
-				dd($keyword);
-//  $bgImage    = $kwData['category_banner'] ?? '/computer-courses-training.jpg';
-
-
-			if (!empty($keyword)) {
-				return view('client.searchkeyword', ['clientskeyword' => $clientskeyword, 'keyword' => $keyword, 'reviewsClientsList' => $reviewsClientsList, 'clientLists' => $clientLists, 'city' => $city]);
-			}
-
-			// --- 5. Check business slug ---
-			$clients = Client::where('business_slug', $city)->where('logo', '<>', '')->get();
-
-			if ($clients->count() > 0) {
-				$client = $clients->first();
-				$cities = Citieslists::select('id', 'city','city_slug')->get();
-				$clientLists = Client::where('logo', '<>', '')->where('business_intro', '<>', '')->where('city', 'noida')->where('active_status', '1')->limit(12)->get();
-
-				$comments = Comment::where('comment_client_ID', $client->id)->where('comment_approved', 1)->orderBy('created_at', 'desc')->paginate(10);
-				$sum = Comment::where('comment_client_ID', $client->id)->where('comment_approved', 1)->sum('rating');
-				$count = Comment::where('comment_client_ID', $client->id)->where('comment_approved', 1)->count();
-				$avgRating = $count != 0 ? ($sum / ($count * 5)) * 5 : 0;
-
-				$graphQuery = Comment::select(DB::raw('*'))
-					->from(DB::raw('(SELECT COUNT(*) as count, SUM(`rating`) as sum_rating, MONTH(DATE(`created_at`)) as month, DATE(`created_at`) as created_at FROM `comments` WHERE `comment_client_ID`=' . $client->id . ' AND `comment_approved`=1 GROUP BY MONTH(DATE(`created_at`)) ORDER BY created_at desc LIMIT 0,3) AS temp'))
-					->orderBy('created_at')->get();
-
-				$barGraphQuery = Comment::select(DB::raw('*'))
-					->from(DB::raw('(SELECT COUNT(*) as count, SUM(`rating`) as sum_rating, rating FROM `comments` WHERE `comment_client_ID`=' . $client->id . ' AND `comment_approved`=1 GROUP BY `rating`) AS temp'))
-					->orderBy('rating', 'desc')->get();
-
-				$assignedKwds = DB::table('assigned_kwds')
-					->join('keyword', 'keyword.id', '=', 'assigned_kwds.kw_id')
-					->join('citylists', 'assigned_kwds.city_id', '=', 'citylists.id')
-					->join('child_category', 'child_category.id', '=', 'assigned_kwds.child_cat_id')
-					->select('keyword.keyword', 'keyword.slug', 'citylists.city', 'child_category.child_category as child_category_name')
-					->where('assigned_kwds.client_id', '=', $client->id)
-					->groupBy('kw_id')->get();
-
-				$assignedCity = DB::table('assigned_kwds')
-					->join('keyword', 'keyword.id', '=', 'assigned_kwds.kw_id')
-					->join('citylists', 'assigned_kwds.city_id', '=', 'citylists.id')
-					->join('child_category', 'child_category.id', '=', 'assigned_kwds.child_cat_id')
-					->select('keyword.keyword', 'keyword.slug', 'citylists.city', 'child_category.child_category as child_category_name')
-					->where('assigned_kwds.client_id', '=', $client->id)
-					->groupBy('assigned_kwds.city_id')->get();
-
-				return view('client.client-detail', ['client' => $client, 'cities' => $cities, 'comments' => $comments, 'count' => $count, 'sum' => $sum, 'avgRating' => number_format($avgRating, 1, '.', ''), 'graphQuery' => $graphQuery, 'barGraphQuery' => $barGraphQuery, 'assignedKwds' => $assignedKwds, 'clientLists' => $clientLists, 'clients' => $clients, 'assignedCity' => $assignedCity]);
-			}
-
-			// ✅ FALLBACK: nothing matched anywhere — show default clients (lic not null)
-			$clientBanner = ChildCategory::whereNotNull('child_banner')->where('child_banner', '!=', '')->first();
-			$keyword = "";
-			return view('client.cityclients', ['cityclients' => $checkcity, 'clientBanner' => $clientBanner, 'keyword' => $keyword]);
-
-		} catch (\Exception $e) {
-			return response()->view('client.error410', [], 410);
-		}
-	}
-
+ 
 	/*
 	 * Subscribe to our newsletter
 	 *
@@ -2047,8 +1728,14 @@ Instead of limiting learning to theory, the course takes you through:.",
         if (!empty($featuredFromApi)) $featured    = $featuredFromApi;
         if (!empty($statsFromApi))    $heroStats   = $statsFromApi;
  
+
+	$city = "delhi";
+	$metaTitle = "Business Services in Delhi | QuickDials Local Business Directory";
+	$metaDescription = "Find trusted business services in Delhi on QuickDials. Explore verified service providers, professionals, consultants, and local business solutions near you.";
+	$keyword = "business services";
+
         return view('client.businessServices', compact(
-            'heroStats', 'categorySections', 'featured', 'featuredCategory','sidebarStats', 'category'
+            'heroStats', 'categorySections', 'featured', 'featuredCategory','sidebarStats', 'category','city','metaTitle','metaDescription','keyword'
         ));
 
 
@@ -2074,9 +1761,12 @@ Instead of limiting learning to theory, the course takes you through:.",
         $categories = $data['categoryList'] ?? [];
         $childs     = $data['childs']       ?? [];
         
+		$city = "delhi";
+		$metaTitle = "Categories in delhi | QuickDials Local Business Directory";
+		$metaDescription = "Find trusted Categories in Delhi on QuickDials. Explore verified service providers, professionals, consultants, and local business solutions near you.";
+		$keyword = "Category";
  
- 
-        return view('client.category', compact('categories', 'childs'));
+        return view('client.category', compact('categories', 'childs','city','metaTitle','metaDescription','keyword'));
 
 
 
@@ -2099,8 +1789,14 @@ Instead of limiting learning to theory, the course takes you through:.",
  
         $childs  = $data['childsList'] ?? [];
         $courses = $data['keywords']   ?? [];
-//   dd($data);
-        return view('client.child', compact('childs', 'courses'));
+ 
+
+		$city = "delhi";
+		$metaTitle = "Sub Categories in delhi | QuickDials Local Business Directory";
+		$metaDescription = "Find trusted sub categories in Delhi on QuickDials. Explore verified service providers, professionals, consultants, and local business solutions near you.";
+		$keyword = "Sub category";
+
+        return view('client.child', compact('childs', 'courses','city','metaTitle','metaDescription','keyword'));
  	}
 
 	public function categories(Request $request, $slug)
@@ -2331,11 +2027,14 @@ Instead of limiting learning to theory, the course takes you through:.",
             ['name' => 'Ananya & Vikram Mehta',  'location' => 'Delhi',     'date' => 'October 2024',  'rating' => 5, 'text' => 'From the mehendi ceremony to the reception, everything was perfect. Our wedding planner was always available, incredibly organized, and made us feel calm throughout.',  'avatar' => 'AV', 'grad' => 'from-amber-400 to-orange-500', 'package' => 'Premium Package'],
             ['name' => 'Deepa & Arjun Nair',     'location' => 'Bangalore', 'date' => 'February 2025', 'rating' => 5, 'text' => 'We had no idea how to plan a wedding for 400 guests. Shaadi6 took care of everything — venue, catering, flowers, even the honeymoon. Most stress-free experience ever.',  'avatar' => 'DA', 'grad' => 'from-purple-400 to-pink-500',  'package' => 'Royal Package'],
         ];
-		
+			$city = "delhi";
+			$metaTitle = "Wedding Planning Services in Delhi | QuickDials";
+			$metaDescription = "Find trusted wedding planning services in Delhi on QuickDials. Explore verified wedding planners, decorators, caterers, photographers, and event experts near you.";
+			$keyword = "Wedding Planning";
  
         return view('client.wedding-planning', compact(
             'stats','categories','brideCategories','groomCategories',
-            'venues','steps','testimonials','prewedding','bigDay'
+            'venues','steps','testimonials','prewedding','bigDay','city','metaTitle','metaDescription','keyword'
         ));
 		 
 
@@ -2371,7 +2070,11 @@ $reviews =  [
  
 		$services = keyword::where('child_category_id','293')->get();
  
-  	return view('client.spa-hub', compact('spa','reviews','services'));
+		$city = "delhi";
+		$metaTitle = "Spa Hub in Delhi | QuickDials";
+		$metaDescription = "Find trusted spa hubs in Delhi on QuickDials. Explore verified spa centres, wellness services, massage therapies, body treatments, and relaxation experts near you.";
+		$keyword = "spa hub in Delhi";
+  	return view('client.spa-hub', compact('spa','reviews','services','city','metaTitle','metaDescription','keyword'));
 	}
 	
 	public function saloonHub(Request $request)
@@ -2398,9 +2101,12 @@ $reviews =  [
             ['name' => 'Meera T.',  'rating' => 5, 'created_at' => '2024-11-18', 'treatment' => 'Facial Glow',        'text' => "My skin hasn't looked this good in years — even a week after. Fully bespoke to my skin type and the products were genuinely premium. Worth every rupee and more.",                                              'color' => '#7c3aed'],
             ['name' => 'Sanjay R.', 'rating' => 5, 'created_at' => '2024-10-30', 'treatment' => 'Swedish Massage',    'text' => "My first spa experience and Serenity made it unforgettable. The Swedish massage was deeply relaxing, the environment thoughtful. I've been back twice already.",                                                  'color' => '#db2777'],
         ];
- 
+ 		$city = "delhi";
+		$metaTitle = "saloon Hub in Delhi | QuickDials";
+		$metaDescription = "Find trusted saloon hubs in Delhi on QuickDials. Explore verified spa centres, wellness services, massage therapies, body treatments, and relaxation experts near you.";
+		$keyword = "saloon hub in Delhi";
 
-  	return view('client.saloon-hub', compact('spa','reviews'));
+  	return view('client.saloon-hub', compact('spa','reviews','city','metaTitle','metaDescription','keyword'));
 	}
 
 

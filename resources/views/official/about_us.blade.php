@@ -4,9 +4,6 @@
 @section('keywords', 'About QuickDials, lead management software, service marketplace india, business listing, get business leads')
 @section('content')
 @include('client.components.banner-section')
- 
-
- 
 <style>
 /* ══════════════════════════════════════
    GRADIENT TEXT

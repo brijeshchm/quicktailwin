@@ -1,4 +1,4 @@
-<?php
+git add<?php
 
 namespace App\Http\Controllers\Official;
 
@@ -35,9 +35,15 @@ class OfficialController extends Controller
     public function about()
     {
         $clients = Client::get()->count();
-        $keyword = Keyword::get()->count();
+        $keywordCount = Keyword::get()->count();
         $citieslists = Citieslists::get()->count();
-        return view('official.about_us', ['clients' => $clients, 'keyword' => $keyword, 'citieslists' => $citieslists]);
+
+        $city = "delhi";
+        $metaTitle ="About QuickDials | India’s Leading Local Business Search Directory";
+        $metaDescription  ="QuickDials is India’s trusted local business search and service directory, helping users find verified businesses, services, shops, and professionals near them"; 
+        $keyword = "About us";
+
+    return view('official.about_us', ['clients' => $clients, 'keywordCount' => $keywordCount, 'citieslists' => $citieslists,'city'=>$city,'metaTitle'=>$metaTitle,'metaDescription'=>$metaDescription,'keyword'=>$keyword]);
     }
   
   
@@ -79,6 +85,11 @@ class OfficialController extends Controller
         //     'Azure', 'Machine Learning', 'DevOps', 'Database', 'Security',
         // ];
         $tags ="";
+        $city = "delhi";
+        $metaTitle = "QuickDials News | Latest Business Updates, Tips & Insights";
+        $metaDescription = "Read the latest QuickDials news, business updates, service guides, local market insights, and helpful tips to find trusted services near you.";
+        $keyword = "News";
+
         return view('official.news', compact(
             'featuredArticle',
             'firstNews',
@@ -86,7 +97,7 @@ class OfficialController extends Controller
             'tickerArticles',
             'listArticles',
             'categories',
-            'tags'
+            'tags','city','metaTitle','metaDescription','keyword'
         ));
         
     }
@@ -166,10 +177,13 @@ class OfficialController extends Controller
             ->get();
         }
 
-        
+        $metaTitle = $newsDetails['title'];
+        $metaDescription =  $newsDetails['meta_description'];
+        $keyword = $newsDetails['name'];
+        $city = "delhi";
         return view('official.news-details', compact(
             'newsDetails','newsList','tickerItems','categories',
-            'faqs','authorColor','paragraphs','slug'
+            'faqs','authorColor','paragraphs','slug','metaTitle','metaDescription','keyword','city'
         ));
          
     }
@@ -245,7 +259,7 @@ class OfficialController extends Controller
 			}
 		}
 			
- $kwData = array(
+        $kwData = array(
 			'parent_category' => $childCategory->parent_category,
 			'parent_slug' => $childCategory->parent_slug,
 			'child_banner' => $child_banner,
@@ -273,7 +287,8 @@ class OfficialController extends Controller
 
 		);
  
-        return view('official.news-category', ['categories' => $categories,'news'=>$news,'kwData'=>$kwData]);
+             
+        return view('official.news-category', ['categories' => $categories,'news'=>$news,'kwData'=>$kwData,'metaTitle'=>$meta_title,'metaDescription'=>$meta_description,'keyword'=>$childCategory->parent_category]);
     }
    
     /**
@@ -284,7 +299,12 @@ class OfficialController extends Controller
     public function rss()
     {
         $blogrecents = Blogdetails::where('status', '1')->limit(8)->orderBy('id', 'DESC')->get();
-        return view('official.rss', ['blogrecents' => $blogrecents]);
+            
+        $city = "delhi";
+        $metaTitle = "QuickDials RSS | Latest Business Updates, Tips & Insights";
+        $metaDescription = "Read the latest QuickDials RSS, business updates, service guides, local market insights, and helpful tips to find trusted services near you.";
+        $keyword = "RSS";
+        return view('official.rss', ['blogrecents' => $blogrecents,'city'=>$city,'metaTitle'=>$metaTitle,'metaDescription'=>$metaDescription,'keyword'=>$keyword]);
     }
 
     /**
@@ -294,7 +314,12 @@ class OfficialController extends Controller
      */
     public function features()
     {
-        return view('official.features');
+
+       $city = "delhi";
+        $metaTitle = "QuickDials features | Latest Business Updates, Tips & Insights";
+        $metaDescription = "Read the latest QuickDials features, business updates, service guides, local market insights, and helpful tips to find trusted services near you.";
+        $keyword = "features";
+        return view('official.features',compact('metaTitle','metaDescription','keyword','city'));
     }
     /**
      * Show the application dashboard.
@@ -303,12 +328,20 @@ class OfficialController extends Controller
      */
     public function faq()
     {
-        return view('official.faq');
+        $city = "delhi";
+        $metaTitle = "QuickDials FAQ | Frequently Asked Questions & Support";
+        $metaDescription = "Find answers to common questions about QuickDials, business listings, services, user support, advertising, pricing, and local service search.";
+        $keyword = "Faq";
+        return view('official.faq',compact('metaTitle','metaDescription','keyword','city'));
     }
 
     public function contact()
     {
-        return view('official.contact-us');
+        $city = "delhi";
+        $metaTitle ="Contact QuickDials | India’s Leading Local Business Search Directory";
+        $metaDescription  ="QuickDials is India’s trusted local business search and service directory, helping users find verified businesses, services, shops, and professionals near them"; 
+        $keyword = "Contact us";
+        return view('official.contact-us',compact('city','metaTitle','metaDescription','keyword'));
     }
 
     /**
@@ -318,7 +351,13 @@ class OfficialController extends Controller
      */
     public function careers()
     {
-        return view('official.careers');
+
+     $city = "delhi";
+        $metaTitle ="Careers QuickDials | India’s Leading Local Business Search Directory";
+        $metaDescription  ="QuickDials is India’s trusted local business search and service directory, helping users find verified businesses, services, shops, and professionals near them"; 
+        $keyword = "careers us";
+
+        return view('official.careers',compact('city','metaTitle','metaDescription','keyword'));
     }
 
     /**
@@ -328,23 +367,29 @@ class OfficialController extends Controller
      */
     public function pricing()
     {
-        return view('official.pricing');
-    } /**
-      * Show the application dashboard.
-      *
-      * @return \Illuminate\Http\Response
-      */
-    public function media()
-    {
-        return view('official.index');
-    } /**
+
+     $city = "delhi";
+        $metaTitle ="Pricing QuickDials | India’s Leading Local Business Search Directory";
+        $metaDescription  ="QuickDials is India’s trusted local business search and service directory, helping users find verified businesses, services, shops, and professionals near them"; 
+        $keyword = "Pricing us";
+
+
+        return view('official.pricing',compact('city','metaTitle','metaDescription','keyword'));
+    } 
+    
+      
+    /**
       * Show the application dashboard.
       *
       * @return \Illuminate\Http\Response
       */
     public function advertise()
     {
-        return view('official.advertise');
+           $city = "delhi";
+        $metaTitle ="advertise QuickDials | India’s Leading Local Business Search Directory";
+        $metaDescription  ="QuickDials is India’s trusted local business search and service directory, helping users find verified businesses, services, shops, and professionals near them"; 
+        $keyword = "advertise us";
+        return view('official.advertise',compact('city','metaTitle','metaDescription','keyword'));
     }
 
 
@@ -381,11 +426,15 @@ class OfficialController extends Controller
         ->orderBy('count', 'DESC')
         ->get();
  
-        // $tags = [
-        //     'SAP S/4HANA', 'FICO', 'ABAP', 'Python', 'AWS',
-        //     'Azure', 'Machine Learning', 'DevOps', 'Database', 'Security',
-        // ];
+   
         $tags ="";
+
+        $city = "delhi";
+        $metaTitle = "QuickDials Blog | Local Business Tips, Guides & Updates";
+        $metaDescription = "Read QuickDials blogs for local business tips, service guides, market updates, and helpful information to find trusted businesses and services near you.";
+        $keyword = "QuickDials blog, local business blog, business tips, service guides, local services, business updates, service directory India";
+
+
         return view('official.blog', compact(
             'featuredArticle',
             'firstBlog',
@@ -393,7 +442,7 @@ class OfficialController extends Controller
             'tickerArticles',
             'listArticles',
             'categories',
-            'tags'
+            'tags','city','metaTitle','metaDescription','keyword'
         ));
         
     }
@@ -473,18 +522,20 @@ class OfficialController extends Controller
             ->get();
         }
 
-        
+        $city = "delhi";
+        $metaTitle =$blogDetails['meta_title'];
+        $metaDescription =  $blogDetails['meta_description'];
+        $keyword = $blogDetails['title'];
         return view('official.blog-details', compact(
             'blogDetails','blogList','tickerItems','categories',
-            'faqs','authorColor','paragraphs','slug'
+            'faqs','authorColor','paragraphs','slug','city','metaTitle','metaDescription','keyword'
         ));
          
     }
 
     public function blogCategory(Request $request, $slug)
     {
-
-   
+  
         $blogs = Blogdetails::where('status', '1')->where('category_name',$slug)->orderBy('id', 'DESC')->get();
  
         $categories = Blogdetails::select('category_name as name', DB::raw('COUNT(*) as count'))
@@ -579,455 +630,51 @@ class OfficialController extends Controller
 			'ratingcount' => $childCategory->ratingcount,
 
 		);
+
+        $city = "delhi";
+        $metaTitle = $meta_title;
+        $metaDescription = $meta_description;
+        $keyword = $childCategory->parent_category; 
+        return view('client.blog-category', ['categories' => $categories,'blogs'=>$blogs,'kwData'=>$kwData,'city'=>$city,'metaTitle'=>$metaTitle,'metaDescription'=>$metaDescription,'keyword'=>$keyword]);
+    }
  
-        return view('client.blog-category', ['categories' => $categories,'blogs'=>$blogs,'kwData'=>$kwData]);
-    }
-
-
-    public function testimonials()
-    {
-        $testimonialsdetails = Testimonialsdetail::orderBy('id', 'DESC')->get();
-        return view('official.testimonials', ['testimonialsdetails' => $testimonialsdetails]);
-    }
     public function termsconditions()
     {
 
-
-        return view('official.terms-conditions');
+        $city ="delhi";
+        $metaTitle = "Terms and Conditions | QuickDials";
+        $metaDescription = "Read QuickDials terms and conditions to understand our website usage policies, business listing rules, user responsibilities, and service guidelines.";
+        $keyword = "Terms and Conditions";
+        return view('official.terms-conditions', compact('city','metaTitle','metaDescription','keyword'));
     }
 
     public function privacypolicy()
     {
-        return view('official.privacy-policy');
+        $city ="delhi";
+        $metaTitle = "Privacy Policy | QuickDials";
+        $metaDescription = "Read QuickDials Privacy Policy to understand our website usage policies, business listing rules, user responsibilities, and service guidelines.";
+        $keyword = "Privacy Policy";
+        return view('official.privacy-policy',compact('city','metaTitle','metaDescription','keyword'));
     }
 
     public function copyrightpolicy()
     {
-        return view('official.copyright-policy');
+        $city ="delhi";
+        $metaTitle = "Copyright Policy | QuickDials";
+        $metaDescription = "Read QuickDials Copyright Policy to understand our website usage policies, business listing rules, user responsibilities, and service guidelines.";
+        $keyword = "Copyright Policy";
+        return view('official.copyright-policy',compact('city','metaTitle','metaDescription','keyword'));
     }
     public function refundPolicy()
     {
-        return view('official.refund-policy');
+        $city ="delhi";
+        $metaTitle = "Refund Policy | QuickDials";
+        $metaDescription = "Read QuickDials Refund Policy to understand our website usage policies, business listing rules, user responsibilities, and service guidelines.";
+        $keyword = "Refund Policy";
+        return view('official.refund-policy',compact('city','metaTitle','metaDescription','keyword'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function enquerystore(Request $request)
-    {
-
-        $lead = new LeadEnquery;
-        $lead->business = $request->input('business');
-        $lead->name = $request->input('name');
-        $lead->mobile = $request->input('mobile');
-        $lead->email = $request->input('email');
-        $lead->city = $request->input('city');
-
-        if ($lead->save()) {
-            $followUp = new EnquiryFollowUp;
-            $followUp->remark = $request->input('message');
-            $followUp->enquiry_id = $lead->id;
-
-            if ($followUp->save()) {
-                $headers = 'MIME-Version: 1.0' . "\r\n";
-                $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-                // Additional headers
-
-                $headers .= 'From: QuickDials <info@quickdials.com>' . "\r\n";
-                $to = "info@quickdials.com" . "\r\n";
-                //	$to="care@quickdials.com". "\r\n";
-                $subject = "New Enquiry" . "\r\n";
-                //	$message=view('site.send_enquiry_mail_thanks');
-
-                $message = '<html>
-<body>
-<table class="m_-3031551356041827469MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%">
-    <tbody>
-        <tr>
-            <td style="padding:0in 0in 0in 0in">
-                <div align="center">
-                    <table class="m_-3031551356041827469MsoNormalTable" border="1" cellspacing="0" cellpadding="0" width="630" style="width:472.5pt;background:white;border:solid #cccccc 1.0pt">
-                        <tbody>
-                            <tr>
-                                <td colspan="3" style="border:none;padding:0in 0in 0in 0in">
-                                    <div align="center">
-                                        <table class="m_-3031551356041827469MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%">
-                                            <tbody>
-                                                <tr style="height:3.75pt">
-                                                    <td style="background:#06A2E3;padding:0in 0in 0in 0in;height:3.75pt"></td>
-                                                    <td style="background:#B12642;padding:0in 0in 0in 0in;height:3.75pt"></td>
-                                                    <td style="background:#06A2E3;padding:0in 0in 0in 0in;height:3.75pt"></td>
-                                                    <td style="background:#B12642;padding:0in 0in 0in 0in;height:3.75pt"></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr style="height:60.0pt">
-                                <td width="55%" style="width:55.0%;border:none;padding:0in 7.5pt 0in 7.5pt;height:60.0pt">
-                                    <p class="MsoNormal" style="line-height:0%"><span style="font-size:1.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333"><a href="http://quickdials.com/" title="quickdials" target="_blank"><span style="text-decoration:none"><img loading="lazy" border="0" id="m_-3031551356041827469_x0000_i1025" src="http://quickdials.com/assets/images/logo.png" alt="quickdials" class="CToWUd" width="100px"></span></a>
-                                        </span><u></u><u></u></p>
-                                </td>
-                                <td width="45%" style="border:none;padding:0in 7.5pt 0in 0in;height:60.0pt">
-                                    <p class="MsoNormal" align="right" style="text-align:right;line-height:0%"><span style="font-size:1.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333"><a href="http://quickdials.com/" title="quickdials" target="_blank"><span style="text-decoration:none"><img loading="lazy" border="0" width="56%" height="auto" id="m_-3031551356041827469_x0000_i1026" src="http://quickdials.com/assets/images/ISO_9001_Logo.png" alt="ISO" class="CToWUd"></span></a>
-                                        </span><u></u><u></u></p>
-                                </td>
-                                <td style="border:none;padding:0in 0in 0in 0in;height:60.0pt"></td>
-                            </tr>
-                            <tr style="height:.75pt">
-                                <td colspan="3" style="border:none;background:#e5e5e5;padding:0in 7.5pt 0in 7.5pt;height:.75pt"></td>
-                            </tr>
-                            <tr>
-                                <td colspan="3" style="border:none;padding:0in 0in 0in 0in">
-                                    <table class="m_-3031551356041827469MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%">
-                                        <tbody>
-                                            <tr>
-                                                <td style="background:#232222;padding:12.5pt 6.0pt 12.5pt 6.0pt">
-                                                    <p class="MsoNormal" align="center" style="text-align:center"><span style="font-size:14.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:white">Enquiry From quickdials.</span><u></u><u></u></p>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding:22.5pt 15.0pt 22.5pt 15.0pt">
-                                                    <div>
-                                                        <p class="MsoNormal"><b><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">Hi Team,</span></b><u></u><u></u></p>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding:0in 15.0pt 0in 15.0pt;border-radius:10px">
-                                                    <table class="m_-3031551356041827469MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td style="border:solid #cccccc 1.0pt;padding:11.25pt 11.25pt 11.25pt 11.25pt">
-                                                                    <table class="m_-3031551356041827469MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%">
-                                                                        <tbody>
-                                                                            <tr>
-                                                                                <td style="padding:0in 0in 15.0pt 0in">
-                                                                                    <p class="MsoNormal"><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">You have received an enquiry from our client. Here are the details:</span><u></u><u></u></p>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td style="padding:0in 0in 7.5pt 0in">
-                                                                                    <p class="MsoNormal"><strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">Campany Name:</span></strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">
-																					' . $request->input('business') . '</span><u></u><u></u></p>
-                                                                                </td>
-                                                                            </tr>
-																			
-																			<tr>
-                                                                                <td style="padding:0in 0in 7.5pt 0in">
-                                                                                    <p class="MsoNormal"><strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">Name:</span></strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">
-																					' . $request->input('name') . '</span><u></u><u></u></p>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td style="padding:0in 0in 7.5pt 0in">
-                                                                                    <p class="MsoNormal"><strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">Email:</span></strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">
-																					' . $request->input('email') . '</span><u></u><u></u></p>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td style="padding:0in 0in 7.5pt 0in">
-                                                                                    <p class="MsoNormal"><strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">Mobile:</span></strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333"> ' . $request->input('mobile') . '</span><u></u><u></u></p>
-                                                                                </td>
-                                                                            </tr>
-                                                                            
-                                                                           
-																			<tr>
-                                                                                <td style="padding:0in 0in 7.5pt 0in">
-                                                                                    <p class="MsoNormal"><strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">City:</span></strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333"> ' . $request->input('city') . '</span><u></u><u></u></p>
-                                                                                </td>
-                                                                            </tr>
-																			<tr>
-                                                                                <td style="padding:0in 0in 7.5pt 0in">
-                                                                                    <p class="MsoNormal"><strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">Message:</span></strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333"> ' . $request->input('message') . '</span><u></u><u></u></p>
-                                                                                </td>
-                                                                            </tr>
-                                                                       
-																			<tr><td style="padding:18pt 0in 0in 0in;"></td></tr>
-																			<tr>
-                                                                                <td style="padding:0in 0in 7.5pt 0in">
-                                                                                    <p class="MsoNormal" style="text-decoration:underline"><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">Note:</span><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333"> This is a system generated email. Please do not reply.</span><u></u><u></u></p>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td style="border:none;border-bottom:dashed #cccccc 1.0pt;padding:0in 0in 5.0pt 0in"></td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td style="padding:11.25pt 0in 11.25pt 0in">
-                                                                                    <p class="MsoNormal"><strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">Contact Details of quickdials:</span></strong><u></u><u></u></p>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td style="padding:0in 0in 0in 0in">
-                                                                                    <p class="MsoNormal"><strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">Address :</span></strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">
-          UNIT 101 OXFORD TOWERS, 139/88 HAL OLD AIRPORT RD, H.A.L II Stage, Bangalore North, Bangalore- 560008, Karnataka</span><u></u><u></u></p>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td style="padding:0in 0in 0in 0in">
-                                                                                    <p class="MsoNormal"><strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">Email ID :</span></strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">
-          info@quickdials.com</span><u></u><u></u></p>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td style="padding:0in 0in 0in 0in">
-                                                                                    <p class="MsoNormal"><strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">Mobile number:</span></strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">
-          +91-9058100001</span><u></u><u></u></p>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td style="padding:0in 0in 0in 0in">
-                                                                                    <p class="MsoNormal">&nbsp;<u></u><u></u></p>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td style="padding:0in 0in 0in 0in">
-                                                                                    <p class="MsoNormal"><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">Contact us on the above details for any confussion or clarification. </span><u></u><u></u></p>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding:22.5pt 15.0pt 22.5pt 15.0pt">
-                                                    <div>
-                                                        <p class="MsoNormal" style="line-height:18.75pt"><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">Regards,<br>
-      quickdials (P) Ltd. </span><u></u><u></u></p>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </td>
-        </tr>
-    </tbody>
-</table>
-</body>
-</html>';
-
-                //	$message=file_get_contents($message);
-                /*$message=preg_replace('NA',$request->input('name'),$message);
-            $message=preg_replace('EM',$request->input('email'),$message);
-                $message=preg_replace('MB',$request->input('mobile'),$message);
-                $message=preg_replace('CI',$request->input('city'),$message);
-                $message=preg_replace('ME',$request->input('message'),$message);*/
-
-                mail($to, $subject, $message, $headers);
-
-
-                if ($lead->email) {
-
-                    $headers = 'MIME-Version: 1.0' . "\r\n";
-                    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-                    // Additional headers
-                    //	$headers .= 'From: enquiry@quickdials.com' . "\r\n";
-                    $headers .= 'From: quickdials <care@quickdials.com>';
-                    //$headers .= "CC: info@gmail.com\r\n";
-                    $to = $lead->email;
-                    $subject = "Thanks for quickdials Enquiry";
-                    $message = '<html>
-<body>
-<table class="m_-3031551356041827469MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%">
-    <tbody>
-        <tr>
-            <td style="padding:0in 0in 0in 0in">
-                <div align="center">
-                    <table class="m_-3031551356041827469MsoNormalTable" border="1" cellspacing="0" cellpadding="0" width="630" style="width:472.5pt;background:white;border:solid #cccccc 1.0pt">
-                        <tbody>
-                            <tr>
-                                <td colspan="3" style="border:none;padding:0in 0in 0in 0in">
-                                    <div align="center">
-                                        <table class="m_-3031551356041827469MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%">
-                                            <tbody>
-                                                <tr style="height:3.75pt">
-                                                    <td style="background:#06A2E3;padding:0in 0in 0in 0in;height:3.75pt"></td>
-                                                    <td style="background:#B12642;padding:0in 0in 0in 0in;height:3.75pt"></td>
-                                                    <td style="background:#06A2E3;padding:0in 0in 0in 0in;height:3.75pt"></td>
-                                                    <td style="background:#B12642;padding:0in 0in 0in 0in;height:3.75pt"></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr style="height:60.0pt">
-                                <td width="55%" style="width:55.0%;border:none;padding:0in 7.5pt 0in 7.5pt;height:60.0pt">
-                                    <p class="MsoNormal" style="line-height:0%"><span style="font-size:1.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333"><a href="http://quickdials.com/" title="quickdials" target="_blank"><span style="text-decoration:none"><img loading="lazy" border="0" id="m_-3031551356041827469_x0000_i1025" src="http://quickdials.com/assets/images/logo.png" alt="quickdials" class="CToWUd" width="100px"></span></a>
-                                        </span><u></u><u></u></p>
-                                </td>
-                                <td width="45%" style="border:none;padding:0in 7.5pt 0in 0in;height:60.0pt">
-                                    <p class="MsoNormal" align="right" style="text-align:right;line-height:0%"><span style="font-size:1.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333"><a href="http://quickdials.com/" title="quickdials" target="_blank"><span style="text-decoration:none"><img loading="lazy" border="0" width="56%" height="auto" id="m_-3031551356041827469_x0000_i1026" src="http://quickdials.com/assets/images/ISO_9001_Logo.png" alt="ISO" class="CToWUd" width="100px"></span></a>
-                                        </span><u></u><u></u></p>
-                                </td>
-                                <td style="border:none;padding:0in 0in 0in 0in;height:60.0pt"></td>
-                            </tr>
-                            <tr style="height:.75pt">
-                                <td colspan="3" style="border:none;background:#e5e5e5;padding:0in 7.5pt 0in 7.5pt;height:.75pt"></td>
-                            </tr>
-                            <tr>
-                                <td colspan="3" style="border:none;padding:0in 0in 0in 0in">
-                                    <table class="m_-3031551356041827469MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%">
-                                        <tbody>
-                                            <tr>
-                                                <td style="background:#232222;padding:12.5pt 6.0pt 12.5pt 6.0pt;height: 160px;">
-                                                    <p class="MsoNormal" align="center" style="text-align:center"><span style="font-size:20.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:white">Thank You !!</span><u></u><u></u></p> 
-
-													<p class="MsoNormal" align="center" style="text-align:center"><span style="font-size:20.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:white">Your Enquiry has been received.</span><u></u><u></u></p>
-													
-											<p class="MsoNormal" align="center" style="text-align:center"><span style="font-size:10.0pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:white">We will get back to you soon.</span><u></u><u></u></p>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding:22.5pt 15.0pt 22.5pt 15.0pt">
-                                                    <div>
-                                                        <p class="MsoNormal"><b><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333"></span></b><u></u><u></u></p>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding:0in 15.0pt 0in 15.0pt;border-radius:10px">
-                                                    <table class="m_-3031551356041827469MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td style="border:solid #cccccc 1.0pt;padding:11.25pt 11.25pt 11.25pt 11.25pt">
-                                                                    <table class="m_-3031551356041827469MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100.0%">
-                                                                        <tbody>
-                                                                       
-																			 
-																			<tr><td class="m_8854432245175541298sectionTitle" style="font-family:sans-serif;color:#313a42;border-collapse:collapse;text-align:center;font-size:26px;padding:0px 10px 10px 10px">Helpline No.</td></tr>
-
-																			<tr><td class="m_-5925867924380956427sectionTitle" style="font-family:sans-serif;color:#313a42;border-collapse:collapse;text-align:center;font-size:26px;padding:0px 10px 10px 10px"><strong>+91-9058-100-001</strong></td></tr>																 <tr><td class="m_-5925867924380956427button" style="font-family:sans-serif;color:#313a42;border-collapse:collapse;padding:10px 5px 10px 5px;text-align:center;background-color:#ff6b6b;border-radius:4px"><a href="http://quickdials.com/" title="quickdials" style="color:#ffffff;text-decoration:none;display:block;text-transform:uppercase" target="_blank" data-saferedirecturl="">Visit Us</a></td></tr>
-																			   
-																			<tr><td style="padding:18pt 0in 0in 0in;"></td></tr>
-																			
-																		 
-                                                                            <tr>
-                                                                                <td style="border:none;border-bottom:dashed #cccccc 1.0pt;padding:0in 0in 5.0pt 0in"></td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td style="padding:11.25pt 0in 11.25pt 0in">
-                                                                                    <p class="MsoNormal"><strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">Contact Details of quickdials:</span></strong><u></u><u></u></p>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td style="padding:0in 0in 0in 0in">
-                                                                                    <p class="MsoNormal"><strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">Address :</span></strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">
-       UNIT 101 OXFORD TOWERS, 139/88 HAL OLD AIRPORT RD, H.A.L II Stage, Bangalore North, Bangalore- 560008, Karnataka </span><u></u><u></u></p>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td style="padding:0in 0in 0in 0in">
-                                                                                    <p class="MsoNormal"><strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">Email ID :</span></strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">
-          info@quickdials.com</span><u></u><u></u></p>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td style="padding:0in 0in 0in 0in">
-                                                                                    <p class="MsoNormal"><strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">Mobile number:</span></strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">
-          +91-9058100001</span><u></u><u></u></p>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td style="padding:0in 0in 0in 0in">
-                                                                                    <p class="MsoNormal">&nbsp;<u></u><u></u></p>
-                                                                                </td>
-                                                                            </tr>
-                                                                         
-																			
-																			<tr>
-                                                                                <td style="padding:0in 0in 0in 0in">
-                                                                                    <p class="MsoNormal"><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">Contact us on the above details for any confussion or clarification. </span><u></u><u></u></p>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding:22.5pt 15.0pt 22.5pt 15.0pt">
-                                                    <div>
-                                                        <p class="MsoNormal" style="line-height:18.75pt"><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">Regards,<br>
-      quickdials (P) Ltd. </span><u></u><u></u></p>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </td>
-        </tr>
-    </tbody>
-</table>
-</body>
-</html>';
-                    mail($to, $subject, $message, $headers);
-                }
-
-                return response()->json(['status' => 1], 200);
-
-            } else {
-
-                return response()->json(['status' => 0, 'errors' => 'Enquiry not added'], 400);
-            }
-        } else {
-            return response()->json(['status' => 0], 200);
-
-        }
-
-
-    }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function contactform(Request $request)
-    {
-
-        $lead = new LeadEnquery;
-        $lead->business = $request->input('subject');
-        $lead->name = $request->input('name');
-        $lead->mobile = $request->input('mobile');
-        $lead->email = $request->input('email');
-        $lead->city = $request->input('city');
-
-        if ($lead->save()) {
-            $followUp = new EnquiryFollowUp;
-            $followUp->remark = $request->input('message');
-            $followUp->enquiry_id = $lead->id;
-            $followUp->save();
-            return response()->json(['status' => 1], 200);
-        } else {
-            return response()->json(['status' => 0], 200);
-
-        }
-
-
-    }
-
+     
 
     /**
      * Store a newly created resource in storage.
@@ -1037,7 +684,6 @@ class OfficialController extends Controller
      */
     public function subscribe(Request $request)
     {
-
         $subscribe = new Subscribe;
         $subscribe->email = $request->input('email');
         if ($subscribe->save()) {
@@ -1046,7 +692,6 @@ class OfficialController extends Controller
             return response()->json(['status' => 0], 200);
 
         }
-
 
     }
 
