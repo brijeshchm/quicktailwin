@@ -126,7 +126,7 @@ $colorMap = [
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
                     <h1 class="text-2xl md:text-3xl font-bold text-white leading-tight">
-                        Business Services Directory
+                        Find Trusted Business Services Near You
                     </h1>
                     <p class="text-blue-100 text-sm mt-2 max-w-xl">
                         Explore thousands of verified businesses across India — browse by category, city, or keyword.

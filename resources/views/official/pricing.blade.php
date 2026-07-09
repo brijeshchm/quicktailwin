@@ -34,7 +34,7 @@
         {{-- Section header --}}
         <div class="text-center mb-14 anim-fade-up">
             <h1 class="text-3xl md:text-5xl font-bold text-gray-900 leading-snug tracking-tight mb-4">
-                Welcome to
+                QuickDials Pricing – Choose the Right Plan for Your Business on 
                 <span class="text-indigo-600">
                     QuickDials<sup class="text-amber-500 text-2xl font-normal align-super">™</sup>
                 </span><span class="text-gray-900">.com</span>

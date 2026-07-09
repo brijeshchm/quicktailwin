@@ -14,7 +14,7 @@
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="section-headline services-head text-center">
-            <h2>QuickDials Application Features</h2>
+            <h2>QuickDials Features – Discover What Makes Us Useful</h2>
           </div>
         </div>
       </div>

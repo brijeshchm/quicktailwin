@@ -27,7 +27,7 @@
                 </div>
 
                 <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 leading-tight tracking-tight anim-fade-up" style="animation-delay:.1s">
-                    We'd love to <span class="gradient-text">hear from you</span>
+                    Contact QuickDials – We’re Here to Help <span class="gradient-text">hear from you</span>
                 </h1>
 
                 <p class="text-base text-gray-500 mt-3 max-w-lg leading-relaxed anim-fade-up" style="animation-delay:.16s">

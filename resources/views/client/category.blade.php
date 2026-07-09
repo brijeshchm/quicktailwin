@@ -15,7 +15,7 @@
             </svg>
             <span class="text-white">All Category</span>
         </div>
-        <h1 class="text-4xl font-bold mb-2">Explore Top-Rated Local Services</h1>
+        <h1 class="text-4xl font-bold mb-2">Explore Top-Rated categories Local Services on QuickDials</h1>
         <p class="text-slate-300 text-lg"> Discover trusted local businesses, professional services, training institutes, healthcare providers, hotels, salons, real estate agencies, travel services, and more on QuickDials. Compare reviews, ratings, contact details, photos, and locations to find the best services near you quickly and easily.</p>
     </div>
 </div>

@@ -222,7 +222,7 @@
   <div class="mx-auto max-w-3xl px-4 py-6 text-center ">
     <h1 id="rotating-heading"
         class="sm:text-2xl transition-opacity duration-500 text-slate-900">
-       What Would You Like to Learn Today?
+       QuickDials News – What Would You Like to Learn Today?
     </h1>
 </div>
 

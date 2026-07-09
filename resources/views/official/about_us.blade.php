@@ -154,7 +154,7 @@
 
                         <h1 class="reveal d-1 text-4xl sm:text-5xl font-extrabold text-gray-900
                                    leading-tight tracking-tight mb-4">
-                            Connecting the world,
+                            About QuickDials – Connecting People with Trusted Local Businesses
                             <span class="gradient-text"> one call at a time</span>
                         </h1>
 

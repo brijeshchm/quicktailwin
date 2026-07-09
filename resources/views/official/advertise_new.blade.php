@@ -114,7 +114,7 @@
                 <h1 class="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-3">
                     <span class="text-gradient-anim inline-block hover:scale-105 transition-transform duration-300">GROW</span>
                     <span class="text-[#22c55e] text-3xl align-super ml-1 inline-block anim-bounce-in">&#10003;</span>
-                    Your Business with QuickDials
+                    Advertise Your Business and Stay Updated with QuickDials News
                 </h1>
                 <p class="text-gray-500 text-base mb-6">                  
                    Get Noticed Fast - Create your business profile, bring in qualified leads, and increase your online visibility, all from one platform

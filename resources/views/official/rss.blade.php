@@ -18,7 +18,7 @@
             <div class="single-blog-page">
               <!-- recent start -->
               <div class="left-blog">
-                <h4>Recent Post Blog</h4>
+                <h1>QuickDials RSS Feed – Latest Updates and News</h1>
                 <div class="recent-post">
                   <!-- start single post -->
                        @if(!empty($blogrecents))

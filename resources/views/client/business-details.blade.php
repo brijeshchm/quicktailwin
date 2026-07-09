@@ -84,8 +84,7 @@ $bgImage = $bgImage ?? '/computer-courses-training.jpg';
 
                 <h1 class="text-lg font-bold text-gray-900 leading-tight">All Business List</h1>
 
-                 {{-- Rating --}}
-                
+           
 
                 
 
@@ -132,13 +131,36 @@ $bgImage = $bgImage ?? '/computer-courses-training.jpg';
             <div class="flex items-center gap-2">
                 <span class="text-xs text-gray-500 font-medium">Min Rating:</span>
                 <div class="flex gap-1">
-                    @foreach([0, 3, 4, 4.5] as $r)
-                    <button @click="minRating = {{ $r }}; applyFilters()"
-                            class="px-2 py-0.5 text-xs font-medium rounded-lg border transition-all"
-                            :class="minRating === {{ $r }} ? 'bg-amber-500 text-white border-amber-500' : 'bg-white text-gray-500 border-gray-200 hover:border-amber-300'">
-                        {{ $r === 0 ? 'All' : $r . '+' }}
-                    </button>
-                    @endforeach
+                     <div itemscope itemtype="https://schema.org/Product" class="space-y-2">                  
+                    <meta itemprop="name" content="{{ $metaTitle ?? $metaTitle ?? 'QuickDials review Service' }}">                   
+                    @if(!empty($kwData['category_icon']))
+                    <meta itemprop="image" content="{{ $clientsList['logo']  ?? asset('client/images/default_pp_small.png') ??'' }}">
+                    @endif                   
+                    @if(!empty($metaDescription))
+                    <meta itemprop="description" content="{{ $metaDescription }}">
+                    @endif 
+                    <div itemprop="aggregateRating"
+                        itemscope
+                        itemtype="https://schema.org/AggregateRating"
+                        class="flex items-center gap-2 text-sm">
+                        <img src="{{ asset('client/images/' . $starImg) }}"
+                        alt="{{ $clientsList['ratingCount'] }} out of 5 stars"
+                        class="lazy-image h-4 w-auto"
+                        width="80"
+                        height="16"
+                        loading="lazy"
+                        decoding="async"
+                        >
+                        <span class="font-semibold text-white-900">
+                        <span itemprop="ratingValue">{{ $clientsList['rating'] }}</span>
+                        </span>
+                        <span class="text-white-500 text-white">out of</span>
+                        <span itemprop="bestRating" >5</span>
+                        <span class="text-white-500">based on</span>
+                        (<span itemprop="ratingCount">{{ number_format($clientsList['ratingCount']) }}</span>
+                        <span class="text-white-500">reviews</span>)
+                    </div>
+                </div>  
                 </div>
             </div>
             <label class="flex items-center gap-2 cursor-pointer">

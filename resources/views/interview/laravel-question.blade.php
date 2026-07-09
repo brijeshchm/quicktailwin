@@ -17,7 +17,7 @@ QuickDials- Business Services POPULAR CATEGORIES, B2B & BUSINESS SERVICES
   <div class='row white'>
     <div class='col l11 m12' id='main'>
        
-<h1>HTML<span class="color_h1"> Basic Examples</span></h1>
+<h1>laravel<span class="color_h1"> Interview Question & Answer</span></h1>
 <div class="clear nextprev">
 <a class="left btn" href="{{url('interviews/technical-logic-question-answer')}}">&#10094; Previous</a>
 <a class="right btn" href="{{url('interviews/javascript-interview-question-answer')}}">Next &#10095;</a>

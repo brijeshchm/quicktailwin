@@ -11,12 +11,13 @@
 
             {{-- Headline --}}
             <div class="max-w-2xl mx-auto text-center mb-3 overflow-hidden">
-                <h1 class="text-[clamp(1rem,3.5vw,1.5rem)] font-black text-gray-900 leading-snug whitespace-nowrap">
+                <h1>QuickDials – Find Local Businesses and Services Near You</h1>
+                <h2 class="text-[clamp(1rem,3.5vw,1.5rem)] font-black text-gray-900 leading-snug whitespace-nowrap">
                     Search across
                     <span class="text-blue-600">'0.9 K+'</span>
                     <span id="rotating-word" class="text-orange-500 inline-block word-animate">Institutes</span>
                     <span class="text-gray-700">&amp; Services</span>
-                </h1>
+                </h2>
             </div>
 
             {{-- ─── Search Box ─── --}}
@@ -45,7 +46,7 @@
                                             id="hero-city-search"
                                             type="text"
                                             placeholder="Search city or area..."
-                                            class="flex-1 text-xs bg-transparent outline-none text-gray-700   border-none placeholder:text-gray-400 font-medium"
+                                            class="flex-1 text-xs bg-transparent outline-none text-gray-700   border-none placeholder:text-gray-400 font-medium w-32"
                                             oninput="filterHeroCities(this.value)"
                                         />
                                         <button id="hero-city-clear" onclick="clearHeroCitySearch()" class="hidden text-gray-300 hover:text-gray-500 text-xs">✕</button>

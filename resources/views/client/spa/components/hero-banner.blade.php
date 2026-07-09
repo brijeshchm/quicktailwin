@@ -79,7 +79,7 @@
                 {{-- HEADING WITH ROTATING WORD --}}
                 <h1 class="hero-heading text-[clamp(3rem,6vw,5.2rem)] text-stone-900 mb-1 leading-none font-black"
                     style="font-family:'Playfair Display',serif;">
-                    The Art of
+                    Find Trusted Spa Services on QuickDials
                 </h1>
 
                 <div class="hero-word mb-6 transition-all duration-350"

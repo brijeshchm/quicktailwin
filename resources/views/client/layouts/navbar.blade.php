@@ -29,7 +29,7 @@
                 <div id="sticky-city-dropdown" class="relative shrink-0">
                     <button
                         id="sticky-city-btn"
-                        class="flex items-center gap-1 h-12 px-2.5 text-xs font-semibold text-blue-700 border-r border-gray-200 hover:bg-blue-50 transition-colors whitespace-nowrap rounded-l-xl"
+                        class="flex items-center gap-1 h-12 px-2.5 text-xs font-semibold text-blue-700 border-r border-gray-200 hover:bg-blue-50 transition-colors whitespace-nowrap rounded-l-xl w-32"
                         onclick="toggleStickyCity()"
                     >
                         <i data-lucide="map-pin" class="w-3 h-3 text-blue-500"></i>

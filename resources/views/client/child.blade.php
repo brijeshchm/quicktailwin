@@ -15,7 +15,7 @@
                 </svg>
                 <span class="text-white">All Services</span>
             </div>
-            <h1 class="text-4xl font-bold mb-2">Explore Verified Services &amp; Experts</h1>
+            <h1 class="text-4xl font-bold mb-2">Find Top Sub Category Services Near You</h1>
             <p class="text-slate-300 text-lg">High-quality services recognized and trusted across the globe</p>
         </div>
     </div>

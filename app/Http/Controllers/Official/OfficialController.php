@@ -26,15 +26,7 @@ class OfficialController extends Controller
     {
 
     }
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('official.index');
-    }
+  
     /**
      * Show the application dashboard.
      *

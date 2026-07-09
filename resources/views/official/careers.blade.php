@@ -51,7 +51,7 @@
 ══════════════════════════ --}}
 <section class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-16 text-center">
     <h1 class="text-3xl md:text-5xl font-bold mb-4 anim-fade-down">
-        Join Our Team 🚀
+        Careers at QuickDials – Join Our Growing Team
     </h1>
     <p class="text-lg opacity-90 anim-fade-down" style="animation-delay:.12s">
         Build your career with us and grow together
