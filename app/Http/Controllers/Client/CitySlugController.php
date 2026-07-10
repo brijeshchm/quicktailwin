@@ -825,13 +825,13 @@ $reviewList = DB::table('clients')
 		}
 
 		if (!empty($keywordDetails->meta_title)) {
-			$meta_title = preg_replace('/in {{city}}/i', $city, $keywordDetails->meta_title);
+			$meta_title = $this->replaceCity($keywordDetails->meta_title,'');
 		} else {
 			$meta_title = 'Best ' . $keywordDetails->keyword . ' - Reviews, Ratings & Contact Details | Quickdials';
 
 		}
 		if (!empty($keywordDetails->meta_keywords)) {
-			$meta_keywords = preg_replace('/in {{city}}/i', $city, $keywordDetails->meta_keywords);
+			$meta_keywords = $this->replaceCity($keywordDetails->meta_keywords,'');
 		} else {
 			$meta_keywords =  implode(', ', [
 						$keywordDetails->keyword,
@@ -845,7 +845,7 @@ $reviewList = DB::table('clients')
 
 
 		if (!empty($keywordDetails->meta_description)) {
-			$meta_description = preg_replace('/in {{city}}/i', $city, $keywordDetails->meta_description);
+			$meta_description = $this->replaceCity($keywordDetails->meta_description,'');
 
 
 		} else {
@@ -855,43 +855,43 @@ $reviewList = DB::table('clients')
 
 		$top_description = "";
 		if (!empty($keywordDetails->top_description)) {
-			$top_description = preg_replace('/in {{city}}/i', $city, $keywordDetails->top_description);
+			$top_description = $this->replaceCity($keywordDetails->top_description,'');
 		}
 		$bottom_description = "";
 		if (!empty($keywordDetails->bottom_description)) {
-			$bottom_description = preg_replace('/in {{city}}/i', $city, $keywordDetails->bottom_description);
+			$bottom_description = $this->replaceCity($keywordDetails->bottom_description,'');
 		}
 		
 		if (!empty($keywordDetails->courseabout)) {
-			$courseabout = preg_replace('/in {{city}}/i', $city, $keywordDetails->courseabout);
+			$courseabout = $this->replaceCity($keywordDetails->courseabout,'');
 		}
 		
 		if (!empty($keywordDetails->heading)) {
-			$heading = preg_replace('/in {{city}}/i', $city, $keywordDetails->heading);
+			$heading = $this->replaceCity($keywordDetails->heading,'');
 		}
 		if (!empty($keywordDetails->paragraph1)) {
-			$paragraph1 = preg_replace('/in {{city}}/i', $city, $keywordDetails->paragraph1);
+			$paragraph1 = $this->replaceCity($keywordDetails->paragraph1,'');
 		}
 		if (!empty($keywordDetails->paragraph2)) {
-			$paragraph2 = preg_replace('/in {{city}}/i', $city, $keywordDetails->paragraph2);
+			$paragraph2 = $this->replaceCity($keywordDetails->paragraph2,'');
 		}
 		if (!empty($keywordDetails->paragraph3)) {
-			$paragraph3 = preg_replace('/in {{city}}/i', $city, $keywordDetails->paragraph3);
+			$paragraph3 = $this->replaceCity($keywordDetails->paragraph3,'');
 		}
 		if (!empty($keywordDetails->paragraph4)) {
-			$paragraph4 = preg_replace('/in {{city}}/i', $city, $keywordDetails->paragraph4);
+			$paragraph4 = $this->replaceCity($keywordDetails->paragraph4,'');
 		}
 		if (!empty($keywordDetails->paragraph5)) {
-			$paragraph5 = preg_replace('/in {{city}}/i', $city, $keywordDetails->paragraph5);
+			$paragraph5 = $this->replaceCity($keywordDetails->paragraph5,'');
 		}
 		if (!empty($keywordDetails->paragraph6)) {
-			$paragraph6 = preg_replace('/in {{city}}/i', $city, $keywordDetails->paragraph6);
+			$paragraph6 = $this->replaceCity($keywordDetails->paragraph6,'');
 		}
 		if (!empty($keywordDetails->paragraph7)) {
-			$paragraph7 = preg_replace('/in {{city}}/i', $city, $keywordDetails->paragraph7);
+			$paragraph7 = $this->replaceCity($keywordDetails->paragraph7,'');
 		}
 		if (!empty($keywordDetails->paragraph8)) {
-			$paragraph8 = preg_replace('/in {{city}}/i', $city, $keywordDetails->paragraph8);
+			$paragraph8 = $this->replaceCity($keywordDetails->paragraph8,'');
 		}
 
 		$data['keyword'] = array(
@@ -909,18 +909,18 @@ $reviewList = DB::table('clients')
 			'top_description' => $top_description,
 			'bottom_description' => $bottom_description,
 		 
-			'bottom_heading' => preg_replace('/{{city}}/i', $city, $keywordDetails->bottom_heading),
-			'top_heading' => preg_replace('/{{city}}/i', $city, $keywordDetails->top_heading),
-			'extra_heading' => preg_replace('/{{city}}/i', $city, $keywordDetails->extra_heading),
-			'extra_description' => preg_replace('/{{city}}/i', $city, $keywordDetails->extra_description),
+			'bottom_heading' => $this->replaceCity($keywordDetails->bottom_heading,''),
+			'top_heading' => $this->replaceCity($keywordDetails->top_heading,''),
+			'extra_heading' => $this->replaceCity($keywordDetails->extra_heading,''),
+			'extra_description' => $this->replaceCity($keywordDetails->extra_description,''),
 		 			
-			'faqq1' => preg_replace('/{{city}}/i', $city, $keywordDetails->faqq1),
-			'faqa1' => preg_replace('/{{city}}/i', $city, $keywordDetails->faqa1),
-			'faqq2' => preg_replace('/{{city}}/i', $city, $keywordDetails->faqq2),
-			'faqa2' => preg_replace('/{{city}}/i', $city, $keywordDetails->faqa2),
-			'faqq3' => preg_replace('/{{city}}/i', $city, $keywordDetails->faqq3),
-			'faqa3' => preg_replace('/{{city}}/i', $city, $keywordDetails->faqa3),
-			'faqq4' => preg_replace('/{{city}}/i', $city, $keywordDetails->faqq4),
+			'faqq1' => $this->replaceCity($keywordDetails->faqq1,''),
+			'faqa1' => $this->replaceCity($keywordDetails->faqa1.''),
+			'faqq2' => $this->replaceCity($keywordDetails->faqq2,''),
+			'faqa2' => $this->replaceCity($keywordDetails->faqa2,''),
+			'faqq3' => $this->replaceCity($keywordDetails->faqq3,''),
+			'faqa3' => $this->replaceCity($keywordDetails->faqa3,''),
+			'faqq4' => $this->replaceCity($keywordDetails->faqq4,''),
 			'faqa4' => preg_replace('/{{city}}/i', $city, $keywordDetails->faqa4),
 			'faqq5' => preg_replace('/{{city}}/i', $city, $keywordDetails->faqq5),
 			'faqa5' => preg_replace('/{{city}}/i', $city, $keywordDetails->faqa5),	
@@ -2040,7 +2040,6 @@ $reviewList = DB::table('clients')
     private function normalizeBusiness(array $b, int $index): array
     {
  
-//  dd($b);
         $colorPalette = [
             'from-violet-500 to-indigo-600', 'from-emerald-500 to-teal-600',
             'from-orange-500 to-amber-600',  'from-blue-500 to-cyan-600',
@@ -2344,7 +2343,7 @@ $reviewList = DB::table('clients')
 
         // ── Businesses ─────────────────────────────────────────────────────
         $rawList    = $response['clientsList'] ?? [];
-        // dd($rawList);
+       
         $agents    = $response['agents'] ?? [];
         $businesses = collect($rawList)
             ->map(fn ($b, $i) => $this->normalizeBusiness($b, $i))
@@ -2402,11 +2401,29 @@ $reviewList = DB::table('clients')
     /**
      * Replace {{city}} placeholder and strip basic HTML.
      */
-    private function replaceCity(string $text, string $city): string
-    {
-        return str_ireplace('{{city}}', ucfirst($city), $text);
-    }
+	 private function replaceCity(string $text, string $city = ''): string
+	{
+		$city = trim($city);
 
+		if ($city === '') {
+			// Remove both "in {{city}}" and "{{city}}"
+			$text = preg_replace('/\s*(?:in\s+)?{{city}}\s*/i', ' ', $text);
+		} else {
+			// Replace "{{city}}" with the city name
+			$text = str_ireplace('{{city}}', ucfirst(strtolower($city)), $text);
+		}
+
+		// Remove extra spaces
+		$text = preg_replace('/\s+/', ' ', $text);
+
+		// Remove spaces before comma
+		$text = preg_replace('/\s+,/', ',', $text);
+
+		// Ensure one space after comma
+		$text = preg_replace('/,\s*/', ', ', $text);
+
+		return trim($text, " \t\n\r\0\x0B,");
+	}
     /**
      * Handle  GET /{city}/{slug}
      */
@@ -2460,8 +2477,7 @@ $reviewList = DB::table('clients')
 
         // ── Fetch data ─────────────────────────────────────────────────────
         $response = $this->fetchKeywordData($slug);
- 
-        
+         
         $kwData   = $response['keyword'] ?? [];
         $businessOwners = $this->businessOwnersData();
 
@@ -2527,7 +2543,7 @@ $reviewList = DB::table('clients')
         $responseZones = $this->fetchCityData();
          $zones     = $responseZones['data'] ?? [];
 
-       
+ 
         return view('client.searchkeyword', compact(
             'city', 'slug', 'keyword', 'area','zones',
             'childSlug', 'childCat',

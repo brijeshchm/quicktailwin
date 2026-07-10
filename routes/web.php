@@ -544,26 +544,14 @@ Route::get('package', [App\Http\Controllers\Client\WebsiteRazorpayController::cl
 Route::post('razorPayCheckout', [App\Http\Controllers\Client\WebsiteRazorpayController::class, 'razorPayCheckout']);
 Route::get('/payment-done', [App\Http\Controllers\Client\WebsiteRazorpayController::class, 'success']);
 Route::get('/failed', [App\Http\Controllers\Client\WebsiteRazorpayController::class, 'failed']);
-// // City home
-// Route::get('/{city}', [HomePageController::class, 'showCityOrService'])
-//     ->name('showCity')
-//     ->where(['city' => '[a-z0-9][a-z0-9\-]*']);
-
-// City home
+ 
+ 
 Route::get('/{city}', [CitySlugController::class, 'showCityOrService'])
     ->name('showCity');
-    // ->where(['city' => '[a-z0-9][a-z0-9\-]*']);
-
-// Route::get('/{city_slug}/{service_slug}', [SearchListController::class, 'showCityWithService'])->name('listing.show');
-    // ->where([
-    //     'city_slug' => '[a-z0-9\-]+',
-    //     'service_slug'  => '[a-z0-9\-]+',
-    // ]);
  
 
 Route::get('/{city_slug}/{service_slug}', [CitySlugController::class, 'showCityWithService'])
-    // ->where('city_slug', '[a-z0-9\-]+')
-    // ->where('service_slug', '[a-z0-9\-]+')
+ 
     ->name('city.slug');
 
 

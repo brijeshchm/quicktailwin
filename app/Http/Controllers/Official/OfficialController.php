@@ -551,7 +551,7 @@ class OfficialController extends Controller
         if (!empty($childCategory->meta_title)) {
         $meta_title = $childCategory->meta_title;
         } else {
-        $meta_title = $childCategory->parent_category ." | Find Trusted Services, Businesses & Professionals Near You | Quickdials ";
+        $meta_title = "Find Trusted Services, Businesses & Professionals Near You | Quickdials ";
 
         }
 

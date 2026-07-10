@@ -364,8 +364,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
     $i=0;
         $bg = $bgColors[$i % count($bgColors)];
         $color = $iconColors[$i % count($iconColors)];
-
-        $city = $clientsList['city']?$clientsList['city']:'bangalore';
+        $city = Str::slug($clientsList['city'] ?? 'bangalore');
     @endphp
 
     <a href="{{ route('city.slug', ['city_slug' => strtolower($city), 'service_slug' => $keySlug]) }}"
