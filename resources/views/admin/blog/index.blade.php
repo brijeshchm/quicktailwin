@@ -223,6 +223,7 @@ padding:0px;
                                 <thead>
                                     <tr>
                                         <th>Name</th>
+                                        <th>Category</th>
 										<th>Title</th>                                        
 										<th>Image</th>                                        
 										<th>Status</th>                                        
@@ -232,6 +233,7 @@ padding:0px;
 								<tfoot>
                                     <tr>
 										<th>Name</th>
+										<th>Category</th>
 										<th>Title</th>                                        
 										<th>Image</th>                                       
 										<th>Status</th>                                       

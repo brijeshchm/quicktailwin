@@ -819,6 +819,7 @@ class BlogController extends Controller
 
 				$data[] = [
 					$blog->name,
+					$blog->category_name,
 					$blog->title,
 					'<img loading="lazy" alt="lazy" src="' . url($image) . '" width="50px">',
 					$status,
