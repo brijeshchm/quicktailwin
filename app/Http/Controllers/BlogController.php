@@ -767,14 +767,14 @@ class BlogController extends Controller
 			$blogdetails = Blogdetails::orderBy('id', 'desc');
 			if ($request->input('search.value') != '') {
 				$blogdetails = $blogdetails->where(function ($query) use ($request) {
-					$query->orWhere('name', 'LIKE', '%' . $request->input('search.value') . '%');
-					$query->orWhere('title', 'LIKE', '%' . $request->input('search.value') . '%');
-					$query->orWhere('slug', 'LIKE', '%' . $request->input('search.value') . '%');
-					$query->orWhere('top_content', 'LIKE', '%' . $request->input('search.value') . '%');
-					$query->orWhere('bottom_content', 'LIKE', '%' . $request->input('search.value') . '%');
-					$query->orWhere('heading', 'LIKE', '%' . $request->input('search.value') . '%');
-					$query->orWhere('about_blog', 'LIKE', '%' . $request->input('search.value') . '%');
-					$query->orWhere('meta_title', 'LIKE', '%' . $request->input('search.value') . '%');
+					$query->orWhere('name', 'LIKE', '%' . $request->input('search.value') . '%')
+					 ->orWhere('title', 'LIKE', '%' . $request->input('search.value') . '%')
+					 ->orWhere('slug', 'LIKE', '%' . $request->input('search.value') . '%')
+					->orWhere('top_content', 'LIKE', '%' . $request->input('search.value') . '%')
+					 ->orWhere('bottom_content', 'LIKE', '%' . $request->input('search.value') . '%')
+					 ->orWhere('heading', 'LIKE', '%' . $request->input('search.value') . '%')
+					 ->orWhere('category_name', 'LIKE', '%' . $request->input('search.value') . '%')
+					 ->orWhere('meta_title', 'LIKE', '%' . $request->input('search.value') . '%');
 
 				});
 			}
