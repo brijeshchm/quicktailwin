@@ -535,108 +535,106 @@ class OfficialController extends Controller
 
     public function blogCategory(Request $request, $slug)
     {
-  
-        $blogs = Blogdetails::where('status', '1')->where('category_name',$slug)->orderBy('id', 'DESC')->get();
- 
-        $categories = Blogdetails::select('category_name as name', DB::raw('COUNT(*) as count'))
+    $childCategory = ChildCategory::where('child_slug', $slug)->first();
+
+    // Bug #2 & #6 fix — bail out cleanly instead of null-property errors
+    if (!$childCategory) {
+        abort(404);
+    }
+
+    $blogs = Blogdetails::where('status', '1')
+        ->where('category_name', $slug)
+        ->orderBy('id', 'DESC')
+        ->get();
+
+    // Bug #3 fix — get ALL categories (for sidebar/related list), not just the current slug
+    $categories = Blogdetails::select('category_name as name', DB::raw('COUNT(*) as count'))
         ->whereNotNull('category_name')
         ->where('status', '1')
-        ->where('category_name',$slug)
         ->where('category_name', '!=', '')
         ->groupBy('category_name')
         ->orderBy('count', 'DESC')
         ->get();
-        $childCategory  = ChildCategory::where('child_slug',$slug)->first();
 
-        if (!empty($childCategory->meta_title)) {
-        $meta_title = $childCategory->meta_title;
-        } else {
-        $meta_title = "Find Trusted Services, Businesses & Professionals Near You | Quickdials ";
+    $meta_title = !empty($childCategory->meta_title)
+        ? $childCategory->meta_title
+        : "Find Trusted Services, Businesses & Professionals Near You | Quickdials";
 
+    $meta_keywords = !empty($childCategory->meta_keywords)
+        ? $childCategory->meta_keywords
+        : implode(', ', [
+            $childCategory->parent_category,
+            $childCategory->parent_category . " near me",
+            "best " . $childCategory->parent_category,
+            "top " . $childCategory->parent_category,
+            "local " . $childCategory->parent_category,
+            "trusted " . $childCategory->parent_category,
+            "affordable " . $childCategory->parent_category,
+            $childCategory->parent_category . " services",
+            $childCategory->parent_category . " providers, Quickdials",
+        ]);
+
+    // Bug #1 fix — was checking $parentCategory (undefined)
+    $meta_description = !empty($childCategory->meta_description)
+        ? $childCategory->meta_description
+        : "Find the best {$childCategory->parent_category} near you on Quickdials. Compare trusted providers, read reviews, check details, and connect with top-rated businesses and professionals for your needs.";
+
+    $child_banner = config('app.website') . 'client/images/computer-courses-training.jpg';
+    $alt = "";
+    $pc_icon = "";
+
+    // Bug #4 fix — safe unserialize, no object injection risk
+    if (!empty($childCategory->child_banner)) {
+        $cicons = @unserialize($childCategory->child_banner, ['allowed_classes' => false]);
+        if (!empty($cicons['child_banner']['src'])) {
+            $child_banner = config('app.website') . $cicons['child_banner']['src'];
+            $alt = $cicons['child_banner']['name'] ?? '';
         }
-
-        if (!empty($childCategory->meta_keywords)) {
-			$meta_keywords = $childCategory->meta_keywords;
-		} else {
-			 
-						
-			$meta_keywords = $childCategory->parent_category . ", " .
-                 $childCategory->parent_category . " near me, " .
-                 "best " . $childCategory->parent_category . ", " .
-                 "top " . $childCategory->parent_category . ", " .
-                 "local " . $childCategory->parent_category . ", " .
-                 "trusted " . $childCategory->parent_category . ", " .
-                 "affordable " . $childCategory->parent_category . ", " .
-                 $childCategory->parent_category . " services, " .
-                 $childCategory->parent_category . " providers, Quickdials";
-
-		}
-
-
-		if (!empty($parentCategory->meta_description)) {
-			$meta_description = $childCategory->meta_description;
-
-
-		} else {
-			 
-			   $meta_description = "Find the best ".$childCategory->parent_category." near you on Quickdials. Compare trusted providers, read reviews, check details, and connect with top-rated businesses and professionals for your needs.";
-
-		}
-
-
-        $child_banner = config('app.website') . 'client/images/computer-courses-training.jpg';
-		$alt = "";
-		$pc_icon ="";
-		if (!empty($childCategory->child_banner)) {
-			$cicons = unserialize($childCategory->child_banner);
-
-			if (!empty($cicons)) {
-				$child_banner = config('app.website') . $cicons['child_banner']['src'];
-				$alt = $cicons['child_banner']['name'];
-			}
-		}if (!empty($childCategory->pc_icon)) {
-			$catIcons = unserialize($childCategory->pc_icon);
-
-			if (!empty($catIcons)) {
-				$pc_icon = config('app.website') . $catIcons['pc_icon']['src'];
-				$alt = $catIcons['pc_icon']['name'];
-			}
-		}
-			
- $kwData = array(
-			'parent_category' => $childCategory->parent_category,
-			'parent_slug' => $childCategory->parent_slug,
-			'child_banner' => $child_banner,
-			'category_icon' => $pc_icon,
-			'alt' => $alt,
-			'meta_title' => $meta_title,
-			'meta_keywords' => $meta_keywords,
-			'meta_description' => $meta_description,
-			'top_description' => $childCategory->top_description,
-			'bottom_description' => $childCategory->bottom_description,
-			'bottom_heading' => $childCategory->bottom_heading,
-			'top_heading' => $childCategory->top_heading,
-			'faqq1' => $childCategory->faqq1,
-			'faqa1' => $childCategory->faqa1,
-			'faqq2' => $childCategory->faqq2,
-			'faqa2' => $childCategory->faqa2,
-			'faqq3' => $childCategory->faqq3,
-			'faqa3' => $childCategory->faqa3,
-			'faqq4' => $childCategory->faqq4,
-			'faqa4' => $childCategory->faqa4,
-			'faqq5' => $childCategory->faqq5,
-			'faqa5' => $childCategory->faqa5,
-			'ratingvalue' => $childCategory->ratingvalue,
-			'ratingcount' => $childCategory->ratingcount,
-
-		);
-
-        $city = "delhi";
-        $metaTitle = $meta_title;
-        $metaDescription = $meta_description;
-        $keyword = $childCategory->parent_category; 
-        return view('client.blog-category', ['categories' => $categories,'blogs'=>$blogs,'kwData'=>$kwData,'city'=>$city,'metaTitle'=>$metaTitle,'metaDescription'=>$metaDescription,'keyword'=>$keyword]);
     }
+
+    if (!empty($childCategory->pc_icon)) {
+        $catIcons = @unserialize($childCategory->pc_icon, ['allowed_classes' => false]);
+        if (!empty($catIcons['pc_icon']['src'])) {
+            $pc_icon = config('app.website') . $catIcons['pc_icon']['src'];
+            $alt = $catIcons['pc_icon']['name'] ?? '';
+        }
+    }
+
+    $kwData = [
+        'parent_category'    => $childCategory->parent_category,
+        'parent_slug'        => $childCategory->parent_slug,
+        'child_banner'       => $child_banner,
+        'category_icon'      => $pc_icon,
+        'alt'                => $alt,
+        'meta_title'         => $meta_title,
+        'meta_keywords'      => $meta_keywords,
+        'meta_description'  => $meta_description,
+        'top_description'    => $childCategory->top_description,
+        'bottom_description' => $childCategory->bottom_description,
+        'bottom_heading'     => $childCategory->bottom_heading,
+        'top_heading'        => $childCategory->top_heading,
+        'faqq1' => $childCategory->faqq1, 'faqa1' => $childCategory->faqa1,
+        'faqq2' => $childCategory->faqq2, 'faqa2' => $childCategory->faqa2,
+        'faqq3' => $childCategory->faqq3, 'faqa3' => $childCategory->faqa3,
+        'faqq4' => $childCategory->faqq4, 'faqa4' => $childCategory->faqa4,
+        'faqq5' => $childCategory->faqq5, 'faqa5' => $childCategory->faqa5,
+        'ratingvalue' => $childCategory->ratingvalue,
+        'ratingcount' => $childCategory->ratingcount,
+    ];
+
+    // Bug #5 — hardcoded city, see note below
+    $city = $request->get('city', 'delhi');
+
+    return view('client.blog-category', [
+        'categories'      => $categories,
+        'blogs'           => $blogs,
+        'kwData'          => $kwData,
+        'city'            => $city,
+        'metaTitle'       => $meta_title,
+        'metaDescription' => $meta_description,
+        'keyword'         => $childCategory->parent_category,
+    ]);
+}
  
     public function termsconditions()
     {
