@@ -122,9 +122,13 @@ class BusinessOwnerController extends Controller
             ['icon' => '📊', 'title' => 'Citation & Local Listings',   'desc' => 'Submit your business info to trusted directories to improve consistency.'],
         ];
  
+		       $city = "delhi";
+        $metaTitle ="QuickDials | A Local Search Engine for Businesses";
+        $metaDescription  ="Category local search engine, for Certified Training Institutes near you Quickdials, Hotels, Salons, Real Estate, Travel, Healthcare, Education,Find addresses, phone numbers, reviews and ratings, photos, maps of businesses Find Only Certified Training Institutes"; 
+        $keyword = "Registered  business";
         return view('client.business-owners', compact(
             'packages','benefits','successStories','stats',
-            'faqs','categories','features','reviewList'
+            'faqs','categories','features','reviewList','metaTitle','metaDescription','keyword'
         ));
 	
 	
