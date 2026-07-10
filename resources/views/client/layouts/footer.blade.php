@@ -293,14 +293,17 @@
                         ['name' => 'Security System',     'slug' => 'security-system','type'=>'child'],
                       
                     ] as $link)
+             
 
                         @php
-                        $catUrl = match($link['type'] ?? '') {                         
-                        'keyword'    => route('city.slug', ['city_slug'=> 'bangalore','service_slug' => $link['slug']]),
-                        'child'      => route('child.show',      $link['slug']),
-                        'categories' => route('categories.show', $link['slug'])
-
-                        };
+                            $catUrl = match($link['type'] ?? '') {
+                                'keyword' => $link['slug'] === 'wedding-planning'
+                                    ? route('showCity', $link['slug'])
+                                    : route('city.slug', ['city_slug' => 'bangalore', 'service_slug' => $link['slug']]),
+                                'child'      => route('child.show', $link['slug']),
+                                'categories' => route('categories.show', $link['slug']),
+                                default      => '#',
+                            };
                         @endphp
                         <li>
 

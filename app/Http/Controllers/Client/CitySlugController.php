@@ -907,43 +907,14 @@ $reviewList = DB::table('clients')
 			'meta_keywords' => $meta_keywords,
 			'meta_description' => $meta_description,
 			'top_description' => $top_description,
-			'bottom_description' => $bottom_description,
-		 
-			'bottom_heading' => preg_replace('/{{city}}/i', $city, $keywordDetails->bottom_heading),
-			'top_heading' => preg_replace('/{{city}}/i', $city, $keywordDetails->top_heading),
-			'extra_heading' => preg_replace('/{{city}}/i', $city, $keywordDetails->extra_heading),
-			'extra_description' => preg_replace('/{{city}}/i', $city, $keywordDetails->extra_description),
-		 			
-			'faqq1' => preg_replace('/{{city}}/i', $city, $keywordDetails->faqq1),
-			'faqa1' => preg_replace('/{{city}}/i', $city, $keywordDetails->faqa1),
-			'faqq2' => preg_replace('/{{city}}/i', $city, $keywordDetails->faqq2),
-			'faqa2' => preg_replace('/{{city}}/i', $city, $keywordDetails->faqa2),
-			'faqq3' => preg_replace('/{{city}}/i', $city, $keywordDetails->faqq3),
-			'faqa3' => preg_replace('/{{city}}/i', $city, $keywordDetails->faqa3),
-			'faqq4' => preg_replace('/{{city}}/i', $city, $keywordDetails->faqq4),
-			'faqa4' => preg_replace('/{{city}}/i', $city, $keywordDetails->faqa4),
-			'faqq5' => preg_replace('/{{city}}/i', $city, $keywordDetails->faqq5),
-			'faqa5' => preg_replace('/{{city}}/i', $city, $keywordDetails->faqa5),	
+			'bottom_description' => $bottom_description,	
+			'bottom_heading'    => $this->replaceCity($keywordDetails->bottom_heading, $city),
+			'top_heading'       => $this->replaceCity($keywordDetails->top_heading, $city),
+			'extra_heading'     => $this->replaceCity($keywordDetails->extra_heading, $city),
+			'extra_description' => $this->replaceCity($keywordDetails->extra_description, $city),
 
-			'faqq6' => preg_replace('/{{city}}/i', $city, $keywordDetails->faqq6),
-			'faqa6' => preg_replace('/{{city}}/i', $city, $keywordDetails->faqa6),
-					
-			'faqq7' => preg_replace('/{{city}}/i', $city, $keywordDetails->faqq7),
-			'faqa7' => preg_replace('/{{city}}/i', $city, $keywordDetails->faqa7),
+			'courseabout' => $this->replaceCity($courseabout, $city),
 
-					
-			'faqq8' => preg_replace('/{{city}}/i', $city, $keywordDetails->faqq8),
-			'faqa8' => preg_replace('/{{city}}/i', $city, $keywordDetails->faqa8),
-
-					
-			'faqq9' => preg_replace('/{{city}}/i', $city, $keywordDetails->faqq9),
-			'faqa9' => preg_replace('/{{city}}/i', $city, $keywordDetails->faqa9),
-
-					
-			'faqq10' => preg_replace('/{{city}}/i', $city, $keywordDetails->faqq10),
-			'faqa10' => preg_replace('/{{city}}/i', $city, $keywordDetails->faqa10),
-			
-			'courseabout' => preg_replace('/{{city}}/i', $city, $courseabout),
 			'heading' => $heading,
 			'paragraph1' => $paragraph1,
 			'paragraph2' => $paragraph2,
@@ -962,6 +933,11 @@ $reviewList = DB::table('clients')
 			'child_slug' => $keywordDetails->child_slug,
 
 		);
+
+		for ($i = 1; $i <= 10; $i++) {
+		$data['keyword']["faqq{$i}"] = $this->replaceCity($keywordDetails->{"faqq{$i}"}, $city);
+		$data['keyword']["faqa{$i}"] = $this->replaceCity($keywordDetails->{"faqa{$i}"}, $city);
+		}
 
 		$keywordName = ucwords(str_replace('-', ' ', $search_kw));
 
@@ -2401,29 +2377,36 @@ $reviewList = DB::table('clients')
     /**
      * Replace {{city}} placeholder and strip basic HTML.
      */
-	 private function replaceCity(string $text, string $city = ''): string
-	{
-		$city = trim($city);
+	  private function replaceCity(?string $text, ?string $city = ''): string
+{
+    $text = trim($text ?? '');
+    $city = trim($city ?? '');
 
-		if ($city === '') {
-			// Remove both "in {{city}}" and "{{city}}"
-			$text = preg_replace('/\s*(?:in\s+)?{{city}}\s*/i', ' ', $text);
-		} else {
-			// Replace "{{city}}" with the city name
-			$text = str_ireplace('{{city}}', ucfirst(strtolower($city)), $text);
-		}
+    if ($text === '') {
+        return '';
+    }
 
-		// Remove extra spaces
-		$text = preg_replace('/\s+/', ' ', $text);
+    if ($city === '') {
+        // Remove both "in {{city}}" and "{{city}}"
+        $text = preg_replace('/\s*(?:in\s+)?{{city}}\s*/i', ' ', $text);
+    } else {
+        // Replace "{{city}}" with the formatted city name
+        $cityName = ucwords(strtolower(str_replace('-', ' ', $city)));
 
-		// Remove spaces before comma
-		$text = preg_replace('/\s+,/', ',', $text);
+        $text = str_ireplace('{{city}}', $cityName, $text);
+    }
 
-		// Ensure one space after comma
-		$text = preg_replace('/,\s*/', ', ', $text);
+    // Remove extra spaces
+    $text = preg_replace('/\s+/', ' ', $text);
 
-		return trim($text, " \t\n\r\0\x0B,");
-	}
+    // Remove spaces before commas
+    $text = preg_replace('/\s+,/', ',', $text);
+
+    // Ensure one space after commas
+    $text = preg_replace('/,\s*/', ', ', $text);
+
+    return trim($text, " \t\n\r\0\x0B,");
+}
     /**
      * Handle  GET /{city}/{slug}
      */
