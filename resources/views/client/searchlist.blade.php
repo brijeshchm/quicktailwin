@@ -1,7 +1,7 @@
 @extends('client.layouts.app')
-@section('title', $metaTitle ?? $keyword . ' in ' . ucfirst($city) . ' | QuickDials')
-@section('description', $metaDescription ?? 'Find the best ' . $keyword . ' in ' . ucfirst($city) . ' with QuickDials. Discover verified businesses, addresses, phone numbers, reviews, ratings, photos, maps, and top local services near you.')
-@section('keywords', $metaKeywords ?? $keyword . ' in ' . ucfirst($city) . ', best ' . $keyword . ' in ' . ucfirst($city) . ', top ' . $keyword . ' near me, verified ' . $keyword . ', local business directory, QuickDials, business listings in ' . ucfirst($city) . ', reviews and ratings, contact details, nearby services, top businesses in ' . ucfirst($city))
+@section('title', $metaTitle ?? $keyword . ' in ' . ucwords(strtolower(str_replace('-', ' ', $city))) . ' | QuickDials')
+@section('description', $metaDescription ?? 'Find the best ' . $keyword . ' in ' . ucwords(strtolower(str_replace('-', ' ', $city))) . ' with QuickDials. Discover verified businesses, addresses, phone numbers, reviews, ratings, photos, maps, and top local services near you.')
+@section('keywords', $metaKeywords ?? $keyword . ' in ' . ucwords(strtolower(str_replace('-', ' ', $city))) . ', best ' . $keyword . ' in ' . ucwords(strtolower(str_replace('-', ' ', $city))) . ', top ' . $keyword . ' near me, verified ' . $keyword . ', local business directory, QuickDials, business listings in ' . ucwords(strtolower(str_replace('-', ' ', $city))) . ', reviews and ratings, contact details, nearby services, top businesses in ' . ucwords(strtolower(str_replace('-', ' ', $city))))
 @section('og_image', !empty($kwData['key_icon'])
     ? asset($kwData['key_icon'])
     : asset('client/images/quickdials-og.png'))
@@ -213,32 +213,18 @@ function bannerSlider(banners, interval = 4000) {
                     <a href="{{ route('child.show', $childSlug) }}" class="hover:text-indigo-600">{{ $childCat }}</a>
                     <span>›</span>
                     @endif
-                    <span class="text-gray-600">{{ $keyword }} in {{ $city }}</span>
+                    <span class="text-gray-600">{{ $keyword }} in {{ ucwords(strtolower(str_replace('-', ' ', $city))) }}</span>
                 </nav>
-
-                <h1 class="text-lg font-bold text-gray-900 leading-tight">{{ $keyword }} in {{ ucfirst($city) }}</h1>
- 
-                <div itemscope itemtype="https://schema.org/Product" class="space-y-2">
-
-                    {{-- Required: Product Name --}}
-                    <meta itemprop="name" content="{{ $keyword ?? $metaTitle ?? 'QuickDials review Service' }}">
-
-                    {{-- Required: Product Image --}}
-                    @if(!empty($kwData['key_icon']))
-                    <meta itemprop="image" content="{{ $kwData['key_icon'] ?? $kwData['child_icon'] ??'' }}">
-                    @endif
-
-                    {{-- Optional: Description --}}
-                    @if(!empty($metaDescription))
-                    <meta itemprop="description" content="{{ $metaDescription }}">
-                    @endif
- 
+                                
+                <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
+                    <div itemprop="name">
+                        <h1 class="text-lg font-bold text-gray-900 leading-tight">{{ $keyword }} in {{ ucwords(strtolower(str_replace('-', ' ', $city))) }}</h1>
+                    </div>                           
                     <div itemprop="aggregateRating"
                         itemscope
                         itemtype="https://schema.org/AggregateRating"
                         class="flex items-center gap-2 text-sm">
-
-                        <img src="{{ asset('client/images/' . $starImg) }}"
+                        <img  itemprop="image" src="{{ asset('client/images/' . $starImg) }}"
                         alt="{{ $ratingValue }} out of 5 stars"
                         class="lazy-image h-4 w-auto"
                         width="80"
@@ -246,24 +232,17 @@ function bannerSlider(banners, interval = 4000) {
                         loading="lazy"
                         decoding="async"
                         >
-
                         <span class="font-semibold text-gray-900">
                         <span itemprop="ratingValue">{{ $ratingValue }}</span>
                         </span>
-
                         <span class="text-gray-500">out of</span>
-
                         <span itemprop="bestRating">5</span>
-
                         <span class="text-gray-500">based on</span>
-
                         <span itemprop="ratingCount">{{ $ratingCount }}</span>
-
                         <span class="text-gray-500">ratings</span>
                     </div>
-                </div>
+                </div> 
 
-                        
             </div>
 
             {{-- Controls --}}
@@ -635,7 +614,7 @@ function bannerSlider(banners, interval = 4000) {
     {{-- Agents comparison table --}}
     @if(count($agents ?? []) > 0)
     <section class="w-full p-4">
-        <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-4">TOP {{ count($agents) }} {{ $keyword }} in {{ ucfirst($city) }}</h2>
+        <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-4">TOP {{ count($agents) }} {{ $keyword }} in {{ ucwords(strtolower(str_replace('-', ' ', $city))) }}</h2>
         <div class="w-full overflow-x-auto border rounded-lg">
             <table class="w-full border-collapse">
                 <thead class="bg-gray-200">
@@ -705,7 +684,7 @@ function bannerSlider(banners, interval = 4000) {
     if (!empty($kwData['top_heading'])) {
         $defaultHeading=  $kwData['top_heading'];
     }else{
-     $defaultHeading = 'Trusted '. $keyword . ' in ' . ucwords($city);
+     $defaultHeading = 'Trusted '. $keyword . ' in ' . ucwords(strtolower(str_replace('-', ' ', $city)));
     }    
     @endphp
 
@@ -750,7 +729,7 @@ function bannerSlider(banners, interval = 4000) {
     if (!empty($kwData['bottom_heading'])) {
         $bottom_heading=  $kwData['bottom_heading'];
     }else{
-     $bottom_heading = 'Find the Best '.$keyword . ' in ' . ucwords($city);
+     $bottom_heading = 'Find the Best '.$keyword . ' in ' . ucwords(strtolower(str_replace('-', ' ', $city)));
     }    
     @endphp
 
@@ -769,7 +748,7 @@ function bannerSlider(banners, interval = 4000) {
     if (!empty($kwData['extra_heading'])) {
         $extra_heading=  $kwData['extra_heading'];
     }else{
-     $extra_heading = $keyword . ' in ' . ucwords($city);
+     $extra_heading = $keyword . ' in ' .ucwords(strtolower(str_replace('-', ' ', $city)));
     }    
     @endphp
 
@@ -815,7 +794,7 @@ function bannerSlider(banners, interval = 4000) {
     @if(!empty($relatedCategory))
     <div class="bg-white py-10 border-t border-gray-200 mt-4">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6">Related Categories in <span class="text-blue-600">{{ ucfirst($city) }}</span></h2>
+            <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6">Related Categories in <span class="text-blue-600">{{ ucwords(strtolower(str_replace('-', ' ', $city))) }}</span></h2>
             <div class="flex flex-wrap gap-x-8 gap-y-3 text-[15px]">
                 @foreach($relatedCategory as $slug_c => $name)
                 <a href="{{ route('child.show', $slug_c) }}" class="text-gray-700 hover:text-blue-600 transition-colors duration-200">{{ $name }}</a>

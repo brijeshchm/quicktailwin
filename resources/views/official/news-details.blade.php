@@ -332,26 +332,18 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
 
             {{-- ── TITLE & META ── --}}
             <div class="reveal mb-8" style="transition-delay:0.1s;">
-                <h1 class="text-3xl lg:text-4xl font-bold text-slate-900 leading-tight mb-5">
-                    {{ $newsDetails['title'] ?? '' }}
-                </h1>
 
-                 <div itemscope itemtype="https://schema.org/Product" class="space-y-2">                    
-                    <meta itemprop="name" content="{{ $newsDetails['title'] ?? $newsDetails['meta_title'] ?? 'QuickDials review Service' }}">                  
-                    @if(!empty($newsDetails['blogImage']))
-                    <meta itemprop="image" content="{{ $newsDetails['blogImage'] ? asset($newsDetails['blogImage']): asset('client/images/quickdials-og.png') }}">
-                    @endif
-               
-                    @if(!empty($newsDetails['meta_description']))
-                    <meta itemprop="description" content="{{ $newsDetails['meta_description'] }}">
-                    @endif
- 
+
+
+              <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
+                    <div itemprop="name">
+                        <h1 class="text-lg font-bold text-gray-900 leading-tight">{{ $newsDetails['title'] }}</h1>
+                    </div>                           
                     <div itemprop="aggregateRating"
                         itemscope
                         itemtype="https://schema.org/AggregateRating"
                         class="flex items-center gap-2 text-sm">
-
-                        <img src="{{ asset('client/images/' . $starImg) }}"
+                        <img  itemprop="image" src="{{ asset('client/images/' . $starImg) }}"
                         alt="{{ $newsDetails['ratingvalue'] }} out of 5 stars"
                         class="lazy-image h-4 w-auto"
                         width="80"
@@ -368,7 +360,10 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                         <span itemprop="ratingCount">{{ $newsDetails['ratingcount'] }}</span>
                         <span class="text-gray-500">ratings</span>
                     </div>
-                </div>
+                </div> 
+
+
+ 
                 <div class="flex flex-wrap items-center gap-4 text-sm text-gray-400 mb-5">
                     {{-- Author --}}
                     @if(!empty($newsDetails['author_name']))

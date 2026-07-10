@@ -104,57 +104,32 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
                     <span class="text-gray-600">{{ $keyword }}</span>
                 </nav>
 
-                <h1 class="text-lg font-bold text-gray-900 leading-tight">{{ $keyword }}</h1>
-
-                 {{-- Rating --}}
-                
-
-                <div itemscope itemtype="https://schema.org/Product" class="space-y-2">
-
-                    {{-- Required: Product Name --}}
-                    <meta itemprop="name" content="{{ $productName ?? $serviceName ?? 'QuickDials Service' }}">
-
-                    {{-- Required: Product Image --}}
-                    @if(!empty($kwData['key_icon']))
-                        <meta itemprop="image" content="{{ $kwData['key_icon'] ?? $kwData['child_icon'] ??'' }}">
-                    @endif
-
-                    {{-- Optional: Description --}}
-                    @if(!empty($metaDescription))
-                        <meta itemprop="description" content="{{ $metaDescription }}">
-                    @endif
-
-                    {{-- Aggregate Rating --}}
+                <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
+                    <div itemprop="name">
+                        <h1 class="text-lg font-bold text-gray-900 leading-tight">{{ $keyword }}</h1>
+                    </div>                           
                     <div itemprop="aggregateRating"
                         itemscope
                         itemtype="https://schema.org/AggregateRating"
                         class="flex items-center gap-2 text-sm">
-
-                        <img src="{{ asset('client/images/' . $starImg) }}"
-                            alt="{{ $ratingValue }} out of 5 stars"
-                            class="h-4 w-auto"
-                            width="80"
-                            height="16"
-                            loading="lazy">
-
+                        <img  itemprop="image" src="{{ asset('client/images/' . $starImg) }}"
+                        alt="{{ $ratingValue }} out of 5 stars"
+                        class="lazy-image h-4 w-auto"
+                        width="80"
+                        height="16"
+                        loading="lazy"
+                        decoding="async"
+                        >
                         <span class="font-semibold text-gray-900">
-                            <span itemprop="ratingValue">{{ $ratingValue }}</span>
+                        <span itemprop="ratingValue">{{ $ratingValue }}</span>
                         </span>
-
                         <span class="text-gray-500">out of</span>
-
                         <span itemprop="bestRating">5</span>
-
                         <span class="text-gray-500">based on</span>
-
                         <span itemprop="ratingCount">{{ $ratingCount }}</span>
-
                         <span class="text-gray-500">ratings</span>
                     </div>
-                </div>
-
-
-            
+                </div>             
             </div>
 
             {{-- Controls --}}

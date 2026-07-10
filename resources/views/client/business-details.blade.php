@@ -131,36 +131,33 @@ $bgImage = $bgImage ?? '/computer-courses-training.jpg';
             <div class="flex items-center gap-2">
                 <span class="text-xs text-gray-500 font-medium">Min Rating:</span>
                 <div class="flex gap-1">
-                     <div itemscope itemtype="https://schema.org/Product" class="space-y-2">                  
-                    <meta itemprop="name" content="{{ $metaTitle ?? $metaTitle ?? 'QuickDials review Service' }}">                   
-                    @if(!empty($kwData['category_icon']))
-                    <meta itemprop="image" content="{{ $clientsList['logo']  ?? asset('client/images/default_pp_small.png') ??'' }}">
-                    @endif                   
-                    @if(!empty($metaDescription))
-                    <meta itemprop="description" content="{{ $metaDescription }}">
-                    @endif 
+
+                    <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
+                    <div itemprop="name">
+                        <h1 class="text-lg font-bold text-gray-900 leading-tight">{{ $metaTitle }}</h1>
+                    </div>                           
                     <div itemprop="aggregateRating"
                         itemscope
                         itemtype="https://schema.org/AggregateRating"
                         class="flex items-center gap-2 text-sm">
-                        <img src="{{ asset('client/images/' . $starImg) }}"
-                        alt="{{ $clientsList['ratingCount'] }} out of 5 stars"
+                        <img  itemprop="image" src="{{ asset('client/images/' . $starImg) }}"
+                        alt="{{ $clientsList['rating']?? '0' }} out of 5 stars"
                         class="lazy-image h-4 w-auto"
                         width="80"
                         height="16"
                         loading="lazy"
                         decoding="async"
                         >
-                        <span class="font-semibold text-white-900">
-                        <span itemprop="ratingValue">{{ $clientsList['rating'] }}</span>
+                        <span class="font-semibold text-gray-900">
+                        <span itemprop="ratingValue">{{ $clientsList['rating']?? '0' }}</span>
                         </span>
-                        <span class="text-white-500 text-white">out of</span>
-                        <span itemprop="bestRating" >5</span>
-                        <span class="text-white-500">based on</span>
-                        (<span itemprop="ratingCount">{{ number_format($clientsList['ratingCount']) }}</span>
-                        <span class="text-white-500">reviews</span>)
+                        <span class="text-gray-500">out of</span>
+                        <span itemprop="bestRating">5</span>
+                        <span class="text-gray-500">based on</span>
+                        <span itemprop="ratingCount">{{ $clientsList['ratingCount'] }}</span>
+                        <span class="text-gray-500">ratings</span>
                     </div>
-                </div>  
+                </div> 
                 </div>
             </div>
             <label class="flex items-center gap-2 cursor-pointer">

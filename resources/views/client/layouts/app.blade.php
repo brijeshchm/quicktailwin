@@ -7,6 +7,7 @@
 <meta name="keywords" content="@yield('keywords')">
 <meta name="description" content="@yield('description')">     
 <meta name="csrf-token" content="{{ csrf_token() }}" />  
+
 @if (request()->is('/'))
 <link rel="canonical" href="https://www.quickdials.com/" />
 @elseif (View::hasSection('canonical'))

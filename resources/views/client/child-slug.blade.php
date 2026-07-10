@@ -46,20 +46,16 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
                 <span class="text-slate-600">{{ $keyword }}</span>
             </nav>
 
-            <h1 class="text-lg sm:text-xl font-bold text-slate-900 leading-tight">{{ $keyword }}</h1>
-                <div itemscope itemtype="https://schema.org/Product" class="space-y-2">                  
-                    <meta itemprop="name" content="{{ $keyword ?? $metaTitle ?? 'QuickDials review Service' }}">                   
-                    @if(!empty($kwData['category_icon']))
-                    <meta itemprop="image" content="{{ $kwData['category_icon'] ?? $kwData['child_icon'] ??'' }}">
-                    @endif                   
-                    @if(!empty($metaDescription))
-                    <meta itemprop="description" content="{{ $metaDescription }}">
-                    @endif 
+
+              <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
+                    <div itemprop="name">
+                        <h1 class="text-lg font-bold text-gray-900 leading-tight">{{ $keyword }}</h1>
+                    </div>                           
                     <div itemprop="aggregateRating"
                         itemscope
                         itemtype="https://schema.org/AggregateRating"
                         class="flex items-center gap-2 text-sm">
-                        <img src="{{ asset('client/images/' . $stars) }}"
+                        <img  itemprop="image" src="{{ asset('client/images/' . $stars) }}"
                         alt="{{ $ratingValue }} out of 5 stars"
                         class="lazy-image h-4 w-auto"
                         width="80"
@@ -76,7 +72,9 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
                         <span itemprop="ratingCount">{{ number_format($ratingCount) }}</span>
                         <span class="text-gray-500">ratings</span>
                     </div>
-                </div>           
+                </div> 
+
+                         
         </div>
     </div>
 

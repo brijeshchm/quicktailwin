@@ -145,45 +145,42 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                          class="w-full h-full object-cover" loading="lazy" decoding="async">
                 </div>
                 {{-- Name --}}
-                <h1 class="text-2xl md:text-5xl font-extrabold text-white leading-tight tracking-tight"
-                    style="text-shadow:0 2px 30px rgba(30,58,138,.6);">
-                    {{ ucfirst($clientsList['business_name']) ?? 'Business Name' }}
-                </h1>
-            </div>
-            <div class="flex flex-wrap items-center gap-3 text-white/80 text-xs font-medium">
-                <div class="flex items-center gap-1">
-                <div itemscope itemtype="https://schema.org/Product" class="space-y-2">                  
-                    <meta itemprop="name" content="{{ $metaTitle ?? $metaTitle ?? 'QuickDials review Service' }}">                   
-                    @if(!empty($kwData['category_icon']))
-                    <meta itemprop="image" content="{{ $clientsList['logo']  ?? asset('client/images/default_pp_small.png') ??'' }}">
-                    @endif                   
-                    @if(!empty($metaDescription))
-                    <meta itemprop="description" content="{{ $metaDescription }}">
-                    @endif 
+                <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
+                    <div itemprop="name">
+                        <h1 class="text-2xl md:text-5xl font-extrabold text-white leading-tight tracking-tight"
+                    style="text-shadow:0 2px 30px rgba(30,58,138,.6);">{{ ucfirst($clientsList['business_name']) ?? 'Business Name' }}</h1>
+                    </div>                           
                     <div itemprop="aggregateRating"
                         itemscope
                         itemtype="https://schema.org/AggregateRating"
                         class="flex items-center gap-2 text-sm">
-                        <img src="{{ asset('client/images/' . $starImg) }}"
+                        <img  itemprop="image" src="{{ asset('client/images/' . $starImg) }}"
                         alt="{{ $clientsList['ratingCount'] }} out of 5 stars"
-                        class="lazy-image h-4 w-auto"
+                        class="lazy-image h-4 w-auto text-white"
                         width="80"
                         height="16"
                         loading="lazy"
                         decoding="async"
                         >
-                        <span class="font-semibold text-white-900">
+                        <span class="font-semibold text-white">
                         <span itemprop="ratingValue">{{ $clientsList['rating'] }}</span>
                         </span>
-                        <span class="text-white-500 text-white">out of</span>
-                        <span itemprop="bestRating" >5</span>
-                        <span class="text-white-500">based on</span>
+                        <span class="text-white">
+                        <span class="text-white">out of</span>
+                        <span itemprop="bestRating">5</span>
+                        <span class="text-white">based on</span>
                         (<span itemprop="ratingCount">{{ number_format($clientsList['ratingCount']) }}</span>
-                        <span class="text-white-500">reviews</span>)
+                        <span class="text-white">reviews</span>)</span>
                     </div>
-                </div>  
-                     
-                </div>
+                </div> 
+
+
+
+
+
+            </div>
+            <div class="flex flex-wrap items-center gap-3 text-white/80 text-xs font-medium">
+                
                 <span class="text-[10px] font-bold tracking-wide text-white rounded-full px-2.5 py-0.5 flex items-center gap-1.5" style="background:#16a34a;">
                     <span class="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span>Open Now
                 </span>
@@ -1057,10 +1054,10 @@ function selectCert(i) {
             </div>
             <div class="px-6 py-5">
                 <ul class="flex flex-wrap gap-2">
-                    @php
-                     $city = $clientsList['city']?$clientsList['city']:'bangalore';
+                    @php                    
+                    $city = Str::slug($clientsList['city'] ?? 'bangalore');
                     @endphp
-                    @foreach($relatedList as $i => $item)
+                    @foreach($relatedList as $i => $item)                    
                     <li>
                         <a href="{{ route('city.slug', ['city_slug'=>strtolower($city),'service_slug' => $item['slug']])}}" class="text-blue-600 hover:underline text-sm">
                             {{ $item['title'] }}{{ $i < count($relatedList)-1 ? ' |' : '' }}

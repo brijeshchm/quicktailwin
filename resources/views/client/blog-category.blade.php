@@ -32,19 +32,15 @@
                 </svg>
                 <span class="text-white">All BLog</span>
             </div>
-            <h1 class="text-4xl font-bold mb-2">Explore Verified Services &amp; Experts</h1>
-               <div itemscope itemtype="https://schema.org/Product" class="space-y-2">                  
-                    <meta itemprop="name" content="QuickDials - Trusted Local Business Listings blog category">                   
-              
-                    <meta itemprop="image" content="asset('client/images/quickdials-og.png')">
-              
-                    <meta itemprop="description" content="Explore the best services with QuickDials. Find verified businesses, contact details, reviews, ratings, photos, addresses, and trusted local service providers near you.">
-                 
+                <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
+                    <div itemprop="name">
+                        <h1 class="text-lg font-bold text-white leading-tight">Explore Verified Services &amp; Experts</h1>
+                    </div>                           
                     <div itemprop="aggregateRating"
                         itemscope
                         itemtype="https://schema.org/AggregateRating"
                         class="flex items-center gap-2 text-sm">
-                        <img src="{{ asset('client/images/star_4.5.png') }}"
+                        <img  itemprop="image" src="{{ asset('client/images/star_4.5.png') }}"
                         alt="4.5 out of 5 stars"
                         class="lazy-image h-4 w-auto"
                         width="80"
@@ -52,16 +48,16 @@
                         loading="lazy"
                         decoding="async"
                         >
-                        <span class="font-semibold text-white-900">
+                        <span class="font-semibold text-white">
                         <span itemprop="ratingValue">4.5</span>
-                        </span>
+                       
                         <span class="text-gray-500">out of</span>
                         <span itemprop="bestRating">5</span>
                         <span class="text-gray-500">based on</span>
                         <span itemprop="ratingCount">234</span>
-                        <span class="text-gray-500">ratings</span>
+                        <span class="text-gray-500">ratings</span> </span>
                     </div>
-                </div> 
+                </div>            
             <p class="text-slate-300 text-lg">High-quality services recognized and trusted across the globe</p>
         </div>
     </div>

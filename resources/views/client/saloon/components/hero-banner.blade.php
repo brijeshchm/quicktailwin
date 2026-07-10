@@ -80,25 +80,15 @@
                     </div>
                 </div>
 
-                {{-- HEADING WITH ROTATING WORD --}}
-                <h1 class="hero-heading text-[clamp(3rem,6vw,5.2rem)] text-stone-900 mb-1 leading-none font-black"
-                    style="font-family:'Playfair Display',serif;">
-                    Find Trusted Beauty Salons on QuickDials
-                </h1>
-
-                <div itemscope itemtype="https://schema.org/Product" class="space-y-2">                  
-                    <meta itemprop="name" content="{{ $metaTitle ?? $metaTitle ?? 'QuickDials review Service' }}">                   
-                    @if(!empty($kwData['category_icon']))
-                    <meta itemprop="image" content="{{ $kwData['category_icon'] ?? $kwData['child_icon'] ??'' }}">
-                    @endif                   
-                    @if(!empty($metaDescription))
-                    <meta itemprop="description" content="{{ $metaDescription }}">
-                    @endif 
+                <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
+                    <div itemprop="name">
+                        <h1 class="text-lg font-bold text-gray-900 leading-tight">Find Trusted Beauty Salons on QuickDials</h1>
+                    </div>                           
                     <div itemprop="aggregateRating"
                         itemscope
                         itemtype="https://schema.org/AggregateRating"
                         class="flex items-center gap-2 text-sm">
-                        <img src="{{ asset('client/images/star_4.5.png') }}"
+                        <img  itemprop="image" src="{{ asset('client/images/star_4.5.png') }}"
                         alt="4.5 out of 5 stars"
                         class="lazy-image h-4 w-auto"
                         width="80"
@@ -116,6 +106,8 @@
                         <span class="text-gray-500">ratings</span>
                     </div>
                 </div> 
+           
+ 
 
 
                 <div class="hero-word mb-6 transition-all duration-350"
