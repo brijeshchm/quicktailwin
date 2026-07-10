@@ -46,7 +46,7 @@
         tabBar.innerHTML = cities.map((city, i) => `
             <button type="button"
                     data-idx="${i}"
-                    data-slug="${city.city}"
+                    data-slug="${city.city_slug}"
                     id="city-tab-${i}"
                     class="${BASE_CLASSES} ${INACTIVE_CLASSES}">
                 ${city.city}
