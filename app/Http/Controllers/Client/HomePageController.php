@@ -1855,13 +1855,13 @@ class HomePageController extends Controller
             '#145a32','#2c3e50','#154360','#7b241c','#117a65',
             '#145a32','#784212','#1e8449','#1b4332',
         ];
- 
+ 		$city = "bangalore";
         return view('client.category-slug', compact(
             'slug', 'keyword', 'childCategory','kwData', 'childSlug',
             'topDescription', 'bottomDescription','faqs',
             'ratingCount', 'ratingValue', 'stars', 'bgImage',
             'categoryList', 'catColors','metaKeywords',
-            'metaTitle', 'metaDescription'
+            'metaTitle', 'metaDescription','city'
         ));
     
 
@@ -1929,13 +1929,13 @@ class HomePageController extends Controller
             '#145a32','#2c3e50','#154360','#7b241c','#117a65',
             '#145a32','#784212','#1e8449','#1b4332',
         ];
- 
+ 		$city = "bangalore";
         return view('client.child-slug', compact(
             'child_slug', 'keyword', 'childCategory', 'childSlug',
             'topDescription', 'bottomDescription','metaKeywords',
             'ratingCount', 'ratingValue', 'stars', 'bgImage',
             'childLists', 'catColors','faqs','kwData',
-            'metaTitle', 'metaDescription'
+            'metaTitle', 'metaDescription','city'
         ));
     
 	}
