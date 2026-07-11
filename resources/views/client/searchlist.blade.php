@@ -790,7 +790,7 @@ function bannerSlider(banners, interval = 4000) {
     @if(!empty($relatedCategory))
     <div class="bg-white py-10 border-t border-gray-200 mt-4">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6">Related Categories in <span class="text-blue-600">{{ ucwords(strtolower(str_replace('-', ' ', $city))) }}</span></h2>
+            <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6">Related Categories in <span class="text-blue-600">{{ ucwords(strtolower(str_replace('-', ' ',  $city ?: 'bangalore'))) }}</span></h2>
             <div class="flex flex-wrap gap-x-8 gap-y-3 text-[15px]">
                 @foreach($relatedCategory as $slug_c => $name)
                 <a href="{{ route('child.show', $slug_c) }}" class="text-gray-700 hover:text-blue-600 transition-colors duration-200">{{ $name }}</a>
@@ -827,7 +827,7 @@ function bannerSlider(banners, interval = 4000) {
         <ul class="flex flex-wrap gap-2 text-sm text-gray-600">
             @foreach($servicesRelated as $i => $service)
             <li class="flex items-center">
-                <a href="{{ route('city.slug', ['city_slug'=> $city ? $city:'bangalore','service_slug' => $service['url']]) }}" class="hover:text-indigo-600">{{ $service['title'] ?? '' }}</a>
+                <a href="{{ route('city.slug', ['city_slug'=>  $city ?: 'bangalore','service_slug' => $service['url']]) }}" class="hover:text-indigo-600">{{ $service['title'] ?? '' }}</a>
                 @if($i !== count($servicesRelated) - 1)
                 <span class="mx-1 text-gray-400">|</span>
                 @endif
@@ -836,36 +836,28 @@ function bannerSlider(banners, interval = 4000) {
         </ul>
     </div>
     @endif
-
-
  @php
-$schemasCourse = [];
-
+$schemasCourse = []; 
 foreach($servicesRelated as $service) {
     $schemasCourse[] = [
         '@context'    => 'https://schema.org/',
         '@type'       => 'Course',
-        'name'        => $service['title']        ?? $keyword ?? '',
-        'description' => $service['
-        
-        
-        
-        
-        '] ?? 'Find best ' . ($service['title'] ?? '') . ' near you on QuickDials.',
-        'image'       => asset('client/images/quickdials-og.png'),
-        'url'         => route('showCity', $service['url'] ?? ''),
+        'name'        => $service['title']?? $keyword ?? '',
+        'description' => $service['meta_description'] ?? 'Find best ' . ($service['title'] ?? '') . ' near you on QuickDials.',
+        'image'       => asset($service['img']),
+        'url'         => route('city.slug', ['city_slug' => $service['city_slug'],'service_slug' => $service['url']?? null]),
         'provider'    => [
             '@type'  => 'Organization',
             'name'   => 'QuickDials',
-            'sameAs' => 'https://www.quickdials.com',
-            'url'    => 'https://www.quickdials.com',
+            'sameAs' => route('home'),
+            'url'    => route('home'),
         ],
         'offers' => [
             '@type'        => 'Offer',
             'price'        => '0',
             'priceCurrency'=> 'INR',
             'availability' => 'https://schema.org/InStock',
-            'url'          => route('showCity', $service['url'] ?? ''),
+            'url'          => route('city.slug', ['city_slug' => $service['city_slug'],'service_slug' => $service['url']?? null]),
         ],
         'hasCourseInstance' => [
             '@type'          => 'CourseInstance',
@@ -873,14 +865,14 @@ foreach($servicesRelated as $service) {
             'courseWorkload' => 'PT1H',
             'instructor'     => [
                 '@type' => 'Person',
-                'name'  => 'QuickDials Expert',
+                'name'  => 'QuickDials Internet Pvt Ltd',
             ],
             'startDate' => now()->format('Y-m-d'),
             'endDate'   => now()->addYear()->format('Y-m-d'),
         ],
         'educationalLevel'    => 'Beginner',
         'inLanguage'          => 'en',
-        'teaches'             => $relatedCategory ?? $service['title'] ?? '',
+        'teaches'             => $service['title'] ?? '',
         'coursePrerequisites' => $keyword ?? '',
     ];
 }

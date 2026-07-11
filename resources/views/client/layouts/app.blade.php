@@ -107,7 +107,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         : "";
 
     $serviceDescription = $metaDescription? $metaDescription: 'India’s leading local business search and service directory. Find trusted businesses, services, it training, professionals, and service providers near you with QuickDials..';
-    $cityName =$city ?? '';
+    $cityName =$city ?: 'bangalore';
     if (!empty($childCat) && !empty($childSlug)) {
         $items[] = ['name' => ucfirst($childCat), 'url' => route('child.show', $childSlug)];
     }
@@ -120,7 +120,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     } 
 
     $breadcrumbs = array_merge(
-        [['name' => 'Home', 'url' => url('/')]],
+        [['name' => 'Home', 'url' => route('home')]],
         $items
     );
 @endphp 
@@ -134,7 +134,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         '@context' => 'https://schema.org',
         '@type'    => 'Organization',
         'name'     => 'QuickDials Internet Pvt Ltd',
-        'url'      => url('/'),
+        'url'      => route('home'),
         'logo'     => asset('client/images/small-logo.jpg'),
         'sameAs'   => [
             'https://www.facebook.com/quickdialsofficial/',
@@ -147,13 +147,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     ];
 }
 
+if (request()->is('/')){
  $schemas[] = [
     '@context'    => 'https://schema.org',
     '@type'       => 'LocalBusiness',
     'name'        => 'Quickdials Pvt Ltd.',
     'image'       => asset('client/images/small-logo.jpg'),
     '@id'         => 'https://www.quickdials.com/#localbusiness',
-    'url'         => 'https://www.quickdials.com/',
+    'url'         => route('home'),
     'telephone'   => '91-7559435943',
     'priceRange'  => '₹1000 - ₹1,00,000',
     'description' => 'QuickDials, local search engine India, local business directory India, online business directory, business listing website, top businesses near me, IT training institutes near me, coaching centres near me, hotels near me, salons near me, healthcare services, real estate services, travel agencies, schools and colleges near me, certified institutes, education consultants, local business listings, business reviews and ratings, trusted local services, find businesses near me.',
@@ -206,7 +207,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       
     ],
 ];
- 
+ }
 
 
     // ---- 2. SERVICE (only if service data exists) ----
@@ -221,7 +222,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             'provider'    => [
                 '@type' => 'Organization',
                 'name'  => 'QuickDials',
-                'url'   => url('/'),
+                'url'   => route('home'),
             ],
         ];
     }

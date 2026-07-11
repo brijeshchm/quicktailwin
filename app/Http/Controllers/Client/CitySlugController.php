@@ -586,10 +586,10 @@ class CitySlugController extends Controller
 			->distinct()
 			->get();
 
-		$servicesRelatedList = $servicesRelated->map(function ($keyword) {
+		$servicesRelatedList = $servicesRelated->map(function ($keyword) use ($cityName){
 			$img = "";
 			$alt = "";
-
+ 
 			if (!empty($keyword->icon)) {
 
 				$data = json_decode($keyword->icon, true);
@@ -604,8 +604,10 @@ class CitySlugController extends Controller
 				'url' =>$keyword->slug,
 				'img' => $img,
 				'alt' => $alt,
-				'title' => $keyword->keyword,
+				'title' => $keyword->keyword. ' in ' .$cityName ?: 'bangalore',
 				'type' => 'keyword',
+				'city_slug' => strtolower($cityName) ?: 'bangalore',
+				'meta_description' => $this->replaceCity($keyword->meta_description, $cityName),
 			];
 		})->values()->toArray();
 

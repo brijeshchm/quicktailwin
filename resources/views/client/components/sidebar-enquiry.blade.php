@@ -2,7 +2,7 @@
 @php
     $tracking = [
         'kw_text'   => !empty($keyword) ? $keyword : '',
-        'city_id'   => Request::segment(1) ?? '',
+        'city_id'   => $city?:'Request::segment(1)' ?? '',
         'from_page' => request()->path(),
         'lead_form' => 1,
     ];

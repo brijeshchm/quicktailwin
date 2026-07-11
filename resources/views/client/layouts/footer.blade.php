@@ -131,7 +131,7 @@
                             'city_slug'    => 'online',
                             'service_slug' => $service['slug'],
                         ])
-                        : route('city.slug',['city_slug' => $city?$city:'bangalore', 'service_slug' => $service['slug']]);
+                        : route('city.slug',['city_slug' =>  $city ?: 'bangalore', 'service_slug' => $service['slug']]);
                 @endphp
                 <a href="{{ $href }}"
                    title="{{ $service['name'] }}"
@@ -235,7 +235,7 @@
                             $slugUrl = match($link['type'] ?? '') {
                              'keyword' => in_array($link['slug'], $noCitySlugs)
                             ? route('showCity', $link['slug'])
-                            : route('city.slug', ['city_slug' => $city?$city:'bangalore', 'service_slug' => $link['slug']]),                            
+                            : route('city.slug', ['city_slug' =>  $city ?: 'bangalore', 'service_slug' => $link['slug']]),                            
                             'child'      => route('child.show',      $link['slug']),
                             'categories' => route('categories.show', $link['slug'])
                         
@@ -298,7 +298,7 @@
                             $catUrl = match($link['type'] ?? '') {
                                 'keyword' => $link['slug'] === 'wedding-planning'
                                     ? route('showCity', $link['slug'])
-                                    : route('city.slug', ['city_slug' => $city?$city:'bangalore', 'service_slug' => $link['slug']]),
+                                    : route('city.slug', ['city_slug' =>  $city ?: 'bangalore', 'service_slug' => $link['slug']]),
                                 'child'      => route('child.show', $link['slug']),
                                 'categories' => route('categories.show', $link['slug']),
                                 default      => '#',
