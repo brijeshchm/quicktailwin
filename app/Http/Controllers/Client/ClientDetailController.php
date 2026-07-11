@@ -89,15 +89,16 @@ class ClientDetailController extends Controller
  
         // Certifications (up to 10)
         $certifications = [];
-       
-        for ($i = 1; $i <= 10; $i++) {
-            $name = $certificate["award_name{$i}"] ?? null;
-            $img  = $certificate["award_img{$i}"]  ?? null;
-            if ($img) {
-                $certifications[] = ['name' => $name, 'img' => $img, 'index' => $i];
+        if(!empty($certificate["award_img1"])){
+            for ($i = 1; $i <= 10; $i++) {
+                $name = $certificate["award_name{$i}"] ?? null;
+                $img  = $certificate["award_img{$i}"]  ?? null;
+                if ($img) {
+                    $certifications[] = ['name' => $name, 'img' => $img, 'index' => $i];
+                }
             }
         }
-        
+
         $faqs = [];
 
         $clientFaq = $clientsList['faqs'] ?? [];
@@ -150,7 +151,7 @@ class ClientDetailController extends Controller
  
 
         $govDocs = [];
-       if (isset($certificate['cin_no']) && !empty($certificate['cin_no'])) {
+       if (isset($certificate['pan_no']) && !empty($certificate['pan_no'])) {
         $govDocs = [
             ['title' => 'CIN',   'no' => $certificate['cin_no']   ?? null, 'img' => $certificate['cin_certificate']   ?? null, 'tileBg' => 'linear-gradient(135deg,#1e3a8a,#2563eb)',  'color' => '#1d4ed8'],
             ['title' => 'MSME',  'no' => $certificate['msme_no']  ?? null, 'img' => $certificate['msme_certificate']  ?? null, 'tileBg' => 'linear-gradient(135deg,#78350f,#b45309)',  'color' => '#92400e'],
