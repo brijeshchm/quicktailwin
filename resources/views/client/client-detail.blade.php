@@ -777,7 +777,7 @@ function selectGov(i) {
 
 
 
-@if(count($certifications))
+@if(!empty($certifications))
 <section style="background:linear-gradient(180deg,#fffbf0 0%,#fef9ec 100%);">
     <div class="w-full px-8 md:px-16 py-10">
 
@@ -1076,7 +1076,7 @@ function selectCert(i) {
 ════════════════════════════════════════ --}}
 @if(!empty($areaBusiness['heading']) || !empty($overviewBusiness['heading']))
 <section class="py-16 bg-white">
-    <div class="max-w-6xl mx-auto px-6 md:px-8">
+    <div class="w-full px-6 md:px-8">
         @if(!empty($areaBusiness['heading']))
         <div class="reveal text-center mb-12">
             <h1 class="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">{{ $areaBusiness['heading'] }}</h1>

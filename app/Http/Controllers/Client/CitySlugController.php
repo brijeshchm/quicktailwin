@@ -2378,35 +2378,35 @@ $reviewList = DB::table('clients')
      * Replace {{city}} placeholder and strip basic HTML.
      */
 	  private function replaceCity(?string $text, ?string $city = ''): string
-{
-    $text = trim($text ?? '');
-    $city = trim($city ?? '');
+	{
+		$text = trim($text ?? '');
+		$city = trim($city ?? '');
 
-    if ($text === '') {
-        return '';
-    }
+		if ($text === '') {
+			return '';
+		}
 
-    if ($city === '') {
-        // Remove both "in {{city}}" and "{{city}}"
-        $text = preg_replace('/\s*(?:in\s+)?{{city}}\s*/i', ' ', $text);
-    } else {
-        // Replace "{{city}}" with the formatted city name
-        $cityName = ucwords(strtolower(str_replace('-', ' ', $city)));
+		if ($city === '') {
+			// Remove both "in {{city}}" and "{{city}}"
+			$text = preg_replace('/\s*(?:in\s+)?{{city}}\s*/i', ' ', $text);
+		} else {
+			// Replace "{{city}}" with the formatted city name
+			$cityName = ucwords(strtolower(str_replace('-', ' ', $city)));
 
-        $text = str_ireplace('{{city}}', $cityName, $text);
-    }
+			$text = str_ireplace('{{city}}', $cityName, $text);
+		}
 
-    // Remove extra spaces
-    $text = preg_replace('/\s+/', ' ', $text);
+		// Remove extra spaces
+		$text = preg_replace('/\s+/', ' ', $text);
 
-    // Remove spaces before commas
-    $text = preg_replace('/\s+,/', ',', $text);
+		// Remove spaces before commas
+		$text = preg_replace('/\s+,/', ',', $text);
 
-    // Ensure one space after commas
-    $text = preg_replace('/,\s*/', ', ', $text);
+		// Ensure one space after commas
+		$text = preg_replace('/,\s*/', ', ', $text);
 
-    return trim($text, " \t\n\r\0\x0B,");
-}
+		return trim($text, " \t\n\r\0\x0B,");
+	}
     /**
      * Handle  GET /{city}/{slug}
      */

@@ -3044,7 +3044,7 @@ protected function deleteOldImage($jsonString)
 			}
 
 
-			if (!$request->user()->current_user_can('administrator') && !$request->user()->current_user_can('lead_show_all')) {
+			if (!$request->user()->current_user_can('administrator') && !$request->user()->current_user_can('client_show_all')) {
 
 				if ($request->user()->current_user_can('manager')) {
 
