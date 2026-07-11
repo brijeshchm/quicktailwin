@@ -3,11 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>@yield('title')</title>
-<meta name="keywords" content="@yield('keywords')">
+<title>@yield('title')</title> 
 <meta name="description" content="@yield('description')">     
-<meta name="csrf-token" content="{{ csrf_token() }}" />  
-
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 @if (request()->is('/'))
 <link rel="canonical" href="https://www.quickdials.com/" />
 @elseif (View::hasSection('canonical'))
@@ -127,7 +125,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     );
 @endphp 
 @php   
+
+
     $schemas = [];  
+
+    if (request()->is('/')){
     $schemas[] = [
         '@context' => 'https://schema.org',
         '@type'    => 'Organization',
@@ -143,6 +145,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             'https://www.youtube.com/@quickdialsofficial',
         ],
     ];
+}
+
  $schemas[] = [
     '@context'    => 'https://schema.org',
     '@type'       => 'LocalBusiness',

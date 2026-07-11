@@ -17,7 +17,6 @@
             <p class="text-sm text-gray-500 mt-1">Sign in to your business account</p>
         </div>
 
-        {{-- Google --}}
         <a href="{{ route('google.login') }}"
            class="w-full flex items-center justify-center gap-3 border-2 border-gray-200 hover:border-gray-300 rounded-xl py-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-all mb-4">
             <svg class="w-5 h-5" viewBox="0 0 24 24">

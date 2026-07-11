@@ -166,7 +166,7 @@
                         ['name' => 'Parties, Special Occasions & Wedding', 'slug' => 'wedding-organisers','type'=>'keyword'],
                         ['name' => 'Electric Services',               'slug' => 'electric-services','type'=>'categories'],
                         ['name' => 'Government Exam',                 'slug' => 'entrance-exams-coaching','type'=>'child'],
-                        ['name' => 'Web Designers',                   'slug' => 'web-designers','type'=>'keyword'],
+                        ['name' => 'Web Designing',                   'slug' => 'web-designing','type'=>'keyword'],
                       
                         ['name' => 'Carpenters',                      'slug' => 'carpenters','type'=>'keyword'],
                         ['name' => 'Health & Wellness',               'slug' => 'health-wellness','type'=>'keyword'],

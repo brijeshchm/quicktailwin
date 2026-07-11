@@ -15,6 +15,7 @@
         <h2 class="mt-4 text-3xl md:text-4xl font-bold text-gray-900">
             Oops! Page Not Found
         </h2>
+
         <!-- Description -->
         <p class="mt-4 text-base md:text-lg text-gray-600">
             The page you're looking for doesn't exist or has been moved.
