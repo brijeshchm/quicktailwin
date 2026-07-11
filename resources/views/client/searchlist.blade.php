@@ -43,7 +43,7 @@ $starMap = [
     4.75 => 'star_4.75.png', 5 => 'star_5.png',
 ];
 
-$bgImage = $bgImage ?? '/computer-courses-training.jpg';
+$bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
 
 // Calculate star image key
 $starKey = 0;
@@ -340,10 +340,8 @@ function bannerSlider(banners, interval = 4000) {
             ? 'grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-2 gap-4 mb-6'
             : 'bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden divide-y divide-gray-50 mb-6'"
              id="chunk-{{ $chunkIndex }}">
-
             @foreach($chunk as $bIndex => $business)
                 @php $globalIndex = $chunkIndex * $adInterval + $bIndex; @endphp
-
                 <div class="business-card"
                      data-name="{{ strtolower($business['name'] ?? '') }}"
                      data-category="{{ strtolower(is_array($business['category'] ?? '') ? implode(',', $business['category']) : ($business['category'] ?? '')) }}"
@@ -355,9 +353,7 @@ function bannerSlider(banners, interval = 4000) {
                     <x-business-card :business="$business" :index="$globalIndex" :view="'list'" />
                 </div>
             @endforeach
-        </div>
-
-      
+        </div>      
         @if(!$loop->last)
             <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-700 my-3 shadow-md">
                     <div class="relative px-5 py-4 flex items-center gap-5 flex-wrap sm:flex-nowrap">
@@ -371,7 +367,7 @@ function bannerSlider(banners, interval = 4000) {
                         </div>
                         <a href="{{ route('login') }}" class="flex-shrink-0 bg-white text-teal-700 font-bold text-sm px-5 py-2.5 rounded-xl hover:bg-white/90 shadow-lg whitespace-nowrap">Claim Offer</a>
                     </div>
-                </div>
+            </div>
         @endif
     @endforeach
 
@@ -831,7 +827,7 @@ function bannerSlider(banners, interval = 4000) {
         <ul class="flex flex-wrap gap-2 text-sm text-gray-600">
             @foreach($servicesRelated as $i => $service)
             <li class="flex items-center">
-                <a href="{{ route('city.slug', ['city_slug'=> $city?$city:'bangalore','service_slug' => $service['url']]) }}" class="hover:text-indigo-600">{{ $service['title'] ?? '' }}</a>
+                <a href="{{ route('city.slug', ['city_slug'=> $city ? $city:'bangalore','service_slug' => $service['url']]) }}" class="hover:text-indigo-600">{{ $service['title'] ?? '' }}</a>
                 @if($i !== count($servicesRelated) - 1)
                 <span class="mx-1 text-gray-400">|</span>
                 @endif

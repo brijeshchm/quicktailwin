@@ -23,7 +23,7 @@ body.modal-open { overflow: hidden; }
 }
 </style>
 
-{{-- In your layout <body> --}}
+ 
 <div id="scroll-progress"></div>
 
 {{-- In @push('scripts') --}}
@@ -673,7 +673,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
     @if(count($faqs ?? []) > 0)
     <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
         <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-            💬 Frequently Asked Questions — {{ $keyword }}
+        Frequently Asked Questions {{ $keyword }}
         </h2>
         <div class="space-y-2">
             @foreach($faqs as $fi => $faq)

@@ -1582,7 +1582,7 @@
                                                                 <img loading="lazy" src="{{ $award1Url }}">
                                                             @endif
 
-                                                            <a href="{{ url('developer/clients/certificate/award_img1/' . $client->id) }}"
+                                                            <a href="{{ url('developer/clients/award/award_img1/' . $client->id) }}"
                                                                 class="btn btn-danger btn-sm" title="Remove Award">
                                                                 <i class="fa fa-trash"></i>
                                                             </a>
@@ -1620,7 +1620,7 @@
                                                             @else
                                                                 <img loading="lazy" src="{{ $award2Url }}">
                                                             @endif
-                                                            <a href="{{ url('developer/clients/certificate/award_img2/' . $client->id) }}"
+                                                            <a href="{{ url('developer/clients/award/award_img2/' . $client->id) }}"
                                                                 class="btn btn-danger btn-sm">
                                                                 <i class="fa fa-trash"></i>
                                                             </a>
@@ -1658,7 +1658,7 @@
                                                                 <img loading="lazy" src="{{ $award3Url }}">
                                                             @endif
 
-                                                            <a href="{{ url('developer/clients/certificate/award_img3/' . $client->id) }}"
+                                                            <a href="{{ url('developer/clients/award/award_img3/' . $client->id) }}"
                                                                 class="btn btn-danger btn-sm">
                                                                 <i class="fa fa-trash"></i>
                                                             </a>
@@ -1702,7 +1702,7 @@
                                                                 <img loading="lazy" src="{{ $award4Url }}">
                                                             @endif
 
-                                                            <a href="{{ url('developer/clients/certificate/award_img4/' . $client->id) }}"
+                                                            <a href="{{ url('developer/clients/award/award_img4/' . $client->id) }}"
                                                                 class="btn btn-danger btn-sm" title="Remove Award">
                                                                 <i class="fa fa-trash"></i>
                                                             </a>
@@ -1740,7 +1740,7 @@
                                                             @else
                                                                 <img loading="lazy" src="{{ $award5Url }}">
                                                             @endif
-                                                            <a href="{{ url('developer/clients/certificate/award_img5/' . $client->id) }}"
+                                                            <a href="{{ url('developer/clients/award/award_img5/' . $client->id) }}"
                                                                 class="btn btn-danger btn-sm">
                                                                 <i class="fa fa-trash"></i>
                                                             </a>
@@ -1778,7 +1778,7 @@
                                                                 <img loading="lazy" src="{{ $award6Url }}">
                                                             @endif
 
-                                                            <a href="{{ url('developer/clients/certificate/award_img6/' . $client->id) }}"
+                                                            <a href="{{ url('developer/clients/award/award_img6/' . $client->id) }}"
                                                                 class="btn btn-danger btn-sm">
                                                                 <i class="fa fa-trash"></i>
                                                             </a>
@@ -1820,7 +1820,7 @@
                                                                 <img loading="lazy" src="{{ $award7Url }}">
                                                             @endif
 
-                                                            <a href="{{ url('developer/clients/certificate/award_img7/' . $client->id) }}"
+                                                            <a href="{{ url('developer/clients/award/award_img7/' . $client->id) }}"
                                                                 class="btn btn-danger btn-sm" title="Remove Award">
                                                                 <i class="fa fa-trash"></i>
                                                             </a>
@@ -1858,7 +1858,7 @@
                                                             @else
                                                                 <img loading="lazy" src="{{ $award8Url }}">
                                                             @endif
-                                                            <a href="{{ url('developer/clients/certificate/award_img8/' . $client->id) }}"
+                                                            <a href="{{ url('developer/clients/award/award_img8/' . $client->id) }}"
                                                                 class="btn btn-danger btn-sm">
                                                                 <i class="fa fa-trash"></i>
                                                             </a>
@@ -1896,7 +1896,7 @@
                                                                 <img loading="lazy" src="{{ $award9Url }}">
                                                             @endif
 
-                                                            <a href="{{ url('developer/clients/certificate/award_img9/' . $client->id) }}"
+                                                            <a href="{{ url('developer/clients/awardqq/award_img9/' . $client->id) }}"
                                                                 class="btn btn-danger btn-sm">
                                                                 <i class="fa fa-trash"></i>
                                                             </a>

@@ -131,9 +131,8 @@
                             'city_slug'    => 'online',
                             'service_slug' => $service['slug'],
                         ])
-                        : route('city.slug',['city_slug' => 'bangalore', 'service_slug' => $service['slug']]);
+                        : route('city.slug',['city_slug' => $city?$city:'bangalore', 'service_slug' => $service['slug']]);
                 @endphp
-
                 <a href="{{ $href }}"
                    title="{{ $service['name'] }}"
                    class="inline-block px-3 py-1.5 bg-white border border-gray-200 rounded-full text-xs text-gray-600 hover:bg-primary hover:text-gray hover:border-primary hover:shadow-sm transition-all duration-200 whitespace-nowrap text-xs md:text-sm text-gray-500 hover:text-primary transition-colors">
@@ -236,7 +235,7 @@
                             $slugUrl = match($link['type'] ?? '') {
                              'keyword' => in_array($link['slug'], $noCitySlugs)
                             ? route('showCity', $link['slug'])
-                            : route('city.slug', ['city_slug' => 'bangalore', 'service_slug' => $link['slug']]),                            
+                            : route('city.slug', ['city_slug' => $city?$city:'bangalore', 'service_slug' => $link['slug']]),                            
                             'child'      => route('child.show',      $link['slug']),
                             'categories' => route('categories.show', $link['slug'])
                         
@@ -299,7 +298,7 @@
                             $catUrl = match($link['type'] ?? '') {
                                 'keyword' => $link['slug'] === 'wedding-planning'
                                     ? route('showCity', $link['slug'])
-                                    : route('city.slug', ['city_slug' => 'bangalore', 'service_slug' => $link['slug']]),
+                                    : route('city.slug', ['city_slug' => $city?$city:'bangalore', 'service_slug' => $link['slug']]),
                                 'child'      => route('child.show', $link['slug']),
                                 'categories' => route('categories.show', $link['slug']),
                                 default      => '#',

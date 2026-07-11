@@ -374,10 +374,15 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                             {{ strtoupper(substr($newsDetails['author_name'], 0, 1)) }}
                         </div>
                         <div>
-                            <p class="text-slate-800 font-semibold text-sm leading-none mb-0.5">
-                                {{ $newsDetails['author_name'] }}
-                            </p>
-                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-1">
+                            {{ $newsDetails['author_name'] }}
+                        </h3>
+                        <p class="text-sm text-gray-500 leading-relaxed">
+                            A seasoned expert in {{ $newsDetails['name'] ?? 'technology' }} with extensive
+                            hands-on experience helping professionals upskill, certify, and advance their
+                            careers in tech and enterprise systems.
+                        </p>
+                    </div>
                     </div>
                     <span class="w-px h-8 bg-gray-200 hidden sm:block"></span>
                     @endif
@@ -406,7 +411,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
                             <circle cx="12" cy="12" r="3"/>
                         </svg>
-                        <span id="view-count">—</span> views
+                        <span id="view-count"></span> views
                     </span>
                 </div>
 
@@ -519,7 +524,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                          stroke="currentColor" stroke-width="2">
                         <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
                     </svg>
-                    Frequently Asked Questions — {{ $newsDetails['name'] ?? '' }}
+                    Frequently Asked Questions {{ $newsDetails['name'] ?? '' }}
                 </h2>
                 <div class="space-y-2" id="faq-list">
                     @foreach($faqs as $faqIndex => $faq)
@@ -546,53 +551,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
             </div>
             @endif
 
-
-
-            {{-- ── TAGS ── --}}
-            @if(count($newsList))
-            <div class="reveal mt-10 pt-6 border-t border-gray-200">
-                <div class="flex items-center gap-2 flex-wrap">
-                    <svg class="w-4 h-4 text-blue-500 shrink-0" fill="none" viewBox="0 0 24 24"
-                         stroke="currentColor" stroke-width="2">
-                        <path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/>
-                        <line x1="7" y1="7" x2="7.01" y2="7"/>
-                    </svg>
-                    @foreach($newsList as $tag)
-                    @if(!empty($tag['title']))
-                    <span class="tag-chip inline-block px-3 py-1 bg-gray-100 text-gray-500 text-xs
-                                 font-medium rounded-full border border-gray-200 cursor-pointer">
-                        {{ $tag['title'] }}
-                    </span>
-                    @endif
-                    @endforeach
-                </div>
-            </div>
-            @endif
-
-            {{-- ── AUTHOR CARD ── --}}
-            @if(!empty($newsDetails['author_name']))
-            <div class="reveal mt-10 p-6 bg-white rounded-2xl border border-gray-200 shadow-sm
-                        flex gap-5 items-start card-glow">
-                <div class="w-16 h-16 rounded-full flex items-center justify-center text-white
-                            font-bold text-xl shrink-0"
-                     style="background: {{ $authorColor }};">
-                    {{ strtoupper(substr($newsDetails['author_name'], 0, 1)) }}
-                </div>
-                <div>
-                    <p class="text-xs text-gray-400 uppercase tracking-widest font-semibold mb-1">
-                        Written by
-                    </p>
-                    <h3 class="text-lg font-bold text-slate-900 mb-1">
-                        {{ $newsDetails['author_name'] }}
-                    </h3>
-                    <p class="text-sm text-gray-500 leading-relaxed">
-                        A seasoned expert in {{ $newsDetails['name'] ?? 'technology' }} with extensive
-                        hands-on experience helping professionals upskill, certify, and advance their
-                        careers in tech and enterprise systems.
-                    </p>
-                </div>
-            </div>
-            @endif
+            
 
             {{-- ── BACK TO BLOG ── --}}
             <div class="reveal mt-10">
