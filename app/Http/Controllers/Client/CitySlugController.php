@@ -139,13 +139,7 @@ class CitySlugController extends Controller
 		if (!empty($keywordDetails->h1_heading)) {
 			$h1_heading = preg_replace('/{{city}}/i', ucfirst($city), $keywordDetails->h1_heading);
 		} else {
-			$h1_heading =  implode(', ', [
-							$keywordDetails->keyword,
-							$keywordDetails->keyword . ' in ' . ucfirst($city),
-							'Best ' . $keywordDetails->keyword . ' in ' . ucfirst($city),
-							ucfirst($city) . ' ' . $keywordDetails->keyword,
-							'Quickdials'
-						]);
+			$h1_heading = 'Best ' . $keywordDetails->keyword . ' in ' . ucfirst($city); 
 
 		}
 
@@ -835,13 +829,7 @@ $reviewList = DB::table('clients')
 		if (!empty($keywordDetails->h1_heading)) {
 			$h1_heading = $this->replaceCity($keywordDetails->h1_heading,'');
 		} else {
-			$h1_heading =  implode(', ', [
-						$keywordDetails->keyword,
-						'Best ' . $keywordDetails->keyword,
-						$keywordDetails->keyword . ' Reviews',
-						$keywordDetails->keyword . ' Contact Details',
-						'Quickdials'
-					]);
+			$h1_heading =  'Best ' . $keywordDetails->keyword;
 
 		}
 
