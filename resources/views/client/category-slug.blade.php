@@ -253,7 +253,7 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
      $bottom_heading = 'Find the Best '.$keyword;
     }    
     @endphp
-    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mt-4 mx-4">
+    <div class="bg-white rounded-2xl mt-4">
         <h2 class="text-lg font-bold text-gray-900 mb-3"> {{ $bottom_heading }} </h2>
         <div class="text-sm text-gray-600 leading-relaxed">{!! $bottomDescription !!}</div>
     </div>
@@ -261,7 +261,7 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
 
     {{-- FAQ --}}
     @if(count($faqs ?? []) > 0)
-    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+    <div class="bg-white rounded-2xl mt-4" x-data="{ openFaq: null }">
         <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
             💬 Frequently Asked Questions — {{ $keyword }}
         </h2>

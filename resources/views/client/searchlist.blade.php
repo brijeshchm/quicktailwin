@@ -729,7 +729,7 @@ function bannerSlider(banners, interval = 4000) {
     }    
     @endphp
 
-    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mt-4 mx-4">
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4">
         <h2 class="text-lg font-bold text-gray-900 mb-3">{{ $bottom_heading }}</h2>
         <div class="text-sm text-gray-600 leading-relaxed">{!! $bottomDescription !!}</div>
     </div>
@@ -748,7 +748,7 @@ function bannerSlider(banners, interval = 4000) {
     }    
     @endphp
 
-    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mt-4 mx-4">
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4">
         <h2 class="text-lg font-bold text-gray-900 mb-3"> {{ $extra_heading }}</h2>
         <div class="text-sm text-gray-600 leading-relaxed">{!! $kwData['extra_description'] !!}</div>
     </div>
@@ -758,7 +758,7 @@ function bannerSlider(banners, interval = 4000) {
 
     {{-- FAQ --}}
     @if(count($faqs ?? []) > 0)
-    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
         <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
             💬 Frequently Asked Questions — {{ $keyword }}
         </h2>

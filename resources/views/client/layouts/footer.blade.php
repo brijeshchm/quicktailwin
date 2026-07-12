@@ -1,5 +1,5 @@
 <footer class="bg-gray-50 pt-10 md:pt-16 pb-8 border-t border-gray-200">
-    <div class="w-full px-4 md:px-8">
+    <div class="w-full px-4 md:px-4">
 
         {{-- ─── CTA Banner ─── --}}
         <div class="bg-white rounded-2xl p-6 md:p-10 mb-10 shadow-lg shadow-gray-200/50 border border-gray-100 flex flex-col md:flex-row items-center justify-between gap-5 relative overflow-hidden">
@@ -110,7 +110,7 @@
 @endphp
 
 <section class="bg-gray-50 border-t border-gray-100 py-10" aria-label="Popular services on QuickDials">
-    <div class="container mx-auto px-4">
+    <div class="mx-auto px-4">
 
         {{-- Section Header --}}
         <div class="mb-8 text-center md:text-left">
@@ -293,8 +293,7 @@
                         
                         ['name' => 'Security System',     'slug' => 'security-system','type'=>'child'],
                       
-                    ] as $link)
-             
+                    ] as $link)             
 
                         @php
 
@@ -327,7 +326,7 @@
                     @foreach([
                         ['name' => 'Add your Business',  'href' => 'business-owners','route'=>route('login')],
                         ['name' => 'Claim your Business','href' => 'business-owners','route'=>route('login')],
-                        ['name' => 'Advertise with Us',  'href' => 'contact-us','route'=>route('contactUs')],
+                        ['name' => 'Advertise with Us',  'href' => 'contact-us','route'=>route('advertise')],
                         ['name' => 'Business Support',   'href' => 'contact-us','route'=>route('contactUs')],
                         ['name' => 'Pricing',            'href' => 'pricing','route'=>route('pricing')],
                     ] as $link)

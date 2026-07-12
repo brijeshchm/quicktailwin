@@ -462,7 +462,7 @@ Route::get('/careers', [App\Http\Controllers\Official\OfficialController::class,
 //Route::post('/api/careers/apply', [App\Http\Controllers\Official\OfficialController::class, 'apply'])->name('careers.apply');
 Route::get('/pricing', [App\Http\Controllers\Official\OfficialController::class, 'pricing'])->name('pricing');
 
-Route::get('/advertise', [App\Http\Controllers\Official\OfficialController::class, 'advertise']);
+Route::get('/advertise', [App\Http\Controllers\Official\OfficialController::class, 'advertise'])->name('advertise');
 Route::get('/blog', [App\Http\Controllers\Official\OfficialController::class, 'blog'])->name('blog.show');
  
 Route::get('/blog/{slug}', [App\Http\Controllers\Official\OfficialController::class, 'blogdetails'])->name('blog.details');
