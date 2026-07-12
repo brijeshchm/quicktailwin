@@ -1397,7 +1397,7 @@ class KeywordController extends Controller
 					->orWhere('k.bottom_description', 'LIKE', '%' . $request->input('search.value') . '%');
 				});
 			}
-			$leads = $leads->select('k.keyword', 'k.id', 'k.meta_title', 'k.meta_keywords', 'k.meta_description', 'k.top_description', 'k.bottom_description');
+			$leads = $leads->select('k.keyword', 'k.id', 'k.meta_title', 'k.h1_heading', 'k.meta_description', 'k.top_description', 'k.bottom_description');
 			$leads = $leads->distinct();
 			$leads = $leads->orderBy('k.id', 'desc');
 			$leads = $leads->paginate($request->input('length'), ['k.keyword']);
@@ -1410,7 +1410,7 @@ class KeywordController extends Controller
 
 				foreach ($leads as $lead) {
 					$totalCount = Keyword::where('keyword', 'LIKE', $lead->keyword)->count();
-					$greenCount = Keyword::where('keyword', 'LIKE', $lead->keyword)->whereNotNull('meta_title')->whereNotNull('meta_description')->whereNotNull('meta_keywords')->count();
+					$greenCount = Keyword::where('keyword', 'LIKE', $lead->keyword)->whereNotNull('meta_title')->whereNotNull('meta_description')->whereNotNull('h1_heading')->count();
 					//whereNotNull('top_description')->whereNotNull('bottom_description')->count();
 					$redCount = $totalCount - $greenCount;
 
@@ -1419,7 +1419,7 @@ class KeywordController extends Controller
 
 						$lead->keyword,
 						$lead->meta_title,
-						$lead->meta_keywords,
+						$lead->h1_heading,
 						$lead->meta_description,
 						"<a href='/developer/seo/$lead->id' class='btn btn-danger btn-xs'><i class='fa fa-fw fa-pencil' aria-hidden='true'></i>Edit</a>",
 						"<small style='color:green'>$greenCount</small>+<small style='color:red'>$redCount</small>=<small style='color:black'>$totalCount</small>"
@@ -1666,7 +1666,7 @@ class KeywordController extends Controller
 			$i = 0;
 			foreach ($keywords as $kw) {
 				$kwObj = Keyword::findOrFail($kw->id);
-				$meta_title = $meta_description = $meta_keywords = $top_description = $bottom_description = NULL;
+				$meta_title = $meta_description = $h1_heading = $top_description = $bottom_description = NULL;
 
 				if ($request->has('meta_title') && $request->input('meta_title') != '') {
 					$meta_title = $request->input('meta_title');
@@ -1677,9 +1677,9 @@ class KeywordController extends Controller
 					$meta_description = preg_replace('/{{keyword}}/i', $kw->keyword, $meta_description);
 
 				}
-				if ($request->has('meta_keywords') && $request->input('meta_keywords') != '') {
-					$meta_keywords = $request->input('meta_keywords');
-					$meta_keywords = preg_replace('/{{keyword}}/i', $kw->keyword, $meta_keywords);
+				if ($request->has('h1_heading') && $request->input('h1_heading') != '') {
+					$h1_heading = $request->input('h1_heading');
+					$h1_heading = preg_replace('/{{keyword}}/i', $kw->keyword, $h1_heading);
 
 				}
 				if ($request->has('top_description') && $request->input('top_description') != '') {
@@ -1695,7 +1695,7 @@ class KeywordController extends Controller
 
 				$kwObj->meta_title = $meta_title;
 				$kwObj->meta_description = $meta_description;
-				$kwObj->meta_keywords = $meta_keywords;
+				$kwObj->h1_heading = $h1_heading;
 				$kwObj->top_description = $top_description;
 
 				$kwObj->faqq1 = $request->input('faqq1');
@@ -1771,7 +1771,7 @@ class KeywordController extends Controller
 		}
 		$validator = Validator::make($request->all(), [
 			'meta_title' => 'required|min:3|max:75',
-			'meta_keywords' => 'required|min:10|max:260',
+			'h1_heading' => 'required|min:10|max:260',
 			'meta_description' => 'required|min:45|max:300',
 			'ratingvalue' => 'required|numeric',
 			'ratingcount' => 'required|numeric',
@@ -1790,7 +1790,7 @@ class KeywordController extends Controller
 		if ($kwObj) {
 			$kwObj->meta_title = $request->input('meta_title');
 			$kwObj->meta_description = $request->input('meta_description');
-			$kwObj->meta_keywords = $request->input('meta_keywords');
+			$kwObj->h1_heading = $request->input('h1_heading');
 			$kwObj->ratingvalue = $request->input('ratingvalue');
 			$kwObj->ratingcount = $request->input('ratingcount');
 
@@ -2203,7 +2203,7 @@ class KeywordController extends Controller
 					$query->orWhere('k.parent_category', 'LIKE', '%' . $request->input('search.value') . '%');
 				});
 			}
-			$leads = $leads->select('k.parent_category', 'k.id', 'k.meta_title', 'k.meta_keywords', 'k.meta_description', 'k.top_description', 'k.bottom_description');
+			$leads = $leads->select('k.parent_category', 'k.id', 'k.meta_title', 'k.h1_heading', 'k.meta_description', 'k.top_description', 'k.bottom_description');
 			$leads = $leads->distinct();
 			$leads = $leads->orderBy('k.parent_category', 'asc');
 			$leads = $leads->paginate($request->input('length'), ['k.parent_category']);
@@ -2220,7 +2220,7 @@ class KeywordController extends Controller
 					$data[] = [
 						$lead->parent_category,
 						$lead->meta_title,
-						$lead->meta_keywords,
+						$lead->h1_heading,
 
 						"<a href='/developer/categoryEdit/seo/$lead->id' class='btn btn-danger btn-xs'><i class='fa fa-fw fa-pencil' aria-hidden='true'></i>Edit</a>",
 					];
@@ -2266,87 +2266,87 @@ class KeywordController extends Controller
 	 * @param  int  $keyword
 	 * @return \Illuminate\Http\Response
 	 */
-	public function updateCategorySEO(Request $request, $keyword)
+
+	public function updateCategorySEO(Request $request, $id)
 	{
-		if (!($request->user()->current_user_can('administrator') || $request->user()->current_user_can('edit_SEO'))) {
+		$user = $request->user();
+
+		// Authorization check
+		if (
+			!$user ||
+			!(
+				$user->current_user_can('administrator') ||
+				$user->current_user_can('edit_SEO')
+			)
+		) {
 			return view('errors.unauthorised');
 		}
-		if (empty($keyword) || is_null($keyword)) {
-			$this->danger_msg .= 'Category cannot be null or blank.';
-			$request->session()->flash('danger_msg', $this->danger_msg);
-			return redirect("developer/category/seo");
+
+		// ID validation
+		if (empty($id)) {
+			return redirect('developer/category/seo')
+				->with('danger_msg', 'Category cannot be null or blank.');
 		}
-		$keywords = ParentCategory::where('id', $keyword)->get();
-		if ($keywords) {
-			$i = 0;
-			foreach ($keywords as $kw) {
-				$kwObj = ParentCategory::findOrFail($kw->id);
-				$meta_title = $meta_description = $meta_keywords = $top_description = $bottom_description = NULL;
 
-				if ($request->has('meta_title') && $request->input('meta_title') != '') {
-					$meta_title = $request->input('meta_title');
+		// Form validation
+		$validated = $request->validate([
+			'meta_title'        => 'nullable|string|max:255',
+			'meta_description'  => 'nullable|string',
+			'h1_heading'        => 'nullable|string|max:255',
+			'top_heading'       => 'nullable|string|max:255',
+			'top_description'   => 'nullable|string',
+			'bottom_heading'    => 'nullable|string|max:255',
+			'bottom_description'=> 'nullable|string',
 
-				}
-				if ($request->has('meta_description') && $request->input('meta_description') != '') {
-					$meta_description = $request->input('meta_description');
-					$meta_description = preg_replace('/{{keyword}}/i', $kw->keyword, $meta_description);
+			'faqq1' => 'nullable|string|max:500',
+			'faqa1' => 'nullable|string',
+			'faqq2' => 'nullable|string|max:500',
+			'faqa2' => 'nullable|string',
+			'faqq3' => 'nullable|string|max:500',
+			'faqa3' => 'nullable|string',
+			'faqq4' => 'nullable|string|max:500',
+			'faqa4' => 'nullable|string',
+			'faqq5' => 'nullable|string|max:500',
+			'faqa5' => 'nullable|string',
+			'faqq6' => 'nullable|string|max:500',
+			'faqa6' => 'nullable|string',
 
-				}
-				if ($request->has('meta_keywords') && $request->input('meta_keywords') != '') {
-					$meta_keywords = $request->input('meta_keywords');
-					$meta_keywords = preg_replace('/{{keyword}}/i', $kw->keyword, $meta_keywords);
+			'ratingvalue' => 'nullable|numeric|min:0|max:5',
+			'ratingcount' => 'nullable|integer|min:0',
+		]);
 
-				}
-				if ($request->has('top_description') && $request->input('top_description') != '') {
-					$top_description = $request->input('top_description');
-					$top_description = preg_replace('/{{keyword}}/i', $kw->keyword, $top_description);
-				}
-				if ($request->has('bottom_description') && $request->input('bottom_description') != '') {
-					$bottom_description = $request->input('bottom_description');
-					$bottom_description = preg_replace('/{{keyword}}/i', $kw->keyword, $bottom_description);
-				}
+		try {
+			$category = ParentCategory::findOrFail($id);
 
+			$category->update($validated);
 
-				$kwObj->meta_title = $meta_title;
-				$kwObj->meta_description = $meta_description;
-				$kwObj->meta_keywords = $meta_keywords;
-				$kwObj->top_description = $top_description;
-				$kwObj->faqq1 = $request->input('faqq1');
-				$kwObj->faqa1 = $request->input('faqa1');
-				$kwObj->faqq2 = $request->input('faqq2');
-				$kwObj->faqa2 = $request->input('faqa2');
-				$kwObj->faqq3 = $request->input('faqq3');
-				$kwObj->faqa3 = $request->input('faqa3');
-				$kwObj->faqq4 = $request->input('faqq4');
-				$kwObj->faqa4 = $request->input('faqa4');
-				$kwObj->faqq5 = $request->input('faqq5');
-				$kwObj->faqa5 = $request->input('faqa5');
-				$kwObj->faqq6 = $request->input('faqq6');
-				$kwObj->faqa6 = $request->input('faqa6');
-				$kwObj->bottom_description = $bottom_description;
-				$kwObj->ratingvalue = $request->input('ratingvalue');
-				$kwObj->ratingcount = $request->input('ratingcount');
-				$kwObj->top_heading = $request->input('top_heading');
-				$kwObj->bottom_heading = $request->input('bottom_heading');
-				if ($kwObj->save()) {
-					++$i;
-				}
-			}
-			if ($i) {
-				$this->success_msg .= "Keyword seo fields added successfully... Updated {$i} records.";
-				$request->session()->flash('success_msg', $this->success_msg);
-				return redirect("developer/category/seo/");
-			} else {
-				$this->danger_msg .= 'Keyword seo fields not added successfully.';
-				$request->session()->flash('danger_msg', $this->danger_msg);
-				return redirect("developer/category/seo");
-			}
-		} else {
-			$this->danger_msg .= 'Keyword not found.';
-			$request->session()->flash('danger_msg', $this->danger_msg);
-			return redirect("developer/category/seo");
+			return redirect('developer/categoryEdit/seo/'.$id)
+				->with(
+					'success_msg',
+					'Category SEO fields updated successfully.'
+				);
+
+		} catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+
+			return redirect('developer/categoryEdit/seo/'.$id)
+				->with('danger_msg', 'Category not found.');
+
+		} catch (\Throwable $e) {
+
+			\Log::error('Category SEO update failed', [
+				'category_id' => $id,
+				'message'     => $e->getMessage(),
+			]);
+
+			return redirect('developer/categoryEdit/seo/'.$id)
+				->with(
+					'danger_msg',
+					'Category SEO fields could not be updated.'
+				);
 		}
 	}
+
+	
 
 	/**
 	 * Display a listing of the distinct keywords for SEO.
@@ -2367,7 +2367,7 @@ class KeywordController extends Controller
 					$query->orWhere('k.child_category', 'LIKE', '%' . $request->input('search.value') . '%');
 				});
 			}
-			$leads = $leads->select('k.child_category', 'k.id', 'k.meta_title', 'k.meta_keywords', 'k.meta_description', 'k.top_description', 'k.bottom_description');
+			$leads = $leads->select('k.child_category', 'k.id', 'k.meta_title', 'k.h1_heading', 'k.meta_description', 'k.top_description', 'k.bottom_description');
 			$leads = $leads->distinct();
 			$leads = $leads->orderBy('k.child_category', 'asc');
 			$leads = $leads->paginate($request->input('length'), ['k.child_category']);
@@ -2384,7 +2384,7 @@ class KeywordController extends Controller
 					$data[] = [
 						$lead->child_category,
 						$lead->meta_title,
-						$lead->meta_keywords,
+						$lead->h1_heading,
 						$lead->meta_description,
 						"<a href='/developer/childcategoryEdit/seo/$lead->id' class='btn btn-danger btn-xs'><i class='fa fa-fw fa-pencil' aria-hidden='true'></i>Edit</a>",
 					];
@@ -2429,97 +2429,86 @@ class KeywordController extends Controller
 	 * @param  int  $keyword
 	 * @return \Illuminate\Http\Response
 	 */
-	public function updateChildcategorySEO(Request $request, $keyword)
+	 
+
+	public function updateChildcategorySEO(Request $request, $id)
 	{
-		if (!($request->user()->current_user_can('administrator') || $request->user()->current_user_can('edit_SEO'))) {
+		$user = $request->user();
+
+		// Authorization check
+		if (
+			!$user ||
+			!(
+				$user->current_user_can('administrator') ||
+				$user->current_user_can('edit_SEO')
+			)
+		) {
 			return view('errors.unauthorised');
 		}
 
-		if (empty($keyword) || is_null($keyword)) {
-			$this->danger_msg .= 'Keyword cannot be null or blank.';
-			$request->session()->flash('danger_msg', $this->danger_msg);
-			return redirect("developer/child_category/seo");
+		// ID validation
+		if (empty($id)) {
+			return redirect('developer/childcategory/seo')
+				->with('danger_msg', 'Category cannot be null or blank.');
 		}
-		$keywords = ChildCategory::where('id', $keyword)->get();
-		if ($keywords) {
-			$i = 0;
-			foreach ($keywords as $kw) {
-				$kwObj = ChildCategory::findOrFail($kw->id);
-				$meta_title = $meta_description = $meta_keywords = $top_description = $bottom_description = NULL;
 
-				if ($request->has('meta_title') && $request->input('meta_title') != '') {
-					$meta_title = $request->input('meta_title');
+		// Form validation
+		$validated = $request->validate([
+			'meta_title'        => 'nullable|string|max:255',
+			'meta_description'  => 'nullable|string',
+			'h1_heading'        => 'nullable|string|max:255',
+			'top_heading'       => 'nullable|string|max:255',
+			'top_description'   => 'nullable|string',
+			'bottom_heading'    => 'nullable|string|max:255',
+			'bottom_description'=> 'nullable|string',
 
-				}
-				if ($request->has('meta_description') && $request->input('meta_description') != '') {
-					$meta_description = $request->input('meta_description');
-					$meta_description = preg_replace('/{{keyword}}/i', $kw->keyword, $meta_description);
+			'faqq1' => 'nullable|string|max:500',
+			'faqa1' => 'nullable|string',
+			'faqq2' => 'nullable|string|max:500',
+			'faqa2' => 'nullable|string',
+			'faqq3' => 'nullable|string|max:500',
+			'faqa3' => 'nullable|string',
+			'faqq4' => 'nullable|string|max:500',
+			'faqa4' => 'nullable|string',
+			'faqq5' => 'nullable|string|max:500',
+			'faqa5' => 'nullable|string',
+			'faqq6' => 'nullable|string|max:500',
+			'faqa6' => 'nullable|string',
 
-				}
-				if ($request->has('meta_keywords') && $request->input('meta_keywords') != '') {
-					$meta_keywords = $request->input('meta_keywords');
-					$meta_keywords = preg_replace('/{{keyword}}/i', $kw->keyword, $meta_keywords);
+			'ratingvalue' => 'nullable|numeric|min:0|max:5',
+			'ratingcount' => 'nullable|integer|min:0',
+		]);
 
-				}
-				if ($request->has('top_description') && $request->input('top_description') != '') {
-					$top_description = $request->input('top_description');
-					$top_description = preg_replace('/{{keyword}}/i', $kw->keyword, $top_description);
+		try {
+			$category = ChildCategory::findOrFail($id);
 
-				}
-				if ($request->has('bottom_description') && $request->input('bottom_description') != '') {
-					$bottom_description = $request->input('bottom_description');
-					$bottom_description = preg_replace('/{{keyword}}/i', $kw->keyword, $bottom_description);
+			$category->update($validated);
 
-				}
+			return redirect('developer/childcategoryEdit/seo/'.$id)
+				->with(
+					'success_msg',
+					'Category SEO fields updated successfully.'
+				);
 
+		} catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
 
+			return redirect('developer/childcategoryEdit/seo/'.$id)
+				->with('danger_msg', 'Category not found.');
 
+		} catch (\Throwable $e) {
 
-				$kwObj->meta_title = $meta_title;
-				$kwObj->meta_description = $meta_description;
-				$kwObj->meta_keywords = $meta_keywords;
-				$kwObj->top_description = $top_description;
+			\Log::error('Category SEO update failed', [
+				'category_id' => $id,
+				'message'     => $e->getMessage(),
+			]);
 
-				$kwObj->faqq1 = $request->input('faqq1');
-				$kwObj->faqa1 = $request->input('faqa1');
-				$kwObj->faqq2 = $request->input('faqq2');
-				$kwObj->faqa2 = $request->input('faqa2');
-				$kwObj->faqq3 = $request->input('faqq3');
-				$kwObj->faqa3 = $request->input('faqa3');
-				$kwObj->faqq4 = $request->input('faqq4');
-				$kwObj->faqa4 = $request->input('faqa4');
-				$kwObj->faqq5 = $request->input('faqq5');
-				$kwObj->faqa5 = $request->input('faqa5');
-				$kwObj->faqq6 = $request->input('faqq6');
-				$kwObj->faqa6 = $request->input('faqa6');
-				$kwObj->bottom_description = $bottom_description;
-
-				$kwObj->top_heading = $request->input('top_heading');
-				$kwObj->bottom_heading = $request->input('bottom_heading');
-
-				$kwObj->ratingvalue = $request->input('ratingvalue');
-				$kwObj->ratingcount = $request->input('ratingcount');
-				if ($kwObj->save()) {
-					++$i;
-				}
-			}
-			if ($i) {
-				$this->success_msg .= "child category seo fields added successfully... Updated {$i} records.";
-				$request->session()->flash('success_msg', $this->success_msg);
-				return redirect("developer/childcategory/seo");
-			} else {
-				$this->danger_msg .= 'child category seo fields not added successfully.';
-				$request->session()->flash('danger_msg', $this->danger_msg);
-				return redirect("developer/childcategory/seo");
-			}
-		} else {
-			$this->danger_msg .= 'Child not found.';
-			$request->session()->flash('danger_msg', $this->danger_msg);
-			return redirect("developer/childcategory/seo");
+			return redirect('developer/childcategoryEdit/seo/'.$id)
+				->with(
+					'danger_msg',
+					'Category SEO fields could not be updated.'
+				);
 		}
 	}
-
-
 
 
 	/**

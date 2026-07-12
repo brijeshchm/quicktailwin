@@ -133,12 +133,12 @@ padding:0px;
 								 
 
 								<div class="form-group">
-									<label for="meta_keywords" class="col-md-2 control-label">Meta Keywords</label>
+									<label for="h1_heading" class="col-md-2 control-label">H1 Heading</label>
 									<div class="col-md-8">
-										<textarea class="form-control" name="meta_keywords" placeholder="Enter Meta Keywords">{{ old('meta_title',(isset($edit_data)) ? $edit_data->meta_keywords:"")}}</textarea>
-										@if ($errors->has('meta_keywords'))
+										<textarea class="form-control" name="h1_heading" placeholder="Enter H1 Heading">{{ old('meta_title',(isset($edit_data)) ? $edit_data->h1_heading:"")}}</textarea>
+										@if ($errors->has('h1_heading'))
 											<span class="error alert-danger">
-												<strong>{{ $errors->first('meta_keywords') }}</strong>
+												<strong>{{ $errors->first('h1_heading') }}</strong>
 											</span>
 										@endif
 									</div>

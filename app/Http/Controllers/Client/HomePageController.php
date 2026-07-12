@@ -1830,7 +1830,7 @@ class HomePageController extends Controller
         $bgImage          = $kwData['category_banner']   ?? '/computer-courses-training.jpg';
         $metaTitle        = $kwData['meta_title']        ?? $keyword;
         $metaDescription  = $kwData['meta_description']  ?? '';
-         $metaKeywords  = $kwData['meta_keywords']  ?? '';
+         $metaKeywords  = $kwData['h1_heading']  ?? '';
         /* star image map */
         $starMap = [
             0 => 'star_1.png', 2 => 'star_2.png', 3 => 'star_3.png',
@@ -1906,7 +1906,7 @@ class HomePageController extends Controller
         $bgImage          = $kwData['category_banner']   ?? '/computer-courses-training.jpg';
         $metaTitle        = $kwData['meta_title']        ?? $keyword;
         $metaDescription  = $kwData['meta_description']  ?? '';
-        $metaKeywords  = $kwData['meta_keywords']  ?? '';
+        $metaKeywords  = $kwData['h1_heading']  ?? '';
  
   		$faqs = [];
         for ($i = 1; $i <= 6; $i++) {

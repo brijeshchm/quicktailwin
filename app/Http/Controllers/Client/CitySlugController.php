@@ -41,7 +41,7 @@ class CitySlugController extends Controller
 			->leftjoin('child_category', 'keyword.child_category_id', '=', 'child_category.id')
 		 
 			->where('keyword.slug', $search_kw)
-			->select('keyword.*', 'parent_category.*','child_category.*', 'keyword.id as key_id', 'keyword.faqq1', 'keyword.faqa1', 'keyword.faqq2', 'keyword.faqa2', 'keyword.faqq3', 'keyword.faqa3', 'keyword.faqq4', 'keyword.faqa4', 'keyword.faqq5', 'keyword.faqa5','keyword.faqq6', 'keyword.faqa6', 'keyword.faqq7', 'keyword.faqa7','keyword.faqq8', 'keyword.faqa8','keyword.faqq9', 'keyword.faqa9','keyword.faqq10', 'keyword.faqa10','keyword.meta_title', 'keyword.meta_description', 'keyword.meta_keywords', 'keyword.top_description', 'keyword.bottom_description', 'keyword.ratingvalue', 'keyword.ratingcount','keyword.courseabout','keyword.heading','keyword.paragraph1','keyword.paragraph2','keyword.paragraph3','keyword.paragraph4','keyword.paragraph5','keyword.paragraph6','keyword.paragraph7','keyword.paragraph8','keyword.slug','keyword.bottom_heading','keyword.top_heading','keyword.extra_heading','keyword.extra_description')
+			->select('keyword.*', 'parent_category.*','child_category.*', 'keyword.id as key_id', 'keyword.faqq1', 'keyword.faqa1', 'keyword.faqq2', 'keyword.faqa2', 'keyword.faqq3', 'keyword.faqa3', 'keyword.faqq4', 'keyword.faqa4', 'keyword.faqq5', 'keyword.faqa5','keyword.faqq6', 'keyword.faqa6', 'keyword.faqq7', 'keyword.faqa7','keyword.faqq8', 'keyword.faqa8','keyword.faqq9', 'keyword.faqa9','keyword.faqq10', 'keyword.faqa10','keyword.meta_title', 'keyword.meta_description', 'keyword.h1_heading', 'keyword.top_description', 'keyword.bottom_description', 'keyword.ratingvalue', 'keyword.ratingcount','keyword.courseabout','keyword.heading','keyword.paragraph1','keyword.paragraph2','keyword.paragraph3','keyword.paragraph4','keyword.paragraph5','keyword.paragraph6','keyword.paragraph7','keyword.paragraph8','keyword.slug','keyword.bottom_heading','keyword.top_heading','keyword.extra_heading','keyword.extra_description')
 			->first();
  
 			 
@@ -57,7 +57,7 @@ class CitySlugController extends Controller
 		$paragraph7 ="";
 		$paragraph8 ="";
 		$meta_title ="";
-		$meta_keywords ="";
+		$h1_heading ="";
 		$meta_description ="";
 		$bottom_description = "";
 		$top_description = "";
@@ -136,10 +136,10 @@ class CitySlugController extends Controller
 			$meta_title =  $keywordDetails->keyword . ' in ' . ucfirst($city) . ' | Quickdials';
 
 		}
-		if (!empty($keywordDetails->meta_keywords)) {
-			$meta_keywords = preg_replace('/{{city}}/i', ucfirst($city), $keywordDetails->meta_keywords);
+		if (!empty($keywordDetails->h1_heading)) {
+			$h1_heading = preg_replace('/{{city}}/i', ucfirst($city), $keywordDetails->h1_heading);
 		} else {
-			$meta_keywords =  implode(', ', [
+			$h1_heading =  implode(', ', [
 							$keywordDetails->keyword,
 							$keywordDetails->keyword . ' in ' . ucfirst($city),
 							'Best ' . $keywordDetails->keyword . ' in ' . ucfirst($city),
@@ -216,7 +216,7 @@ class CitySlugController extends Controller
 			'key_alt' => $child_alt,
 			'alt' => $alt,
 			'meta_title' => $meta_title,
-			'meta_keywords' => $meta_keywords,
+			'h1_heading' => $h1_heading,
 			'meta_description' => $meta_description,
 			'top_description' => $top_description,
 			'bottom_description' => $bottom_description,
@@ -774,7 +774,7 @@ $reviewList = DB::table('clients')
 			->leftjoin('parent_category', 'keyword.parent_category_id', '=', 'parent_category.id')
 			->leftjoin('child_category', 'keyword.child_category_id', '=', 'child_category.id')
 			->where('slug', $search_kw)
-			->select('keyword.*', 'parent_category.*', 'child_category.*', 'keyword.id as key_id', 'keyword.faqq1', 'keyword.faqa1', 'keyword.faqq2', 'keyword.faqa2', 'keyword.faqq3', 'keyword.faqa3', 'keyword.faqq4', 'keyword.faqa4', 'keyword.faqq5', 'keyword.faqa5','keyword.faqq6','keyword.faqa6','keyword.faqq7','keyword.faqa7','keyword.faqq8','keyword.faqa8','keyword.faqq9','keyword.faqa9','keyword.faqq10','keyword.faqa10','keyword.meta_title', 'keyword.meta_description', 'keyword.meta_keywords', 'keyword.top_description', 'keyword.bottom_description', 'keyword.ratingvalue', 'keyword.ratingcount','keyword.courseabout','keyword.heading','keyword.paragraph1','keyword.paragraph2','keyword.paragraph3','keyword.paragraph4','keyword.paragraph5','keyword.paragraph6','keyword.paragraph7','keyword.paragraph8','keyword.slug','keyword.bottom_heading','keyword.top_heading','keyword.extra_heading','keyword.extra_description'
+			->select('keyword.*', 'parent_category.*', 'child_category.*', 'keyword.id as key_id', 'keyword.faqq1', 'keyword.faqa1', 'keyword.faqq2', 'keyword.faqa2', 'keyword.faqq3', 'keyword.faqa3', 'keyword.faqq4', 'keyword.faqa4', 'keyword.faqq5', 'keyword.faqa5','keyword.faqq6','keyword.faqa6','keyword.faqq7','keyword.faqa7','keyword.faqq8','keyword.faqa8','keyword.faqq9','keyword.faqa9','keyword.faqq10','keyword.faqa10','keyword.meta_title', 'keyword.meta_description', 'keyword.h1_heading', 'keyword.top_description', 'keyword.bottom_description', 'keyword.ratingvalue', 'keyword.ratingcount','keyword.courseabout','keyword.heading','keyword.paragraph1','keyword.paragraph2','keyword.paragraph3','keyword.paragraph4','keyword.paragraph5','keyword.paragraph6','keyword.paragraph7','keyword.paragraph8','keyword.slug','keyword.bottom_heading','keyword.top_heading','keyword.extra_heading','keyword.extra_description'
 			)
 			->first();
 		 
@@ -832,10 +832,10 @@ $reviewList = DB::table('clients')
 			$meta_title = 'Best ' . $keywordDetails->keyword . ' - Reviews, Ratings & Contact Details | Quickdials';
 
 		}
-		if (!empty($keywordDetails->meta_keywords)) {
-			$meta_keywords = $this->replaceCity($keywordDetails->meta_keywords,'');
+		if (!empty($keywordDetails->h1_heading)) {
+			$h1_heading = $this->replaceCity($keywordDetails->h1_heading,'');
 		} else {
-			$meta_keywords =  implode(', ', [
+			$h1_heading =  implode(', ', [
 						$keywordDetails->keyword,
 						'Best ' . $keywordDetails->keyword,
 						$keywordDetails->keyword . ' Reviews',
@@ -906,7 +906,7 @@ $reviewList = DB::table('clients')
 			'key_icon' => $key_icon,
 			'key_alt' => $child_alt,
 			'meta_title' => $meta_title,
-			'meta_keywords' => $meta_keywords,
+			'h1_heading' => $h1_heading,
 			'meta_description' => $meta_description,
 			'top_description' => $top_description,
 			'bottom_description' => $bottom_description,	
@@ -1631,7 +1631,7 @@ $reviewList = DB::table('clients')
 				'business_id' => $clientscheck->business_id,
 				'meta_title' => $clientscheck->meta_title,
 				'meta_description' => $clientscheck->meta_description,
-				'meta_keywords' => $clientscheck->meta_keywords,
+				'h1_heading' => $clientscheck->h1_heading,
 				'business_name' => $clientscheck->business_name,
 				'business_slug' => $clientscheck->business_slug,
 				'business_url' => config('app.website') . 'businessdetails/' . $clientscheck->business_slug,
@@ -2261,8 +2261,8 @@ $reviewList = DB::table('clients')
         ? $clientsList['meta_title']
         : ($clientsList['business_name'] ?? '') . ' | ' . ($clientsList['city'] ?? '') . ' | QuickDials';
 
-        $metaKeywords = !empty($clientsList['meta_keywords'])
-        ? $clientsList['meta_keywords']
+        $metaKeywords = !empty($clientsList['h1_heading'])
+        ? $clientsList['h1_heading']
         : ($clientsList['business_name'] ?? '') . ' | QuickDials';
 
         $relatedSearches = $businessResponse['related_searches'] ?? [];
@@ -2371,7 +2371,7 @@ $reviewList = DB::table('clients')
         ) + [
             'metaTitle'       => $kwData['meta_title'] ?? "{$keyword} in " . ucfirst($city),
             'metaDescription' => $kwData['meta_description'] ?? '',
-            'metaKeywords'    => $kwData['meta_keywords'] ?? '',
+            'metaKeywords'    => $kwData['h1_heading'] ?? '',
         ]);
     }
 
@@ -2542,7 +2542,7 @@ $reviewList = DB::table('clients')
         ) + [
             'metaTitle'       => $kwData['meta_title'] ?? "{$keyword} ",
             'metaDescription' => $kwData['meta_description'] ?? '',
-            'metaKeywords'    => $kwData['meta_keywords'] ?? '',
+            'metaKeywords'    => $kwData['h1_heading'] ?? '',
         ]);
     }
 

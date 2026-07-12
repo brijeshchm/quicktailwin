@@ -47,7 +47,7 @@ class SearchListController extends Controller
 					'k.slug',
 					'k.meta_title',
 					'k.meta_description',
-					'k.meta_keywords',
+					'k.h1_heading',
 					'k.top_description',
 					'k.bottom_description',
 					'k.ratingvalue',

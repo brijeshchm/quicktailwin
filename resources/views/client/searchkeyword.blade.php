@@ -106,7 +106,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
 
                 <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
                     <div itemprop="name">
-                        <h1 class="text-lg font-bold text-gray-900 leading-tight">{{ $keyword }}</h1>
+                        <h1 class="text-lg font-bold text-gray-900 leading-tight">{{ $kwData['h1_heading'] ?? $keyword ?? 'Service' }}</h1>
                     </div>                           
                     <div itemprop="aggregateRating"
                         itemscope

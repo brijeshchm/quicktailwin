@@ -202,8 +202,8 @@ class ClientDetailController extends Controller
         ? $clientsList['meta_title']
         : ($clientsList['business_name'] ?? '') . ' | ' . ($clientsList['city'] ?? '') . ' | QuickDials';
 
-        $metaKeywords = !empty($clientsList['meta_keywords'])
-        ? $clientsList['meta_keywords']
+        $metaKeywords = !empty($clientsList['h1_heading'])
+        ? $clientsList['h1_heading']
         : ($clientsList['business_name'] ?? '') . ' | QuickDials';
 
         $relatedSearches = $data['related_searches'] ?? [];

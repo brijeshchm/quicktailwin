@@ -165,9 +165,9 @@ padding:0px;
                 </div>
 
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Meta Keywords</label>
+                    <label class="col-md-2 control-label">H1 Heading</label>
                     <div class="col-md-8">
-                        <textarea class="form-control" name="meta_keywords" placeholder="Enter Meta Keywords" rows="5">{{ old('meta_keywords', $edit_data->meta_keywords ?? '') }}</textarea>
+                        <input class="form-control" name="h1_heading" placeholder="Enter H1 Heading" rows="5" value="{{ old('h1_heading', $edit_data->h1_heading ?? '') }}">
                     </div>
                 </div>
                

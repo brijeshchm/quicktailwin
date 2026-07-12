@@ -956,7 +956,7 @@ class BackEndClientsController extends Controller
 					$validator = Validator::make($request->all(), [				 
 
 						'meta_title' => 'nullable|string|max:75',
-						'meta_keywords' => 'nullable|string|max:275',					 
+						'h1_heading' => 'nullable|string|max:275',					 
 						'meta_description' => 'nullable|string|max:170',
 				 					 
 					]);
@@ -970,7 +970,7 @@ class BackEndClientsController extends Controller
 				 
  
 					$client->meta_title = $request->input('meta_title');
-					$client->meta_keywords = $request->input('meta_keywords');
+					$client->h1_heading = $request->input('h1_heading');
 					$client->meta_description = $request->input('meta_description');
 					$client->business_intro = $request->input('business_intro');
 				 

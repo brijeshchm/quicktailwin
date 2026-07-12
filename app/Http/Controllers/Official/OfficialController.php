@@ -211,12 +211,12 @@ class OfficialController extends Controller
 
         }
 
-        if (!empty($childCategory->meta_keywords)) {
-			$meta_keywords = $childCategory->meta_keywords;
+        if (!empty($childCategory->h1_heading)) {
+			$h1_heading = $childCategory->h1_heading;
 		} else {
 			 
 						
-			$meta_keywords = $childCategory->parent_category . ", " .
+			$h1_heading = $childCategory->parent_category . ", " .
                  $childCategory->parent_category . " near me, " .
                  "best " . $childCategory->parent_category . ", " .
                  "top " . $childCategory->parent_category . ", " .
@@ -266,7 +266,7 @@ class OfficialController extends Controller
 			'category_icon' => $pc_icon,
 			'alt' => $alt,
 			'meta_title' => $meta_title,
-			'meta_keywords' => $meta_keywords,
+			'h1_heading' => $h1_heading,
 			'meta_description' => $meta_description,
 			'top_description' => $childCategory->top_description,
 			'bottom_description' => $childCategory->bottom_description,
@@ -560,8 +560,8 @@ class OfficialController extends Controller
         ? $childCategory->meta_title
         : "Find Trusted Services, Businesses & Professionals Near You | Quickdials";
 
-    $meta_keywords = !empty($childCategory->meta_keywords)
-        ? $childCategory->meta_keywords
+    $h1_heading = !empty($childCategory->h1_heading)
+        ? $childCategory->h1_heading
         : implode(', ', [
             $childCategory->parent_category,
             $childCategory->parent_category . " near me",
@@ -607,7 +607,7 @@ class OfficialController extends Controller
         'category_icon'      => $pc_icon,
         'alt'                => $alt,
         'meta_title'         => $meta_title,
-        'meta_keywords'      => $meta_keywords,
+        'h1_heading'      => $h1_heading,
         'meta_description'  => $meta_description,
         'top_description'    => $childCategory->top_description,
         'bottom_description' => $childCategory->bottom_description,

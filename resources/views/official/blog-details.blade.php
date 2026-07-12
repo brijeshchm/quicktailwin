@@ -1,7 +1,7 @@
 @extends('client.layouts.app') 
 @section('title',$blogDetails['meta_title'])
 @section('description', $blogDetails['meta_description'])
-@section('keywords', $blogDetails['meta_keywords'])
+@section('keywords', $blogDetails['h1_heading'])
 @section('og_image', !empty($blogDetails['blogImage'])
     ? asset($blogDetails['blogImage'])
     : asset('client/images/quickdials-og.png'))

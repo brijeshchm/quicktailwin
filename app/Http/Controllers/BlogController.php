@@ -60,7 +60,7 @@ class BlogController extends Controller
 				'title' => 'required|string|min:50|max:175',
 				'slug' => 'required|string|min:50|max:175',
 				'meta_title' => 'required|string|min:50|max:85',
-				'meta_keywords' => 'required|string|max:255',
+				'h1_heading' => 'required|string|max:255',
 				'meta_description' => 'required|string|min:150|max:165',
 				'description' => 'required|string|max:500',
 			]);
@@ -78,7 +78,7 @@ class BlogController extends Controller
 			$blogdetails->slug = generate_slug($request->input('title'));
 			$blogdetails->description = $request->input('description');
 			$blogdetails->meta_title = $request->input('meta_title');
-			$blogdetails->meta_keywords = $request->input('meta_keywords');
+			$blogdetails->h1_heading = $request->input('h1_heading');
 			$blogdetails->meta_description = $request->input('meta_description');
 
 			if ($blogdetails->save()) {
@@ -108,7 +108,7 @@ class BlogController extends Controller
 					'title' => 'required|string|min:10|max:175',
 
 					'meta_title' => 'required|string',
-					'meta_keywords' => 'required|string|max:255',
+					'h1_heading' => 'required|string|max:255',
 					'meta_description' => 'required|string',
 
 				]);
@@ -126,7 +126,7 @@ class BlogController extends Controller
 				$blogdetails->slug = generate_slug($request->input('title'));
 				$blogdetails->description = $request->input('description');
 				$blogdetails->meta_title = $request->input('meta_title');
-				$blogdetails->meta_keywords = $request->input('meta_keywords');
+				$blogdetails->h1_heading = $request->input('h1_heading');
 				$blogdetails->meta_description = $request->input('meta_description');
 				$blogdetails->ratingvalue = $request->input('ratingvalue');
 				$blogdetails->ratingcount = $request->input('ratingcount');
@@ -249,7 +249,7 @@ class BlogController extends Controller
 				'description' => 'required',
 				// 'image' => 'required',
 				'meta_title' => 'required',
-				'meta_keywords' => 'required',
+				'h1_heading' => 'required',
 				'meta_description' => 'required',
 
 			]);
@@ -260,7 +260,7 @@ class BlogController extends Controller
 			$blogdetails->slug = generate_slug($request->input('meta_title'));
 			$blogdetails->description = $request->input('description');
 			$blogdetails->meta_title = $request->input('meta_title');
-			$blogdetails->meta_keywords = $request->input('meta_keywords');
+			$blogdetails->h1_heading = $request->input('h1_heading');
 			$blogdetails->meta_description = $request->input('meta_description');
 			$blogdetails->top_content = $request->input('top_content');
 			$blogdetails->bottom_content = $request->input('bottom_content');
@@ -371,7 +371,7 @@ class BlogController extends Controller
 				'title' => 'required|string',
 				'slug' => 'required|string',
 				'meta_title' => 'required|string',
-				'meta_keywords' => 'required|string|max:255',
+				'h1_heading' => 'required|string|max:255',
 				'meta_description' => 'required|string',
 				// 'description' => 'required|string',
 			]);
@@ -395,7 +395,7 @@ class BlogController extends Controller
 					'title' => $request->title,
 					// 'description' => $request->description,
 					'meta_title' => $request->meta_title,
-					'meta_keywords' => $request->meta_keywords,
+					'h1_heading' => $request->h1_heading,
 					'meta_description' => $request->meta_description,
 					'ratingvalue' => $request->ratingvalue,
 					'ratingcount' => $request->ratingcount,

@@ -1,7 +1,6 @@
 @extends('client.layouts.app')
 @section('title', $metaTitle ?? $keyword . ' | QuickDials - Trusted Local Search')
-@section('description', $metaDescription ?? 'Find the best ' . $keyword . ' services with QuickDials. Explore verified businesses, phone numbers, addresses, reviews, ratings, photos, maps, and trusted local service providers near you.')
-@section('keywords', $metaKeywords ?? $keyword . ', best ' . $keyword . ', top ' . $keyword . ' services, verified businesses, local business directory, QuickDials, nearby services, reviews and ratings, trusted businesses, contact details, local search engine India')
+@section('description', $metaDescription ?? 'Find the best ' . $keyword . ' services with QuickDials. Explore verified businesses, phone numbers, addresses, reviews, ratings, photos, maps, and trusted local service providers near you.') 
 @section('og_image', !empty($kwData['category_icon'])
     ? asset($kwData['category_icon'])
     : asset('client/images/quickdials-og.png')) 
@@ -45,10 +44,10 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
                 <span class="text-slate-600">{{ $keyword }}</span>
             </nav>
 
-
+ 
                 <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
                     <div itemprop="name">
-                        <h1 class="text-lg font-bold text-gray-900 leading-tight">{{ $keyword }}</h1>
+                        <h1 class="text-lg font-bold text-gray-900 leading-tight">{{ $kwData['h1_heading']?? $keyword??"Category" }}</h1>
                     </div>                           
                     <div itemprop="aggregateRating"
                         itemscope

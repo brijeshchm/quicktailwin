@@ -24,7 +24,7 @@ return new class extends Migration
             $table->longText('description')->nullable();
 
             $table->string('meta_title')->nullable();
-            $table->text('meta_keywords')->nullable();
+            $table->text('h1_heading')->nullable();
             $table->text('meta_description')->nullable();
 
             $table->longText('top_content')->nullable();

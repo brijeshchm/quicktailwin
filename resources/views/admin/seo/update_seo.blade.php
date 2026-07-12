@@ -2,7 +2,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Add SEO Fields - {{$keyword->keyword}}</h1>
+                    <h1 class="page-header">Update SEO keyword - {{$keyword->keyword}}</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -82,9 +82,9 @@ padding:0px;
                 </div>
 
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Meta Keywords</label>
+                    <label class="col-md-2 control-label">H1 Heading</label>
                     <div class="col-md-8">
-                        <textarea class="form-control" name="meta_keywords" placeholder="Enter Meta Keywords">{{ $keyword->meta_keywords }}</textarea>
+                        <textarea class="form-control" name="h1_heading" placeholder="Enter H1 Heading">{{ $keyword->h1_heading }}</textarea>
                     </div>
                 </div>
 
@@ -165,32 +165,32 @@ padding:0px;
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="meta_keywords" class="col-md-2 control-label">Paragraph 4 </label>
+                    <label for="h1_heading" class="col-md-2 control-label">Paragraph 4 </label>
                     <div class="col-md-8">
                         <input class="form-control" name="paragraph4" placeholder="Enter paragraph4" value="{{ $keyword->paragraph4 }}"> 
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="meta_keywords" class="col-md-2 control-label">Paragraph 5</label>
+                    <label for="h1_heading" class="col-md-2 control-label">Paragraph 5</label>
                     <div class="col-md-8">
                         <input class="form-control" name="paragraph5" placeholder="Enter paragraph5" value="{{ $keyword->paragraph5 }}"> 
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="meta_keywords" class="col-md-2 control-label">Paragraph 6 </label>
+                    <label for="h1_heading" class="col-md-2 control-label">Paragraph 6 </label>
                     <div class="col-md-8">
                         <input class="form-control" name="paragraph6" placeholder="Enter paragraph 6" value="{{ $keyword->paragraph6 }}"> 
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="meta_keywords" class="col-md-2 control-label">Paragraph 7 </label>
+                    <label for="h1_heading" class="col-md-2 control-label">Paragraph 7 </label>
                     <div class="col-md-8">
                         <input class="form-control" name="paragraph7" placeholder="Enter paragraph 7" value="{{ $keyword->paragraph7 }}"> 
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="meta_keywords" class="col-md-2 control-label">Paragraph 8 </label>
+                    <label for="h1_heading" class="col-md-2 control-label">Paragraph 8 </label>
                     <div class="col-md-8">
                         <input class="form-control" name="paragraph8" placeholder="Enter paragraph 8" value="{{ $keyword->paragraph8 }}"> 
                     </div>

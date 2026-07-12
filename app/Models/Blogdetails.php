@@ -13,7 +13,7 @@ class Blogdetails extends Model
     'slug',
     'description',
     'meta_title',
-    'meta_keywords',
+    'h1_heading',
     'meta_description',
     'top_content',
     'top_heading',

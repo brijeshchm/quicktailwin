@@ -102,7 +102,7 @@ div.dataTables_paginate ul.pagination {
 
                       <div class="form-group">
                           <label>Meta Keyword:</label>                    
-                          <textarea name="meta_keywords" type="text" class="form-control auto-save-field" placeholder="Please enter meta keywords">{{ old('meta_keywords',(isset($client)) ? $client->meta_keywords:"")}}</textarea>
+                          <textarea name="h1_heading" type="text" class="form-control auto-save-field" placeholder="Please enter H1 Heading">{{ old('h1_heading',(isset($client)) ? $client->h1_heading:"")}}</textarea>
                       </div>
                       <div class="form-group">
                           <label>Meta Description:</label>                    

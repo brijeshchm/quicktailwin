@@ -136,7 +136,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="meta_keywords" class="col-md-2 control-label">Location</label>
+									<label for="h1_heading" class="col-md-2 control-label">Location</label>
 									<div class="col-md-6">
 										<textarea class="form-control" name="location" placeholder="Enter Location">{{ old('location',(isset($edit_data)) ? $edit_data->location:"")}}</textarea>
 										@if ($errors->has('location'))

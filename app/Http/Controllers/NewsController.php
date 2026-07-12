@@ -60,7 +60,7 @@ class NewsController extends Controller
 				'title' => 'required|string|min:50|max:175',
 				'slug' => 'required|string|min:50|max:175',
 				'meta_title' => 'required|string|min:50|max:85',
-				'meta_keywords' => 'required|string|max:255',
+				'h1_heading' => 'required|string|max:255',
 				'meta_description' => 'required|string|min:150|max:165',
 				'description' => 'required|string|max:500',
 			]);
@@ -78,7 +78,7 @@ class NewsController extends Controller
 			$news->slug = generate_slug($request->input('title'));
 			$news->description = $request->input('description');
 			$news->meta_title = $request->input('meta_title');
-			$news->meta_keywords = $request->input('meta_keywords');
+			$news->h1_heading = $request->input('h1_heading');
 			$news->meta_description = $request->input('meta_description');
 
 			if ($news->save()) {
@@ -108,7 +108,7 @@ class NewsController extends Controller
 					'title' => 'required|string|min:10|max:175',
 
 					'meta_title' => 'required|string',
-					'meta_keywords' => 'required|string|max:255',
+					'h1_heading' => 'required|string|max:255',
 					'meta_description' => 'required|string',
 
 				]);
@@ -126,7 +126,7 @@ class NewsController extends Controller
 				$news->slug = generate_slug($request->input('title'));
 				$news->description = $request->input('description');
 				$news->meta_title = $request->input('meta_title');
-				$news->meta_keywords = $request->input('meta_keywords');
+				$news->h1_heading = $request->input('h1_heading');
 				$news->meta_description = $request->input('meta_description');
 				$news->ratingvalue = $request->input('ratingvalue');
 				$news->ratingcount = $request->input('ratingcount');
@@ -264,7 +264,7 @@ class NewsController extends Controller
 				'title' => 'required|string',
 				'slug' => 'required|string',
 				'meta_title' => 'required|string',
-				'meta_keywords' => 'required|string|max:255',
+				'h1_heading' => 'required|string|max:255',
 				'meta_description' => 'required|string',
 				// 'description' => 'required|string',
 			]);
@@ -288,7 +288,7 @@ class NewsController extends Controller
 					'title' => $request->title,
 					// 'description' => $request->description,
 					'meta_title' => $request->meta_title,
-					'meta_keywords' => $request->meta_keywords,
+					'h1_heading' => $request->h1_heading,
 					'meta_description' => $request->meta_description,
 					'ratingvalue' => $request->ratingvalue,
 					'ratingcount' => $request->ratingcount,

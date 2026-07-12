@@ -49,7 +49,7 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
 
               <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
                     <div itemprop="name">
-                        <h1 class="text-lg font-bold text-gray-900 leading-tight">{{ $keyword }}</h1>
+                        <h1 class="text-lg font-bold text-gray-900 leading-tight">{{ $kwData['h1_heading']??$keyword??"Sub Category" }}</h1>
                     </div>                           
                     <div itemprop="aggregateRating"
                         itemscope

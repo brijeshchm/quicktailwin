@@ -343,8 +343,8 @@ class ServiceCitySlugController extends Controller
         ? $clientsList['meta_title']
         : ($clientsList['business_name'] ?? '') . ' | ' . ($clientsList['city'] ?? '') . ' | QuickDials';
 
-        $metaKeywords = !empty($clientsList['meta_keywords'])
-        ? $clientsList['meta_keywords']
+        $metaKeywords = !empty($clientsList['h1_heading'])
+        ? $clientsList['h1_heading']
         : ($clientsList['business_name'] ?? '') . ' | QuickDials';
 
         $relatedSearches = $data['related_searches'] ?? [];
@@ -478,7 +478,7 @@ class ServiceCitySlugController extends Controller
         ) + [
             'metaTitle'       => $kwData['meta_title'] ?? "{$keyword} in " . ucfirst($city),
             'metaDescription' => $kwData['meta_description'] ?? '',
-            'metaKeywords'    => $kwData['meta_keywords'] ?? '',
+            'metaKeywords'    => $kwData['h1_heading'] ?? '',
         ]);
     }
 
@@ -634,7 +634,7 @@ class ServiceCitySlugController extends Controller
         ) + [
             'metaTitle'       => $kwData['meta_title'] ?? "{$keyword} ",
             'metaDescription' => $kwData['meta_description'] ?? '',
-            'metaKeywords'    => $kwData['meta_keywords'] ?? '',
+            'metaKeywords'    => $kwData['h1_heading'] ?? '',
         ]);
     }
 

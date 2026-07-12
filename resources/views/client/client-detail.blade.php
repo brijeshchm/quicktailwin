@@ -148,7 +148,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                 <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
                     <div itemprop="name">
                         <h1 class="text-2xl md:text-5xl font-extrabold text-white leading-tight tracking-tight"
-                    style="text-shadow:0 2px 30px rgba(30,58,138,.6);">{{ ucfirst($clientsList['business_name']) ?? 'Business Name' }}</h1>
+                    style="text-shadow:0 2px 30px rgba(30,58,138,.6);">{{ ucfirst($clientsList['h1_heading']) ?? ucfirst($clientsList['business_name']) ?? 'Business Name' }}</h1>
                     </div>                           
                     <div itemprop="aggregateRating"
                         itemscope

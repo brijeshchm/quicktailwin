@@ -50,7 +50,7 @@ class Keyword extends Model
 
     'meta_title',
     'meta_description',
-    'meta_keywords',
+    'h1_heading',
 
     'top_description',
     'courseabout',

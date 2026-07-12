@@ -31,7 +31,7 @@
 										<tr>
 											<th>Keyword</th>
 											<th>Meta Title</th>
-											<th>Meta Keywords</th>
+											<th>H1 Heading</th>
 											<th>Meta Description</th>
 											<th>Action</th>
 											<th>Signal</th>
@@ -41,7 +41,7 @@
 										<tr>
 											<th>Keyword</th>
 											<th>Meta Title</th>
-											<th>Meta Keywords</th>
+											<th>H1 Heading</th>
 											<th>Meta Description</th>
 											<th>Action</th>
 											<th>Signal</th>
