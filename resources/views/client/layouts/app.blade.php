@@ -112,9 +112,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         $items[] = ['name' => ucfirst($childCat), 'url' => route('child.show', $childSlug)];
     }
     $items =[];
-    // if(request()->segment(1)){
-    // $items[] = ['name' => request()->segment(1), 'url' => url()->current()];
-    // }
+    if(request()->segment(1) ===$city){
+    $items[] = ['name' => $keyword .' in '. $city, 'url' => url()->current()];
+    }else 
     if (!empty($keyword)) {
         $items[] = ['name' => $keyword, 'url' => url()->current()];
     } 

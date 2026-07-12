@@ -836,9 +836,11 @@ function bannerSlider(banners, interval = 4000) {
         </ul>
     </div>
     @endif
- @php
-$schemasCourse = []; 
-foreach($servicesRelated as $service) {
+    @php
+ $schemasCourse = []; 
+
+if(!empty($servicesRelated)){
+foreach(array_slice($servicesRelated, 0, 5) as $service) {
     $schemasCourse[] = [
         '@context'    => 'https://schema.org/',
         '@type'       => 'Course',
@@ -875,6 +877,7 @@ foreach($servicesRelated as $service) {
         'teaches'             => $service['title'] ?? '',
         'coursePrerequisites' => $keyword ?? '',
     ];
+}
 }
 @endphp
 
