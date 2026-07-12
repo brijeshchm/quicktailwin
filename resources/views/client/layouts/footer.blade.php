@@ -121,17 +121,18 @@
                 Browse trending categories and find verified providers near you.
             </p>
         </div>
-
+ 
         {{-- All services in ONE flat loop --}}
         <div class="flex flex-wrap gap-2">
             @foreach($allServices as $service)
                 @php
+              $cityName = !empty($city) && is_string($city) ? strtolower(str_replace(' ', '-', trim($city))) : 'bangalore';
                     $href = $service['type'] === 'online'
                         ? route('city.slug', [
                             'city_slug'    => 'online',
                             'service_slug' => $service['slug'],
                         ])
-                        : route('city.slug',['city_slug' =>  $city ?: 'bangalore', 'service_slug' => $service['slug']]);
+                        : route('city.slug',['city_slug' =>  $cityName, 'service_slug' => $service['slug']]);
                 @endphp
                 <a href="{{ $href }}"
                    title="{{ $service['name'] }}"
@@ -231,11 +232,12 @@
                         @foreach($section['links'] as $i => $link)
  
                            @php
+                           $cityName = !empty($city) && is_string($city) ? strtolower(str_replace(' ', '-', trim($city))) : 'bangalore';
                              $noCitySlugs = ['business-services'];  
                             $slugUrl = match($link['type'] ?? '') {
                              'keyword' => in_array($link['slug'], $noCitySlugs)
                             ? route('showCity', $link['slug'])
-                            : route('city.slug', ['city_slug' =>  $city ?: 'bangalore', 'service_slug' => $link['slug']]),                            
+                            : route('city.slug', ['city_slug' =>  $cityName, 'service_slug' => $link['slug']]),                            
                             'child'      => route('child.show',      $link['slug']),
                             'categories' => route('categories.show', $link['slug'])
                         
@@ -295,10 +297,12 @@
              
 
                         @php
+
+                         $cityName = !empty($city) && is_string($city) ? strtolower(str_replace(' ', '-', trim($city))) : 'bangalore';
                             $catUrl = match($link['type'] ?? '') {
                                 'keyword' => $link['slug'] === 'wedding-planning'
                                     ? route('showCity', $link['slug'])
-                                    : route('city.slug', ['city_slug' =>  $city ?: 'bangalore', 'service_slug' => $link['slug']]),
+                                    : route('city.slug', ['city_slug' =>  $cityName, 'service_slug' => $link['slug']]),
                                 'child'      => route('child.show', $link['slug']),
                                 'categories' => route('categories.show', $link['slug']),
                                 default      => '#',
