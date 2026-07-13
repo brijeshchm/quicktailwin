@@ -2406,8 +2406,8 @@ $reviewList = DB::table('clients')
         $city = strtolower($city);
  
         // 1. Validate city
-        if (!$this->cityExists($city)) {
-              abort(410);          
+        if (!$this->cityExists($city)) {               
+			return redirect()->route('home');  
         }
 
         // 2. If slug is NOT a service, try it as a business slug
@@ -2415,7 +2415,8 @@ $reviewList = DB::table('clients')
             
             $businessResponse = $this->fetchBusinessData($slug);
            if (!$businessResponse) {              
-               abort(410);
+            //    abort(410);
+			   return redirect()->route('home');  
             }             
             return $this->getClientDetail($businessResponse,$slug);
         }
@@ -2425,7 +2426,8 @@ $reviewList = DB::table('clients')
 
  
         if (!$response) {
-            abort(410);
+            // abort(410);
+			return redirect()->route('home');  
         }
 
         return $this->getsearchlist($response, $slug, $city);
@@ -2445,7 +2447,8 @@ $reviewList = DB::table('clients')
  
         // ── Validate city ──────────────────────────────────────────────────
         if (!$this->serviceExists($slug)) {
-            abort(410);
+            // abort(410);
+			return redirect()->route('home');  
         }
 
         // ── Fetch data ─────────────────────────────────────────────────────
