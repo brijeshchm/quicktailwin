@@ -1431,8 +1431,8 @@ class HomePageController extends Controller
 		$query = DB::table('keyword')
 			->select('keyword.keyword', 'keyword.slug', 'keyword.id');
 		$str = '';
-		if ($request->input('search_kw') != "") {
-			$str = trim($request->input('search_kw'));
+		if ($request->input('q') != "") {
+			$str = trim($request->input('q'));
 			$query = $query->orWhere('keyword.keyword', 'LIKE', '%' . $str . '%');
 			$query = $query->orderBy(DB::raw("CASE WHEN keyword.keyword LIKE '" . $str . "%' THEN 1 ELSE 2 END"));
 
@@ -1446,8 +1446,8 @@ class HomePageController extends Controller
 		$query = DB::table('clients')
 			->select('clients.business_name');
 		$str = '';
-		if ($request->input('search_kw') != "") {
-			$str = trim($request->input('search_kw'));
+		if ($request->input('q') != "") {
+			$str = trim($request->input('q'));
 			$query = $query->orWhere('clients.business_name', 'LIKE', '%' . $str . '%');
 			$query = $query->orderBy(DB::raw("CASE WHEN clients.business_name LIKE '" . $str . "%' THEN 1 ELSE 2 END"), 'DESC');
 			$query = $query->distinct()->get();

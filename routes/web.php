@@ -493,7 +493,7 @@ Route::get('/disclaimer', function () {
 
 
 
-Route::post('/kw/search', [App\Http\Controllers\Client\HomePageController::class, 'searchKW']);
+Route::post('/kw/search', [App\Http\Controllers\Client\HomePageController::class, 'searchKW'])->name('kw.search');
 Route::get('/courses/playwright-automation-training-in-noida', [App\Http\Controllers\Client\HomePageController::class, 'playwrightAutomation']);
 
 

@@ -2446,8 +2446,7 @@ $reviewList = DB::table('clients')
         $slug = strtolower($slug);
  
         // ── Validate city ──────────────────────────────────────────────────
-        if (!$this->serviceExists($slug)) {
-            // abort(410);
+        if (!$this->serviceExists($slug)) {            
 			return redirect()->route('home');  
         }
 

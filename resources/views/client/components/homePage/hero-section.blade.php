@@ -106,7 +106,7 @@
                             >{{ $tag['title'] }}</button>
                         @endforeach
                     @else
-                        @foreach(['AC Repair','Wedding Planner','Home Loan','Dentist','Pizza Near Me'] as $tag)
+                        @foreach(['AC Repair Service','Wedding Planner','Home Loan','Dentist','Pizza Near Me'] as $tag)
                             <button
                                 onclick="redirectSearch('{{ Str::slug($tag) }}', heroSelectedCity)"
                                 aria-label="Search {{ Str::slug($tag) }}"
@@ -205,7 +205,7 @@ setInterval(() => {
 }, 2200);
 
 // ─── Hero City ────────────────────────────────────────────────────────────
-let heroSelectedCity = 'Bangalore';
+let heroSelectedCity = 'bangalore';
 // const CITIES = ['Mumbai','Delhi','Bangalore','Hyderabad','Chennai','Pune','Kolkata','Ahmedabad'];
 
 const cityNames = ['Mumbai', 'Delhi', 'Bangalore', 'Hyderabad', 'Chennai', 'Pune', 'Kolkata', 'Ahmedabad'];
