@@ -48,11 +48,13 @@ select.ef-input { padding-left:1rem; }
 
     {{-- Header --}}
     <div class="px-6 py-5" style="background:linear-gradient(135deg,#2563EB 0%,#0891b2 100%);">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="font-bold text-white text-lg">Make an Enquiry</h3>
-            <button onclick="document.getElementById('enquiry-modal').classList.remove('open')"
+        <div class="flex items-center justify-center text-center mb-4">
+            <h3 class="font-bold text-white text-lg text-center">Request a Callback</h3>
+
+            <!-- <button onclick="document.getElementById('enquiry-modal').classList.remove('open')"
                     class="w-8 h-8 rounded-full flex items-center justify-center text-white/70 hover:text-white"
-                    style="background:rgba(255,255,255,.12);">✕</button>
+                    style="background:rgba(255,255,255,.12);">✕</button> -->
+
         </div>
         {{-- Step indicators --}}
         <div class="flex items-center gap-0">

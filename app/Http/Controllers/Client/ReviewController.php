@@ -33,14 +33,40 @@ class ReviewController extends Controller
         ], 400);
     }
 
-    // Validation
-    $validator = Validator::make($request->all(), [
-        'comment_author'       => 'required|regex:/^[A-Za-z ]/',
-        'comment_author_phone' => 'required|numeric',
-        'comment_author_email' => 'required|email',
-        'comment_content'      => 'required',
-        's_rating'             => 'required|numeric|max:5|min:1',
-    ]);
+   
+
+
+
+        $validator = Validator::make(
+        $request->all(),
+        [
+            'name'            => ['required', 'string', 'regex:/^[A-Za-z\s]+$/', 'max:100'],
+            'phone'           => ['required', 'regex:/^\+?[0-9\s\-()]{10,20}$/'],
+            'email'           => ['required', 'email'],
+            'comment_content' => ['required', 'string'],
+            's_rating'        => ['required', 'numeric', 'min:1', 'max:5'],
+        ],
+        [
+            'name.required'            => 'Please enter your name.',
+            'name.regex'               => 'Name may contain only letters and spaces.',
+            'name.max'                 => 'Name must not exceed 100 characters.',
+
+            'phone.required'           => 'Please enter your phone number.',
+            'phone.regex'              => 'Please enter a valid phone number containing 10 to 16 digits.',
+
+            'email.required'           => 'Please enter your email address.',
+            'email.email'              => 'Please enter a valid email address.',
+
+            'comment_content.required' => 'Please enter your comment.',
+
+            's_rating.required'        => 'Please select a rating.',
+            's_rating.numeric'         => 'Rating must be a number.',
+            's_rating.min'             => 'Rating must be at least 1.',
+            's_rating.max'             => 'Rating cannot be greater than 5.',
+        ]
+    );
+
+
 
     if ($validator->fails()) {
         return response()->json([
@@ -74,9 +100,9 @@ class ReviewController extends Controller
     // Save
     $comment = new Comment();
     $comment->comment_client_ID    = $clientId;
-    $comment->comment_author       = $request->comment_author;
-    $comment->comment_author_phone = $request->comment_author_phone;
-    $comment->comment_author_email = $request->comment_author_email;
+    $comment->comment_author       = $request->name;
+    $comment->comment_author_phone = $request->phone;
+    $comment->comment_author_email = $request->email;
     $comment->comment_content      = $request->comment_content;
     $comment->rating               = $request->s_rating;
     $comment->comment_author_IP    = $request->ip();
