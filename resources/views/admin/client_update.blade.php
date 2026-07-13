@@ -657,8 +657,8 @@
 				</div>
 				<div class="form-group col-md-12">
 					<div class="col-md-12">
-					 <label>Meta Keyword:</label>                    
-          <textarea name="h1_heading" type="text" class="form-control" placeholder="Please enter meta keyword">{{ old('h1_heading',(isset($client)) ? $client->h1_heading:"")}}</textarea>              
+					 <label>H1 Heading:</label>                    
+          <input name="h1_heading" type="text" class="form-control" placeholder="Please enter Hi Heading" value="{{ old('h1_heading',(isset($client)) ? $client->h1_heading:"")}}">             
 					</div>
 				</div>
 
