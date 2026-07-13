@@ -492,8 +492,6 @@ Route::get('/disclaimer', function () {
 });
 
 
-
-Route::post('/kw/search', [App\Http\Controllers\Client\HomePageController::class, 'searchKW'])->name('kw.search');
 Route::get('/courses/playwright-automation-training-in-noida', [App\Http\Controllers\Client\HomePageController::class, 'playwrightAutomation']);
 
 
@@ -545,7 +543,7 @@ Route::post('razorPayCheckout', [App\Http\Controllers\Client\WebsiteRazorpayCont
 Route::get('/payment-done', [App\Http\Controllers\Client\WebsiteRazorpayController::class, 'success']);
 Route::get('/failed', [App\Http\Controllers\Client\WebsiteRazorpayController::class, 'failed']);
  
- 
+// Route::get('search', [App\Http\Controllers\Client\CitySlugController::class, 'searchKW'])->name('kw.search');
 Route::get('/{city}', [CitySlugController::class, 'showCityOrService'])
     ->name('showCity');
  

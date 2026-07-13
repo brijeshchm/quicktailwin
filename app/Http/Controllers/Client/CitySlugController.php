@@ -732,15 +732,29 @@ $reviewList = DB::table('clients')
      */
     private function cityExists(string $city): bool
     {
-        $citySlug = strtolower(trim($city));
-        if (empty($citySlug)) {
-            return false;
-        }
-        return Cache::remember("city_exists_{$citySlug}", 3600, function () use ($citySlug) {
-            return DB::table('citylists')
-                ->where('city_slug', $citySlug)
-                ->exists();
-        });
+        // $citySlug = strtolower(trim($city));
+        // if (empty($citySlug)) {
+        //     return false;
+        // }
+        // return Cache::remember("city_exists_{$citySlug}", 3600, function () use ($citySlug) {
+        //     return DB::table('citylists')
+        //         ->where('city_slug', $citySlug)
+        //         ->exists();
+        // });
+
+
+		$citySlug = trim(strtolower($city));
+
+		return Cache::remember("city_exists_{$citySlug}", 3600, function () use ($citySlug) {
+			return DB::table('citylists')
+				->where(function ($query) use ($citySlug) {
+					$query->where('city_slug', $citySlug)          // Exact match
+						->orWhere('city_slug', 'LIKE', "%{$citySlug}%"); // Partial match
+				})
+				->exists();
+		});
+
+
     }
 
  
@@ -2346,7 +2360,7 @@ $reviewList = DB::table('clients')
         $zones     = $responseZones['data'] ?? [];
  
 	
-        return view('client.searchlist ', compact(
+        return view('client.searchlist', compact(
             'city', 'slug', 'keyword', 'area','zones',
             'childSlug', 'childCat',
             'ratingCount', 'ratingValue', 'bgImage',
@@ -2400,41 +2414,214 @@ $reviewList = DB::table('clients')
     /**
      * Handle  GET /{city}/{slug}
      */
+	public function showCityWithService(Request $request, string $city, string $slug)
+	{
+		$citySlug = strtolower(trim($city));
+		$keySlugRaw = strtolower(trim($slug));
 
-    public function showCityWithService(Request $request, string $city, string $slug)
-    {
-        $city = strtolower($city);
- 
-        // 1. Validate city
-        if (!$this->cityExists($city)) {               
-			return redirect()->route('home');  
-        }
+		$cityMap    = $this->getCitySlugMap();     // cached, in-memory
+		$keywordMap = $this->getKeywordSlugMap();  // cached, in-memory
 
-        // 2. If slug is NOT a service, try it as a business slug
-        if (!$this->serviceExists($slug)) {
-            
-            $businessResponse = $this->fetchBusinessData($slug);
-           if (!$businessResponse) {              
-            //    abort(410);
-			   return redirect()->route('home');  
-            }             
-            return $this->getClientDetail($businessResponse,$slug);
-        }
+		// ---- Resolve city (no DB call) ----
+		$cityName = $this->resolveBestCandidate($citySlug, $cityMap);
 
-        // 3. Otherwise treat as service / search listing
-        $response = $this->fetchData($city, $slug);
+		if (!$cityName) {
+			$defaultSlug = config('app.default_city_slug', 'bangalore');
+			if (!isset($cityMap[$defaultSlug])) {
+				return redirect()->route('home');
+			}
+			return redirect()->route('city.slug', [
+				'city_slug'    => $defaultSlug,
+				'service_slug' => $slug,
+			], 301);
+		}
 
- 
-        if (!$response) {
-            // abort(410);
-			return redirect()->route('home');  
-        }
+		if ($citySlug !== $cityName) {
+			return redirect()->route('city.slug', [
+				'city_slug'    => $cityName,
+				'service_slug' => $slug,
+			], 301);
+		}
 
-        return $this->getsearchlist($response, $slug, $city);
-    }
+		// ---- Resolve keyword/service (no DB call) ----
+		$slugUrl = $this->resolveBestCandidate($keySlugRaw, $keywordMap);
 
+		if ($slugUrl) {
+			if ($keySlugRaw !== $slugUrl) {
+				return redirect()->route('city.slug', [
+					'city_slug'    => $cityName,
+					'service_slug' => $slugUrl,
+				], 301);
+			}
 
-   
+			// Confirmed valid service slug — skip the redundant serviceExists() DB call.
+			$response = $this->fetchData($cityName, $slugUrl);
+
+			if (!$response) {
+				return redirect()->route('home');
+			}
+
+			return $this->getsearchlist($response, $slugUrl, $cityName);
+		}
+
+		// Not a known service/keyword slug at all -> try as a business slug.
+		$businessResponse = $this->fetchBusinessData($slug);
+		if (!$businessResponse) {
+			return redirect()->route('home');
+		}
+
+		return $this->getClientDetail($businessResponse, $slug);
+	}
+
+	/**
+	 * Full slug => slug map, cached. Rebuilds only when cache expires or is flushed.
+	 */
+	private function getCitySlugMap(): array
+	{
+		return Cache::remember('citylists_slug_map', now()->addHours(6), function () {
+			return DB::table('citylists')->pluck('city_slug', 'city_slug')->all();
+		});
+	}
+
+	private function getKeywordSlugMap(): array
+	{
+		return Cache::remember('keyword_slug_map', now()->addHours(6), function () {
+			return DB::table('keyword')->pluck('slug', 'slug')->all();
+		});
+	}
+
+	/**
+	 * Generate subsequence candidates for the given slug, longest-first,
+	 * and return the first one present in the cached map (in-memory, O(candidates)).
+	 */
+	private function resolveBestCandidate(string $inputSlug, array $slugMap): ?string
+	{
+		$tokens = array_values(array_filter(explode('-', $inputSlug), fn ($p) => $p !== ''));
+		$candidates = $this->generateSubsequenceSlugs($tokens);
+
+		// Longest candidate first = most specific match wins.
+		usort($candidates, fn ($a, $b) => strlen($b) <=> strlen($a));
+
+		foreach ($candidates as $candidate) {
+			if (isset($slugMap[$candidate])) {
+				return $candidate;
+			}
+		}
+
+		return null;
+	}
+	
+
+		public function showCityWithService_olldd(Request $request, string $city, string $slug)
+		{
+			$citySlug = strtolower(trim($city));
+
+			$parts = array_values(array_filter(explode('-', $citySlug), fn ($p) => $p !== ''));
+
+			$candidates = [];
+			$n = count($parts);
+			for ($i = 0; $i < $n; $i++) {
+				for ($j = $i; $j < $n; $j++) {
+					$candidates[] = implode('-', array_slice($parts, $i, $j - $i + 1));
+				}
+			}
+			$candidates = array_unique($candidates);
+
+			$cityDetails = DB::table('citylists')
+				->whereIn('city_slug', $candidates)
+				->orderByRaw('LENGTH(city_slug) DESC')
+				->first();
+
+			// No match at all -> fall back to the default city, but redirect to its
+			// canonical URL rather than silently rendering it at the wrong slug.
+			if (!$cityDetails) {
+				$defaultCity = DB::table('citylists')
+					->where('city_slug', config('app.default_city_slug', 'bangalore'))
+					->first();
+
+				// Default city itself missing from DB — nothing sane to fall back to.
+				if (!$defaultCity) {
+					return redirect()->route('home');
+				}
+
+				return redirect()->route('city.slug', [
+					'city_slug'    => $defaultCity->city_slug,
+					'service_slug' => $slug,
+				], 301);
+			}
+
+			$cityName = $cityDetails->city_slug;
+
+			// City in URL is not the canonical slug (typo, junk prefix/suffix, wrong case, etc.)
+			if ($citySlug !== $cityName) {
+				return redirect()->route('city.slug', [
+					'city_slug'    => $cityName,
+					'service_slug' => $slug,
+				], 301);
+			}
+
+			$keySlug = strtolower(trim($slug));
+			$keys    = array_values(array_filter(explode('-', $keySlug), fn ($p) => $p !== ''));
+			$keywords = $this->generateSubsequenceSlugs($keys);
+
+			$exists = DB::table('keyword')
+				->select('slug')
+				->whereIn('slug', $keywords)
+				->orderByRaw('LENGTH(slug) DESC')
+				->first();
+
+			if (!$exists) {
+				abort(404);
+			}
+
+			$slugUrl = $exists->slug;
+
+			if ($keySlug !== $slugUrl) {
+				return redirect()->route('city.slug', [
+					'city_slug'    => $cityName,
+					'service_slug' => $slugUrl,
+				], 301);
+			}
+
+			// City and service are both exactly correct from here on — no redirect, just render.
+
+			if (!$this->serviceExists($slugUrl)) {
+				$businessResponse = $this->fetchBusinessData($slugUrl);
+				if (!$businessResponse) {
+					return redirect()->route('home');
+				}
+				return $this->getClientDetail($businessResponse, $slugUrl);
+			}
+
+			$response = $this->fetchData($cityName, $slugUrl);
+
+			if (!$response) {
+				return redirect()->route('home');
+			}
+
+			return $this->getsearchlist($response, $slugUrl, $cityName);
+		}
+		
+
+	
+	private function generateSubsequenceSlugs(array $tokens): array
+	{
+		$tokens = array_slice($tokens, 0, 8);
+		$count  = count($tokens);
+		$result = [];
+
+		for ($mask = 1; $mask < (1 << $count); $mask++) {
+			$subset = [];
+			for ($bit = 0; $bit < $count; $bit++) {
+				if ($mask & (1 << $bit)) {
+					$subset[] = $tokens[$bit];
+				}
+			}
+			$result[] = implode('-', $subset);
+		}
+
+		return array_unique($result);
+	}
 
 
 
@@ -2536,7 +2723,63 @@ $reviewList = DB::table('clients')
         ]);
     }
 
+/*
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
 
+	public function searchKW(Request $request)
+	{
+
+	$str = trim($request->input('q'));
+
+
+		$query = DB::table('keyword')
+			->select('keyword.keyword', 'keyword.slug', 'keyword.id');
+		$str = '';
+		if ($request->input('q') != "") {
+			$str = trim($request->input('q'));
+			$query = $query->orWhere('keyword.keyword', 'LIKE', '%' . $str . '%');
+			$query = $query->orderBy(DB::raw("CASE WHEN keyword.keyword LIKE '" . $str . "%' THEN 1 ELSE 2 END"));
+
+			$query = $query->distinct()->first();
+
+		}
+ 
+	  
+		$city = 'delhi';
+		$slug = strtolower($query->slug);
+ 
+        // 1. Validate city
+        if (!$slug) {               
+			return redirect()->route('home');  
+        }
+
+        // 2. If slug is NOT a service, try it as a business slug
+        if (!$this->serviceExists($slug)) {
+            
+            $businessResponse = $this->fetchBusinessData($slug);
+           if (!$businessResponse) {              
+            //    abort(410);
+			   return redirect()->route('home');  
+            }             
+            return $this->getClientDetail($businessResponse,$slug);
+        }
+
+        // 3. Otherwise treat as service / search listing
+        $response = $this->fetchData($city, $slug);
+
+ 
+        if (!$response) {
+            // abort(410);
+			return redirect()->route('home');  
+        }
+
+        return $this->getsearchlist($response, $slug, $city);
+
+	}
 
 
 

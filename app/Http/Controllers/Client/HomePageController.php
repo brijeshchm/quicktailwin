@@ -1417,48 +1417,6 @@ class HomePageController extends Controller
 	}
 
 
-
-	/*
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-
-	public function searchKW(Request $request)
-	{
-
-		$query = DB::table('keyword')
-			->select('keyword.keyword', 'keyword.slug', 'keyword.id');
-		$str = '';
-		if ($request->input('q') != "") {
-			$str = trim($request->input('q'));
-			$query = $query->orWhere('keyword.keyword', 'LIKE', '%' . $str . '%');
-			$query = $query->orderBy(DB::raw("CASE WHEN keyword.keyword LIKE '" . $str . "%' THEN 1 ELSE 2 END"));
-
-			$query = $query->distinct()->get();
-
-		}
-		$html = "";
-		foreach ($query as $q) {
-			$html .= "<li><a href='#'><i class='fa fa-search'></i>" . trim($q->keyword) . "</a></li>";
-		}
-		$query = DB::table('clients')
-			->select('clients.business_name');
-		$str = '';
-		if ($request->input('q') != "") {
-			$str = trim($request->input('q'));
-			$query = $query->orWhere('clients.business_name', 'LIKE', '%' . $str . '%');
-			$query = $query->orderBy(DB::raw("CASE WHEN clients.business_name LIKE '" . $str . "%' THEN 1 ELSE 2 END"), 'DESC');
-			$query = $query->distinct()->get();
-		}
-
-		foreach ($query as $q) {
-			$html .= "<li><a href='#'><i class='fa fa-search'></i>" . trim($q->business_name) . "</a></li>";
-		}
-		return response()->json(['status' => 1, 'message' => $html]);
-	}
-
 	/*
 	 * Remove the specified resource from storage.
 	 *
