@@ -599,7 +599,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
      $defaultHeading = 'Trusted '. $keyword;
     }    
     @endphp
-    <div class="bg-white rounded-2xl mt-4">
+    <div class="bg-white rounded-2xl p-6 mt-4 mx-4">
         <h2 class="text-lg font-bold text-gray-900 mb-3"> {{ $defaultHeading }}</h2>
         <div class="text-sm text-gray-600 leading-relaxed">{!! $topDescription !!}</div>
     </div>
@@ -642,7 +642,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
     }    
     @endphp
     
-    <div class="bg-white rounded-2xl mt-4">
+    <div class="bg-white rounded-2xl p-6 mt-4 mx-4">
         <h2 class="text-lg font-bold text-gray-900 mb-3"> {{ $bottom_heading }}  </h2>
         <div class="text-sm text-gray-600 leading-relaxed">{!! $bottomDescription !!}</div>
     </div>
@@ -662,7 +662,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
     }    
     @endphp
 
-    <div class="bg-white rounded-2xl mt-4">
+    <div class="bg-white rounded-2xl p-6 mt-4 mx-4">
         <h2 class="text-lg font-bold text-gray-900 mb-3"> {{ $extra_heading }}</h2>
         <div class="text-sm text-gray-600 leading-relaxed">{!! $kwData['extra_description'] !!}</div>
     </div>
@@ -671,7 +671,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
 
     {{-- FAQ --}}
     @if(count($faqs ?? []) > 0)
-    <div class="bg-white rounded-2xl mt-4" x-data="{ openFaq: null }">
+    <div class="bg-white rounded-2xl p-6 mt-4 mx-4" x-data="{ openFaq: null }">
         <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
         Frequently Asked Questions {{ $keyword }}
         </h2>
@@ -712,7 +712,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
     @endif
 
     {{-- Other Cities --}}
-    <div class="bg-white rounded-2xl mt-4">
+    <div class="bg-white rounded-2xl p-6 mt-4 mx-4">
         <h2 class="text-base font-bold text-gray-900 mb-3 flex items-center gap-2"> Find {{ $keyword }} in Other City</h2>
         <ul class="flex flex-wrap gap-2 text-sm text-gray-600">
             @foreach($otherCities as $i => $c)
