@@ -1079,7 +1079,7 @@ function selectCert(i) {
     <div class="w-full px-6 md:px-8">
         @if(!empty($areaBusiness['heading']))
         <div class="reveal text-center mb-12">
-            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">{{ $areaBusiness['heading'] }}</h1>
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">{{ $areaBusiness['heading'] }}</h2>
             <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">{{ $areaBusiness['paragraph'] ?? '' }}</p>
         </div>
         @endif

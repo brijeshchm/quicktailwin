@@ -100,8 +100,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         .hidden-init { display: none; }
     </style>        
-@php
-     
+@php     
     $serviceName = !empty($metaTitle)
         ? $metaTitle
         : "";
@@ -125,10 +124,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     );
 @endphp 
 @php   
-
-
     $schemas = [];  
-
     if (request()->is('/')){
     $schemas[] = [
         '@context' => 'https://schema.org',
