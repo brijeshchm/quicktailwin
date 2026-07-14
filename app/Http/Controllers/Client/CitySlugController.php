@@ -2630,16 +2630,32 @@ $reviewList = DB::table('clients')
      */
     public function showCityOrService(Request $request, string $slug)
     {
-        $slug = strtolower($slug);
- 
-        // ── Validate city ──────────────────────────────────────────────────
-        if (!$this->serviceExists($slug)) {            
-			return redirect()->route('home');  
-        }
+			// ── Normalize once ───────────────────────────────────────────────────
+		$slug = strtolower(trim($slug));
 
-        // ── Fetch data ─────────────────────────────────────────────────────
-        $response = $this->fetchKeywordData($slug);
-         
+		$keywordMap = $this->getKeywordSlugMap(); // cached, in-memory
+		$slugUrl    = $this->resolveBestCandidate($slug, $keywordMap);
+
+		// If a canonical/better match exists and differs from input → 301 redirect
+		if ($slugUrl && $slugUrl !== $slug) {
+			return redirect()->route('showCity', $slugUrl, 301);
+		}
+
+		// Final slug to use downstream: prefer resolved match, fallback to input
+		$finalSlug = $slugUrl ?: $slug;
+
+		// ── Validate city ────────────────────────────────────────────────────
+		if (!$this->serviceExists($finalSlug)) {
+			return redirect()->route('home');
+		}
+
+		// ── Fetch data ───────────────────────────────────────────────────────
+		$response = $this->fetchKeywordData($finalSlug);
+
+		if (!$response) {
+			return redirect()->route('home');
+		}		
+
         $kwData   = $response['keyword'] ?? [];
         $businessOwners = $this->businessOwnersData();
 
@@ -2651,7 +2667,7 @@ $reviewList = DB::table('clients')
         $childCat   = $kwData['child_category'] ?? '';
         $ratingCount = (int) ($kwData['ratingcount'] ?? 0);
         $ratingValue = (float) ($kwData['ratingvalue'] ?? 4.8);
-        $bgImage    = $kwData['category_banner'] ?? '/computer-courses-training.jpg';
+        $bgImage    = $kwData['category_banner'] ?? '/client/images/computer-courses-training.jpg';
  
         $topDescription    = $this->replaceCity($kwData['top_description'] ?? '', $area);
         $bottomDescription = $this->replaceCity($kwData['bottom_description'] ?? '', $area);
