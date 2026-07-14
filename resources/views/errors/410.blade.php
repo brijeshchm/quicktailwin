@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="csrf-token" content="{{ csrf_token() }}" />
-<meta name="robots" content="index, nofollow">
+<meta name="robots" content="noindex, nofollow">
 <link rel="canonical" href="{{ url()->current() }}" />
 <link rel="shortcut icon" href="{{ asset('client/images/favicon.png') }}" type="image/png" />
 <title>No results found @if(request('q')) for "{{ request('q') }}" @endif — QuickDials</title>

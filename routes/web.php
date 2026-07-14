@@ -548,8 +548,7 @@ Route::get('/{city}', [CitySlugController::class, 'showCityOrService'])
     ->name('showCity');
  
 
-Route::get('/{city_slug}/{service_slug}', [CitySlugController::class, 'showCityWithService'])
- 
+Route::get('/{city_slug}/{service_slug}', [CitySlugController::class, 'showCityWithService']) 
     ->name('city.slug');
 
 

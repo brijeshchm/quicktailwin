@@ -453,7 +453,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
                     </div>
                 </div>
             </div>
-
+            @if(!empty($growthBusiness))
             {{-- Grow Your Business Banner --}}
             <section class="w-full bg-[#057AEC] rounded-lg overflow-hidden mt-4">
                 <div class="flex flex-col lg:flex-row items-center">
@@ -477,7 +477,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
                     </div>
                 </div>
             </section>
-
+            @endif
         </main>
 
     

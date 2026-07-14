@@ -165,8 +165,8 @@ if (request()->is('/')){
 
     'geo' => [
         '@type'     => 'GeoCoordinates',
-        'latitude'  => 12.9594,
-        'longitude' => 77.6462,
+        'latitude'  => 12.9658,
+        'longitude' => 77.6421,
     ],
 
     'openingHoursSpecification' => [

@@ -29,7 +29,6 @@ class CitySlugController extends Controller
     private function fetchData(string $city, string $keyword): ?array
     {  
  
- 
 		$cityName = ucwords(str_replace('-', ' ', $city));
 		//$keywordName = ucwords(str_replace('-', ' ', $search_kw));
 		$city = strtolower(str_replace(' ', '-', trim($city)));
@@ -798,8 +797,7 @@ $reviewList = DB::table('clients')
 			$paragraph8 ="";
 
 			if(!$keywordDetails){
-						return  null;
-
+				return  null;
 			}
 		$category_banner = config('app.website') . 'client/images/computer-courses-training.jpg';
 		$child_icon =config('app.website') . 'client/images/it_training.jpg';
@@ -2418,7 +2416,6 @@ $reviewList = DB::table('clients')
 	{
 		$citySlug = strtolower(trim($city));
 		$keySlugRaw = strtolower(trim($slug));
-
 		$cityMap    = $this->getCitySlugMap();     // cached, in-memory
 		$keywordMap = $this->getKeywordSlugMap();  // cached, in-memory
 
@@ -2458,7 +2455,8 @@ $reviewList = DB::table('clients')
 			$response = $this->fetchData($cityName, $slugUrl);
 
 			if (!$response) {
-				return redirect()->route('home');
+				abort(410);
+				//return redirect()->route('home');
 			}
 
 			return $this->getsearchlist($response, $slugUrl, $cityName);
@@ -2630,9 +2628,8 @@ $reviewList = DB::table('clients')
      */
     public function showCityOrService(Request $request, string $slug)
     {
-			// ── Normalize once ───────────────────────────────────────────────────
+		// ── Normalize once ───────────────────────────────────────────────────
 		$slug = strtolower(trim($slug));
-
 		$keywordMap = $this->getKeywordSlugMap(); // cached, in-memory
 		$slugUrl    = $this->resolveBestCandidate($slug, $keywordMap);
 
@@ -2749,9 +2746,7 @@ $reviewList = DB::table('clients')
 	public function searchKW(Request $request)
 	{
 
-	$str = trim($request->input('q'));
-
-
+		$str = trim($request->input('q'));
 		$query = DB::table('keyword')
 			->select('keyword.keyword', 'keyword.slug', 'keyword.id');
 		$str = '';
@@ -2759,18 +2754,16 @@ $reviewList = DB::table('clients')
 			$str = trim($request->input('q'));
 			$query = $query->orWhere('keyword.keyword', 'LIKE', '%' . $str . '%');
 			$query = $query->orderBy(DB::raw("CASE WHEN keyword.keyword LIKE '" . $str . "%' THEN 1 ELSE 2 END"));
-
 			$query = $query->distinct()->first();
-
-		}
- 
+		} 
 	  
 		$city = 'delhi';
 		$slug = strtolower($query->slug);
  
         // 1. Validate city
-        if (!$slug) {               
-			return redirect()->route('home');  
+        if (!$slug) {     
+			 abort(410);          
+			 
         }
 
         // 2. If slug is NOT a service, try it as a business slug
@@ -2778,8 +2771,8 @@ $reviewList = DB::table('clients')
             
             $businessResponse = $this->fetchBusinessData($slug);
            if (!$businessResponse) {              
-            //    abort(410);
-			   return redirect()->route('home');  
+               abort(410);
+			   
             }             
             return $this->getClientDetail($businessResponse,$slug);
         }
@@ -2789,14 +2782,11 @@ $reviewList = DB::table('clients')
 
  
         if (!$response) {
-            // abort(410);
-			return redirect()->route('home');  
+            abort(410);
+			  
         }
 
         return $this->getsearchlist($response, $slug, $city);
 
 	}
-
-
-
 }

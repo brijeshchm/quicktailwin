@@ -549,6 +549,7 @@ function bannerSlider(banners, interval = 4000) {
                 </div>
             </div>
 
+            @if(!empty($growthBusiness))
             {{-- Grow Your Business Banner --}}
             <section class="w-full bg-[#057AEC] rounded-lg overflow-hidden mt-4">
                 <div class="flex flex-col lg:flex-row items-center">
@@ -556,11 +557,11 @@ function bannerSlider(banners, interval = 4000) {
                         <h2 class="text-2xl md:text-3xl font-bold mb-3">Trying to grow your business?</h2>
                         <p class="text-sm md:text-base mb-6 text-gray-200">Create a listing on Quickdials now and start getting enquiries</p>
                         <div class="flex flex-wrap items-center gap-6 md:gap-10 mb-6">
-                            <div><h3 class="text-xl font-bold text-orange-300">{{ $growthBusiness['Keyword'] }}</h3><p class="text-sm text-gray-200">Service Visitors</p></div>
+                            <div><h3 class="text-xl font-bold text-orange-300">{{ $growthBusiness['Keyword'] ??''}}</h3><p class="text-sm text-gray-200">Service Visitors</p></div>
                             <div class="hidden md:block w-px h-10 bg-gray-400"></div>
-                            <div><h3 class="text-xl font-bold text-orange-300">{{ $growthBusiness['ProductsServices'] }}</h3><p class="text-sm text-gray-200">Products Services</p></div>
+                            <div><h3 class="text-xl font-bold text-orange-300">{{ $growthBusiness['ProductsServices']??'' }}</h3><p class="text-sm text-gray-200">Products Services</p></div>
                             <div class="hidden md:block w-px h-10 bg-gray-400"></div>
-                            <div><h3 class="text-xl font-bold text-orange-300">{{ $growthBusiness['GrowClient'] }}</h3><p class="text-sm text-gray-200">Listed Businesses</p></div>
+                            <div><h3 class="text-xl font-bold text-orange-300">{{ $growthBusiness['GrowClient']??'' }}</h3><p class="text-sm text-gray-200">Listed Businesses</p></div>
                         </div>
                         <a href="{{ route('login') }}" class="inline-block bg-orange-500 hover:bg-orange-600 px-6 py-3 rounded-md font-semibold mb-6 transition">Add Your Business</a>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-gray-200">
@@ -572,7 +573,7 @@ function bannerSlider(banners, interval = 4000) {
                     </div>
                 </div>
             </section>
-
+@endif
         </main>
 
         {{-- Sidebar --}}
