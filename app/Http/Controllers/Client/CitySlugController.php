@@ -402,10 +402,10 @@ class CitySlugController extends Controller
 				'certified_img' => $certified_img,
 				'trusted_img' => $trusted_img,
 				'gst_img' => $gst_img,			 
-				'city' => $client->city??'bangalore',	 		 
-				'state' => $client->state??'Karnataka',	 		 
-				'pincode' => $client->pincode??'560008',	 		 
-				'landmark' => $client->landmark??'OLD AIRPORT RD',	 		 
+				'city' => $client->city ??'bangalore',	 		 
+				'state' => $client->state ?? 'Karnataka',	 		 
+				'pincode' => !empty($client->pincode) ? $client->pincode : '560008',		 
+				'landmark' => $client->landmark ??'OLD AIRPORT RD',	 		 
 				'verified' => $client->verified ,
 				'active_status' => $client->active_status,
 				'trending' => $client->trending,			 
@@ -2074,9 +2074,9 @@ $reviewList = DB::table('clients')
             'rating'        => (float) ($b['avgRating'] ?? 0),
             'reviewCount'   => (int)   ($b['reviewCount'] ?? 0),
             'address'       => $b['address'] ?? '',
-            'state'       => $b['state'] ?? '',
-            'city'          => $b['city'] ?? '',
-            'pincode'          => $b['pincode'] ?? '',
+            'state'       => $b['state'] ?? 'Karnataka',
+            'city'          => $b['city'] ?? 'Bangalore',
+            'pincode'          => $b['pincode'] ?? '560008',
             'landmark'          => $b['landmark'] ?? '',
             'openUntil'     => $b['openUntil'] ?? $b['open_until'] ?? '9:00 AM',
             'isOpen'        => $b['isOpen'] ?? $b['is_open'] ?? true,
@@ -2481,7 +2481,7 @@ $reviewList = DB::table('clients')
 
 			// Confirmed valid service slug — skip the redundant serviceExists() DB call.
 			$response = $this->fetchData($cityName, $slugUrl);
-
+ 
 			if (!$response) {
 				abort(410);
 				//return redirect()->route('home');
