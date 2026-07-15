@@ -1,6 +1,6 @@
 @props(['business', 'index' => 0, 'view' => 'list'])
 
-@php
+@php 
  $colorPalette = [
         'from-violet-500 to-indigo-600',
         'from-emerald-500 to-teal-600',
@@ -21,7 +21,6 @@
 
     $rating = $business['rating'] ?? 0;
     $reviewCount = $business['reviewCount'] ?? 0;
-
   
     $isOpen = $business['active_status'] ?? true;
     $verified = $business['verified'] ?? false;
@@ -39,13 +38,8 @@
     $openUntil = $business['openUntil'] ?? '9:00 AM';
 
     $filledStars = round($rating);
-
-       
-                     
+   
 @endphp
-
- 
-
 @if($view === 'list')
 {{-- LIST VIEW --}}
 <div class="group relative bg-white border-b border-gray-100 last:border-b-0 transition-all duration-300 hover:bg-indigo-50/30"
@@ -127,7 +121,7 @@
 
         {{-- Fallback initials --}}
         <div class="w-full h-full flex items-center justify-center">
-            <span class="text-white text-lg sm:text-2xl font-bold">{{ $initials ?? '' }}</span>
+            <span class="text-white text-lg sm:text-2xl font-bold">{{ $initials ?? '' }} </span>
         </div>
 
         @endif
@@ -355,7 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="p-5 flex flex-col flex-1">
         <div class="flex items-start justify-between mb-6">
             <div class="relative w-20 h-20 rounded-2xl bg-gradient-to-br {{ $color }} flex items-center justify-center shadow-md">
-                <span class="text-white text-xl font-bold">{{ $initials }}</span>
+                <span class="text-white text-xl font-bold">{{ $initials }} dddd</span>
                 @if($isOpen)
                 <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 text-[9px] font-bold bg-emerald-500 text-white px-2 py-0.5 rounded-full whitespace-nowrap shadow">OPEN</span>
                 @endif

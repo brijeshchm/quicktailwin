@@ -555,8 +555,6 @@ Route::get('/{city}', [CitySlugController::class, 'showCityOrService'])
 Route::get('/{city_slug}/{service_slug}', [CitySlugController::class, 'showCityWithService']) 
     ->name('city.slug');
 
-
-
 Route::POST('/client/lead/add-lead/', [App\Http\Controllers\Client\HomePageController::class, 'store']);
 Route::POST('/client/lead/saveTwoEnquiry', [App\Http\Controllers\Client\HomePageController::class, 'saveTwoEnquiry']);
 Route::POST('/client/enquirySendOtp', [App\Http\Controllers\Client\HomePageController::class, 'enquirySendOtp']);

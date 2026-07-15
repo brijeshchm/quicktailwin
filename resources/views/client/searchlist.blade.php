@@ -6,6 +6,9 @@
     ? asset($kwData['key_icon'])
     : asset('client/images/quickdials-og.png'))
 @section('content') 
+  
+
+
 <style>  
     #enquiry-modal { display: none; }
     #enquiry-modal.open { display: flex; }
@@ -76,6 +79,179 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
   @php
     $hasBanners = is_countable($keywordBanners) && count($keywordBanners) > 0;
 @endphp
+
+@php     
+    $serviceName = !empty($metaTitle)
+        ? $metaTitle
+        : "";
+
+    $serviceDescription = $metaDescription? $metaDescription: 'India’s leading local business search and service directory. Find trusted businesses, services, it training, professionals, and service providers near you with QuickDials..';
+    $cityName =$city ?: 'bangalore';
+    if (!empty($childCat) && !empty($childSlug)) {
+        $items[] = ['name' => ucfirst($childCat), 'url' => route('child.show', $childSlug)];
+    }
+
+ 
+@endphp 
+@php   
+
+$keywordImg= !empty($kwData['key_icon'])
+    ? asset($kwData['key_icon'])
+    : asset('client/images/quickdials-og.png');
+    $schemas = [];  
+     
+     $schemas[] = [
+        '@context'        => 'https://schema.org',
+        '@type'           => 'WebSite',
+        'name' => "Quickdials",
+        'url' => "https://www.quickdials.com/",
+    ];
+    
+
+      // ---- 2. SERVICE (only if service data exists) ----
+    if (!empty($serviceName)) {
+        $schemas[] = [
+            '@context'    => 'https://schema.org',
+            '@type'       => 'Service',
+            "@id"=> url()->current()."#service",
+            'name'        => $serviceName ?? '',
+            "serviceType"=> $serviceName,
+            'description' => $serviceDescription ?? '',
+            'url'         => url()->current(),        
+            "areaServed"=> [
+                    "@type"=> "City",
+                    "name"=>$cityName ?? '',
+                ],
+            'provider'    => [
+                '@type' => 'Organization',
+                "@id"=> "https://www.quickdials.com/#organization",
+                'name'  => 'QuickDials',
+                'url'   => route('home'),
+            ],
+        ];
+    }
+
+    if (!empty($metaTitle) && !empty($cityDetails['city'])) {
+
+        $address = [
+            '@type'          => 'PostalAddress',
+            'addressLocality' => $cityDetails['city'],
+            'addressCountry'  => 'IN',
+        ];
+
+        // Only add optional address fields if they actually have data
+        if (!empty($cityDetails['state'])) {
+            $address['addressRegion'] = $cityDetails['state'];
+        }
+        if (!empty($cityDetails['pincode'])) {
+            $address['postalCode'] = $cityDetails['pincode'];
+        }
+
+        $schema = [
+            '@context' => 'https://schema.org',
+            '@type'    => 'LocalBusiness',
+            'name'     => $metaTitle,
+            'url'      => url()->current(),
+            'address'  => $address,
+        ];
+
+        // Only add image if present
+        if (!empty($keywordImg)) {
+            $schema['image'] = $keywordImg;
+        }
+
+        // // Only add aggregateRating if BOTH value and count are real (non-zero, non-empty)
+        // if (!empty($ratingValue) && !empty($ratingCount)) {
+        //     $schema['aggregateRating'] = [
+        //         '@type'       => 'AggregateRating',
+        //         'ratingValue' => (string) $ratingValue,
+        //         'ratingCount' => (string) $ratingCount,
+        //         'bestRating'  => '5',
+        //     ];
+        // }
+
+        $schemas[] = $schema;
+    }
+ 
+
+    if(!empty($businesses)){
+
+        foreach($businesses as $clientBus){
+    
+            if (!empty($clientBus['logo']) && !empty($clientBus['name']) && !empty($clientBus['business_slug'])) {
+
+                $address = [
+                    '@type'          => 'PostalAddress',
+                    'addressLocality' => $clientBus['city'],
+                    'addressCountry'  => 'IN',
+                ];
+
+                // Only add optional address fields if they actually have data
+                if (!empty($clientBus['state'])) {
+                    $address['addressRegion'] = $clientBus['state'];
+                }
+                if (!empty($clientBus['pincode'])) {
+                    $address['postalCode'] = $clientBus['pincode'];
+                }
+
+                $schema = [
+                    '@context' => 'https://schema.org',
+                    '@type'    => 'LocalBusiness',
+                    'name'     => $clientBus['name'],
+                    'url' =>    route('business.details',$clientBus['business_slug']),     
+                    'address'  => $address,
+                ];
+
+                // Only add image if present
+                if (!empty($clientBus['logo'])) {
+                    $schema['image'] = $clientBus['logo'];
+                }
+
+
+        
+        
+
+                $schemas[] = $schema;
+            }
+        }
+
+    }
+
+
+    if (!empty($businesses)) {
+       
+        foreach ($businesses as $i => $item) {
+            $listItem[] = [
+                '@type'    => 'ListItem',
+                'position' => $i + 1,
+                'url'     => route('business.details',$item['business_slug']),
+                 
+            ];
+        }
+
+          $schemas[] = [
+            '@context'        => 'https://schema.org',
+            '@type'           => 'ItemList',
+            'itemListElement' => $listItem,
+        ];
+    }
+                     
+ 
+ 
+
+ 
+@endphp
+
+@if(!empty($schemas))
+<script type="application/ld+json">
+{!! json_encode(
+    count($schemas) === 1 ? $schemas[0] : $schemas,
+    JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
+) !!}
+</script>
+@endif 
+
+
 
 @if($hasBanners)
 <div x-data='bannerSlider(@json($keywordBanners), 4000)'
@@ -277,16 +453,7 @@ function bannerSlider(banners, interval = 4000) {
             </div>
         </div>
 
-        {{-- Category tabs --}}
-        <div class="flex gap-2 flex-wrap mt-2">
-            @foreach($categories as $cat)
-            <button @click="activeCategory = '{{ $cat }}'; applyFilters()"
-                    class="px-3 py-1 text-xs font-medium rounded-full border transition-all"
-                    :class="activeCategory === '{{ $cat }}' ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-gray-600 border-gray-200 hover:border-indigo-300'">
-                {{ $cat }}
-            </button>
-            @endforeach
-        </div>
+     
 
         {{-- Advanced filters --}}
         <div x-show="showFilters" x-cloak class="pt-3 mt-3 border-t border-gray-100 flex items-center gap-6 flex-wrap">
@@ -436,7 +603,6 @@ function bannerSlider(banners, interval = 4000) {
                         @endforeach
                     </div>
                 </div>
-
                 {{-- Review list --}}
                 @forelse($reviews as $review)
                 @php
@@ -837,59 +1003,7 @@ function bannerSlider(banners, interval = 4000) {
         </ul>
     </div>
     @endif
-    @php
- $schemasCourse = []; 
-
-if(!empty($servicesRelated)){
-foreach(array_slice($servicesRelated, 0, 5) as $service) {
-    $schemasCourse[] = [
-        '@context'    => 'https://schema.org/',
-        '@type'       => 'Course',
-        'name'        => $service['title']?? $keyword ?? '',
-        'description' => $service['meta_description'] ?? 'Find best ' . ($service['title'] ?? '') . ' near you on QuickDials.',
-        'image'       => asset($service['img']),
-        'url'         => route('city.slug', ['city_slug' => $service['city_slug'],'service_slug' => $service['url']?? null]),
-        'provider'    => [
-            '@type'  => 'Organization',
-            'name'   => 'QuickDials',
-            'sameAs' => route('home'),
-            'url'    => route('home'),
-        ],
-        'offers' => [
-            '@type'        => 'Offer',
-            'price'        => '0',
-            'priceCurrency'=> 'INR',
-            'availability' => 'https://schema.org/InStock',
-            'url'          => route('city.slug', ['city_slug' => $service['city_slug'],'service_slug' => $service['url']?? null]),
-        ],
-        'hasCourseInstance' => [
-            '@type'          => 'CourseInstance',
-            'courseMode'     => 'online',
-            'courseWorkload' => 'PT1H',
-            'instructor'     => [
-                '@type' => 'Person',
-                'name'  => 'QuickDials Internet Pvt Ltd',
-            ],
-            'startDate' => now()->format('Y-m-d'),
-            'endDate'   => now()->addYear()->format('Y-m-d'),
-        ],
-        'educationalLevel'    => 'Beginner',
-        'inLanguage'          => 'en',
-        'teaches'             => $service['title'] ?? '',
-        'coursePrerequisites' => $keyword ?? '',
-    ];
-}
-}
-@endphp
-
-{{-- Output Schema --}}
-@if(!empty($schemasCourse))
-<script type="application/ld+json">
-{!! json_encode($schemasCourse, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) !!}
-</script>
-@endif
-
-
+   
 </div>
 
 <script>

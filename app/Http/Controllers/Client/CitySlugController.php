@@ -297,6 +297,9 @@ class CitySlugController extends Controller
 				'clients.client_type',			 
 				'clients.pictures',			 
 				'clients.logo',			 
+				'clients.city',			 
+				'clients.state',			 
+				'clients.pincode',			 
 				'clients.business_description',			 
 				'citylists.city',
 				'keyword.keyword as keywords',
@@ -399,6 +402,8 @@ class CitySlugController extends Controller
 				'trusted_img' => $trusted_img,
 				'gst_img' => $gst_img,			 
 				'city' => $client->city,	 		 
+				'state' => $client->state,	 		 
+				'pincode' => $client->pincode,	 		 
 				'verified' => $client->verified,
 				'active_status' => $client->active_status,
 				'trending' => $client->trending,			 
@@ -976,6 +981,8 @@ $reviewList = DB::table('clients')
 				'clients.business_slug',
 				'clients.client_type',			 
 				'clients.city',		
+				'clients.state',		
+				'clients.pincode',		
 				'clients.logo',		
 				'clients.business_description',		
 				'clients.pictures',		
@@ -1091,6 +1098,8 @@ $reviewList = DB::table('clients')
 				'topSearch' => $client->topSearch,
 				'featured' => $client->featured,			 
 				'city' => $client->city,				 
+				'state' => $client->state,				 
+				'pincode' => $client->pincode,				 
 				'address' => $client->address,			 
 				'year_of_estb' => $client->year_of_estb,
 	 
@@ -1420,6 +1429,24 @@ $reviewList = DB::table('clients')
         try {
              $response = Http::timeout(5)
                ->withoutVerifying()->get('https://api.quickdials.com/api/website/getCityList', ['city' => $city]);
+ 
+            return $response->successful() ? $response->json() : null;
+        } catch (\Throwable $e) {
+            return null;
+        }
+    }
+     
+
+
+	
+    /**
+     * Fetch data from the QuickDials API.
+     */
+    private function fetchCityDetails(string $city=null)
+    {
+        try {
+             $response = Http::timeout(5)
+               ->withoutVerifying()->get('https://api.quickdials.com/api/website/getZoneDetails', ['city' => $city]);
  
             return $response->successful() ? $response->json() : null;
         } catch (\Throwable $e) {
@@ -2023,7 +2050,7 @@ $reviewList = DB::table('clients')
             'from-sky-500 to-blue-600',      'from-amber-500 to-yellow-600',
             'from-fuchsia-500 to-purple-600','from-lime-500 to-green-600',
         ];
-
+ 
         $tags     = $this->normalizeArray($b['tags'] ?? []);
         $category = $this->normalizeArray($b['category'] ?? []);
         $name     = $b['business_name'] ?? 'Business Name';
@@ -2034,7 +2061,7 @@ $reviewList = DB::table('clients')
             : [];
 
         $overviewBusiness = $b['businessDescription']; 
-
+ 
         return [
             'id'            => $id,
             'name'          => $name,
@@ -2043,7 +2070,9 @@ $reviewList = DB::table('clients')
             'rating'        => (float) ($b['avgRating'] ?? 0),
             'reviewCount'   => (int)   ($b['reviewCount'] ?? 0),
             'address'       => $b['address'] ?? '',
+            'state'       => $b['state'] ?? '',
             'city'          => $b['city'] ?? '',
+            'pincode'          => $b['pincode'] ?? '',
             'openUntil'     => $b['openUntil'] ?? $b['open_until'] ?? '9:00 AM',
             'isOpen'        => $b['isOpen'] ?? $b['is_open'] ?? true,
             'verified'      => $b['verified'] ?? $b['trusted_status'] ?? false,
@@ -2060,6 +2089,7 @@ $reviewList = DB::table('clients')
             'certifications'   => $b['certifications'] ?? '',
             'gallery'   => $gallery ?? '',
             'businessDescription'   => $overviewBusiness ?? '',
+            'logo'   => $b['logo'] ?? '',
         ];
     }
 
@@ -2346,12 +2376,13 @@ $reviewList = DB::table('clients')
         $businessChunks = array_chunk($businesses, 5);
         $quickBusinesses =  [];
         $responseZones = $this->fetchCityData($city);
+        $responseCityDetails = $this->fetchCityDetails($city);
         $zones     = $responseZones['data'] ?? [];
+        $cityDetails     = $responseCityDetails['data'] ?? [];
  
-	
         return view('client.searchlist', compact(
             'city', 'slug', 'keyword', 'area','zones',
-            'childSlug', 'childCat',
+            'childSlug', 'childCat','cityDetails',
             'ratingCount', 'ratingValue', 'bgImage',
             'topDescription', 'bottomDescription',
             'faqs', 'kwData','keywordBanners',
@@ -2716,12 +2747,12 @@ $reviewList = DB::table('clients')
  
         // ── Businesses ─────────────────────────────────────────────────────
         $rawList    = $response['clientsList'] ?? [];
-        
+     
         $agents    = $response['agents'] ?? [];
         $businesses = collect($rawList)
             ->map(fn ($b, $i) => $this->normalizeBusiness($b, $i))
             ->all();
-
+ 
  
          
         // ── Agents comparison table ────────────────────────────────────────

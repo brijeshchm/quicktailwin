@@ -100,7 +100,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         }
 
         .hidden-init { display: none; }
-    </style>        
+    </style>     
+       
 @php     
     $serviceName = !empty($metaTitle)
         ? $metaTitle
@@ -205,24 +206,6 @@ if (request()->is('/')){
     ],
 ];
  }
-
-
-    // ---- 2. SERVICE (only if service data exists) ----
-    if (!empty($serviceName)) {
-        $schemas[] = [
-            '@context'    => 'https://schema.org',
-            '@type'       => 'Service',
-            'name'        => $serviceName ?? '',
-            'description' => $serviceDescription ?? '',
-            'url'         => url()->current(),
-            'areaServed'  => $cityName ?? null,
-            'provider'    => [
-                '@type' => 'Organization',
-                'name'  => 'QuickDials',
-                'url'   => route('home'),
-            ],
-        ];
-    }
 
     // ---- 3. BREADCRUMBS ----
     if (!empty($breadcrumbs)) {
