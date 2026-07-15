@@ -543,6 +543,10 @@ Route::post('razorPayCheckout', [App\Http\Controllers\Client\WebsiteRazorpayCont
 Route::get('/payment-done', [App\Http\Controllers\Client\WebsiteRazorpayController::class, 'success']);
 Route::get('/failed', [App\Http\Controllers\Client\WebsiteRazorpayController::class, 'failed']);
  
+Route::match(['GET', 'HEAD'], '/business-details/{slug}', function () {
+    abort(410, 'This business listing has been permanently removed.');
+})->where('slug', '.*');
+
 // Route::get('search', [App\Http\Controllers\Client\CitySlugController::class, 'searchKW'])->name('kw.search');
 Route::get('/{city}', [CitySlugController::class, 'showCityOrService'])
     ->name('showCity');

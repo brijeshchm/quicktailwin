@@ -33,8 +33,9 @@
 <meta name="geo.position" content="@yield('geo_position', '')" />
 <meta name="google-site-verification" content="O8A-LG3YpW7vOcPtVP9OuNrEcLfLf1kW2tTVpFpHNxM" />
 <meta name="msvalidate.01" content="456AED0115D50D42C4F3A79DAB89D41D" />
-<link rel="icon" href="{{ asset('client/images/favicon.png') }}" type="image/png" />
-<link rel="apple-touch-icon" href="{{ asset('favicon.ico') }}" type="image/x-icon" />
+<link rel="icon" type="image/png" sizes="96x96" href="{{ asset('client/images/favicon.png') }}">
+<link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('client/images/favicon.png') }}">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-KF6W10RN9L"></script>
 <script>
   window.dataLayer = window.dataLayer || [];

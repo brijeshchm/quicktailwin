@@ -117,7 +117,7 @@ select.ef-input { padding-left:1rem; }
 // Calculate star image key
 $starKey = 0;
 foreach ($starMap as $k => $v) {
-    if ($clientsList['rating'] >= $k) $starKey = $k;
+    if (isset($clientsList['rating']) && $clientsList['rating'] >= $k) $starKey = $k;
 }
 $starImg = $starMap[$starKey] ?? 'star_4.5.png';
 @endphp
@@ -148,14 +148,20 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                 <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
                     <div itemprop="name">
                         <h1 class="text-2xl md:text-5xl font-extrabold text-white leading-tight tracking-tight"
-                    style="text-shadow:0 2px 30px rgba(30,58,138,.6);">{{ ucfirst($clientsList['h1_heading']) ?? ucfirst($clientsList['business_name']) ?? 'Business Name' }}</h1>
+                    style="text-shadow:0 2px 30px rgba(30,58,138,.6);"> {{ ucfirst(
+    !empty($clientsList['h1_heading'])
+        ? $clientsList['h1_heading']
+        : (!empty($clientsList['business_name'])
+            ? $clientsList['business_name']
+            : 'Business Name')
+) }}</h1>
                     </div>                           
                     <div itemprop="aggregateRating"
                         itemscope
                         itemtype="https://schema.org/AggregateRating"
                         class="flex items-center gap-2 text-sm">
                         <img  itemprop="image" src="{{ asset('client/images/' . $starImg) }}"
-                        alt="{{ $clientsList['ratingCount'] }} out of 5 stars"
+                        alt="{{ $clientsList['ratingCount']??'0' }} out of 5 stars"
                         class="lazy-image h-4 w-auto text-white"
                         width="80"
                         height="16"
@@ -163,13 +169,17 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                         decoding="async"
                         >
                         <span class="font-semibold text-white">
-                        <span itemprop="ratingValue">{{ $clientsList['rating'] }}</span>
+                        <span itemprop="ratingValue">{{ $clientsList['rating']??'0' }}</span>
                         </span>
                         <span class="text-white">
                         <span class="text-white">out of</span>
                         <span itemprop="bestRating">5</span>
                         <span class="text-white">based on</span>
-                        (<span itemprop="ratingCount">{{ number_format($clientsList['ratingCount']) }}</span>
+                        (<span itemprop="ratingCount">{{ number_format(
+    !empty($clientsList['ratingCount'])
+        ? (int) $clientsList['ratingCount']
+        : 0
+) }}</span>
                         <span class="text-white">reviews</span>)</span>
                     </div>
                 </div> 

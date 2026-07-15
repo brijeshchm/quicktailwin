@@ -24,11 +24,28 @@ class ClientDetailController extends Controller
 	 */
 	public function index(string $slug)
 	{
+
+        $newSlug = strtolower(str_replace(' ', '-', trim($slug)));   
+        $keywordMap = $this->getClientSlugMap(); // cached, in-memory
+ 
+        $slugUrl    = $this->resolveBestCandidate($newSlug, $keywordMap);
+
+        if ($slugUrl && $slugUrl !== $slug) {
+			return redirect()->route('business.details', $slugUrl, 301);
+		}
+        $finalSlug = $slugUrl ?: $slug;
+  
+        // ── Validate city ────────────────────────────────────────────────────
+		if (!$this->clientsExists($finalSlug)) {			 
+            abort(410);
+		}
+
+
         try {
         $res = Http::timeout(10)
         ->withoutVerifying()
         ->get('https://api.quickdials.com/api/website/business-details', [
-        'business_slug' => $slug,
+        'business_slug' => $finalSlug,
         ]);
 
         $response = $res->successful() ? $res->json() : null;
@@ -218,7 +235,7 @@ class ClientDetailController extends Controller
 
         $city = "delhi";      
    
-        $keyword = $clientsList['business_name'];
+        $keyword = $clientsList['business_name']??'Business Name';
 
         return view('client.client-detail', compact(
             'slug', 'response', 'clientsList', 'certificate','metaTitle','metaKeywords','metaDescription',
@@ -232,9 +249,62 @@ class ClientDetailController extends Controller
 	 
 
 	}
+	private function getClientSlugMap(): array
+	{
+		return Cache::remember('client_slug_map', now()->addHours(6), function () {
+			return DB::table('clients')->pluck('business_slug','business_slug')->all();
+		});
+	}
+    private function resolveBestCandidate(string $inputSlug, array $slugMap): ?string
+	{
+		$tokens = array_values(array_filter(explode('-', $inputSlug), fn ($p) => $p !== ''));
+		$candidates = $this->generateSubsequenceSlugs($tokens);
 
+		// Longest candidate first = most specific match wins.
+		usort($candidates, fn ($a, $b) => strlen($b) <=> strlen($a));
+ 
+		foreach ($candidates as $candidate) {
+ 
+			if (isset($slugMap[$candidate])) {
 
-    
+ 
+				return $candidate;
+			}
+		}
+
+		return null;
+	}
+       /**
+     * Check if a city is valid via the QuickDials city-check API.
+     */
+    private function clientsExists(string $slug): bool
+    {
+        $search_kw = strtolower(str_replace(' ', '-', trim($slug)));
+        $exists = DB::table('clients')
+            ->where('business_slug', $search_kw)
+            ->exists();
+        return $exists;
+    }
+
+    private function generateSubsequenceSlugs(array $tokens): array
+	{
+		$tokens = array_slice($tokens, 0, 8);
+		$count  = count($tokens);
+		$result = [];
+
+		for ($mask = 1; $mask < (1 << $count); $mask++) {
+			$subset = [];
+			for ($bit = 0; $bit < $count; $bit++) {
+				if ($mask & (1 << $bit)) {
+					$subset[] = $tokens[$bit];
+				}
+			}
+			$result[] = implode('-', $subset);
+		}
+
+		return array_unique($result);
+	}
+
      /**
      * Handle  GET /{city}/{slug}
      */

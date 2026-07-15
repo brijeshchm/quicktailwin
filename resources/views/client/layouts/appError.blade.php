@@ -6,7 +6,9 @@
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 <meta name="robots" content="index, nofollow">
 <link rel="canonical" href="{{ url()->current() }}" />
-<link rel="shortcut icon" href="{{asset('client/images/favicon.png')}}" type="image/png" />
+<link rel="icon" type="image/png" sizes="96x96" href="{{ asset('client/images/favicon.png') }}">
+<link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('client/images/favicon.png') }}">
 <title>@yield('title')</title>   
 @vite(['resources/css/app.css', 'resources/js/app.js'])    
 </head>

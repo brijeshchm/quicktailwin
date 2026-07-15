@@ -1623,9 +1623,7 @@ $reviewList = DB::table('clients')
 			'faqq10' => $clientscheck->faqq10,
 			'faqa10' => $clientscheck->faqa10,
 			);
-			
-			
-			
+					
 			
 			$data['clientsList'] = [
 				'business_id' => $clientscheck->business_id,
@@ -2251,11 +2249,6 @@ $reviewList = DB::table('clients')
             ['day'=>'Sunday',    'hours'=>'Closed'],
         ];
  
-   
-
-
-
-
 
         $metaTitle = !empty($clientsList['meta_title'])
         ? $clientsList['meta_title']
@@ -2349,9 +2342,7 @@ $reviewList = DB::table('clients')
             ))
         );
 
-   
-
-        // ── Chunk businesses for ad insertion every 5 ─────────────────────
+		// ── Chunk businesses for ad insertion every 5 ─────────────────────
         $businessChunks = array_chunk($businesses, 5);
         $quickBusinesses =  [];
         $responseZones = $this->fetchCityData($city);
@@ -2416,9 +2407,10 @@ $reviewList = DB::table('clients')
 	{
 		$citySlug = strtolower(trim($city));
 		$keySlugRaw = strtolower(trim($slug));
+		$newSlug = strtolower(str_replace(' ', '-', trim($slug)));  		 
 		$cityMap    = $this->getCitySlugMap();     // cached, in-memory
 		$keywordMap = $this->getKeywordSlugMap();  // cached, in-memory
-
+ 
 		// ---- Resolve city (no DB call) ----
 		$cityName = $this->resolveBestCandidate($citySlug, $cityMap);
 
@@ -2432,7 +2424,7 @@ $reviewList = DB::table('clients')
 				'service_slug' => $slug,
 			], 301);
 		}
-
+ 
 		if ($citySlug !== $cityName) {
 			return redirect()->route('city.slug', [
 				'city_slug'    => $cityName,
@@ -2441,8 +2433,8 @@ $reviewList = DB::table('clients')
 		}
 
 		// ---- Resolve keyword/service (no DB call) ----
-		$slugUrl = $this->resolveBestCandidate($keySlugRaw, $keywordMap);
-
+		$slugUrl = $this->resolveBestCandidate($newSlug, $keywordMap);
+ 
 		if ($slugUrl) {
 			if ($keySlugRaw !== $slugUrl) {
 				return redirect()->route('city.slug', [
@@ -2462,14 +2454,77 @@ $reviewList = DB::table('clients')
 			return $this->getsearchlist($response, $slugUrl, $cityName);
 		}
 
-		// Not a known service/keyword slug at all -> try as a business slug.
-		$businessResponse = $this->fetchBusinessData($slug);
-		if (!$businessResponse) {
-			return redirect()->route('home');
+ 
+     
+        $clientMap = $this->getClientSlugMap(); // cached, in-memory
+ 
+        $slugUrl    = $this->resolveBestCandidate($newSlug, $clientMap);
+
+      
+		if ($slugUrl && $slugUrl !== $slug) {	 
+			return redirect()->route('city.slug', [
+				'city_slug'    => $cityName,
+				'service_slug' => $slugUrl,    
+			], 301);
+		}
+       
+
+		if($slugUrl){
+ 
+	 
+				if (!$this->clientsExists($slugUrl)) {					  
+					abort(410);
+				}
+				$businessResponse = $this->fetchBusinessData($slugUrl);
+				if (!$businessResponse) {
+					return redirect()->route('home');
+				}
+
+				return $this->getClientDetail($businessResponse, $slugUrl);
+			}
+ 		abort(410);
+
+	}
+
+
+	private function getClientSlugMap(): array
+	{
+		return Cache::remember('client_slug_map', now()->addHours(6), function () {
+			return DB::table('clients')->pluck('business_slug','business_slug')->all();
+		});
+	}
+    private function resolveBestCandidate(string $inputSlug, array $slugMap): ?string
+	{
+		$tokens = array_values(array_filter(explode('-', $inputSlug), fn ($p) => $p !== ''));
+		$candidates = $this->generateSubsequenceSlugs($tokens);
+
+		// Longest candidate first = most specific match wins.
+		usort($candidates, fn ($a, $b) => strlen($b) <=> strlen($a));
+ 
+		foreach ($candidates as $candidate) {
+ 
+			if (isset($slugMap[$candidate])) {
+
+ 
+				return $candidate;
+			}
 		}
 
-		return $this->getClientDetail($businessResponse, $slug);
+		return null;
 	}
+    
+	/**
+     * Check if a city is valid via the QuickDials city-check API.
+     */
+    private function clientsExists(string $slug): bool
+    {
+        $search_kw = strtolower(str_replace(' ', '-', trim($slug)));
+        $exists = DB::table('clients')
+            ->where('business_slug', $search_kw)
+            ->exists();
+        return $exists;
+    }
+
 
 	/**
 	 * Full slug => slug map, cached. Rebuilds only when cache expires or is flushed.
@@ -2488,26 +2543,7 @@ $reviewList = DB::table('clients')
 		});
 	}
 
-	/**
-	 * Generate subsequence candidates for the given slug, longest-first,
-	 * and return the first one present in the cached map (in-memory, O(candidates)).
-	 */
-	private function resolveBestCandidate(string $inputSlug, array $slugMap): ?string
-	{
-		$tokens = array_values(array_filter(explode('-', $inputSlug), fn ($p) => $p !== ''));
-		$candidates = $this->generateSubsequenceSlugs($tokens);
-
-		// Longest candidate first = most specific match wins.
-		usort($candidates, fn ($a, $b) => strlen($b) <=> strlen($a));
-
-		foreach ($candidates as $candidate) {
-			if (isset($slugMap[$candidate])) {
-				return $candidate;
-			}
-		}
-
-		return null;
-	}
+ 
 	
 
 		public function showCityWithService_olldd(Request $request, string $city, string $slug)
@@ -2630,8 +2666,9 @@ $reviewList = DB::table('clients')
     {
 		// ── Normalize once ───────────────────────────────────────────────────
 		$slug = strtolower(trim($slug));
+		$newSlug = strtolower(str_replace(' ', '-', trim($slug)));  
 		$keywordMap = $this->getKeywordSlugMap(); // cached, in-memory
-		$slugUrl    = $this->resolveBestCandidate($slug, $keywordMap);
+		$slugUrl    = $this->resolveBestCandidate($newSlug, $keywordMap);
 
 		// If a canonical/better match exists and differs from input → 301 redirect
 		if ($slugUrl && $slugUrl !== $slug) {
