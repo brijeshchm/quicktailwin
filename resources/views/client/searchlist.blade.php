@@ -144,7 +144,7 @@ $keywordImg= !empty($kwData['key_icon'])
             $address['addressRegion'] = $cityDetails['state'];
         }
         if (!empty($cityDetails['pincode'])) {
-            $address['postalCode'] = $cityDetails['pincode'];
+            $address['postalCode'] = $cityDetails['pincode'] ?? '560008';
         }
 
         $schema = [
@@ -192,6 +192,9 @@ $keywordImg= !empty($kwData['key_icon'])
                 }
                 if (!empty($clientBus['pincode'])) {
                     $address['postalCode'] = $clientBus['pincode'];
+                }
+                if (!empty($clientBus['city'])) {
+                    $address['streetAddress'] = $clientBus['landmark'] ?? $clientBus['city'];
                 }
 
                 $schema = [

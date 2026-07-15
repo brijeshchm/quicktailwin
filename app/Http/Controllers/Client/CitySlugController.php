@@ -404,6 +404,7 @@ class CitySlugController extends Controller
 				'city' => $client->city,	 		 
 				'state' => $client->state,	 		 
 				'pincode' => $client->pincode,	 		 
+				'landmark' => $client->landmark,	 		 
 				'verified' => $client->verified,
 				'active_status' => $client->active_status,
 				'trending' => $client->trending,			 
@@ -1100,6 +1101,7 @@ $reviewList = DB::table('clients')
 				'city' => $client->city,				 
 				'state' => $client->state,				 
 				'pincode' => $client->pincode,				 
+				'landmark' => $client->landmark,				 
 				'address' => $client->address,			 
 				'year_of_estb' => $client->year_of_estb,
 	 
@@ -1689,6 +1691,7 @@ $reviewList = DB::table('clients')
 				'area' => $clientscheck->area,
 				'zone' => $clientscheck->zone,
 				'address' => $clientscheck->address,
+				 
 				'pincode' => $clientscheck->pincode,
 				'country_id' => $clientscheck->country,
 				'country' => 'India',
@@ -2073,6 +2076,7 @@ $reviewList = DB::table('clients')
             'state'       => $b['state'] ?? '',
             'city'          => $b['city'] ?? '',
             'pincode'          => $b['pincode'] ?? '',
+            'landmark'          => $b['landmark'] ?? '',
             'openUntil'     => $b['openUntil'] ?? $b['open_until'] ?? '9:00 AM',
             'isOpen'        => $b['isOpen'] ?? $b['is_open'] ?? true,
             'verified'      => $b['verified'] ?? $b['trusted_status'] ?? false,
