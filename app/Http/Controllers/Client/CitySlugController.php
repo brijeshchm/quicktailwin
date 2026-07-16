@@ -386,7 +386,7 @@ class CitySlugController extends Controller
                         $workingHoursHtml,
                         $categorySlug
                     );
-							// dd($template);		
+						 	
 				
 			return [
 				'business_id' => $client->business_id,
@@ -2388,7 +2388,7 @@ $reviewList = DB::table('clients')
         $zones     = $responseZones['data'] ?? [];
         $cityDetails     = $responseCityDetails['data'] ?? [];
  	
-		 dd($cityDetails);
+		 
         return view('client.searchlist', compact(
             'city', 'slug', 'keyword', 'area','zones',
             'childSlug', 'childCat','cityDetails',
