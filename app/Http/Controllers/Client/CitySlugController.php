@@ -2387,7 +2387,8 @@ $reviewList = DB::table('clients')
         $responseCityDetails = $this->fetchCityDetails($city);
         $zones     = $responseZones['data'] ?? [];
         $cityDetails     = $responseCityDetails['data'] ?? [];
- 
+ 	
+		 dd($cityDetails);
         return view('client.searchlist', compact(
             'city', 'slug', 'keyword', 'area','zones',
             'childSlug', 'childCat','cityDetails',
@@ -2509,7 +2510,6 @@ $reviewList = DB::table('clients')
        
 
 		if($slugUrl){
- 
 	 
 				if (!$this->clientsExists($slugUrl)) {					  
 					abort(410);
@@ -2792,12 +2792,21 @@ $reviewList = DB::table('clients')
         $city = "";
 
         $responseZones = $this->fetchCityData();
-         $zones     = $responseZones['data'] ?? [];
+        $zones     = $responseZones['data'] ?? [];
+  
+        $cityDetails     =  [
+				"zone" => "Bangalore North",
+				"city" => "Bangalore",
+				"pincode" => '560008',
+				"city_slug" => "bangalore",
+				"state" => "Karnataka",
+		];
 
  
+
         return view('client.searchkeyword', compact(
             'city', 'slug', 'keyword', 'area','zones',
-            'childSlug', 'childCat',
+            'childSlug', 'childCat','cityDetails',
             'ratingCount', 'ratingValue', 'bgImage',
             'topDescription', 'bottomDescription',
             'faqs', 'kwData',
