@@ -529,7 +529,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                          stroke="currentColor" stroke-width="2">
                         <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
                     </svg>
-                    Frequently Asked Questions(FAQ's) {{ $blogDetails['name'] ?? '' }}
+                    Frequently Asked Questions(FAQ's) of {{ $blogDetails['name'] ?? '' }}
                 </h2>
                 <div class="space-y-2" id="faq-list">
                     @foreach($faqs as $faqIndex => $faq)
