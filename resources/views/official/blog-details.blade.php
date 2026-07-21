@@ -529,7 +529,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                          stroke="currentColor" stroke-width="2">
                         <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
                     </svg>
-                    Frequently Asked Questions {{ $blogDetails['name'] ?? '' }}
+                    Frequently Asked Questions(FAQ's) {{ $blogDetails['name'] ?? '' }}
                 </h2>
                 <div class="space-y-2" id="faq-list">
                     @foreach($faqs as $faqIndex => $faq)
@@ -538,7 +538,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                                        text-left text-sm font-medium text-gray-800 hover:bg-gray-50
                                        transition-colors"
                                 data-index="{{ $faqIndex }}">
-                            <span>{{ $faq['q'] }}</span>
+                            <h3>{{ $faq['q'] }}</h3>
                             <svg class="faq-chevron w-4 h-4 text-gray-400 shrink-0 transition-transform duration-300"
                                  fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>

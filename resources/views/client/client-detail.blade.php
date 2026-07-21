@@ -1133,7 +1133,7 @@ function selectCert(i) {
     @if(count($faqs ?? []) > 0)
     <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
         <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-            💬 Frequently Asked Questions — {{ $clientsList['business_name'] }}
+            💬 Frequently Asked Questions(FAQ's) {{ $clientsList['business_name'] }}
         </h2>
         <div class="space-y-2">
         
@@ -1142,7 +1142,7 @@ function selectCert(i) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === {{ $fi }} ? null : {{ $fi }}"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                  {{ $faq['q'] }} 
+                 <h3> {{ $faq['q'] }} </h3>
                     <span x-text="openFaq === {{ $fi }} ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === {{ $fi }}" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >

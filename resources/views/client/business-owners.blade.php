@@ -819,7 +819,7 @@ select.form-input { padding-left:1rem; }
                 <span class="text-blue-600 text-xs font-semibold tracking-widest uppercase">Got Questions?</span>
             </div>
             <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4">
-                Frequently Asked <span class="gradient-text">Questions</span>
+                Frequently Asked <span class="gradient-text">Questions (FAQ's)</span>
             </h2>
             <p class="text-slate-500 text-sm max-w-md mx-auto leading-relaxed">
                 Everything you need to know about listing your business on QuickDials.
@@ -847,10 +847,10 @@ select.form-input { padding-left:1rem; }
                             {{ $i + 1 }}
                         </span>
                     </div>
-                    <span class="flex-1 min-w-0 text-sm font-semibold text-slate-700
+                    <h3 class="flex-1 min-w-0 text-sm font-semibold text-slate-700
                                  group-hover:text-slate-900 leading-snug">
                         {{ $faq['q'] }}
-                    </span>
+                    </h3>
                     <svg class="faq-chevron w-3.5 h-3.5 text-slate-400 flex-shrink-0"
                          fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>

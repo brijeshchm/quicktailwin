@@ -1002,7 +1002,7 @@
                 <div class="w-14 h-14 mx-auto mb-3 bg-blue-50 rounded-2xl flex items-center justify-center">
                     <i data-lucide="help-circle" class="w-7 h-7 text-[#0076D7]"></i>
                 </div>
-                <h2 class="text-3xl font-bold text-gray-900">Frequently Asked Questions</h2>
+                <h2 class="text-3xl font-bold text-gray-900">Frequently Asked Questions(FAQ's)</h2>
                 <p class="text-gray-500 mt-2 text-sm">Everything you need to know before getting started</p>
             </div>
             <div class="bg-white rounded-2xl border border-gray-200 shadow-sm px-6 py-2" data-reveal>
@@ -1014,7 +1014,7 @@
                         >
                             <span class="flex items-center gap-2">
                                 <i data-lucide="message-circle-question" class="w-4 h-4 text-[#0076D7] flex-shrink-0"></i>
-                                {{ $faq['q'] }}
+                              <h3>  {{ $faq['q'] }}</h3>
                             </span>
                             <svg class="w-4 h-4 flex-shrink-0 text-gray-400 transition-transform duration-300" :class="open ? 'rotate-180 text-[#0076D7]' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
                         </button>
