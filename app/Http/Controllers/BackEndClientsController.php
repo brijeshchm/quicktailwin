@@ -1219,8 +1219,8 @@ class BackEndClientsController extends Controller
 				$pan_certificate = $this->saveImageSmart(
 					$request->file('pan_certificate'),
 					$destinationPath,
-					1000,
-					1000
+					800,
+					800
 				);
 
 				$client->pan_certificate = json_encode([
@@ -1440,8 +1440,8 @@ class BackEndClientsController extends Controller
 					$filename = $this->saveImageSmart(
 						$request->file('logo'),
 						$destinationPath,
-						1000,
-						1000
+						150,
+						100
 					);
 
 					$client->logo = serialize([
@@ -1458,8 +1458,8 @@ class BackEndClientsController extends Controller
 					$filename = $this->saveImageSmart(
 						$request->file('profile_pic'),
 						$destinationPath,
-						1200,
-						180
+						840,
+						400
 					);
 
 					$client->profile_pic = serialize([
@@ -1497,6 +1497,8 @@ class BackEndClientsController extends Controller
 
 	private function saveImageSmart($file, $destinationPath, $width = null, $height = null)
 	{
+
+	
 		$ext = strtolower($file->getClientOriginalExtension());
 		$name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
 		$name = str_replace(' ', '_', $name);
@@ -1526,6 +1528,7 @@ class BackEndClientsController extends Controller
 				break;
 			case 'webp':
 				$src = imagecreatefromwebp($imagePath);
+				imagewebp($src, $imagePath, 70);
 				break;
 			default:
 				throw new \Exception('Unsupported image type');
@@ -1539,15 +1542,19 @@ class BackEndClientsController extends Controller
 		$originalHeight = imagesy($src);
 
 		// If image is smaller than 500px in width or height
-		if ($originalWidth < 540 || $originalHeight < 500) {
-		$width = 900;
-		$height = 800;
-		} else {
+		// if ($originalWidth < 100 || $originalHeight < 100) {
+		// $width = 900;
+		// $height = 800;
+		// } if ($originalWidth < 540 || $originalHeight < 500) {
+		// 		$width = 900;
+		// $height = 800;
+		// }else {
+		// $width = $width ?? $originalWidth;
+		// $height = $height ?? $originalHeight;
+		// }
+
 		$width = $width ?? $originalWidth;
 		$height = $height ?? $originalHeight;
-		}
-
-
 		$dst = imagecreatetruecolor($width, $height);
 		imagealphablending($dst, false);
 		imagesavealpha($dst, true);
@@ -1623,8 +1630,8 @@ class BackEndClientsController extends Controller
 								$finalName = $this->saveImageSmart(
 									$file,
 									$destinationPath,
-									null,
-									null
+									1000,
+									1000
 								);
 							}
 

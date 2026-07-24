@@ -77,8 +77,8 @@ class HomeSliderController extends Controller
 				$filename = $this->saveImageSmart(
 					$request->file('image'),
 					$destinationPath,
-					null,
-					null
+					400,
+					400
 				);
 
 				$image = array(
@@ -156,8 +156,8 @@ class HomeSliderController extends Controller
 				$filename = $this->saveImageSmart(
 				$request->file('image'),
 				$destinationPath,
-				null,
-				null
+				400,
+				400
 				);
 
 				$image= array(

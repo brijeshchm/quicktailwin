@@ -158,8 +158,8 @@ class AuthorController extends Controller
 				$filename = $this->saveImageSmart(
 				$request->file('image'),
 				$destinationPath,
-				null,
-				null
+				100,
+				100
 				);
 
 				$image= array(

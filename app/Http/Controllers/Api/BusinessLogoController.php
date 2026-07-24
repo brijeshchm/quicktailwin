@@ -100,8 +100,8 @@ class BusinessLogoController extends Controller
 				$filename = $this->saveImageSmart(
 					$request->file('logo'),
 					$destinationPath,
-					250,
-					141
+					150,
+					100
 				);
 
 				$client->logo = serialize([
@@ -131,8 +131,8 @@ class BusinessLogoController extends Controller
 				$filename = $this->saveImageSmart(
 					$request->file('profile_pic'),
 					$destinationPath,
-					1200,
-					180
+					840,
+					400
 				);
 
 				$client->profile_pic = serialize([
@@ -208,8 +208,8 @@ class BusinessLogoController extends Controller
 				$filename = $this->saveImageSmart(
 					$request->file('profile_pic'),
 					$destinationPath,
-					1200,
-					180
+					840,
+					400
 				);
 
 				$client->profile_pic = serialize([
