@@ -167,7 +167,7 @@
                 </a>
             @endif
 
-            <a href="{{ url('/') }}"
+            <a href="{{ route('home') }}"
                class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-bold
                       bg-white text-slate-700 border-2 border-slate-200
                       hover:border-slate-300 hover:bg-slate-50 transition-all duration-200">

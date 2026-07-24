@@ -121,10 +121,10 @@
                             <p class="text-white/60 text-sm mt-0.5">{{ number_format($clinic->review_count) }} patient reviews</p>
                         </div>
                         @if ($clinic->doctors->isNotEmpty())
-                            <a href=""
+                            <span
                                class="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-primary font-semibold px-8 py-3 rounded-lg shadow-xl shadow-accent/30 text-base transition-all">
                                 Book Appointment <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                            </a>
+                            </span>
                         @endif
                     </div>
                 </div>
@@ -344,10 +344,10 @@
                                             <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> Insurance
                                         </span>
                                     @endif
-                                    <a href=""
+                                    <span
                                        class="inline-flex items-center gap-1 bg-primary hover:bg-primary/90 text-white text-sm font-medium px-4 py-2 rounded-md transition-colors">
                                         Book <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
-                                    </a>
+                                    </span>
                                 </div>
                             </div>
                         @endforeach
@@ -441,10 +441,10 @@
                     </div>
 
                     <div class="mt-6 text-center">
-                        <a href=""
+                        <span
                            class="inline-flex items-center gap-1 border border-border px-4 py-2 rounded-md font-medium hover:bg-muted/30 transition-colors">
                             View All Reviews <i data-lucide="chevron-right" class="w-4 h-4"></i>
-                        </a>
+</span>
                     </div>
                 </section>
 
@@ -540,7 +540,7 @@
                         </div>
                         <div class="p-5 space-y-3">
                             @foreach ($clinic->doctors->take(3) as $doc)
-                                <a href=""
+                                <span
                                    class="flex items-center gap-3 p-3 rounded-xl border border-border/50 hover:border-primary/30 hover:bg-primary/5 transition-all group">
                                     <div class="w-10 h-10 rounded-xl overflow-hidden bg-muted shrink-0">
                                         @if ($doc->image_url)
@@ -559,13 +559,13 @@
                                         <p class="text-xs text-muted-foreground truncate">{{ $doc->specialty }}</p>
                                     </div>
                                     <div class="w-2 h-2 rounded-full shrink-0 {{ $doc->is_available_today ? 'bg-green-400' : 'bg-muted-foreground/30' }}"></div>
-                                </a>
+</span>
                             @endforeach
                             @if ($clinic->doctors->isNotEmpty())
-                                <a href=""
+                                <span
                                    class="flex items-center justify-center gap-2 w-full mt-2 bg-primary hover:bg-primary/90 text-white font-semibold text-sm py-3 rounded-lg transition-colors">
                                     <i data-lucide="calendar" class="w-4 h-4"></i> Schedule Appointment
-                                </a>
+</span>
                             @endif
                         </div>
                     </div>
@@ -623,10 +623,10 @@
             </p>
             <div class="flex flex-wrap gap-4 justify-center">
                 @if ($clinic->doctors->isNotEmpty())
-                    <a href=""
+                    <span
                        class="inline-flex items-center gap-2 bg-accent hover:bg-accent/90 text-primary font-semibold px-10 py-4 rounded-lg shadow-xl shadow-black/20 text-base transition-all">
                         Book Appointment <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                    </a>
+                    </span>
                 @endif
                 @if ($clinic->phone)
                     <a href="tel:{{ $clinic->phone }}"

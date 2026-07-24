@@ -53,10 +53,10 @@
             <div class="text-sm">
                 Consultation: <strong>$300</strong>
             </div>
-            <a href=""
+            <span
                class="inline-flex items-center gap-1.5 bg-primary hover:bg-primary/90 text-white text-sm font-medium px-4 py-2 rounded-full transition-colors">
                 Book <i data-lucide="calendar" class="w-4 h-4"></i>
-            </a>
+</span>
         </div>
     </article>
 </div>

@@ -25,11 +25,11 @@
 
         <!-- CTA Buttons -->
         <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="https://www.quickdials.com/"
+            <a https="{{route('home')}}"
                class="inline-block px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 hover:shadow-lg transition-all duration-200">
                 Back to Home
             </a>
-            <a href="https://www.quickdials.com/contact-us"
+            <a href="{{route('contactUs')}}"
                class="inline-block px-8 py-3 bg-white text-blue-600 font-semibold rounded-lg border border-blue-600 hover:bg-blue-50 transition-all duration-200">
                 Contact Support
             </a>
