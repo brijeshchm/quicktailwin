@@ -152,11 +152,11 @@
             class="banner-card relative shrink-0 rounded-t-2xl overflow-hidden cursor-pointer group h-[140px] sm:h-[155px] block {{ $colorMap[$i % count($colorMap)] }}">
 <img
     src="{{ $card['img'] ?? '' }}"
-    alt="{{ $card['title'] ?? '' }}"
-    loading="lazy"
+    alt="{{ $card['title'] ?? '' }}"    
+    fetchpriority="high"
     decoding="async"
     width="254"
-    height="155"  
+    height="155"
     class="absolute inset-0 w-full h-full object-cover object-center opacity-80 brightness-90 group-hover:opacity-100 group-hover:brightness-110 group-hover:scale-105 transition-all duration-500"
 />
     <div class="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent"></div>
