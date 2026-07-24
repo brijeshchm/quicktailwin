@@ -272,6 +272,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 @yield('content')
 </main>
 @include('client.layouts.footer')
+
 <script>
 var searchCity       = '';
 // var heroSelectedCity = '';
@@ -285,17 +286,25 @@ var searchCity = '';
  
 
 document.addEventListener('DOMContentLoaded', function () {
-    // No geolocation permission prompt on page load.
-    // Go straight to IP-based detection, which requires no browser permission.
-    detectCityFromIP();
+let cities = localStorage.getItem('city');
+
+  if(cities){
+    applyCity(cities);
+    }else{
+    requestPreciseLocation();
+    }
+
+    
 });
 
 // ── Call this ONLY from an explicit user action ──────────────────────
 // e.g. <button onclick="requestPreciseLocation()">📍 Use my exact location</button>
 function requestPreciseLocation() {
+   
     if (!navigator.geolocation) {
         return;
     }
+
     navigator.geolocation.getCurrentPosition(
         gpsSuccess,
         gpsError,
@@ -308,6 +317,7 @@ function requestPreciseLocation() {
 }
 
 async function gpsSuccess(position) {
+   
     var lat = position.coords.latitude;
     var lon = position.coords.longitude;
 
@@ -324,9 +334,11 @@ async function gpsSuccess(position) {
         if (!response.ok) throw new Error('Nominatim request failed');
 
         var data = await response.json();
-        var city = data.address.city ;
-              console.log('data',data);
- 
+    
+        var city =
+            data.address.city ||
+            data.address.state_district
+
         if (city) {
             applyCity(city);
         } else {
@@ -351,7 +363,7 @@ function detectCityFromIP() {
             return res.json();
         })
         .then(function (data) {
-            console.log('detectCityFromIP',city);
+                
             if (data.city) {
                 applyCity(data.city);
             } else {
@@ -366,7 +378,12 @@ function detectCityFromIP() {
 // ── Safe default if all detection fails — no third-party JSONP script ──
 function applyDefaultCity() {
     if (cityDetected) return;
-    applyCity('bangalore'); // confirm/replace with your actual site default
+	let cities = localStorage.getItem('city');
+  if(cities){
+    applyCity(cities); 
+    }else{
+    applyCity('Bangalore'); 
+    }
 }
 
 function applyCity(rawCity) {
@@ -452,6 +469,8 @@ function applyCity(rawCity) {
     }
 }
 
+
+ 
 </script>
  
 

@@ -918,6 +918,7 @@ function redirectSearch(keyword, city) {
     if (!keyword || !city) return;
     const c = city.toLowerCase().replace(/\s+/g, '-');
     const k = keyword.toLowerCase().replace(/\s+/g, '-');
+    localStorage.setItem('city', c);
     window.location.href = `/${c}/${k}`;
 }
 
