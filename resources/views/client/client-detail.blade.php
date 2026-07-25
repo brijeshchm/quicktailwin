@@ -291,7 +291,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                 ['🐦', $clientsList['social']['twitter_url']   ?? '#', '#333'],
                 ['💬', 'https://wa.me/917559435943',                   '#25d366'],
             ] as [$icon, $href, $bg])
-            <a href="{{ $href }}" target="_blank"
+            <a href="{{ $href }}" target="_blank" rel="nofollow noopener noreferrer"
                class="w-7 h-7 rounded-full flex items-center justify-center hover:scale-110 transition-transform text-sm"
                style="background:{{ $bg }};">{{ $icon }}</a>
             @endforeach

@@ -33,12 +33,14 @@
 
         {{-- Section header --}}
         <div class="text-center mb-14 anim-fade-up">
+          
+
             <h1 class="text-3xl md:text-5xl font-bold text-gray-900 leading-snug tracking-tight mb-4">
-                QuickDials Pricing – Choose the Right Plan for Your Business on 
-                <span class="text-indigo-600">
-                    QuickDials<sup class="text-amber-500 text-2xl font-normal align-super">™</sup>
-                </span><span class="text-gray-900">.com</span>
-            </h1>
+    QuickDials Pricing Plans
+    <span class="text-indigo-600">
+        QuickDials<sup class="text-amber-500 text-2xl font-normal align-super">™</sup>
+    </span><span class="text-gray-900">.com</span>
+</h1>
             <p class="text-gray-500 max-w-2xl mx-auto text-lg leading-relaxed">
                 Pick a plan that suits your business size and how fast you want to grow. Every package gives you easy system access and tools to manage your enquiries smoothly. Higher plans come with more user access and extra coins, which help you reach more customers and handle more requests. All plans are made to keep things simple, clear, and easy to use for your daily business needs.
             </p>
