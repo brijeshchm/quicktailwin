@@ -355,7 +355,7 @@
                     </p>
                     <p class="text-sm text-gray-600">
                         <strong class="text-gray-800 font-semibold">Phone:</strong>
-                        <a href="tel:+917559435943" class="text-violet-600 hover:text-violet-800 hover:underline transition-colors ml-1">+91-75-5943-5943</a>
+                        <a href="tel:+917559435943" rel="nofollow" class="text-violet-600 hover:text-violet-800 hover:underline transition-colors ml-1">+91-75-5943-5943</a>
                     </p>
                     <p class="text-sm text-gray-500 flex items-center gap-1.5 pt-3 border-t border-gray-100">
                         <span>🕒</span>

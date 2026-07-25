@@ -136,7 +136,7 @@
 <section class="text-center py-14 bg-white border-t border-slate-100">
     <h3 class="text-xl font-semibold mb-2">Didn't find a suitable role?</h3>
     <p class="text-gray-500 mb-5">Send your resume and we'll get back to you</p>
-    <a href="mailto:hr@quickdials.com"
+    <a href="mailto:hr@quickdials.com" rel="nofollow"
        class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-7 py-3 rounded-lg transition-colors">
         Send Resume
     </a>

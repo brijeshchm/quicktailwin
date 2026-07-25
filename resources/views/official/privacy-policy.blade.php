@@ -609,13 +609,13 @@
                                 <div class="font-semibold text-sm mb-1" style="color:hsl(270 50% 30%)">Privacy Concerns? We're Here.</div>
                                 <p class="text-xs" style="color:hsl(270 20% 50%)">For any questions, data requests, or privacy concerns, please use the channels below. We respond within 24 hours.</p>
                                 <div class="mt-3 flex flex-wrap gap-2">
-                                    <a href="mailto:privacy@quickdials.com" class="btn-purple inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold text-white transition-all duration-200 hover:scale-105 hover:shadow-md">
+                                    <a href="mailto:info@quickdials.com" rel="nofollow" class="btn-purple inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold text-white transition-all duration-200 hover:scale-105 hover:shadow-md">
                                         Privacy Requests
                                     </a>
-                                    <a href="mailto:grievance@quickdials.com" class="btn-purple inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold text-white transition-all duration-200 hover:scale-105 hover:shadow-md">
+                                    <a href="mailto:info@quickdials.com" rel="nofollow" class="btn-purple inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold text-white transition-all duration-200 hover:scale-105 hover:shadow-md">
                                         Grievance Officer
                                     </a>
-                                    <a href="mailto:security@quickdials.com" class="btn-purple inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold text-white transition-all duration-200 hover:scale-105 hover:shadow-md">
+                                    <a href="mailto:info@quickdials.com" rel="nofollow" class="btn-purple inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold text-white transition-all duration-200 hover:scale-105 hover:shadow-md">
                                         Report a Breach
                                     </a>
                                 </div>

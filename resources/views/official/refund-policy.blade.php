@@ -501,10 +501,10 @@
                                 <div class="font-semibold text-sm mb-1" style="color:hsl(270 50% 30%)">Need Help with a Refund?</div>
                                 <p class="text-xs" style="color:hsl(270 20% 50%)">Our team is committed to resolving refund and cancellation matters promptly and in accordance with Indian consumer protection laws. Reach out through any of the channels below.</p>
                                 <div class="mt-3 flex flex-wrap gap-2">
-                                    <a href="mailto:support@quickdials.com" class="btn-purple inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold text-white transition-all duration-200 hover:scale-105 hover:shadow-md">
+                                    <a href="mailto:support@quickdials.com" rel="nofollow" class="btn-purple inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold text-white transition-all duration-200 hover:scale-105 hover:shadow-md">
                                         Refund Support
                                     </a>
-                                    <a href="mailto:grievance@quickdials.com" class="btn-purple inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold text-white transition-all duration-200 hover:scale-105 hover:shadow-md">
+                                    <a href="mailto:info@quickdials.com" rel="nofollow" class="btn-purple inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold text-white transition-all duration-200 hover:scale-105 hover:shadow-md">
                                         Grievance Officer
                                     </a>
                                     <a href="{{ route('contactUs') }}" class="btn-purple inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold text-white transition-all duration-200 hover:scale-105 hover:shadow-md">

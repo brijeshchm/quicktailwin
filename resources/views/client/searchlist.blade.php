@@ -704,7 +704,7 @@ function bannerSlider(banners, interval = 4000) {
                                     <a href="{{ route('business.details', $qb['slug']) }}" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-center py-3 rounded-xl font-medium transition-all flex items-center justify-center gap-2">
                                         💬 Send Enquiry
                                     </a>
-                                    <a href="https://wa.me/{{ preg_replace('/\D/', '', $qb['phone'] ?? '') }}" target="_blank"
+                                    <a href="https://wa.me/{{ preg_replace('/\D/', '', $qb['phone'] ?? '') }}" rel="nofollow noopener noreferrer" target="_blank"
                                        class="flex items-center justify-center w-12 h-12 border border-gray-300 rounded-xl hover:bg-gray-50 transition-all">
                                         <img src="{{ asset('WhatsApp.svg') }}" alt="WhatsApp" class="w-6 h-6" loading="lazy"
                                             decoding="async">

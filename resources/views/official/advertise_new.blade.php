@@ -466,7 +466,7 @@
 </a>
                
                 <a
-                    href="tel:+917559435943"
+                    href="tel:+917559435943" rel="nofollow"
                     class="flex items-center justify-center gap-2 border-2 border-white text-white font-semibold px-8 py-3 rounded-xl hover:bg-white/10 hover:scale-105 transition-all duration-300"
                 >
                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.61 21 3 13.39 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>
@@ -651,7 +651,7 @@
 </a>
                
                 <a
-                    href="tel:+917559435943"
+                    href="tel:+917559435943" rel="nofollow"
                     class="flex items-center justify-center gap-2 border-2 border-white text-white font-semibold px-8 py-3 rounded-xl hover:bg-white/10 hover:scale-105 transition-all duration-300"
                 >
                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.61 21 3 13.39 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>
@@ -970,7 +970,7 @@
 </a>
                
                 <a
-                    href="tel:+917559435943"
+                    href="tel:+917559435943" rel="nofollow"
                     class="flex items-center justify-center gap-2 border-2 border-white text-white font-semibold px-8 py-3 rounded-xl hover:bg-white/10 hover:scale-105 transition-all duration-300"
                 >
                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.61 21 3 13.39 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>
@@ -1051,7 +1051,7 @@
         class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-200 shadow-2xl px-4 py-3 flex items-center gap-3"
         style="display:none;"
     >
-        <a href="tel:+918888888888" class="flex-1 flex items-center justify-center gap-1.5 border-2 border-[#0076D7] text-[#0076D7] font-semibold py-2.5 rounded-lg text-sm">
+        <a href="tel:+917559435943" rel="nofollow" class="flex-1 flex items-center justify-center gap-1.5 border-2 border-[#0076D7] text-[#0076D7] font-semibold py-2.5 rounded-lg text-sm">
             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.61 21 3 13.39 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>
             Call
         </a>

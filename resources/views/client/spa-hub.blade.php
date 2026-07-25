@@ -39,7 +39,7 @@
          style="padding-bottom: calc(0.6rem + env(safe-area-inset-bottom));">
 
         {{-- Call --}}
-        <a href="tel:{{ $spa['phone'] }}"
+        <a href="tel:{{ $spa['phone'] }}" rel="nofollow"
            class="flex-1 flex items-center justify-center gap-1.5 px-2 py-2.5 rounded-full
                   bg-green-500 text-white text-xs font-bold no-underline
                   shadow-md shadow-green-500/40 active:scale-95 transition-transform">
@@ -51,7 +51,7 @@
 
         {{-- WhatsApp --}}
         <a href="https://wa.me/{{ $spa['whatsapp'] }}?text={{ urlencode('Hi ' . $spa['name'] . '! I would like to book a treatment.') }}"
-           target="_blank" rel="noopener noreferrer"
+           target="_blank" rel="nofollow noopener noreferrer"
            class="flex-1 flex items-center justify-center gap-1.5 px-2 py-2.5 rounded-full
                   bg-[#25d366] text-white text-xs font-bold no-underline
                   shadow-md shadow-emerald-500/40 active:scale-95 transition-transform">

@@ -227,12 +227,12 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
 ════════════════════════════════════════ --}}
 <div class="hidden md:block">
     <div class="w-full px-8 md:px-16 py-3 flex flex-wrap gap-2 items-center">
-        <!-- <a href="tel:+917559435943">
+        <!-- <a href="tel:+917559435943" rel="nofollow">
             <button class="glow-pulse flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold text-sm text-white" style="background:#16a34a;">
                 📞 Call Now
             </button>
         </a> -->
-        <a href="https://wa.me/917559435943" target="_blank" rel="noreferrer">
+        <a href="https://wa.me/917559435943" rel="nofollow noopener noreferrer" target="_blank" rel="noreferrer">
             <button class="flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold text-sm text-white" style="background:#25D366;">
                 💬 WhatsApp
             </button>
@@ -253,7 +253,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                     <span class="w-7 h-7 rounded-lg flex items-center justify-center text-base" style="background:rgba(37,99,235,.1)">🔗</span>
                     Copy Link
                 </button>
-                <a href="https://wa.me/?text={{ urlencode(url()->current()) }}" target="_blank"
+                <a href="https://wa.me/?text={{ urlencode(url()->current()) }}" rel="nofollow noopener noreferrer" target="_blank"
                    class="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50">
                     <span class="w-7 h-7 rounded-lg flex items-center justify-center text-base" style="background:rgba(37,211,102,.1)">💬</span>
                     WhatsApp
@@ -1064,9 +1064,11 @@ function selectCert(i) {
             </div>
             <div class="px-6 py-5">
                 <ul class="flex flex-wrap gap-2">
-                    @php                    
-                    $city = Str::slug($clientsList['city'] ?? 'bangalore');
-                    @endphp
+                  @php
+    $city = (!empty($clientsList['city']) && !is_numeric($clientsList['city']))
+        ? Str::slug($clientsList['city'])
+        : 'bangalore';
+@endphp
                     @foreach($relatedList as $i => $item)                    
                     <li>
                         <a href="{{ route('city.slug', ['city_slug'=>strtolower($city),'service_slug' => $item['slug']])}}" class="text-blue-600 hover:underline text-sm">
@@ -1263,12 +1265,12 @@ function selectCert(i) {
 ════════════════════════════════════════ --}}
 <div id="mobile-bar" class="fixed left-0 bottom-2 right-0 z-50 flex items-center gap-2 px-4 py-3 md:hidden"
      style="background:rgba(255,255,255,.95);backdrop-filter:blur(16px);border-top:1px solid rgba(59,130,246,.15);box-shadow:0 -4px 24px rgba(37,99,235,.1);">
-    <!-- <a href="tel:+917559435943" class="flex-1">
+    <!-- <a href="tel:+917559435943" class="flex-1" rel="nofollow">
         <button class="w-full flex items-center justify-center gap-1.5 py-3 rounded-2xl font-bold text-sm text-white" style="background:#16a34a;">
             📞 Call Now
         </button>
     </a> -->
-    <a href="https://wa.me/917559435943" target="_blank" rel="noreferrer" class="flex-1">
+    <a href="https://wa.me/917559435943" target="_blank" rel="nofollow noopener noreferrer" class="flex-1">
         <button class="w-full flex items-center justify-center gap-1.5 py-3 rounded-2xl font-bold text-sm text-white" style="background:#25D366;">
             💬 WhatsApp
         </button>
@@ -1336,7 +1338,7 @@ function selectCert(i) {
         <div class="flex-1 min-w-0">
             <p class="text-white font-bold text-sm truncate">{{ $clientsList['business_name'] ?? '' }}</p>
         </div>
-        <a href="tel:+917559435943" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-white" style="background:#22c55e;">📞 Call</a>
+        <a href="tel:+917559435943" rel="nofollow" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-white" style="background:#22c55e;">📞 Call</a>
         <button onclick="document.getElementById('gallery-modal').classList.remove('open');document.getElementById('enquiry-modal').classList.add('open');"
                 class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-white" style="background:#2563eb;">✉️ Enquire</button>
     </div>

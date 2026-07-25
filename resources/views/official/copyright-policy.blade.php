@@ -292,7 +292,7 @@
                                 </div>
                                 <div>
                                     <p class="text-xs text-gray-500 mb-0.5">Copyright Officer</p>
-                                    <a href="mailto:info@quickdials.com" class="text-sm font-semibold text-gray-900 hover:text-violet-600">info@quickdials.com</a>
+                                    <a href="mailto:info@quickdials.com" rel="nofollow" class="text-sm font-semibold text-gray-900 hover:text-violet-600">info@quickdials.com</a>
                                 </div>
                             </div>
                             <div class="flex items-start gap-3 p-4 rounded-xl bg-white border border-gray-200">

@@ -9,20 +9,12 @@
 @section('content')	
 @include('client.components.banner-section')
 @php
-// dd($kwData);
-@endphp
-
-
-@php
  $starMap = [
     0 => 'star_1.png', 2 => 'star_2.png', 3 => 'star_3.png',
     3.5 => 'star_3.5.png', 4 => 'star_4.png', 4.5 => 'star_4.5.png',
     4.75 => 'star_4.75.png', 5 => 'star_5.png',
 ];
 
- 
-
-// Calculate star image key
 $starKey = 0;
 foreach ($starMap as $k => $v) {
     if (isset($kwData['rating']) && $kwData['rating'] >= $k) $starKey = $k;

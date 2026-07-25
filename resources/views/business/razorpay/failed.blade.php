@@ -29,7 +29,7 @@
       <p class="lead text-danger">Your transaction has been declined.</p>
       <hr>
       <p>
-        Having trouble? <a href="mailto:info@quickdials.com">Contact us</a>
+        Having trouble? <a href="mailto:info@quickdials.com" rel="nofollow">Contact us</a>
       </p>
       <p class="lead">
         <a class="btn btn-primary btn-sm" href="{{url('business/package')}}" role="button">Continue to Pay</a>

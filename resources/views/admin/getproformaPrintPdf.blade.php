@@ -506,7 +506,7 @@ body {
         <div class="company-info">
           G-13, Third Floor, Sector-3 Noida, U.P. India<br>
           📞 +91-75-9543-9543 &nbsp;|&nbsp;
-          ✉ <a href="mailto:info@quickdials.com">info@quickdials.com</a> &nbsp;|&nbsp;
+          ✉ <a href="mailto:info@quickdials.com" rel="nofollow">info@quickdials.com</a> &nbsp;|&nbsp;
           🌐 <a href="https://www.quickdials.com" target="_blank">www.quickdials.com</a>
         </div>
       </div>

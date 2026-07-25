@@ -84,23 +84,23 @@
 
                                                         <div class="share-menu">
 
-                                                            <a href="https://wa.me/?text={{ urlencode($lead->share_address) }}"
+                                                            <a href="https://wa.me/?text={{ urlencode($lead->share_address) }}" rel="nofollow noopener noreferrer"
                                                                 target="_blank">
 
                                                                 <img src="{{ asset('img/map.png') }}" width="18"> Service
 
                                                             </a>
 
-                                                            <a href="https://wa.me/?text={{ urlencode($lead->share_review) }}"
+                                                            <a href="https://wa.me/?text={{ urlencode($lead->share_review) }}" rel="nofollow noopener noreferrer"
                                                                 target="_blank">
                                                                 ⭐ Review
                                                             </a>
-                                                            <a href="https://wa.me/?text={{ urlencode($lead->share_service) }}"
+                                                            <a href="https://wa.me/?text={{ urlencode($lead->share_service) }}" rel="nofollow noopener noreferrer"
                                                                 target="_blank">
                                                                 <img src="{{ asset('img/service.png') }}" width="18"> Service
                                                             </a>
 
-                                                            <a href="https://wa.me/?text={{ urlencode($lead->share_lead) }}"
+                                                            <a href="https://wa.me/?text={{ urlencode($lead->share_lead) }}" rel="nofollow noopener noreferrer"
                                                                 target="_blank">
                                                                 👤Share Lead
                                                             </a>

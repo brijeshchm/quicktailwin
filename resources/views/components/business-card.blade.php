@@ -309,14 +309,14 @@ document.addEventListener('DOMContentLoaded', () => {
         @endphp
 
         <div class="grid w-full grid-cols-4 gap-2">
-            <!-- <a href="tel:{{ $business['mobile'] ?? '' }}"
+            <!-- <a href="tel:{{ $business['mobile'] ?? '' }}" rel="nofollow"
             class="{{ $actionClass }} bg-indigo-600 hover:bg-indigo-700">
                 📞 <span>Call</span>
             </a> -->
 
             <a href="https://wa.me/917559435943"
             target="_blank"
-            rel="noopener noreferrer"
+            rel="nofollow noopener noreferrer"
             class="{{ $actionClass }} bg-emerald-500 hover:bg-emerald-600">
                 💬 <span>WhatsApp</span>
             </a>

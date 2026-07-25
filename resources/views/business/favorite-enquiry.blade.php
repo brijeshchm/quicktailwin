@@ -58,20 +58,20 @@ Find Only Certified Training Institutes, Coaching Centers near you on Estivaledg
 
     <div class="share-menu">
 
-        <a href="https://wa.me/?text={{ urlencode($lead->share_address) }}" target="_blank">
+        <a href="https://wa.me/?text={{ urlencode($lead->share_address) }}" rel="nofollow noopener noreferrer" target="_blank">
           
             <img src="{{ asset('img/map.png') }}" width="18"> Service
           
         </a>
 
-        <a href="https://wa.me/?text={{ urlencode($lead->share_review) }}" target="_blank">
+        <a href="https://wa.me/?text={{ urlencode($lead->share_review) }}" rel="nofollow noopener noreferrer" target="_blank">
             ⭐ Review
         </a>
-        <a href="https://wa.me/?text={{ urlencode($lead->share_service) }}" target="_blank">
+        <a href="https://wa.me/?text={{ urlencode($lead->share_service) }}" rel="nofollow noopener noreferrer" target="_blank">
             <img src="{{ asset('img/service.png') }}" width="18"> Service
         </a>
       
-        <a href="https://wa.me/?text={{ urlencode($lead->share_lead) }}" target="_blank">
+        <a href="https://wa.me/?text={{ urlencode($lead->share_lead) }}" rel="nofollow noopener noreferrer" target="_blank">
         👤Share Lead
         </a>
 

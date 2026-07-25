@@ -17,7 +17,7 @@
     $amount    = e($_GET['amount']     ?? '');
     $paymentId = e($_GET['payment_id'] ?? '');
     $supportEmail = 'info@quickdials.com';
-    $supportPhone = '+91-XXXXXXXXXX';
+    $supportPhone = '+91-7595439543';
 @endphp
 <main class="min-h-screen relative overflow-hidden bg-gradient-to-br from-rose-50 via-white to-orange-50">
 
@@ -195,7 +195,7 @@
 
                 {{-- Phone / WhatsApp --}}
                 <a href="https://wa.me/917595439543?text=Hi%2C%20my%20payment%20failed.%20Order%20ID%3A%20{{ $orderId }}"
-                   target="_blank"
+                   target="_blank" rel="nofollow noopener noreferrer"
                    class="flex items-center gap-3 p-3.5 rounded-xl bg-white border border-emerald-200/60 hover:border-emerald-400 hover:shadow-md transition-all group">
                     <div class="w-10 h-10 rounded-lg bg-emerald-100 flex items-center justify-center group-hover:scale-110 transition-transform">
                         <svg class="w-5 h-5 text-emerald-600" fill="currentColor" viewBox="0 0 24 24">

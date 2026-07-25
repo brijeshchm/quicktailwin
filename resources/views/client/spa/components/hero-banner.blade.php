@@ -135,7 +135,7 @@
 
                     {{-- WhatsApp --}}
                     <a href="https://wa.me/{{ $spa['whatsapp'] }}?text={{ urlencode('Hi ' . $spa['name'] . '! I would like to book a treatment.') }}"
-                       target="_blank" rel="noopener"
+                       target="_blank" rel="nofollow noopener noreferrer"
                        class="hero-tab-whatsapp shrink-0 inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full
                               bg-[#25d366] text-white text-sm font-bold no-underline
                               shadow-md shadow-emerald-500/30 hover:-translate-y-0.5 hover:shadow-lg transition-all">

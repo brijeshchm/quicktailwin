@@ -144,7 +144,7 @@ Find Only Certified Training Institutes, Coaching Centers near you on Estivaledg
             <div class="icon whatsapp">
             <i class="bi bi-whatsapp"></i>
             </div>
-            <span><a href="https://wa.me/91{{$lead->mobile}}" target="_blank" aria-label="Whatsup">{{$lead->mobile}}</a></span>
+            <span><a href="https://wa.me/91{{$lead->mobile}}" rel="nofollow noopener noreferrer" target="_blank" aria-label="Whatsup">{{$lead->mobile}}</a></span>
             </div>
 
             <div class="time">

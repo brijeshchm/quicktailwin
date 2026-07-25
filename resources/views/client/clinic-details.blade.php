@@ -482,13 +482,13 @@
                                 @if ($clinic->phone)
                                     <div class="flex items-center gap-3">
                                         <i data-lucide="phone" class="w-5 h-5 text-primary shrink-0"></i>
-                                        <a href="tel:{{ $clinic->phone }}" class="font-semibold text-sm text-foreground hover:text-primary">{{ $clinic->phone }}</a>
+                                        <a href="tel:{{ $clinic->phone }}" rel="nofollow" class="font-semibold text-sm text-foreground hover:text-primary">{{ $clinic->phone }}</a>
                                     </div>
                                 @endif
                                 @if ($clinic->email)
                                     <div class="flex items-center gap-3">
                                         <i data-lucide="mail" class="w-5 h-5 text-primary shrink-0"></i>
-                                        <a href="mailto:{{ $clinic->email }}" class="text-sm font-medium text-foreground hover:text-primary">{{ $clinic->email }}</a>
+                                        <a href="mailto:{{ $clinic->email }}" rel="nofollow" class="text-sm font-medium text-foreground hover:text-primary">{{ $clinic->email }}</a>
                                     </div>
                                 @endif
                                 @if ($clinic->website)
@@ -603,7 +603,7 @@
                     @if ($clinic->phone)
                         <div class="p-4 rounded-xl border border-red-200 bg-red-50 text-center">
                             <p class="text-xs font-medium text-red-600 mb-1">Medical Emergency?</p>
-                            <a href="tel:{{ $clinic->phone }}" class="text-lg font-bold text-foreground hover:text-red-600">{{ $clinic->phone }}</a>
+                            <a href="tel:{{ $clinic->phone }}" rel="nofollow" class="text-lg font-bold text-foreground hover:text-red-600">{{ $clinic->phone }}</a>
                             <p class="text-xs text-muted-foreground mt-0.5">Call us immediately</p>
                         </div>
                     @endif
@@ -629,7 +629,7 @@
                     </span>
                 @endif
                 @if ($clinic->phone)
-                    <a href="tel:{{ $clinic->phone }}"
+                    <a href="tel:{{ $clinic->phone }}" rel="nofollow"
                        class="inline-flex items-center gap-2 border border-white/40 text-white hover:bg-white/10 font-semibold px-8 py-4 rounded-lg transition-all">
                         <i data-lucide="phone" class="w-4 h-4"></i> Call Now
                     </a>
