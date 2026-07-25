@@ -355,7 +355,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
 {{-- ════════════════════════════════════════
      SERVICES SECTION
 ════════════════════════════════════════ --}}
-@if(count($assignKeyword))
+@if(!empty($assignKeyword))
 <section style="background:linear-gradient(135deg,#f0f4ff 0%,#e8edf8 100%);">
     <div class="w-full px-8 md:px-16 py-10">
         <span class="section-badge reveal" style="background:rgba(37,99,235,.1);color:#2563eb;border:1px solid rgba(37,99,235,.2);">What We Offer</span>
@@ -368,10 +368,14 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
 
             @foreach($assignKeyword as $keySlug => $keyword)
     @php
+
+
     $i=0;
         $bg = $bgColors[$i % count($bgColors)];
         $color = $iconColors[$i % count($iconColors)];
-        $city = Str::slug($clientsList['city'] ?? 'bangalore');
+        $city = (!empty($clientsList['city']) && !is_numeric($clientsList['city']))
+        ? Str::slug($clientsList['city'])
+        : 'bangalore';
     @endphp
 
     <a href="{{ route('city.slug', ['city_slug' => strtolower($city), 'service_slug' => $keySlug]) }}"
