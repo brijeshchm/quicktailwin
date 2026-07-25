@@ -10,7 +10,7 @@
 
 @php
 
-// echo "<pre>";print_r($blogDetails['ratingvalue']);die;
+ //echo "<pre>";print_r($blogDetails);die;
 $starMap = [
     0 => 'star_1.png', 2 => 'star_2.png', 3 => 'star_3.png',
     3.5 => 'star_3.5.png', 4 => 'star_4.png', 4.5 => 'star_4.5.png',
@@ -338,7 +338,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                 <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
                     <div itemprop="name">
                         <h1 class="text-lg font-bold text-gray-900 leading-tight">
-                    {{ $blogDetails['h1_heading'] ?? $blogDetails['title']  }}
+                 {{ $blogDetails['h1_heading'] ?? ($blogDetails['title'] ?? '') }}
 
 
                         </h1>
@@ -620,14 +620,14 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                 </div>
                 @endif
 
-                {{-- ── RELATED ARTICLES ── --}}
+                
                 @if(count($blogList))
                 <div class="reveal-right bg-white p-5 rounded-xl border border-gray-200 shadow-sm"
                      style="transition-delay:0.1s;">
                     <h4 class="text-sm font-bold text-slate-900 mb-4 uppercase tracking-widest
                                flex items-center gap-2">
                         <span class="w-1 h-4 bg-blue-500 rounded-full inline-block"></span>
-                        Related Articles
+                        Latest Articles
                     </h4>
                     <div class="space-y-4">
                         @foreach($blogList as $i => $rel)

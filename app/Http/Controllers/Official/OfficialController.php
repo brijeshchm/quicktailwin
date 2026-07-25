@@ -563,8 +563,7 @@ class OfficialController extends Controller
     $h1_heading = !empty($childCategory->h1_heading)
         ? $childCategory->h1_heading
         : implode(', ', [                      
-            "best " . $childCategory->child_category,
-            
+            "best " . $childCategory->child_category,            
         ]);
  
     // Bug #1 fix — was checking $parentCategory (undefined)

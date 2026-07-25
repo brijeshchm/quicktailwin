@@ -8,8 +8,27 @@
 
 @section('content')	
 @include('client.components.banner-section')
+@php
+// dd($kwData);
+@endphp
+
+
+@php
+ $starMap = [
+    0 => 'star_1.png', 2 => 'star_2.png', 3 => 'star_3.png',
+    3.5 => 'star_3.5.png', 4 => 'star_4.png', 4.5 => 'star_4.5.png',
+    4.75 => 'star_4.75.png', 5 => 'star_5.png',
+];
+
  
 
+// Calculate star image key
+$starKey = 0;
+foreach ($starMap as $k => $v) {
+    if (isset($kwData['rating']) && $kwData['rating'] >= $k) $starKey = $k;
+}
+$starImg = $starMap[$starKey] ?? 'star_4.5.png';
+@endphp
 <style>
     .view-btn.active {
         background-color: #4f46e5;  /* indigo-600 */
@@ -36,14 +55,14 @@
             </div>
                 <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
                     <div itemprop="name">
-                        <h1 class="text-lg font-bold text-white leading-tight">Explore Verified </h1>
+                        <h1 class="text-lg font-bold text-white leading-tight">{{ $kwData['h1_heading'] ?? ('Explore Verified ' . $kwData['child_category']) }}</h1>
                     </div>                           
                     <div itemprop="aggregateRating"
                         itemscope
                         itemtype="https://schema.org/AggregateRating"
                         class="flex items-center gap-2 text-sm">
-                        <img  itemprop="image" src="{{ asset('client/images/star_4.5.png') }}"
-                        alt="4.5 out of 5 stars"
+                        <img  itemprop="image" src="{{ asset('client/images/' . $starImg) }}"
+                        alt="{{ $kwData['ratingvalue'] }} out of 5 stars"
                         class="lazy-image h-4 w-auto"
                         width="80"
                         height="16"
@@ -51,16 +70,16 @@
                         decoding="async"
                         >
                         <span class="font-semibold text-white">
-                        <span itemprop="ratingValue">4.5</span>
+                        <span itemprop="ratingValue">{{ $kwData['ratingvalue'] }}</span>
                        
                         <span class="text-gray-500">out of</span>
                         <span itemprop="bestRating">5</span>
                         <span class="text-gray-500">based on</span>
-                        <span itemprop="ratingCount">234</span>
+                        <span itemprop="ratingCount">{{ $kwData['ratingcount'] }}</span>
                         <span class="text-gray-500">ratings</span> </span>
                     </div>
                 </div>            
-            <p class="text-slate-300 text-lg">High-quality services recognized and trusted across the globe</p>
+            <p class="text-slate-300 text-lg">{{ $kwData['top_description'] }}</p>
         </div>
     </div>
 
