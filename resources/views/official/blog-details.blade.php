@@ -10,7 +10,7 @@
 
 @php
 
- //echo "<pre>";print_r($blogDetails);die;
+
 $starMap = [
     0 => 'star_1.png', 2 => 'star_2.png', 3 => 'star_3.png',
     3.5 => 'star_3.5.png', 4 => 'star_4.png', 4.5 => 'star_4.5.png',
@@ -338,10 +338,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                 <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
                     <div itemprop="name">
                         <h1 class="text-lg font-bold text-gray-900 leading-tight">
-                 {{ $blogDetails['h1_heading'] ?? ($blogDetails['title'] ?? '') }}
-
-
-                        </h1>
+                 {{ $blogDetails['h1_heading'] ? $blogDetails['h1_heading']: ($blogDetails['title'] ?? '') }} </h1>
                     </div>                           
                     <div itemprop="aggregateRating"
                         itemscope
