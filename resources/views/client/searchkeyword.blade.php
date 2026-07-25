@@ -865,7 +865,7 @@ $keywordImg= !empty($kwData['key_icon'])
     @if(!empty($relatedCategory))
     <div class="bg-white py-10 border-t border-gray-200 mt-4">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-2xl font-bold text-gray-900 mb-6">Related Categories<span class="text-blue-600">{{ ucfirst($city) }}</span></h2>
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Related Sub Categories<span class="text-blue-600">{{ ucfirst($city) }}</span></h2>
             <div class="flex flex-wrap gap-x-8 gap-y-3 text-[15px]">
                 @foreach($relatedCategory as $slug_c => $name)
                 <a href="{{ route('child.show', $slug_c) }}" class="text-gray-700 hover:text-blue-600 transition-colors duration-200">{{ $name }}</a>
