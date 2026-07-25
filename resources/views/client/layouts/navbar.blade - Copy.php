@@ -117,7 +117,7 @@
            
 
 
-<a href="https://play.google.com/store/apps/details?id=com.quick_dial&hl=en_IN"
+<a href="https://play.google.com/store/apps/details?id=com.quick_dial&hl=en_IN" rel="nofollow noopener noreferrer"
    target="_blank"
    class="group inline-flex items-center justify-center w-24 h-36 hover:bg-EB2C3B-700 from-green-500 to-emerald-600  transition-all duration-300">
 
@@ -558,7 +558,7 @@ if(!empty($clientcheck)){
            
         
 
-<a href="https://play.google.com/store/apps/details?id=com.quick_dial&hl=en_IN"
+<a href="https://play.google.com/store/apps/details?id=com.quick_dial&hl=en_IN" rel="nofollow noopener noreferrer"
    target="_blank"
    class="group inline-flex items-center justify-center hover:bg-EB2C3B-700 from-green-500 to-emerald-600  transition-all duration-300">
      <img src="{{ asset('play-store-android.png') }}" 

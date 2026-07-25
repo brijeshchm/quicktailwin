@@ -275,7 +275,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                 ['✉️', $clientsList['email'] ?? '',                 'mailto:'.($clientsList['email']??'#'), 'rgba(167,139,250,.12)', 'rgba(167,139,250,.2)'],
             ] as [$icon, $text, $href, $bg, $border])
             @if($text)
-            <a href="{{ $href }}" target="{{ str_starts_with($href,'http')?'_blank':'' }}"
+            <a href="{{ $href }}" target="{{ str_starts_with($href,'http')?'_blank':'' }}" rel="nofollow noopener noreferrer"
                class="flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-medium transition-all hover:brightness-125"
                style="background:{{ $bg }};border:1px solid {{ $border }};color:rgba(255,255,255,.75);">
                 {{ $icon }} {{ Str::limit($text, 40) }}
@@ -1045,7 +1045,7 @@ function selectCert(i) {
                             @endforeach
                         </div>
                     </div>
-                    <a href="{{ $googleMapUrl }}" target="_blank"
+                    <a href="{{ $googleMapUrl }}" target="_blank" rel="nofollow noopener noreferrer"
                        class="flex items-center justify-center gap-2 text-xs font-bold rounded-xl py-2.5 text-white hover:opacity-90 transition-opacity"
                        style="background:linear-gradient(135deg,#f59e0b,#ea580c);">
                         📍 Get Directions
@@ -1311,7 +1311,7 @@ function selectCert(i) {
             📍 {{ $clientsList['address'] ?? '' }}
         </p>
         <iframe src="{{ $mapSrc }}" width="100%" height="300" style="border:0;border-radius:.75rem;" allowfullscreen loading="lazy"></iframe>
-        <a href="{{ $googleMapUrl }}" target="_blank" rel="noreferrer"
+        <a href="{{ $googleMapUrl }}" target="_blank" rel="nofollow noopener noreferrer"
            class="mt-4 flex items-center justify-center gap-2 w-full py-2.5 rounded-xl font-semibold text-blue-700 border border-blue-200 hover:bg-blue-50 transition-colors">
             📍 View on Google Maps
         </a>

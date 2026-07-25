@@ -960,7 +960,7 @@ function bannerSlider(banners, interval = 4000) {
     @if(!empty($relatedCategory))
     <div class="bg-white py-10 border-t border-gray-200 mt-4">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6">Related sub Categories in <span class="text-blue-600">{{ ucwords(strtolower(str_replace('-', ' ',  $city ?: 'bangalore'))) }}</span></h2>
+            <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6">Related Sub Categories in <span class="text-blue-600">{{ ucwords(strtolower(str_replace('-', ' ',  $city ?: 'bangalore'))) }}</span></h2>
             <div class="flex flex-wrap gap-x-8 gap-y-3 text-[15px]">
                 @foreach($relatedCategory as $slug_c => $name)
                 <a href="{{ route('child.show', $slug_c) }}" class="text-gray-700 hover:text-blue-600 transition-colors duration-200">{{ $name }}</a>
