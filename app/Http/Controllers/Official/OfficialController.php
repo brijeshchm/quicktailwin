@@ -536,7 +536,7 @@ class OfficialController extends Controller
     public function blogCategory(Request $request, $slug)
     {
     $childCategory = ChildCategory::where('child_slug', $slug)->first();
-
+// dd($childCategory);
     // Bug #2 & #6 fix — bail out cleanly instead of null-property errors
     if (!$childCategory) {
         abort(404);
@@ -562,18 +562,11 @@ class OfficialController extends Controller
 
     $h1_heading = !empty($childCategory->h1_heading)
         ? $childCategory->h1_heading
-        : implode(', ', [
-            $childCategory->parent_category,
-            $childCategory->parent_category . " near me",
-            "best " . $childCategory->parent_category,
-            "top " . $childCategory->parent_category,
-            "local " . $childCategory->parent_category,
-            "trusted " . $childCategory->parent_category,
-            "affordable " . $childCategory->parent_category,
-            $childCategory->parent_category . " services",
-            $childCategory->parent_category . " providers, Quickdials",
+        : implode(', ', [                      
+            "best " . $childCategory->child_category,
+            
         ]);
-
+ 
     // Bug #1 fix — was checking $parentCategory (undefined)
     $meta_description = !empty($childCategory->meta_description)
         ? $childCategory->meta_description
@@ -602,6 +595,7 @@ class OfficialController extends Controller
 
     $kwData = [
         'parent_category'    => $childCategory->parent_category,
+         'child_category'    => $childCategory->child_category,
         'parent_slug'        => $childCategory->parent_slug,
         'child_banner'       => $child_banner,
         'category_icon'      => $pc_icon,

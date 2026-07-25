@@ -8,6 +8,8 @@
 
 @section('content')	
 @include('client.components.banner-section')
+ 
+
 <style>
     .view-btn.active {
         background-color: #4f46e5;  /* indigo-600 */
@@ -34,7 +36,7 @@
             </div>
                 <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
                     <div itemprop="name">
-                        <h1 class="text-lg font-bold text-white leading-tight">Explore Verified Services &amp; Experts</h1>
+                        <h1 class="text-lg font-bold text-white leading-tight">Explore Verified </h1>
                     </div>                           
                     <div itemprop="aggregateRating"
                         itemscope

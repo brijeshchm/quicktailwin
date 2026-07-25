@@ -87,7 +87,7 @@
                 </div>
 
                 
-                    href="{{ route('google.login') }}"
+                   <a href="{{ route('google.login') }}" rel="nofollow"
                     class="flex items-center justify-center gap-2.5 w-full border border-gray-200 rounded-xl py-2.5 px-4 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors shadow-sm no-underline"
                 >
                      

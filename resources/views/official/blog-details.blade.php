@@ -323,12 +323,12 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                     <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
 
                     {{-- Badge --}}
-                    <div class="absolute bottom-6 left-6">
+                    <!-- <div class="absolute bottom-6 left-6">
                         <span class="inline-flex bg-blue-500 text-white text-xs font-bold uppercase
                                      tracking-wider px-3 py-1 rounded-full shadow">
                             {{ $blogDetails['title'] ?? '' }}
                         </span>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
@@ -337,7 +337,11 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                 
                 <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
                     <div itemprop="name">
-                        <h1 class="text-lg font-bold text-gray-900 leading-tight">{{ $blogDetails['title'] }}</h1>
+                        <h1 class="text-lg font-bold text-gray-900 leading-tight">
+                    {{ $blogDetails['h1_heading'] ?? $blogDetails['title']  }}
+
+
+                        </h1>
                     </div>                           
                     <div itemprop="aggregateRating"
                         itemscope
