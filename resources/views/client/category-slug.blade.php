@@ -262,9 +262,9 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
     {{-- FAQ --}}
     @if(count($faqs ?? []) > 0)
     <div class="bg-white rounded-2xl mt-4" x-data="{ openFaq: null }">
-        <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
             💬 Frequently Asked Questions(FAQ's) {{ $keyword }}
-        </h2>
+        </h3>
         <div class="space-y-2">
         
             @foreach($faqs as $fi => $faq)

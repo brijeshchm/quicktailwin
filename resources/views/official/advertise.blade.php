@@ -436,7 +436,7 @@
                 <div class="w-16 h-16 mx-auto mb-4 bg-blue-50 rounded-2xl flex items-center justify-center">
                     <i data-lucide="megaphone" class="w-8 h-8 text-[#0076D7]"></i>
                 </div>
-                <h2 class="text-3xl font-bold text-gray-900">Advertise on Quick Dials: Grow Your Business with Greater Online Visibility</h2>
+                <h3 class="text-3xl font-bold text-gray-900">Advertise on Quick Dials: Grow Your Business with Greater Online Visibility</h3>
               
                 <h4 class="text-gray-500 mt-2 text-sm">Reach More Customers and Grow Faster with Quick Dials</h4>
 <p>In the present-day competitive world of business, an online presence becomes important in order to attract more customers and remain ahead of your competitors. Quick Dials is a reliable business directory service that can help businesses reach out to those who are looking for their products or services. No matter whether you are a startup, a local business, or an already established business, Quick Dials will provide you with all necessary means for development.</p>
@@ -680,7 +680,7 @@
     <section id="features" class="py-16 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center mb-12" data-reveal>
-                <h2 class="text-3xl font-bold text-gray-900">Powerful Features for Your Business</h2>
+                <span class="text-3xl font-bold text-gray-900">Powerful Features for Your Business</span>
                 <p class="text-gray-500 mt-2 text-sm">Everything you need to attract, convert, and retain customers</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -1138,9 +1138,9 @@ function selectCert(i) {
     {{-- FAQ --}}
     @if(count($faqs ?? []) > 0)
     <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
-        <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
             💬 Frequently Asked Questions(FAQ's) {{ $clientsList['business_name'] }}
-        </h2>
+        </h3>
         <div class="space-y-2">
         
             @foreach($faqs as $fi => $faq)

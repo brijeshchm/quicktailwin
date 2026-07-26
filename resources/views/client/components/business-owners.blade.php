@@ -531,7 +531,7 @@
 {{-- ── FEATURES ─────────────────────────────────────────────── --}}
 <section class="py-16 bg-gray-100">
     <div class="max-w-7xl mx-auto px-4 text-center">
-        <h2 class="text-3xl font-bold mb-2 slide-up">Powerful Features for Your Business</h2>
+        <span class="text-3xl font-bold mb-2 slide-up">Powerful Features for Your Business</span>
         <p class="text-gray-500 mb-10">Discover how QuickDials can transform your business growth</p>
         <div class="grid md:grid-cols-3 gap-6">
             @foreach([

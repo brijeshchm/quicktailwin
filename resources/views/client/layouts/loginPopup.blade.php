@@ -164,7 +164,7 @@
             <div class="w-16 h-16 rounded-full bg-green-50 flex items-center justify-center mb-4">
                 <svg class="w-9 h-9 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             </div>
-            <h2 class="text-2xl font-bold text-gray-900 mb-2">You're in!</h2>
+            <span class="text-2xl font-bold text-gray-900 mb-2">You're in!</span>
             <p class="text-sm text-gray-500 mb-6">
                 Logged in as <span class="font-semibold text-gray-700" x-text="email"></span>
             </p>

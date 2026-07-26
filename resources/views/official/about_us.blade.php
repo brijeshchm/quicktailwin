@@ -315,7 +315,7 @@
                         </svg>
                     </div>
                     <div>
-                        <h2 class="text-xl font-bold text-gray-900">Our journey</h2>
+                        <span class="text-xl font-bold text-gray-900">Our journey</span>
                         <p class="text-xs text-gray-400">From idea to global infrastructure</p>
                     </div>
                     <div class="section-line ml-2"></div>

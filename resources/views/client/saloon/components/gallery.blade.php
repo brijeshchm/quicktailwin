@@ -47,7 +47,8 @@
             Our Work
         </div>
         <h2 class="mb-2.5 font-serif text-[clamp(2rem,4vw,3.2rem)] font-bold leading-tight text-stone-900">
-            Gallery
+            
+            Spa Hub Gallery – Explore Our Spa Experience
         </h2>
         <p class="mx-auto mb-7 max-w-md text-[0.95rem] text-stone-500">
             Every look is a story. Explore our portfolio of transformations.

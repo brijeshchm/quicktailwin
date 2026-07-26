@@ -284,7 +284,7 @@
 
     <div class="container mx-auto px-4 md:px-6 relative z-10">
         <div class="reveal text-center mb-4">
-            <h2 class="serif text-xl md:text-2xl font-bold text-gray-900 mb-1">Wedding Prerequisites</h2>
+            <h3 class="serif text-xl md:text-2xl font-bold text-gray-900 mb-1">Wedding Prerequisites</h3>
             <p class="text-amber-800/50 text-[11px] max-w-lg mx-auto">Everything you need for your special day, carefully curated.</p>
         </div>
 

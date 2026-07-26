@@ -286,7 +286,7 @@
             {{-- LEFT: features --}}
             <div class="flex flex-col gap-6 anim-fade-left" style="animation-delay:.3s">
                 <div>
-                    <h2 class="text-xl font-bold text-gray-900 mb-2">Send us a message</h2>
+                    <span class="text-xl font-bold text-gray-900 mb-2">Send us a message</span>
                     <p class="text-gray-400 text-sm leading-relaxed">
                         Fill out the form and our team will reach out as soon as possible.
                     </p>
