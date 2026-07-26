@@ -264,8 +264,7 @@ Route::middleware('auth:clients')->group(function () {
 
 
 /*login otp mobile */
-Route::get('/client-login', [App\Http\Controllers\ClientAuth\AuthController::class, 'clientLogin'])->name('clientAuth.Login');
-Route::post('/client-login', [App\Http\Controllers\ClientAuth\AuthController::class, 'clientLoginPost'])->name('client.loginPost');
+//Route::get('/client-login', [App\Http\Controllers\ClientAuth\AuthController::class, 'clientLogin'])->name('clientAuth.Login');
 
  
 
@@ -504,7 +503,7 @@ Route::get('/spa-hub', [App\Http\Controllers\Client\HomePageController::class, '
 Route::get('/saloon-hub', [App\Http\Controllers\Client\HomePageController::class, 'saloonHub'])->name('saloon.hub');
 
 /*login otp mobile */
-Route::get('/client-login', [App\Http\Controllers\ClientAuth\AuthController::class, 'clientLogin']);
+ 
 Route::post('/client-login', [App\Http\Controllers\ClientAuth\AuthController::class, 'clientLoginPost'])->name('client.login');
 
 Route::post('auth/send-otp', [App\Http\Controllers\ClientAuth\AuthController::class, 'sendOtp']);
