@@ -148,7 +148,7 @@
                          data-count="{{ $course['ratingcount'] ?? 0 }}">
                         <a href="{{ route('showCity', $course['slug']) }}" class="block h-full flex flex-col">
                             {{-- Card image/header --}}
-                            <div class="h-36 bg-gradient-to-br from-slate-100 to-indigo-50
+                            <div class="h-28 bg-gradient-to-br from-slate-100 to-indigo-50
                                         flex items-center justify-center p-5 relative overflow-hidden">
                                 <div class="card-bg-overlay"></div>
                                 <h3 class="font-bold text-lg text-slate-700 text-center leading-tight
@@ -163,33 +163,7 @@
 
                             {{-- Card body --}}
                             <div class="p-4 flex-1 flex flex-col">
-                                <div class="flex justify-between items-center mb-2">
-                                    <span class="text-sm font-medium text-slate-700 truncate">
-                                        {{ $course['title'] ?? '' }}
-                                    </span>
-                                    <div class="flex items-center gap-1 text-amber-500 flex-shrink-0">
-                                        <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                                        </svg>
-                                        <span class="text-xs font-medium text-slate-700">
-                                            {{ $course['rating'] ?? '' }}
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="flex gap-3 text-xs text-slate-500 mb-3">
-                                    <span class="flex items-center gap-1">
-                                        <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-                                        </svg>
-                                        150hrs
-                                    </span>
-                                    <span class="flex items-center gap-1">
-                                        <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                            <circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/>
-                                        </svg>
-                                        Advance
-                                    </span>
-                                </div>
+                           
                                 <div class="flex items-center justify-between mt-auto pt-3 border-t border-slate-100">
                                     <span class="text-xs text-indigo-600 font-medium flex items-center gap-0.5 view-arrow">
                                         View Details
