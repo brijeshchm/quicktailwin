@@ -454,7 +454,7 @@
             <div class="w-14 h-14 mx-auto mb-4 bg-white/15 rounded-2xl flex items-center justify-center">
                 <i data-lucide="trending-up" class="w-7 h-7 text-white"></i>
             </div>
-            <h2 class="text-3xl font-bold mb-3">Ready to Grow Your Business?</h2>
+            <span class="text-3xl font-bold mb-3">Ready to Grow Your Business with QuickDials Advertising?</span>
             <p class="text-blue-100 mb-8">Join 1.8 K+ businesses already thriving on QuickDials</p>
             <div class="flex flex-col sm:flex-row gap-3 justify-center">
               <a
@@ -605,7 +605,7 @@
             <div class="w-14 h-14 mx-auto mb-4 bg-white/15 rounded-2xl flex items-center justify-center">
                 <i data-lucide="rocket" class="w-7 h-7 text-white"></i>
             </div>
-            <h2 class="text-3xl font-bold mb-3">Ready to Grow Your Business?</h2>
+            <span class="text-3xl font-bold mb-3">Ready to Grow Your Business Advertising?</span>
             <p class="text-blue-100 mb-8">Join 1.8 K+ businesses already thriving on QuickDials</p>
             <div class="flex flex-col sm:flex-row gap-3 justify-center">
                  <a
@@ -857,7 +857,7 @@
             <div class="w-14 h-14 mx-auto mb-4 bg-white/15 rounded-2xl flex items-center justify-center">
                 <i data-lucide="rocket" class="w-7 h-7 text-white"></i>
             </div>
-            <h2 class="text-3xl font-bold mb-3">Ready to Grow Your Business?</h2>
+            <span class="text-3xl font-bold mb-3">Ready to Grow Your Business for advertising?</span>
             <p class="text-blue-100 mb-8">Join 1.8 K+ businesses already thriving on QuickDials</p>
             <div class="flex flex-col sm:flex-row gap-3 justify-center">
                  <a

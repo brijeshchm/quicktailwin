@@ -559,7 +559,7 @@
     </div>
     <div class="max-w-7xl mx-auto px-4 py-12 grid md:grid-cols-2 gap-10">
         <div class="slide-left">
-            <h3 class="text-xl font-semibold mb-3">How QuickDials help You to Grow your Business?</h3>
+            <span class="text-xl font-semibold mb-3">How QuickDials help You to Grow your Business?</span>
             <p class="text-gray-600 mb-4">QuickDials helps grow your business by boosting local visibility, generating quality leads, and connecting you with customers searching for your services.</p>
             <h4 class="font-semibold mb-2">What is QuickDials?</h4>
             <p class="text-gray-600 mb-4">A platform designed for students, parents, and professionals seeking reliable information across India's diverse education and industrial sectors.</p>
@@ -660,7 +660,7 @@
         <div class="mt-12 relative rounded-3xl overflow-hidden slide-up">
             <div class="bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 p-10 text-center relative">
                 <div class="absolute inset-0 opacity-10" style="background-image:radial-gradient(circle at 20% 50%,white 0%,transparent 40%),radial-gradient(circle at 80% 50%,white 0%,transparent 40%)"></div>
-                <h3 class="text-2xl sm:text-3xl font-extrabold text-white mb-3 relative">Ready to Grow Your Business?</h3>
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-white mb-3 relative">Ready to Grow Your Business signup?</h3>
                 <p class="text-blue-100 mb-7 relative">Join 8,100+ suppliers already thriving on QuickDials</p>
                 <a href="#enquiry" class="relative inline-flex items-center gap-3 bg-white text-blue-700 font-extrabold px-8 py-4 rounded-2xl shadow-2xl hover:shadow-blue-900/30 hover:-translate-y-1 transition-all text-base">
                     <i data-lucide="building-2" class="w-5 h-5"></i>
