@@ -114,9 +114,9 @@
 
         {{-- Section Header --}}
         <div class="mb-8 text-center md:text-left">
-            <h2 class="text-lg md:text-2xl font-bold text-gray-800">
+            <span class="text-lg md:text-2xl font-bold text-gray-800">
                 Trending Services on QuickDials
-            </h2>
+</span>
             <p class="text-xs md:text-sm text-gray-500 mt-1">
                 Browse trending categories and find verified providers near you.
             </p>
