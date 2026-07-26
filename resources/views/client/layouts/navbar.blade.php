@@ -689,7 +689,7 @@ if(!empty($clientcheck)){
         </button>
         <div class="text-center mb-6">
             <img src="{{ asset('client/images/small-logo.png') }}" alt="QuickDials" class="h-10 mx-auto mb-3 object-contain" loading="lazy" decoding="async">
-            <h2 class="text-lg font-black text-gray-900">Welcome QuickDials for register</h2>
+            <span class="text-lg font-black text-gray-900">Welcome QuickDials for register</span>
             <p class="text-sm text-gray-500 mt-1">Sign in to your QuickDials account</p>
         </div>
         <button
