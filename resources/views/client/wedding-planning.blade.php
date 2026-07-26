@@ -322,7 +322,7 @@
      TOP CATEGORIES GRID
 ════════════════════════════════════════════ --}}
 <div class="max-w-7xl mx-auto px-6 py-10">
-    <h1 class="serif text-4xl font-bold text-center mb-10">Find Trusted Wedding Planners on QuickDials</h1>
+    <h2 class="serif text-4xl font-bold text-center mb-10">Find Trusted Wedding Planners on QuickDials</h2>
 
     <div class="grid grid-cols-3 md:grid-cols-6 gap-6 mb-16">
         @foreach([
