@@ -713,7 +713,7 @@ if(!empty($clientcheck)){
         </div>
         
 
-        <form action="/client-login" autocomplete="on" id="login-form" 
+        <form action="{{route('client.login')}}" autocomplete="on" id="login-form" 
       class="max-w-md mx-auto bg-white p-6 rounded-2xl shadow-lg text-center space-y-5">
         <input
             type="email"

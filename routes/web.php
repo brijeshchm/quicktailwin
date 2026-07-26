@@ -264,8 +264,8 @@ Route::middleware('auth:clients')->group(function () {
 
 
 /*login otp mobile */
-Route::get('/client-login', [App\Http\Controllers\ClientAuth\AuthController::class, 'clientLogin']);
-Route::post('/client-login', [App\Http\Controllers\ClientAuth\AuthController::class, 'clientLoginPost'])->name('client.login');
+Route::get('/client-login', [App\Http\Controllers\ClientAuth\AuthController::class, 'clientLogin'])->name('clientAuth.Login');
+Route::post('/client-login', [App\Http\Controllers\ClientAuth\AuthController::class, 'clientLoginPost'])->name('client.loginPost');
 
  
 
