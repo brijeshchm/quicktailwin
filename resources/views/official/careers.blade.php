@@ -182,7 +182,7 @@
             <div class="bg-gradient-to-r from-blue-600 to-indigo-700 px-6 py-5 flex items-start justify-between">
                 <div>
                     <p class="text-xs font-semibold uppercase tracking-wider text-blue-200 mb-0.5">Applying for</p>
-                    <h2 class="text-white font-bold text-lg leading-tight" x-text="jobTitle"></h2>
+
                 </div>
                 <button @click="close()" class="text-white/70 hover:text-white transition-colors mt-0.5">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

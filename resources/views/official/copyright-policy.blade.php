@@ -169,7 +169,7 @@
                         <div class="w-10 h-10 rounded-xl bg-violet-100 flex items-center justify-center text-violet-600">
                             @include('client.icons.shield', ['class' => 'w-5 h-5'])
                         </div>
-                        <h2 class="text-xl font-bold text-gray-900">Intellectual Property Rights</h2>
+                        <h2 class="text-xl font-bold text-gray-900">Intellectual copyright policy Property Rights</h2>
                     </div>
                     <div class="space-y-4 text-gray-600 leading-relaxed">
                         <p>

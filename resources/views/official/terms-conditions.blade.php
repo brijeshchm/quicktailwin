@@ -233,7 +233,7 @@
                             <polyline points="10 9 9 9 8 9"/>
                         </svg>
                     </div>
-                    <h2 class="text-xl font-bold section-title">QuickDials — Terms of Use</h2>
+                    <h2 class="text-xl font-bold section-title">QuickDials — Terms & Condition </h2>
                 </div>
                 <div class="text-sm leading-relaxed space-y-3 section-body">
                     <p>By visiting our website or transacting with QuickDials, you agree to these Terms of Use. Please read them carefully before using this website. By using the website or any service available on it, you agree to be bound by these terms. QuickDials reserves the right to change these Terms at any time. Your continued use of the website constitutes acceptance of the modified Terms.</p>
@@ -258,7 +258,7 @@
                 </div>
             </section>
 
-            {{-- ─ Venue Only ─ --}}
+           
             <section id="venue" class="scroll-reveal glass-card rounded-2xl p-8 mb-8">
                 <div class="flex items-center gap-4 mb-6">
                     <div class="w-12 h-12 rounded-xl icon-grad flex items-center justify-center shrink-0 icon-float" style="animation-delay:.3s">
@@ -304,7 +304,7 @@
                 <div class="text-sm leading-relaxed space-y-3 section-body">
                     <p>All content on this website, including but not limited to text, graphics, logos, icons, images, audio clips, digital downloads, data compilations, and software, is the property of QuickDials Internet Pvt Ltd or its content suppliers and is protected by applicable intellectual property laws.</p>
                     <div class="mt-5">
-                        <h3 class="font-semibold text-base mb-2 subsection-title">Intellectual Property Rights</h3>
+                        <h3 class="font-semibold text-base mb-2 subsection-title">Intellectual terms & conditions Property Rights</h3>
                         <div class="pl-4 border-l-2 subsection-border">
                             <p>The compilation of all content on this site is the exclusive property of QuickDials Pvt Ltd, with copyright authorship for this collection by QuickDials, and protected by applicable copyright laws. All trademarks and service marks on this website not owned by QuickDials are the property of their respective owners.</p>
                         </div>
