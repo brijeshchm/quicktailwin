@@ -725,7 +725,7 @@ function bannerSlider(banners, interval = 4000) {
             <section class="w-full bg-[#057AEC] rounded-lg overflow-hidden mt-4">
                 <div class="flex flex-col lg:flex-row items-center">
                     <div class="flex-1 text-white px-6 py-10 md:px-10">
-                        <h2 class="text-2xl md:text-3xl font-bold mb-3">Trying to grow your business?</h2>
+                        <span class="text-2xl md:text-3xl font-bold mb-3">Trying to grow your business?</span>
                         <p class="text-sm md:text-base mb-6 text-gray-200">Create a listing on Quickdials now and start getting enquiries</p>
                         <div class="flex flex-wrap items-center gap-6 md:gap-10 mb-6">
                             <div><h3 class="text-xl font-bold text-orange-300">{{ $growthBusiness['Keyword'] ??''}}</h3><p class="text-sm text-gray-200">Service Visitors</p></div>

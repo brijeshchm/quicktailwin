@@ -251,7 +251,7 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
     }    
     @endphp
     <div class="bg-white rounded-2xl mt-4">
-        <h2 class="text-lg font-bold text-gray-900 mb-3"> {{ $bottom_heading }} </h2>
+        <h3 class="text-lg font-bold text-gray-900 mb-3"> {{ $bottom_heading }} </h3>
         <div class="text-sm text-gray-600 leading-relaxed">{!! $bottomDescription !!}</div>
     </div>
     @endif
