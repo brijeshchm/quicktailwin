@@ -128,6 +128,8 @@
     src="{{ asset('play-store-android.png') }}" 
       alt="Download Quickdials app on Google Play Store"
     class="h-14 w-auto sm:h-16 md:h-20 lg:h-24 xl:h-28 2xl:h-32 object-contain"
+     width="96"
+    height="56"
      loading="lazy"
      decoding="async" />
      
@@ -568,6 +570,8 @@ if(!empty($clientcheck)){
      <img src="{{ asset('play-store-android.png') }}" 
      alt="Download Quickdials app on Google Play Store"
    class="h-10 w-24 sm:h-16 md:h-20 lg:h-24 xl:h-28 2xl:h-32 object-contain"
+    width="96"
+    height="56"
      loading="lazy"
      decoding="async"
 />
