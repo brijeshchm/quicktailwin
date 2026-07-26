@@ -167,7 +167,9 @@
 													if($logoStatus):
 													 
 													?>
-														<img src="/<?php echo asset($logo['thumbnail']['src']); ?>" alt="logo" />
+														<img src="<?php echo asset($logo['thumbnail']['src']); ?>" alt="logo" width="200"
+     height="200"
+     loading="lazy" />
 													<?php
 													endif;
 												?>

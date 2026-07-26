@@ -15,7 +15,7 @@
         <a href="{{ $catUrl }}"
            class="flex flex-col items-center gap-2 p-3 rounded-2xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/50 transition-all group text-center block">
             <div class="w-12 h-12 rounded-xl overflow-hidden bg-gray-100 flex items-center justify-center">
-                <img loading="lazy" decoding="async" src="{{ $cat['img'] ?? '' }}" alt="{{ $cat['alt'] ?? '' }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                <img loading="lazy" decoding="async" src="{{ $cat['img'] ?? '' }}" alt="{{ $cat['alt'] ?? '' }}" width="100" height="100" loading="lazy"class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
             </div>
             <span class="text-xs font-semibold text-gray-700 group-hover:text-blue-700 leading-tight">{{ $cat['title'] ?? '' }}</span>
         </a>
