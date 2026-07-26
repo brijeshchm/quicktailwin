@@ -684,17 +684,11 @@ Fatal error: Uncaught TypeError string
 Type: !
 
 Then Press: Tab
+//html head
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
   <title>Document</title>
-</head>
-<body>
-</body>
-</html>
+
  
 
 </xmp>
