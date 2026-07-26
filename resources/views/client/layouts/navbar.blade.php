@@ -13,6 +13,8 @@
                 src="{{ asset('client/images/small-logo.png') }}"
                 alt="QuickDials"
                 class="h-12 w-auto sm:h-10 md:h-12 lg:h-14 object-contain"
+                width="112"
+                height="56"
                 loading="lazy" decoding="async"
             />
         </a>
@@ -688,7 +690,8 @@ if(!empty($clientcheck)){
             <svg class="w-5 h-5" stroke="currentColor" fill="none" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
         <div class="text-center mb-6">
-            <img src="{{ asset('client/images/small-logo.png') }}" alt="QuickDials" class="h-10 mx-auto mb-3 object-contain" loading="lazy" decoding="async">
+            <img src="{{ asset('client/images/small-logo.png') }}" alt="QuickDials" class="h-10 mx-auto mb-3 object-contain" width="112"
+                height="56" loading="lazy" decoding="async">
             <span class="text-lg font-black text-gray-900">Welcome QuickDials for register</span>
             <p class="text-sm text-gray-500 mt-1">Sign in to your QuickDials account</p>
         </div>

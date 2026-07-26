@@ -335,7 +335,7 @@
 ] as $cat)
     <a href="{{ route('showCity', $cat['slug']) }}" class="group block reveal">
         <div class="relative h-48 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition">
-            <img src="{{ $cat['img'] }}" alt="{{ $cat['name'] }}"
+            <img src="{{ $cat['img'] }}" alt="{{ $cat['name'] }}" width="200" height="200"
                  class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
             <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
             <div class="absolute bottom-4 left-4 text-white font-medium text-sm">{{ $cat['name'] }}</div>

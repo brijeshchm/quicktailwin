@@ -649,6 +649,8 @@ function bannerSlider(banners, interval = 4000) {
         src="{{ $kwData['key_icon'] ?? $kwData['child_icon'] ??'' }}" 
         alt="{{ $keyword }}"
         class="w-16 h-16 object-contain group-hover:scale-105 transition-transform duration-500"
+        width="100"
+        height="100"
         loading="lazy"
         decoding="async">
 </div>

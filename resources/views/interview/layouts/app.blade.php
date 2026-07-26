@@ -128,7 +128,8 @@ function getStyleValue(elmnt,style) {
     <div class="bar left" style="width:100%;overflow:hidden;height:44px">
        <a href="javascript:void(0);" class="topnav-icons fa fa-menu hide-large left bar-item button active" onclick="open_menu('tutorials')" title="Menu"></a>
     
-      <a class="bar-item logo-hover" href="{{url('')}}" ><img src="<?php echo asset('client/images/small-logo.png'); ?>" alt="QuickDials" style="width: 140px;
+      <a class="bar-item logo-hover" href="{{url('')}}" ><img src="<?php echo asset('client/images/small-logo.png'); ?>" width="112"
+                height="56" alt="QuickDials" style="width: 140px;
     margin-top: -27px;"/></a>
       <a class="bar-item button" href="{{url('interviews/php-interview-question-answer')}}" title='php interview question answer'>PHP Interview header</a>
       <a class="bar-item button" href="{{url('interviews/mysql-interview-question-answer')}}" title='mysql-interview-question-answer'>Mysql Interview</a>

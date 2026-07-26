@@ -13,6 +13,8 @@
                 src="{{ asset('client/images/small-logo.png') }}"
                 alt="QuickDials"
                 class="h-12 w-auto sm:h-10 md:h-12 lg:h-14 object-contain"
+                width="112"
+                height="56"
                 loading="lazy" decoding="async"
             />
         </a>
@@ -125,6 +127,8 @@
     src="{{ asset('play-store-android.png') }}" 
       alt="Download Quickdials app on Google Play Store"
     class="h-14 w-auto sm:h-16 md:h-20 lg:h-24 xl:h-28 2xl:h-32 object-contain"
+    width="96"
+    height="56"
      loading="lazy"
      decoding="async" />
      
@@ -688,7 +692,7 @@ if(!empty($clientcheck)){
         </button>
         <div class="text-center mb-6">
             <img src="{{ asset('client/images/small-logo.png') }}" alt="QuickDials" class="h-10 mx-auto mb-3 object-contain" onerror="this.style.display='none'">
-            <h2 class="text-lg font-black text-gray-900">Welcome QuickDials</h2>
+            <span class="text-lg font-black text-gray-900">Welcome QuickDials</span>
             <p class="text-sm text-gray-500 mt-1">Sign in to your QuickDials account</p>
         </div>
         <button
