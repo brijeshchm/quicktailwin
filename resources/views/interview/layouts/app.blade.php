@@ -204,7 +204,7 @@ function getStyleValue(elmnt,style) {
  
 <div class="container light-grey padding" id="err_sent" style="display:none;position:relative">
 <span onclick="this.parentElement.style.display='none'" class="button display-topright">&times;</span>     
-<h2>Thank You For Helping Us!</h2>
+<span>Thank You For Helping Us!</span>
 <p>Your message has been sent to tutorial.</p>
 </div>
 
