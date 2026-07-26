@@ -1,12 +1,12 @@
  @extends('interview.layouts.app')
 @section('title')
-QuickDials- Business Services
+Technical Logic Interview Questions
 @endsection 
 @section('keywords')
 QuickDials-  Business Services list 
 @endsection
 @section('description'),  
-QuickDials- Business Services POPULAR CATEGORIES, B2B & BUSINESS SERVICES
+Practice technical logic questions and answers to improve problem-solving skills and prepare for coding, aptitude, and technical interviews.
 @endsection
 
 

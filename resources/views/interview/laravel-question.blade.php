@@ -6,7 +6,7 @@ QuickDials- Business Services
 QuickDials-  Business Services list 
 @endsection
 @section('description'),  
-QuickDials- Business Services POPULAR CATEGORIES, B2B & BUSINESS SERVICES
+Explore top Laravel interview questions and answers covering routing, Eloquent, middleware, authentication, APIs, and advanced concepts.
 @endsection
 
 

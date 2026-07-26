@@ -1,12 +1,12 @@
- @extends('interview.layouts.app')
+@extends('interview.layouts.app')
 @section('title')
-QuickDials- Business Services
+Interview Questions & Answers
 @endsection 
 @section('keywords')
 QuickDials-  Business Services list 
 @endsection
 @section('description'),  
-QuickDials- Business Services POPULAR CATEGORIES, B2B & BUSINESS SERVICES
+Master MySQL and php interview questions with expert answers covering database concepts, React hooks, state management, APIs, and projects.
 @endsection
 
 

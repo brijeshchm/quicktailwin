@@ -6,7 +6,7 @@ QuickDials- Business Services
 QuickDials-  Business Services list 
 @endsection
 @section('description'),  
-QuickDials- Business Services POPULAR CATEGORIES, B2B & BUSINESS SERVICES
+Prepare with PHP interview questions and answers covering OOP, arrays, sessions, MySQL, security, APIs, and advanced PHP concepts.
 @endsection
 
 

@@ -1,12 +1,12 @@
- @extends('interview.layouts.app')
+@extends('interview.layouts.app')
 @section('title')
-QuickDials- Business Services
+Reastjs Interview Questions & Answers
 @endsection 
 @section('keywords')
 QuickDials-  Business Services list 
 @endsection
 @section('description'),  
-QuickDials- Business Services POPULAR CATEGORIES, B2B & BUSINESS SERVICES
+Master REST API interview questions and answers covering HTTP methods, status codes, authentication, JSON, CRUD, and API best practices.
 @endsection
 
 

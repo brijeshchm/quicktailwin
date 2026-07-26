@@ -1,12 +1,12 @@
- @extends('interview.layouts.app')
+@extends('interview.layouts.app')
 @section('title')
-QuickDials- Business Services
+Reactjs Interview Questions & Answers
 @endsection 
 @section('keywords')
 QuickDials-  Business Services list 
 @endsection
 @section('description'),  
-QuickDials- Business Services POPULAR CATEGORIES, B2B & BUSINESS SERVICES
+Explore ReactJS interview questions and answers covering components, hooks, state, props, routing, Redux, APIs, and performance optimization.
 @endsection
 
 

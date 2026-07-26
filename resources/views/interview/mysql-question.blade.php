@@ -1,12 +1,12 @@
- @extends('interview.layouts.app')
+@extends('interview.layouts.app')
 @section('title')
-QuickDials- Business Services
+Mysql Interview Questions & Answers
 @endsection 
 @section('keywords')
 QuickDials-  Business Services list 
 @endsection
 @section('description'),  
-QuickDials- Business Services POPULAR CATEGORIES, B2B & BUSINESS SERVICES
+Prepare for your next interview with MySQL interview questions and answers covering joins, indexes, queries, normalization, transactions, and optimization.
 @endsection
 
 

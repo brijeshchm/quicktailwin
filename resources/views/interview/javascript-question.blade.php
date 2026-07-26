@@ -1,12 +1,12 @@
- @extends('interview.layouts.app')
+@extends('interview.layouts.app')
 @section('title')
-QuickDials- Business Services
+javascript Interview Questions & Answers
 @endsection 
 @section('keywords')
 QuickDials-  Business Services list 
 @endsection
 @section('description'),  
-QuickDials- Business Services POPULAR CATEGORIES, B2B & BUSINESS SERVICES
+Learn JavaScript interview questions and answers on ES6, DOM, promises, async/await, closures, events, and modern JavaScript concepts.
 @endsection
 
 
