@@ -170,7 +170,7 @@
  
                     {{-- Business name --}}
                     <h3 class="text-sm font-bold text-gray-900 mb-2 line-clamp-1 group-hover:text-blue-600 transition-colors">
-                        <a href="{{ route('business.details', $biz['business_slug']) }}">{{ $biz['business_name'] ?? '' }}</a>
+                        <a href="{{ route('business.details', $biz['business_slug']) }}" rel="noopener noreferrer nofollow">{{ $biz['business_name'] ?? '' }}</a>
                     </h3>
  
                     <div class="space-y-1.5 mb-3 flex-1">
@@ -203,7 +203,7 @@
                     </div>
  
                     <div class="pt-2.5 border-t border-gray-100">
-                        <a href="{{ route('business.details', $biz['business_slug']) }}"
+                        <a href="{{ route('business.details', $biz['business_slug']) }}" rel="noopener noreferrer nofollow"
                            class="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-1.5 rounded-lg transition-colors">
                             View Details
                         </a>
