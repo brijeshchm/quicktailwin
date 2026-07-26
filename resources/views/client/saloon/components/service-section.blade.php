@@ -235,7 +235,7 @@
 
                         {{-- Book Now → shimmer-arrow link --}}
                         <a
-                            href="{{ url('/book?service=' . urlencode($s['slug'])) }}"
+                            href="#" rel="nofollow noopener noreferrer"
                             class="inline-flex items-center gap-1.5 rounded-full bg-rose-50 px-3.5 py-1.5 text-[11px] font-extrabold uppercase tracking-wider text-rose-700 transition-all duration-300
                                    hover:bg-rose-600 hover:text-white hover:shadow-md hover:shadow-rose-600/40
                                    group-hover:bg-rose-600 group-hover:text-white group-hover:shadow-md group-hover:shadow-rose-600/40"

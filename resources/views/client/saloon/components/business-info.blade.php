@@ -28,18 +28,18 @@
         [
             'icon'      => '✉️',
             'label'     => 'Email',
-            'l1'        => 'hello@serenityspa.in',
-            'l2'        => 'bookings@serenityspa.in',
-            'href'      => 'mailto:hello@serenityspa.in',
+            'l1'        => 'info@quickdials.com',
+            'l2'        => 'inquiry@quickdials.com',
+            'href'      => 'mailto:info@quickdials.com',
             'cta'       => 'Email Us',
             'color_key' => 'indigo',
         ],
         [
             'icon'      => '🌐',
             'label'     => 'Website',
-            'l1'        => 'www.serenityspa.in',
-            'l2'        => '@SerenitySpaIndia',
-            'href'      => 'https://www.serenityspa.in',
+            'l1'        => 'www.quickdials.com',
+            'l2'        => '@quickdials.com',
+            'href'      => 'https://www.quickdials.com',
             'cta'       => 'Visit Site',
             'color_key' => 'amber',
         ],
@@ -60,7 +60,7 @@
     */
     $quickActions = [
         ['href' => 'tel:+919876543210',          'icon' => '📞',  'label' => 'Call Us'],
-        ['href' => 'mailto:hello@serenityspa.in', 'icon' => '✉️',  'label' => 'Email Us'],
+        ['href' => 'mailto:info@quickdials.com', 'icon' => '✉️',  'label' => 'Email Us'],
         ['href' => 'https://maps.google.com/?q=Koregaon+Park+Pune', 'icon' => '🗺️', 'label' => 'Directions'],
     ];
 
@@ -233,7 +233,7 @@
                     <a
                         href="{{ $c['href'] }}"
                         target="_blank"
-                        rel="noopener noreferrer"
+                        rel="nofollow noopener noreferrer"
                         class="inline-block whitespace-nowrap rounded-full border-[1.5px] px-4 py-2 text-center text-[0.7rem] font-extrabold uppercase tracking-wider transition-transform hover:scale-105
                                {{ $p['text'] }} {{ $p['border'] }} {{ $p['cta_bg'] }}
                                max-sm:w-full max-sm:flex-1"
@@ -334,7 +334,7 @@
                         <a
                             href="{{ $map['href'] }}"
                             target="_blank"
-                            rel="noopener noreferrer"
+                           rel="nofollow noopener noreferrer"
                             class="inline-flex items-center gap-1.5 rounded-full bg-orange-500 px-4 py-1.5 text-[0.72rem] font-extrabold uppercase tracking-wider text-white shadow-md shadow-orange-500/40 transition-transform hover:scale-105"
                         >
                             Open in Maps →
@@ -353,7 +353,7 @@
                     <a
                         href="{{ $a['href'] }}"
                         target="_blank"
-                        rel="noopener noreferrer"
+                       rel="nofollow noopener noreferrer"
                         class="flex flex-1 items-center gap-3.5 rounded-2xl border-[1.5px] border-slate-200 bg-white px-5 py-3 text-sm font-bold text-slate-900 transition-all duration-200
                                hover:-translate-y-0.5 hover:border-orange-500 hover:text-orange-600 hover:shadow-lg hover:shadow-orange-500/15
                                justify-center max-sm:w-full max-sm:justify-start"

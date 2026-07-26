@@ -28,18 +28,18 @@
         [
             'icon'      => '✉️',
             'label'     => 'Email',
-            'l1'        => 'hello@serenityspa.in',
-            'l2'        => 'bookings@serenityspa.in',
-            'href'      => 'mailto:hello@serenityspa.in',
+            'l1'        => 'info@quickdials.com',
+            'l2'        => 'inquiry@quickdials.com',
+            'href'      => 'mailto:info@quickdials.com',
             'cta'       => 'Email Us',
             'color_key' => 'indigo',
         ],
         [
             'icon'      => '🌐',
             'label'     => 'Website',
-            'l1'        => 'www.serenityspa.in',
-            'l2'        => '@SerenitySpaIndia',
-            'href'      => 'https://www.serenityspa.in',
+            'l1'        => 'www.quickdials.com',
+            'l2'        => '@quickdials.com',
+            'href'      => 'https://www.quickdials.com',
             'cta'       => 'Visit Site',
             'color_key' => 'amber',
         ],
@@ -60,7 +60,7 @@
     */
     $quickActions = [
         ['href' => 'tel:+919876543210',          'icon' => '📞',  'label' => 'Call Us'],
-        ['href' => 'mailto:hello@serenityspa.in', 'icon' => '✉️',  'label' => 'Email Us'],
+        ['href' => 'mailto:info@quickdials.com', 'icon' => '✉️',  'label' => 'Email Us'],
         ['href' => 'https://maps.google.com/?q=Koregaon+Park+Pune', 'icon' => '🗺️', 'label' => 'Directions'],
     ];
 
