@@ -193,7 +193,7 @@ class DoctorController extends Controller
     ];
  
         $city = "delhi";
-        $metaTitle = "clinic details Services in Delhi | QuickDials";
+        $metaTitle = "clinic details Services for Quickdials";
         $metaDescription = "Find trusted clinic details services in Delhi on QuickDials. Explore verified wedding planners, decorators, caterers, photographers, and event experts near you.";
         $keyword = "clinic details";
 
