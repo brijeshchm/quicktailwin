@@ -1,6 +1,6 @@
  
 <!DOCTYPE html>
-<html lang="en-US"> 
+<html lang="en"> 
 <head>
 <title>@yield('title')</title>
 <meta charset="utf-8">
@@ -37,9 +37,9 @@
     <meta name="DC.title" content="@yield('keyword')" />
     <meta name="distribution" content="global" />
     <meta name="geo.region" content="IN-UP" />
-    <meta name="geo.placename" content="Noida" />
-    <meta name="geo.position" content="28.5802;77.3181" />
-    <meta name="ICBM" content="28.5802, 77.3181" />
+    <meta name="geo.placename" content="bangalore" />
+    <meta name="geo.position" content="12.9658;77.6421" />
+    <meta name="ICBM" content="12.9658, 77.6421" />
     <meta name="robots" content="index, follow" />
     <meta name="Revisit-after" content="7 Days" />
     <meta property="og:locale" content="en_IN" />
@@ -62,16 +62,8 @@
     <meta name="twitter:image" content="{{asset('client/images/small-logo.png')}}" />
     <meta name="twitter:url" content="{{ URL::current() }}" />
 
-    <meta name="rating" content="general">
-    <meta name="robots" content="ALL">
-    <meta name="googlebot" content=" index, follow ">
-    <meta name="bingbot" content=" index, follow ">
-    <meta name="reply-to" content="info@quickdials.com">
-    <meta name="expires" content="never">
-    <link rel="alternate" href="https://www.quickdials.com/" hreflang="en-in" />
- 
- 
-<script type='text/javascript'>
+  
+ <script type='text/javascript'>
 var stickyadstatus = "";
 function fix_stickyad() {
   document.getElementById("stickypos").style.position = "sticky";
