@@ -208,68 +208,7 @@
                     </div>
                    @endif
                 </div>
-
-                {{-- LIST VIEW --}}
-                <div id="list-view" class="space-y-3">
-                    @foreach($courses as $i => $course)
-                    <div class="list-card reveal d-{{ min($i % 6, 5) }} bg-white border border-slate-200
-                                rounded-xl p-5 flex items-start gap-5 cursor-pointer"
-                         data-title="{{ strtolower($course['title'] ?? '') }}"
-                         data-name="{{ strtolower($course['name'] ?? '') }}"
-                         data-slug="{{ $course['child_slug'] ?? '' }}"
-                         data-rating="{{ $course['rating'] ?? 0 }}"
-                         data-count="{{ $course['ratingcount'] ?? 0 }}">
-                        <a href="{{ route('showCity', $course['slug']) }}" class="contents">
-                            <div class="list-num w-14 h-14 shrink-0 rounded-xl bg-indigo-50 flex items-center
-                                        justify-center text-indigo-700 font-bold text-xl border border-indigo-100">
-                                {{ $i + 1 }}
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <div class="flex items-start justify-between gap-4 flex-wrap">
-                                    <div>
-                                        <h3 class="list-title font-bold text-slate-900 transition-colors">
-                                            {{ $course['title'] ?? '' }}
-                                        </h3>
-                                        <p class="text-sm text-slate-500 mt-0.5">{{ $course['name'] ?? '' }}</p>
-                                    </div>
-                                    <div class="text-right flex-shrink-0">
-                                        <div class="flex items-center gap-1 justify-end">
-                                            <svg class="w-3.5 h-3.5 fill-amber-400 text-amber-400" viewBox="0 0 24 24">
-                                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                                            </svg>
-                                            <span class="text-xs text-slate-600">
-                                                {{ $course['rating'] ?? '' }}
-                                                @if(!empty($course['ratingcount']))
-                                                ({{ number_format($course['ratingcount'] / 1000, 1) }}k)
-                                                @endif
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                @if(!empty($course['description']))
-                                <p class="text-sm text-slate-500 mt-2 line-clamp-2">{{ $course['description'] }}</p>
-                                @endif
-                                <div class="flex items-center gap-2 mt-2">
-                                    <span class="px-2.5 py-0.5 bg-indigo-50 text-indigo-700 text-xs font-semibold
-                                                 rounded-full border border-indigo-100">
-                                        {{ $course['name'] ?? '' }}
-                                    </span>
-                                    @if(!empty($course['ratingcount']))
-                                    <span class="flex items-center gap-1 text-xs text-slate-400">
-                                        <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
-                                            <circle cx="9" cy="7" r="4"/>
-                                            <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
-                                        </svg>
-                                        {{ number_format($course['ratingcount']) }} enrolled
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    @endforeach
-                </div>
+ 
 
                 {{-- Empty state --}}
                 <div id="empty-state" class="hidden text-center py-16">
