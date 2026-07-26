@@ -137,7 +137,7 @@ class HomePageController extends Controller
             ['url' => 'packers-and-movers', 'img' => $popular . 'Packers-movers.png', 'alt' => 'Packers & Movers', 'title' => 'Packers & Movers', 'type' => 'child', 'rating' => '3.5', 'count' => '199'],
             ['url' => 'professional', 'img' => $popular . 'Professional.png', 'alt' => 'Professional Course', 'title' => 'Professional', 'type' => 'categories', 'rating' => '3.5', 'count' => '149'],
             ['url' => 'contractors', 'img' => $img . 'contractors.png', 'alt' => 'Contractors Property', 'title' => 'Contractors', 'type' => 'child', 'rating' => '3.5', 'count' => '167'],
-            ['url' => 'collages-and-Institutions', 'img' => $popular . 'Education.png', 'alt' => 'collages and Institutions', 'title' => 'Education', 'type' => 'categories', 'rating' => '3.5', 'count' => '197'],
+            ['url' => 'collages-and-institutions', 'img' => $popular . 'Education.png', 'alt' => 'collages and Institutions', 'title' => 'Education', 'type' => 'categories', 'rating' => '3.5', 'count' => '197'],
             ['url' => 'rent-or-buy', 'img' => $img . 'rent_buy.svg', 'alt' => 'Rent or Buy', 'title' => 'Rent & Buy', 'type' => 'child', 'rating' => '3.5', 'count' => '329'],
             ['url' => 'sports-academy', 'img' => $popular . 'sports.png', 'alt' => 'Sport Academy', 'title' => 'Sport Academy', 'type' => 'child', 'rating' => '3.5', 'count' => '539'],
             ['url' => 'medical', 'img' => $img . 'Medical.webp', 'alt' => 'Medical Medician', 'title' => 'Medical', 'type' => 'child', 'rating' => '3.5', 'count' => '269'],
@@ -171,7 +171,7 @@ class HomePageController extends Controller
             ['url' => 'spa-and-beauty', 'img' => $img . 'Spa-Beauty.webp', 'alt' => 'Spa & Beauty', 'title' => 'Spa & Beauty', 'type' => 'child', 'rating' => '5', 'count' => '325'],
             ['url' => 'professional-courses', 'img' => $img . 'Professional.webp', 'alt' => 'Professional Course', 'title' => 'Professional', 'type' => 'categories', 'rating' => '3.5', 'count' => '149'],
             ['url' => 'contractors', 'img' => $img . 'contractors.webp', 'alt' => 'Contractors Builder', 'title' => 'Contractors', 'type' => 'child', 'rating' => '3.5', 'count' => '167'],
-            ['url' => 'collages-and-Institutions', 'img' => $img . 'Education.webp', 'alt' => 'Education collages', 'title' => 'Education', 'type' => 'categories', 'rating' => '3.5', 'count' => '197'],
+            ['url' => 'collages-and-institutions', 'img' => $img . 'Education.webp', 'alt' => 'Education collages', 'title' => 'Education', 'type' => 'categories', 'rating' => '3.5', 'count' => '197'],
             ['url' => 'sports-academy', 'img' => $img . 'sports.webp', 'alt' => 'Sport Academy', 'title' => 'Sport Academy', 'type' => 'child', 'rating' => '3.5', 'count' => '539'],
             ['url' => 'medical', 'img' => $img . 'Medical.webp', 'alt' => 'Medical', 'title' => 'Medical', 'type' => 'child', 'rating' => '3.5', 'count' => '269'],
             ['url' => 'loan-service', 'img' => $img . 'Loan.webp', 'alt' => 'Loan Service', 'title' => 'Loan', 'type' => 'child', 'rating' => '3.5', 'count' => '69'],
@@ -1888,6 +1888,7 @@ class HomePageController extends Controller
             '#145a32','#784212','#1e8449','#1b4332',
         ];
  		$city = "bangalore";
+		
         return view('client.child-slug', compact(
             'child_slug', 'keyword', 'childCategory', 'childSlug',
             'topDescription', 'bottomDescription','metaKeywords',

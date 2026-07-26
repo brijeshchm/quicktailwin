@@ -1,6 +1,6 @@
 @extends('client.layouts.app')
-@section('title', 'Package Price Dials | Local Search, IT Training & Overseas Education')
-@section('description', 'Discover Package Price Dials for local search, IT training, professional services, and overseas education solutions designed for your career and business needs.')
+@section('title', 'Package Price Dials | Local Search, IT Training & Wedding')
+@section('description', 'Explore QuickDials package pricing for local search, IT training, professional services, and overseas education solutions tailored to your business and career needs.')
 @section('keywords', 'Package Price Dials, local search, IT training, professional services, overseas education')
 @section('content') 
 
