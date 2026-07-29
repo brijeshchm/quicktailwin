@@ -800,6 +800,10 @@ $reviewList = DB::table('clients')
 			$heading ="";
 			$h1_heading ="";
 			$short_definition ="";
+			$top_wcity_description ="";
+			$top_wcity_heading ="";
+			$bottom_wcity_heading ="";
+			$bottom_wcity_description ="";
 			$paragraph1 ="";
 			$paragraph2="";
 			$paragraph3 ="";
@@ -859,16 +863,28 @@ $reviewList = DB::table('clients')
 			$short_definition = $this->replaceCity($keywordDetails->short_definition,'');
 		}  
 
+		if (!empty($keywordDetails->top_wcity_description)) {
+			$top_wcity_description = $keywordDetails->top_wcity_description;
+		}  
+
+		if (!empty($keywordDetails->top_wcity_heading)) {
+			$top_wcity_heading = $keywordDetails->top_wcity_heading;
+		}  
+
+		if (!empty($keywordDetails->bottom_wcity_heading)) {
+			$bottom_wcity_heading = $keywordDetails->bottom_wcity_heading;
+		}  
+
+		if (!empty($keywordDetails->bottom_wcity_description)) {
+			$bottom_wcity_description = $keywordDetails->bottom_wcity_description;
+		}  
 
 		if (!empty($keywordDetails->meta_description)) {
 			$meta_description = $this->replaceCity($keywordDetails->meta_description,'');
-
-
 		} else {
 			$meta_description = 'Find the best ' . strtolower($keywordDetails->keyword) . '. Compare ratings, reviews, contact details and service information on Quickdials.';
-
 		}
-
+	
 		$top_description = "";
 		if (!empty($keywordDetails->top_description)) {
 			$top_description = $this->replaceCity($keywordDetails->top_description,'');
@@ -922,6 +938,10 @@ $reviewList = DB::table('clients')
 			'meta_title' => $meta_title,
 			'h1_heading' => $h1_heading,
 			'short_definition' => $short_definition,
+			'top_wcity_description' => $top_wcity_description,
+			'top_wcity_heading' => $top_wcity_heading,
+			'bottom_wcity_heading' => $bottom_wcity_heading,
+			'bottom_wcity_description' => $bottom_wcity_description,
 			'meta_description' => $meta_description,
 			'top_description' => $top_description,
 			'bottom_description' => $bottom_description,	

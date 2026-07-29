@@ -1405,11 +1405,7 @@ class BackEndClientsController extends Controller
 	 * @return \Illuminate\Http\Response
 	 */
 	public function editSaveClientProfileLogo(Request $request, $id)
-	{
-
-	 
-
-			 
+	{			 
 			$client = Client::withTrashed()->where('id', $id)->first();
 			$validator = Validator::make($request->all(), [
 				'logo' => 'mimes:jpeg,jpg,png,svg,webp|max:12048',
