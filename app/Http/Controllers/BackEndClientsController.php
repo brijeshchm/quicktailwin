@@ -1414,9 +1414,6 @@ class BackEndClientsController extends Controller
 				'logo' => 'mimes:jpeg,jpg,png,svg,webp|max:12048',
 				'profile_pic' => 'mimes:jpeg,jpg,png,svg,webp|max:12048',
 				// 'year_of_estb' => 'required',
-			], [
-				'profile_pic.dimensions' => 'Please upload Banner of given size -> [Minimum Height:319px] &amp; [Minimum Width:1137px].',
-				'logo.dimensions' => 'Please upload profile logo of given size -> .[Maximum Height:150px] &amp; [Maximum Width:300px]'
 			]);
 			if ($validator->fails()) {
 				$errorsBag = $validator->getMessageBag()->toArray();

@@ -1042,7 +1042,7 @@
 				<a href="{{url('developer/clients/update/profileLogo/logoDel/'.$client->username)}}" class="btn btn-danger btn-sm" title="Remove my profile image" width="100"><i class="fa fa-trash"></i></a>
 				<?php   }else{ ?>
 					
-						<input type="file" class="form-control" id="logo" name="logo" accept=".png,.jpeg,.jpg,.webp">
+						<input type="file" class="form-control" id="logo" name="logo" accept=".png,.jpeg,.jpg,.webp,.svg">
 					
 					<?php  	}  ?>
 						
@@ -1064,7 +1064,7 @@
 					<?php if(!empty($profile_pic['thumbnail'])){ ?><img loading="lazy" src="{{asset('/'.$profile_pic['thumbnail']['src'])}}" width="100"><?php  } ?>
 						<a href="{{url('developer/clients/update/profileLogo/profilePicDel/'.$client->username)}}" class="btn btn-danger btn-sm" title="Remove my profile image" width="100"><i class="fa fa-trash"></i></a>
 					<?php  }else{ ?>
-								<input type="file" class="form-control" id="profile_pic" name="profile_pic" accept=".png,.jpeg,.jpg,.webp">
+								<input type="file" class="form-control" id="profile_pic" name="profile_pic" accept=".png,.jpeg,.jpg,.webp,.svg">
 								
 					
 					<?php  } ?>
