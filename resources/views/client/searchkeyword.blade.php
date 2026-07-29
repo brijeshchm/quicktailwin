@@ -306,9 +306,9 @@ $keywordImg= !empty($kwData['key_icon'])
                         <span class="text-gray-500">ratings</span>
                     </div>
                 </div>    
-                  <p>{{ $kwData['short_definition']??'' }}</p>         
+                     
             </div>
-
+            <p>{{ $kwData['short_definition']??'' }}</p>      
             {{-- Controls --}}
             <div class="flex items-center gap-2 flex-wrap">
                 <div class="relative">
