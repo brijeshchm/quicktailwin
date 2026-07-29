@@ -957,6 +957,7 @@ class BackEndClientsController extends Controller
 
 						'meta_title' => 'nullable|string|max:75',
 						'h1_heading' => 'nullable|string|max:275',					 
+											 
 						'meta_description' => 'nullable|string|max:170',
 				 					 
 					]);

@@ -1666,7 +1666,7 @@ class KeywordController extends Controller
 			$i = 0;
 			foreach ($keywords as $kw) {
 				$kwObj = Keyword::findOrFail($kw->id);
-				$meta_title = $meta_description = $h1_heading = $top_description = $bottom_description = NULL;
+				$meta_title = $meta_description = $h1_heading = $top_description = $bottom_description = $short_defination = NULL;
 
 				if ($request->has('meta_title') && $request->input('meta_title') != '') {
 					$meta_title = $request->input('meta_title');
@@ -1679,8 +1679,13 @@ class KeywordController extends Controller
 				}
 				if ($request->has('h1_heading') && $request->input('h1_heading') != '') {
 					$h1_heading = $request->input('h1_heading');
-					$h1_heading = preg_replace('/{{keyword}}/i', $kw->keyword, $h1_heading);
+					
 
+				}
+
+			
+				if ($request->has('short_defination') && $request->input('short_defination') != '') {
+					$short_defination = $request->input('short_defination');
 				}
 				if ($request->has('top_description') && $request->input('top_description') != '') {
 					$top_description = $request->input('top_description');
@@ -1696,6 +1701,7 @@ class KeywordController extends Controller
 				$kwObj->meta_title = $meta_title;
 				$kwObj->meta_description = $meta_description;
 				$kwObj->h1_heading = $h1_heading;
+				$kwObj->short_defination = $short_defination;
 				$kwObj->top_description = $top_description;
 
 				$kwObj->faqq1 = $request->input('faqq1');
@@ -1773,6 +1779,7 @@ class KeywordController extends Controller
 			'meta_title' => 'required|min:3|max:75',
 			'h1_heading' => 'required|min:10|max:260',
 			'meta_description' => 'required|min:45|max:300',
+			'short_definition' => 'required|min:45|max:360',
 			'ratingvalue' => 'required|numeric',
 			'ratingcount' => 'required|numeric',
 		]);
@@ -1791,6 +1798,7 @@ class KeywordController extends Controller
 			$kwObj->meta_title = $request->input('meta_title');
 			$kwObj->meta_description = $request->input('meta_description');
 			$kwObj->h1_heading = $request->input('h1_heading');
+			$kwObj->short_definition  = $request->input('short_definition');			
 			$kwObj->ratingvalue = $request->input('ratingvalue');
 			$kwObj->ratingcount = $request->input('ratingcount');
 

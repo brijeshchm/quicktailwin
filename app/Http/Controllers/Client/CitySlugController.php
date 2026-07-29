@@ -57,6 +57,7 @@ class CitySlugController extends Controller
 		$paragraph8 ="";
 		$meta_title ="";
 		$h1_heading ="";
+		$short_definition ="";
 		$meta_description ="";
 		$bottom_description = "";
 		$top_description = "";
@@ -137,10 +138,12 @@ class CitySlugController extends Controller
 		}
 		if (!empty($keywordDetails->h1_heading)) {
 			$h1_heading = preg_replace('/{{city}}/i', ucfirst($city), $keywordDetails->h1_heading);
-		} else {
-			$h1_heading = 'Best ' . $keywordDetails->keyword . ' in ' . ucfirst($city); 
+		}  
 
-		}
+		if (!empty($keywordDetails->short_definition)) {
+			$short_definition = preg_replace('/{{city}}/i', ucfirst($city), $keywordDetails->short_definition);
+		} 
+
 
 
 		if (!empty($keywordDetails->meta_description)) {
@@ -210,6 +213,7 @@ class CitySlugController extends Controller
 			'alt' => $alt,
 			'meta_title' => $meta_title,
 			'h1_heading' => $h1_heading,
+			'short_definition' => $short_definition,
 			'meta_description' => $meta_description,
 			'top_description' => $top_description,
 			'bottom_description' => $bottom_description,
@@ -794,6 +798,8 @@ $reviewList = DB::table('clients')
 		 
 			$courseabout ="";
 			$heading ="";
+			$h1_heading ="";
+			$short_definition ="";
 			$paragraph1 ="";
 			$paragraph2="";
 			$paragraph3 ="";
@@ -847,10 +853,11 @@ $reviewList = DB::table('clients')
 		}
 		if (!empty($keywordDetails->h1_heading)) {
 			$h1_heading = $this->replaceCity($keywordDetails->h1_heading,'');
-		} else {
-			$h1_heading =  'Best ' . $keywordDetails->keyword;
+		}  
 
-		}
+		if (!empty($keywordDetails->short_definition)) {
+			$short_definition = $this->replaceCity($keywordDetails->short_definition,'');
+		}  
 
 
 		if (!empty($keywordDetails->meta_description)) {
@@ -914,6 +921,7 @@ $reviewList = DB::table('clients')
 			'key_alt' => $child_alt,
 			'meta_title' => $meta_title,
 			'h1_heading' => $h1_heading,
+			'short_definition' => $short_definition,
 			'meta_description' => $meta_description,
 			'top_description' => $top_description,
 			'bottom_description' => $bottom_description,	

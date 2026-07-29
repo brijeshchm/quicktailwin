@@ -88,6 +88,12 @@ padding:0px;
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Short Definition</label>
+                    <div class="col-md-8">
+                        <textarea class="form-control" name="short_definition" placeholder="Enter short definition">{{ $keyword->short_definition }}</textarea>
+                    </div>
+                </div>
                
                 <div class="form-group">
                     <label for="ratingValue" class="col-md-2 control-label">Rating Value</label>

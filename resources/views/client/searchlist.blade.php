@@ -419,9 +419,12 @@ function bannerSlider(banners, interval = 4000) {
                         <span class="text-gray-500">based on</span>
                         <span itemprop="ratingCount">{{ $ratingCount }}</span>
                         <span class="text-gray-500">ratings</span>
+                        
                     </div>
+                  
+                  
                 </div> 
-
+  <p>{{ $kwData['short_definition']??'' }}</p>
             </div>
 
             {{-- Controls --}}
