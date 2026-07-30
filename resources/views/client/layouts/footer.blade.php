@@ -213,7 +213,7 @@
                         ['name' => 'Loans',                           'slug' => 'loan-service','type'=>'child'],
                         ['name' => 'Visa Consultants',                'slug' => 'visa-consultants','type'=>'keyword'],
                         ['name' => 'Beauty Parlour Services',         'slug' => 'beauty-parlours','type'=>'keyword'],
-                        ['name' => 'Event Organisers',                'slug' => 'event-organisers','type'=>'keyword'],
+                        ['name' => 'Event Organisers',                'slug' => 'event-organizers','type'=>'keyword'],
                         ['name' => 'Catering Services',               'slug' => 'catering-services','type'=>'keyword'],
                         ['name' => 'Photographers & Videographers',   'slug' => 'photographers-videographers','type'=>'keyword'],
                         ['name' => 'Astrologers',                     'slug' => 'astrologers','type'=>'keyword'],
