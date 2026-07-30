@@ -424,7 +424,7 @@ function bannerSlider(banners, interval = 4000) {
                   
                   
                 </div> 
-  <p>{{ $kwData['short_definition']??'' }}</p>
+                 <p class="pt-1">{{ $kwData['short_definition']??'' }}</p>
             </div>
 
             {{-- Controls --}}

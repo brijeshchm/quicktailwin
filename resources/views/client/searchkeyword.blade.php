@@ -305,9 +305,10 @@ $keywordImg= !empty($kwData['key_icon'])
                         <span itemprop="ratingCount">{{ $ratingCount }}</span>
                         <span class="text-gray-500">ratings</span>
                     </div>
-                </div>                         
+                </div>    
+                  <p class="pt-1">{{ $kwData['short_definition']??'' }}</p>         
             </div>
-            <p>{{ $kwData['short_definition']??'' }}</p>      
+
             {{-- Controls --}}
             <div class="flex items-center gap-2 flex-wrap">
                 <div class="relative">
