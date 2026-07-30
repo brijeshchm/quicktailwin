@@ -394,10 +394,10 @@ function bannerSlider(banners, interval = 4000) {
                     @endif
                     <span class="text-gray-600">{{ $keyword }} in {{ ucwords(strtolower(str_replace('-', ' ', $city))) }}</span>
                 </nav>
-                                
+                           
                 <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
                     <div itemprop="name">
-                        <h1 class="text-lg font-bold text-gray-900 leading-tight">{{ $kwData['h1_heading'] ?? (($keyword ?? 'Service') . ' in ' . ucwords(strtolower(str_replace('-', ' ', $city ?? '')))) }}</h1>
+                        <h1 class="text-lg font-bold text-gray-900 leading-tight">{{ !empty($kwData['h1_heading']) ? $kwData['h1_heading'] : trim(($keyword ?? '') . (!empty($city) ? ' in ' . ucwords(strtolower(str_replace('-', ' ', $city))) : '' ))}}</h1>
                     </div>                           
                     <div itemprop="aggregateRating"
                         itemscope

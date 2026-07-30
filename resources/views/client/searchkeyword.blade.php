@@ -282,7 +282,7 @@ $keywordImg= !empty($kwData['key_icon'])
 
                 <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
                     <div itemprop="name">
-                        <h1 class="text-lg font-bold text-gray-900 leading-tight">{{ $kwData['h1_heading'] ?? $keyword ?? 'Service' }}</h1>
+                        <h1 class="text-lg font-bold text-gray-900 leading-tight">{{ !empty($kwData['h1_heading']) ? $kwData['h1_heading'] : trim($keyword) }}</h1>
                     </div>                           
                     <div itemprop="aggregateRating"
                         itemscope
