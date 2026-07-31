@@ -58,7 +58,7 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
  
                 <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
                     <div itemprop="name">
-                        <h1 class="text-lg font-bold text-gray-900 leading-tight">{{ !empty($kwData['h1_heading']) ? $kwData['h1_heading'] : trim(($keyword ?? '') . (!empty($city) ? ' in ' . ucwords(strtolower(str_replace('-', ' ', $city))) : '' ))}}</h1>
+                        <h1 class="text-lg font-bold text-gray-900 leading-tight">{{ !empty($kwData['h1_heading']) ? replaceCity($kwData['h1_heading'],$city ): trim(($keyword ?? '') . (!empty($city) ? ' in ' . ucwords(strtolower(str_replace('-', ' ', $city))) : '' ))}}</h1>
                     </div>                           
                     <div itemprop="aggregateRating"
                         itemscope

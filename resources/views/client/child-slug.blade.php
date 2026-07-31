@@ -52,19 +52,15 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
                     
                 @else                    
                     <a href="{{ route('showCity', $kwData['child_slug'])}}" class="hover:text-indigo-600 transition-colors">{{ $keyword }} </a>
-
-                @endif
-
-              
-                    <!-- <span>›</span>
-            
+                @endif         
+                    <!-- <span>›</span>            
                 <span class="text-slate-600">{{ $keyword }}</span> -->
             </nav>
 
 
               <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
                     <div itemprop="name">
-                        <h1 class="text-lg font-bold text-gray-900 leading-tight">{{ $kwData['h1_heading']??$keyword??"Sub Category" }}</h1>
+                        <h1 class="text-lg font-bold text-gray-900 leading-tight">{{ !empty($kwData['h1_heading']) ? replaceCity($kwData['h1_heading'],$city): trim(($keyword ?? '') . (!empty($city) ? ' in ' . ucwords(strtolower(str_replace('-', ' ', $city))) : '' ))}}</h1>
                     </div>                           
                     <div itemprop="aggregateRating"
                         itemscope
