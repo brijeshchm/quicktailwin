@@ -226,10 +226,7 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
         </div>
     </section>
     @endif
-@php
 
-dd($kwData);
-@endphp
     {{-- Course About --}}
     @if(!empty($kwData['heading']) && !empty($kwData['courseabout']))
     <div class="border rounded-lg p-4 bg-white shadow-sm mx-4">
