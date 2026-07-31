@@ -226,20 +226,23 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
         </div>
     </section>
     @endif
+@php
 
+dd($kwData);
+@endphp
     {{-- Course About --}}
     @if(!empty($kwData['heading']) && !empty($kwData['courseabout']))
     <div class="border rounded-lg p-4 bg-white shadow-sm mx-4">
         <section class="rounded-md p-1">
             <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-blue-900">{{ replaceCity($kwData['heading'],$city) }}</h2>
             <div class="w-full h-[2px] bg-teal-500 mt-3 mb-5"></div>
-            <div class="text-gray-800 leading-relaxed mb-5">{!! $kwData['courseabout'] !!}</div>
+            <div class="text-gray-800 leading-relaxed mb-5">{!! replaceCity($kwData['courseabout'],$city) !!}</div>
             <ul class="space-y-3">
                 @foreach(['paragraph1','paragraph2','paragraph3','paragraph4','paragraph5','paragraph6'] as $p)
                 @if(!empty($kwData[$p]))
                 <li class="flex items-start gap-2 text-gray-800">
                     <span class="text-orange-500 mt-1">✔</span>
-                    <span>{!! $kwData[$p] !!}</span>
+                    <span>{!! replaceCity($kwData[$p],$city) !!}</span>
                 </li>
                 @endif
                 @endforeach

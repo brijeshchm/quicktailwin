@@ -2665,8 +2665,7 @@ $reviewList = DB::table('clients')
 
 
 	public function childListPage($response, $child_slug,$city)
-	{
-		      
+	{	      
  
         /* ── extract data (mirrors the Next.js component) ── */
         $kwData       = $response['data']['keyword']      ?? [];
@@ -2919,7 +2918,7 @@ $reviewList = DB::table('clients')
 			$cityKeyword = $this->cityKeyword();
 			return $this->cityKeywordPage($cityKeyword,$cityName);			
 		}
-		
+
 		// If a canonical/better match exists and differs from input → 301 redirect
 		if ($slugUrl && $slugUrl !== $slug) {
 			return redirect()->route('showCity', $slugUrl, 301);

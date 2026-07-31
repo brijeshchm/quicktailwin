@@ -1644,7 +1644,7 @@ class HomePageController extends Controller
 		// ── API fetch (cached 1 hour) ────────────────────────────────────────
         $apiData = Cache::remember('business_services', 3600, function () {
             try {
-                $res = Http::timeout(10)->withoutVerifying()
+                $res = Http::timeout(30)->withoutVerifying()
                     ->get('https://api.quickdials.com/api/website/business-services');
                 return $res->successful() ? $res->json('data', []) : [];
             } catch (\Exception $e) {
