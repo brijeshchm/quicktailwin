@@ -229,11 +229,12 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
 
     {{-- Course About --}}
     @if(!empty($kwData['heading']) && !empty($kwData['courseabout']))
-    <div class="border rounded-lg p-4 bg-white shadow-sm mx-4">
+    <div class="bg-white rounded-2xl mt-4 pt-4">
         <section class="rounded-md p-1">
             <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-blue-900">{{ replaceCity($kwData['heading'],$city) }}</h2>
             <div class="w-full h-[2px] bg-teal-500 mt-3 mb-5"></div>
-            <div class="text-gray-800 leading-relaxed mb-5">{!! replaceCity($kwData['courseabout'],$city) !!}</div>
+            <div class="text-gray-800 leading-relaxed mb-5">
+          <p>  {!! replaceCity($kwData['courseabout'],$city) !!}</p></div>
             <ul class="space-y-3">
                 @foreach(['paragraph1','paragraph2','paragraph3','paragraph4','paragraph5','paragraph6'] as $p)
                 @if(!empty($kwData[$p]))
@@ -261,9 +262,10 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
      $bottom_heading = 'Find the Best ' .$keyword;
     }    
     @endphp
-    <div class="bg-white rounded-2xl mt-4">
+    <div class="bg-white rounded-2xl mt-4 pt-4">
         <h3 class="text-lg font-bold text-gray-900 mb-3"> {{ replaceCity($bottom_heading,$city) }} </h3>
-        <div class="text-sm text-gray-600 leading-relaxed">{!! $bottomDescription !!}</div>
+        <div class="text-sm text-gray-600 leading-relaxed">
+        <p>{!! $bottomDescription !!}</p></div>
     </div>
     @endif
 
