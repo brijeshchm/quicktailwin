@@ -79,7 +79,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
     $serviceDescription = $metaDescription? $metaDescription: 'India’s leading local business search and service directory. Find trusted businesses, services, it training, professionals, and service providers near you with QuickDials..';
     $cityName =$city ?: 'bangalore';
     if (!empty($childCat) && !empty($childSlug)) {
-        $items[] = ['name' => ucfirst($childCat), 'url' => route('child.show', $childSlug)];
+        $items[] = ['name' => ucfirst($childCat), 'url' => route('city.slug', ['city_slug'=> $cityName,'service_slug' => $childSlug]) ];
     }
 
  
@@ -903,14 +903,14 @@ $keywordImg= !empty($kwData['key_icon'])
     @if(!empty($relatedCategory))
     <div class="bg-white py-10 border-t border-gray-200 mt-4">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-2xl font-bold text-gray-900 mb-6">Related Sub Categories<span class="text-blue-600">{{ ucfirst($city) }}</span></h2>
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Related Categories<span class="text-blue-600">{{ ucfirst($city) }}</span></h2>
             <div class="flex flex-wrap gap-x-8 gap-y-3 text-[15px]">
                 @foreach($relatedCategory as $slug_c => $name)
-                <a href="{{ route('child.show', $slug_c) }}" class="text-gray-700 hover:text-blue-600 transition-colors duration-200">{{ $name }}</a>
+                <a href="{{ route('city.slug', ['city_slug'=> $cityName,'service_slug' => $slug_c])}}" class="text-gray-700 hover:text-blue-600 transition-colors duration-200">{{ $name }}</a>
                 @endforeach
             </div>
             <div class="mt-8">
-                <a href="{{ route('category.list') }}" class="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium">View All Categories →</a>
+                <a href="{{ route('showCity','bangalore') }}" class="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium">View All Categories →</a>
             </div>
         </div>
     </div>

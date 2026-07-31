@@ -524,10 +524,10 @@ Route::get('/client/logout', [App\Http\Controllers\LogoutController::class, 'cli
 
 
 
-Route::get('/categories', [HomePageController::class, 'category'])->name('category.list');
-Route::get('/child', [HomePageController::class, 'child'])->name('child.list');
-Route::get('/categories/{slug}', [HomePageController::class, 'categories'])->name('categories.show');
-Route::get('/child/{slug}', [HomePageController::class, 'childSlus'])->name('child.show');
+//Route::get('/categories', [HomePageController::class, 'category'])->name('category.list');
+//Route::get('/child', [HomePageController::class, 'child'])->name('child.list');
+//Route::get('/categories/{slug}', [HomePageController::class, 'categories'])->name('categories.show');
+//Route::get('/child/{slug}', [HomePageController::class, 'childSlus'])->name('child.show');
 Route::get('location/getAjaxCity', [HomePageController::class, 'getAjaxLocation'])->name('get.location');
 Route::get('service/getAjaxKeyword', [HomePageController::class, 'getAjaxKeyword'])->name('search.keyword');
 

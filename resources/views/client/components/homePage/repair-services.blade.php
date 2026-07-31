@@ -43,7 +43,7 @@ $repairGradients = [
                 </div>
             </div>
             <div class="flex items-center gap-2">
-                <a href="{{ route('category.list') }}"
+                <a href="{{ route('showCity','bangalore') }}"
                    class="hidden sm:block text-blue-600 text-xs font-semibold hover:underline mr-1">
                     View All
                 </a>

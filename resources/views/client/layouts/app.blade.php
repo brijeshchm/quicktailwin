@@ -110,7 +110,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     $serviceDescription = $metaDescription? $metaDescription: 'India’s leading local business search and service directory. Find trusted businesses, services, it training, professionals, and service providers near you with QuickDials..';
     $cityName =$city ?: 'bangalore';
     if (!empty($childCat) && !empty($childSlug)) {
-        $items[] = ['name' => ucfirst($childCat), 'url' => route('child.show', $childSlug)];
+        $items[] = ['name' => ucfirst($childCat), 'url' =>route('city.slug', ['city_slug'=> $cityName,'service_slug' => $childSlug])];
     }
     $items =[];
     if(request()->segment(1) ===$city){

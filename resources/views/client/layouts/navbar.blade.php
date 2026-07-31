@@ -111,7 +111,7 @@
         {{-- Desktop nav links --}}
         <nav id="desktop-nav" class="hidden md:flex items-center gap-6 shrink-0 transition-all duration-200">
             <a href="{{ route('home') }}" class="text-xs font-medium text-gray-900 hover:text-primary transition-colors">Home</a>
-            <a href="{{ route('category.list') }}" class="text-xs font-medium text-gray-600 hover:text-primary transition-colors">Categories</a>
+           
             <a href="{{ route('business.services') }}" class="text-xs font-medium text-gray-600 hover:text-primary transition-colors">Businesses</a>
         </nav>
 
@@ -668,7 +668,7 @@ if(!empty($clientcheck)){
     <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-4 pb-4 shadow-lg">
         <nav class="flex flex-col gap-0.5 pt-2 mb-3">
             <a href="{{ route('home') }}" class="text-sm font-semibold text-gray-900 hover:text-primary px-2 py-2.5 rounded-lg hover:bg-blue-50 transition-colors">Home</a>
-            <a href="{{ route('category.list') }}" class="text-sm font-medium text-gray-600 hover:text-primary px-2 py-2.5 rounded-lg hover:bg-blue-50 transition-colors">Categories</a>
+          
             <a href="{{ route('business.services') }}" class="text-sm font-medium text-gray-600 hover:text-primary px-2 py-2.5 rounded-lg hover:bg-blue-50 transition-colors">Businesses</a>
         </nav>
         <div class="flex flex-col gap-2 border-t border-gray-100 pt-3">

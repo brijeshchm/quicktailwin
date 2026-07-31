@@ -2474,6 +2474,126 @@ $reviewList = DB::table('clients')
      * Handle  GET /{city}/{slug}
      */
 	public function showCityWithService(Request $request, string $city, string $slug)
+{
+    $citySlug   = strtolower(trim($city));
+    $keySlugRaw = strtolower(trim($slug));
+    $newSlug    = strtolower(str_replace(' ', '-', trim($slug)));
+
+    $cityMap    = $this->getCitySlugMap();     // cached, in-memory
+    $keywordMap = $this->getKeywordSlugMap();  // cached, in-memory
+
+    $defaultCity = config('app.default_city_slug', 'bangalore');
+
+    // ---- CATEGORY CHECK ----
+    $category = $this->categoriesCheck($newSlug);
+
+    if ($category) {
+        // No real city in URL (e.g. /categories/{slug}) — redirect with default city
+        if ($citySlug === 'categories' || !isset($cityMap[$citySlug])) {
+            return redirect()->route('city.slug', [
+                'city_slug'     => $defaultCity,
+                'service_slug' => $newSlug,
+            ], 301);
+        }
+
+        // Real city present but not canonical (wrong case/format) — normalize it
+        $cityName = $this->resolveBestCandidate($citySlug, $cityMap);
+        if ($cityName && $citySlug !== $cityName) {
+            return redirect()->route('city.slug', [
+                'city_slug'     => $cityName,
+                'service_slug' => $newSlug,
+            ], 301);
+        }
+
+        return $this->categoriesListPage($category, $newSlug, $cityName ?? $city);
+    }
+
+    // ---- CHILD CHECK ----
+    $child = $this->childCheck($newSlug);
+
+    if ($child) {
+        if ($citySlug === 'child' || !isset($cityMap[$citySlug])) {
+            return redirect()->route('city.slug', [
+                'city_slug'  => $defaultCity,
+                'service_slug' => $newSlug,
+            ], 301);
+        }
+
+        $cityName = $this->resolveBestCandidate($citySlug, $cityMap);
+        if ($cityName && $citySlug !== $cityName) {
+            return redirect()->route('city.slug', [
+                'city_slug'  => $cityName,
+                'service_slug' => $newSlug,
+            ], 301);
+        }
+
+        return $this->childListPage($child, $newSlug, $cityName ?? $city);
+    }
+
+    // ---- Resolve city (no DB call) ----
+    $cityName = $this->resolveBestCandidate($citySlug, $cityMap);
+
+    if (!$cityName) {
+        if (!isset($cityMap[$defaultCity])) {
+            return redirect()->route('home');
+        }
+        return redirect()->route('city.slug', [
+            'city_slug'    => $defaultCity,
+            'service_slug' => $slug,
+        ], 301);
+    }
+
+    if ($citySlug !== $cityName) {
+        return redirect()->route('city.slug', [
+            'city_slug'    => $cityName,
+            'service_slug' => $slug,
+        ], 301);
+    }
+
+    // ---- Resolve keyword/service (no DB call) ----
+    $slugUrl = $this->resolveBestCandidate($newSlug, $keywordMap);
+
+    if ($slugUrl) {
+        if ($keySlugRaw !== $slugUrl) {
+            return redirect()->route('city.slug', [
+                'city_slug'    => $cityName,
+                'service_slug' => $slugUrl,
+            ], 301);
+        }
+
+        $response = $this->fetchData($cityName, $slugUrl);
+        if (!$response) {
+            abort(410);
+        }
+
+        return $this->getsearchlist($response, $slugUrl, $cityName);
+    }
+
+    $clientMap = $this->getClientSlugMap(); // cached, in-memory
+    $slugUrl   = $this->resolveBestCandidate($newSlug, $clientMap);
+
+    if ($slugUrl && $slugUrl !== $slug) {
+        return redirect()->route('city.slug', [
+            'city_slug'    => $cityName,
+            'service_slug' => $slugUrl,
+        ], 301);
+    }
+
+    if ($slugUrl) {
+        if (!$this->clientsExists($slugUrl)) {
+            abort(410);
+        }
+        $businessResponse = $this->fetchBusinessData($slugUrl);
+        if (!$businessResponse) {
+            return redirect()->route('home');
+        }
+
+        return $this->getClientDetail($businessResponse, $slugUrl);
+    }
+
+    abort(410);
+}
+	public function showCityWithService_oolld(Request $request, string $city, string $slug)
 	{
 		$citySlug = strtolower(trim($city));
 		$keySlugRaw = strtolower(trim($slug));
@@ -2482,19 +2602,38 @@ $reviewList = DB::table('clients')
 		// dd($newSlug);
 		$cityMap    = $this->getCitySlugMap();     // cached, in-memory
 		$keywordMap = $this->getKeywordSlugMap();  // cached, in-memory
- 
-
+ 	 
 		$category = $this->categoriesCheck($newSlug);
  
 		if($category){
-
+ 
+		if ($citySlug==='categories') {
+ 
+			$defaultCity = config('app.default_city_slug', 'bangalore');
+		 
+			return redirect()->route('city.slug', [
+				'city_slug'    => $defaultCity,
+				'service_slug' => $newSlug,
+			], 301);
+		}
 		return $this->categoriesListPage($category,$newSlug,$city);
 		}
 
+	
 
 		$child = $this->childCheck($newSlug);
  
 		if($child){
+
+		if ($citySlug==='child') {
+ 
+			$defaultCity = config('app.default_city_slug', 'bangalore');
+		 
+			return redirect()->route('city.slug', [
+				'city_slug'    => $defaultCity,
+				'service_slug' => $newSlug,
+			], 301);
+		}
 		return $this->childListPage($child,$newSlug,$city);
 		}
 
@@ -2579,16 +2718,18 @@ $reviewList = DB::table('clients')
 	}
 
 
+	 
+
 	public function categoriesCheck($slug)
 	{
-	
-		$res = Http::timeout(10)->withoutVerifying()
-			->get('https://api.quickdials.com/api/website/searchCategories', [
-				'category-slug' => $slug,
-			]);
+		return Cache::remember("category_check_{$slug}", now()->addHours(6), function () use ($slug) {
+			$res = Http::withoutVerifying()
+				->get('https://api.quickdials.com/api/website/searchCategories', [
+					'category-slug' => $slug,
+				]);
 
-		$response = $res->successful() ? $res->json() : null;
-  		return $response;
+			return $res->successful() ? $res->json() : null;
+		});
 	}
 
 
