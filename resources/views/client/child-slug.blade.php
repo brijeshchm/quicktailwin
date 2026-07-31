@@ -7,8 +7,8 @@
     : asset('client/images/quickdials-og.png')) 
 @section('content')	
 @include('client.components.banner-section')
- @php
- 
+@php
+
 $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
 
  @endphp
@@ -38,12 +38,27 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
         <div>
             <nav class="text-xs sm:text-sm text-slate-500 mb-1 flex items-center gap-1.5 flex-wrap">
                 <a href="{{ route('home') }}" class="hover:text-indigo-600 transition-colors">Home</a>
-                <span>›</span>
-           
-                    <a href="{{ route('child.list') }}" class="hover:text-indigo-600 transition-colors">Child</a>
-                    <span>›</span>
+                <span>›</span>  
+                @php
+                   $cityName = !empty($city) && is_string($city) ? strtolower(str_replace(' ', '-', trim($city))) : 'bangalore';                  
+                @endphp
+                @if(!empty($cityName))
+                <a href="{{ route('showCity',$cityName) }}" class="hover:text-indigo-600 transition-colors">{{ ucfirst($city)}}</a>
+                <span>›</span>    
+                @endif   
+
+                  @if(!empty($city))
+                    <a href="{{ route('city.slug', ['city_slug'=> $cityName,'service_slug' => $kwData['child_slug']])}}" class="hover:text-indigo-600 transition-colors">{{ $keyword }} in {{ ucwords(strtolower(str_replace('-', ' ', $city))) }}</a>
+                    
+                @else                    
+                    <a href="{{ route('showCity', $kwData['child_slug'])}}" class="hover:text-indigo-600 transition-colors">{{ $keyword }} </a>
+
+                @endif
+
+              
+                    <!-- <span>›</span>
             
-                <span class="text-slate-600">{{ $keyword }}</span>
+                <span class="text-slate-600">{{ $keyword }}</span> -->
             </nav>
 
 

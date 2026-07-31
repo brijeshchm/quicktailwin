@@ -74,19 +74,15 @@ $repairGradients = [
                  class="flex gap-3 overflow-x-auto pb-2"
                  style="scroll-behavior:smooth; scrollbar-width:none; -ms-overflow-style:none;">
  
-                @foreach($repairsServices as $i => $service)
+            @foreach($repairsServices as $i => $service)
+                 
+            @php
+            $noCitySlugs = ['wedding-planning'];
 
-
-                  @php
-                $catUrl = match($service['type'] ?? '') {              
-                'keyword'    => route('city.slug', ['city_slug'=> 'bangalore','service_slug' => $service['url']]),
-                'child'      => route('child.show',      $service['url']),
-                'categories' => route('categories.show', $service['url'])
-
-                };
-                @endphp
-
-
+            $catUrl = in_array($service['url'], $noCitySlugs)
+            ? route('showCity', $service['url'])
+            : route('city.slug', ['city_slug' => 'bangalore', 'service_slug' => $service['url']]);
+            @endphp
 
                 @php
                     $grad = $repairGradients[$i % count($repairGradients)];
@@ -116,7 +112,7 @@ $repairGradients = [
                     {{-- Card body --}}
                     <div class="p-2 bg-white relative">
                         <p class="text-[11px] font-bold text-gray-900 truncate mb-0.5">
-                            <a href="{{ route('showCity', $service['url']) }}">{{ $service['title'] ?? '' }}</a>
+                            <a href="{{ $catUrl }}">{{ $service['title'] ?? '' }}</a>
                         </p>
                         <div class="flex items-center justify-between">
                             <span class="flex items-center gap-0.5 text-[9px] text-gray-500">

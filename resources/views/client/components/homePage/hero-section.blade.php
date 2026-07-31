@@ -100,19 +100,11 @@
                     @if(!empty($trending))
                         @foreach($trending as $tag)
                             <button
-                                onclick="redirectSearch('{{ $tag['url'] ?? $tag['title'] }}', heroSelectedCity)"
+                                onclick="redirectSearch('{{ $tag['url'] }}', heroSelectedCity)"
                                 aria-label="Search {{ $tag['url'] }}"
                                 class="text-[11px] bg-gray-100 hover:bg-blue-50 border border-gray-200 hover:border-blue-200 text-gray-500 hover:text-blue-700 px-2.5 py-0.5 rounded-full transition-colors"
                             >{{ $tag['title'] }}</button>
-                        @endforeach
-                    @else
-                        @foreach(['AC Repair Service','Wedding Planner','Home Loan','Dentist','Pizza Near Me'] as $tag)
-                            <button
-                                onclick="redirectSearch('{{ Str::slug($tag) }}', heroSelectedCity)"
-                                aria-label="Search {{ Str::slug($tag) }}"
-                                class="text-[11px] bg-gray-100 hover:bg-blue-50 border border-gray-200 hover:border-blue-200 text-gray-500 hover:text-blue-700 px-2.5 py-0.5 rounded-full transition-colors"
-                            >{{ $tag }}</button>
-                        @endforeach
+                        @endforeach                    
                     @endif
                 </div>
             </div>
@@ -140,13 +132,15 @@
                 @if($bannerKeyword)
                 @foreach($bannerKeyword as $i => $card)
 
+             
+                
                 @php
-                $catUrl = match($card['type'] ?? '') {                
-                'keyword'    => route('city.slug', ['city_slug'=> 'bangalore','service_slug' => $card['url']]),
-                'child'      => route('child.show',      $card['url']),
-                'categories' => route('categories.show', $card['url'])
-                };
-                @endphp
+    $noCitySlugs = ['wedding-planning','spa-hub'];
+
+    $catUrl = in_array($card['url'], $noCitySlugs)
+        ? route('showCity', $card['url'])
+        : route('city.slug', ['city_slug' => 'bangalore', 'service_slug' => $card['url']]);
+@endphp
                     <a href="{{ $catUrl }}"
             title="{{ $card['title'] ?? '' }}"
             class="banner-card relative shrink-0 rounded-t-2xl overflow-hidden cursor-pointer group h-[140px] sm:h-[155px] block {{ $colorMap[$i % count($colorMap)] }}">

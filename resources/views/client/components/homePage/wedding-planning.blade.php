@@ -28,14 +28,15 @@
  
         <div class="grid grid-cols-6 gap-2">
             @foreach($weddingPlanning as $i => $ws)
-             @php
-                $catUrl = match($ws['type'] ?? '') {               
-                'keyword'    => route('city.slug', ['city_slug'=> 'bangalore','service_slug' => $ws['url']]),
-                'child'      => route('child.show',      $ws['url']),
-                'categories' => route('categories.show', $ws['url'])
+             
+            @php
+            $noCitySlugs = ['wedding-planning'];
 
-                };
-                @endphp
+            $catUrl = in_array($ws['url'], $noCitySlugs)
+            ? route('showCity', $ws['url'])
+            : route('city.slug', ['city_slug' => 'bangalore', 'service_slug' => $ws['url']]);
+            @endphp
+
 
  <a href="{{ $catUrl }}">
             <div class="{{ $i >= 6 ? 'hidden md:block' : '' }} cursor-pointer group flex flex-col items-center gap-1.5">

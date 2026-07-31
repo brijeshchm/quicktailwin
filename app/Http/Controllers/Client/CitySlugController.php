@@ -611,7 +611,7 @@ class CitySlugController extends Controller
 				'title' => $keyword->keyword. ' in ' .$cityName ?: 'bangalore',
 				'type' => 'keyword',
 				'city_slug' => strtolower($cityName) ?: 'bangalore',
-				'meta_description' => $this->replaceCity($keyword->meta_description, $cityName),
+				'meta_description' => replaceCity($keyword->meta_description, $cityName),
 			];
 		})->values()->toArray();
 
@@ -850,17 +850,17 @@ $reviewList = DB::table('clients')
 		}
 
 		if (!empty($keywordDetails->meta_title)) {
-			$meta_title = $this->replaceCity($keywordDetails->meta_title,'');
+			$meta_title = replaceCity($keywordDetails->meta_title,'');
 		} else {
 			$meta_title = 'Best ' . $keywordDetails->keyword . ' - Reviews, Ratings & Contact Details | Quickdials';
 
 		}
 		if (!empty($keywordDetails->h1_heading)) {
-			$h1_heading = $this->replaceCity($keywordDetails->h1_heading,'');
+			$h1_heading = replaceCity($keywordDetails->h1_heading,'');
 		}  
 
 		if (!empty($keywordDetails->short_definition)) {
-			$short_definition = $this->replaceCity($keywordDetails->short_definition,'');
+			$short_definition = replaceCity($keywordDetails->short_definition,'');
 		}  
 
 		if (!empty($keywordDetails->top_wcity_description)) {
@@ -880,50 +880,50 @@ $reviewList = DB::table('clients')
 		}  
 
 		if (!empty($keywordDetails->meta_description)) {
-			$meta_description = $this->replaceCity($keywordDetails->meta_description,'');
+			$meta_description = replaceCity($keywordDetails->meta_description,'');
 		} else {
 			$meta_description = 'Find the best ' . strtolower($keywordDetails->keyword) . '. Compare ratings, reviews, contact details and service information on Quickdials.';
 		}
 	
 		$top_description = "";
 		if (!empty($keywordDetails->top_description)) {
-			$top_description = $this->replaceCity($keywordDetails->top_description,'');
+			$top_description = replaceCity($keywordDetails->top_description,'');
 		}
 		$bottom_description = "";
 		if (!empty($keywordDetails->bottom_description)) {
-			$bottom_description = $this->replaceCity($keywordDetails->bottom_description,'');
+			$bottom_description = replaceCity($keywordDetails->bottom_description,'');
 		}
 		
 		if (!empty($keywordDetails->courseabout)) {
-			$courseabout = $this->replaceCity($keywordDetails->courseabout,'');
+			$courseabout = replaceCity($keywordDetails->courseabout,'');
 		}
 		
 		if (!empty($keywordDetails->heading)) {
-			$heading = $this->replaceCity($keywordDetails->heading,'');
+			$heading = replaceCity($keywordDetails->heading,'');
 		}
 		if (!empty($keywordDetails->paragraph1)) {
-			$paragraph1 = $this->replaceCity($keywordDetails->paragraph1,'');
+			$paragraph1 = replaceCity($keywordDetails->paragraph1,'');
 		}
 		if (!empty($keywordDetails->paragraph2)) {
-			$paragraph2 = $this->replaceCity($keywordDetails->paragraph2,'');
+			$paragraph2 = replaceCity($keywordDetails->paragraph2,'');
 		}
 		if (!empty($keywordDetails->paragraph3)) {
-			$paragraph3 = $this->replaceCity($keywordDetails->paragraph3,'');
+			$paragraph3 = replaceCity($keywordDetails->paragraph3,'');
 		}
 		if (!empty($keywordDetails->paragraph4)) {
-			$paragraph4 = $this->replaceCity($keywordDetails->paragraph4,'');
+			$paragraph4 = replaceCity($keywordDetails->paragraph4,'');
 		}
 		if (!empty($keywordDetails->paragraph5)) {
-			$paragraph5 = $this->replaceCity($keywordDetails->paragraph5,'');
+			$paragraph5 = replaceCity($keywordDetails->paragraph5,'');
 		}
 		if (!empty($keywordDetails->paragraph6)) {
-			$paragraph6 = $this->replaceCity($keywordDetails->paragraph6,'');
+			$paragraph6 = replaceCity($keywordDetails->paragraph6,'');
 		}
 		if (!empty($keywordDetails->paragraph7)) {
-			$paragraph7 = $this->replaceCity($keywordDetails->paragraph7,'');
+			$paragraph7 = replaceCity($keywordDetails->paragraph7,'');
 		}
 		if (!empty($keywordDetails->paragraph8)) {
-			$paragraph8 = $this->replaceCity($keywordDetails->paragraph8,'');
+			$paragraph8 = replaceCity($keywordDetails->paragraph8,'');
 		}
 
 		$data['keyword'] = array(
@@ -945,12 +945,12 @@ $reviewList = DB::table('clients')
 			'meta_description' => $meta_description,
 			'top_description' => $top_description,
 			'bottom_description' => $bottom_description,	
-			'bottom_heading'    => $this->replaceCity($keywordDetails->bottom_heading, $city),
-			'top_heading'       => $this->replaceCity($keywordDetails->top_heading, $city),
-			'extra_heading'     => $this->replaceCity($keywordDetails->extra_heading, $city),
-			'extra_description' => $this->replaceCity($keywordDetails->extra_description, $city),
+			'bottom_heading'    => replaceCity($keywordDetails->bottom_heading, $city),
+			'top_heading'       => replaceCity($keywordDetails->top_heading, $city),
+			'extra_heading'     => replaceCity($keywordDetails->extra_heading, $city),
+			'extra_description' => replaceCity($keywordDetails->extra_description, $city),
 
-			'courseabout' => $this->replaceCity($courseabout, $city),
+			'courseabout' => replaceCity($courseabout, $city),
 
 			'heading' => $heading,
 			'paragraph1' => $paragraph1,
@@ -972,8 +972,8 @@ $reviewList = DB::table('clients')
 		);
 
 		for ($i = 1; $i <= 10; $i++) {
-		$data['keyword']["faqq{$i}"] = $this->replaceCity($keywordDetails->{"faqq{$i}"}, $city);
-		$data['keyword']["faqa{$i}"] = $this->replaceCity($keywordDetails->{"faqa{$i}"}, $city);
+		$data['keyword']["faqq{$i}"] = replaceCity($keywordDetails->{"faqq{$i}"}, $city);
+		$data['keyword']["faqa{$i}"] = replaceCity($keywordDetails->{"faqa{$i}"}, $city);
 		}
 
 		$keywordName = ucwords(str_replace('-', ' ', $search_kw));
@@ -2359,7 +2359,7 @@ $reviewList = DB::table('clients')
         $keywordBanners   = $kwData['keywordBanners'] ?? [];
  
         // ── Keyword / meta ─────────────────────────────────────────────────
-        $keyword    = $this->replaceCity($kwData['keyword'] ?? $slug, $city);
+        $keyword    = replaceCity($kwData['keyword'] ?? $slug, $city);
         $area       = $kwData['area'] ?? $city;
         $childSlug  = $kwData['child_slug'] ?? '';
         $childCat   = $kwData['child_category'] ?? '';
@@ -2367,14 +2367,14 @@ $reviewList = DB::table('clients')
         $ratingValue = (float) ($kwData['ratingvalue'] ?? 0);
         $bgImage    = $kwData['category_banner'] ?? '/computer-courses-training.jpg';
  
-        $topDescription    = $this->replaceCity($kwData['top_description'] ?? '', $area);
-        $bottomDescription = $this->replaceCity($kwData['bottom_description'] ?? '', $area);
+        $topDescription    = replaceCity($kwData['top_description'] ?? '', $area);
+        $bottomDescription = replaceCity($kwData['bottom_description'] ?? '', $area);
  
         // ── FAQs ───────────────────────────────────────────────────────────
         $faqs = [];
         for ($i = 0; $i <= 10; $i++) {
-            $q = $this->replaceCity($kwData["faqq{$i}"] ?? '', $city);
-            $a = $this->replaceCity($kwData["faqa{$i}"] ?? '', $city);
+            $q = replaceCity($kwData["faqq{$i}"] ?? '', $city);
+            $a = replaceCity($kwData["faqa{$i}"] ?? '', $city);
             if ($q && $a) $faqs[] = ['q' => $q, 'a' => $a];
         }
 
@@ -2438,7 +2438,7 @@ $reviewList = DB::table('clients')
     /**
      * Replace {{city}} placeholder and strip basic HTML.
      */
-	  private function replaceCity(?string $text, ?string $city = ''): string
+	private function replaceCity(?string $text, ?string $city = ''): string
 	{
 		$text = trim($text ?? '');
 		$city = trim($city ?? '');
@@ -2468,6 +2468,8 @@ $reviewList = DB::table('clients')
 
 		return trim($text, " \t\n\r\0\x0B,");
 	}
+
+
     /**
      * Handle  GET /{city}/{slug}
      */
@@ -2475,10 +2477,30 @@ $reviewList = DB::table('clients')
 	{
 		$citySlug = strtolower(trim($city));
 		$keySlugRaw = strtolower(trim($slug));
-		$newSlug = strtolower(str_replace(' ', '-', trim($slug)));  		 
+		$newSlug = strtolower(str_replace(' ', '-', trim($slug)));  
+		
+		// dd($newSlug);
 		$cityMap    = $this->getCitySlugMap();     // cached, in-memory
 		$keywordMap = $this->getKeywordSlugMap();  // cached, in-memory
  
+
+		$category = $this->categoriesCheck($newSlug);
+ 
+		if($category){
+
+		return $this->categoriesListPage($category,$newSlug,$city);
+		}
+
+
+		$child = $this->childCheck($newSlug);
+ 
+		if($child){
+		return $this->childListPage($child,$newSlug,$city);
+		}
+
+
+
+
 		// ---- Resolve city (no DB call) ----
 		$cityName = $this->resolveBestCandidate($citySlug, $cityMap);
 
@@ -2553,6 +2575,142 @@ $reviewList = DB::table('clients')
 
 	}
 
+
+	public function categoriesCheck($slug)
+	{
+	
+		$res = Http::timeout(10)->withoutVerifying()
+			->get('https://api.quickdials.com/api/website/searchCategories', [
+				'category-slug' => $slug,
+			]);
+
+		$response = $res->successful() ? $res->json() : null;
+  		return $response;
+	}
+
+
+	public function categoriesListPage($response,$slug,$city)
+	{
+		 
+ 
+        /* ── extract data (mirrors the Next.js component) ── */
+        $kwData       = $response['data']['keyword']      ?? [];
+
+		// dd($kwData);
+        $categoryList = $response['data']['categoryList'] ?? [];
+ 
+        $keyword          = $kwData['parent_category']   ?? '';
+        $childCategory    = $kwData['parent_category']   ?? '';
+        $childSlug        = $kwData['parent_slug']       ?? '';
+        $topDescription   = replaceCity(strip_tags($kwData['top_description'],$city));
+        $bottomDescription= replaceCity(strip_tags($kwData['bottom_description'], $city));
+        $ratingCount      = $kwData['ratingcount']       ?? 0;
+        $ratingValue      = $kwData['ratingvalue']       ?? 0;
+        $bgImage          = $kwData['category_banner']   ?? '/computer-courses-training.jpg';
+        $metaTitle        = replaceCity($kwData['meta_title'],$city)        ?? $keyword;
+        $metaDescription  = replaceCity($kwData['meta_description'],$city)  ?? '';
+         $metaKeywords  = replaceCity($kwData['h1_heading'],$city)  ?? '';
+        /* star image map */
+        $starMap = [
+            0 => 'star_1.png', 2 => 'star_2.png', 3 => 'star_3.png',
+            3.5 => 'star_3.5.png', 4 => 'star_4.png', 4.5 => 'star_4.5.png',
+            4.75 => 'star_4.75.png', 5 => 'star_5.png',
+        ];
+        $stars = $starMap[$ratingValue] ?? 'star_4.5.png';
+ 
+
+		$faqs = [];
+        for ($i = 1; $i <= 6; $i++) {
+            $q = $kwData["faqq{$i}"] ?? '';
+            $a = $kwData["faqa{$i}"] ?? '';
+            if ($q && $a) $faqs[] = ['q' => $q, 'a' => $a];
+        }
+
+
+
+        /* category colour palette (index-based, mirrors Next.js CAT_STYLE) */
+        $catColors = [
+            '#1a5276','#1a6496','#4a235a','#b7770d','#0b3d5e',
+            '#145a32','#2c3e50','#154360','#7b241c','#117a65',
+            '#145a32','#784212','#1e8449','#1b4332',
+        ];
+ 		 
+        return view('client.category-slug', compact(
+            'slug', 'keyword', 'childCategory','kwData', 'childSlug',
+            'topDescription', 'bottomDescription','faqs',
+            'ratingCount', 'ratingValue', 'stars', 'bgImage',
+            'categoryList', 'catColors','metaKeywords',
+            'metaTitle', 'metaDescription','city'
+        ));
+	}
+
+
+
+	public function childCheck($child_slug)
+	{
+		  
+ 
+    
+            $res = Http::timeout(10)->withoutVerifying()
+                ->get('https://api.quickdials.com/api/website/searchChild', [
+                    'child-slug' => $child_slug,
+                ]);
+ 			$response = $res->successful() ? $res->json() : null;
+        
+    		return $response;
+	}
+
+
+	public function childListPage($response, $child_slug,$city)
+	{
+		      
+ 
+        /* ── extract data (mirrors the Next.js component) ── */
+        $kwData       = $response['data']['keyword']      ?? [];
+        $childLists = $response['data']['childLists'] ?? []; 
+        $keyword          = $kwData['child_category']   ?? '';
+        $childCategory    = $kwData['child_category']   ?? '';
+        $childSlug        = $kwData['child_slug']       ?? '';
+        $topDescription   = replaceCity(strip_tags($kwData['top_description']),$city);
+        $bottomDescription= replaceCity(strip_tags($kwData['bottom_description']),$city);
+        $ratingCount      = $kwData['ratingcount']       ?? 0;
+        $ratingValue      = $kwData['ratingvalue']       ?? 4.8;
+        $bgImage          = $kwData['category_banner']   ?? '/computer-courses-training.jpg';
+        $metaTitle        = replaceCity($kwData['meta_title'],$city)        ?? $keyword;
+        $metaDescription  = replaceCity($kwData['meta_description'],$city)  ?? '';
+        $metaKeywords  = replaceCity($kwData['h1_heading'],$city)  ?? ''; 
+  		$faqs = [];
+        for ($i = 1; $i <= 6; $i++) {
+            $q = $kwData["faqq{$i}"] ?? '';
+            $a = $kwData["faqa{$i}"] ?? '';
+            if ($q && $a) $faqs[] = ['q' => $q, 'a' => $a];
+        }
+
+        /* star image map */
+        $starMap = [
+            0 => 'star_1.png', 2 => 'star_2.png', 3 => 'star_3.png',
+            3.5 => 'star_3.5.png', 4 => 'star_4.png', 4.5 => 'star_4.5.png',
+            4.75 => 'star_4.75.png', 5 => 'star_5.png',
+        ];
+        $stars = $starMap[$ratingValue] ?? 'star_4.5.png';
+ 
+        /* category colour palette (index-based, mirrors Next.js CAT_STYLE) */
+        $catColors = [
+            '#1a5276','#1a6496','#4a235a','#b7770d','#0b3d5e',
+            '#145a32','#2c3e50','#154360','#7b241c','#117a65',
+            '#145a32','#784212','#1e8449','#1b4332',
+        ];
+ 		 
+		
+        return view('client.child-slug', compact(
+            'child_slug', 'keyword', 'childCategory', 'childSlug',
+            'topDescription', 'bottomDescription','metaKeywords',
+            'ratingCount', 'ratingValue', 'stars', 'bgImage',
+            'childLists', 'catColors','faqs','kwData',
+            'metaTitle', 'metaDescription','city'
+        ));
+    
+	}
 
 	private function getClientSlugMap(): array
 	{
@@ -2736,6 +2894,21 @@ $reviewList = DB::table('clients')
 		$newSlug = strtolower(str_replace(' ', '-', trim($slug)));  
 		$keywordMap = $this->getKeywordSlugMap(); // cached, in-memory
 		$slugUrl    = $this->resolveBestCandidate($newSlug, $keywordMap);
+		$city= "bangalore";
+
+		
+		$category = $this->categoriesCheck($newSlug);
+ 
+		if($category){
+		return $this->categoriesListPage($category,$newSlug,$city);
+		}
+		$child = $this->childCheck($newSlug);
+ 
+		if($child){
+		return $this->childListPage($child,$newSlug,$city);
+		}
+
+
 
 		// If a canonical/better match exists and differs from input → 301 redirect
 		if ($slugUrl && $slugUrl !== $slug) {
@@ -2762,7 +2935,7 @@ $reviewList = DB::table('clients')
 
         $growthBusiness = $businessOwners['data']['businessOwners'] ?? [];
         // ── Keyword / meta ─────────────────────────────────────────────────
-        $keyword    = $this->replaceCity($kwData['keyword'] ?? $slug, '');
+        $keyword    = replaceCity($kwData['keyword'] ?? $slug, '');
         $area       = $kwData['area'] ?? '';
         $childSlug  = $kwData['child_slug'] ?? '';
         $childCat   = $kwData['child_category'] ?? '';
@@ -2770,14 +2943,14 @@ $reviewList = DB::table('clients')
         $ratingValue = (float) ($kwData['ratingvalue'] ?? 4.8);
         $bgImage    = $kwData['category_banner'] ?? '/client/images/computer-courses-training.jpg';
  
-        $topDescription    = $this->replaceCity($kwData['top_description'] ?? '', $area);
-        $bottomDescription = $this->replaceCity($kwData['bottom_description'] ?? '', $area);
+        $topDescription    = replaceCity($kwData['top_description'] ?? '', $area);
+        $bottomDescription = replaceCity($kwData['bottom_description'] ?? '', $area);
  
         // ── FAQs ───────────────────────────────────────────────────────────
         $faqs = [];
         for ($i = 0; $i <= 10; $i++) {
-            $q = $this->replaceCity($kwData["faqq{$i}"] ?? '', '');
-            $a = $this->replaceCity($kwData["faqa{$i}"] ?? '', '');
+            $q = replaceCity($kwData["faqq{$i}"] ?? '', '');
+            $a = replaceCity($kwData["faqa{$i}"] ?? '', '');
             if ($q && $a) $faqs[] = ['q' => $q, 'a' => $a];
         }
  

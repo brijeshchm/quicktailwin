@@ -34,20 +34,31 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
     {{-- ── Breadcrumb + Title ── --}}
     <div class="flex items-start justify-between gap-3 flex-wrap border-b border-slate-100 pb-5">
         <div>
+          
             <nav class="text-xs sm:text-sm text-slate-500 mb-1 flex items-center gap-1.5 flex-wrap">
                 <a href="{{ route('home') }}" class="hover:text-indigo-600 transition-colors">Home</a>
                 <span>›</span>
-             
-                    <a href="{{ route('category.list') }}" class="hover:text-indigo-600 transition-colors">Categories</a>
+
+                @if(!empty($city))
+                    <a href="{{ route('showCity',$city) }}" class="hover:text-indigo-600 transition-colors">{{ ucfirst($city)}}</a>
+                    
                     <span>›</span>
-              
-                <span class="text-slate-600">{{ $keyword }}</span>
+              @endif
+                @if(!empty($city))
+                    <a href="{{ route('city.slug', ['city_slug'=> $city,'service_slug' => $kwData['parent_slug']])}}" class="hover:text-indigo-600 transition-colors">{{ $keyword }} in {{ ucwords(strtolower(str_replace('-', ' ', $city))) }}</a>
+                    
+                @else                    
+                    <a href="{{ route('showCity', $kwData['parent_slug'])}}" class="hover:text-indigo-600 transition-colors">{{ $keyword }} </a>
+
+                    @endif
+                      <!-- <span>›</span>
+                <span class="text-slate-600">{{ $keyword }}</span> -->
             </nav>
 
  
                 <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
                     <div itemprop="name">
-                        <h1 class="text-lg font-bold text-gray-900 leading-tight">{{ $kwData['h1_heading']?? $keyword??"Category" }}</h1>
+                        <h1 class="text-lg font-bold text-gray-900 leading-tight">{{ !empty($kwData['h1_heading']) ? $kwData['h1_heading'] : trim(($keyword ?? '') . (!empty($city) ? ' in ' . ucwords(strtolower(str_replace('-', ' ', $city))) : '' ))}}</h1>
                     </div>                           
                     <div itemprop="aggregateRating"
                         itemscope
@@ -96,7 +107,7 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
 
                     @endphp
                     <div class="animate-tile" style="animation-delay: {{ $delay }}ms">
-                        <a href="{{ route('child.show', $url) }}" >
+                        <a href="{{ route('city.slug', ['city_slug'=> $city,'service_slug' => $url])}}" >
                             <div class="tile-card group bg-white border border-slate-200 rounded-xl overflow-hidden">
 
                                 {{-- Coloured image strip --}}

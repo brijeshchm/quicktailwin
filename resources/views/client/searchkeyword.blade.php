@@ -274,10 +274,16 @@ $keywordImg= !empty($kwData['key_icon'])
                     <a href="{{ route('home') }}" class="hover:text-indigo-600">Home</a>
                     <span>›</span>
                     @if($childSlug)
-                    <a href="{{ route('child.show', $childSlug) }}" class="hover:text-indigo-600">{{ $childCat }}</a>
+                    
+                    <a href="{{ route('showCity', $childSlug) }}" class="hover:text-indigo-600">{{ $childCat }}</a>
                     <span>›</span>
                     @endif
-                    <span class="text-gray-600">{{ $keyword }}</span>
+
+                     <a href="{{ route('showCity', $kwData['keyword_slug'])}}" class="hover:text-indigo-600">{{ $keyword }}</a>
+
+                      <!-- <span>›</span>
+
+                    <span class="text-gray-600">{{ $keyword }}</span> -->
                 </nav>
 
                 <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    

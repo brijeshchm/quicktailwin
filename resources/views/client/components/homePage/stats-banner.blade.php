@@ -8,10 +8,10 @@
     <div class="w-full px-4 md:px-8 relative z-10">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12">
             @foreach([
-                ['value' => '1,318+', 'label' => 'Cities Covered'],
-                ['value' => '168k+',  'label' => 'Listed Businesses'],
-                ['value' => '1,389',  'label' => 'Categories'],
-                ['value' => '5M+',    'label' => 'Happy Users'],
+                ['value' => $citieslists, 'label' => 'Cities Covered'],
+                ['value' => $clients,  'label' => 'Listed Businesses'],
+                ['value' => $childCategory,  'label' => 'Categories'],
+                ['value' => $keywordCount,    'label' => 'Keywords'],
             ] as $stat)
             <div class="text-center stat-item">
                 <h3 class="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-1.5 drop-shadow-sm">{{ $stat['value'] }}</h3>

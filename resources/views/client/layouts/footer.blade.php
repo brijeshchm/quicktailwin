@@ -230,18 +230,12 @@
                     <h4 class="text-xs font-black text-gray-900 uppercase tracking-wider mb-3">{{ $section['heading'] }}</h4>
                     <p class="text-xs text-gray-500 leading-relaxed">
                         @foreach($section['links'] as $i => $link)
- 
-                           @php
-                           $cityName = !empty($city) && is_string($city) ? strtolower(str_replace(' ', '-', trim($city))) : 'bangalore';
-                             $noCitySlugs = ['business-services'];  
-                            $slugUrl = match($link['type'] ?? '') {
-                             'keyword' => in_array($link['slug'], $noCitySlugs)
+                             @php
+                            $noCitySlugs = ['business-services'];
+                            $cityName = !empty($city) && is_string($city) ? strtolower(str_replace(' ', '-', trim($city))) : 'bangalore';
+                            $slugUrl = in_array($link['slug'], $noCitySlugs)
                             ? route('showCity', $link['slug'])
-                            : route('city.slug', ['city_slug' =>  $cityName, 'service_slug' => $link['slug']]),                            
-                            'child'      => route('child.show',      $link['slug']),
-                            'categories' => route('categories.show', $link['slug'])
-                        
-                            };
+                            : route('city.slug', ['city_slug' => $cityName, 'service_slug' => $link['slug']]);
                             @endphp
                             <a href="{{ $slugUrl }}" class="hover:text-primary transition-colors hover:underline">{{ $link['name'] }}</a>
                             @if($i < count($section['links']) - 1)
@@ -294,19 +288,13 @@
                         ['name' => 'Security System',     'slug' => 'security-system','type'=>'child'],
                       
                     ] as $link)             
-
-                        @php
-
-                         $cityName = !empty($city) && is_string($city) ? strtolower(str_replace(' ', '-', trim($city))) : 'bangalore';
-                            $catUrl = match($link['type'] ?? '') {
-                                'keyword' => $link['slug'] === 'wedding-planning'
-                                    ? route('showCity', $link['slug'])
-                                    : route('city.slug', ['city_slug' =>  $cityName, 'service_slug' => $link['slug']]),
-                                'child'      => route('child.show', $link['slug']),
-                                'categories' => route('categories.show', $link['slug']),
-                                default      => '#',
-                            };
-                        @endphp
+                         @php
+                            $noCitySlugs = ['wedding-planning'];
+                            $cityName = !empty($city) && is_string($city) ? strtolower(str_replace(' ', '-', trim($city))) : 'bangalore';
+                            $catUrl = in_array($link['slug'], $noCitySlugs)
+                            ? route('showCity', $link['slug'])
+                            : route('city.slug', ['city_slug' => $cityName, 'service_slug' => $link['slug']]);
+                            @endphp
                         <li>
 
 

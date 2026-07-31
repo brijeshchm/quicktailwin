@@ -55,7 +55,13 @@ class HomePageController extends Controller
         $popularSearches    = $this->getPopularSearches();
         $trending           = $this->getTrending();
         $blogPageList       = $this->getBlogList();
- 
+
+  		$clients = Client::get()->count();
+        $keywordCount = Keyword::get()->count();
+        $childCategory = ChildCategory::get()->count();
+        $citieslists = Citieslists::get()->count();
+
+
 		$city= "bangalore";
 		$metaTitle ="QuickDials | India’s Leading Local Business Search Directory";
 		$metaDescription  ="QuickDials is India’s trusted local business search and service directory, helping users find verified businesses, services, and professionals near them"; 
@@ -68,8 +74,8 @@ class HomePageController extends Controller
             'featuredBusinesses',
             'bannerKeyword',
             'homePage',
-            'repairsServices',
-            'weddingPlanning','city',
+            'repairsServices','childCategory',
+            'weddingPlanning','city','citieslists','keywordCount','clients',
 			'metaTitle','metaDescription','keyword'
         ));
     }
@@ -163,13 +169,13 @@ class HomePageController extends Controller
             ['url' => 'rent-or-buy', 'img' => $img . 'Rent-buy.webp', 'alt' => 'Rent Or Buy', 'title' => 'Rent & Buy', 'type' => 'child', 'rating' => '3.5', 'count' => '329'],
             ['url' => 'packers-and-movers', 'img' => $img . 'Packers-movers.webp', 'alt' => 'Packers & Movers', 'title' => 'Packers & Movers', 'type' => 'child', 'rating' => '3.5', 'count' => '199'],
             ['url' => 'tours-and-travels', 'img' => $images . 'tour-travels.webp', 'alt' => 'Tours & Travels', 'title' => 'Tours & Travels', 'type' => 'keyword', 'rating' => '3.5', 'count' => '49'],
-            ['url' => 'professional-courses', 'img' => $popular . 'IT-Training.webp', 'alt' => 'Professional Courses', 'title' => 'Professional Courses', 'type' => 'categories', 'rating' => '4', 'count' => '434'],
+           
             ['url' => 'doctor', 'img' => $img . 'Doctor.webp', 'alt' => 'Doctor Clinic', 'title' => 'Doctor', 'type' => 'keyword', 'rating' => '4', 'count' => '234'],
             ['url' => 'electric-services', 'img' => $img . 'electric-services.webp', 'alt' => 'Electric Services', 'title' => 'Electric Services', 'type' => 'child', 'rating' => '3.5', 'count' => '377'],
             ['url' => 'entrance-exams-coaching', 'img' => $img . 'government-exam.webp', 'alt' => 'Government exam', 'title' => 'Government exam', 'type' => 'child', 'rating' => '3.5', 'count' => '229'],
             ['url' => 'study-abroad', 'img' => $img . 'study-abroad.svg', 'alt' => 'Study Abroad', 'title' => 'Study Abroad', 'type' => 'child', 'rating' => '5', 'count' => '399'],
             ['url' => 'spa-and-beauty', 'img' => $img . 'Spa-Beauty.webp', 'alt' => 'Spa & Beauty', 'title' => 'Spa & Beauty', 'type' => 'child', 'rating' => '5', 'count' => '325'],
-            ['url' => 'professional-courses', 'img' => $img . 'Professional.webp', 'alt' => 'Professional Course', 'title' => 'Professional', 'type' => 'categories', 'rating' => '3.5', 'count' => '149'],
+           
             ['url' => 'contractors', 'img' => $img . 'contractors.webp', 'alt' => 'Contractors Builder', 'title' => 'Contractors', 'type' => 'child', 'rating' => '3.5', 'count' => '167'],
             ['url' => 'collages-and-institutions', 'img' => $img . 'Education.webp', 'alt' => 'Education collages', 'title' => 'Education', 'type' => 'categories', 'rating' => '3.5', 'count' => '197'],
             ['url' => 'sports-academy', 'img' => $img . 'sports.webp', 'alt' => 'Sport Academy', 'title' => 'Sport Academy', 'type' => 'child', 'rating' => '3.5', 'count' => '539'],
@@ -366,7 +372,7 @@ class HomePageController extends Controller
             ['url' => 'interior-designer', 'img' => $popular . 'Interior-design.jpg', 'alt' => 'Interior Design', 'title' => 'Interior Design', 'type' => 'keyword', 'rating' => '3.5', 'count' => '192'],
             ['url' => 'real-estate', 'img' => $popular . 'real-estate-agent.jpg', 'alt' => 'Real Estate Agents', 'title' => 'Real Estate Agents', 'type' => 'child', 'rating' => '3.5', 'count' => '239'],
             ['url' => 'carpenters', 'img' => $popular . 'carpenter.jpg', 'alt' => 'Carpenters', 'title' => 'Carpenters', 'type' => 'keyword', 'rating' => '3.5', 'count' => '123'],
-            ['url' => 'wedding-planning', 'img' => $popular . 'Bridal-Wear.jpg', 'alt' => 'Bridal Wear', 'title' => 'Bridal Wear', 'type' => 'keyword', 'rating' => '3.5', 'count' => '119'],
+           
         ];
     }
  
@@ -376,11 +382,11 @@ class HomePageController extends Controller
     private function getTrending(): array
     {
         return [
-            ['url' => 'ac-repair-service', 'title' => 'AC Repair Service', 'type' => 'keyword', 'rating' => '3.5', 'count' => '199'],
+            ['url' => 'artificial-intelligence-training', 'title' => 'Artificial Intelligence', 'type' => 'keyword', 'rating' => '3.5', 'count' => '199'],
             ['url' => 'banquet-hall', 'title' => 'Wedding Planning', 'type' => 'keyword', 'rating' => '3.5', 'count' => '778'],
-            ['url' => 'clinical-research', 'title' => 'Clinical', 'type' => 'keyword', 'rating' => '4', 'count' => '374'],
-            ['url' => 'home-loan', 'title' => 'Home Loan', 'type' => 'keyword', 'rating' => '4.75', 'count' => '475'],
-            ['url' => 'carpenters', 'title' => 'Carpenters', 'type' => 'keyword', 'rating' => '4.75', 'count' => '463'],
+            ['url' => 'sap-training', 'title' => 'SAP Training', 'type' => 'keyword', 'rating' => '4', 'count' => '374'],
+            ['url' => 'cricket-academy', 'title' => 'Cricket Academy', 'type' => 'keyword', 'rating' => '4.75', 'count' => '475'],
+            ['url' => 'python-training', 'title' => 'Python Training', 'type' => 'keyword', 'rating' => '4.75', 'count' => '463'],
         ];
     }
  

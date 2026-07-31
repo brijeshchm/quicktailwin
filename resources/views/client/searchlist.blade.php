@@ -94,7 +94,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
  
 @endphp 
 @php   
-
+ 
 $keywordImg= !empty($kwData['key_icon'])
     ? asset($kwData['key_icon'])
     : asset('client/images/quickdials-og.png');
@@ -389,10 +389,13 @@ function bannerSlider(banners, interval = 4000) {
                     <a href="{{ route('home') }}" class="hover:text-indigo-600">Home</a>
                     <span>›</span>
                     @if($childSlug)
-                    <a href="{{ route('child.show', $childSlug) }}" class="hover:text-indigo-600">{{ $childCat }}</a>
+                    <a href="{{ route('city.slug', ['city_slug'=> $city,'service_slug' => $childSlug])}}" class="hover:text-indigo-600">{{ $childCat }}</a>
                     <span>›</span>
                     @endif
-                    <span class="text-gray-600">{{ $keyword }} in {{ ucwords(strtolower(str_replace('-', ' ', $city))) }}</span>
+                     <a href="{{ route('city.slug', ['city_slug'=> $city,'service_slug' => $kwData['keyword_slug']])}}" class="hover:text-indigo-600">{{ $keyword }} in {{ ucwords(strtolower(str_replace('-', ' ', $city))) }}</a>
+
+                       <!-- <span>›</span>
+                    <span class="text-gray-600">{{ $keyword }} in {{ ucwords(strtolower(str_replace('-', ' ', $city))) }}</span> -->
                 </nav>
                            
                 <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
