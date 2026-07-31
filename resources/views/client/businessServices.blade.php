@@ -1,7 +1,6 @@
 @extends('client.layouts.app')
-@section('title','QuickDials | A Local Search Engine for Businesses')
-@section('description', 'Find certified training institutes near you on QuickDials. Explore verified businesses with addresses, phone numbers, reviews, ratings, photos, and maps.')
-@section('keywords','Find Best It Training Centre near You, Find Best It Training Institute near You, Find Top 10 IT Training Institute near You, Find Best Entrance Exam Preparation Centre Near you, Top 10 Entrance Exam Centre Near you, Find Best Distance Education Centre Near You, Find Top 10 Distance Education Centre Near You, Find Best School And Colleges Near You, Find Top 10 school And College Near You, Get Education Loan, GET Free career Counselling, Find Best overseas education consultants Near you, Find Top 10 overseas education consultants Near you')
+@section('title','Local Businesses & Services near me | QuickDials')
+@section('description', 'Find trusted local businesses and service providers in Noida on QuickDials. Explore training institutes, home services, repairs, healthcare, property dealers, contractors and more.')
 @section('content')	
 @include('client.components.banner-section')
 <style> 
@@ -126,7 +125,7 @@ $colorMap = [
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
                     <h1 class="text-2xl md:text-3xl font-bold text-white leading-tight">
-                        Find Trusted Business Services Near You
+                        Find Trusted Local Businesses & Services near you
                     </h1>
                     <p class="text-blue-100 text-sm mt-2 max-w-xl">
                         Explore thousands of verified businesses across India — browse by category, city, or keyword.

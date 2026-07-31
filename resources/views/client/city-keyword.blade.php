@@ -1,7 +1,7 @@
 @extends('client.layouts.app')
-@section('title','QuickDials | A Local Search Engine for Businesses')
-@section('description', 'Find certified training institutes near you on QuickDials. Explore verified businesses with addresses, phone numbers, reviews, ratings, photos, and maps.')
-@section('keywords','Find Best It Training Centre near You, Find Best It Training Institute near You, Find Top 10 IT Training Institute near You, Find Best Entrance Exam Preparation Centre Near you, Top 10 Entrance Exam Centre Near you, Find Best Distance Education Centre Near You, Find Top 10 Distance Education Centre Near You, Find Best School And Colleges Near You, Find Top 10 school And College Near You, Get Education Loan, GET Free career Counselling, Find Best overseas education consultants Near you, Find Top 10 overseas education consultants Near you')
+@section('title','Local Businesses & Services in {{ $city }} | QuickDials')
+@section('description', 'Find trusted local businesses in {{ $city }} and service providers in Noida on QuickDials. Explore training institutes, home services, repairs, healthcare, property dealers, contractors and more.')
+
 @section('content')	
 @include('client.components.banner-section')
 <style> 
@@ -243,6 +243,208 @@ $colorMap = [
                         </a>
                     </div>
                 </div>
+
+
+                 <div class="reveal bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                    <h2 class="text-base font-bold text-gray-900 mb-3">
+                       Find Trusted Local Businesses & Services in {{ $city }}
+                    </h2>
+                    <div class="text-sm text-gray-600 leading-relaxed space-y-3">
+                        <p>
+                           Looking for reliable businesses and service providers in {{$city}}? QuickDials helps you discover local professionals, companies, institutes, contractors, healthcare providers, home service experts and other trusted businesses near you.
+                        </p>
+                        <p>
+                           Whether you need computer training, professional courses, coaching institutes, electricians, packers and movers, repair services, property dealers, wedding services, healthcare providers, security services or home improvement professionals, QuickDials makes it easier to explore suitable service providers across {{$city}}.
+                        </p>
+
+
+
+
+<h2>Explore Popular Services in Noida</h2>
+<p>
+Noida is an important commercial and industrial centre within the NCR region, with strong activity in technology, engineering, management and other professional services.
+</p><span>
+On QuickDials, you can explore a wide variety of services in Noida, including:</span>
+<ul><li>
+Computer Courses & IT Training</li><li>
+SAP, Cloud Computing & Digital Marketing Training</li><li>
+Coaching & Tuition Classes</li><li>
+    Schools, Colleges & Educational Institutes</li><li> 
+Packers and Movers</li><li> 
+AC & Home Appliance Repair</li><li> 
+Electricians & Electrical Services</li><li> 
+Interior Designers & Contractors</li><li> 
+Property Dealers & Real Estate Services</li><li> 
+Cleaning & Housekeeping Services</li><li> 
+Security Guards & CCTV Services</li><li> 
+Doctors, Clinics & Healthcare Services</li><li> 
+Gyms, Yoga & Fitness Centres</li><li> 
+Wedding Planners & Banquet Services</li><li> 
+Tour & Travel Agencies</li><li> 
+Loan & Financial Services</li>
+
+                       
+                       
+                    </div>
+                </div>
+
+                {{-- About Section --}}
+                <div class="reveal bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                    <h2 class="text-base font-bold text-gray-900 mb-3">
+                       Why Use QuickDials for Local Services in Noida?
+                    </h2>
+                    <div class="text-sm text-gray-600 leading-relaxed space-y-3">
+                        <p>
+                            QuickDials is India's fastest-growing local business directory, connecting millions
+                            of consumers with verified businesses across 200+ cities. Whether you're looking for
+                            IT training, medical services, home repairs, or restaurants — we have it all.
+                        </p>
+                        <p>
+                            Our directory features over 8,000 business keywords and 350+ registered businesses,
+                            each verified for authenticity. Browse by category, read real reviews, and connect
+                            directly with businesses via phone or website — all for free.
+                        </p>
+                        <p>
+                            Are you a business owner? List your business for free on QuickDials and reach
+                            thousands of potential customers searching for your services every day.
+                        </p>
+                        <a href="{{ route('business.services') }}"
+                           class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700
+                                  text-white text-xs font-bold px-4 py-2.5 rounded-xl
+                                  transition-colors mt-1">
+                            List Your Business Free
+                            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24"
+                                 stroke="currentColor" stroke-width="2.5">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+
+                 <div class="reveal bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                    <h2 class="text-base font-bold text-gray-900 mb-3">
+                       Find Trusted Local Businesses & Services in {{ $city }}
+                    </h2>
+                    <div class="text-sm text-gray-600 leading-relaxed space-y-3">
+                        <p>
+                           Looking for reliable businesses and service providers in {{$city}}? QuickDials helps you discover local professionals, companies, institutes, contractors, healthcare providers, home service experts and other trusted businesses near you.
+                        </p>
+                        <p>
+                           Whether you need computer training, professional courses, coaching institutes, electricians, packers and movers, repair services, property dealers, wedding services, healthcare providers, security services or home improvement professionals, QuickDials makes it easier to explore suitable service providers across {{$city}}.
+                        </p>
+
+
+
+
+<h2>Explore Popular Services in Noida</h2>
+<p>
+Noida is an important commercial and industrial centre within the NCR region, with strong activity in technology, engineering, management and other professional services.
+</p><span>
+On QuickDials, you can explore a wide variety of services in Noida, including:</span>
+<ul><li>
+Computer Courses & IT Training</li><li>
+SAP, Cloud Computing & Digital Marketing Training</li><li>
+Coaching & Tuition Classes</li><li>
+    Schools, Colleges & Educational Institutes</li><li> 
+Packers and Movers</li><li> 
+AC & Home Appliance Repair</li><li> 
+Electricians & Electrical Services</li><li> 
+Interior Designers & Contractors</li><li> 
+Property Dealers & Real Estate Services</li><li> 
+Cleaning & Housekeeping Services</li><li> 
+Security Guards & CCTV Services</li><li> 
+Doctors, Clinics & Healthcare Services</li><li> 
+Gyms, Yoga & Fitness Centres</li><li> 
+Wedding Planners & Banquet Services</li><li> 
+Tour & Travel Agencies</li><li> 
+Loan & Financial Services</li>
+
+                       
+                       
+                    </div>
+                </div>
+
+
+                
+  
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            💬 Frequently Asked Questions(FAQ's) {{ $city }}
+        </h3>
+        <div class="space-y-2">
+        
+            
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 1 ? null : 1"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h3>How can I find local businesses in {{ $city }}?</h3> 
+                    <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                   Search for your required service on QuickDials and select {{ $city }} as your location to explore relevant businesses and service providers.
+                </div>
+            </div>
+
+
+
+              <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 2 ? null : 2"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h3>What types of services can I find in {{ $city }} on QuickDials?</h3> 
+                    <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                    You can explore training institutes, home services, repair services, healthcare, property services, contractors, wedding services, professional services and many other categories.
+                </div>
+            </div>
+           
+
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 3 ? null : 3"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h3>Can I search for businesses by {{$city}} sector?</h3> 
+                    <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                    Yes. You can search for service providers based on specific areas and sectors depending on business availability.
+                </div>
+            </div>
+           
+
+            
+
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 4 ? null : 4"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h3>Can businesses list their services on QuickDials?</h3> 
+                    <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                   Yes. Businesses operating in {{ $city }} can create a profile and provide information about their services, location and contact details.
+                </div>
+            </div>
+           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 5 ? null : 5"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h3>How do I contact a service provider?</h3> 
+                    <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                  Open the relevant business listing to check available contact information and connect directly with the provider.
+                </div>
+            </div>
+           
+            
+            
+            
+        </div>
+    </div>
+    
+
+
+
 
             </main>
 

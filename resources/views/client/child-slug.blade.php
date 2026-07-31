@@ -153,7 +153,7 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
                     $defaultHeading = '';
 
                     if (!empty($kwData['top_heading'])) {
-                    $defaultHeading=  $kwData['top_heading'];
+                    $defaultHeading=  replaceCity($kwData['top_heading'],$city);
                     }else{
                     $defaultHeading = 'Trusted '. $keyword;
                     }    
@@ -231,7 +231,7 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
     @if(!empty($kwData['heading']) && !empty($kwData['courseabout']))
     <div class="border rounded-lg p-4 bg-white shadow-sm mx-4">
         <section class="rounded-md p-1">
-            <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-blue-900">{{ $kwData['heading'] }}</h2>
+            <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-blue-900">{{ replaceCity($kwData['heading'],$city) }}</h2>
             <div class="w-full h-[2px] bg-teal-500 mt-3 mb-5"></div>
             <div class="text-gray-800 leading-relaxed mb-5">{!! $kwData['courseabout'] !!}</div>
             <ul class="space-y-3">
@@ -256,13 +256,13 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
     $bottom_heading = '';
 
     if (!empty($kwData['bottom_heading'])) {
-        $bottom_heading=  $kwData['bottom_heading'];
+        $bottom_heading=  replaceCity($kwData['bottom_heading'],$city);
     }else{
      $bottom_heading = 'Find the Best ' .$keyword;
     }    
     @endphp
     <div class="bg-white rounded-2xl mt-4">
-        <h3 class="text-lg font-bold text-gray-900 mb-3"> {{ $bottom_heading }} </h3>
+        <h3 class="text-lg font-bold text-gray-900 mb-3"> {{ replaceCity($bottom_heading,$city) }} </h3>
         <div class="text-sm text-gray-600 leading-relaxed">{!! $bottomDescription !!}</div>
     </div>
     @endif
