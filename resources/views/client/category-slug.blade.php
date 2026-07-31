@@ -153,14 +153,14 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
                     $defaultHeading = '';
 
                     if (!empty($kwData['top_heading'])) {
-                    $defaultHeading=  $kwData['top_heading'];
+                    $defaultHeading=  replaceCity($kwData['top_heading'],$city);
                     }else{
                     $defaultHeading = 'Trusted '. $keyword;
                     }    
                     @endphp
                 <div class="mt-8 prose prose-sm max-w-none text-slate-600 leading-relaxed">
                     <h2 class="text-lg font-bold text-gray-900 mb-3"> {{ $defaultHeading }}</h2>
-                    <p>{{ $topDescription }}</p>
+                    <p>{{ replaceCity($topDescription,$city) }}</p>
                 </div>
             @endif
         </div>
@@ -230,17 +230,17 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
 
     {{-- Course About --}}
     @if(!empty($kwData['heading']) && !empty($kwData['courseabout']))
-    <div class="border rounded-lg p-4 bg-white shadow-sm mx-4">
+    <div class="bg-white rounded-2xl mt-4 pt-4">
         <section class="rounded-md p-1">
-            <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-blue-900">{{ $kwData['heading'] }}</h2>
+            <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-blue-900">{{ replaceCity($kwData['heading'],$city) }}</h2>
             <div class="w-full h-[2px] bg-teal-500 mt-3 mb-5"></div>
-            <div class="text-gray-800 leading-relaxed mb-5">{!! $kwData['courseabout'] !!}</div>
+            <div class="text-gray-800 leading-relaxed mb-5">{!! replaceCity($kwData['courseabout'],$city) !!}</div>
             <ul class="space-y-3">
                 @foreach(['paragraph1','paragraph2','paragraph3','paragraph4','paragraph5','paragraph6'] as $p)
                 @if(!empty($kwData[$p]))
                 <li class="flex items-start gap-2 text-gray-800">
                     <span class="text-orange-500 mt-1">✔</span>
-                    <span>{!! $kwData[$p] !!}</span>
+                    <span>{!! replaceCity($kwData[$p],$city) !!}</span>
                 </li>
                 @endif
                 @endforeach
@@ -259,7 +259,7 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
     $bottom_heading = '';
 
     if (!empty($kwData['bottom_heading'])) {
-        $bottom_heading=  $kwData['bottom_heading'];
+        $bottom_heading=  replaceCity($kwData['bottom_heading'],$city);
     }else{
      $bottom_heading = 'Find the Best '.$keyword;
     }    
@@ -283,11 +283,11 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === {{ $fi }} ? null : {{ $fi }}"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                  <h3>{{ $faq['q'] }} </h3>
+                  <h3>{{ replaceCity($faq['q'],$city) }} </h3>
                     <span x-text="openFaq === {{ $fi }} ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === {{ $fi }}" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
-                   {!! $faq['a'] !!}
+                   {!! replaceCity($faq['a'],$city) !!}
                 </div>
             </div>
             @endif
