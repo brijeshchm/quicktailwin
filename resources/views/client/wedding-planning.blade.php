@@ -520,7 +520,7 @@
                     </h2>
                     <div class="w-14 h-1 bg-red-600 rounded-full mt-3"></div>
                 </div>
-                <a href="{{ route('category.list') }}" class="self-start md:self-auto border border-red-200 text-red-700
+                <a href="{{ route('showCity','bangalore') }}" class="self-start md:self-auto border border-red-200 text-red-700
                                    hover:bg-red-600 hover:text-white rounded-full px-5 py-2
                                    text-sm flex items-center gap-2 transition-all">
                     View All Bride Services →
@@ -594,7 +594,7 @@
                     <h2 class="serif text-3xl md:text-4xl font-bold text-gray-900 mb-2">Top Venues in Mumbai</h2>
                     <p class="text-amber-800/50 max-w-xl text-sm">Discover breathtaking locations for your perfect celebration.</p>
                 </div>
-                <a href="{{ route('category.list') }}" class="reveal-r text-red-700 font-medium hover:underline flex items-center gap-1 text-sm">
+                <a href="{{ route('showCity','bangalore') }}" class="reveal-r text-red-700 font-medium hover:underline flex items-center gap-1 text-sm">
                     View all venues →
                 </a>
             </div>
@@ -658,7 +658,7 @@
                     </h2>
                     <div class="w-14 h-1 bg-gray-800 rounded-full mt-3"></div>
                 </div>
-                <a href="{{ route('category.list') }}" class="self-start border border-gray-300 text-gray-800 hover:bg-gray-900 hover:text-white
+                <a href="{{ route('showCity','bangalore') }}" class="self-start border border-gray-300 text-gray-800 hover:bg-gray-900 hover:text-white
                                    rounded-full px-5 py-2 text-sm flex items-center gap-2 transition-all">
                     View All Groom Services →
                 </a>
