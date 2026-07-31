@@ -1640,10 +1640,8 @@ class HomePageController extends Controller
 	}
 
 	public function businessServices(Request $request)
-	{
-		 
-
-// ── API fetch (cached 1 hour) ────────────────────────────────────────
+	{	
+		// ── API fetch (cached 1 hour) ────────────────────────────────────────
         $apiData = Cache::remember('business_services', 3600, function () {
             try {
                 $res = Http::timeout(10)->withoutVerifying()
@@ -1685,8 +1683,8 @@ class HomePageController extends Controller
         $categorySections    = $apiData['businessServices']             ?? [];
  
 
- $category = array_slice($categorySections, 1, 5);
- $featuredCategory = array_slice($categorySections, 1, 5);
+ 		$category = array_slice($categorySections, 1, 5);
+ 		$featuredCategory = array_slice($categorySections, 1, 5);
 
  
         if (!empty($featuredFromApi)) $featured    = $featuredFromApi;

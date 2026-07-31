@@ -253,9 +253,6 @@ $keywordImg= !empty($kwData['key_icon'])
 ) !!}
 </script>
 @endif 
-
-
-
 @if($hasBanners)
 <div x-data='bannerSlider(@json($keywordBanners), 4000)'
      x-init="init()"

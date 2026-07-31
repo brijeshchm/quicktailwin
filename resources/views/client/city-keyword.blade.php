@@ -120,13 +120,14 @@ $colorMap = [
                 <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                     <path d="M9 5l7 7-7 7"/>
                 </svg>
-                <span class="text-white font-medium">Business Services</span>
+                <a href="{{ route('showCity', $city)}}" class="hover:text-gray-600"> {{ ucwords(strtolower(str_replace('-', ' ', $city))) }}</a>
+                
             </nav>
 
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
                     <h1 class="text-2xl md:text-3xl font-bold text-white leading-tight">
-                        Find Trusted Business Services Near You
+                        Find Trusted Business Services in {{ $city }}
                     </h1>
                     <p class="text-blue-100 text-sm mt-2 max-w-xl">
                         Explore thousands of verified businesses across India — browse by category, city, or keyword.
@@ -185,6 +186,7 @@ $colorMap = [
                 <span class="w-2 h-2 rounded-full bg-white/60"></span>
                 <h2 class="text-sm font-bold">{{ $title }}</h2>
             </div>
+
             {{-- Items grid --}}
             <div class="p-4">
                 <div class="flex flex-wrap gap-2">

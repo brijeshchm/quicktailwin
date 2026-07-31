@@ -2503,7 +2503,7 @@ $reviewList = DB::table('clients')
 
 		// ---- Resolve city (no DB call) ----
 		$cityName = $this->resolveBestCandidate($citySlug, $cityMap);
-
+ 
 		if (!$cityName) {
 			$defaultSlug = config('app.default_city_slug', 'bangalore');
 			if (!isset($cityMap[$defaultSlug])) {
@@ -2514,7 +2514,8 @@ $reviewList = DB::table('clients')
 				'service_slug' => $slug,
 			], 301);
 		}
- 
+
+
 		if ($citySlug !== $cityName) {
 			return redirect()->route('city.slug', [
 				'city_slug'    => $cityName,
@@ -2571,6 +2572,8 @@ $reviewList = DB::table('clients')
 
 				return $this->getClientDetail($businessResponse, $slugUrl);
 			}
+
+
  		abort(410);
 
 	}
@@ -2893,6 +2896,7 @@ $reviewList = DB::table('clients')
 		$slug = strtolower(trim($slug));
 		$newSlug = strtolower(str_replace(' ', '-', trim($slug)));  
 		$keywordMap = $this->getKeywordSlugMap(); // cached, in-memory
+		$cityMap    = $this->getCitySlugMap(); 
 		$slugUrl    = $this->resolveBestCandidate($newSlug, $keywordMap);
 		$city= "bangalore";
 
@@ -2908,8 +2912,14 @@ $reviewList = DB::table('clients')
 		return $this->childListPage($child,$newSlug,$city);
 		}
 
+		
+		$cityName = $this->resolveBestCandidate($newSlug, $cityMap);
 
-
+		if (!empty($cityName)) {
+			$cityKeyword = $this->cityKeyword();
+			return $this->cityKeywordPage($cityKeyword,$cityName);			
+		}
+		
 		// If a canonical/better match exists and differs from input → 301 redirect
 		if ($slugUrl && $slugUrl !== $slug) {
 			return redirect()->route('showCity', $slugUrl, 301);
@@ -2925,6 +2935,7 @@ $reviewList = DB::table('clients')
 
 		// ── Fetch data ───────────────────────────────────────────────────────
 		$response = $this->fetchKeywordData($finalSlug);
+ 
 
 		if (!$response) {
 			return redirect()->route('home');
@@ -3020,6 +3031,8 @@ $reviewList = DB::table('clients')
             'metaDescription' => $kwData['meta_description'] ?? '',
             'metaKeywords'    => $kwData['h1_heading'] ?? '',
         ]);
+
+
     }
 
 /*
@@ -3075,4 +3088,78 @@ $reviewList = DB::table('clients')
         return $this->getsearchlist($response, $slug, $city);
 
 	}
+
+	public function cityKeyword()
+	{	
+		// ── API fetch (cached 1 hour) ────────────────────────────────────────
+        $apiData = Cache::remember('business_services', 3600, function () {
+            try {
+                $res = Http::timeout(10)->withoutVerifying()
+                    ->get('https://api.quickdials.com/api/website/business-services');
+                return $res->successful() ? $res->json('data', []) : [];
+            } catch (\Exception $e) {
+                \Log::error('BusinessServices API: ' . $e->getMessage());
+                return [];
+            }
+        });
+		return $apiData;
+ 
+	}
+	
+
+
+	public function cityKeywordPage($apiData,$city)
+	{	
+		 
+        // ── Static data ──────────────────────────────────────────────────────
+        $heroStats = [
+            ['value' => '350+',  'label' => 'Register Business'],
+            ['value' => '8000+', 'label' => 'Business Keyword'],
+            ['value' => '200+',  'label' => 'Years'],
+            ['value' => '20+',   'label' => 'Countries'],
+        ];
+ 
+        
+ 
+        $featured = [
+            ['name' => 'TechAxis IT Solutions', 'category' => 'Web Development',   'city' => 'Delhi',     'rating' => 4.8, 'reviews' => 312],
+            ['name' => 'BrightMinds Coaching',  'category' => 'IIT JEE Coaching',  'city' => 'Mumbai',    'rating' => 4.6, 'reviews' => 189],
+            ['name' => 'GreenLeaf Ayurveda',    'category' => 'Ayurvedic Clinic',   'city' => 'Bangalore', 'rating' => 4.9, 'reviews' => 97],
+            ['name' => 'StyleCraft Interiors',  'category' => 'Interior Design',    'city' => 'Hyderabad', 'rating' => 4.7, 'reviews' => 243],
+        ];
+ 
+        $sidebarStats = [
+            ['icon' => 'building', 'val' => '350+',  'label' => 'Businesses'],
+            ['icon' => 'search',   'val' => '8000+', 'label' => 'Keywords'],
+            ['icon' => 'award',    'val' => '200+',  'label' => 'Years Exp.'],
+            ['icon' => 'globe',    'val' => '20+',   'label' => 'Countries'],
+        ];
+ 
+        // Merge API data over static defaults if available
+        $featuredFromApi = $apiData['featured']          ?? [];
+        $statsFromApi    = $apiData['stats']             ?? [];
+        $categorySections    = $apiData['businessServices']             ?? [];
+ 
+
+ 		$category = array_slice($categorySections, 1, 5);
+ 		$featuredCategory = array_slice($categorySections, 1, 5);
+
+ 
+        if (!empty($featuredFromApi)) $featured    = $featuredFromApi;
+        if (!empty($statsFromApi))    $heroStats   = $statsFromApi;
+ 
+
+	 
+	$metaTitle = "Business Services in Delhi | QuickDials Local Business Directory";
+	$metaDescription = "Find trusted business services in Delhi on QuickDials. Explore verified service providers, professionals, consultants, and local business solutions near you.";
+	$keyword = "business services";
+
+        return view('client.city-keyword', compact(
+            'heroStats', 'categorySections', 'featured', 'featuredCategory','sidebarStats', 'category','city','metaTitle','metaDescription','keyword'
+        ));
+
+
+ 
+	}
+	
 }
