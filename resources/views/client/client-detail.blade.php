@@ -1360,16 +1360,7 @@ function selectCert(i) {
     </div>
 </div>
 
-{{-- ════════════════════════════════════════
-     "Write Your Review" trigger button
-     Change classList.add('open') to openReviewModal()
-════════════════════════════════════════ --}}
-<button onclick="openReviewModal()"
-        class="flex items-center justify-center gap-2.5 px-7 py-4 rounded-2xl font-bold text-base text-white"
-        style="background:linear-gradient(135deg,#6d28d9,#a855f7,#ec4899);box-shadow:0 4px 24px rgba(124,58,237,.4);">
-    ★ Write Your Review
-</button>
-
+ 
 
 {{-- ════════════════════════════════════════
      REVIEW FORM MODAL
