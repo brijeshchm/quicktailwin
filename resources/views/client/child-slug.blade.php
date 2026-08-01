@@ -42,17 +42,14 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
                 @php
                    $cityName = !empty($city) && is_string($city) ? strtolower(str_replace(' ', '-', trim($city))) : 'bangalore';                  
                 @endphp
-                @if(!empty($cityName))
+                @if(!empty(request()->segment(1) === $cityName) && !empty($cityName))
                 <a href="{{ route('showCity',$cityName) }}" class="hover:text-indigo-600 transition-colors">{{ ucfirst($city)}}</a>
                 <span>›</span>    
                 @endif   
 
-                  @if(!empty($city))
-                    <a href="{{ route('city.slug', ['city_slug'=> $cityName,'service_slug' => $kwData['child_slug']])}}" class="hover:text-indigo-600 transition-colors">{{ $keyword }} in {{ ucwords(strtolower(str_replace('-', ' ', $city))) }}</a>
-                    
-                @else                    
-                    <a href="{{ route('showCity', $kwData['child_slug'])}}" class="hover:text-indigo-600 transition-colors">{{ $keyword }} </a>
-                @endif         
+                                  
+                    <span>{{ $keyword }} </span>
+                       
                     <!-- <span>›</span>            
                 <span class="text-slate-600">{{ $keyword }}</span> -->
             </nav>

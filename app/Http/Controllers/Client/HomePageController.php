@@ -65,7 +65,7 @@ class HomePageController extends Controller
 		$city= "bangalore";
 		$metaTitle ="QuickDials | India’s Leading Local Business Search Directory";
 		$metaDescription  ="QuickDials is India’s trusted local business search and service directory, helping users find verified businesses, services, and professionals near them"; 
-		$keyword = "Quickdials";
+		$keyword = "";
         return view('client.index', compact(
             'blogPageList',
             'trending',

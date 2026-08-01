@@ -385,11 +385,11 @@ function bannerSlider(banners, interval = 4000) {
                 <nav class="text-black text-xs sm:text-sm mb-1 flex items-center gap-1.5 flex-wrap">
                     <a href="{{ route('home') }}" class="hover:text-indigo-600">Home</a>
                     <span>›</span>
-                    @if($childSlug)
-                    <a href="{{ route('city.slug', ['city_slug'=> $city,'service_slug' => $childSlug])}}" class="hover:text-indigo-600">{{ $childCat }}</a>
+                    @if($city)
+                    <a href="{{ route('showCity', $city)}}" class="hover:text-indigo-600">{{ ucfirst($city) }}</a>
                     <span>›</span>
                     @endif
-                     <a href="{{ route('city.slug', ['city_slug'=> $city,'service_slug' => $kwData['keyword_slug']])}}" class="hover:text-indigo-600">{{ $keyword }} in {{ ucwords(strtolower(str_replace('-', ' ', $city))) }}</a>
+                    <span>{{ $keyword }} in {{ ucwords(strtolower(str_replace('-', ' ', $city))) }}</span>
 
                        <!-- <span>›</span>
                     <span class="text-gray-600">{{ $keyword }} in {{ ucwords(strtolower(str_replace('-', ' ', $city))) }}</span> -->

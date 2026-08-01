@@ -38,17 +38,19 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
             <nav class="text-xs sm:text-sm text-slate-500 mb-1 flex items-center gap-1.5 flex-wrap">
                 <a href="{{ route('home') }}" class="hover:text-indigo-600 transition-colors">Home</a>
                 <span>›</span>
-
-                @if(!empty($city))
+                @php
+                   $cityName = !empty($city) && is_string($city) ? strtolower(str_replace(' ', '-', trim($city))) : 'bangalore';                  
+                @endphp
+                @if(!empty(request()->segment(1) === $cityName) && !empty($cityName))
                     <a href="{{ route('showCity',$city) }}" class="hover:text-indigo-600 transition-colors">{{ ucfirst($city)}}</a>
                     
                     <span>›</span>
               @endif
-                @if(!empty($city))
+                @if(!empty(request()->segment(1) === $cityName) && !empty($cityName))
                     <a href="{{ route('city.slug', ['city_slug'=> $city,'service_slug' => $kwData['parent_slug']])}}" class="hover:text-indigo-600 transition-colors">{{ $keyword }} in {{ ucwords(strtolower(str_replace('-', ' ', $city))) }}</a>
                     
                 @else                    
-                    <a href="{{ route('showCity', $kwData['parent_slug'])}}" class="hover:text-indigo-600 transition-colors">{{ $keyword }} </a>
+                    <span>{{ $keyword }} </span>
 
                     @endif
                       <!-- <span>›</span>

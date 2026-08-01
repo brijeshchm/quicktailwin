@@ -113,12 +113,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         $items[] = ['name' => ucfirst($childCat), 'url' =>route('city.slug', ['city_slug'=> $cityName,'service_slug' => $childSlug])];
     }
     $items =[];
-    if(request()->segment(1) ===$city){
-    $items[] = ['name' => $keyword .' in '. $city, 'url' => url()->current()];
-    }else 
-    if (!empty($keyword)) {
+    if(request()->segment(1) === $city){
+    $items[] = ['name' => ucfirst($city), 'url' => route('showCity',$city)];
+    }else if (!empty($keyword && request()->segment(1) !='blog')) {   
         $items[] = ['name' => $keyword, 'url' => url()->current()];
-    } 
+    }
+
+    if(request()->segment(2) && request()->segment(1)=='blog'){
+        $items[] = ['name' => $keyword, 'url' => url()->current()];
+    }else{
+        if(request()->segment(2)){
+            $items[] = ['name' => $keyword .' in '. $city, 'url' => url()->current()];
+        }
+    }
+ 
 
     $breadcrumbs = array_merge(
         [['name' => 'Home', 'url' => route('home')]],
@@ -218,7 +226,6 @@ if (request()->is('/')){
                 'item'     => $item['url'],
             ];
         }
-
         $schemas[] = [
             '@context'        => 'https://schema.org',
             '@type'           => 'BreadcrumbList',

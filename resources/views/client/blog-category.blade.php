@@ -38,13 +38,17 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
     ════════════════════════════════ --}}
     <div class="bg-slate-900 text-white py-12">
         <div class="container mx-auto px-4">
-            <div class="flex items-center gap-2 text-slate-400 text-sm mb-3">
-                <a href="{{ route('home') }}" class="hover:text-white transition-colors">Home</a>
-                <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                    <path d="M9 5l7 7-7 7"/>
-                </svg>
-                <span class="text-white">All BLog</span>
-            </div>
+               <nav class="text-white text-xs sm:text-sm mb-1 flex items-center gap-1.5 flex-wrap">
+                    <a href="{{ route('home') }}" class="hover:text-indigo-600">Home</a>
+                    <span>›</span>
+                    @if($city)
+                    <a href="{{ route('blog.show')}}" class="hover:text-indigo-600">Blog</a>
+                    <span>›</span>
+                    @endif
+                    <span>{{ $keyword }} </span>
+
+                      
+                </nav>
                 <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
                     <div itemprop="name">
                         <h1 class="text-lg font-bold text-white leading-tight">{{ $kwData['h1_heading'] ?? ('Explore Verified ' . $kwData['child_category']) }}</h1>

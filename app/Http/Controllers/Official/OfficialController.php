@@ -432,9 +432,7 @@ class OfficialController extends Controller
         $city = "delhi";
         $metaTitle = "QuickDials Blog | Local Business Tips, Guides & Updates";
         $metaDescription = "Read QuickDials blogs for local business tips, service guides, market updates, and helpful information to find trusted businesses and services near you.";
-        $keyword = "QuickDials blog, local business blog, business tips, service guides, local services, business updates, service directory India";
-
-
+        $keyword = "Blog";
         return view('official.blog', compact(
             'featuredArticle',
             'firstBlog',
@@ -591,12 +589,13 @@ class OfficialController extends Controller
             $alt = $catIcons['pc_icon']['name'] ?? '';
         }
     }
-
+//$keyword="";
     $kwData = [
         'parent_category'    => $childCategory->parent_category,
          'child_category'    => $childCategory->child_category,
         'parent_slug'        => $childCategory->parent_slug,
         'child_banner'       => $child_banner,
+        'keyword'       => $childCategory->child_category,
         'category_icon'      => $pc_icon,
         'alt'                => $alt,
         'meta_title'         => $meta_title,
@@ -625,7 +624,7 @@ class OfficialController extends Controller
         'city'            => $city,
         'metaTitle'       => $meta_title,
         'metaDescription' => $meta_description,
-        'keyword'         => $childCategory->parent_category,
+        'keyword'         => $childCategory->child_category,
     ]);
 }
  

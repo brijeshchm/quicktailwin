@@ -147,41 +147,16 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                 {{-- Name --}}
                 <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
                     <div itemprop="name">
-                        <h1 class="text-2xl md:text-5xl font-extrabold text-white leading-tight tracking-tight"
-                    style="text-shadow:0 2px 30px rgba(30,58,138,.6);"> {{ ucfirst(
-    !empty($clientsList['h1_heading'])
-        ? $clientsList['h1_heading']
-        : (!empty($clientsList['business_name'])
-            ? $clientsList['business_name']
-            : 'Business Name')
-) }}</h1>
+                        <h2 class="text-2xl md:text-3xl font-extrabold text-white leading-tight tracking-tight"
+                    style="text-shadow:0 2px 30px rgba(30,58,138,.6);"> {{
+    ucwords(
+        strtolower(
+            $clientsList['business_name'] ?? 'Business Name'
+        )
+    )
+}}</h2>
                     </div>                           
-                    <div itemprop="aggregateRating"
-                        itemscope
-                        itemtype="https://schema.org/AggregateRating"
-                        class="flex items-center gap-2 text-sm">
-                        <img  itemprop="image" src="{{ asset('client/images/' . $starImg) }}"
-                        alt="{{ $clientsList['ratingCount']??'0' }} out of 5 stars"
-                        class="lazy-image h-4 w-auto text-white"
-                        width="80"
-                        height="16"
-                        loading="lazy"
-                        decoding="async"
-                        >
-                        <span class="font-semibold text-white">
-                        <span itemprop="ratingValue">{{ $clientsList['rating']??'0' }}</span>
-                        </span>
-                        <span class="text-white">
-                        <span class="text-white">out of</span>
-                        <span itemprop="bestRating">5</span>
-                        <span class="text-white">based on</span>
-                        (<span itemprop="ratingCount">{{ number_format(
-    !empty($clientsList['ratingCount'])
-        ? (int) $clientsList['ratingCount']
-        : 0
-) }}</span>
-                        <span class="text-white">reviews</span>)</span>
-                    </div>
+                  
                 </div> 
 
 
@@ -189,13 +164,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
 
 
             </div>
-            <div class="flex flex-wrap items-center gap-3 text-white/80 text-xs font-medium">
-                
-                <span class="text-[10px] font-bold tracking-wide text-white rounded-full px-2.5 py-0.5 flex items-center gap-1.5" style="background:#16a34a;">
-                    <span class="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span>Open Now
-                </span>
-                <span class="flex items-center gap-1">📍 {{ $clientsList['address'] ?? 'India' }}</span>
-            </div>
+           
         </div>
     </div>
 
@@ -308,13 +277,45 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
 
             {{-- Left: About --}}
             <div class="space-y-6 reveal">
+
+            <div class="flex">
+         <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
+                    <div itemprop="name">
+                        <h1 class="text-sm md:text-2xl font-extrabold text-black leading-tight tracking-tight"> {{ ucfirst(!empty($clientsList['h1_heading'])? $clientsList['h1_heading'] : (!empty($clientsList['business_name']) ? $clientsList['business_name']: 'Business Name')) }}</h1>
+                    </div>                           
+                    <div itemprop="aggregateRating"
+                        itemscope
+                        itemtype="https://schema.org/AggregateRating"
+                        class="flex items-center gap-2 text-sm">
+                        <img  itemprop="image" src="{{ asset('client/images/' . $starImg) }}"
+                        alt="{{ $clientsList['ratingCount']??'0' }} out of 5 stars"
+                        class="lazy-image h-4 w-auto text-black"
+                        width="80"
+                        height="16"
+                        loading="lazy"
+                        decoding="async"
+                        >
+                        <span class="font-semibold text-black">
+                        <span itemprop="ratingValue">{{ $clientsList['rating']??'0' }}</span>
+                        </span>
+                        <span class="text-black">
+                        <span class="text-black">out of</span>
+                        <span itemprop="bestRating">5</span>
+                        <span class="text-black">based on</span>
+                        (<span itemprop="ratingCount">{{ number_format(
+    !empty($clientsList['ratingCount'])
+        ? (int) $clientsList['ratingCount']
+        : 0
+) }}</span>
+                        <span class="text-black">reviews</span>)</span>
+                    </div>
+                </div> 
+                </div> 
+
                 <span class="section-badge" style="background:rgba(59,130,246,.1);color:#2563eb;border:1px solid rgba(59,130,246,.2);">
                     ✨ About Us
                 </span>
-                <h2 class="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight text-gray-900">
-                    {{ $clientsList['business_name'] ?? '' }}<br>
-                    <span style="color:#2563eb;"></span>
-                </h2>
+               
                 <p class="text-gray-600 leading-relaxed">{!! $clientsList['business_intro'] ?? '' !!}</p>
 
                 {{-- Stats --}}
@@ -1880,11 +1881,7 @@ $localBusiness[] = [
 
     "url" => url()->current(),
 
-    "aggregateRating" => [
-        "@type" => "AggregateRating",
-        "ratingValue" => $clientsList['rating'] ?? '1',
-        "reviewCount" => $clientsList['ratingCount'] ?? '1'
-    ]
+    
 
 ];
 

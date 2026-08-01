@@ -70,19 +70,15 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
     'percent' => $totalReviews > 0 ? round(($starCounts[$s] / $totalReviews) * 100) : 0
 ]);
 @endphp
-
 @php     
     $serviceName = !empty($metaTitle)
         ? $metaTitle
         : "";
-
     $serviceDescription = $metaDescription? $metaDescription: 'India’s leading local business search and service directory. Find trusted businesses, services, it training, professionals, and service providers near you with QuickDials..';
     $cityName =$city ?: 'bangalore';
     if (!empty($childCat) && !empty($childSlug)) {
-        $items[] = ['name' => ucfirst($childCat), 'url' => route('city.slug', ['city_slug'=> $cityName,'service_slug' => $childSlug]) ];
-    }
-
- 
+        $items[] = ['name' => ucfirst($childCat), 'url' => route('city.slug', ['city_slug'=> $cityName,'service_slug' => $childSlug])];
+    } 
 @endphp 
 @php   
 
@@ -273,13 +269,11 @@ $keywordImg= !empty($kwData['key_icon'])
                 <nav class="text-black text-xs sm:text-sm mb-1 flex items-center gap-1.5 flex-wrap">
                     <a href="{{ route('home') }}" class="hover:text-indigo-600">Home</a>
                     <span>›</span>
-                    @if($childSlug)
-                    
+                    <!-- @if(request()->segment(1) === $city)                    
                     <a href="{{ route('showCity', $childSlug) }}" class="hover:text-indigo-600">{{ $childCat }}</a>
                     <span>›</span>
-                    @endif
-
-                     <a href="{{ route('showCity', $kwData['keyword_slug'])}}" class="hover:text-indigo-600">{{ $keyword }}</a>
+                    @endif -->
+                    <span>{{ $keyword }}</span>
 
                       <!-- <span>›</span>
 
