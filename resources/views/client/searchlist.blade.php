@@ -998,11 +998,11 @@ function bannerSlider(banners, interval = 4000) {
     {{-- Related Services --}}
     @if(!empty($servicesRelated))
     <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mt-4 mb-4 mx-4">
-        <h2 class="text-lg sm:text-xl md:text-2xl font-semibold text-blue-900"> Find Services Related to {{ $keyword }}</h2>
+        <h2 class="text-lg sm:text-xl md:text-2xl font-semibold text-blue-900"> Find Services Related to {{ $keyword }} in {{ ucfirst($city) }}</h2>
         <ul class="flex flex-wrap gap-2 text-sm text-gray-600">
             @foreach($servicesRelated as $i => $service)
             <li class="flex items-center">
-                <a href="{{ route('city.slug', ['city_slug'=>  $city ?: 'bangalore','service_slug' => $service['url']]) }}" class="hover:text-indigo-600">{{ $service['title'] ?? '' }}</a>
+                <a href="{{ route('city.slug', ['city_slug'=>  $city ?: 'bangalore','service_slug' => $service['url']]) }}" class="hover:text-indigo-600">{{ $service['keyword'] ?? '' }}</a>
                 @if($i !== count($servicesRelated) - 1)
                 <span class="mx-1 text-gray-400">|</span>
                 @endif

@@ -609,6 +609,7 @@ class CitySlugController extends Controller
 				'img' => $img,
 				'alt' => $alt,
 				'title' => $keyword->keyword. ' in ' .$cityName ?: 'bangalore',
+				'keyword' => $keyword->keyword,
 				'type' => 'keyword',
 				'city_slug' => strtolower($cityName) ?: 'bangalore',
 				'meta_description' => replaceCity($keyword->meta_description, $cityName),
