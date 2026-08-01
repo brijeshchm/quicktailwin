@@ -5,6 +5,17 @@
 @section('og_image', !empty($kwData['key_icon'])
     ? asset($kwData['key_icon'])
     : asset('client/images/quickdials-og.png'))
+@php   
+    $keywordArray = [
+        'artificial-intelligence-training', 'python-training', 'workday-training',
+        'sap-training', 'banquet-hall', 'cricket-academy'
+    ];   
+    $currentKeyword = strtolower(trim($kwData['keyword_slug'] ?? ''));
+    $shouldIndex = in_array($currentKeyword, $keywordArray); 
+@endphp
+@section('meta_robots')
+<meta name="robots" content="{{ $shouldIndex ? 'index, follow' : 'noindex, nofollow' }}">
+@endsection
 @section('content') 
 <style>
 #enquiry-modal { display: none; }
@@ -897,7 +908,7 @@ $keywordImg= !empty($kwData['key_icon'])
     @if(!empty($relatedCategory))
     <div class="bg-white py-10 border-t border-gray-200 mt-4">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-2xl font-bold text-gray-900 mb-6">Related Categories<span class="text-blue-600">{{ ucfirst($city) }}</span></h2>
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Related <span class="text-blue-600">{{ ucfirst($city) }} Categories</span></h2>
             <div class="flex flex-wrap gap-x-8 gap-y-3 text-[15px]">
                 @foreach($relatedCategory as $slug_c => $name)
                 <a href="{{ route('city.slug', ['city_slug'=> $cityName,'service_slug' => $slug_c])}}" class="text-gray-700 hover:text-blue-600 transition-colors duration-200">{{ $name }}</a>

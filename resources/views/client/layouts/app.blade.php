@@ -109,13 +109,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     $serviceDescription = $metaDescription? $metaDescription: 'India’s leading local business search and service directory. Find trusted businesses, services, it training, professionals, and service providers near you with QuickDials..';
     $cityName =$city ?: 'bangalore';
-    if (!empty($childCat) && !empty($childSlug)) {
+    if(!empty($childCat) && !empty($childSlug)) {
         $items[] = ['name' => ucfirst($childCat), 'url' =>route('city.slug', ['city_slug'=> $cityName,'service_slug' => $childSlug])];
     }
+
     $items =[];
     if(request()->segment(1) === $city){
-    $items[] = ['name' => ucfirst($city), 'url' => route('showCity',$city)];
-    }else if (!empty($keyword && request()->segment(1) !='blog')) {   
+        $items[] = ['name' => ucfirst($city), 'url' => route('showCity',$city)];
+    }else if(!empty($keyword && request()->segment(1) !='blog')){   
         $items[] = ['name' => $keyword, 'url' => url()->current()];
     }
 
@@ -123,10 +124,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         $items[] = ['name' => $keyword, 'url' => url()->current()];
     }else{
         if(request()->segment(2)){
-            $items[] = ['name' => $keyword .' in '. $city, 'url' => url()->current()];
+        $items[] = ['name' => $keyword .' in '. $city, 'url' => url()->current()];
         }
     }
- 
 
     $breadcrumbs = array_merge(
         [['name' => 'Home', 'url' => route('home')]],

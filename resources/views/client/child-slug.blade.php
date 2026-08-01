@@ -5,6 +5,17 @@
 @section('og_image', !empty($kwData['child_icon'])
     ? asset($kwData['child_icon'])
     : asset('client/images/quickdials-og.png')) 
+@php    
+    $keywordArray = [
+        'artificial-intelligence-training', 'python-training', 'workday-training',
+        'sap-training', 'banquet-hall', 'cricket-academy'
+    ];   
+    $currentKeyword = strtolower(trim($kwData['child_slug'] ?? ''));
+    $shouldIndex = in_array($currentKeyword, $keywordArray); 
+@endphp
+@section('meta_robots')
+<meta name="robots" content="{{ $shouldIndex ? 'index, follow' : 'noindex, nofollow' }}">
+@endsection
 @section('content')	
 @include('client.components.banner-section')
 @php

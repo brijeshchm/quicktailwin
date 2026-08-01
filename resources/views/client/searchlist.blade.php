@@ -1,19 +1,35 @@
 @extends('client.layouts.app')
 @section('title', $metaTitle ?? $keyword . ' in ' . ucwords(strtolower(str_replace('-', ' ', $city))) . ' | QuickDials')
 @section('description', $metaDescription ?? 'Find the best ' . $keyword . ' in ' . ucwords(strtolower(str_replace('-', ' ', $city))) . ' with QuickDials. Discover verified businesses, addresses, phone numbers, reviews, ratings, photos, maps, and top local services near you.')
-@section('keywords', $metaKeywords ?? $keyword . ' in ' . ucwords(strtolower(str_replace('-', ' ', $city))) . ', best ' . $keyword . ' in ' . ucwords(strtolower(str_replace('-', ' ', $city))) . ', top ' . $keyword . ' near me, verified ' . $keyword . ', local business directory, QuickDials, business listings in ' . ucwords(strtolower(str_replace('-', ' ', $city))) . ', reviews and ratings, contact details, nearby services, top businesses in ' . ucwords(strtolower(str_replace('-', ' ', $city))))
+@php
+    $allowedCities = [
+        'faridabad','delhi', 'noida',
+        'gurgaon', 'bangalore'
+    ];
+    $keywordArray = [
+        'artificial-intelligence-training', 'python-training', 'workday-training',
+        'sap-training', 'banquet-hall', 'cricket-academy'
+    ];
+    $currentCity    = strtolower(trim($city ?? ''));
+    $currentKeyword = strtolower(trim($kwData['keyword_slug'] ?? ''));
+
+    $shouldIndex = in_array($currentCity, $allowedCities) 
+        && in_array($currentKeyword, $keywordArray);
+ 
+@endphp
+
+@section('meta_robots')
+<meta name="robots" content="{{ $shouldIndex ? 'index, follow' : 'noindex, nofollow' }}">
+@endsection
 @section('og_image', !empty($kwData['key_icon'])
     ? asset($kwData['key_icon'])
     : asset('client/images/quickdials-og.png'))
 @section('content') 
-  
-
 
 <style>  
     #enquiry-modal { display: none; }
     #enquiry-modal.open { display: flex; }
-    body.modal-open { overflow: hidden; }
- 
+    body.modal-open { overflow: hidden; } 
 #scroll-progress {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -965,14 +981,14 @@ function bannerSlider(banners, interval = 4000) {
     @if(!empty($relatedCategory))
     <div class="bg-white py-10 border-t border-gray-200 mt-4">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6">Related Sub Categories in <span class="text-blue-600">{{ ucwords(strtolower(str_replace('-', ' ',  $city ?: 'bangalore'))) }}</span></h2>
+            <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6">Related {{ $keyword }} Categories in <span class="text-blue-600">{{ ucwords(strtolower(str_replace('-', ' ',  $city ?: 'bangalore'))) }}</span></h2>
             <div class="flex flex-wrap gap-x-8 gap-y-3 text-[15px]">
                 @foreach($relatedCategory as $slug_c => $name)
                 <a href="{{ route('city.slug', ['city_slug'=> $cityName,'service_slug' => $slug_c])}}" class="text-gray-700 hover:text-blue-600 transition-colors duration-200">{{ $name }}</a>
                 @endforeach
             </div>
             <div class="mt-8">
-                <a href="{{ route('showCity','bangalore') }}" class="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium">View All Categories →</a>
+                <a href="{{ route('showCity',$city) }}" class="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium">View All Categories →</a>
             </div>
         </div>
     </div>
