@@ -39,6 +39,12 @@ body.modal-open { overflow: hidden; }
     line-height: 1.75rem;
     font-weight: 700;
 }
+
+.bg-white h2{
+    font-size: 1.025rem;
+    line-height: 1.75rem;
+    font-weight: 700;
+}
 </style>
 
  
