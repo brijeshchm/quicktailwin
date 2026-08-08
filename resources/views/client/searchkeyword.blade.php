@@ -845,37 +845,7 @@ $keywordImg= !empty($kwData['key_icon'])
     </div>
     @endif
 
-    {{-- top_wcity_description --}}
-    @if(!empty($kwData['top_wcity_description']))
-     @php
-    $top_wcity_heading = '';
-
-    if (!empty($kwData['top_wcity_heading'])) {
-        $top_wcity_heading=  $kwData['top_wcity_heading'];
-    }   
-    @endphp
-
-    <div class="bg-white rounded-2xl p-6 mt-4 mx-4">
-        <h2 class="text-lg font-bold text-gray-900 mb-3"> {{ $top_wcity_heading }}</h2>
-        <div class="text-sm text-gray-600 leading-relaxed">{!! $kwData['top_wcity_description'] !!}</div>
-    </div>
-    @endif
-
-
-     {{-- bottom_wcity_heading --}}
-    @if(!empty($kwData['bottom_wcity_description']))
-    
-    @php
-    $bottom_wcity_heading = '';
-    if (!empty($kwData['bottom_wcity_heading'])) {
-        $bottom_wcity_heading=  $kwData['bottom_wcity_heading'];
-    }   
-    @endphp
-    <div class="bg-white rounded-2xl p-6 mt-4 mx-4">
-        <h2 class="text-lg font-bold text-gray-900 mb-3"> {{ $bottom_wcity_heading }}</h2>
-        <div class="text-sm text-gray-600 leading-relaxed">{!! $kwData['bottom_wcity_description'] !!}</div>
-    </div>
-    @endif
+ 
    
 
 

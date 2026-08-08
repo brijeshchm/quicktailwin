@@ -2617,7 +2617,9 @@ $reviewList = DB::table('clients')
 				'service_slug' => $newSlug,
 			], 301);
 		}
-		return $this->categoriesListPage($category,$newSlug,$city);
+
+		$newCat = $this->categoriesCheckDetails($newSlug);
+		return $this->categoriesListPage($newCat,$newSlug,$city);
 		}
 
 	
@@ -2635,7 +2637,9 @@ $reviewList = DB::table('clients')
 				'service_slug' => $newSlug,
 			], 301);
 		}
-		return $this->childListPage($child,$newSlug,$city);
+
+		$newchild = $this->childCheckDetails($newSlug);
+		return $this->childListPage($newchild,$newSlug,$city);
 		}
 
 
@@ -2721,7 +2725,21 @@ $reviewList = DB::table('clients')
 
 	 
 
+		
 	public function categoriesCheck($slug)
+	{
+		$categoryDetails = DB::table('parent_category')
+			->where('parent_slug', $slug)
+			->first();
+
+		if ($categoryDetails) {
+			return $categoryDetails;
+		}
+
+		return null;
+	}
+			
+	public function categoriesCheckDetails($slug)
 	{
 		return Cache::remember("category_check_{$slug}", now()->addHours(6), function () use ($slug) {
 			$res = Http::withoutVerifying()
@@ -2794,6 +2812,18 @@ $reviewList = DB::table('clients')
 	public function childCheck($child_slug)
 	{
 		  
+ 		$childDetails = ChildCategory::where('child_slug', $child_slug)->first();
+    if($childDetails){
+
+		return $childDetails;
+	}
+        
+	return null;
+	}
+
+		public function childCheckdetails($child_slug)
+	{
+		  
  
     
             $res = Http::timeout(10)->withoutVerifying()
@@ -2804,6 +2834,7 @@ $reviewList = DB::table('clients')
         
     		return $response;
 	}
+
 
 
 	public function childListPage($response, $child_slug,$city)
