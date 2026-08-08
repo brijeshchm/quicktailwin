@@ -20,6 +20,7 @@ foreach ($starMap as $k => $v) {
     if (isset($kwData['rating']) && $kwData['rating'] >= $k) $starKey = $k;
 }
 $starImg = $starMap[$starKey] ?? 'star_4.5.png';
+$city='faridabad';
 @endphp
 <style>
     .view-btn.active {
@@ -45,7 +46,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                     <a href="{{ route('blog.show')}}" class="hover:text-indigo-600">Blog</a>
                     <span>›</span>
                     @endif
-                    <span>{{ $keyword }} </span>
+                    <span>{{ replaceCity($keyword,$city) }} </span>
 
                       
                 </nav>
@@ -75,7 +76,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                         <span class="text-gray-500">ratings</span> </span>
                     </div>
                 </div>            
-            <p class="text-slate-300 text-lg">{{ $kwData['top_description'] }}</p>
+            <p class="text-slate-300 text-lg">{{ replaceCity($kwData['top_description'],$city) }}</p>
         </div>
     </div>
 
@@ -159,7 +160,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                     @foreach($blogs as $i => $blog)
                     <div class="course-card reveal d-{{ min($i % 6, 5) }} bg-white border border-slate-200
                                 rounded-xl overflow-hidden flex flex-col"
-                         data-title="{{ strtolower($blog['title'] ?? '') }}"
+                         data-title="{{ replaceCity($blog['title'],$city) ?? '' }}"
                          data-name="{{ strtolower($blog['name'] ?? '') }}"
                          data-slug="{{ $blog['child_slug'] ?? '' }}"
                          data-rating="{{ $blog['rating'] ?? 0 }}"
@@ -171,7 +172,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                                 <div class="card-bg-overlay"></div>
                                 <h3 class="font-bold text-lg text-slate-700 text-center leading-tight
                                            relative z-10 group-hover:text-indigo-700">
-                                    {{ $blog['title'] ?? '' }}
+                                    {{ replaceCity($blog['title'],$city) ?? '' }}
                                 </h3>
                                 <span class="absolute top-3 right-3 px-2 py-0.5 bg-white/90 text-indigo-700
                                              text-xs font-semibold rounded-full border border-indigo-100 shadow-sm">
@@ -183,7 +184,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                             <div class="p-4 flex-1 flex flex-col">
                                 <div class="flex justify-between items-center mb-2">
                                     <span class="text-sm font-medium text-slate-700 truncate">
-                                        {{ $blog['title'] ?? '' }}
+                                        {{ replaceCity($blog['title'],$city) ?? '' }}
                                     </span>
                                     <div class="flex items-center gap-1 text-amber-500 flex-shrink-0">
                                         <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">

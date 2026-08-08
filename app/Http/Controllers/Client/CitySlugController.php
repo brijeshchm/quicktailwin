@@ -235,7 +235,7 @@ class CitySlugController extends Controller
 			'meta_description' => $meta_description,
 			'top_description' => $top_description,
 			'bottom_description' => $bottom_description,
-					'top_wcity_description' => $top_wcity_description,
+			'top_wcity_description' => $top_wcity_description,
 			'top_wcity_heading' => $top_wcity_heading,
 			'bottom_wcity_heading' => $bottom_wcity_heading,
 			'bottom_wcity_description' => $bottom_wcity_description,
