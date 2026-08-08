@@ -134,35 +134,37 @@ class HomePageController extends Controller
  
         return [
 
-			//  ['url' => 'artificial-intelligence-training', 'img' => $img . 'it_training.svg', 'alt' => 'Artificial Intelligence Training', 'title' => 'Artificial Intelligence Training', 'type' => 'categories', 'rating' => '4', 'count' => '434'],
+			 ['url' => 'artificial-intelligence-training', 'img' => $img . 'it_training.svg', 'alt' => 'Artificial Intelligence Training', 'title' => 'Artificial Intelligence Training', 'type' => 'keyword', 'rating' => '4', 'count' => '434'],
 
-			//  ['url' => 'professional-courses', 'img' => $img . 'it_training.svg', 'alt' => 'IT Professional Courses', 'title' => 'Professional Courses', 'type' => 'categories', 'rating' => '4', 'count' => '434'],
-			//  ['url' => 'professional-courses', 'img' => $img . 'it_training.svg', 'alt' => 'IT Professional Courses', 'title' => 'Professional Courses', 'type' => 'categories', 'rating' => '4', 'count' => '434'],
-			//  ['url' => 'professional-courses', 'img' => $img . 'it_training.svg', 'alt' => 'IT Professional Courses', 'title' => 'Professional Courses', 'type' => 'categories', 'rating' => '4', 'count' => '434'],
-			//  ['url' => 'professional-courses', 'img' => $img . 'it_training.svg', 'alt' => 'IT Professional Courses', 'title' => 'Professional Courses', 'type' => 'categories', 'rating' => '4', 'count' => '434'],
+		 
+			 ['url' => 'python-training', 'img' => $img . 'it_training.svg', 'alt' => '', 'title' => 'Python Training', 'type' => 'keyword', 'rating' => '4.75', 'count' => '789'],
+			 ['url' => 'workday-training', 'img' => $img . 'it_training.svg', 'alt' => 'Workday Training', 'title' => 'Workday Training', 'type' => 'keyword', 'rating' => '4.75', 'count' => '539'],
+			 ['url' => 'sap-training', 'img' => $img . 'it_training.svg', 'alt' => 'SAP Training', 'title' => 'SAP Training', 'type' => 'keyword', 'rating' => '4.75', 'count' => '678'],
+			 ['url' => 'banquet-hall', 'img' => $popular . 'Banquet-Halls.webp', 'alt' => 'Banquet Hall', 'title' => 'Banquet Hall', 'type' => 'keyword', 'rating' => '4.5', 'count' => '778'],
 
+	 		['url' => 'cricket-academy', 'img' => $img . 'it_training.svg', 'alt' => 'Cricket academy', 'title' => 'Cricket Academy', 'type' => 'categories', 'rating' => '4.75', 'count' => '480'],
 
 
 
           //  ['url' => 'professional-courses', 'img' => $img . 'it_training.svg', 'alt' => 'IT Professional Courses', 'title' => 'Professional Courses', 'type' => 'categories', 'rating' => '4', 'count' => '434'],
-            ['url' => 'wedding-planning', 'img' => $img . 'wedding.png', 'alt' => 'Wedding pannel', 'title' => 'Wedding pannel', 'type' => 'keyword', 'rating' => '4', 'count' => '234'],
-            ['url' => 'electric-services', 'img' => $img . 'electric-services.webp', 'alt' => 'Electric Services', 'title' => 'Electric Services', 'type' => 'child', 'rating' => '3.5', 'count' => '377'],
-            ['url' => 'entrance-exams-coaching', 'img' => $popular . 'government-exam.png', 'alt' => 'Government exam coaching', 'title' => 'Government exam', 'type' => 'child', 'rating' => '3.5', 'count' => '229'],
-            ['url' => 'study-abroad', 'img' => $img . 'study-abroad.svg', 'alt' => 'Study Abroad', 'title' => 'Study Abroad', 'type' => 'child', 'rating' => '5', 'count' => '399'],
-            ['url' => 'spa-hub', 'img' => $img . 'Spa & Beauty.png', 'alt' => 'Spa & Beauty', 'title' => 'Spa & Beauty', 'type' => 'keyword', 'rating' => '5', 'count' => '325'],
-            ['url' => 'repair-services', 'img' => $img . 'Repairs-Services.svg', 'alt' => 'Repair Services', 'title' => 'Repair Services', 'type' => 'child', 'rating' => '5', 'count' => '389'],
-            ['url' => 'packers-and-movers', 'img' => $popular . 'Packers-movers.png', 'alt' => 'Packers & Movers', 'title' => 'Packers & Movers', 'type' => 'child', 'rating' => '3.5', 'count' => '199'],
-            ['url' => 'professional', 'img' => $popular . 'Professional.png', 'alt' => 'Professional Course', 'title' => 'Professional', 'type' => 'categories', 'rating' => '3.5', 'count' => '149'],
-            ['url' => 'contractors', 'img' => $img . 'contractors.png', 'alt' => 'Contractors Property', 'title' => 'Contractors', 'type' => 'child', 'rating' => '3.5', 'count' => '167'],
-            ['url' => 'collages-and-institutions', 'img' => $popular . 'Education.png', 'alt' => 'collages and Institutions', 'title' => 'Education', 'type' => 'categories', 'rating' => '3.5', 'count' => '197'],
-            ['url' => 'rent-or-buy', 'img' => $img . 'rent_buy.svg', 'alt' => 'Rent or Buy', 'title' => 'Rent & Buy', 'type' => 'child', 'rating' => '3.5', 'count' => '329'],
-            ['url' => 'sports-academy', 'img' => $popular . 'sports.png', 'alt' => 'Sport Academy', 'title' => 'Sport Academy', 'type' => 'child', 'rating' => '3.5', 'count' => '539'],
-            ['url' => 'medical', 'img' => $img . 'Medical.webp', 'alt' => 'Medical Medician', 'title' => 'Medical', 'type' => 'child', 'rating' => '3.5', 'count' => '269'],
-            ['url' => 'loan-service', 'img' => $popular . 'Loan.png', 'alt' => 'Loan Service', 'title' => 'Loan', 'type' => 'child', 'rating' => '3.5', 'count' => '69'],
-            ['url' => 'dance-classes', 'img' => $popular . 'Dancing.png', 'alt' => 'Dancing Class', 'title' => 'Dancing', 'type' => 'child', 'rating' => '3.5', 'count' => '79'],
-            ['url' => 'yoga-classes', 'img' => $popular . 'Yoga.png', 'alt' => 'Yoga Class', 'title' => 'Yoga', 'type' => 'child', 'rating' => '3.5', 'count' => '89'],
-            ['url' => 'security-system', 'img' => $img . 'CCTV-security.webp', 'alt' => 'CCTV Security', 'title' => 'CCTV Security', 'type' => 'child', 'rating' => '3.5', 'count' => '109'],
-            ['url' => 'tours-and-travels', 'img' => $images . 'tour-travels.png', 'alt' => 'Tours & Travels', 'title' => 'Tours & Travels', 'type' => 'keyword', 'rating' => '3.5', 'count' => '49'],
+            // ['url' => 'wedding-planning', 'img' => $img . 'wedding.png', 'alt' => 'Wedding pannel', 'title' => 'Wedding pannel', 'type' => 'keyword', 'rating' => '4', 'count' => '234'],
+            // ['url' => 'electric-services', 'img' => $img . 'electric-services.webp', 'alt' => 'Electric Services', 'title' => 'Electric Services', 'type' => 'child', 'rating' => '3.5', 'count' => '377'],
+            // ['url' => 'entrance-exams-coaching', 'img' => $popular . 'government-exam.png', 'alt' => 'Government exam coaching', 'title' => 'Government exam', 'type' => 'child', 'rating' => '3.5', 'count' => '229'],
+            // ['url' => 'study-abroad', 'img' => $img . 'study-abroad.svg', 'alt' => 'Study Abroad', 'title' => 'Study Abroad', 'type' => 'child', 'rating' => '5', 'count' => '399'],
+            // ['url' => 'spa-hub', 'img' => $img . 'Spa & Beauty.png', 'alt' => 'Spa & Beauty', 'title' => 'Spa & Beauty', 'type' => 'keyword', 'rating' => '5', 'count' => '325'],
+            // ['url' => 'repair-services', 'img' => $img . 'Repairs-Services.svg', 'alt' => 'Repair Services', 'title' => 'Repair Services', 'type' => 'child', 'rating' => '5', 'count' => '389'],
+            // ['url' => 'packers-and-movers', 'img' => $popular . 'Packers-movers.png', 'alt' => 'Packers & Movers', 'title' => 'Packers & Movers', 'type' => 'child', 'rating' => '3.5', 'count' => '199'],
+            // ['url' => 'professional', 'img' => $popular . 'Professional.png', 'alt' => 'Professional Course', 'title' => 'Professional', 'type' => 'categories', 'rating' => '3.5', 'count' => '149'],
+            // ['url' => 'contractors', 'img' => $img . 'contractors.png', 'alt' => 'Contractors Property', 'title' => 'Contractors', 'type' => 'child', 'rating' => '3.5', 'count' => '167'],
+            // ['url' => 'collages-and-institutions', 'img' => $popular . 'Education.png', 'alt' => 'collages and Institutions', 'title' => 'Education', 'type' => 'categories', 'rating' => '3.5', 'count' => '197'],
+            // ['url' => 'rent-or-buy', 'img' => $img . 'rent_buy.svg', 'alt' => 'Rent or Buy', 'title' => 'Rent & Buy', 'type' => 'child', 'rating' => '3.5', 'count' => '329'],
+            // ['url' => 'sports-academy', 'img' => $popular . 'sports.png', 'alt' => 'Sport Academy', 'title' => 'Sport Academy', 'type' => 'child', 'rating' => '3.5', 'count' => '539'],
+            // ['url' => 'medical', 'img' => $img . 'Medical.webp', 'alt' => 'Medical Medician', 'title' => 'Medical', 'type' => 'child', 'rating' => '3.5', 'count' => '269'],
+            // ['url' => 'loan-service', 'img' => $popular . 'Loan.png', 'alt' => 'Loan Service', 'title' => 'Loan', 'type' => 'child', 'rating' => '3.5', 'count' => '69'],
+            // ['url' => 'dance-classes', 'img' => $popular . 'Dancing.png', 'alt' => 'Dancing Class', 'title' => 'Dancing', 'type' => 'child', 'rating' => '3.5', 'count' => '79'],
+            // ['url' => 'yoga-classes', 'img' => $popular . 'Yoga.png', 'alt' => 'Yoga Class', 'title' => 'Yoga', 'type' => 'child', 'rating' => '3.5', 'count' => '89'],
+            // ['url' => 'security-system', 'img' => $img . 'CCTV-security.webp', 'alt' => 'CCTV Security', 'title' => 'CCTV Security', 'type' => 'child', 'rating' => '3.5', 'count' => '109'],
+            // ['url' => 'tours-and-travels', 'img' => $images . 'tour-travels.png', 'alt' => 'Tours & Travels', 'title' => 'Tours & Travels', 'type' => 'keyword', 'rating' => '3.5', 'count' => '49'],
         ];
     }
  
