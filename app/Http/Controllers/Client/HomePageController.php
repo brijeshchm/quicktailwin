@@ -133,7 +133,18 @@ class HomePageController extends Controller
 		$images  = config('app.website') . 'images/';
  
         return [
-            ['url' => 'professional-courses', 'img' => $img . 'it_training.svg', 'alt' => 'IT Professional Courses', 'title' => 'Professional Courses', 'type' => 'categories', 'rating' => '4', 'count' => '434'],
+
+			//  ['url' => 'artificial-intelligence-training', 'img' => $img . 'it_training.svg', 'alt' => 'Artificial Intelligence Training', 'title' => 'Artificial Intelligence Training', 'type' => 'categories', 'rating' => '4', 'count' => '434'],
+
+			//  ['url' => 'professional-courses', 'img' => $img . 'it_training.svg', 'alt' => 'IT Professional Courses', 'title' => 'Professional Courses', 'type' => 'categories', 'rating' => '4', 'count' => '434'],
+			//  ['url' => 'professional-courses', 'img' => $img . 'it_training.svg', 'alt' => 'IT Professional Courses', 'title' => 'Professional Courses', 'type' => 'categories', 'rating' => '4', 'count' => '434'],
+			//  ['url' => 'professional-courses', 'img' => $img . 'it_training.svg', 'alt' => 'IT Professional Courses', 'title' => 'Professional Courses', 'type' => 'categories', 'rating' => '4', 'count' => '434'],
+			//  ['url' => 'professional-courses', 'img' => $img . 'it_training.svg', 'alt' => 'IT Professional Courses', 'title' => 'Professional Courses', 'type' => 'categories', 'rating' => '4', 'count' => '434'],
+
+
+
+
+          //  ['url' => 'professional-courses', 'img' => $img . 'it_training.svg', 'alt' => 'IT Professional Courses', 'title' => 'Professional Courses', 'type' => 'categories', 'rating' => '4', 'count' => '434'],
             ['url' => 'wedding-planning', 'img' => $img . 'wedding.png', 'alt' => 'Wedding pannel', 'title' => 'Wedding pannel', 'type' => 'keyword', 'rating' => '4', 'count' => '234'],
             ['url' => 'electric-services', 'img' => $img . 'electric-services.webp', 'alt' => 'Electric Services', 'title' => 'Electric Services', 'type' => 'child', 'rating' => '3.5', 'count' => '377'],
             ['url' => 'entrance-exams-coaching', 'img' => $popular . 'government-exam.png', 'alt' => 'Government exam coaching', 'title' => 'Government exam', 'type' => 'child', 'rating' => '3.5', 'count' => '229'],

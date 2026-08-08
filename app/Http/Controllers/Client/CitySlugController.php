@@ -2505,14 +2505,17 @@ $reviewList = DB::table('clients')
                 'service_slug' => $newSlug,
             ], 301);
         }
+		$newCat = $this->categoriesCheckDetails($newSlug);
+	 
 
-        return $this->categoriesListPage($category, $newSlug, $cityName ?? $city);
+        return $this->categoriesListPage($newCat, $newSlug, $cityName ?? $city);
     }
 
     // ---- CHILD CHECK ----
     $child = $this->childCheck($newSlug);
 
-    if ($child) {
+    if (!empty($child)) {
+	
         if ($citySlug === 'child' || !isset($cityMap[$citySlug])) {
             return redirect()->route('city.slug', [
                 'city_slug'  => $defaultCity,
@@ -2527,8 +2530,9 @@ $reviewList = DB::table('clients')
                 'service_slug' => $newSlug,
             ], 301);
         }
+		 $newchild = $this->childCheckdetails($newSlug);
 
-        return $this->childListPage($child, $newSlug, $cityName ?? $city);
+        return $this->childListPage($newchild, $newSlug, $cityName ?? $city);
     }
 
     // ---- Resolve city (no DB call) ----
@@ -2594,134 +2598,7 @@ $reviewList = DB::table('clients')
 
     abort(410);
 }
-	public function showCityWithService_oolld(Request $request, string $city, string $slug)
-	{
-		$citySlug = strtolower(trim($city));
-		$keySlugRaw = strtolower(trim($slug));
-		$newSlug = strtolower(str_replace(' ', '-', trim($slug)));  
-		
-		// dd($newSlug);
-		$cityMap    = $this->getCitySlugMap();     // cached, in-memory
-		$keywordMap = $this->getKeywordSlugMap();  // cached, in-memory
- 	 
-		$category = $this->categoriesCheck($newSlug);
  
-		if($category){
- 
-		if ($citySlug==='categories') {
- 
-			$defaultCity = config('app.default_city_slug', 'faridabad');
-		 
-			return redirect()->route('city.slug', [
-				'city_slug'    => $defaultCity,
-				'service_slug' => $newSlug,
-			], 301);
-		}
-
-		$newCat = $this->categoriesCheckDetails($newSlug);
-		return $this->categoriesListPage($newCat,$newSlug,$city);
-		}
-
-	
-
-		$child = $this->childCheck($newSlug);
- 
-		if($child){
-
-		if ($citySlug==='child') {
- 
-			$defaultCity = config('app.default_city_slug', 'faridabad');
-		 
-			return redirect()->route('city.slug', [
-				'city_slug'    => $defaultCity,
-				'service_slug' => $newSlug,
-			], 301);
-		}
-
-		$newchild = $this->childCheckDetails($newSlug);
-		return $this->childListPage($newchild,$newSlug,$city);
-		}
-
-
-
-
-		// ---- Resolve city (no DB call) ----
-		$cityName = $this->resolveBestCandidate($citySlug, $cityMap);
- 
-		if (!$cityName) {
-			$defaultSlug = config('app.default_city_slug', 'faridabad');
-			if (!isset($cityMap[$defaultSlug])) {
-				return redirect()->route('home');
-			}
-			return redirect()->route('city.slug', [
-				'city_slug'    => $defaultSlug,
-				'service_slug' => $slug,
-			], 301);
-		}
-
-
-		if ($citySlug !== $cityName) {
-			return redirect()->route('city.slug', [
-				'city_slug'    => $cityName,
-				'service_slug' => $slug,
-			], 301);
-		}
-
-		// ---- Resolve keyword/service (no DB call) ----
-		$slugUrl = $this->resolveBestCandidate($newSlug, $keywordMap);
- 
-		if ($slugUrl) {
-			if ($keySlugRaw !== $slugUrl) {
-				return redirect()->route('city.slug', [
-					'city_slug'    => $cityName,
-					'service_slug' => $slugUrl,
-				], 301);
-			}
-
-			// Confirmed valid service slug — skip the redundant serviceExists() DB call.
-			$response = $this->fetchData($cityName, $slugUrl);
- 
-			if (!$response) {
-				abort(410);
-				//return redirect()->route('home');
-			}
-
-			return $this->getsearchlist($response, $slugUrl, $cityName);
-		}
-
- 
-     
-        $clientMap = $this->getClientSlugMap(); // cached, in-memory
- 
-        $slugUrl    = $this->resolveBestCandidate($newSlug, $clientMap);
-
-      
-		if ($slugUrl && $slugUrl !== $slug) {	 
-			return redirect()->route('city.slug', [
-				'city_slug'    => $cityName,
-				'service_slug' => $slugUrl,    
-			], 301);
-		}
-       
-
-		if($slugUrl){
-	 
-				if (!$this->clientsExists($slugUrl)) {					  
-					abort(410);
-				}
-				$businessResponse = $this->fetchBusinessData($slugUrl);
-				if (!$businessResponse) {
-					return redirect()->route('home');
-				}
-
-				return $this->getClientDetail($businessResponse, $slugUrl);
-			}
-
-
- 		abort(410);
-
-	}
-
 
 	 
 
@@ -2741,6 +2618,8 @@ $reviewList = DB::table('clients')
 			
 	public function categoriesCheckDetails($slug)
 	{
+
+	 
 		return Cache::remember("category_check_{$slug}", now()->addHours(6), function () use ($slug) {
 			$res = Http::withoutVerifying()
 				->get('https://api.quickdials.com/api/website/searchCategories', [
@@ -2759,7 +2638,7 @@ $reviewList = DB::table('clients')
         /* ── extract data (mirrors the Next.js component) ── */
         $kwData       = $response['data']['keyword']      ?? [];
 
-		// dd($kwData);
+	 
         $categoryList = $response['data']['categoryList'] ?? [];
  
         $keyword          = $kwData['parent_category']   ?? '';
@@ -2821,11 +2700,9 @@ $reviewList = DB::table('clients')
 	return null;
 	}
 
-		public function childCheckdetails($child_slug)
+	public function childCheckdetails($child_slug)
 	{
-		  
- 
-    
+		     
             $res = Http::timeout(10)->withoutVerifying()
                 ->get('https://api.quickdials.com/api/website/searchChild', [
                     'child-slug' => $child_slug,
@@ -2841,13 +2718,14 @@ $reviewList = DB::table('clients')
 	{	      
  
         /* ── extract data (mirrors the Next.js component) ── */
-        $kwData       = $response['data']['keyword']      ?? [];
+        $kwData       = $response['data']['keyword']  ?? [];
+		 
         $childLists = $response['data']['childLists'] ?? []; 
         $keyword          = $kwData['child_category']   ?? '';
         $childCategory    = $kwData['child_category']   ?? '';
         $childSlug        = $kwData['child_slug']       ?? '';
-        $topDescription   = replaceCity(strip_tags($kwData['top_description']),$city);
-        $bottomDescription= replaceCity(strip_tags($kwData['bottom_description']),$city);
+        $topDescription   = replaceCity($kwData['top_description'],$city);
+        $bottomDescription= replaceCity($kwData['bottom_description'],$city);
         $ratingCount      = $kwData['ratingcount']       ?? 0;
         $ratingValue      = $kwData['ratingvalue']       ?? 4.8;
         $bgImage          = $kwData['category_banner']   ?? '/computer-courses-training.jpg';
@@ -2946,96 +2824,7 @@ $reviewList = DB::table('clients')
  
 	
 
-		public function showCityWithService_olldd(Request $request, string $city, string $slug)
-		{
-			$citySlug = strtolower(trim($city));
-
-			$parts = array_values(array_filter(explode('-', $citySlug), fn ($p) => $p !== ''));
-
-			$candidates = [];
-			$n = count($parts);
-			for ($i = 0; $i < $n; $i++) {
-				for ($j = $i; $j < $n; $j++) {
-					$candidates[] = implode('-', array_slice($parts, $i, $j - $i + 1));
-				}
-			}
-			$candidates = array_unique($candidates);
-
-			$cityDetails = DB::table('citylists')
-				->whereIn('city_slug', $candidates)
-				->orderByRaw('LENGTH(city_slug) DESC')
-				->first();
-
-			// No match at all -> fall back to the default city, but redirect to its
-			// canonical URL rather than silently rendering it at the wrong slug.
-			if (!$cityDetails) {
-				$defaultCity = DB::table('citylists')
-					->where('city_slug', config('app.default_city_slug', 'faridabad'))
-					->first();
-
-				// Default city itself missing from DB — nothing sane to fall back to.
-				if (!$defaultCity) {
-					return redirect()->route('home');
-				}
-
-				return redirect()->route('city.slug', [
-					'city_slug'    => $defaultCity->city_slug,
-					'service_slug' => $slug,
-				], 301);
-			}
-
-			$cityName = $cityDetails->city_slug;
-
-			// City in URL is not the canonical slug (typo, junk prefix/suffix, wrong case, etc.)
-			if ($citySlug !== $cityName) {
-				return redirect()->route('city.slug', [
-					'city_slug'    => $cityName,
-					'service_slug' => $slug,
-				], 301);
-			}
-
-			$keySlug = strtolower(trim($slug));
-			$keys    = array_values(array_filter(explode('-', $keySlug), fn ($p) => $p !== ''));
-			$keywords = $this->generateSubsequenceSlugs($keys);
-
-			$exists = DB::table('keyword')
-				->select('slug')
-				->whereIn('slug', $keywords)
-				->orderByRaw('LENGTH(slug) DESC')
-				->first();
-
-			if (!$exists) {
-				abort(404);
-			}
-
-			$slugUrl = $exists->slug;
-
-			if ($keySlug !== $slugUrl) {
-				return redirect()->route('city.slug', [
-					'city_slug'    => $cityName,
-					'service_slug' => $slugUrl,
-				], 301);
-			}
-
-			// City and service are both exactly correct from here on — no redirect, just render.
-
-			if (!$this->serviceExists($slugUrl)) {
-				$businessResponse = $this->fetchBusinessData($slugUrl);
-				if (!$businessResponse) {
-					return redirect()->route('home');
-				}
-				return $this->getClientDetail($businessResponse, $slugUrl);
-			}
-
-			$response = $this->fetchData($cityName, $slugUrl);
-
-			if (!$response) {
-				return redirect()->route('home');
-			}
-
-			return $this->getsearchlist($response, $slugUrl, $cityName);
-		}
-		
+	 
 
 	
 	private function generateSubsequenceSlugs(array $tokens): array
@@ -3057,8 +2846,6 @@ $reviewList = DB::table('clients')
 		return array_unique($result);
 	}
 
-
-
      /**
      * Handle  GET /{city}/{slug}
      */
@@ -3076,12 +2863,17 @@ $reviewList = DB::table('clients')
 		$category = $this->categoriesCheck($newSlug);
  
 		if($category){
-		return $this->categoriesListPage($category,$newSlug,$city);
+
+		$newCategory = $this->categoriesCheckDetails($newSlug);
+		return $this->categoriesListPage($newCategory,$newSlug,$city);
 		}
 		$child = $this->childCheck($newSlug);
  
-		if($child){
-		return $this->childListPage($child,$newSlug,$city);
+		if(!empty($child)){
+		$newchild = $this->childCheckDetails($newSlug);
+ 
+
+		return $this->childListPage($newchild,$newSlug,$city);
 		}
 
 		
