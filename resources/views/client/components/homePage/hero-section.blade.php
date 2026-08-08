@@ -111,7 +111,7 @@
         </div>
 
         {{-- ─── Banner Keyword Slider ─── --}}
-        <div class="relative pb-0" id="banner-slider-wrapper"
+        <!-- <div class="relative pb-0" id="banner-slider-wrapper"
              onmouseenter="sliderPaused=true" onmouseleave="sliderPaused=false">
 
             <button id="slider-prev" onclick="goSlider('left')"
@@ -180,7 +180,9 @@
             </div>
 
             <div class="flex justify-center gap-1.5 pt-2 pb-1" id="slider-dots"></div>
-        </div>
+        </div> -->
+    
+    
     </div>
 </section>
 
