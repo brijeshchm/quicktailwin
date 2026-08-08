@@ -12,7 +12,7 @@ $cities = ['jalandhar', 'dehradun','varanasi','kanpur','gorakhpur','lucknow','gw
     <url>
         <loc>{{ route('city.slug', ['city_slug' => $city, 'service_slug' => $keyword->slug]) }}</loc>
         <lastmod>{{ \Carbon\Carbon::parse($keyword->updated_at)->toAtomString() }}</lastmod>
-        <changefreq>weekly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.80</priority>
     </url>
     @endforeach

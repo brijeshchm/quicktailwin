@@ -9,7 +9,7 @@
 <url>       
       <loc>{{ route('business.details', $client->business_slug) }}</loc>      
       <lastmod>{{ \Carbon\Carbon::parse($client->updated_at)->toAtomString() }}</lastmod>    
-      <changefreq>weekly</changefreq>
+      <changefreq>daily</changefreq>
       <priority>0.80</priority>
 </url>
 @endif
