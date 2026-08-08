@@ -33,7 +33,7 @@
                                 class="flex items-center gap-1.5 h-11 px-3 text-sm font-semibold text-blue-700 border-r border-gray-200 hover:bg-blue-50 transition-colors whitespace-nowrap rounded-l-xl"
                             >
                                 <i data-lucide="map-pin" class="w-3.5 h-3.5 text-blue-500"></i>
-                                <span id="hero-city-label">Bangalore</span>
+                                <span id="hero-city-label">faridabad</span>
                                 <i data-lucide="chevron-down" id="hero-city-chevron" class="w-3 h-3 text-gray-400 transition-transform duration-200"></i>
                             </button>
 
@@ -139,7 +139,7 @@
 
     $catUrl = in_array($card['url'], $noCitySlugs)
         ? route('showCity', $card['url'])
-        : route('city.slug', ['city_slug' => 'bangalore', 'service_slug' => $card['url']]);
+        : route('city.slug', ['city_slug' => 'faridabad', 'service_slug' => $card['url']]);
 @endphp
                     <a href="{{ $catUrl }}"
             title="{{ $card['title'] ?? '' }}"
@@ -199,10 +199,10 @@ setInterval(() => {
 }, 2200);
 
 // ─── Hero City ────────────────────────────────────────────────────────────
-let heroSelectedCity = 'bangalore';
-// const CITIES = ['Mumbai','Delhi','Bangalore','Hyderabad','Chennai','Pune','Kolkata','Ahmedabad'];
+let heroSelectedCity = 'faridabad';
+// const CITIES = ['Mumbai','Delhi','faridabad','Hyderabad','Chennai','Pune','Kolkata','Ahmedabad'];
 
-const cityNames = ['Mumbai', 'Delhi', 'Bangalore', 'Hyderabad', 'Chennai', 'Pune', 'Kolkata', 'Ahmedabad'];
+const cityNames = ['Mumbai', 'Delhi', 'faridabad', 'Hyderabad', 'Chennai', 'Pune', 'Kolkata', 'Ahmedabad'];
 
 const CITIES = cityNames.map(name => ({
     city: name.toLowerCase(),

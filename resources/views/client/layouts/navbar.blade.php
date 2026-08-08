@@ -36,7 +36,7 @@
                     >
                         <i data-lucide="map-pin" class="w-3 h-3 text-blue-500"></i>
                         
-                        <span id="sticky-city-label">Bangalore</span>
+                        <span id="sticky-city-label">faridabad</span>
                         <i data-lucide="chevron-down" class="w-2.5 h-2.5 text-gray-400 transition-transform duration-200" id="sticky-city-chevron"></i>
                     </button>
 
@@ -60,7 +60,7 @@
                             </div>
                         </div>
                         <div class="max-h-48 overflow-y-auto py-1" id="sticky-city-list">
-                            @foreach(['Mumbai','Delhi','Bangalore','Hyderabad','Chennai','Pune','Kolkata','Ahmedabad'] as $city)
+                            @foreach(['Mumbai','Delhi','faridabad','Hyderabad','Chennai','Pune','Kolkata','Ahmedabad'] as $city)
                               
                                 <button
                                     onclick="selectStickyCity('{{ $city }}')"
@@ -606,7 +606,7 @@ if(!empty($clientcheck)){
                     class="flex items-center gap-1 h-9 px-2.5 text-xs font-semibold text-blue-700 border-r border-gray-200 hover:bg-blue-50 transition-colors whitespace-nowrap rounded-l-xl"
                 >
                     <i data-lucide="map-pin" class="w-3 h-3 text-blue-500"></i>
-                    <span id="mobile-city-label">Bangalore</span>
+                    <span id="mobile-city-label">faridabad</span>
                     <i data-lucide="chevron-down" class="w-2.5 h-2.5 text-gray-400 transition-transform duration-200" id="mobile-city-chevron"></i>
                 </button>
 
@@ -763,10 +763,10 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 // ─── Sticky City Dropdown ──────────────────────────────────────────────────
-let stickySelectedCity = 'Bangalore';
+let stickySelectedCity = 'faridabad';
  
 
-const cityStickyNames = ['Mumbai', 'Delhi', 'Bangalore', 'Hyderabad', 'Chennai', 'Pune', 'Kolkata', 'Ahmedabad'];
+const cityStickyNames = ['Mumbai', 'Delhi', 'faridabad', 'Hyderabad', 'Chennai', 'Pune', 'Kolkata', 'Ahmedabad'];
 
 const FALLBACK_CITIES = cityStickyNames.map(name => ({
     city: name.toLowerCase(),

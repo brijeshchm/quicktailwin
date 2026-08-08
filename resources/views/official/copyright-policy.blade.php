@@ -265,7 +265,7 @@
                     </div>
                     <div class="space-y-4 text-gray-600 leading-relaxed">
                         <p>This Copyright Policy shall be governed by and construed in accordance with the laws of India, without regard to its conflict of law provisions. QuickDials Pvt Ltd is registered and operates under the jurisdiction of Indian law.</p>
-                        <p>For disputes arising from this policy, you agree to submit to the exclusive jurisdiction of the courts located in Bangalore, Karnataka, India. This policy applies globally to all users of the QuickDials platform regardless of geographic location.</p>
+                        <p>For disputes arising from this policy, you agree to submit to the exclusive jurisdiction of the courts located in faridabad, Karnataka, India. This policy applies globally to all users of the QuickDials platform regardless of geographic location.</p>
                         <div class="flex flex-wrap gap-3 mt-4">
                             @foreach(['Information Technology Act, 2000', 'Copyright Act, 1957', 'DMCA Compliant', 'GDPR Aware'] as $tag)
                             <span class="px-3 py-1.5 rounded-full bg-violet-50 text-violet-700 text-xs font-semibold border border-violet-200">{{ $tag }}</span>
@@ -301,7 +301,7 @@
                                 </div>
                                 <div>
                                     <p class="text-xs text-gray-500 mb-0.5">Registered Office</p>
-                                    <p class="text-sm font-semibold text-gray-900">Bangalore, Karnataka, India</p>
+                                    <p class="text-sm font-semibold text-gray-900">faridabad, Karnataka, India</p>
                                 </div>
                             </div>
                         </div>

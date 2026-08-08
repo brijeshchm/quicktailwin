@@ -568,7 +568,7 @@
       </a>
       <p>Looking forward to a long and fruitful association with you!</p>
       <p class="regd-office">
-        Regd. Office: Unit 101, Oxford Towers, 139/88 HAL Old Airport Rd, H.A.L II Stage, Bangalore North, Bangalore — 560008, Karnataka.
+        Regd. Office: Unit 101, Oxford Towers, 139/88 HAL Old Airport Rd, H.A.L II Stage, faridabad North, faridabad — 560008, Karnataka.
       </p>
     </div>
     <div class="thank-block">

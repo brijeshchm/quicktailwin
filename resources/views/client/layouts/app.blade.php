@@ -108,7 +108,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         : "";
 
     $serviceDescription = $metaDescription? $metaDescription: 'India’s leading local business search and service directory. Find trusted businesses, services, it training, professionals, and service providers near you with QuickDials..';
-    $cityName =$city ?: 'bangalore';
+    $cityName =$city ?: 'faridabad';
     if(!empty($childCat) && !empty($childSlug)) {
         $items[] = ['name' => ucfirst($childCat), 'url' =>route('city.slug', ['city_slug'=> $cityName,'service_slug' => $childSlug])];
     }
@@ -167,8 +167,8 @@ if (request()->is('/')){
 
     'address' => [
         '@type'          => 'PostalAddress',
-        'streetAddress'  => 'UNIT 101 OXFORD TOWERS, 139/88 HAL OLD AIRPORT RD, H.A.L II Stage, Bangalore North, Bangalore- 560008, Karnataka',
-        'addressLocality'=> 'Bangalore',
+        'streetAddress'  => 'UNIT 101 OXFORD TOWERS, 139/88 HAL OLD AIRPORT RD, H.A.L II Stage, faridabad North, faridabad- 560008, Karnataka',
+        'addressLocality'=> 'faridabad',
         'postalCode'     => '560008',
         'addressCountry' => 'IN',
     ],
@@ -209,7 +209,7 @@ if (request()->is('/')){
         ['@type' => 'City', 'name' => 'Indore'],
         ['@type' => 'City', 'name' => 'Pune'],
         ['@type' => 'City', 'name' => 'Mumbai'],
-        ['@type' => 'City', 'name' => 'Bangalore'],
+        ['@type' => 'City', 'name' => 'faridabad'],
       
     ],
 ];
@@ -389,7 +389,7 @@ function applyDefaultCity() {
   if(cities){
     applyCity(cities); 
     }else{
-    applyCity('Bangalore'); 
+    applyCity('faridabad'); 
     }
 }
 

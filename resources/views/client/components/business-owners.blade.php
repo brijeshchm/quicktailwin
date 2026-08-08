@@ -244,7 +244,7 @@
                         <span class="text-[10px] text-blue-500 font-medium">500+ cities</span>
                     </div>
                     <div class="flex flex-wrap gap-1.5">
-                        @foreach([['n'=>'Mumbai','c'=>'1.2K'],['n'=>'Delhi','c'=>'1.1K'],['n'=>'Bangalore','c'=>'980'],['n'=>'Hyderabad','c'=>'870'],['n'=>'Ahmedabad','c'=>'760'],['n'=>'Chennai','c'=>'720'],['n'=>'Pune','c'=>'680'],['n'=>'Surat','c'=>'540'],['n'=>'Jaipur','c'=>'460'],['n'=>'Kolkata','c'=>'420'],['n'=>'Lucknow','c'=>'390'],['n'=>'+ 489 more','c'=>'']] as $city)
+                        @foreach([['n'=>'Mumbai','c'=>'1.2K'],['n'=>'Delhi','c'=>'1.1K'],['n'=>'faridabad','c'=>'980'],['n'=>'Hyderabad','c'=>'870'],['n'=>'Ahmedabad','c'=>'760'],['n'=>'Chennai','c'=>'720'],['n'=>'Pune','c'=>'680'],['n'=>'Surat','c'=>'540'],['n'=>'Jaipur','c'=>'460'],['n'=>'Kolkata','c'=>'420'],['n'=>'Lucknow','c'=>'390'],['n'=>'+ 489 more','c'=>'']] as $city)
                         <span class="inline-flex items-center gap-1 text-[10px] font-semibold px-2.5 py-1 rounded-full border bg-blue-50 text-blue-600 border-blue-100 hover:bg-blue-100 transition-colors cursor-default">
                             {{ $city['n'] }}@if($city['c'])<span class="text-[8px] opacity-60">{{ $city['c'] }}</span>@endif
                         </span>
@@ -425,7 +425,7 @@
                     <div class="divide-y divide-slate-50">
                         @foreach([
                             ['name'=>'Priya Fashion House','city'=>'Surat','pkg'=>'Growth','time'=>'2 min ago','initials'=>'PF','color'=>'from-pink-400 to-rose-500','pkgcls'=>'bg-blue-50 text-blue-600 border-blue-100'],
-                            ['name'=>'TechVision Solutions','city'=>'Bangalore','pkg'=>'Premium','time'=>'11 min ago','initials'=>'TV','color'=>'from-blue-400 to-indigo-500','pkgcls'=>'bg-violet-50 text-violet-600 border-violet-100'],
+                            ['name'=>'TechVision Solutions','city'=>'faridabad','pkg'=>'Premium','time'=>'11 min ago','initials'=>'TV','color'=>'from-blue-400 to-indigo-500','pkgcls'=>'bg-violet-50 text-violet-600 border-violet-100'],
                             ['name'=>'Mehta Electronics','city'=>'Ahmedabad','pkg'=>'Starter','time'=>'23 min ago','initials'=>'ME','color'=>'from-amber-400 to-orange-500','pkgcls'=>'bg-slate-50 text-slate-500 border-slate-100'],
                             ['name'=>'GreenLeaf Organics','city'=>'Pune','pkg'=>'Growth','time'=>'38 min ago','initials'=>'GL','color'=>'from-emerald-400 to-teal-500','pkgcls'=>'bg-blue-50 text-blue-600 border-blue-100'],
                         ] as $act)

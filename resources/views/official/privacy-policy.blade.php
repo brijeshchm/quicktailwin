@@ -576,7 +576,7 @@
                                 <li><strong>Name:</strong> Grievance Officer, Quickdials Internet Pvt. Ltd.</li>
                                 <li><strong>Email:</strong> info@quickdials.com</li>
                                 <li><strong>Phone:</strong> +91-75-5943-5943</li>
-                                <li><strong>Address:</strong> UNIT 101 OXFORD TOWERS, 139/88 HAL OLD AIRPORT RD, H.A.L II Stage, Bangalore North, Bangalore- 560008, Karnataka</li>
+                                <li><strong>Address:</strong> UNIT 101 OXFORD TOWERS, 139/88 HAL OLD AIRPORT RD, H.A.L II Stage, faridabad North, faridabad- 560008, Karnataka</li>
                                 <li><strong>Working hours:</strong> Monday to Friday, 10:00 AM – 6:00 PM IST</li>
                             </ul>
                             <p class="mt-2">The Grievance Officer shall acknowledge receipt within <strong>twenty-four (24) hours</strong> and resolve the grievance within <strong>fifteen (15) days</strong> from the date of receipt, as mandated under IT Rules 2021.</p>

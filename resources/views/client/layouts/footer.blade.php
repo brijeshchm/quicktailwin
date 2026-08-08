@@ -126,7 +126,7 @@
         <div class="flex flex-wrap gap-2">
             @foreach($allServices as $service)
                 @php
-              $cityName = !empty($city) && is_string($city) ? strtolower(str_replace(' ', '-', trim($city))) : 'bangalore';
+              $cityName = !empty($city) && is_string($city) ? strtolower(str_replace(' ', '-', trim($city))) : 'faridabad';
                     $href = $service['type'] === 'online'
                         ? route('city.slug', [
                             'city_slug'    => 'online',
@@ -232,7 +232,7 @@
                         @foreach($section['links'] as $i => $link)
                              @php
                             $noCitySlugs = ['business-services'];
-                            $cityName = !empty($city) && is_string($city) ? strtolower(str_replace(' ', '-', trim($city))) : 'bangalore';
+                            $cityName = !empty($city) && is_string($city) ? strtolower(str_replace(' ', '-', trim($city))) : 'faridabad';
                             $slugUrl = in_array($link['slug'], $noCitySlugs)
                             ? route('showCity', $link['slug'])
                             : route('city.slug', ['city_slug' => $cityName, 'service_slug' => $link['slug']]);
@@ -290,7 +290,7 @@
                     ] as $link)             
                          @php
                             $noCitySlugs = ['wedding-planning'];
-                            $cityName = !empty($city) && is_string($city) ? strtolower(str_replace(' ', '-', trim($city))) : 'bangalore';
+                            $cityName = !empty($city) && is_string($city) ? strtolower(str_replace(' ', '-', trim($city))) : 'faridabad';
                             $catUrl = in_array($link['slug'], $noCitySlugs)
                             ? route('showCity', $link['slug'])
                             : route('city.slug', ['city_slug' => $cityName, 'service_slug' => $link['slug']]);

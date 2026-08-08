@@ -37,7 +37,7 @@
     <meta name="DC.title" content="@yield('keyword')" />
     <meta name="distribution" content="global" />
     <meta name="geo.region" content="IN-UP" />
-    <meta name="geo.placename" content="bangalore" />
+    <meta name="geo.placename" content="faridabad" />
     <meta name="geo.position" content="12.9658;77.6421" />
     <meta name="ICBM" content="12.9658, 77.6421" />
     <meta name="robots" content="index, follow" />

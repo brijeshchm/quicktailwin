@@ -54,7 +54,7 @@ window.addEventListener('scroll', () => {
 @include('client.components.banner-section')
 @php
 $sortOptions = ['Best Match', 'Highest Rated', 'Most Reviews', 'Newest', 'Name A–Z'];
-$otherCities = ['hyderabad','delhi','noida','gurgaon','mumbai','bangalore'];
+$otherCities = ['hyderabad','delhi','noida','gurgaon','mumbai','faridabad'];
 
 $starMap = [
     0 => 'star_1.png', 2 => 'star_2.png', 3 => 'star_3.png',
@@ -102,7 +102,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
         : "";
 
     $serviceDescription = $metaDescription? $metaDescription: 'India’s leading local business search and service directory. Find trusted businesses, services, it training, professionals, and service providers near you with QuickDials..';
-    $cityName =$city ?: 'bangalore';
+    $cityName =$city ?: 'faridabad';
     if (!empty($childCat) && !empty($childSlug)) {
         $items[] = ['name' => ucfirst($childCat), 'url' => route('city.slug', ['city_slug'=> $cityName,'service_slug' => $childSlug]) ];
     }
@@ -981,7 +981,7 @@ function bannerSlider(banners, interval = 4000) {
     @if(!empty($relatedCategory))
     <div class="bg-white py-10 border-t border-gray-200 mt-4">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6">Related {{ $keyword }} Categories in <span class="text-blue-600">{{ ucwords(strtolower(str_replace('-', ' ',  $city ?: 'bangalore'))) }}</span></h2>
+            <h2 class="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6">Related {{ $keyword }} Categories in <span class="text-blue-600">{{ ucwords(strtolower(str_replace('-', ' ',  $city ?: 'faridabad'))) }}</span></h2>
             <div class="flex flex-wrap gap-x-8 gap-y-3 text-[15px]">
                 @foreach($relatedCategory as $slug_c => $name)
                 <a href="{{ route('city.slug', ['city_slug'=> $cityName,'service_slug' => $slug_c])}}" class="text-gray-700 hover:text-blue-600 transition-colors duration-200">{{ $name }}</a>
@@ -1018,7 +1018,7 @@ function bannerSlider(banners, interval = 4000) {
         <ul class="flex flex-wrap gap-2 text-sm text-gray-600">
             @foreach($servicesRelated as $i => $service)
             <li class="flex items-center">
-                <a href="{{ route('city.slug', ['city_slug'=>  $city ?: 'bangalore','service_slug' => $service['url']]) }}" class="hover:text-indigo-600">{{ $service['keyword'] ?? '' }}</a>
+                <a href="{{ route('city.slug', ['city_slug'=>  $city ?: 'faridabad','service_slug' => $service['url']]) }}" class="hover:text-indigo-600">{{ $service['keyword'] ?? '' }}</a>
                 @if($i !== count($servicesRelated) - 1)
                 <span class="mx-1 text-gray-400">|</span>
                 @endif

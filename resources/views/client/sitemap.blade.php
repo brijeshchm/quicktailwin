@@ -76,7 +76,7 @@
 <priority>0.80</priority>
 </url>  
 @php
-    $cities = ['bangalore','ajmer','kolhapur','firozabad','aligarh','bareilly','udaipur','mysuru','visakhapatnam','jamshedpur','jabalpur'];
+    $cities = ['faridabad','ajmer','kolhapur','firozabad','aligarh','bareilly','udaipur','mysuru','visakhapatnam','jamshedpur','jabalpur'];
 @endphp
 
 @foreach ($cities as $city)
@@ -91,7 +91,7 @@
 @endforeach
 @foreach ($categories as $category)
 <url>
-    <loc>{{ route('city.slug', ['city_slug'=> 'bangalore','service_slug' => $category->parent_slug]) }}</loc>
+    <loc>{{ route('city.slug', ['city_slug'=> 'faridabad','service_slug' => $category->parent_slug]) }}</loc>
     <lastmod>{{ \Carbon\Carbon::parse($category->updated_at ?? now())->toAtomString() }}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
@@ -100,7 +100,7 @@
 
 @foreach ($childCategories as $child)
 <url>
-    <loc>{{ route('city.slug', ['city_slug'=> 'bangalore','service_slug' => $child->child_slug]) }}</loc>
+    <loc>{{ route('city.slug', ['city_slug'=> 'faridabad','service_slug' => $child->child_slug]) }}</loc>
     <lastmod>{{ \Carbon\Carbon::parse($child->updated_at ?? now())->toAtomString() }}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>

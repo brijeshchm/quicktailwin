@@ -51,7 +51,7 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
                 <a href="{{ route('home') }}" class="hover:text-indigo-600 transition-colors">Home</a>
                 <span>›</span>  
                 @php
-                   $cityName = !empty($city) && is_string($city) ? strtolower(str_replace(' ', '-', trim($city))) : 'bangalore';                  
+                   $cityName = !empty($city) && is_string($city) ? strtolower(str_replace(' ', '-', trim($city))) : 'faridabad';                  
                 @endphp
                 @if(!empty(request()->segment(1) === $cityName) && !empty($cityName))
                 <a href="{{ route('showCity',$cityName) }}" class="hover:text-indigo-600 transition-colors">{{ ucfirst($city)}}</a>
@@ -114,7 +114,7 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
 
                     @endphp
                     <div class="animate-tile" style="animation-delay: {{ $delay }}ms">
-                        <a href="{{ route('city.slug', ['city_slug'=> 'bangalore','service_slug' => $url])}}" >
+                        <a href="{{ route('city.slug', ['city_slug'=> 'faridabad','service_slug' => $url])}}" >
                             <div class="tile-card group bg-white border border-slate-200 rounded-xl overflow-hidden">
 
                                 {{-- Coloured image strip --}}
@@ -344,7 +344,7 @@ const COUNTRIES = [
 ];
 
 const LOCATIONS = [
-    "Abu Dhabi","Ahmedabad","Amsterdam","Auckland","Bangalore","Bangkok","Barcelona",
+    "Abu Dhabi","Ahmedabad","Amsterdam","Auckland","faridabad","Bangkok","Barcelona",
     "Beijing","Berlin","Brisbane","Brussels","Budapest","Cairo","Cape Town","Chennai",
     "Chicago","Colombo","Copenhagen","Dallas","Delhi","Dubai","Dublin","Frankfurt",
     "Glasgow","Guangzhou","Helsinki","Ho Chi Minh City","Hong Kong","Houston","Hyderabad",

@@ -79,7 +79,7 @@
 </section>
 </main>
 <script>
-    let heroSelectedCity = 'bangalore';
+    let heroSelectedCity = 'faridabad';
     function redirectSearch(keyword, city) { 
     if (!keyword || !city) return;
     const c = city.toLowerCase().replace(/\s+/g, '-');

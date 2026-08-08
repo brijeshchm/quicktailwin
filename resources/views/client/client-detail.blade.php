@@ -378,7 +378,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
         $color = $iconColors[$i % count($iconColors)];
         $city = (!empty($clientsList['city']) && !is_numeric($clientsList['city']))
         ? Str::slug($clientsList['city'])
-        : 'bangalore';
+        : 'faridabad';
     @endphp
 
     <a href="{{ route('city.slug', ['city_slug' => strtolower($city), 'service_slug' => $keySlug]) }}"
@@ -1074,7 +1074,7 @@ function selectCert(i) {
                   @php
     $city = (!empty($clientsList['city']) && !is_numeric($clientsList['city']))
         ? Str::slug($clientsList['city'])
-        : 'bangalore';
+        : 'faridabad';
 @endphp
                     @foreach($relatedList as $i => $item)                    
                     <li>

@@ -49,7 +49,7 @@ window.addEventListener('scroll', () => {
 @include('client.components.banner-section')
 @php
 $sortOptions = ['Best Match', 'Highest Rated', 'Most Reviews', 'Newest', 'Name A–Z'];
-$otherCities = ['hyderabad','delhi','noida','gurgaon','mumbai','bangalore'];
+$otherCities = ['hyderabad','delhi','noida','gurgaon','mumbai','faridabad'];
 $starMap = [
     0 => 'star_1.png', 2 => 'star_2.png', 3 => 'star_3.png',
     3.5 => 'star_3.5.png', 4 => 'star_4.png', 4.5 => 'star_4.5.png',
@@ -86,7 +86,7 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
         ? $metaTitle
         : "";
     $serviceDescription = $metaDescription? $metaDescription: 'India’s leading local business search and service directory. Find trusted businesses, services, it training, professionals, and service providers near you with QuickDials..';
-    $cityName =$city ?: 'bangalore';
+    $cityName =$city ?: 'faridabad';
     if (!empty($childCat) && !empty($childSlug)) {
         $items[] = ['name' => ucfirst($childCat), 'url' => route('city.slug', ['city_slug'=> $cityName,'service_slug' => $childSlug])];
     } 
@@ -915,7 +915,7 @@ $keywordImg= !empty($kwData['key_icon'])
                 @endforeach
             </div>
             <div class="mt-8">
-                <a href="{{ route('showCity','bangalore') }}" class="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium">View All Categories →</a>
+                <a href="{{ route('showCity','faridabad') }}" class="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium">View All Categories →</a>
             </div>
         </div>
     </div>
@@ -947,7 +947,7 @@ $keywordImg= !empty($kwData['key_icon'])
         <ul class="flex flex-wrap gap-2 text-sm text-gray-600">
             @foreach($servicesRelated as $i => $service)
             <li class="flex items-center">
-                <a href="{{ route('city.slug', ['city_slug'=>'bangalore','service_slug' => $service['url']]) }}" class="hover:text-indigo-600">{{ $service['title'] ?? '' }}</a>
+                <a href="{{ route('city.slug', ['city_slug'=>'faridabad','service_slug' => $service['url']]) }}" class="hover:text-indigo-600">{{ $service['title'] ?? '' }}</a>
                 @if($i !== count($servicesRelated) - 1)
                 <span class="mx-1 text-gray-400">|</span>
                 @endif

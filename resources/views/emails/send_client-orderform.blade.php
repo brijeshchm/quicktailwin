@@ -82,7 +82,7 @@
             <td class="hide-mob" width="50%" valign="middle" align="right"
                 style="font-family:Arial,Helvetica,sans-serif;font-size:11px;color:rgba(255,255,255,.75);line-height:1.8;text-align:right;">
               <strong style="color:#fff;font-size:13px;display:block;margin-bottom:3px;">QuickDials Pvt. Ltd.</strong>
-              UNIT 101 Oxford Towers, Bangalore — 560008<br>
+              UNIT 101 Oxford Towers, faridabad — 560008<br>
               📞 +91-75-5943-5943 &nbsp;|&nbsp; info@quickdials.com<br>
               CIN: U63112KA2026PTC215594
             </td>
@@ -468,7 +468,7 @@
             <td style="font-family:Arial,Helvetica,sans-serif;font-size:11px;color:rgba(255,255,255,.6);line-height:1.8;">
               <strong style="color:rgba(255,255,255,.9);">QuickDials Pvt. Ltd.</strong><br>
               UNIT 101 Oxford Towers, 139/88 HAL Old Airport Rd,<br>
-              Bangalore North — 560008, Karnataka, India.<br>
+              faridabad North — 560008, Karnataka, India.<br>
               CIN: U63112KA2026PTC215594 &nbsp;|&nbsp; TAN: BLRQ01951F
             </td>
             <td valign="top" align="right"

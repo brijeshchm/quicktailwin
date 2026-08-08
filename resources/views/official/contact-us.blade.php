@@ -174,7 +174,7 @@
 
                                 <div>
                                     <h3 class="text-2xl font-extrabold text-gray-900 mb-1">QuickDials Internet Pvt Ltd</h3>
-                                    <p class="text-sm text-gray-500">UNIT 101 OXFORD TOWERS, 139/88 HAL OLD AIRPORT RD, H.A.L II Stage, Bangalore North, Bangalore- 560008, Karnataka</p>
+                                    <p class="text-sm text-gray-500">UNIT 101 OXFORD TOWERS, 139/88 HAL OLD AIRPORT RD, H.A.L II Stage, faridabad North, faridabad- 560008, Karnataka</p>
                                 </div>
 
                                 <div class="flex flex-col gap-2">
@@ -218,9 +218,9 @@
                 @php
                 $branches = [
                     [
-                        'city'     => 'Bangalore',
+                        'city'     => 'faridabad',
                         'country'  => 'India',
-                        'address'  => 'UNIT 101 OXFORD TOWERS, 139/88 HAL OLD AIRPORT RD, H.A.L II Stage, Bangalore North, Bangalore- 560008, Karnataka',
+                        'address'  => 'UNIT 101 OXFORD TOWERS, 139/88 HAL OLD AIRPORT RD, H.A.L II Stage, faridabad North, faridabad- 560008, Karnataka',
                         'phone'    => '+91-75-5943-5943',
                         'hours'    => 'Mon–Fri, 10am–7pm EST',
                         'flag'     => '🇮🇳',

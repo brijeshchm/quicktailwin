@@ -50,7 +50,7 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
                 <a href="{{ route('home') }}" class="hover:text-indigo-600 transition-colors">Home</a>
                 <span>›</span>
                 @php
-                   $cityName = !empty($city) && is_string($city) ? strtolower(str_replace(' ', '-', trim($city))) : 'bangalore';                  
+                   $cityName = !empty($city) && is_string($city) ? strtolower(str_replace(' ', '-', trim($city))) : 'faridabad';                  
                 @endphp
                 @if(!empty(request()->segment(1) === $cityName) && !empty($cityName))
                     <a href="{{ route('showCity',$city) }}" class="hover:text-indigo-600 transition-colors">{{ ucfirst($city)}}</a>
@@ -105,7 +105,7 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
         <div class="flex-1 min-w-0">
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-base font-extrabold text-slate-900">Top {{ $keyword }}</h2>
-                <a href="{{ route('showCity','bangalore') }}" class="text-xs text-indigo-600 font-semibold hover:underline">View all →</a>
+                <a href="{{ route('showCity','faridabad') }}" class="text-xs text-indigo-600 font-semibold hover:underline">View all →</a>
             </div>
  
             <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-6 gap-3">
@@ -348,7 +348,7 @@ const COUNTRIES = [
 ];
 
 const LOCATIONS = [
-    "Abu Dhabi","Ahmedabad","Amsterdam","Auckland","Bangalore","Bangkok","Barcelona",
+    "Abu Dhabi","Ahmedabad","Amsterdam","Auckland","faridabad","Bangkok","Barcelona",
     "Beijing","Berlin","Brisbane","Brussels","Budapest","Cairo","Cape Town","Chennai",
     "Chicago","Colombo","Copenhagen","Dallas","Delhi","Dubai","Dublin","Frankfurt",
     "Glasgow","Guangzhou","Helsinki","Ho Chi Minh City","Hong Kong","Houston","Hyderabad",

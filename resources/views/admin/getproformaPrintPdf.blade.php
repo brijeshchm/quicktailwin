@@ -682,7 +682,7 @@ body {
     <div class="footer-inner">
       <div class="footer-office">
         <strong>Registered Office:</strong><br>
-        Regd. Office: Unit 101, Oxford Towers, 139/88 HAL Old Airport Rd, H.A.L II Stage, Bangalore North, Bangalore — 560008, Karnataka<br>
+        Regd. Office: Unit 101, Oxford Towers, 139/88 HAL Old Airport Rd, H.A.L II Stage, faridabad North, faridabad — 560008, Karnataka<br>
         <span style="opacity:.5;font-size:10.5px;">
           For support: <a href="https://www.quickdials.com/contact-us" target="_blank" style="color:rgba(255,255,255,.7);text-decoration:none;">help@quickdials.com</a>
           &nbsp;|&nbsp; Timings: 24/7

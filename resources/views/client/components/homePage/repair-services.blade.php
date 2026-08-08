@@ -43,7 +43,7 @@ $repairGradients = [
                 </div>
             </div>
             <div class="flex items-center gap-2">
-                <a href="{{ route('showCity','bangalore') }}"
+                <a href="{{ route('showCity','faridabad') }}"
                    class="hidden sm:block text-blue-600 text-xs font-semibold hover:underline mr-1">
                     View All
                 </a>
@@ -81,7 +81,7 @@ $repairGradients = [
 
             $catUrl = in_array($service['url'], $noCitySlugs)
             ? route('showCity', $service['url'])
-            : route('city.slug', ['city_slug' => 'bangalore', 'service_slug' => $service['url']]);
+            : route('city.slug', ['city_slug' => 'faridabad', 'service_slug' => $service['url']]);
             @endphp
 
                 @php

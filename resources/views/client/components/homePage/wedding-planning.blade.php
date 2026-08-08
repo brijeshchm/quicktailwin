@@ -34,7 +34,7 @@
 
             $catUrl = in_array($ws['url'], $noCitySlugs)
             ? route('showCity', $ws['url'])
-            : route('city.slug', ['city_slug' => 'bangalore', 'service_slug' => $ws['url']]);
+            : route('city.slug', ['city_slug' => 'faridabad', 'service_slug' => $ws['url']]);
             @endphp
 
 
