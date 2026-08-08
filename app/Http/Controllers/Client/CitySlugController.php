@@ -61,6 +61,10 @@ class CitySlugController extends Controller
 		$meta_description ="";
 		$bottom_description = "";
 		$top_description = "";
+		$top_wcity_description ="";
+		$top_wcity_heading ="";
+		$bottom_wcity_heading ="";
+		$bottom_wcity_description ="";
         if (!$keywordDetails) {
             return null;  
         }
@@ -144,7 +148,21 @@ class CitySlugController extends Controller
 			$short_definition = preg_replace('/{{city}}/i', ucfirst($city), $keywordDetails->short_definition);
 		} 
 
+		if (!empty($keywordDetails->top_wcity_description)) {
+			$top_wcity_description = $keywordDetails->top_wcity_description;
+		}  
 
+		if (!empty($keywordDetails->top_wcity_heading)) {
+			$top_wcity_heading = $keywordDetails->top_wcity_heading;
+		}  
+
+		if (!empty($keywordDetails->bottom_wcity_heading)) {
+			$bottom_wcity_heading = $keywordDetails->bottom_wcity_heading;
+		}  
+
+		if (!empty($keywordDetails->bottom_wcity_description)) {
+			$bottom_wcity_description = $keywordDetails->bottom_wcity_description;
+		}  
 
 		if (!empty($keywordDetails->meta_description)) {
 			$meta_description = preg_replace('/{{city}}/i', ucfirst($city), $keywordDetails->meta_description);
@@ -217,6 +235,10 @@ class CitySlugController extends Controller
 			'meta_description' => $meta_description,
 			'top_description' => $top_description,
 			'bottom_description' => $bottom_description,
+					'top_wcity_description' => $top_wcity_description,
+			'top_wcity_heading' => $top_wcity_heading,
+			'bottom_wcity_heading' => $bottom_wcity_heading,
+			'bottom_wcity_description' => $bottom_wcity_description,
 			'courseabout' => $courseabout,
 			'heading' => $heading,
 			'paragraph1' => $paragraph1,

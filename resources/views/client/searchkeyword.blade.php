@@ -12,6 +12,8 @@
     ];   
     $currentKeyword = strtolower(trim($kwData['keyword_slug'] ?? ''));
     $shouldIndex = in_array($currentKeyword, $keywordArray); 
+
+    
 @endphp
 @section('meta_robots')
 <meta name="robots" content="{{ $shouldIndex ? 'index, follow' : 'noindex, nofollow' }}">
