@@ -61,7 +61,7 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
                     <a href="{{ route('city.slug', ['city_slug'=> $city,'service_slug' => $kwData['parent_slug']])}}" class="hover:text-indigo-600 transition-colors">{{ $keyword }} in {{ ucwords(strtolower(str_replace('-', ' ', $city))) }}</a>
                     
                 @else                    
-                    <span>{{ $keyword }} </span>
+                    <span>{{ $keyword }}</span>
 
                     @endif
                       <!-- <span>›</span>
@@ -240,7 +240,7 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
         </div>
     </section>
     @endif
-
+ 
     {{-- Course About --}}
     @if(!empty($kwData['heading']) && !empty($kwData['courseabout']))
     <div class="bg-white rounded-2xl mt-4 pt-4">

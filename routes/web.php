@@ -358,16 +358,11 @@ Route::get('/sitemap.xml', function () {
 });
  
 Route::get('/top-city.xml', function () {
-
 	 
-		 
-	 	 return response()
+	return response()
         ->view('client.top_city')
         ->header('Content-Type', 'application/xml; charset=UTF-8');
-
 });
-
-
 
 Route::get('/sitemap-online.xml', function () { 
 	$keywords =  DB::table('keyword')
