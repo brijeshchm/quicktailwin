@@ -406,7 +406,7 @@ class CitySlugController extends Controller
 				'certified_img' => $certified_img,
 				'trusted_img' => $trusted_img,
 				'gst_img' => $gst_img,			 
-				'city' => $client->city ??'bangalore',	 		 
+				'city' => $client->city ??'faridabad',	 		 
 				'state' => $client->state ?? 'Karnataka',	 		 
 				'pincode' => !empty($client->pincode) ? $client->pincode : '560008',		 
 				'landmark' => $client->landmark ??'OLD AIRPORT RD',	 		 
@@ -608,10 +608,10 @@ class CitySlugController extends Controller
 				'url' =>$keyword->slug,
 				'img' => $img,
 				'alt' => $alt,
-				'title' => $keyword->keyword. ' in ' .$cityName ?: 'bangalore',
+				'title' => $keyword->keyword. ' in ' .$cityName ?: 'faridabad',
 				'keyword' => $keyword->keyword,
 				'type' => 'keyword',
-				'city_slug' => strtolower($cityName) ?: 'bangalore',
+				'city_slug' => strtolower($cityName) ?: 'faridabad',
 				'meta_description' => replaceCity($keyword->meta_description, $cityName),
 			];
 		})->values()->toArray();
@@ -1128,7 +1128,7 @@ $reviewList = DB::table('clients')
 				'trending' => $client->trending,
 				'topSearch' => $client->topSearch,
 				'featured' => $client->featured,			 
-				'city' => $client->city ??'bangalore',	 		 
+				'city' => $client->city ??'faridabad',	 		 
 				'state' => $client->state ?? 'Karnataka',	 		 
 				'pincode' => !empty($client->pincode) ? $client->pincode : '560008',		 
 				'landmark' => $client->landmark ??'OLD AIRPORT RD',	 				 
@@ -1302,7 +1302,7 @@ $reviewList = DB::table('clients')
 				'country' => $client->country,
 				'year_of_estb' => $client->year_of_estb,
 				 
-				'city' => $client->city ??'bangalore',	 		 
+				'city' => $client->city ??'faridabad',	 		 
 				'state' => $client->state ?? 'Karnataka',	 		 
 				'pincode' => !empty($client->pincode) ? $client->pincode : '560008',		 
 				'landmark' => $client->landmark ??'OLD AIRPORT RD',	 
@@ -2107,7 +2107,7 @@ $reviewList = DB::table('clients')
             'reviewCount'   => (int)   ($b['reviewCount'] ?? 0),
             'address'       => $b['address'] ?? '',
             'state'       => $b['state'] ?? 'Karnataka',
-            'city'          => $b['city'] ?? 'Bangalore',
+            'city'          => $b['city'] ?? 'faridabad',
             'pincode'          => $b['pincode'] ?? '560008',
             'landmark'          => $b['landmark'] ?? '',
             'openUntil'     => $b['openUntil'] ?? $b['open_until'] ?? '9:00 AM',
@@ -2299,8 +2299,8 @@ $reviewList = DB::table('clients')
  
         $planOptions = ['Immediate', 'Within Week', 'Within Months', 'Not Planned Yet'];
  
-        $googleMapUrl = 'https://www.google.com/maps/search/?api=1&query=' . urlencode($clientsList['address'] ?? 'Bangalore');
-        $mapSrc = 'https://www.google.com/maps/embed/v1/search?key=AIzaSyAPFOcLOlCcBCtp764h9HflPfA56VlCFo0&q=' . urlencode($clientsList['address'] ?? 'Bangalore');
+        $googleMapUrl = 'https://www.google.com/maps/search/?api=1&query=' . urlencode($clientsList['address'] ?? 'faridabad');
+        $mapSrc = 'https://www.google.com/maps/embed/v1/search?key=AIzaSyAPFOcLOlCcBCtp764h9HflPfA56VlCFo0&q=' . urlencode($clientsList['address'] ?? 'faridabad');
  
         $yearEst  = $clientsList['year_of_estb'] ?? 2012;
         $yearsExp = date('Y') - (int)$yearEst;
@@ -2483,7 +2483,7 @@ $reviewList = DB::table('clients')
     $cityMap    = $this->getCitySlugMap();     // cached, in-memory
     $keywordMap = $this->getKeywordSlugMap();  // cached, in-memory
 
-    $defaultCity = config('app.default_city_slug', 'bangalore');
+    $defaultCity = config('app.default_city_slug', 'faridabad');
 
     // ---- CATEGORY CHECK ----
     $category = $this->categoriesCheck($newSlug);
@@ -2610,7 +2610,7 @@ $reviewList = DB::table('clients')
  
 		if ($citySlug==='categories') {
  
-			$defaultCity = config('app.default_city_slug', 'bangalore');
+			$defaultCity = config('app.default_city_slug', 'faridabad');
 		 
 			return redirect()->route('city.slug', [
 				'city_slug'    => $defaultCity,
@@ -2628,7 +2628,7 @@ $reviewList = DB::table('clients')
 
 		if ($citySlug==='child') {
  
-			$defaultCity = config('app.default_city_slug', 'bangalore');
+			$defaultCity = config('app.default_city_slug', 'faridabad');
 		 
 			return redirect()->route('city.slug', [
 				'city_slug'    => $defaultCity,
@@ -2645,7 +2645,7 @@ $reviewList = DB::table('clients')
 		$cityName = $this->resolveBestCandidate($citySlug, $cityMap);
  
 		if (!$cityName) {
-			$defaultSlug = config('app.default_city_slug', 'bangalore');
+			$defaultSlug = config('app.default_city_slug', 'faridabad');
 			if (!isset($cityMap[$defaultSlug])) {
 				return redirect()->route('home');
 			}
@@ -2939,7 +2939,7 @@ $reviewList = DB::table('clients')
 			// canonical URL rather than silently rendering it at the wrong slug.
 			if (!$cityDetails) {
 				$defaultCity = DB::table('citylists')
-					->where('city_slug', config('app.default_city_slug', 'bangalore'))
+					->where('city_slug', config('app.default_city_slug', 'faridabad'))
 					->first();
 
 				// Default city itself missing from DB — nothing sane to fall back to.
@@ -3039,7 +3039,7 @@ $reviewList = DB::table('clients')
 		$keywordMap = $this->getKeywordSlugMap(); // cached, in-memory
 		$cityMap    = $this->getCitySlugMap(); 
 		$slugUrl    = $this->resolveBestCandidate($newSlug, $keywordMap);
-		$city= "bangalore";
+		$city= "faridabad";
 
 		
 		$category = $this->categoriesCheck($newSlug);
@@ -3148,10 +3148,10 @@ $reviewList = DB::table('clients')
         $zones     = $responseZones['data'] ?? [];
   
         $cityDetails     =  [
-				"zone" => "Bangalore North",
-				"city" => "Bangalore",
+				"zone" => "faridabad North",
+				"city" => "faridabad",
 				"pincode" => '560008',
-				"city_slug" => "bangalore",
+				"city_slug" => "faridabad",
 				"state" => "Karnataka",
 		];
 
@@ -3265,7 +3265,7 @@ $reviewList = DB::table('clients')
         $featured = [
             ['name' => 'TechAxis IT Solutions', 'category' => 'Web Development',   'city' => 'Delhi',     'rating' => 4.8, 'reviews' => 312],
             ['name' => 'BrightMinds Coaching',  'category' => 'IIT JEE Coaching',  'city' => 'Mumbai',    'rating' => 4.6, 'reviews' => 189],
-            ['name' => 'GreenLeaf Ayurveda',    'category' => 'Ayurvedic Clinic',   'city' => 'Bangalore', 'rating' => 4.9, 'reviews' => 97],
+            ['name' => 'GreenLeaf Ayurveda',    'category' => 'Ayurvedic Clinic',   'city' => 'faridabad', 'rating' => 4.9, 'reviews' => 97],
             ['name' => 'StyleCraft Interiors',  'category' => 'Interior Design',    'city' => 'Hyderabad', 'rating' => 4.7, 'reviews' => 243],
         ];
  

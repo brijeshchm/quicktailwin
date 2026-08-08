@@ -297,7 +297,7 @@ class CitiesController extends Controller
 					'Mumbai',
 					'Pune',
 					'Meerut',
-					'Bangalore',
+					'faridabad',
 					'indore',
 					'kanpur',
 					'Chennai',

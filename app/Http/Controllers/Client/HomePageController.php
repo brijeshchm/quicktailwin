@@ -62,7 +62,7 @@ class HomePageController extends Controller
         $citieslists = Citieslists::get()->count();
 
 
-		$city= "bangalore";
+		$city= "faridabad";
 		$metaTitle ="QuickDials | India’s Leading Local Business Search Directory";
 		$metaDescription  ="QuickDials is India’s trusted local business search and service directory, helping users find verified businesses, services, and professionals near them"; 
 		$keyword = "";
@@ -1666,7 +1666,7 @@ class HomePageController extends Controller
         $featured = [
             ['name' => 'TechAxis IT Solutions', 'category' => 'Web Development',   'city' => 'Delhi',     'rating' => 4.8, 'reviews' => 312],
             ['name' => 'BrightMinds Coaching',  'category' => 'IIT JEE Coaching',  'city' => 'Mumbai',    'rating' => 4.6, 'reviews' => 189],
-            ['name' => 'GreenLeaf Ayurveda',    'category' => 'Ayurvedic Clinic',   'city' => 'Bangalore', 'rating' => 4.9, 'reviews' => 97],
+            ['name' => 'GreenLeaf Ayurveda',    'category' => 'Ayurvedic Clinic',   'city' => 'faridabad', 'rating' => 4.9, 'reviews' => 97],
             ['name' => 'StyleCraft Interiors',  'category' => 'Interior Design',    'city' => 'Hyderabad', 'rating' => 4.7, 'reviews' => 243],
         ];
  
@@ -1817,7 +1817,7 @@ class HomePageController extends Controller
             '#145a32','#2c3e50','#154360','#7b241c','#117a65',
             '#145a32','#784212','#1e8449','#1b4332',
         ];
- 		$city = "bangalore";
+ 		$city = "faridabad";
         return view('client.category-slug', compact(
             'slug', 'keyword', 'childCategory','kwData', 'childSlug',
             'topDescription', 'bottomDescription','faqs',
@@ -1891,7 +1891,7 @@ class HomePageController extends Controller
             '#145a32','#2c3e50','#154360','#7b241c','#117a65',
             '#145a32','#784212','#1e8449','#1b4332',
         ];
- 		$city = "bangalore";
+ 		$city = "faridabad";
 		
         return view('client.child-slug', compact(
             'child_slug', 'keyword', 'childCategory', 'childSlug',
@@ -1988,7 +1988,7 @@ class HomePageController extends Controller
         $testimonials = [
             ['name' => 'Priya & Rahul Sharma',   'location' => 'Mumbai',    'date' => 'December 2024', 'rating' => 5, 'text' => 'Shaadi6 made our dream wedding a reality. From finding the perfect venue at The Taj to coordinating with 15 different vendors seamlessly — every moment was magical.', 'avatar' => 'PR', 'grad' => 'from-pink-400 to-red-500',    'package' => 'Royal Package'],
             ['name' => 'Ananya & Vikram Mehta',  'location' => 'Delhi',     'date' => 'October 2024',  'rating' => 5, 'text' => 'From the mehendi ceremony to the reception, everything was perfect. Our wedding planner was always available, incredibly organized, and made us feel calm throughout.',  'avatar' => 'AV', 'grad' => 'from-amber-400 to-orange-500', 'package' => 'Premium Package'],
-            ['name' => 'Deepa & Arjun Nair',     'location' => 'Bangalore', 'date' => 'February 2025', 'rating' => 5, 'text' => 'We had no idea how to plan a wedding for 400 guests. Shaadi6 took care of everything — venue, catering, flowers, even the honeymoon. Most stress-free experience ever.',  'avatar' => 'DA', 'grad' => 'from-purple-400 to-pink-500',  'package' => 'Royal Package'],
+            ['name' => 'Deepa & Arjun Nair',     'location' => 'faridabad', 'date' => 'February 2025', 'rating' => 5, 'text' => 'We had no idea how to plan a wedding for 400 guests. Shaadi6 took care of everything — venue, catering, flowers, even the honeymoon. Most stress-free experience ever.',  'avatar' => 'DA', 'grad' => 'from-purple-400 to-pink-500',  'package' => 'Royal Package'],
         ];
 			$city = "delhi";
 			$metaTitle = "Wedding Planning Services in Delhi | QuickDials";
@@ -2126,7 +2126,7 @@ $reviews =  [
 				'Mumbai',
 				'Pune',
 				'Meerut',
-				'Bangalore',
+				'faridabad',
 				'Indore',
 				'Kanpur',
 				'Chennai',
