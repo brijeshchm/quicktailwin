@@ -2497,7 +2497,9 @@ $reviewList = DB::table('clients')
      * Handle  GET /{city}/{slug}
      */
 	public function showCityWithService(Request $request, string $city, string $slug)
-{
+	{
+
+	 
     $citySlug   = strtolower(trim($city));
     $keySlugRaw = strtolower(trim($slug));
     $newSlug    = strtolower(str_replace(' ', '-', trim($slug)));
@@ -2510,17 +2512,21 @@ $reviewList = DB::table('clients')
     // ---- CATEGORY CHECK ----
     $category = $this->categoriesCheck($newSlug);
 
-    if ($category) {
+    if (!empty($category)) {
         // No real city in URL (e.g. /categories/{slug}) — redirect with default city
         if ($citySlug === 'categories' || !isset($cityMap[$citySlug])) {
-            return redirect()->route('city.slug', [
-                'city_slug'     => $defaultCity,
-                'service_slug' => $newSlug,
-            ], 301);
+            // return redirect()->route('city.slug', [
+            //     'city_slug'     => $defaultCity,
+            //     'service_slug' => $newSlug,
+            // ], 301);
+
+			return redirect()->route('showCity', $newSlug, 301);
         }
 
         // Real city present but not canonical (wrong case/format) — normalize it
         $cityName = $this->resolveBestCandidate($citySlug, $cityMap);
+
+	 
         if ($cityName && $citySlug !== $cityName) {
             return redirect()->route('city.slug', [
                 'city_slug'     => $cityName,
@@ -2539,18 +2545,25 @@ $reviewList = DB::table('clients')
     if (!empty($child)) {
 	
         if ($citySlug === 'child' || !isset($cityMap[$citySlug])) {
-            return redirect()->route('city.slug', [
-                'city_slug'  => $defaultCity,
-                'service_slug' => $newSlug,
-            ], 301);
+            // return redirect()->route('city.slug', [
+            //     'city_slug'  => $defaultCity,
+            //     'service_slug' => $newSlug,
+            // ], 301);
+
+
+			return redirect()->route('showCity', $newSlug, 301);
+			
         }
 
         $cityName = $this->resolveBestCandidate($citySlug, $cityMap);
+	 
         if ($cityName && $citySlug !== $cityName) {
-            return redirect()->route('city.slug', [
-                'city_slug'  => $cityName,
-                'service_slug' => $newSlug,
-            ], 301);
+            // return redirect()->route('city.slug', [
+            //     'city_slug'  => $cityName,
+            //     'service_slug' => $newSlug,
+            // ], 301);
+
+			return redirect()->route('showCity', $newSlug, 301);
         }
 		 $newchild = $this->childCheckdetails($newSlug);
 
@@ -2564,10 +2577,12 @@ $reviewList = DB::table('clients')
         if (!isset($cityMap[$defaultCity])) {
             return redirect()->route('home');
         }
-        return redirect()->route('city.slug', [
-            'city_slug'    => $defaultCity,
-            'service_slug' => $slug,
-        ], 301);
+        // return redirect()->route('city.slug', [
+        //     'city_slug'    => $defaultCity,
+        //     'service_slug' => $slug,
+        // ], 301);
+
+		return redirect()->route('showCity', $slug, 301);
     }
 
     if ($citySlug !== $cityName) {

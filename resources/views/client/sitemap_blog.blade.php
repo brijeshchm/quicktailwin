@@ -9,7 +9,7 @@
 <url>
     <loc>{{ route('blog.details', $blog->slug) }}</loc>    
     <lastmod>{{ \Carbon\Carbon::parse($blog->updated_at)->toAtomString() }}</lastmod>    
-    <changefreq>weekly</changefreq>
+    <changefreq>daily</changefreq>
     <priority>0.8</priority>
 </url>
 @endforeach
