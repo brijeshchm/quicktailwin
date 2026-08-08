@@ -840,7 +840,7 @@ function bannerSlider(banners, interval = 4000) {
         </div>
     </section>
     @endif
-
+  @if($cityName != 'faridabad')
     {{-- Course About --}}
     @if(!empty($kwData['heading']) && !empty($kwData['courseabout']))
     <div class="border rounded-lg p-4 bg-white shadow-sm mx-4">
@@ -861,7 +861,7 @@ function bannerSlider(banners, interval = 4000) {
         </section>
     </div>
     @endif
-
+@endif
 
     @if($cityName == 'faridabad')
        {{-- top_wcity_description --}}
@@ -898,7 +898,7 @@ function bannerSlider(banners, interval = 4000) {
 
 @endif
 
-
+  @if($cityName != 'faridabad')
     {{-- Top Description --}}
     @if(!empty($topDescription))
     <div class="bg-white rounded-2xl p-6 mt-4 mx-4">
@@ -919,7 +919,7 @@ function bannerSlider(banners, interval = 4000) {
     </div>
     @endif
 
-
+@endif
 
 
 <style>
@@ -947,6 +947,8 @@ function bannerSlider(banners, interval = 4000) {
         width:100%;
     }
     </style>
+
+      @if($cityName != 'faridabad')
     {{-- Bottom Description --}}
     @if(!empty($bottomDescription))
 
@@ -985,10 +987,16 @@ function bannerSlider(banners, interval = 4000) {
         <div class="text-sm text-gray-600 leading-relaxed">{!! $kwData['extra_description'] !!}</div>
     </div>
     @endif
+@endif
+
+
+  @if($cityName == 'faridabad')
 
 
 
 
+
+  @else 
     {{-- FAQ --}}
     @if(count($faqs ?? []) > 0)
     <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
@@ -1015,7 +1023,7 @@ function bannerSlider(banners, interval = 4000) {
         </div>
     </div>
     @endif
-
+@endif
 
 
 
