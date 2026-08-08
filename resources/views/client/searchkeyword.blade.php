@@ -34,6 +34,11 @@ body.modal-open { overflow: hidden; }
     border-radius: 0 9999px 9999px 0;
     transition: transform 0.1s linear;
 }
+.bg-white h3{
+    font-size: 1.025rem;
+    line-height: 1.75rem;
+    font-weight: 700;
+}
 </style>
 
  
