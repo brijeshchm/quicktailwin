@@ -1231,7 +1231,9 @@ function selectCert(i) {
                     $author = $review['comment_author'] ?? 'Anonymous';
                     $initials = strtoupper(substr($author,0,2));
                     $rating = (int)($review['rating'] ?? 5);
+                  
                     @endphp
+                    @if(!empty($review['comment_content']))
                     <div class="review-card reveal d-{{ min($i%6,5) }} rounded-2xl p-6 border"
                          data-rating="{{ $rating }}">
                         <div class="flex items-start gap-4 mb-4">
@@ -1254,8 +1256,9 @@ function selectCert(i) {
                                 </div>
                             </div>
                         </div>
-                        <p class="text-gray-500 leading-relaxed text-sm">"{{ $review['comment_content'] ?? 'Great experience!' }}"</p>
+                        <p class="text-gray-500 leading-relaxed text-sm">"{{ $review['comment_content'] ?? '' }}"</p>
                     </div>
+                    @endif                    
                     @empty
                     <div class="py-12 text-center rounded-2xl" style="background:rgba(124,58,237,.04);border:1px dashed rgba(124,58,237,.2);">
                         <p class="font-bold text-gray-400 text-sm">No reviews yet. Be the first!</p>
