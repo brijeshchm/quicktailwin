@@ -851,7 +851,7 @@ function bannerSlider(banners, interval = 4000) {
         </div>
     </section>
     @endif
-  @if($cityName != 'faridabad')
+  @if(!$shouldIndex)
     {{-- Course About --}}
     @if(!empty($kwData['heading']) && !empty($kwData['courseabout']))
     <div class="border rounded-lg p-4 bg-white shadow-sm mx-4">
@@ -874,7 +874,7 @@ function bannerSlider(banners, interval = 4000) {
     @endif
 @endif
 
-    @if($cityName == 'faridabad')
+    @if($shouldIndex)
        {{-- top_wcity_description --}}
     @if(!empty($kwData['top_wcity_description']))
      @php
@@ -909,7 +909,7 @@ function bannerSlider(banners, interval = 4000) {
 
 @endif
 
-  @if($cityName != 'faridabad')
+  @if(!$shouldIndex)
     {{-- Top Description --}}
     @if(!empty($topDescription))
     <div class="bg-white rounded-2xl p-6 mt-4 mx-4">
@@ -959,7 +959,7 @@ function bannerSlider(banners, interval = 4000) {
     }
     </style>
 
-      @if($cityName != 'faridabad')
+      @if(!$shouldIndex)
     {{-- Bottom Description --}}
     @if(!empty($bottomDescription))
 
@@ -1001,9 +1001,9 @@ function bannerSlider(banners, interval = 4000) {
 @endif
 
 
-  @if($cityName == 'faridabad' && $kwData['keyword_slug']=='artificial-intelligence-training')
+  @if($shouldIndex && $cityName =='faridabad')
               
-  
+  @if($kwData['keyword_slug']=='artificial-intelligence-training' && $cityName =='faridabad')
     <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
         <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
             💬 Frequently Asked Questions(FAQ's) {{ $city }}
@@ -1077,7 +1077,170 @@ function bannerSlider(banners, interval = 4000) {
             
         </div>
     </div>
+    @elseif($kwData['keyword_slug']=='python-training' && $cityName =='faridabad')
 
+
+     <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            💬  Frequently Asked Questions About Python Training in Faridabad
+        </h3>
+        <div class="space-y-2">
+        
+            
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 1 ? null : 1"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h3>What is the duration of Python training in Faridabad?	</h3> 
+                    <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                   It all depends on the course level, curriculum, training mode, and class schedule. A simple Python program may take a few weeks, but more complicated courses involving Data Science, Machine Learning, or other projects may take months. 
+                </div>
+            </div>
+
+
+
+              <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 2 ? null : 2"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h3> How much does Python training cost in Faridabad?</h3> 
+                    <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                   The cost of Python training in Faridabad depends on the course duration, the trainer's experience, the training mode, projects, certification, and other technologies. Urban Pro currently lists Python training rates of about ₹300–₹500 per hour, while its Faridabad Python course page gives ₹3,600–₹6,000/month for 1-to-1 classes and ₹2,880–₹4,800/month for group classes.
+                </div>
+            </div>
+           
+
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 3 ? null : 3"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h3>Can beginners join Python classes in Faridabad?</h3> 
+                    <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                    Yes, beginner learners can take Python classes that are designed for learners who do not have any programming knowledge at all. Computer basics is good but prior Python programming knowledge is not normally needed.
+                </div>
+            </div>
+           
+
+            
+
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 4 ? null : 4"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h3>Are online Python classes available in Faridabad?</h3> 
+                    <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                   Yes, there are different classes for online learners, classroom training and one-to-one training available for Faridabad learners. Online learning may help students and professionals who dont want to travel daily. Live online classes with video recording options are also available, in addition to one-to-one training.
+                </div>
+            </div>
+           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 5 ? null : 5"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h3>Is Python useful for data science and AI careers?</h3> 
+                    <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                 Yes, Python is useful if you want to learn Data Science or AI. It is used for working with data, making charts and building Machine Learning models. You can start with basic Python and later learn tools like Pandas, NumPy and Scikit-learn. After learning Python, you can explore roles like Data Analyst, Data Scientist, ML Engineer or AI Developer. Other skills and project practice are also needed.
+                </div>
+            </div>
+           
+            
+            
+            
+        </div>
+    </div>
+
+    @elseif($kwData['keyword_slug']=='workday-training' && $cityName =='faridabad')
+
+  <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            💬 Frequently Asked Questions About Workday Training in Faridabad</h3>
+        <div class="space-y-2">
+        
+            
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 1 ? null : 1"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h3>What is the duration of Workday training in Faridabad?</h3> 
+                    <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                   Every training institute has their own duration for each course. The time required to complete a basic Workday course can be just a few weeks, but a comprehensive one like HCM can take more time. Some institutes have courses ranging from 45+ hours, whereas some in Faridabad offer two-month courses as well.
+                </div>
+            </div>
+
+
+
+              <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 2 ? null : 2"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h3>How much does Workday training cost in Faridabad?</h3> 
+                    <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                   Workday Training charges are based on the module, time period, instructor, practical training, and the type of training that is being offered. The currently published fee structure varies between Rs. 15,000 and Rs. 34,000 for some courses, whereas others fall within a higher fee structure.
+                </div>
+            </div>
+           
+
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 3 ? null : 3"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h3>Can beginners join Workday classes in Faridabad?</h3> 
+                    <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                    Yes, beginner level students may begin with basic understanding of Workday and HCM. But having knowledge of Human Resource, Payroll, Business Process, and basic IT can make the learning process easier. It would be better to select a course which begins with basics rather than selecting advanced courses.
+                </div>
+            </div>
+           
+
+            
+
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 4 ? null : 4"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h3>Are online Workday classes available in Faridabad?</h3> 
+                    <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                   Yes, Classes for Workday online are available, and many training institutions offer live online batch classes as well as physical class sessions. Online classes are good for professionals and students who are unable to attend class sessions at the training institution daily.
+                </div>
+            </div>
+           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 5 ? null : 5"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h3>Do Workday courses include practical training?</h3> 
+                    <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                 It all depends on the institution. There are some that incorporate practical projects and Workday system training, whereas others just concentrate on theory alone. When signing up for the program, ask whether practical training is given in the fees and how long you will be given for practicing. 
+                </div>
+            </div>
+           
+            
+            
+            
+        </div>
+    </div>
+
+    @elseif($kwData['keyword_slug']=='sap-training' && $cityName =='faridabad')
+
+
+    @elseif($kwData['keyword_slug']=='banquet-hall' && $cityName =='faridabad')
+
+
+
+    @elseif($kwData['keyword_slug']=='cricket-academy' && $cityName =='faridabad')
+
+
+
+    @endif
 
   @else 
     {{-- FAQ --}}
