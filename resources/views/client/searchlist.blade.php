@@ -6,6 +6,12 @@
         'faridabad','delhi', 'noida',
         'gurgaon', 'bangalore'
     ];
+
+     $singleCities = [
+        'faridabad'
+    ];
+
+
     $keywordArray = [
         'artificial-intelligence-training', 'python-training', 'workday-training',
         'sap-training', 'banquet-hall', 'cricket-academy'
@@ -16,6 +22,7 @@
     $shouldIndex = in_array($currentCity, $allowedCities) 
         && in_array($currentKeyword, $keywordArray);
  
+   
 @endphp
 
 @section('meta_robots')
@@ -851,7 +858,8 @@ function bannerSlider(banners, interval = 4000) {
         </div>
     </section>
     @endif
-  @if(!$shouldIndex)
+  @if( !in_array($cityName, $singleCities) ||
+    !in_array($kwData['keyword_slug'], $keywordArray))
     {{-- Course About --}}
     @if(!empty($kwData['heading']) && !empty($kwData['courseabout']))
     <div class="border rounded-lg p-4 bg-white shadow-sm mx-4">
@@ -909,7 +917,8 @@ function bannerSlider(banners, interval = 4000) {
 
 @endif
 
-  @if(!$shouldIndex)
+  @if(!in_array($cityName, $singleCities) ||
+    !in_array($kwData['keyword_slug'], $keywordArray))
     {{-- Top Description --}}
     @if(!empty($topDescription))
     <div class="bg-white rounded-2xl p-6 mt-4 mx-4">
@@ -959,7 +968,8 @@ function bannerSlider(banners, interval = 4000) {
     }
     </style>
 
-      @if(!$shouldIndex)
+    @if(!in_array($cityName, $singleCities) ||
+    !in_array($kwData['keyword_slug'], $keywordArray))
     {{-- Bottom Description --}}
     @if(!empty($bottomDescription))
 
