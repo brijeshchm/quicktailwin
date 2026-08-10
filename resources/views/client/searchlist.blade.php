@@ -1001,11 +1001,8 @@ function bannerSlider(banners, interval = 4000) {
 @endif
 
 
-  @if($cityName == 'faridabad')
-
-
-
-                
+  @if($cityName == 'faridabad' && $kwData['keyword_slug']=='artificial-intelligence-training')
+              
   
     <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
         <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
