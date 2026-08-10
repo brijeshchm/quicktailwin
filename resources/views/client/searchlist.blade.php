@@ -874,7 +874,7 @@ function bannerSlider(banners, interval = 4000) {
     @endif
 @endif
 
-    @if($shouldIndex)
+    @if($shouldIndex && $cityName =='faridabad')
        {{-- top_wcity_description --}}
     @if(!empty($kwData['top_wcity_description']))
      @php
