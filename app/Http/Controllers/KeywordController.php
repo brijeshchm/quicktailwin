@@ -1526,7 +1526,7 @@ class KeywordController extends Controller
 						$lead->attributes,
 						$htmlreport,
 						$owner_name,
-						(date('Y-m-d', strtotime($lead->created_at))),
+						(date('Y-m-d H:i:s', strtotime($lead->created_at))),
 					];
 				}
 				$returnLeads['data'] = $data;
