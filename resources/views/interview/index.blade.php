@@ -2,19 +2,11 @@
 @section('title')
 Interview Questions & Answers
 @endsection 
-@section('keywords')
-QuickDials-  Business Services list 
-@endsection
 @section('description'),  
 Master MySQL and php interview questions with expert answers covering database concepts, React hooks, state management, APIs, and projects.
 @endsection
-
-
 @section('content')	
- 
- 
-
-	<div class='main light-grey' id='belowtopnav' style='margin-left:220px;'>
+<div class='main light-grey' id='belowtopnav' style='margin-left:220px;'>
 		<div class='row white'>
     <div class='col l11 m12' id='main'>
      <div class="container-xxl py-5">

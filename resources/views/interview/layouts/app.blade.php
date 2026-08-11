@@ -2,17 +2,16 @@
 <!DOCTYPE html>
 <html lang="en"> 
 <head>
-<title>@yield('title')</title>
+
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta content="@yield('keywords')" name="keywords">
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<title>@yield('title')</title>
 <meta content="@yield('description')" name="description"> 
 <link rel="icon" href="{{asset('client/images/favicon.png')}}" type="image/x-icon">
 <link rel="stylesheet" href="{{asset('interview/css/tdcss.css')}}">
 <link rel="stylesheet" href="{{asset('interview/lib/style.css')}}">
 <link href='https://fonts.googleapis.com/css?family=Source%20Code%20Pro' rel='stylesheet'>
  
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="canonical" href="{{ URL::current() }}" />
     <link rel="shortcut icon" href="{{asset('client/images/favicon.png')}}" type="image/png" />
@@ -56,8 +55,7 @@
     <meta property="og:image:height" content="628" />
     <meta property="og:image:alt" content="QuickDials" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="@yield('title')" />
-    <meta name="twitter:keyword" content="@yield('keyword')" />
+    <meta name="twitter:title" content="@yield('title')" />  
     <meta name="twitter:description" content="@yield('description')" />
     <meta name="twitter:image" content="{{asset('client/images/small-logo.png')}}" />
     <meta name="twitter:url" content="{{ URL::current() }}" />
@@ -137,11 +135,7 @@ function getStyleValue(elmnt,style) {
       <a class="bar-item button" href="{{url('interviews/javascript-interview-question-answer')}}" title='javascript-interview-question-answer'>javascript</a>    
       <a class="bar-item button" href="{{url('interviews/reactjs-interview-question-answer')}}" title='reactjs-interview-question-answer'>reactjs</a> 
       <a class="bar-item button" href="{{url('interviews/restapi-interview-question-answer')}}" title='restapi-interview-question-answer'>Restapi </a>    
- 
-       
-      
-     
-    </div>
+     </div>
      
     <div id='nav_references' class='bar-block card-2'>
       <span onclick='close_nav("references")' class='button xlarge right' style="position:absolute;right:0;font-weight:bold;">&times;</span>
@@ -167,20 +161,11 @@ function getStyleValue(elmnt,style) {
 <a target="_top" href="{{url('interviews/javascript-interview-question-answer')}}">Javascript Interview Question Answer</a>
 <a target="_top" href="{{url('interviews/reactjs-interview-question-answer')}}">Reactjs Interview Question Answer</a>
 <a target="_top" href="{{url('interviews/restapi-interview-question-answer')}}">Rest API Interview Question Answer</a> 
- 
-  
-      <br><br>
-    </div>
- 
+<br><br>
+    </div> 
     </div>
 </div>
-
-    @yield('content')
-
-
-
-
-
+@yield('content')
 <div id="footer" class="footer container white">
 
 <hr>

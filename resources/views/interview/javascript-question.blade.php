@@ -2,19 +2,10 @@
 @section('title')
 javascript Interview Questions & Answers
 @endsection 
-@section('keywords')
-QuickDials-  Business Services list 
-@endsection
 @section('description'),  
 Learn JavaScript interview questions and answers on ES6, DOM, promises, async/await, closures, events, and modern JavaScript concepts.
 @endsection
-
-
 @section('content')	
-  
- 
- 
-
 <div class='main light-grey' id='belowtopnav' style='margin-left:220px;'>
   <div class='row white'>
     <div class='col l11 m12' id='main'>

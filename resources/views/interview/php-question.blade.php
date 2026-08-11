@@ -1,18 +1,11 @@
  @extends('interview.layouts.app')
 @section('title')
-QuickDials- Business Services
+PHP Interview Questions & Answers
 @endsection 
-@section('keywords')
-QuickDials-  Business Services list 
-@endsection
 @section('description'),  
 Prepare with PHP interview questions and answers covering OOP, arrays, sessions, MySQL, security, APIs, and advanced PHP concepts.
 @endsection
-
-
 @section('content')	 
- 
-
 <div class='main light-grey' id='belowtopnav' style='margin-left:220px;'>
   <div class='row white'>
     <div class='col l11 m12' id='main'>
