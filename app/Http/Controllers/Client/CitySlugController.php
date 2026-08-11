@@ -2498,7 +2498,7 @@ $reviewList = DB::table('clients')
 	public function showCityWithService(Request $request, string $city, string $slug)
 	{
 
-	 
+ 
     $citySlug   = strtolower(trim($city));
     $keySlugRaw = strtolower(trim($slug));
     $newSlug    = strtolower(str_replace(' ', '-', trim($slug)));
@@ -2548,8 +2548,6 @@ $reviewList = DB::table('clients')
             //     'city_slug'  => $defaultCity,
             //     'service_slug' => $newSlug,
             // ], 301);
-
-
 			return redirect()->route('showCity', $newSlug, 301);
 			
         }
@@ -2571,17 +2569,22 @@ $reviewList = DB::table('clients')
 
     // ---- Resolve city (no DB call) ----
     $cityName = $this->resolveBestCandidate($citySlug, $cityMap);
-
+   $slugUrl = $this->resolveBestCandidate($newSlug, $keywordMap);
+ 
     if (!$cityName) {
-        if (!isset($cityMap[$defaultCity])) {
-            return redirect()->route('home');
+ 	 
+ 		$cityData = $cityMap[$cityName] ?? null;
+        if (!isset($cityData) && !$slugUrl) {			 
+			abort(410);
+            //return redirect()->route('home');
         }
         // return redirect()->route('city.slug', [
         //     'city_slug'    => $defaultCity,
         //     'service_slug' => $slug,
         // ], 301);
-
-		return redirect()->route('showCity', $slug, 301);
+		if($slugUrl){
+		return redirect()->route('showCity', $slugUrl, 301);	
+		}	
     }
 
     if ($citySlug !== $cityName) {
@@ -2592,7 +2595,7 @@ $reviewList = DB::table('clients')
     }
 
     // ---- Resolve keyword/service (no DB call) ----
-    $slugUrl = $this->resolveBestCandidate($newSlug, $keywordMap);
+  
 
     if ($slugUrl) {
         if ($keySlugRaw !== $slugUrl) {
@@ -2626,6 +2629,7 @@ $reviewList = DB::table('clients')
         }
         $businessResponse = $this->fetchBusinessData($slugUrl);
         if (!$businessResponse) {
+
             return redirect()->route('home');
         }
 
