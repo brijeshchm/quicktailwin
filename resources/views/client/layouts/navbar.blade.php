@@ -1,5 +1,4 @@
 {{-- resources/views/layouts/navbar.blade.php --}}
-
 <header
     id="main-navbar"
     class="fixed top-0 w-full z-50 transition-all duration-300 h-20 md:h-16 bg-transparent"
@@ -20,6 +19,8 @@
         </a>
 
         {{-- Sticky search bar (hidden until user scrolls) --}}
+
+        @if (!request()->is('/'))
         <div
             id="sticky-search-wrapper"
             class="flex-1 max-w-xl relative hidden md:block opacity-0 pointer-events-none transition-all duration-200"
@@ -107,6 +108,7 @@
                 <ul id="sticky-suggestions-list"></ul>
             </div>
         </div>
+@endif
 
         {{-- Desktop nav links --}}
         <nav id="desktop-nav" class="hidden md:flex items-center gap-6 shrink-0 transition-all duration-200">
@@ -741,9 +743,10 @@ const desktopNav  = document.getElementById('desktop-nav');
 
 window.addEventListener('scroll', () => {
     const y = window.scrollY;
-    const scrolled = y > 0;
-    const showSearch = y > 0;
-
+  
+    const scrolled = 1 > 0;
+    const showSearch = 1 > 0;
+ 
     navbar.classList.toggle('bg-white/95', scrolled || false);
     navbar.classList.toggle('backdrop-blur-md', scrolled);
     navbar.classList.toggle('shadow-sm', scrolled);
@@ -825,7 +828,7 @@ function clearStickyCitySearch() {
 
 function selectStickyCity(city) {
     stickySelectedCity = city;
- 
+    localStorage.setItem('city', city);
     document.getElementById('sticky-city-label').textContent = city;
     // document.getElementById('mobile-city-label').textContent = city; 
     document.getElementById('sticky-city-panel').classList.add('hidden');

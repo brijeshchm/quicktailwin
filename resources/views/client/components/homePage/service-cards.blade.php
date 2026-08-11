@@ -36,12 +36,9 @@
                  
                @php
                 $noCitySlugs = ['wedding-planning'];
-
     // $popSUrl = in_array($svc['url'], $noCitySlugs)
     //     ? route('showCity', $svc['url'])
     //     : route('city.slug', ['city_slug' => 'faridabad', 'service_slug' => $svc['url']]);
-
-
             $popSUrl = route('showCity',$svc['url']);        
             @endphp
                  <a href="{{ $popSUrl }}"

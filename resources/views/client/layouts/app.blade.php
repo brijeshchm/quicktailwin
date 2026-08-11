@@ -232,8 +232,7 @@ if (request()->is('/')){
             'itemListElement' => $breadcrumbList,
         ];
     }
-
-    
+   
 
     // ---- 5. FAQ ----
     if (!empty($faqs)) {

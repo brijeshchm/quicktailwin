@@ -125,23 +125,18 @@
             <div id="slider-track" class="flex slider-track" style="gap:4px">
                 @php
                 $colorMap = ['bg-blue-600','bg-indigo-600','bg-rose-800','bg-violet-700','bg-teal-600','bg-orange-500','bg-rose-600','bg-amber-600','bg-indigo-600','bg-rose-800','bg-teal-600','bg-amber-600','bg-blue-600','bg-orange-500','bg-violet-700','bg-blue-600'];
-              
-                
+               
                 @endphp
                 @if($bannerKeyword)
                 @foreach($bannerKeyword as $i => $card)
-
-             
-                
+               
                 @php
-    $noCitySlugs = ['wedding-planning','spa-hub'];
-
-    // $catUrl = in_array($card['url'], $noCitySlugs)
-    //     ? route('showCity', $card['url'])
-    //     : route('city.slug', ['city_slug' => 'faridabad', 'service_slug' => $card['url']]);
-
-        $catUrl = route('showCity',$card['url']);
-@endphp
+                $noCitySlugs = ['wedding-planning','spa-hub'];
+                // $catUrl = in_array($card['url'], $noCitySlugs)
+                //     ? route('showCity', $card['url'])
+                //     : route('city.slug', ['city_slug' => 'faridabad', 'service_slug' => $card['url']]);
+                $catUrl = route('showCity',$card['url']);
+                @endphp
                     <a href="{{ $catUrl }}"
             title="{{ $card['title'] ?? '' }}"
             class="banner-card relative shrink-0 rounded-t-2xl overflow-hidden cursor-pointer group h-[140px] sm:h-[155px] block {{ $colorMap[$i % count($colorMap)] }}">
@@ -217,6 +212,7 @@ function renderHeroCityList(list, q = '') {
     const el = document.getElementById('hero-city-list');
 
     el.innerHTML = list.map((city, index) => {
+        
         const cityName = city.city || city.name || '';
         const cityDetails = city.cityDetails || cityName;
 
@@ -254,7 +250,7 @@ function toggleHeroCity() {
     const panel = document.getElementById('hero-city-panel');
     const chevron = document.getElementById('hero-city-chevron');
     const search = document.getElementById('hero-city-search');
-
+ 
     const isHidden = panel.classList.contains('hidden');
 
     if (isHidden) {
@@ -270,6 +266,7 @@ function toggleHeroCity() {
 
 let heroCityTimeout = null;
 function filterHeroCities(q) {
+     
     document.getElementById('hero-city-clear').classList.toggle('hidden', !q);
     clearTimeout(heroCityTimeout);
     if (q.length < 1) { renderHeroCityList(CITIES); return; }
@@ -298,7 +295,7 @@ function clearHeroCitySearch() {
 
 function selectHeroCity(city) {
     heroSelectedCity = city;
-   
+    localStorage.setItem('city', city);
     document.getElementById('hero-city-label').textContent = city;
     // document.getElementById('sticky-city-label').textContent = city;
     // document.getElementById('mobile-city-label').textContent = city;
