@@ -91,7 +91,7 @@
 @endforeach
 @foreach ($categories as $category)
 <url>
-    <loc>{{ route('city.slug', ['city_slug'=> 'faridabad','service_slug' => $category->parent_slug]) }}</loc>
+    <loc>{{ route('showCity',$category->parent_slug) }}</loc>
     <lastmod>{{ \Carbon\Carbon::parse($category->updated_at ?? now())->toAtomString() }}</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.80</priority>
@@ -100,7 +100,7 @@
 
 @foreach ($childCategories as $child)
 <url>
-    <loc>{{ route('city.slug', ['city_slug'=> 'faridabad','service_slug' => $child->child_slug]) }}</loc>
+    <loc>{{ route('showCity',$child->child_slug) }}</loc>
     <lastmod>{{ \Carbon\Carbon::parse($child->updated_at ?? now())->toAtomString() }}</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.80</priority>

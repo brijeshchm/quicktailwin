@@ -2640,7 +2640,6 @@ $reviewList = DB::table('clients')
         }
         $businessResponse = $this->fetchBusinessData($slugUrl);
         if (!$businessResponse) {
-
             return redirect()->route('home');
         }
 
