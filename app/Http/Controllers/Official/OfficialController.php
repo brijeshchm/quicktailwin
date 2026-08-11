@@ -446,22 +446,21 @@ class OfficialController extends Controller
     }
     public function blogdetails(Request $request, $slug)
     {
-        $cacheKey = 'blog_article_' . md5($slug); 
-        $data = Cache::remember($cacheKey, 3600, function () use ($slug) {
-            try {
-                $response = Http::timeout(10)->withoutVerifying()
-                    ->get('https://api.quickdials.com/api/website/blog', [
-                        'blog_slug' => $slug,
-                    ]);
-                if ($response->successful()) {
-                    return $response->json();
-                }
-            } catch (\Exception $e) {
-                \Log::error('Blog detail API failed: ' . $e->getMessage());
+        $data = null;
+        try {
+            $response = Http::timeout(10)
+                ->withoutVerifying()
+                ->get('https://api.quickdials.com/api/website/blog', [
+                    'blog_slug' => $slug,
+                ]);
+
+            if ($response->successful()) {
+                $data = $response->json();
             }
-            return null;
-        });
- 
+        } catch (\Exception $e) {
+            \Log::error('Blog detail API failed: ' . $e->getMessage());
+        }
+
         if (!$data) abort(410);
  
         // Handle both { data: {} } and { data: [{}] }
