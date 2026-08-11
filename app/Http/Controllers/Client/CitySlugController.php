@@ -2522,15 +2522,22 @@ $reviewList = DB::table('clients')
 			return redirect()->route('showCity', $newSlug, 301);
         }
 
+		if(isset($cityMap[$citySlug])){
+			return redirect()->route('showCity', $newSlug, 301);
+
+		}
         // Real city present but not canonical (wrong case/format) — normalize it
         $cityName = $this->resolveBestCandidate($citySlug, $cityMap);
 
 	 
         if ($cityName && $citySlug !== $cityName) {
-            return redirect()->route('city.slug', [
-                'city_slug'     => $cityName,
-                'service_slug' => $newSlug,
-            ], 301);
+			
+			return redirect()->route('showCity', $newSlug, 301);
+
+            // return redirect()->route('city.slug', [
+            //     'city_slug'     => $cityName,
+            //     'service_slug' => $newSlug,
+            // ], 301);
         }
 		$newCat = $this->categoriesCheckDetails($newSlug);
 	 
@@ -2551,6 +2558,10 @@ $reviewList = DB::table('clients')
 			return redirect()->route('showCity', $newSlug, 301);
 			
         }
+
+		if(isset($cityMap[$citySlug])){
+			return redirect()->route('showCity', $newSlug, 301);
+		}
 
         $cityName = $this->resolveBestCandidate($citySlug, $cityMap);
 	 
