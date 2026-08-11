@@ -79,9 +79,10 @@ $repairGradients = [
             @php
             $noCitySlugs = ['wedding-planning'];
 
-            $catUrl = in_array($service['url'], $noCitySlugs)
-            ? route('showCity', $service['url'])
-            : route('city.slug', ['city_slug' => 'faridabad', 'service_slug' => $service['url']]);
+            // $catUrl = in_array($service['url'], $noCitySlugs)
+            // ? route('showCity', $service['url'])
+            // : route('city.slug', ['city_slug' => 'faridabad', 'service_slug' => $service['url']]);
+            $catUrl = route('showCity',$service['url']);
             @endphp
 
                 @php

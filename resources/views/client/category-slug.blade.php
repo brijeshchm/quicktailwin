@@ -117,10 +117,11 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
                         $title = $course['title']    ?? ($course['name'] ?? '');
                         $url   = $course['url']      ?? '#';
                         $rating= $course['rating']   ?? '';
+                        $cateSUrl = route('showCity',$url);
 
                     @endphp
                     <div class="animate-tile" style="animation-delay: {{ $delay }}ms">
-                        <a href="{{ route('city.slug', ['city_slug'=> $city,'service_slug' => $url])}}" >
+                        <a href="{{ $cateSUrl }}" >
                             <div class="tile-card group bg-white border border-slate-200 rounded-xl overflow-hidden">
 
                                 {{-- Coloured image strip --}}

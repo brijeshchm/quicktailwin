@@ -1,20 +1,20 @@
 
 @if(!empty($homePage))
 <section class="py-10 px-4 md:px-8">
-    <h2 class="text-xl font-black text-gray-900 mb-6">Browse Categories</h2>
+    <h2 class="text-xl font-black text-gray-900 mb-6">Browse Search</h2>
     <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
 
         @foreach($homePage as $cat)
         
-              
+            @php
+            $noCitySlugs = ['wedding-planning','spa-hub'];
 
-                @php
-    $noCitySlugs = ['wedding-planning','spa-hub'];
+            $popSUrl = in_array($cat['url'], $noCitySlugs)
+            ? route('showCity', $cat['url'])
+            : route('city.slug', ['city_slug' => 'faridabad', 'service_slug' => $cat['url']]);
 
-    $popSUrl = in_array($cat['url'], $noCitySlugs)
-        ? route('showCity', $cat['url'])
-        : route('city.slug', ['city_slug' => 'faridabad', 'service_slug' => $cat['url']]);
-@endphp
+          
+            @endphp
 
 
         <a href="{{ $popSUrl }}"

@@ -32,9 +32,12 @@
             @php
             $noCitySlugs = ['wedding-planning'];
 
-            $catUrl = in_array($ws['url'], $noCitySlugs)
-            ? route('showCity', $ws['url'])
-            : route('city.slug', ['city_slug' => 'faridabad', 'service_slug' => $ws['url']]);
+            // $catUrl = in_array($ws['url'], $noCitySlugs)
+            // ? route('showCity', $ws['url'])
+            // : route('city.slug', ['city_slug' => 'faridabad', 'service_slug' => $ws['url']]);
+
+                $catUrl = route('showCity',$ws['url']);   
+            
             @endphp
 
 

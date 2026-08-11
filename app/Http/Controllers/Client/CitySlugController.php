@@ -2389,10 +2389,9 @@ $reviewList = DB::table('clients')
         $ratingCount = (int) ($kwData['ratingcount'] ?? 0);
         $ratingValue = (float) ($kwData['ratingvalue'] ?? 0);
         $bgImage    = $kwData['category_banner'] ?? '/computer-courses-training.jpg';
- 
-        $topDescription    = replaceCity($kwData['top_description'] ?? '', $area);
-        $bottomDescription = replaceCity($kwData['bottom_description'] ?? '', $area);
- 
+  
+		$topDescription = !empty($kwData['top_description']) ? replaceCity($kwData['top_description'], $area) : '';
+		$bottomDescription = !empty($kwData['bottom_description']) ? replaceCity($kwData['bottom_description'], $area) : '';
         // ── FAQs ───────────────────────────────────────────────────────────
         $faqs = [];
         for ($i = 0; $i <= 10; $i++) {
@@ -2681,14 +2680,18 @@ $reviewList = DB::table('clients')
         $keyword          = $kwData['parent_category']   ?? '';
         $childCategory    = $kwData['parent_category']   ?? '';
         $childSlug        = $kwData['parent_slug']       ?? '';
-        $topDescription   = replaceCity(strip_tags($kwData['top_description'],$city));
-        $bottomDescription= replaceCity(strip_tags($kwData['bottom_description'], $city));
+       
+		$topDescription = !empty($kwData['top_description']) ? replaceCity($kwData['top_description'], $city) : '';
+		$bottomDescription = !empty($kwData['bottom_description']) ? replaceCity($kwData['bottom_description'], $city) : '';
+
         $ratingCount      = $kwData['ratingcount']       ?? 0;
         $ratingValue      = $kwData['ratingvalue']       ?? 0;
         $bgImage          = $kwData['category_banner']   ?? '/computer-courses-training.jpg';
-        $metaTitle        = replaceCity($kwData['meta_title'],$city)        ?? $keyword;
-        $metaDescription  = replaceCity($kwData['meta_description'],$city)  ?? '';
-         $metaKeywords  = replaceCity($kwData['h1_heading'],$city)  ?? '';
+       		 
+		$metaTitle = !empty($kwData['meta_title']) ? replaceCity($kwData['meta_title'], $city) : '';
+		$metaDescription = !empty($kwData['meta_description']) ? replaceCity($kwData['meta_description'], $city) : '';
+		$metaKeywords = !empty($kwData['h1_heading']) ? replaceCity($kwData['h1_heading'], $city) : '';
+
         /* star image map */
         $starMap = [
             0 => 'star_1.png', 2 => 'star_2.png', 3 => 'star_3.png',
@@ -2761,14 +2764,20 @@ $reviewList = DB::table('clients')
         $keyword          = $kwData['child_category']   ?? '';
         $childCategory    = $kwData['child_category']   ?? '';
         $childSlug        = $kwData['child_slug']       ?? '';
-        $topDescription   = replaceCity($kwData['top_description'],$city);
-        $bottomDescription= replaceCity($kwData['bottom_description'],$city);
+        
+		$topDescription = !empty($kwData['top_description']) ? replaceCity($kwData['top_description'], $city) : '';
+		$bottomDescription = !empty($kwData['bottom_description']) ? replaceCity($kwData['bottom_description'], $city) : '';
+      
         $ratingCount      = $kwData['ratingcount']       ?? 0;
         $ratingValue      = $kwData['ratingvalue']       ?? 4.8;
         $bgImage          = $kwData['category_banner']   ?? '/computer-courses-training.jpg';
-        $metaTitle        = replaceCity($kwData['meta_title'],$city)        ?? $keyword;
-        $metaDescription  = replaceCity($kwData['meta_description'],$city)  ?? '';
-        $metaKeywords  = replaceCity($kwData['h1_heading'],$city)  ?? ''; 
+
+    
+		$metaTitle = !empty($kwData['meta_title']) ? replaceCity($kwData['meta_title'], $city) : '';
+		$metaDescription = !empty($kwData['meta_description']) ? replaceCity($kwData['meta_description'], $city) : '';
+		$metaKeywords = !empty($kwData['h1_heading']) ? replaceCity($kwData['h1_heading'], $city) : '';
+
+
   		$faqs = [];
         for ($i = 1; $i <= 6; $i++) {
             $q = $kwData["faqq{$i}"] ?? '';
@@ -2953,10 +2962,10 @@ $reviewList = DB::table('clients')
         $childCat   = $kwData['child_category'] ?? '';
         $ratingCount = (int) ($kwData['ratingcount'] ?? 0);
         $ratingValue = (float) ($kwData['ratingvalue'] ?? 4.8);
-        $bgImage    = $kwData['category_banner'] ?? '/client/images/computer-courses-training.jpg';
- 
-        $topDescription    = replaceCity($kwData['top_description'] ?? '', $area);
-        $bottomDescription = replaceCity($kwData['bottom_description'] ?? '', $area);
+        $bgImage    = $kwData['category_banner'] ?? '/client/images/computer-courses-training.jpg';  
+
+		$topDescription = !empty($kwData['top_description']) ? replaceCity($kwData['top_description'], $area) : '';
+		$bottomDescription = !empty($kwData['bottom_description']) ? replaceCity($kwData['bottom_description'], $area) : '';
  
         // ── FAQs ───────────────────────────────────────────────────────────
         $faqs = [];
@@ -2973,9 +2982,7 @@ $reviewList = DB::table('clients')
         $businesses = collect($rawList)
             ->map(fn ($b, $i) => $this->normalizeBusiness($b, $i))
             ->all();
- 
- 
-         
+          
         // ── Agents comparison table ────────────────────────────────────────
         $agents = collect($agents)
             ->map(fn ($b) => $this->normalizeAgent($b))

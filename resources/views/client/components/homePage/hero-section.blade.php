@@ -95,8 +95,7 @@
                 {{-- Trending tags --}}
                 <div class="flex flex-wrap items-center gap-1.5 mt-2 justify-center" id="trending-tags">
                     <span class="text-gray-400 text-[11px] font-medium">Trending:</span>
-                   
-                    
+                                   
                     @if(!empty($trending))
                         @foreach($trending as $tag)
                             <button
@@ -111,7 +110,7 @@
         </div>
 
         {{-- ─── Banner Keyword Slider ─── --}}
-        <!-- <div class="relative pb-0" id="banner-slider-wrapper"
+        <div class="relative pb-0" id="banner-slider-wrapper"
              onmouseenter="sliderPaused=true" onmouseleave="sliderPaused=false">
 
             <button id="slider-prev" onclick="goSlider('left')"
@@ -137,9 +136,11 @@
                 @php
     $noCitySlugs = ['wedding-planning','spa-hub'];
 
-    $catUrl = in_array($card['url'], $noCitySlugs)
-        ? route('showCity', $card['url'])
-        : route('city.slug', ['city_slug' => 'faridabad', 'service_slug' => $card['url']]);
+    // $catUrl = in_array($card['url'], $noCitySlugs)
+    //     ? route('showCity', $card['url'])
+    //     : route('city.slug', ['city_slug' => 'faridabad', 'service_slug' => $card['url']]);
+
+        $catUrl = route('showCity',$card['url']);
 @endphp
                     <a href="{{ $catUrl }}"
             title="{{ $card['title'] ?? '' }}"
@@ -180,7 +181,7 @@
             </div>
 
             <div class="flex justify-center gap-1.5 pt-2 pb-1" id="slider-dots"></div>
-        </div> -->
+        </div>
     
     
     </div>

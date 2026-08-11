@@ -132,7 +132,7 @@
                             'city_slug'    => 'online',
                             'service_slug' => $service['slug'],
                         ])
-                        : route('city.slug',['city_slug' =>  $cityName, 'service_slug' => $service['slug']]);
+                        : route('showCity',$service['slug']);
                 @endphp
                 <a href="{{ $href }}"
                    title="{{ $service['name'] }}"
@@ -231,11 +231,13 @@
                     <p class="text-xs text-gray-500 leading-relaxed">
                         @foreach($section['links'] as $i => $link)
                              @php
-                            $noCitySlugs = ['business-services'];
-                            $cityName = !empty($city) && is_string($city) ? strtolower(str_replace(' ', '-', trim($city))) : 'faridabad';
-                            $slugUrl = in_array($link['slug'], $noCitySlugs)
-                            ? route('showCity', $link['slug'])
-                            : route('city.slug', ['city_slug' => $cityName, 'service_slug' => $link['slug']]);
+                            // $noCitySlugs = ['business-services'];
+                            // $cityName = !empty($city) && is_string($city) ? strtolower(str_replace(' ', '-', trim($city))) : 'faridabad';
+                            // $slugUrl = in_array($link['slug'], $noCitySlugs)
+                            // ? route('showCity', $link['slug'])
+                            // : route('city.slug', ['city_slug' => $cityName, 'service_slug' => $link['slug']]);
+                            $slugUrl = route('showCity',$link['slug']);
+
                             @endphp
                             <a href="{{ $slugUrl }}" class="hover:text-primary transition-colors hover:underline">{{ $link['name'] }}</a>
                             @if($i < count($section['links']) - 1)
@@ -279,25 +281,18 @@
             <div>
                 
                 <ul class="space-y-2">
+
                     @foreach([
                         ['name' => 'Professional Courses', 'slug' => 'professional-courses','type'=>'categories'],
-                        ['name' => 'Wedding Planning',    'slug' => 'wedding-planning','type'=>'keyword'],
-                        ['name' => 'Healthcare',          'slug' => 'health-wellness','type'=>'keyword'],
-                        ['name' => 'Real Estate',         'slug' => 'real-estate','type'=>'child'],
-                        
-                        ['name' => 'Security System',     'slug' => 'security-system','type'=>'child'],
-                      
+                        ['name' => 'Wedding Planning','slug' => 'wedding-planning','type'=>'keyword'],
+                        ['name' => 'Healthcare','slug' => 'health-wellness','type'=>'keyword'],
+                        ['name' => 'Real Estate','slug' => 'real-estate','type'=>'child'],                        
+                        ['name' => 'Security System','slug' => 'security-system','type'=>'child'],                   
                     ] as $link)             
-                         @php
-                            $noCitySlugs = ['wedding-planning'];
-                            $cityName = !empty($city) && is_string($city) ? strtolower(str_replace(' ', '-', trim($city))) : 'faridabad';
-                            $catUrl = in_array($link['slug'], $noCitySlugs)
-                            ? route('showCity', $link['slug'])
-                            : route('city.slug', ['city_slug' => $cityName, 'service_slug' => $link['slug']]);
-                            @endphp
+                        @php
+                        $catUrl = route('showCity',$link['slug']);
+                        @endphp
                         <li>
-
-
                             <a href="{{ $catUrl }}" class="text-gray-500 text-sm hover:text-primary transition-colors">{{ $link['name'] }}</a>
                         </li>
                     @endforeach
@@ -393,7 +388,7 @@
             <p class="text-gray-500 text-xs">
                  {{ date('Y') }} QuickDials Directory. All rights reserved.
             </p>
-            <span class="text-gray-600 text-base">Made with precision in India 🇮🇳</span>
+            <span class="text-gray-600 text-base">Made with precision in India</span>
         </div>
     </div>
 </footer>
