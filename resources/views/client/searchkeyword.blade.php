@@ -894,7 +894,7 @@ $keywordImg= !empty($kwData['key_icon'])
             <h2 class="text-2xl font-bold text-gray-900 mb-6">Related <span class="text-blue-600">{{ ucfirst($city) }} Categories</span></h2>
             <div class="flex flex-wrap gap-x-8 gap-y-3 text-[15px]">
                 @foreach($relatedCategory as $slug_c => $name)
-                <a href="{{ route('city.slug', ['city_slug'=> $cityName,'service_slug' => $slug_c])}}" class="text-gray-700 hover:text-blue-600 transition-colors duration-200">{{ $name }}</a>
+                <a href="{{ route('showCity',$slug_c)}}" class="text-gray-700 hover:text-blue-600 transition-colors duration-200">{{ $name }}</a>
                 @endforeach
             </div>
             <div class="mt-8">
