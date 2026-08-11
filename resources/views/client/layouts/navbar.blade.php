@@ -20,7 +20,7 @@
 
         {{-- Sticky search bar (hidden until user scrolls) --}}
 
-        @if (!request()->is('/'))
+       
         <div
             id="sticky-search-wrapper"
             class="flex-1 max-w-xl relative hidden md:block opacity-0 pointer-events-none transition-all duration-200"
@@ -108,7 +108,7 @@
                 <ul id="sticky-suggestions-list"></ul>
             </div>
         </div>
-@endif
+ 
 
         {{-- Desktop nav links --}}
         <nav id="desktop-nav" class="hidden md:flex items-center gap-6 shrink-0 transition-all duration-200">
@@ -740,7 +740,7 @@ if(!empty($clientcheck)){
 const navbar      = document.getElementById('main-navbar');
 const stickyWrap  = document.getElementById('sticky-search-wrapper');
 const desktopNav  = document.getElementById('desktop-nav');
-
+ @if (!request()->is('/'))
 window.addEventListener('scroll', () => {
     const y = window.scrollY;
   
@@ -764,6 +764,8 @@ window.addEventListener('scroll', () => {
         desktopNav.classList.remove('opacity-0', 'overflow-hidden', 'pointer-events-none', 'w-0');
     }
 }, { passive: true });
+
+@endif
 
 // ─── Sticky City Dropdown ──────────────────────────────────────────────────
 let stickySelectedCity = 'faridabad';

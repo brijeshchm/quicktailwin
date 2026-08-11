@@ -490,6 +490,35 @@ function redirectSearch(keyword, city) {
 
 
 
+// ─── Navbar scroll behavior ────────────────────────────────────────────────
+const navbarhome      = document.getElementById('main-navbar');
+const stickyWraphome  = document.getElementById('sticky-search-wrapper');
+const desktopNavhome  = document.getElementById('desktop-nav');
+
+window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+  
+    const scrolled = y > 140;
+    const showSearch = y > 140;
+ 
+    navbarhome.classList.toggle('bg-white/95', scrolled || false);
+    navbarhome.classList.toggle('backdrop-blur-md', scrolled);
+    navbarhome.classList.toggle('shadow-sm', scrolled);
+    navbarhome.classList.toggle('border-b', scrolled);
+    navbarhome.classList.toggle('border-gray-100', scrolled);
+    navbarhome.classList.toggle('bg-transparent', !scrolled);
+
+    if (showSearch) {
+        stickyWraphome.classList.remove('opacity-0', 'pointer-events-none');
+        stickyWraphome.classList.add('opacity-100');
+        desktopNavhome.classList.add('opacity-0', 'overflow-hidden', 'pointer-events-none', 'w-0');
+    } else {
+        stickyWraphome.classList.add('opacity-0', 'pointer-events-none');
+        stickyWraphome.classList.remove('opacity-100');
+        desktopNavhome.classList.remove('opacity-0', 'overflow-hidden', 'pointer-events-none', 'w-0');
+    }
+}, { passive: true });
+
 
 </script>
  

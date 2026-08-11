@@ -2572,7 +2572,7 @@ $reviewList = DB::table('clients')
    $slugUrl = $this->resolveBestCandidate($newSlug, $keywordMap);
  
     if (!$cityName) {
- 	 
+  
  		$cityData = $cityMap[$cityName] ?? null;
         if (!isset($cityData) && !$slugUrl) {			 
 			abort(410);
@@ -2583,7 +2583,7 @@ $reviewList = DB::table('clients')
         //     'service_slug' => $slug,
         // ], 301);
 		if($slugUrl){
-		return redirect()->route('showCity', $slugUrl, 301);	
+			return redirect()->route('showCity', $slugUrl, 301);	
 		}	
     }
 
