@@ -305,7 +305,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                  class="reveal rounded-2xl overflow-hidden shadow-xl mb-8 card-glow">
                 <div class="w-full relative"
                      style="aspect-ratio: 16/7;
-                            {{ !empty($blogDetails['blogImage'])
+                    {{ !empty($blogDetails['blogImage'])
                                 ? 'background-image: url(' . e($blogDetails['blogImage']) . '); background-size: cover; background-position: center;'
                                 : 'background: linear-gradient(135deg,#1e3a5f 0%,#2563eb 50%,#0891b2 100%);' }}">
 
