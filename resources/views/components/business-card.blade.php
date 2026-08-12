@@ -284,20 +284,18 @@ document.addEventListener('DOMContentLoaded', () => {
             @endif
          
             @if(!empty($business['businessDescription']))
-            <p class="sm:block text-sm text-gray-500 mt-1 line-clamp-1">
+            <p class="sm:block text-sm text-gray-500 mt-1 line-clamp-3">
             {!! $business['businessDescription'] !!}
             </p>
-            @endif
-                
-              
+            @endif                             
             {{-- Tags/Category --}}
-            @if(count($category) > 0)
+            <!-- @if(count($category) > 0)
             <div class="flex items-center gap-1.5 mt-2 flex-wrap">
                 @foreach(array_slice($category, 0, 5) as $tag)
                 <span class="text-[9px] sm:text-sm text-indigo-600 bg-indigo-50 border border-indigo-100 px-1.5 sm:px-2 py-0.5 rounded-full font-medium">{{ $tag }}</span>
                 @endforeach
             </div>
-            @endif
+            @endif -->
         </div>
     </div>
 
