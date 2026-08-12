@@ -191,7 +191,7 @@ $colorMap = [
             <div class="p-4">
                 <div class="flex flex-wrap gap-2">
                     @foreach($sections as $item)
-                    <a href="{{ route('city.slug', ['city_slug'=> $city,'service_slug' => $item['child_slug']])}}"
+                    <a href="{{ route('showCity', $item['child_slug'])}}"
                        class="c-item-btn px-3.5 py-1.5 rounded-lg text-sm font-medium
                               flex items-center gap-1.5">
                         @if(!empty($item['icon']))
