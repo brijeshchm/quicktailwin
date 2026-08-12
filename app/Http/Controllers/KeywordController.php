@@ -1384,7 +1384,7 @@ class KeywordController extends Controller
 			return view('errors.unauthorised');
 		}
 
-
+ 
 		if ($request->ajax()) {
 			$leads = DB::table('keyword as k');
 			if ($request->input('search.value') != '') {
@@ -1399,7 +1399,13 @@ class KeywordController extends Controller
 			}
 			$leads = $leads->select('k.keyword', 'k.id', 'k.meta_title', 'k.h1_heading', 'k.meta_description', 'k.top_description', 'k.bottom_description');
 			$leads = $leads->distinct();
-			$leads = $leads->orderBy('k.id', 'desc');
+			//$leads = $leads->orderBy('k.short_definition', 'desc');
+			$leads = $leads->orderByRaw("
+			CASE
+			WHEN k.short_definition IS NULL OR TRIM(k.short_definition) = '' THEN 0
+			ELSE 1
+			END
+			")->orderBy('k.short_definition', 'desc');
 			$leads = $leads->paginate($request->input('length'), ['k.keyword']);
 
 			if ($leads) {
