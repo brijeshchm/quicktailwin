@@ -282,12 +282,166 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span class="line-clamp-1">{{ collect([$address, $city])->filter()->implode(', ') }}</span>
             </p>
             @endif
-         
+<!--          
             @if(!empty($business['businessDescription']))
             <p class="sm:block text-sm text-gray-500 mt-1 line-clamp-3">
             {!! $business['businessDescription'] !!}
             </p>
-            @endif                             
+            @endif           -->
+             @if(!empty($business['businessDescription']))
+
+<div x-data="{ showDescription: false }">
+
+    {{-- Desktop Description --}}
+    <p class="hidden sm:block text-sm text-gray-500 mt-1 line-clamp-3">
+        {!! $business['businessDescription'] !!}
+    </p>
+
+    {{-- Mobile Description --}}
+    <div class="sm:hidden mt-1">
+        <p class="text-sm text-gray-500 line-clamp-2">
+            {!! strip_tags($business['businessDescription']) !!}
+        </p>
+
+        <button
+            type="button"
+            @click="
+                showDescription = true;
+                document.body.style.overflow = 'hidden';
+            "
+            class="text-xs font-semibold text-blue-600 mt-1"
+        >
+            Read More
+        </button>
+    </div>
+
+    {{-- Mobile Popup --}}
+
+
+<div
+    x-show="showDescription"
+    x-cloak
+    class="fixed inset-0 z-[99999] sm:hidden bg-black/50"
+>
+    <div
+        class="absolute inset-x-0 bottom-0
+               bg-white
+               rounded-t-3xl
+               shadow-2xl
+               h-[75vh]
+               max-h-[75vh]
+               flex flex-col
+               overflow-hidden
+               z-[100000]"
+    >
+
+        {{-- Header --}}
+        <div class="flex-none flex items-center justify-between
+                    px-5 py-4
+                    bg-white
+                    border-b border-gray-200">
+
+            <h3 class="text-base font-bold text-gray-900">
+                Business Description
+            </h3>
+
+            <button
+                type="button"
+                @click="showDescription = false"
+                class="w-9 h-9 flex items-center justify-center
+                       rounded-full bg-gray-100 text-gray-600"
+            >
+                ✕
+            </button>
+        </div>
+
+        {{-- Scrollable Content --}}
+        <div class="flex-1 min-h-0
+                    overflow-y-auto
+                    overflow-x-hidden
+                    overscroll-contain
+                    px-5 py-5
+                    bg-white">
+
+            <div class="text-sm text-gray-700
+                        leading-6
+                        break-words
+                        whitespace-normal">
+                {!! $business['businessDescription'] !!}
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+    <!-- <div
+        x-show="showDescription"
+        x-cloak
+        x-transition.opacity
+        class="fixed inset-0 z-[99999] sm:hidden"
+        style="display: none;"
+    >
+
+        {{-- Dark Overlay --}}
+        <div
+            class="absolute inset-0 bg-black/60"
+            @click="
+                showDescription = false;
+                document.body.style.overflow = '';
+            "
+        ></div>
+
+        {{-- Popup Box --}}
+        <div
+            class="absolute inset-x-0 bottom-0
+                   bg-white
+                   rounded-t-3xl
+                   shadow-2xl
+                   max-h-[80vh]
+                   overflow-y-auto
+                   z-[100000]"
+            @click.stop
+        >
+        
+
+            {{-- Header --}}
+            <div class="sticky top-0 bg-white border-b border-gray-100
+                        px-5 py-4 flex items-center justify-between z-10 ">
+
+                <h3 class="text-base font-bold text-gray-900">
+                    Business Description
+                </h3>
+
+                <button
+                    type="button"
+                    @click="
+                        showDescription = false;
+                        document.body.style.overflow = '';
+                    "
+                    class="w-9 h-9 rounded-full bg-gray-100
+                           flex items-center justify-center
+                           text-gray-600 text-lg"
+                >
+                    ✕
+                </button>
+
+            </div>
+
+            {{-- Description --}}
+            <div class="p-5 bg-white">
+                <div class="text-sm text-gray-600 leading-relaxed">
+                    {!! $business['businessDescription'] !!}
+                </div>
+            </div>
+
+        </div>
+
+    </div> -->
+
+</div>
+
+@endif
             {{-- Tags/Category --}}
             <!-- @if(count($category) > 0)
             <div class="flex items-center gap-1.5 mt-2 flex-wrap">
@@ -306,7 +460,7 @@ document.addEventListener('DOMContentLoaded', () => {
             $actionClass = 'flex items-center justify-center gap-1 rounded-xl py-2 text-[10px] font-semibold text-white transition sm:text-xs';
         @endphp
 
-        <div class="grid w-full grid-cols-4 gap-2">
+        <div class="grid w-full grid-cols-4 gap-2 ">
             <!-- <a href="tel:{{ $business['mobile'] ?? '' }}" rel="nofollow"
             class="{{ $actionClass }} bg-indigo-600 hover:bg-indigo-700">
                 📞 <span>Call</span>
