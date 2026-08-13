@@ -59,9 +59,9 @@ class BlogController extends Controller
 				'ratingcount' => 'required|integer|min:0',
 				'title' => 'required|string|min:50|max:175',
 				'slug' => 'required|string|min:50|max:175',
-				'meta_title' => 'required|string|min:50|max:85',
+				'meta_title' => 'required|string|min:30|max:60',
 				'h1_heading' => 'required|string|max:255',
-				'meta_description' => 'required|string|min:150|max:165',
+				'meta_description' => 'required|string|min:70|max:155',
 				'description' => 'required|string|max:500',
 			]);
 

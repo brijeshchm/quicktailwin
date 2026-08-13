@@ -1914,9 +1914,11 @@ $leads->whereDate('created_at', '<=', $dateTo);
 			return response()->json(['status' => 1, 'errors' => $danger_msg], 400);
 		}
 		$validator = Validator::make($request->all(), [
-			'meta_title' => 'required|min:3|max:60',
+
+			'meta_title'        => 'required|string|min:30|max:60',
+			'meta_description'  => 'required|string|min:70|max:155',
 			'h1_heading' => 'required|min:10|max:260',
-			'meta_description' => 'required|min:45|max:155',
+	
 			'short_definition' => 'required|min:45|max:360',
 			'ratingvalue' => 'required|numeric',
 			'ratingcount' => 'required|numeric',
@@ -2436,8 +2438,11 @@ $leads->whereDate('created_at', '<=', $dateTo);
 
 		// Form validation
 		$validated = $request->validate([
-			'meta_title'        => 'nullable|string|max:255',
-			'meta_description'  => 'nullable|string',
+
+
+			'meta_title'        => 'required|string|min:30|max:60',
+			'meta_description'  => 'required|string|min:70|max:155',
+	
 			'h1_heading'        => 'nullable|string|max:255',
 			'top_heading'       => 'nullable|string|max:255',
 			'top_description'   => 'nullable|string',
@@ -2600,8 +2605,8 @@ $leads->whereDate('created_at', '<=', $dateTo);
 
 		// Form validation
 		$validated = $request->validate([
-			'meta_title'        => 'nullable|string|max:60',
-			'meta_description'  => 'nullable|string|max:155',
+			'meta_title'        => 'nullable|string|min:30|max:60',
+			'meta_description'  => 'nullable|string|min:70|max:155',
 			'h1_heading'        => 'nullable|string|max:255',
 			'top_heading'       => 'nullable|string|max:255',
 			'top_description'   => 'nullable|string',
