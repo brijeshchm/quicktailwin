@@ -61,7 +61,7 @@ class BlogController extends Controller
 				'slug' => 'required|string|min:50|max:175',
 				'meta_title' => 'required|string|min:30|max:60',
 				'h1_heading' => 'required|string|max:255',
-				'meta_description' => 'required|string|min:70|max:155',
+				'meta_description' => 'required|string|min:70|max:161',
 				'description' => 'required|string|max:500',
 			]);
 
@@ -109,7 +109,7 @@ class BlogController extends Controller
 
 					'meta_title' => 'required|string',
 					'h1_heading' => 'required|string|max:255',
-					'meta_description' => 'required|string',
+					'meta_description' => 'required|string|min:70|max:161',
 
 				]);
 
@@ -247,10 +247,9 @@ class BlogController extends Controller
 			$this->validate($request, [
 				'name' => 'required|max:200',
 				'description' => 'required',
-				// 'image' => 'required',
-				'meta_title' => 'required',
+				'meta_title' => 'required|min:30|max:61',
 				'h1_heading' => 'required',
-				'meta_description' => 'required',
+				'meta_description' => 'required|min:70|max:161',
 
 			]);
 
@@ -370,10 +369,10 @@ class BlogController extends Controller
 				'ratingcount' => 'required|integer|min:0',
 				'title' => 'required|string',
 				'slug' => 'required|string',
-				'meta_title' => 'required|string',
+				'meta_title' => 'required|string|min:30|max:61',
 				'h1_heading' => 'required|string|max:255',
-				'meta_description' => 'required|string',
-				// 'description' => 'required|string',
+				'meta_description' => 'required|string|min:70|max:161',
+				
 			]);
 
 			if ($validator->fails()) {
