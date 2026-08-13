@@ -1915,7 +1915,7 @@ $leads->whereDate('created_at', '<=', $dateTo);
 		}
 		$validator = Validator::make($request->all(), [
 
-			'meta_title'        => 'required|string|min:30|max:60',
+			'meta_title'        => 'required|string|min:30|max:61',
 			'meta_description'  => 'required|string|min:70|max:161',
 			'h1_heading' => 'required|min:10|max:260',
 	
@@ -2440,7 +2440,7 @@ $leads->whereDate('created_at', '<=', $dateTo);
 		$validated = $request->validate([
 
 
-			'meta_title'        => 'required|string|min:30|max:60',
+			'meta_title'        => 'required|string|min:30|max:61',
 			'meta_description'  => 'required|string|min:70|max:161',
 	
 			'h1_heading'        => 'nullable|string|max:255',
@@ -2605,7 +2605,7 @@ $leads->whereDate('created_at', '<=', $dateTo);
 
 		// Form validation
 		$validated = $request->validate([
-			'meta_title'        => 'nullable|string|min:30|max:60',
+			'meta_title'        => 'nullable|string|min:30|max:61',
 			'meta_description'  => 'nullable|string|min:70|max:161',
 			'h1_heading'        => 'nullable|string|max:255',
 			'top_heading'       => 'nullable|string|max:255',
