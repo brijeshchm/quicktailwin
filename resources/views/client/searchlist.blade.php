@@ -8,7 +8,7 @@
     ];
 
      $singleCities = [
-        'faridabad'
+        'faridabad','noida'
     ];
 
 
@@ -917,8 +917,8 @@ function bannerSlider(banners, interval = 4000) {
 
 @endif
 
-  @if(!in_array($cityName, $singleCities) ||
-    !in_array($kwData['keyword_slug'], $keywordArray))
+ @if($shouldIndex && $cityName =='noida')
+ 
     {{-- Top Description --}}
     @if(!empty($topDescription))
     <div class="bg-white rounded-2xl p-6 mt-4 mx-4">
@@ -967,9 +967,8 @@ function bannerSlider(banners, interval = 4000) {
         width:100%;
     }
     </style>
-
-    @if(!in_array($cityName, $singleCities) ||
-    !in_array($kwData['keyword_slug'], $keywordArray))
+ @if($shouldIndex && $cityName =='noida')
+  
     {{-- Bottom Description --}}
     @if(!empty($bottomDescription))
 
@@ -989,7 +988,10 @@ function bannerSlider(banners, interval = 4000) {
         <div class="text-sm text-gray-600 leading-relaxed">{!! $bottomDescription !!}</div>
     </div>
     @endif
+    @endif
 
+      @if(!in_array($cityName, $singleCities) ||
+    !in_array($kwData['keyword_slug'], $keywordArray))
 
     {{-- extra_description --}}
     @if(!empty($kwData['extra_description']))
@@ -1508,13 +1510,13 @@ function bannerSlider(banners, interval = 4000) {
 
     {{-- Other Cities --}}
     <div class="bg-white rounded-2xl p-6 mt-4 mx-4">
-        <h2 class="text-base font-bold text-gray-900 mb-3 flex items-center gap-2"> Find {{ $keyword }} in Other City</h2>
+        <h2 class="text-base font-bold text-gray-900 mb-3 flex items-center gap-2"> Find {{ $keyword }} in Popular City</h2>
         <ul class="flex flex-wrap gap-2 text-sm text-gray-600">
             @foreach($otherCities as $i => $c)
             <li class="flex items-center">
                 <a href="{{ route('city.slug', ['city_slug' => $c,
                 'service_slug' => $kwData['keyword_slug']?? null
-                ]) }}" class="hover:text-indigo-600">{{ $keyword }} in {{ ucfirst($c) }}</a>
+                ]) }}" class="hover:text-indigo-600"> {{ ucfirst($c) }}</a>
                 @if($i !== count($otherCities) - 1)
                 <span class="mx-1 text-gray-400">|</span>
                 @endif
@@ -1526,7 +1528,7 @@ function bannerSlider(banners, interval = 4000) {
     {{-- Related Services --}}
     @if(!empty($servicesRelated))
     <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mt-4 mb-4 mx-4">
-        <h2 class="text-lg sm:text-xl md:text-2xl font-semibold text-blue-900"> Find Services Related to {{ $keyword }} in {{ ucfirst($city) }}</h2>
+        <h2 class="text-lg sm:text-xl md:text-2xl font-semibold text-blue-900"> Services Related to {{ $keyword }} in {{ ucfirst($city) }}</h2>
         <ul class="flex flex-wrap gap-2 text-sm text-gray-600">
             @foreach($servicesRelated as $i => $service)
             <li class="flex items-center">

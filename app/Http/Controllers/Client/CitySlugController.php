@@ -609,6 +609,7 @@ class CitySlugController extends Controller
 			->where('parent_category_id', $keywordDetails->parent_category_id)
 			->select('keyword', 'icon', 'slug','meta_description')
 			->orderBy('keyword', 'asc')
+			->limit(50)
 			->distinct()
 			->get();
 
@@ -1346,6 +1347,7 @@ $reviewList = DB::table('clients')
 			->where('parent_category_id', $keywordDetails->parent_category_id)
 			->select('keyword', 'icon', 'slug')
 			->orderBy('keyword', 'asc')
+			->limit(50)
 			->distinct()
 			->get();
 

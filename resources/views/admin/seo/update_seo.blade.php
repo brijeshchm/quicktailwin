@@ -213,7 +213,7 @@ padding:0px;
         </div>
 
         <div class="section-border">
-            <h4>Page Content</h4>
+            <h4>Noida City Page Content</h4>
             <form class="form-horizontal" method="POST" onsubmit="return keywordController.updatePageContent(this,<?php echo (isset($keyword->id)? $keyword->id:""); ?>)" >
                 {{ csrf_field() }}
                 <div class="form-group">
@@ -251,7 +251,7 @@ padding:0px;
         </div>
 
         <div class="section-border">
-            <h4>Extra Content</h4>
+            <h4>Extra Content Without City</h4>
             <form class="form-horizontal" method="POST" onsubmit="return keywordController.extraPageContent(this,<?php echo (isset($keyword->id)? $keyword->id:""); ?>)" >
                 {{ csrf_field() }}
                 <div class="form-group">
@@ -280,7 +280,7 @@ padding:0px;
 
 
 <div class="section-border">
-            <h4>Without City Page Content</h4>
+            <h4>Faridabad only City Page Content</h4>
             <form class="form-horizontal" method="POST" onsubmit="return keywordController.updatePageWithoutCityContent(this,<?php echo (isset($keyword->id)? $keyword->id:""); ?>)" >
                 {{ csrf_field() }}
                 <div class="form-group">
@@ -494,7 +494,7 @@ padding:0px;
         <!-- /#page-wrapper -->
 
 
- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">

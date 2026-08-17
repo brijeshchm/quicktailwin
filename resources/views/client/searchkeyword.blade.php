@@ -780,22 +780,7 @@ $keywordImg= !empty($kwData['key_icon'])
     </div>
     @endif
 
-    {{-- Top Description --}}
-    @if(!empty($topDescription))
-        @php
-    $defaultHeading = '';
-
-    if (!empty($kwData['top_heading'])) {
-        $defaultHeading=  $kwData['top_heading'];
-    }else{
-     $defaultHeading = 'Trusted '. $keyword;
-    }    
-    @endphp
-    <div class="bg-white rounded-2xl p-6 mt-4 mx-4">
-        <h2 class="text-lg font-bold text-gray-900 mb-3"> {{ $defaultHeading }}</h2>
-        <div class="text-sm text-gray-600 leading-relaxed">{!! $topDescription !!}</div>
-    </div>
-    @endif
+ 
 <style>
     .leading-relaxed h3{
         font-size: 1.225rem;
@@ -821,24 +806,6 @@ $keywordImg= !empty($kwData['key_icon'])
         width:100%;
     }
     </style>
-    {{-- Bottom Description --}}
-    @if(!empty($bottomDescription))
-
-     @php
-    $bottom_heading = '';
-
-    if (!empty($kwData['bottom_heading'])) {
-        $bottom_heading=  $kwData['bottom_heading'];
-    }else{
-     $bottom_heading = 'Find the Best '.$keyword;
-    }    
-    @endphp
-    
-    <div class="bg-white rounded-2xl p-6 mt-4 mx-4">
-        <h2 class="text-lg font-bold text-gray-900 mb-3"> {{ $bottom_heading }}  </h2>
-        <div class="text-sm text-gray-600 leading-relaxed">{!! $bottomDescription !!}</div>
-    </div>
-    @endif
 
 
 
@@ -906,7 +873,7 @@ $keywordImg= !empty($kwData['key_icon'])
 
     {{-- Other Cities --}}
     <div class="bg-white rounded-2xl p-6 mt-4 mx-4">
-        <h2 class="text-base font-bold text-gray-900 mb-3 flex items-center gap-2"> Find {{ $keyword }} in Other City</h2>
+        <h2 class="text-base font-bold text-gray-900 mb-3 flex items-center gap-2"> Find {{ $keyword }} in Popular City</h2>
         <ul class="flex flex-wrap gap-2 text-sm text-gray-600">
             @foreach($otherCities as $i => $c)
             <li class="flex items-center">
@@ -914,7 +881,7 @@ $keywordImg= !empty($kwData['key_icon'])
 
                 <a href="{{ route('city.slug', ['city_slug' => $c,
                 'service_slug' => $slug?? null
-                ]) }}" class="hover:text-indigo-600">{{ $keyword }} in {{ ucfirst($c) }}</a>
+                ]) }}" class="hover:text-indigo-600">{{ ucfirst($c) }}</a>
                 @if($i !== count($otherCities) - 1)
                 <span class="mx-1 text-gray-400">|</span>
                 @endif
