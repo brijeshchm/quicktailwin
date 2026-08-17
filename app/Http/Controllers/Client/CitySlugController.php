@@ -149,19 +149,19 @@ class CitySlugController extends Controller
 		} 
 
 		if (!empty($keywordDetails->top_wcity_description)) {
-			$top_wcity_description = $keywordDetails->top_wcity_description;
+			$top_wcity_description = preg_replace('/{{city}}/i', ucfirst($city), $keywordDetails->top_wcity_description);
 		}  
 
 		if (!empty($keywordDetails->top_wcity_heading)) {
-			$top_wcity_heading = $keywordDetails->top_wcity_heading;
+			$top_wcity_heading =preg_replace('/{{city}}/i', ucfirst($city), $keywordDetails->top_wcity_heading);
 		}  
 
 		if (!empty($keywordDetails->bottom_wcity_heading)) {
-			$bottom_wcity_heading = $keywordDetails->bottom_wcity_heading;
+			$bottom_wcity_heading = preg_replace('/{{city}}/i', ucfirst($city), $keywordDetails->bottom_wcity_heading);
 		}  
 
 		if (!empty($keywordDetails->bottom_wcity_description)) {
-			$bottom_wcity_description = $keywordDetails->bottom_wcity_description;
+			$bottom_wcity_description = preg_replace('/{{city}}/i', ucfirst($city), $keywordDetails->bottom_wcity_description);
 		}  
 
 		if (!empty($keywordDetails->meta_description)) {
