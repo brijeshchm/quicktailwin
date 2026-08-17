@@ -49,16 +49,7 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
         <div>
             <nav class="text-xs sm:text-sm text-slate-500 mb-1 flex items-center gap-1.5 flex-wrap">
                 <a href="{{ route('home') }}" class="hover:text-indigo-600 transition-colors">Home</a>
-                <span>›</span>  
-                @php
-                   $cityName = !empty($city) && is_string($city) ? strtolower(str_replace(' ', '-', trim($city))) : 'faridabad';                  
-                @endphp
-                @if(!empty(request()->segment(1) === $cityName) && !empty($cityName))
-                <a href="{{ route('showCity',$cityName) }}" class="hover:text-indigo-600 transition-colors">{{ ucfirst($city)}}</a>
-                <span>›</span>    
-                @endif   
-
-                                  
+                <span>›</span>                                   
                     <span>{{ $keyword }} </span>
                        
                     <!-- <span>›</span>            
@@ -68,7 +59,7 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
 
               <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
                     <div itemprop="name">
-                        <h1 class="text-lg font-bold text-gray-900 leading-tight">{{ !empty($kwData['h1_heading']) ? replaceCity($kwData['h1_heading'],$city): trim(($keyword ?? '') . (!empty($city) ? ' in ' . ucwords(strtolower(str_replace('-', ' ', $city))) : '' ))}}</h1>
+                        <h1 class="text-lg font-bold text-gray-900 leading-tight">{{ !empty($kwData['h1_heading']) ? replaceCity($kwData['h1_heading'], $city) : '' }}</h1>
                     </div>                           
                     <div itemprop="aggregateRating"
                         itemscope

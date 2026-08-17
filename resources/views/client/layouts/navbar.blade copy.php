@@ -87,11 +87,8 @@
                     placeholder="Search businesses,Power by AI services,..."
                     class="flex-1 text-xs px-2.5  border-gray-100 outline-none bg-transparent text-gray-800 placeholder:text-gray-400 hover:border-gray-300"
                     oninput="handleStickySearchInput(this.value)"
-                    onfocus="handleStickySearchFocus()"
                     onkeydown="handleStickyKeydown(event)"
                 />
-
-           
 
                 {{-- Search button --}}
                 <button
@@ -645,7 +642,6 @@ if(!empty($clientcheck)){
                 placeholder="Search businesses, Power by AI services..."
                 class="flex-1 text-xs px-2.5 outline-none bg-transparent text-gray-800 placeholder:text-gray-400"
                 oninput="handleMobileSearchInput(this.value)"
-                onfocus="handleMobileSearchFocus()"
                 onkeydown="handleMobileKeydown(event)"
             />
 
@@ -850,67 +846,23 @@ document.addEventListener('mousedown', (e) => {
     }
 });
 
-
 // ─── Sticky Search + Suggestions ──────────────────────────────────────────
 let stickySearchTimeout = null;
 let stickySuggestions   = [];
 let activeStickyIdx     = -1;
 
-// Default/trending keywords shown on click before typing anything.
-// Replace this fallback array with whatever popular searches you want to show.
-const DEFAULT_KEYWORDS = [
-    { id: 'artificial-intelligence-training', label: 'Artificial Intelligence Training', kind: 'trending' },
-    { id: 'python-training', label: 'Python Training', kind: 'trending' },
-    { id: 'sap-training', label: 'SAP Training', kind: 'trending' },
-    { id: 'workday-training', label: 'Workday Training', kind: 'trending' },
-    { id: 'banquet-hall', label: 'Banquet Hall', kind: 'trending' },
-    { id: 'cricket-academy', label: 'Cricket Academy', kind: 'trending' },
-];
-
-// Fired on focus/click — shows default keywords if the box is empty,
-// or re-shows the last fetched suggestions if the user already typed something.
-function handleStickySearchFocus() {
-    const val = document.getElementById('sticky-search-input').value.trim();
-    if (val.length < 1) {
-        showDefaultStickySuggestions();
-    } else if (stickySuggestions.length) {
-        document.getElementById('sticky-suggestions').classList.remove('hidden');
-    } else {
-        fetchStickySuggestions(val);
-    }
-}
-
-function showDefaultStickySuggestions() {
-    stickySuggestions = DEFAULT_KEYWORDS;
-    const list = document.getElementById('sticky-suggestions-list');
-    const box  = document.getElementById('sticky-suggestions');
-
-    list.innerHTML = `
-        <li class="px-4 pt-2.5 pb-1 text-[10px] font-bold text-gray-400 uppercase tracking-wide">Popular Searches</li>
-        ${stickySuggestions.map((s, idx) => `
-        <li>
-            <button onmouseenter="activeStickyIdx=${idx}" onmousedown="selectStickySuggestion(${idx})"
-                class="w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors hover:bg-gray-50">
-                <svg class="w-3.5 h-3.5 text-gray-300 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                <span class="flex-1 text-sm text-gray-700">${s.label}</span>
-            </button>
-        </li>`).join('')}
-    `;
-    box.classList.remove('hidden');
-    activeStickyIdx = -1;
-}
-
 function handleStickySearchInput(val) {
+    alert(val);
     clearTimeout(stickySearchTimeout);
     if (val.trim().length < 1) {
-        showDefaultStickySuggestions();
+        alert('inner');
+        hideStickysuggestions();
         return;
     }
     stickySearchTimeout = setTimeout(() => fetchStickySuggestions(val.trim()), 220);
 }
 
 async function fetchStickySuggestions(q) {
-    
     try {
         const res  = await fetch(`https://api.quickdials.com/api/website/get-keyword-list?keyword=${encodeURIComponent(q)}`);
         const data = await res.json();
@@ -953,121 +905,30 @@ function hideStickysuggestions() {
 
 function selectStickySuggestion(idx) {
     const s = stickySuggestions[idx];
-    if (!s) return;
-    document.getElementById('sticky-search-input').value = s.label;
+      if (!s) return;
+    document.getElementById('sticky-search-input').value = s.id;
     hideStickysuggestions();
     redirectSearch(s.id, stickySelectedCity);
 }
 
 function handleStickyKeydown(e) {
+    
+
     if (e.key === 'ArrowDown') { e.preventDefault(); activeStickyIdx = Math.min(activeStickyIdx+1, stickySuggestions.length-1); }
     else if (e.key === 'ArrowUp')  { e.preventDefault(); activeStickyIdx = Math.max(activeStickyIdx-1, 0); }
     else if (e.key === 'Enter')  { e.preventDefault(); activeStickyIdx >= 0 ? selectStickySuggestion(activeStickyIdx) : doStickySearch(); }
     else if (e.key === 'Escape') hideStickysuggestions();
 }
 
-function handleMobileSearchInput(val) {
-    clearTimeout(mobileSearchTimeout);
-    if (val.trim().length < 1) {
-        showDefaultMobileSuggestions();
-        return;
-    }
-    if (val.trim().length < 2) { hideMobileSuggestions(); return; }
-    mobileSearchTimeout = setTimeout(() => fetchMobileSuggestions(val.trim()), 220);
+function doStickySearch() {
+    const kw = document.getElementById('sticky-search-input').value.trim();
+    redirectSearch(kw, stickySelectedCity);
 }
 
-function selectMobileSuggestion(idx) {
-    const s = mobileSuggestions[idx];
-    if (!s) return;
-    document.getElementById('mobile-search-input').value = s.label;
-    hideMobileSuggestions();
-    redirectSearch(s.id, stickySelectedCity);
+function doMobileSearch() {
+    const kw = document.getElementById('mobile-search-input').value.trim();
+    redirectSearch(kw, stickySelectedCity);
 }
-
-
-// // ─── Sticky Search + Suggestions ──────────────────────────────────────────
-// let stickySearchTimeout = null;
-// let stickySuggestions   = [];
-// let activeStickyIdx     = -1;
-
-// function handleStickySearchInput(val) {
-//     alert(val);
-//     clearTimeout(stickySearchTimeout);
-//     if (val.trim().length < 1) {
-//         alert('inner');
-//         hideStickysuggestions();
-//         return;
-//     }
-//     stickySearchTimeout = setTimeout(() => fetchStickySuggestions(val.trim()), 220);
-// }
-
-// async function fetchStickySuggestions(q) {
-//     try {
-//         const res  = await fetch(`https://api.quickdials.com/api/website/get-keyword-list?keyword=${encodeURIComponent(q)}`);
-//         const data = await res.json();
-//         stickySuggestions = (data.data ?? []).map(i => ({ id: i.slug, label: i.keyword, kind: i.type }));
-//         renderStickySuggestions(q);
-//     } catch { hideStickysuggestions(); }
-// }
-
-// function renderStickySuggestions(q) {
-//     const list = document.getElementById('sticky-suggestions-list');
-//     const box  = document.getElementById('sticky-suggestions');
-//     if (!stickySuggestions.length) { hideStickysuggestions(); return; }
-//     const kindColors = { category: 'bg-blue-50 text-blue-600', service: 'bg-orange-50 text-orange-600', keyword: 'bg-green-50 text-green-600' };
-//     list.innerHTML = stickySuggestions.map((s, idx) => {
-//         const low = q.toLowerCase();
-//         const lbl = s.label;
-//         const mi  = lbl.toLowerCase().indexOf(low);
-//         const hl  = mi >= 0
-//             ? `${lbl.slice(0,mi)}<span class="text-blue-600 font-semibold">${lbl.slice(mi,mi+q.length)}</span>${lbl.slice(mi+q.length)}`
-//             : lbl;
-//         const kc = kindColors[s.kind] || 'bg-gray-100 text-gray-500';
-//         return `<li>
-//             <button onmouseenter="activeStickyIdx=${idx}" onmousedown="selectStickySuggestion(${idx})"
-//                 class="w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors hover:bg-gray-50">
-//                 <svg class="w-3.5 h-3.5 text-gray-300 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/></svg>
-//                 <span class="flex-1 text-sm text-gray-700">${hl}</span>
-//                 <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full uppercase tracking-wide ${kc}">${s.kind}</span>
-//             </button>
-//         </li>`;
-//     }).join('');
-//     box.classList.remove('hidden');
-//     activeStickyIdx = -1;
-// }
-
-// function hideStickysuggestions() {
-//     document.getElementById('sticky-suggestions').classList.add('hidden');
-//     stickySuggestions = [];
-//     activeStickyIdx   = -1;
-// }
-
-// function selectStickySuggestion(idx) {
-//     const s = stickySuggestions[idx];
-//       if (!s) return;
-//     document.getElementById('sticky-search-input').value = s.id;
-//     hideStickysuggestions();
-//     redirectSearch(s.id, stickySelectedCity);
-// }
-
-// function handleStickyKeydown(e) {
-    
-
-//     if (e.key === 'ArrowDown') { e.preventDefault(); activeStickyIdx = Math.min(activeStickyIdx+1, stickySuggestions.length-1); }
-//     else if (e.key === 'ArrowUp')  { e.preventDefault(); activeStickyIdx = Math.max(activeStickyIdx-1, 0); }
-//     else if (e.key === 'Enter')  { e.preventDefault(); activeStickyIdx >= 0 ? selectStickySuggestion(activeStickyIdx) : doStickySearch(); }
-//     else if (e.key === 'Escape') hideStickysuggestions();
-// }
-
-// function doStickySearch() {
-//     const kw = document.getElementById('sticky-search-input').value.trim();
-//     redirectSearch(kw, stickySelectedCity);
-// }
-
-// function doMobileSearch() {
-//     const kw = document.getElementById('mobile-search-input').value.trim();
-//     redirectSearch(kw, stickySelectedCity);
-// }
 
 function redirectSearch(keyword, city) {
     if (!keyword || !city) return;
@@ -1077,7 +938,7 @@ function redirectSearch(keyword, city) {
     window.location.href = `/${c}/${k}`;
 }
 
-// // ─── Mobile Menu ───────────────────────────────────────────────────────────
+// ─── Mobile Menu ───────────────────────────────────────────────────────────
 function toggleMobileMenu() {
     const menu      = document.getElementById('mobile-menu');
     const iconOpen  = document.getElementById('menu-icon-open');
@@ -1088,39 +949,6 @@ function toggleMobileMenu() {
     iconClose.classList.toggle('hidden', !isHidden);
 }
 
-function handleMobileSearchFocus() {
-    const inp = document.getElementById('mobile-search-input');
-    if (!inp) return;
-    const val = inp.value.trim();
-    if (val.length < 1) {
-        showDefaultMobileSuggestions();
-    } else if (mobileSuggestions.length) {
-        document.getElementById('mobile-suggestions').classList.remove('hidden');
-    } else {
-        fetchMobileSuggestions(val);
-    }
-}
-
-function showDefaultMobileSuggestions() {
-    mobileSuggestions = DEFAULT_KEYWORDS;
-    const list = document.getElementById('mobile-suggestions-list');
-    const box  = document.getElementById('mobile-suggestions');
-    if (!list || !box) return;
-
-    list.innerHTML = `
-        <li class="px-4 pt-2.5 pb-1 text-[10px] font-bold text-gray-400 uppercase tracking-wide">Popular Searches</li>
-        ${mobileSuggestions.map((s, idx) => `
-        <li>
-            <button type="button" onmousedown="selectMobileSuggestion(${idx})" ontouchstart="selectMobileSuggestion(${idx})"
-                class="w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors hover:bg-gray-50">
-                <svg class="w-3.5 h-3.5 text-gray-300 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                <span class="flex-1 text-sm text-gray-700">${s.label}</span>
-            </button>
-        </li>`).join('')}
-    `;
-    box.classList.remove('hidden');
-    activeMobileIdx = -1;
-}
 
 // ─── MOBILE: City Dropdown ─────────────────────────────────────────────────
 function toggleMobileCity() {
@@ -1149,7 +977,7 @@ function renderMobileCityList(list, q = '') {
         </button>`).join('');
 }
 
-// let mobileCityTimeout = null;
+let mobileCityTimeout = null;
 function filterMobileCities(q) {
     const clearBtn = document.getElementById('mobile-city-clear');
     if (clearBtn) clearBtn.classList.toggle('hidden', !q);
@@ -1188,7 +1016,7 @@ function selectMobileCity(city) {
     if (inp) inp.focus();
 }
 
-// // ─── MOBILE: Search Suggestions ────────────────────────────────────────────
+// ─── MOBILE: Search Suggestions ────────────────────────────────────────────
 let mobileSearchTimeout = null;
 let mobileSuggestions   = [];
 let activeMobileIdx     = -1;
@@ -1262,7 +1090,7 @@ function doMobileSearch() {
     redirectSearch(kw, stickySelectedCity);
 }
 
-// // Close mobile city dropdown on outside tap
+// Close mobile city dropdown on outside tap
 document.addEventListener('mousedown', (e) => {
     const dd = document.getElementById('mobile-city-dropdown');
     if (dd && !dd.contains(e.target)) {
@@ -1279,7 +1107,7 @@ document.addEventListener('mousedown', (e) => {
     }
 });
 
-// // Re-init Lucide icons after dynamic insert (run after DOM ready)
+// Re-init Lucide icons after dynamic insert (run after DOM ready)
 document.addEventListener('DOMContentLoaded', () => {
     if (window.lucide) window.lucide.createIcons();
 });

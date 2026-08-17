@@ -379,11 +379,11 @@ $keywordImg= !empty($kwData['key_icon'])
             </div>
             <label class="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" x-model="verifiedOnly" @change="applyFilters()" class="w-3.5 h-3.5 accent-indigo-600">
-                <span class="text-xs text-gray-600 font-medium">Verified only</span>
+                <span class="text-xs text-gray-600 font-medium">Verified</span>
             </label>
             <label class="flex items-center gap-2 cursor-pointer">
-                <input type="checkbox" x-model="openOnly" @change="applyFilters()" class="w-3.5 h-3.5 accent-indigo-600">
-                <span class="text-xs text-gray-600 font-medium">Currently open</span>
+                <input type="checkbox" x-model="GstOnly" @change="applyFilters()" class="w-3.5 h-3.5 accent-indigo-600">
+                <span class="text-xs text-gray-600 font-medium">GST Verified</span>
             </label>
             <button @click="resetFilters()" class="text-xs text-gray-400 hover:text-red-500 ml-auto">Reset</button>
         </div>
@@ -430,17 +430,21 @@ $keywordImg= !empty($kwData['key_icon'])
 
             @foreach($chunk as $bIndex => $business)
                 @php $globalIndex = $chunkIndex * $adInterval + $bIndex; @endphp
+ 
 
-                <div class="business-card"
-                     data-name="{{ strtolower($business['name'] ?? '') }}"
-                     data-category="{{ strtolower(is_array($business['category'] ?? '') ? implode(',', $business['category']) : ($business['category'] ?? '')) }}"
-                     data-rating="{{ $business['avgRating'] ?? 4.0 }}"
-                     data-verified="{{ ($business['verified'] ?? false) ? '1' : '0' }}"
-                     data-open="{{ ($business['isOpen'] ?? false) ? '1' : '0' }}"
-                     data-reviews="{{ $business['reviewCount'] ?? 0 }}"
-                     x-show="shouldShow($el)">
-                    <x-business-card :business="$business" :index="$globalIndex" :view="'list'" />
-                </div>
+    <div class="business-card"
+     data-id="{{ $business['id'] ?? $globalIndex }}"
+     data-name="{{ strtolower($business['name'] ?? '') }}"
+     data-category="{{ strtolower(is_array($business['category'] ?? '') ? implode(',', $business['category']) : ($business['category'] ?? '')) }}"
+     data-rating="{{ $business['rating'] }}"
+     data-gst-status="{{ $business['gst_status'] }}"
+     data-trusted-status="{{ $business['trusted_status'] }}"
+     data-verified="{{ $business['certified_status'] }}"
+     data-open="{{ $business['active_status'] }}"
+     data-reviews="{{ $business['reviewCount'] }}"
+     x-show="shouldShow($el)">
+    <x-business-card :business="$business" :index="$globalIndex" :view="'list'" />
+</div>
             @endforeach
         </div>
 
@@ -909,6 +913,8 @@ $keywordImg= !empty($kwData['key_icon'])
 
 </div>
 
+
+
 <script>
 function listingPage() {
     return {
@@ -919,15 +925,18 @@ function listingPage() {
         activeCategory: 'All',
         minRating: 0,
         verifiedOnly: false,
-        openOnly: false,
-        showFilters: false,
+        GstOnly: false,
+        showFilters: true,
         filteredCount: {{ count(collect($businesses)->flatten(1)->all()) }},
+        _originalOrder: [], // stores original DOM order per card id, for "Best Match"
 
         get activeFilterCount() {
-            return [this.verifiedOnly, this.openOnly, this.minRating > 0].filter(Boolean).length;
+            return [this.verifiedOnly, this.GstOnly, this.minRating > 0].filter(Boolean).length;
         },
 
         init() {
+            // Remember the original render order so "Best Match" can restore it
+            this._originalOrder = Array.from(document.querySelectorAll('.business-card'));
             this.applyFilters();
         },
 
@@ -936,19 +945,56 @@ function listingPage() {
             const name = el.dataset.name ?? '';
             const cat = el.dataset.category ?? '';
             const rating = parseFloat(el.dataset.rating ?? 0);
+            const gstStatus = String(el.dataset.gstStatus ?? '');
             const verified = el.dataset.verified === '1';
-            const open = el.dataset.open === '1';
 
             const matchSearch = !q || name.includes(q) || cat.includes(q);
             const matchCat = this.activeCategory === 'All' || cat.includes(this.activeCategory.toLowerCase());
             const matchRating = rating >= this.minRating;
             const matchVerified = !this.verifiedOnly || verified;
-            const matchOpen = !this.openOnly || open;
+            const matchGst = !this.GstOnly || gstStatus === '1';
 
-            return matchSearch && matchCat && matchRating && matchVerified && matchOpen;
+            return matchSearch && matchCat && matchRating && matchVerified && matchGst;
+        },
+
+        // Comparator per dropdown option
+        getComparator() {
+            switch (this.sortBy) {
+                case 'Highest Rated':
+                    return (a, b) => parseFloat(b.dataset.rating || 0) - parseFloat(a.dataset.rating || 0);
+                case 'Most Reviews':
+                    return (a, b) => parseFloat(b.dataset.reviews || 0) - parseFloat(a.dataset.reviews || 0);
+                case 'Newest':
+                    return (a, b) => parseFloat(b.dataset.id || 0) - parseFloat(a.dataset.id || 0);
+                case 'Name A–Z':
+                    return (a, b) => (a.dataset.name || '').localeCompare(b.dataset.name || '');
+                case 'Best Match':
+                default:
+                    return (a, b) => this._originalOrder.indexOf(a) - this._originalOrder.indexOf(b);
+            }
+        },
+
+        // Reorders cards in-place at their existing DOM "slots" so sponsored
+        // banners between chunks stay exactly where they are.
+        sortCards() {
+            const cards = Array.from(document.querySelectorAll('.business-card'));
+            if (!cards.length) return;
+
+            const sorted = [...cards].sort(this.getComparator());
+
+            // Swap content in place using a detached fragment to avoid
+            // duplicate-node DOM errors during reordering.
+            const placeholders = cards.map(c => {
+                const ph = document.createComment('slot');
+                c.replaceWith(ph);
+                return ph;
+            });
+
+            placeholders.forEach((ph, i) => ph.replaceWith(sorted[i]));
         },
 
         applyFilters() {
+            this.sortCards();
             this.$nextTick(() => {
                 const cards = document.querySelectorAll('.business-card');
                 let count = 0;
@@ -966,15 +1012,13 @@ function listingPage() {
             this.activeCategory = 'All';
             this.minRating = 0;
             this.verifiedOnly = false;
-            this.openOnly = false;
+            this.GstOnly = false;
+            this.sortBy = 'Best Match';
             this.applyFilters();
         }
     }
 }
 </script>
- 
-
-
 
 
 @endsection

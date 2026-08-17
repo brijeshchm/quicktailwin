@@ -552,23 +552,18 @@ function bannerSlider(banners, interval = 4000) {
             
                 
                  $globalIndex = $chunkIndex * $adInterval + $bIndex; @endphp
-       
-
-<div class="business-card"
-     data-id="{{ $business['id'] ?? $globalIndex }}"
-     data-name="{{ strtolower($business['name'] ?? '') }}"
-     data-category="{{ strtolower(is_array($business['category'] ?? '') ? implode(',', $business['category']) : ($business['category'] ?? '')) }}"
-     data-rating="{{ $business['rating'] }}"
-     data-gst-status="{{ $business['gst_status'] }}"
-     data-trusted-status="{{ $business['trusted_status'] }}"
-     data-verified="{{ $business['certified_status'] }}"
-     data-open="{{ $business['active_status'] }}"
-     data-reviews="{{ $business['reviewCount'] }}"
-     x-show="shouldShow($el)">
-    <x-business-card :business="$business" :index="$globalIndex" :view="'list'" />
-</div>
-
-                
+                <div class="business-card"
+                     data-name="{{ strtolower($business['name'] ?? '') }}"
+                     data-category="{{ strtolower(is_array($business['category'] ?? '') ? implode(',', $business['category']) : ($business['category'] ?? '')) }}"
+                     data-rating="{{ $business['rating'] }}"
+                     data-gstStatus="{{ $business['gst_status']}}"
+                     data-trustedStatus="{{ $business['trusted_status'] }}"
+                     data-verified="{{ $business['certified_status'] }}"
+                     data-open="{{ $business['active_status'] }}"
+                     data-reviews="{{ $business['reviewCount'] }}"
+                     x-show="shouldShow($el)">
+                    <x-business-card :business="$business" :index="$globalIndex" :view="'list'" />
+                </div>
             @endforeach
         </div>      
         @if(!$loop->last)
@@ -1472,7 +1467,7 @@ function bannerSlider(banners, interval = 4000) {
 
   @else 
     {{-- FAQ --}}
-    @if(!empty($faqs))
+    @if(count($faqs ?? []) > 0)
     <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
         <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
             💬 Frequently Asked Questions(FAQ's) of {{ $keyword }}
@@ -1562,111 +1557,6 @@ function listingPage() {
         search: '',
         sortBy: 'Best Match',
         activeCategory: 'All',
-        minRating: 0,
-        verifiedOnly: false,
-        GstOnly: false,
-        showFilters: true,
-        filteredCount: {{ count(collect($businesses)->flatten(1)->all()) }},
-        _originalOrder: [], // stores original DOM order per card id, for "Best Match"
-
-        get activeFilterCount() {
-            return [this.verifiedOnly, this.GstOnly, this.minRating > 0].filter(Boolean).length;
-        },
-
-        init() {
-            // Remember the original render order so "Best Match" can restore it
-            this._originalOrder = Array.from(document.querySelectorAll('.business-card'));
-            this.applyFilters();
-        },
-
-        shouldShow(el) {
-            const q = this.search.toLowerCase();
-            const name = el.dataset.name ?? '';
-            const cat = el.dataset.category ?? '';
-            const rating = parseFloat(el.dataset.rating ?? 0);
-            const gstStatus = String(el.dataset.gstStatus ?? '');
-            const verified = el.dataset.verified === '1';
-
-            const matchSearch = !q || name.includes(q) || cat.includes(q);
-            const matchCat = this.activeCategory === 'All' || cat.includes(this.activeCategory.toLowerCase());
-            const matchRating = rating >= this.minRating;
-            const matchVerified = !this.verifiedOnly || verified;
-            const matchGst = !this.GstOnly || gstStatus === '1';
-
-            return matchSearch && matchCat && matchRating && matchVerified && matchGst;
-        },
-
-        // Comparator per dropdown option
-        getComparator() {
-            switch (this.sortBy) {
-                case 'Highest Rated':
-                    return (a, b) => parseFloat(b.dataset.rating || 0) - parseFloat(a.dataset.rating || 0);
-                case 'Most Reviews':
-                    return (a, b) => parseFloat(b.dataset.reviews || 0) - parseFloat(a.dataset.reviews || 0);
-                case 'Newest':
-                    return (a, b) => parseFloat(b.dataset.id || 0) - parseFloat(a.dataset.id || 0);
-                case 'Name A–Z':
-                    return (a, b) => (a.dataset.name || '').localeCompare(b.dataset.name || '');
-                case 'Best Match':
-                default:
-                    return (a, b) => this._originalOrder.indexOf(a) - this._originalOrder.indexOf(b);
-            }
-        },
-
-        // Reorders cards in-place at their existing DOM "slots" so sponsored
-        // banners between chunks stay exactly where they are.
-        sortCards() {
-            const cards = Array.from(document.querySelectorAll('.business-card'));
-            if (!cards.length) return;
-
-            const sorted = [...cards].sort(this.getComparator());
-
-            // Swap content in place using a detached fragment to avoid
-            // duplicate-node DOM errors during reordering.
-            const placeholders = cards.map(c => {
-                const ph = document.createComment('slot');
-                c.replaceWith(ph);
-                return ph;
-            });
-
-            placeholders.forEach((ph, i) => ph.replaceWith(sorted[i]));
-        },
-
-        applyFilters() {
-            this.sortCards();
-            this.$nextTick(() => {
-                const cards = document.querySelectorAll('.business-card');
-                let count = 0;
-                cards.forEach(card => {
-                    const visible = this.shouldShow(card);
-                    card.style.display = visible ? '' : 'none';
-                    if (visible) count++;
-                });
-                this.filteredCount = count;
-            });
-        },
-
-        resetFilters() {
-            this.search = '';
-            this.activeCategory = 'All';
-            this.minRating = 0;
-            this.verifiedOnly = false;
-            this.GstOnly = false;
-            this.sortBy = 'Best Match';
-            this.applyFilters();
-        }
-    }
-}
-</script>
-
-<!-- <script>
-function listingPage() {
-    return {
-        showAd: true,
-        view: 'list',
-        search: '',
-        sortBy: 'Best Match',
-        activeCategory: 'All',
         minRating: 0,      
         verifiedOnly: 0,
         GstOnly: 0,
@@ -1726,5 +1616,5 @@ function listingPage() {
     }
 }
 </script>
-   -->
+  
 @endsection

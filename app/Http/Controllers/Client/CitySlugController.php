@@ -2135,11 +2135,15 @@ $reviewList = DB::table('clients')
             'pincode'          => $b['pincode'] ?? '560008',
             'landmark'          => $b['landmark'] ?? '',
             'openUntil'     => $b['openUntil'] ?? $b['open_until'] ?? '9:00 AM',
-            'isOpen'        => $b['isOpen'] ?? $b['is_open'] ?? true,
-            'verified'      => $b['verified'] ?? $b['trusted_status'] ?? false,
-            'trending'      => $b['trending'] ?? false,
-            'topSearch'     => $b['topSearch'] ?? $b['top_search'] ?? false,
-            'featured'      => $b['featured'] ?? false,
+            'isOpen'        => $b['isOpen'] ?? 0,
+            'active_status' => $b['active_status'] ?? 0,
+            'gst_status' => 	$b['gst_status'] ?? 0,
+            'certified_status' => 	$b['certified_status'] ?? 0,			
+            'trusted_status' => 	$b['trusted_status'] ?? 0,
+            'verified'      => $b['verified'] ?? $b['trusted_status'] ?? 0,
+            'trending'      => $b['trending'] ?? 0,
+            'topSearch'     => $b['topSearch'] ?? $b['top_search'] ?? 0,
+            'featured'      => $b['featured'] ?? 0,
             'tags'          => array_slice($tags, 0, 5),
             'phone'         => $b['call'] ?? '',
             'whatsapp'      => $b['whatsapp'] ?? '',
@@ -2919,7 +2923,7 @@ $reviewList = DB::table('clients')
 		$keywordMap = $this->getKeywordSlugMap(); // cached, in-memory
 		$cityMap    = $this->getCitySlugMap(); 
 		$slugUrl    = $this->resolveBestCandidate($newSlug, $keywordMap);
-		$city= "faridabad";
+		$city= "";
 
 		
 		$category = $this->categoriesCheck($newSlug);
@@ -3069,6 +3073,7 @@ $reviewList = DB::table('clients')
 	public function searchKW(Request $request)
 	{
 
+	dd($request);
 		$str = trim($request->input('q'));
 		$query = DB::table('keyword')
 			->select('keyword.keyword', 'keyword.slug', 'keyword.id');
