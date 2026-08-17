@@ -288,12 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span class="line-clamp-1">{{ collect([$address, $city])->filter()->implode(', ') }}</span>
             </p>
             @endif
-<!--          
-            @if(!empty($business['businessDescription']))
-            <p class="sm:block text-sm text-gray-500 mt-1 line-clamp-3">
-            {!! $business['businessDescription'] !!}
-            </p>
-            @endif           -->
+ 
              @if(!empty($business['businessDescription']))
 
 <div x-data="{ showDescription: false }">
@@ -381,69 +376,7 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
 </div>
 
-    <!-- <div
-        x-show="showDescription"
-        x-cloak
-        x-transition.opacity
-        class="fixed inset-0 z-[99999] sm:hidden"
-        style="display: none;"
-    >
-
-        {{-- Dark Overlay --}}
-        <div
-            class="absolute inset-0 bg-black/60"
-            @click="
-                showDescription = false;
-                document.body.style.overflow = '';
-            "
-        ></div>
-
-        {{-- Popup Box --}}
-        <div
-            class="absolute inset-x-0 bottom-0
-                   bg-white
-                   rounded-t-3xl
-                   shadow-2xl
-                   max-h-[80vh]
-                   overflow-y-auto
-                   z-[100000]"
-            @click.stop
-        >
-        
-
-            {{-- Header --}}
-            <div class="sticky top-0 bg-white border-b border-gray-100
-                        px-5 py-4 flex items-center justify-between z-10 ">
-
-                <h3 class="text-base font-bold text-gray-900">
-                    Business Description
-                </h3>
-
-                <button
-                    type="button"
-                    @click="
-                        showDescription = false;
-                        document.body.style.overflow = '';
-                    "
-                    class="w-9 h-9 rounded-full bg-gray-100
-                           flex items-center justify-center
-                           text-gray-600 text-lg"
-                >
-                    ✕
-                </button>
-
-            </div>
-
-            {{-- Description --}}
-            <div class="p-5 bg-white">
-                <div class="text-sm text-gray-600 leading-relaxed">
-                    {!! $business['businessDescription'] !!}
-                </div>
-            </div>
-
-        </div>
-
-    </div> -->
+    
 
 </div>
 

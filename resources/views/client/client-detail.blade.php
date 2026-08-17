@@ -338,10 +338,8 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
 
                 {{-- Website + Social --}}
                 <div class="flex flex-wrap items-center gap-3">
-                    @if(!empty($clientsList['website']))
-                     
-                        {{ $clientsList['website'] }}
-                    
+                    @if(!empty($clientsList['website']))                     
+                        {{ $clientsList['website'] }}                    
                     @endif
                 </div>
             </div>
@@ -365,15 +363,9 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
         <h2 class="heading-ul text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight mb-8 reveal">Our Services</h2>
 
         <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
-           
-
-
-
             @foreach($assignKeyword as $keySlug => $keyword)
     @php
-
-
-    $i=0;
+     $i=0;
         $bg = $bgColors[$i % count($bgColors)];
         $color = $iconColors[$i % count($iconColors)];
         $city = (!empty($clientsList['city']) && !is_numeric($clientsList['city']))
@@ -1074,7 +1066,7 @@ function selectCert(i) {
                   @php
     $city = (!empty($clientsList['city']) && !is_numeric($clientsList['city']))
         ? Str::slug($clientsList['city'])
-        : 'faridabad';
+        : '';
 @endphp
                     @foreach($relatedList as $i => $item)                    
                     <li>

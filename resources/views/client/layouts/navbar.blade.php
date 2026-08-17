@@ -891,7 +891,7 @@ function showDefaultStickySuggestions() {
         <li>
             <button onmouseenter="activeStickyIdx=${idx}" onmousedown="selectStickySuggestion(${idx})"
                 class="w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors hover:bg-gray-50">
-                <svg class="w-3.5 h-3.5 text-gray-300 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <svg class="w-3.5 h-3.5 text-gray-300 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/></svg>
                 <span class="flex-1 text-sm text-gray-700">${s.label}</span>
             </button>
         </li>`).join('')}
@@ -939,6 +939,8 @@ function renderStickySuggestions(q) {
                 <span class="flex-1 text-sm text-gray-700">${hl}</span>
                 <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full uppercase tracking-wide ${kc}">${s.kind}</span>
             </button>
+
+
         </li>`;
     }).join('');
     box.classList.remove('hidden');
@@ -1113,7 +1115,7 @@ function showDefaultMobileSuggestions() {
         <li>
             <button type="button" onmousedown="selectMobileSuggestion(${idx})" ontouchstart="selectMobileSuggestion(${idx})"
                 class="w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors hover:bg-gray-50">
-                <svg class="w-3.5 h-3.5 text-gray-300 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <svg class="w-3.5 h-3.5 text-gray-300 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/></svg>
                 <span class="flex-1 text-sm text-gray-700">${s.label}</span>
             </button>
         </li>`).join('')}
