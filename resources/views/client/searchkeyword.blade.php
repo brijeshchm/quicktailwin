@@ -10,6 +10,11 @@
         'artificial-intelligence-training', 'python-training', 'workday-training',
         'sap-training', 'banquet-hall', 'cricket-academy'
     ];   
+
+      $keywordArray = [
+        'artificial-intelligence-training', 'python-training', 'workday-training',
+        'sap-training', 'banquet-hall', 'cricket-academy','cloud-computing-training','aws-training','devops-training','digital-marketing-training','full-stack-developer-training','azure-training','pmp-certification-training','mba-distance','car-service','computer-repair','shooting-academy','swimming-academy','boxing'
+    ];
     $currentKeyword = strtolower(trim($kwData['keyword_slug'] ?? ''));
     $shouldIndex = in_array($currentKeyword, $keywordArray); 
 
@@ -487,12 +492,8 @@ $schema = [
         </div>
 
         {{-- Inline ad between chunks (not after the last one) --}}
-        @if(!$loop->last)
-             
-
-
-
-            <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-700 my-3 shadow-md">
+        @if(!$loop->last)             
+        <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-700 my-3 shadow-md">
                     <div class="relative px-5 py-4 flex items-center gap-5 flex-wrap sm:flex-nowrap">
                         <div class="flex-1 min-w-0">
                             <div class="flex items-center gap-2 mb-0.5 flex-wrap">
@@ -524,11 +525,7 @@ $schema = [
         </div>
     </div>
 @endif
-
-
- 
-
-                <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-700 my-3 shadow-md">
+<div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-700 my-3 shadow-md">
                     <div class="relative px-5 py-4 flex items-center gap-5 flex-wrap sm:flex-nowrap">
                         <div class="flex-1 min-w-0">
                             <div class="flex items-center gap-2 mb-0.5 flex-wrap">
