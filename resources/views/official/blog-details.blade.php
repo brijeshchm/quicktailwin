@@ -336,8 +336,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                 
                 <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
                     <div itemprop="name">
-                        <h1 class="text-lg font-bold text-gray-900 leading-tight">
-                 {{ $blogDetails['title'] ? $blogDetails['title'] }} </h1>
+                        <h1 class="text-lg font-bold text-gray-900 leading-tight">{{ !empty($blogDetails['title']) ? $blogDetails['title'] : '' }}</h1>
                     </div>                           
                     <div itemprop="aggregateRating"
                         itemscope
