@@ -163,14 +163,7 @@ padding:0px;
                         <textarea class="form-control" name="meta_description" placeholder="Enter Meta Description">{{ old('meta_description', $edit_data->meta_description ?? '') }}</textarea>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <label class="col-md-2 control-label">H1 Heading</label>
-                    <div class="col-md-8">
-                        <input class="form-control" name="h1_heading" placeholder="Enter H1 Heading" rows="5" value="{{ old('h1_heading', $edit_data->h1_heading ?? '') }}">
-                    </div>
-                </div>
-               
+ 
               
                 <div class="form-group">
                     <label for="ratingValue" class="col-md-2 control-label">Rating Value</label>

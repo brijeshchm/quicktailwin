@@ -14,7 +14,7 @@
 
     $keywordArray = [
         'artificial-intelligence-training', 'python-training', 'workday-training',
-        'sap-training', 'banquet-hall', 'cricket-academy'
+        'sap-training', 'banquet-hall', 'cricket-academy','servicenow-training'
     ];
     $currentCity    = strtolower(trim($city ?? ''));
     $currentKeyword = strtolower(trim($kwData['keyword_slug'] ?? ''));
