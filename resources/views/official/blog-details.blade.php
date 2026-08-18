@@ -1,7 +1,6 @@
 @extends('client.layouts.app') 
 @section('title',$blogDetails['meta_title'])
 @section('description', $blogDetails['meta_description'])
-@section('keywords', $blogDetails['h1_heading'])
 @section('og_image', !empty($blogDetails['blogImage'])
     ? asset($blogDetails['blogImage'])
     : asset('client/images/quickdials-og.png'))
@@ -338,7 +337,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                 <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
                     <div itemprop="name">
                         <h1 class="text-lg font-bold text-gray-900 leading-tight">
-                 {{ $blogDetails['title'] ? $blogDetails['title']: ($blogDetails['h1_heading'] ?? '') }} </h1>
+                 {{ $blogDetails['title'] ? $blogDetails['title'] }} </h1>
                     </div>                           
                     <div itemprop="aggregateRating"
                         itemscope

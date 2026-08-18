@@ -52,7 +52,7 @@ $city = 'faridabad';
                 </nav>
                 <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
                     <div itemprop="name">
-                        <h1 class="text-lg font-bold text-white leading-tight">{{ replaceCity($kwData['h1_heading'],$city) ?? ('Explore Verified ' . $kwData['child_category']) }}</h1>
+                        <h1 class="text-lg font-bold text-white leading-tight">{{ replaceCity($kwData['title'],$city) ?? ('Explore Verified ' . $kwData['child_category']) }}</h1>
                     </div>                           
                     <div itemprop="aggregateRating"
                         itemscope
