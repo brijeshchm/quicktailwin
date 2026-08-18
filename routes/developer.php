@@ -144,6 +144,7 @@ Route::post('keyword/{id}/banners',         [KeywordBannerController::class, 'up
 	Route::post('/seo/updateMetaInformation/{id}',[App\Http\Controllers\KeywordController::class, 'updateMetaInformation'])->middleware('auth');
 	Route::post('/seo/updateAboutKeyword/{id}',[App\Http\Controllers\KeywordController::class, 'updateAboutKeyword'])->middleware('auth');
 	Route::post('/seo/updatePageContent/{id}',[App\Http\Controllers\KeywordController::class, 'updatePageContent'])->middleware('auth');
+	Route::post('/seo/updateNoidaPageContent/{id}',[App\Http\Controllers\KeywordController::class, 'updateNoidaPageContent'])->middleware('auth');
 	Route::post('/seo/updatePageWithoutCityContent/{id}',[App\Http\Controllers\KeywordController::class, 'updatePageWithoutCityContent'])->middleware('auth');
 	Route::post('/seo/extraPageContent/{id}',[App\Http\Controllers\KeywordController::class, 'extraPageContent'])->middleware('auth');
 	Route::post('/seo/updateFaqKeyword/{id}',[App\Http\Controllers\KeywordController::class, 'updateFaqKeyword'])->middleware('auth');

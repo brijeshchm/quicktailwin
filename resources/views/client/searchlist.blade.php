@@ -964,8 +964,9 @@ function bannerSlider(banners, interval = 4000) {
 
 @endif
 
- @if($shouldIndex && $cityName =='noida')
  
+   @if( !in_array($cityName, $singleCities) ||
+    !in_array($kwData['keyword_slug'], $keywordArray))
     {{-- Top Description --}}
     @if(!empty($topDescription))
     <div class="bg-white rounded-2xl p-6 mt-4 mx-4">
@@ -988,6 +989,32 @@ function bannerSlider(banners, interval = 4000) {
 
 @endif
 
+
+
+
+ @if($shouldIndex && $cityName =='noida')
+ 
+    {{-- Top Description --}}
+    @if(!empty($noidatopDescription))
+    <div class="bg-white rounded-2xl p-6 mt-4 mx-4">
+    @php
+    $defaultHeading = '';
+
+    if (!empty($kwData['noida_top_heading'])) {
+        $defaultHeading=  $kwData['noida_top_heading'];
+    }else{
+     $defaultHeading = 'Trusted '. $keyword . ' in ' . ucwords(strtolower(str_replace('-', ' ', $city)));
+    }    
+    @endphp
+
+    <h2 class="text-lg font-bold text-gray-900 mb-3">
+         {{ $defaultHeading }}
+    </h2>
+    <div class="text-sm text-gray-600 leading-relaxed">{!! $noidatopDescription !!}</div>
+    </div>
+    @endif
+
+@endif
 
 <style>
     .leading-relaxed h3{
@@ -1014,8 +1041,11 @@ function bannerSlider(banners, interval = 4000) {
         width:100%;
     }
     </style>
- @if($shouldIndex && $cityName =='noida')
-  
+
+
+ 
+     @if( !in_array($cityName, $singleCities) ||
+    !in_array($kwData['keyword_slug'], $keywordArray))
     {{-- Bottom Description --}}
     @if(!empty($bottomDescription))
 
@@ -1036,6 +1066,34 @@ function bannerSlider(banners, interval = 4000) {
     </div>
     @endif
     @endif
+
+
+    
+ @if($shouldIndex && $cityName =='noida')
+  
+    {{-- Bottom Description --}}
+    @if(!empty($noidabottomDescription))
+
+
+     @php
+    $noidabottom_heading = '';
+
+    if (!empty($kwData['noida_bottom_heading'])) {
+        $noidabottom_heading=  $kwData['noida_bottom_heading'];
+    }else{
+     $noidabottom_heading = 'Find the Best '.$keyword . ' in ' . ucwords(strtolower(str_replace('-', ' ', $city)));
+    }    
+    @endphp
+
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4">
+        <h2 class="text-lg font-bold text-gray-900 mb-3">{{ $noidabottom_heading }}</h2>
+        <div class="text-sm text-gray-600 leading-relaxed">{!! $noidabottomDescription !!}</div>
+    </div>
+    @endif
+    @endif
+
+
+
 
       @if(!in_array($cityName, $singleCities) ||
     !in_array($kwData['keyword_slug'], $keywordArray))

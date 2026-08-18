@@ -2889,6 +2889,49 @@ var dataTableAssignedKeywords = $('#datatable-assigned-keywords').dataTable({
 				}); 
 				 return false;	
 			},	
+ 			updateNoidaPageContent:function(THIS,id){	
+			  var $this = $(THIS);
+			var form = new FormData(THIS);			 
+				$.ajax({
+					url:"/developer/seo/updateNoidaPageContent/"+id,
+					type:"POST",					   
+					dataType:"json",	
+					data:form,
+					 cache: false,
+					contentType: false, 
+                    processData: false,                      
+					success:function(data){
+					 	
+						if(data.status){	
+					 					
+						$('#messagemodel .modal-title').text("About Keyword");	
+						$('#messagemodel .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
+						$('#messagemodel').modal({keyboard:false,backdrop:'static'});
+						$('#messagemodel').css({'width':'100%'});
+							removeValidationErrors($this);
+							//window.location.href ="/developer/seoCity";
+						}else{
+							$('#messagemodel .modal-title').text("About Keyword");	
+							$('#messagemodel .modal-body').html("<div class='alert alert-danger'>"+data.msg+"</div>");			
+							$('#messagemodel').modal({keyboard:false,backdrop:'static'});
+							$('#messagemodel').css({'width':'100%'});		 
+							
+						}
+					},
+					error:function(jqXHR, textStatus, errorThrown){
+					 
+						var response = JSON.parse(jqXHR.responseText);
+						if(response.status){ 
+							showValidationErrors($this,response.errors);						 
+						}else{
+							alert('Something went wrong');
+						}
+						 
+					}
+				}); 
+				 return false;	
+			},			
+
 			 updatePageWithoutCityContent:function(THIS,id){	
 			  var $this = $(THIS);
 			var form = new FormData(THIS);	

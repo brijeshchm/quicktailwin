@@ -846,6 +846,49 @@ $schema = [
     }
     </style>
 
+{{-- Top Description --}}
+    @if(!empty($topDescription))
+    <div class="bg-white rounded-2xl p-6 mt-4 mx-4">
+    @php
+    $defaultHeading = '';
+
+    if (!empty($kwData['top_heading'])) {
+        $defaultHeading=  $kwData['top_heading'];
+    }else{
+     $defaultHeading = 'Trusted '. $keyword;
+    }    
+    @endphp
+
+
+
+    <h2 class="text-lg font-bold text-gray-900 mb-3">
+         {{ $defaultHeading }}
+    </h2>
+    <div class="text-sm text-gray-600 leading-relaxed">{!! $topDescription !!}</div>
+    </div>
+    @endif
+
+
+    {{-- Bottom Description --}}
+    @if(!empty($bottomDescription))
+
+
+     @php
+    $bottom_heading = '';
+
+    if (!empty($kwData['bottom_heading'])) {
+        $bottom_heading=  $kwData['bottom_heading'];
+    }else{
+     $bottom_heading = 'Find the Best '.$keyword ;
+    }    
+    @endphp
+
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4">
+        <h2 class="text-lg font-bold text-gray-900 mb-3">{{ $bottom_heading }}</h2>
+        <div class="text-sm text-gray-600 leading-relaxed">{!! $bottomDescription !!}</div>
+    </div>
+    @endif
+ 
 
 
     {{-- extra_description --}}
