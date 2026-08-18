@@ -18,6 +18,8 @@
 @section('meta_robots')
 <meta name="robots" content="{{ $shouldIndex ? 'index, follow' : 'noindex, nofollow' }}">
 @endsection
+
+
 @section('content') 
 <style>
 #enquiry-modal { display: none; }
@@ -186,8 +188,8 @@ $keywordImg= !empty($kwData['key_icon'])
  
 
     if(!empty($businesses)){
-
-        foreach($businesses as $clientBus){
+            $businessCollections = collect($businesses)->take(20);
+        foreach($businessCollections as $clientBus){
     
             if (!empty($clientBus['logo']) && !empty($clientBus['name']) && !empty($clientBus['business_slug'])) {
 
@@ -232,30 +234,66 @@ $keywordImg= !empty($kwData['key_icon'])
     }
 
 
-    if (!empty($businesses)) {
-       
-        foreach ($businesses as $i => $item) {
-            $listItem[] = [
-                '@type'    => 'ListItem',
-                'position' => $i + 1,
-                'url'     => route('business.details',$item['business_slug']),
-                 
-            ];
-        }
+    if (!empty($businesses)) { 
 
-          $schemas[] = [
-            '@context'        => 'https://schema.org',
-            '@type'           => 'ItemList',
-            'itemListElement' => $listItem,
-        ];
-    }
-                     
- 
- 
+$businessCollection = collect($businesses)->take(10);
 
- 
+$schema = [
+    '@context' => 'https://schema.org',
+    '@type' => 'CollectionPage',
+
+    'name' => $keyword,
+
+    'description' => $metaDescription,
+
+    'url' => url()->current(),
+
+    'mainEntity' => [
+        '@type' => 'ItemList',
+
+        'numberOfItems' => $businessCollection->count(),
+
+        'itemListElement' => $businessCollection
+            ->values()
+            ->map(function ($business, $index) {
+
+                $businessName = data_get($business, 'business_name');
+                $businessSlug = data_get($business, 'business_slug');
+
+                return [
+                    '@type' => 'ListItem',
+
+                    'position' => $index + 1,
+
+                    'name' => $businessName,
+
+                    'url' => route(
+                        'business.details',
+                        $businessSlug
+                    )
+                ];
+            })
+            ->toArray()
+    ]
+];
+}
 @endphp
 
+
+ 
+
+ 
+
+@if(!empty($schema))
+<script type="application/ld+json">
+{!! json_encode(
+    $schema,
+    JSON_UNESCAPED_SLASHES |
+    JSON_UNESCAPED_UNICODE |
+    JSON_PRETTY_PRINT
+) !!}
+</script>
+@endif
 @if(!empty($schemas))
 <script type="application/ld+json">
 {!! json_encode(

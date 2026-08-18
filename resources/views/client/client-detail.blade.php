@@ -1068,6 +1068,7 @@ function selectCert(i) {
         ? Str::slug($clientsList['city'])
         : '';
 @endphp
+@if($relatedList)
                     @foreach($relatedList as $i => $item)                    
                     <li>
                         <a href="{{ route('city.slug', ['city_slug'=>strtolower($city),'service_slug' => $item['slug']])}}" class="text-blue-600 hover:underline text-sm">
@@ -1075,6 +1076,7 @@ function selectCert(i) {
                         </a>
                     </li>
                     @endforeach
+                    @endif
                 </ul>
             </div>
         </div>
