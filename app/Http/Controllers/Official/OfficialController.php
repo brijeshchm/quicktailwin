@@ -598,6 +598,7 @@ class OfficialController extends Controller
         'category_icon'      => $pc_icon,
         'alt'                => $alt,
         'meta_title'         => $meta_title,
+        'title'         => $h1_heading,
         'h1_heading'      => $h1_heading,
         'meta_description'  => $meta_description,
         'top_description'    => $childCategory->top_description,

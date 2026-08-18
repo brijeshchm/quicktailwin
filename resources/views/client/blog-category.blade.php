@@ -20,7 +20,7 @@ foreach ($starMap as $k => $v) {
     if (isset($kwData['rating']) && $kwData['rating'] >= $k) $starKey = $k;
 }
 $starImg = $starMap[$starKey] ?? 'star_4.5.png';
-$city = 'faridabad';
+$city = '';
 @endphp
 <style>
     .view-btn.active {
@@ -50,6 +50,7 @@ $city = 'faridabad';
 
                       
                 </nav>
+               
                 <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
                     <div itemprop="name">
                         <h1 class="text-lg font-bold text-white leading-tight">{{ replaceCity($kwData['title'],$city) ?? ('Explore Verified ' . $kwData['child_category']) }}</h1>
