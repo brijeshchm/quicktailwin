@@ -101,12 +101,31 @@
             </div>
 
             {{-- Suggestions dropdown --}}
-            <div
+            <!-- <div
                 id="sticky-suggestions"
-                class="hidden absolute top-full left-0 right-0 mt-1.5 bg-white rounded-xl shadow-2xl border border-gray-100 z-50 overflow-hidden dropdown-enter"
+                class="absolute left-0 right-0 top-full z-50 mt-1 max-h-72 overflow-y-auto rounded-lg border border-gray-200 bg-white shadow-xl"
             >
-                <ul id="sticky-suggestions-list"></ul>
-            </div>
+                <ul id="sticky-suggestions-list">
+
+                </ul>
+            </div> -->
+
+
+<div 
+    id="sticky-suggestions" 
+    class="absolute left-0 right-0 top-full z-50 mt-1 rounded-lg border border-gray-200 bg-white shadow-xl"
+>
+    <ul 
+        id="sticky-suggestions-list"
+        class="max-h-[200px] overflow-y-auto"
+    >
+    </ul>
+</div>
+
+
+
+
+
         </div>
  
 

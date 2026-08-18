@@ -765,17 +765,7 @@ $reviewList = DB::table('clients')
      * Check if a city exists, by slug.
      */
     private function cityExists(string $city): bool
-    {
-        // $citySlug = strtolower(trim($city));
-        // if (empty($citySlug)) {
-        //     return false;
-        // }
-        // return Cache::remember("city_exists_{$citySlug}", 3600, function () use ($citySlug) {
-        //     return DB::table('citylists')
-        //         ->where('city_slug', $citySlug)
-        //         ->exists();
-        // });
-
+    {         
 
 		$citySlug = trim(strtolower($city));
 
@@ -1517,7 +1507,7 @@ $reviewList = DB::table('clients')
         /**
      * Fetch a single business's profile by slug.
      */
-    private function fetchBusinessData(string $slug = null)
+    private function fetchBusinessData(string $slug = null, $city)
     {
       
 		$business_slug = $slug;
@@ -1992,19 +1982,20 @@ $reviewList = DB::table('clients')
 
 			if (!empty($assignedKeywords)) {
 				$findKeywords = Keyword::select('child_category_id')->where('keyword', $assignedKeywords->first())->first();
-
+				$relKeywords =[];
+				if(!empty($findKeywords->child_category_id)){
 				$relKeywords = Keyword::select('keyword','slug')->where('child_category_id', $findKeywords->child_category_id)
 					->orderBy('keyword', 'asc')
 					->pluck('keyword.keyword','keyword.slug')
 					->toArray();
-
+				}
 				$data['related_searches'] = $relKeywords;
 			}
 			
 			
 				$businessName = $clientscheck->business_name ?? 'this business';
 				$area         = $clientscheck->area ?? '';
-				$city         = $clientscheck->city ?? '';
+				$city         = $clientscheck->city ?? $city;
 				$location     = trim($area . ($area && $city ? ', ' : '') . $city);
 
 				if(!empty($clientscheck->business_description)){
@@ -2063,7 +2054,7 @@ $reviewList = DB::table('clients')
 			// ─── Extract once for clarity & to avoid repetition ───
 			$businessName = $clientscheck->business_name ?? 'this business';
 			$area         = $clientscheck->area ?? '';
-			$city         = $clientscheck->city ?? '';
+			$city         = $clientscheck->city ?? $city;
 			$location     = trim($area . ($area && $city ? ', ' : '') . $city);
 
 			// ─── Paragraph 1 ───
@@ -2207,7 +2198,7 @@ $reviewList = DB::table('clients')
     /**
      * Convert tags/category that may be array or key-value object.
      */
-    private function getClientDetail($businessResponse,$slug): \Illuminate\Contracts\View\View
+    private function getClientDetail($businessResponse,$slug,$city): \Illuminate\Contracts\View\View
     {
     
         $clientsList = $businessResponse['clientsList']       ?? [];
@@ -2363,15 +2354,18 @@ $reviewList = DB::table('clients')
         ' - ' . $serviceText .
         '. View address, photos, reviews and contact details on QuickDials.';
 
-       
+       $keyword = !empty($clientsList['business_name'])
+        ? $clientsList['business_name']
+        : ($clientsList['meta_title'] ?? '') . ' | ' . ($clientsList['city'] ?? '') . ' | QuickDials';
+
         return view('client.client-detail', compact(
-            'slug', 'clientsList', 'keywordList','certificate','metaTitle','metaKeywords','metaDescription',
+            'slug', 'clientsList', 'keywordList','certificate','metaTitle','metaKeywords','metaDescription','keyword',
             'comment', 'areaBusiness', 'overviewBusiness',
             'relatedList', 'gallery', 'hImages', 'vImages',
             'assignKeyword', 'certifications', 'govDocs', 'reviews',
             'gradients', 'bgColors', 'iconColors', 'planOptions',
             'googleMapUrl', 'mapSrc', 'yearsExp', 'yearEst',
-            'todayDay', 'hours','linearGradients'
+            'todayDay', 'hours','linearGradients','city'
         ));
     }
 
@@ -2644,12 +2638,12 @@ $reviewList = DB::table('clients')
         if (!$this->clientsExists($slugUrl)) {
             abort(410);
         }
-        $businessResponse = $this->fetchBusinessData($slugUrl);
+        $businessResponse = $this->fetchBusinessData($slugUrl,$cityName);
         if (!$businessResponse) {
             return redirect()->route('home');
         }
 
-        return $this->getClientDetail($businessResponse, $slugUrl);
+        return $this->getClientDetail($businessResponse, $slugUrl,$cityName);
     }
 
     abort(410);
@@ -3097,12 +3091,12 @@ $reviewList = DB::table('clients')
         // 2. If slug is NOT a service, try it as a business slug
         if (!$this->serviceExists($slug)) {
             
-            $businessResponse = $this->fetchBusinessData($slug);
+            $businessResponse = $this->fetchBusinessData($slug, $city);
            if (!$businessResponse) {              
                abort(410);
 			   
             }             
-            return $this->getClientDetail($businessResponse,$slug);
+            return $this->getClientDetail($businessResponse,$slug,$city);
         }
 
         // 3. Otherwise treat as service / search listing
