@@ -59,8 +59,7 @@ class BlogController extends Controller
 				'ratingcount' => 'required|integer|min:0',
 				'title' => 'required|string|min:50|max:175',
 				'slug' => 'required|string|min:50|max:175',
-				'meta_title' => 'required|string|min:30|max:60',
-			
+				'meta_title' => 'required|string|min:30|max:71',			
 				'meta_description' => 'required|string|min:70|max:161',
 				'description' => 'required|string|max:500',
 			]);
@@ -247,9 +246,8 @@ class BlogController extends Controller
 			$this->validate($request, [
 				'name' => 'required|max:200',
 				'description' => 'required',
-				'meta_title' => 'required|min:30|max:61',			
+				'meta_title' => 'required|min:30|max:71',			
 				'meta_description' => 'required|min:70|max:161',
-
 			]);
 
 			$blogdetails = Blogdetails::find($id);
@@ -367,7 +365,7 @@ class BlogController extends Controller
 				'ratingcount' => 'required|integer|min:0',
 				'title' => 'required|string',
 				'slug' => 'required|string',
-				'meta_title' => 'required|string|min:30|max:61',			
+				'meta_title' => 'required|string|min:30|max:71',			
 				'meta_description' => 'required|string|min:70|max:161',
 				
 			]);
