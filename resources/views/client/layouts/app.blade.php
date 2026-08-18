@@ -24,10 +24,14 @@
 <meta property="og:url" content="{{ url()->current() }}" />
 <meta property="og:type" content="website" />
 <meta property="og:image" content="@yield('og_image', asset('client/images/quickdials-og.png'))" />
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="@yield('title', 'QuickDials')">
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="@yield('title')" />
 <meta name="twitter:description" content="@yield('description')" />
 <meta name="twitter:image" content="@yield('og_image', asset('client/images/quickdials-og.png'))" />
+<meta name="twitter:image:alt" content="@yield('title', 'QuickDials')">
 <meta name="geo.region" content="@yield('geo_region', 'IN')" />
 <meta name="geo.placename" content="@yield('geo_city', 'India')" />
 <meta name="geo.position" content="@yield('geo_position', '')" />
