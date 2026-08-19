@@ -8,7 +8,7 @@
     ];
 
      $singleCities = [
-        'faridabad','noida','delhi'
+        'faridabad','noida','delhi','bangalore'
     ];
     $keywordArray = [
         'artificial-intelligence-training', 'python-training', 'workday-training',
@@ -945,6 +945,10 @@ function bannerSlider(banners, interval = 4000) {
     @endif
 
 
+
+@endif
+
+@if($shouldIndex && $cityName =='bangalore')
      {{-- bottom_wcity_heading --}}
     @if(!empty($kwData['bottom_wcity_description']))
     
@@ -959,9 +963,7 @@ function bannerSlider(banners, interval = 4000) {
         <div class="text-sm text-gray-600 leading-relaxed">{!! $kwData['bottom_wcity_description'] !!}</div>
     </div>
     @endif
-
 @endif
-
  
    @if( !in_array($cityName, $singleCities) ||
     !in_array($kwData['keyword_slug'], $keywordArray))

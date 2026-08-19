@@ -339,7 +339,7 @@ padding:0px;
 
 
 
-<div class="section-border">
+        <div class="section-border">
             <h4>Faridabad only City Page Content</h4>
             <form class="form-horizontal" method="POST" onsubmit="return keywordController.updatePageWithoutCityContent(this,<?php echo (isset($keyword->id)? $keyword->id:""); ?>)" >
                 {{ csrf_field() }}
@@ -357,7 +357,23 @@ padding:0px;
                         <textarea class="form-control summernote" name="top_wcity_description" rows="9" placeholder="Enter Page Top Description">{{ $keyword->top_wcity_description }}</textarea>
                     </div>
                 </div>
-                  <div class="form-group">
+       
+      
+            <div class="form-group text-center">
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-btn"></i> Submit
+            </button>
+        </div>
+            </form>
+        </div>
+
+        
+        <div class="section-border">
+            <h4>Bangalore only City Page Content</h4>
+            <form class="form-horizontal" method="POST" onsubmit="return keywordController.updateBangaloreCityContent(this,<?php echo (isset($keyword->id)? $keyword->id:""); ?>)" >
+                {{ csrf_field() }}
+         
+                <div class="form-group">
                     <label class="col-md-2 control-label">Bottom Heading without city</label>
                     <div class="col-md-8">
                         <input class="form-control" name="bottom_wcity_heading" value="{{ $keyword->bottom_wcity_heading }}" placeholder="Enter bottom heading without city">

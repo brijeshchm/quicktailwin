@@ -2904,14 +2904,14 @@ var dataTableAssignedKeywords = $('#datatable-assigned-keywords').dataTable({
 					 	
 						if(data.status){	
 					 					
-						$('#messagemodel .modal-title').text("About Keyword");	
+						$('#messagemodel .modal-title').text("Noida Keyword");	
 						$('#messagemodel .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
 						$('#messagemodel').modal({keyboard:false,backdrop:'static'});
 						$('#messagemodel').css({'width':'100%'});
 							removeValidationErrors($this);
 							//window.location.href ="/developer/seoCity";
 						}else{
-							$('#messagemodel .modal-title').text("About Keyword");	
+							$('#messagemodel .modal-title').text("Noida Keyword");	
 							$('#messagemodel .modal-body').html("<div class='alert alert-danger'>"+data.msg+"</div>");			
 							$('#messagemodel').modal({keyboard:false,backdrop:'static'});
 							$('#messagemodel').css({'width':'100%'});		 
@@ -2947,14 +2947,14 @@ var dataTableAssignedKeywords = $('#datatable-assigned-keywords').dataTable({
 					 	
 						if(data.status){	
 					 					
-						$('#messagemodel .modal-title').text("About Keyword");	
+						$('#messagemodel .modal-title').text("Delhi Keyword");	
 						$('#messagemodel .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
 						$('#messagemodel').modal({keyboard:false,backdrop:'static'});
 						$('#messagemodel').css({'width':'100%'});
 							removeValidationErrors($this);
 							//window.location.href ="/developer/seoCity";
 						}else{
-							$('#messagemodel .modal-title').text("About Keyword");	
+							$('#messagemodel .modal-title').text("Delhi Keyword");	
 							$('#messagemodel .modal-body').html("<div class='alert alert-danger'>"+data.msg+"</div>");			
 							$('#messagemodel').modal({keyboard:false,backdrop:'static'});
 							$('#messagemodel').css({'width':'100%'});		 
@@ -3018,6 +3018,52 @@ var dataTableAssignedKeywords = $('#datatable-assigned-keywords').dataTable({
 				}); 
 				 return false;	
 			},	
+
+			updateBangaloreCityContent:function(THIS,id){	
+			var $this = $(THIS);
+			var form = new FormData(THIS);	
+		 
+				$.ajax({
+					url:"/developer/seo/updateBangaloreCityContent/"+id,
+					type:"POST",					   
+					dataType:"json",	
+					data:form,
+					 cache: false,
+					contentType: false, 
+                    processData: false,                      
+					success:function(data){
+					 	
+						if(data.status){	
+					 					
+						$('#messagemodel .modal-title').text("Bangalore Keyword");	
+						$('#messagemodel .modal-body').html("<div class='alert alert-success'>"+data.msg+"</div>");			
+						$('#messagemodel').modal({keyboard:false,backdrop:'static'});
+						$('#messagemodel').css({'width':'100%'});
+							removeValidationErrors($this);
+							//window.location.href ="/developer/seoCity";
+						}else{
+							$('#messagemodel .modal-title').text("Bangalore Keyword");	
+							$('#messagemodel .modal-body').html("<div class='alert alert-danger'>"+data.msg+"</div>");			
+							$('#messagemodel').modal({keyboard:false,backdrop:'static'});
+							$('#messagemodel').css({'width':'100%'});		 
+							
+						}
+					},
+					error:function(jqXHR, textStatus, errorThrown){
+					 
+						var response = JSON.parse(jqXHR.responseText);
+						if(response.status){ 
+							showValidationErrors($this,response.errors);						 
+						}else{
+							alert('Something went wrong');
+						}
+						 
+					}
+				}); 
+				 return false;	
+			},	
+
+			
 			 extraPageContent:function(THIS,id){	
 			  var $this = $(THIS);
 			var form = new FormData(THIS);	
