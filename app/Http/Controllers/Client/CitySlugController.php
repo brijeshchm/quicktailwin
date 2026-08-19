@@ -40,7 +40,7 @@ class CitySlugController extends Controller
 			->leftjoin('child_category', 'keyword.child_category_id', '=', 'child_category.id')
 		 
 			->where('keyword.slug', $search_kw)
-			->select('keyword.*', 'parent_category.*','child_category.*', 'keyword.id as key_id', 'keyword.faqq1', 'keyword.faqa1', 'keyword.faqq2', 'keyword.faqa2', 'keyword.faqq3', 'keyword.faqa3', 'keyword.faqq4', 'keyword.faqa4', 'keyword.faqq5', 'keyword.faqa5','keyword.faqq6', 'keyword.faqa6', 'keyword.faqq7', 'keyword.faqa7','keyword.faqq8', 'keyword.faqa8','keyword.faqq9', 'keyword.faqa9','keyword.faqq10', 'keyword.faqa10','keyword.meta_title', 'keyword.meta_description', 'keyword.h1_heading', 'keyword.top_description', 'keyword.bottom_description','keyword.ratingvalue', 'keyword.ratingcount','keyword.courseabout','keyword.heading','keyword.paragraph1','keyword.paragraph2','keyword.paragraph3','keyword.paragraph4','keyword.paragraph5','keyword.paragraph6','keyword.paragraph7','keyword.paragraph8','keyword.slug','keyword.bottom_heading','keyword.top_heading','keyword.extra_heading','keyword.extra_description','keyword.noida_top_description','keyword.noida_bottom_description','keyword.noida_top_heading','keyword.noida_bottom_heading')
+			->select('keyword.*', 'parent_category.*','child_category.*', 'keyword.id as key_id', 'keyword.faqq1', 'keyword.faqa1', 'keyword.faqq2', 'keyword.faqa2', 'keyword.faqq3', 'keyword.faqa3', 'keyword.faqq4', 'keyword.faqa4', 'keyword.faqq5', 'keyword.faqa5','keyword.faqq6', 'keyword.faqa6', 'keyword.faqq7', 'keyword.faqa7','keyword.faqq8', 'keyword.faqa8','keyword.faqq9', 'keyword.faqa9','keyword.faqq10', 'keyword.faqa10','keyword.meta_title', 'keyword.meta_description', 'keyword.h1_heading', 'keyword.top_description', 'keyword.bottom_description','keyword.ratingvalue', 'keyword.ratingcount','keyword.courseabout','keyword.heading','keyword.paragraph1','keyword.paragraph2','keyword.paragraph3','keyword.paragraph4','keyword.paragraph5','keyword.paragraph6','keyword.paragraph7','keyword.paragraph8','keyword.slug','keyword.bottom_heading','keyword.top_heading','keyword.extra_heading','keyword.extra_description','keyword.noida_top_description','keyword.delhi_bottom_description','keyword.noida_top_heading','keyword.delhi_bottom_heading')
 			->first();
  
 			 
@@ -66,9 +66,9 @@ class CitySlugController extends Controller
 		$bottom_wcity_heading ="";
 		$bottom_wcity_description ="";
 		$noida_top_description ="";
-		$noida_bottom_description ="";
+		$delhi_bottom_description ="";
 		$noida_top_heading ="";
-		$noida_bottom_heading ="";
+		$delhi_bottom_heading ="";
 		$extra_heading ="";
 		$extra_description ="";
         if (!$keywordDetails) {
@@ -227,15 +227,15 @@ class CitySlugController extends Controller
 			$noida_top_heading = preg_replace('/{{city}}/i', ucfirst($city), $keywordDetails->noida_top_heading);
 		}  
 
-		if (!empty($keywordDetails->noida_bottom_heading)) {
-			$noida_bottom_heading =preg_replace('/{{city}}/i', ucfirst($city), $keywordDetails->noida_bottom_heading);
+		if (!empty($keywordDetails->delhi_bottom_heading)) {
+			$delhi_bottom_heading =preg_replace('/{{city}}/i', ucfirst($city), $keywordDetails->delhi_bottom_heading);
 		}  
-		 	if (!empty($keywordDetails->noida_top_description)) {
+		if (!empty($keywordDetails->noida_top_description)) {
 			$noida_top_description = preg_replace('/{{city}}/i', ucfirst($area), $keywordDetails->noida_top_description);
 		}
 		
-		if (!empty($keywordDetails->noida_bottom_description)) {
-			$noida_bottom_description = preg_replace('/{{city}}/i', ucfirst($area), $keywordDetails->noida_bottom_description);
+		if (!empty($keywordDetails->delhi_bottom_description)) {
+			$delhi_bottom_description = preg_replace('/{{city}}/i', ucfirst($area), $keywordDetails->delhi_bottom_description);
 		}
 		if (!empty($keywordDetails->extra_description)) {
 			$extra_description = preg_replace('/{{city}}/i', ucfirst($area), $keywordDetails->extra_description);
@@ -265,9 +265,9 @@ class CitySlugController extends Controller
 			'bottom_wcity_heading' => $bottom_wcity_heading,
 			'bottom_wcity_description' => $bottom_wcity_description,
 			'noida_top_heading' => $noida_top_heading,
-			'noida_bottom_heading' => $noida_bottom_heading,
+			'delhi_bottom_heading' => $delhi_bottom_heading,
 			'noida_top_description' => $noida_top_description,
-			'noida_bottom_description' => $noida_bottom_description,
+			'delhi_bottom_description' => $delhi_bottom_description,
 			'courseabout' => $courseabout,
 			'heading' => $heading,
 			'paragraph1' => $paragraph1,
@@ -2423,7 +2423,7 @@ $reviewList = DB::table('clients')
 		$bottomDescription = !empty($kwData['bottom_description']) ? replaceCity($kwData['bottom_description'], $area) : '';
 
 		$noidatopDescription = !empty($kwData['noida_top_description']) ? replaceCity($kwData['noida_top_description'], $area) : '';
-		$noidabottomDescription = !empty($kwData['noida_bottom_description']) ? replaceCity($kwData['noida_bottom_description'], $area) : '';
+		$delhibottomDescription = !empty($kwData['delhi_bottom_description']) ? replaceCity($kwData['delhi_bottom_description'], $area) : '';
 
 
 
@@ -2478,7 +2478,7 @@ $reviewList = DB::table('clients')
             'city', 'slug', 'keyword', 'area','zones',
             'childSlug', 'childCat','cityDetails',
             'ratingCount', 'ratingValue', 'bgImage',
-            'topDescription', 'bottomDescription','noidatopDescription','noidabottomDescription',
+            'topDescription', 'bottomDescription','noidatopDescription','delhibottomDescription',
             'faqs', 'kwData','keywordBanners',
             'businesses', 'businessChunks',
             'agents', 'reviews', 'categories',

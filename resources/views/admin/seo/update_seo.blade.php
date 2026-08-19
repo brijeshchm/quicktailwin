@@ -251,48 +251,8 @@ padding:0px;
         </div>
 
 
-
-          <div class="section-border">
-            <h4>Noida City Page Content</h4>
-            <form class="form-horizontal" method="POST" onsubmit="return keywordController.updateNoidaPageContent(this,<?php echo (isset($keyword->id)? $keyword->id:""); ?>)" >
-                {{ csrf_field() }}
-                <div class="form-group">
-                    <label class="col-md-2 control-label">Noida Top Heading</label>
-                    <div class="col-md-8">
-                        <input class="form-control" name="noida_top_heading" value="{{ $keyword->noida_top_heading }}" placeholder="Enter noida top heading">
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-                    <label class="col-md-2 control-label">Page Top Description (max 500 chars)</label>
-                    <div class="col-md-8">
-                        <textarea class="form-control summernote" name="noida_top_description" rows="9" placeholder="Enter Page Top Description">{{ $keyword->noida_top_description }}</textarea>
-                    </div>
-                </div>
-                  <div class="form-group">
-                    <label class="col-md-2 control-label">Bottom Heading</label>
-                    <div class="col-md-8">
-                        <input class="form-control" name="noida_bottom_heading" value="{{ $keyword->noida_bottom_heading }}" placeholder="Enter bottom noida heading">
-                    </div>
-                </div>
-            <div class="form-group ">
-                <label for="bottom_description" class="col-md-2 control-label">Page Bottom Description</label>
-                <div class="col-md-8">
-                <textarea class="form-control summernote" name="noida_bottom_description" placeholder="Enter Page Bottom Description" rows="15">{{ $keyword->noida_bottom_description }}</textarea>
-                </div>
-            </div>	
-            <div class="form-group text-center">
-            <button type="submit" class="btn btn-primary">
-                <i class="fa fa-btn"></i> Submit
-            </button>
-        </div>
-            </form>
-        </div>
-
-
         <div class="section-border">
-            <h4>Extra Content Without City</h4>
+            <h4>Extra Content</h4>
             <form class="form-horizontal" method="POST" onsubmit="return keywordController.extraPageContent(this,<?php echo (isset($keyword->id)? $keyword->id:""); ?>)" >
                 {{ csrf_field() }}
                 <div class="form-group">
@@ -318,6 +278,65 @@ padding:0px;
         </div>
             </form>
         </div>
+
+          <div class="section-border">
+            <h4>Noida City Page Content</h4>
+            <form class="form-horizontal" method="POST" onsubmit="return keywordController.updateNoidaPageContent(this,<?php echo (isset($keyword->id)? $keyword->id:""); ?>)" >
+                {{ csrf_field() }}
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Noida Top Heading</label>
+                    <div class="col-md-8">
+                        <input class="form-control" name="noida_top_heading" value="{{ $keyword->noida_top_heading }}" placeholder="Enter noida top heading">
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Page Top Description (max 500 chars)</label>
+                    <div class="col-md-8">
+                        <textarea class="form-control summernote" name="noida_top_description" rows="9" placeholder="Enter Page Top Description">{{ $keyword->noida_top_description }}</textarea>
+                    </div>
+                </div>
+            <div class="form-group text-center">
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-btn"></i> Submit
+            </button>
+        </div>
+            </form>
+        </div>
+
+
+
+        
+          <div class="section-border">
+            <h4>Delhi City Page Content</h4>
+            <form class="form-horizontal" method="POST" onsubmit="return keywordController.updateDelhiPageContent(this,<?php echo (isset($keyword->id)? $keyword->id:""); ?>)" >
+                {{ csrf_field() }}
+       
+
+                  <div class="form-group">
+                    <label class="col-md-2 control-label">Delhi Bottom Heading</label>
+                    <div class="col-md-8">
+                        <input class="form-control" name="delhi_bottom_heading" value="{{ $keyword->delhi_bottom_heading }}" placeholder="Enter bottom delhi heading">
+                    </div>
+                </div>
+            <div class="form-group ">
+                <label for="bottom_description" class="col-md-2 control-label">Delhi Page Bottom Description</label>
+                <div class="col-md-8">
+                <textarea class="form-control summernote" name="delhi_bottom_description" placeholder="Enter Page Bottom Description" rows="15">{{ $keyword->delhi_bottom_description }}</textarea>
+                </div>
+            </div>	
+
+
+            
+            <div class="form-group text-center">
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-btn"></i> Submit
+            </button>
+        </div>
+            </form>
+        </div>
+
 
 
 <div class="section-border">

@@ -2141,9 +2141,7 @@ $leads->whereDate('created_at', '<=', $dateTo);
 		}
 		$validator = Validator::make($request->all(), [
 			'noida_top_description' => 'nullable',
-			'noida_bottom_description' => 'nullable',
-
-
+			'noida_top_heading' => 'nullable',
 		]);
 
 		if ($validator->fails()) {
@@ -2154,8 +2152,6 @@ $leads->whereDate('created_at', '<=', $dateTo);
 
 		if ($kwObj) {
 			$kwObj->noida_top_description = $request->input('noida_top_description');
-			$kwObj->noida_bottom_description = $request->input('noida_bottom_description');
-			$kwObj->noida_bottom_heading = $request->input('noida_bottom_heading');
 			$kwObj->noida_top_heading = $request->input('noida_top_heading');
 
 
@@ -2190,6 +2186,74 @@ $leads->whereDate('created_at', '<=', $dateTo);
 		return response()->json(['status' => $status, 'msg' => $msg], 200);
 	}
 	
+	
+		/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function updateDelhiPageContent(Request $request, $id)
+	{
+		if (!($request->user()->current_user_can('administrator') || $request->user()->current_user_can('edit_SEO'))) {
+			return response()->json(['status' => 1, 'errors' => 'errors unauthorised'], 400);
+		}
+
+		if (empty($id) || is_null($id)) {
+			$danger_msg = 'Keyword cannot be null or blank.';
+			return response()->json(['status' => 1, 'errors' => $danger_msg], 400);
+		}
+		$validator = Validator::make($request->all(), [
+			'delhi_bottom_heading' => 'nullable',
+			'delhi_bottom_description' => 'nullable',
+
+
+		]);
+
+		if ($validator->fails()) {
+			$errorsBag = $validator->getMessageBag()->toArray();
+			return response()->json(['status' => 1, 'errors' => $errorsBag], 400);
+		}
+		$kwObj = Keyword::findOrFail($id);
+
+		if ($kwObj) {
+		
+			$kwObj->delhi_bottom_description = $request->input('delhi_bottom_description');
+			$kwObj->delhi_bottom_heading = $request->input('delhi_bottom_heading');
+		
+
+
+			if ($kwObj->isDirty()) {
+				$originalValues = $kwObj->getOriginal();
+				$changes = [];
+				foreach ($kwObj->getDirty() as $field => $newValue) {
+					$changes[$field] = json_encode([
+						'old' => $originalValues[$field] ?? null,
+						'new' => $newValue,
+					]);
+
+					$versionData['version'] = $kwObj->id;
+					$versionData['updated_by'] = Auth::id();
+					$versionData['table'] = "keyword";
+					$versionData['attributes'] = $kwObj->keyword;
+					$versionData['description'] = json_encode($changes);
+				}
+				$this->seoLog->createSeoLog($versionData);
+			}
+		}
+
+		if (!empty($kwObj->save())) {
+			$status = 1;
+			$msg = "Delhi Content Update submitted successfully!";
+
+		} else {
+			$status = 0;
+			$msg = "Delhi Content Update could not be submitted!";
+		}
+
+		return response()->json(['status' => $status, 'msg' => $msg], 200);
+	}
 	
 	/**
 	 * Update the specified resource in storage.

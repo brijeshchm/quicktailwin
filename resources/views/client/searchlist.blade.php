@@ -8,10 +8,8 @@
     ];
 
      $singleCities = [
-        'faridabad','noida'
+        'faridabad','noida','delhi'
     ];
-
-
     $keywordArray = [
         'artificial-intelligence-training', 'python-training', 'workday-training',
         'sap-training', 'banquet-hall', 'cricket-academy','cloud-computing-training','aws-training','devops-training','digital-marketing-training','full-stack-developer-training','azure-training','pmp-certification-training','mba-distance','car-service','computer-repair','shooting-academy','swimming-academy','boxing'
@@ -1066,28 +1064,26 @@ function bannerSlider(banners, interval = 4000) {
     </div>
     @endif
     @endif
-
-
     
- @if($shouldIndex && $cityName =='noida')
+ @if($shouldIndex && $cityName =='delhi')
   
     {{-- Bottom Description --}}
-    @if(!empty($noidabottomDescription))
+    @if(!empty($delhibottomDescription))
 
 
      @php
-    $noidabottom_heading = '';
+    $delhibottom_heading = '';
 
-    if (!empty($kwData['noida_bottom_heading'])) {
-        $noidabottom_heading=  $kwData['noida_bottom_heading'];
+    if (!empty($kwData['delhi_bottom_heading'])) {
+        $delhibottom_heading=  $kwData['delhi_bottom_heading'];
     }else{
-     $noidabottom_heading = 'Find the Best '.$keyword . ' in ' . ucwords(strtolower(str_replace('-', ' ', $city)));
+     $delhibottom_heading = 'Find the Best '.$keyword . ' in ' . ucwords(strtolower(str_replace('-', ' ', $city)));
     }    
     @endphp
 
     <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4">
-        <h2 class="text-lg font-bold text-gray-900 mb-3">{{ $noidabottom_heading }}</h2>
-        <div class="text-sm text-gray-600 leading-relaxed">{!! $noidabottomDescription !!}</div>
+        <h2 class="text-lg font-bold text-gray-900 mb-3">{{ $delhibottom_heading }}</h2>
+        <div class="text-sm text-gray-600 leading-relaxed">{!! $delhibottomDescription !!}</div>
     </div>
     @endif
     @endif
