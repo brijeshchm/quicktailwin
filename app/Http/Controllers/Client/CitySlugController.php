@@ -2866,7 +2866,7 @@ $reviewList = DB::table('clients')
 			return DB::table('clients')->pluck('business_slug','business_slug')->all();
 		});
 	}
-    private function resolveBestCandidate(string $inputSlug, array $slugMap): ?string
+    private function resolveBestCandidate_old(string $inputSlug, array $slugMap): ?string
 	{
 		$tokens = array_values(array_filter(explode('-', $inputSlug), fn ($p) => $p !== ''));
 		$candidates = $this->generateSubsequenceSlugs($tokens);
@@ -2886,6 +2886,33 @@ $reviewList = DB::table('clients')
 		return null;
 	}
     
+
+private function resolveBestCandidate(string $inputSlug, array $slugMap): ?string
+{
+    $tokens = array_values(array_filter(explode('-', $inputSlug), fn ($p) => $p !== ''));
+
+    if (empty($tokens)) {
+        return null;
+    }
+
+    // Step 1: Exact full-slug match (keyword+city combo, or standalone keyword/city)
+    if (isset($slugMap[$inputSlug])) {
+        return $inputSlug;
+    }
+
+    // Step 2: Progressively strip trailing token(s) — look for exact keyword match only
+    $count = count($tokens);
+
+    for ($i = $count - 1; $i >= 1; $i--) {
+        $candidate = implode('-', array_slice($tokens, 0, $i));
+
+        if (isset($slugMap[$candidate])) {
+            return $candidate;
+        }
+    }
+
+    return null;
+}
 	/**
      * Check if a city is valid via the QuickDials city-check API.
      */
@@ -2917,11 +2944,6 @@ $reviewList = DB::table('clients')
 	}
 
  
-	
-
-	 
-
-	
 	private function generateSubsequenceSlugs(array $tokens): array
 	{
 		$tokens = array_slice($tokens, 0, 8);
@@ -2957,7 +2979,7 @@ $reviewList = DB::table('clients')
 		
 		$category = $this->categoriesCheck($newSlug);
  
-		if($category){
+		if(!empty($category)){
 
 		$newCategory = $this->categoriesCheckDetails($newSlug);
 		return $this->categoriesListPage($newCategory,$newSlug,$city);
@@ -2971,9 +2993,9 @@ $reviewList = DB::table('clients')
 		return $this->childListPage($newchild,$newSlug,$city);
 		}
 
-		
+	 
 		$cityName = $this->resolveBestCandidate($newSlug, $cityMap);
-
+ 
 		if (!empty($cityName)) {
 			$cityKeyword = $this->cityKeyword();
 			return $this->cityKeywordPage($cityKeyword,$cityName);			
@@ -3102,7 +3124,7 @@ $reviewList = DB::table('clients')
 	public function searchKW(Request $request)
 	{
 
-	dd($request);
+	 
 		$str = trim($request->input('q'));
 		$query = DB::table('keyword')
 			->select('keyword.keyword', 'keyword.slug', 'keyword.id');
