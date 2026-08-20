@@ -7,7 +7,6 @@
 @php
 $cities = ['hyderabad','jammu','jalandhar','nagpur','jhansi','bhopal','saharanpur','vadodara','chennai','moradabad','jaipur'];
 @endphp
-
 @foreach ($cities as $city)
     @foreach ($keywords as $keyword)
     <url>
@@ -17,6 +16,5 @@ $cities = ['hyderabad','jammu','jalandhar','nagpur','jhansi','bhopal','saharanpu
         <priority>0.80</priority>
     </url>
     @endforeach
-@endforeach
- 
+@endforeach 
 </urlset>
