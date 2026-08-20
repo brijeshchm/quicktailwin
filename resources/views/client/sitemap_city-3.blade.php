@@ -5,7 +5,7 @@
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 @php
-$cities = ['hyderabad','jammu','jalandhar','nagpur','jhansi','bhopal','saharanpur','vadodara','chennai','moradabad','jaipur'];
+$cities = ['hyderabad', 'jammu', 'jalandhar', 'nagpur', 'jhansi','bhopal','saharanpur','vadodara','chennai','moradabad','jaipur'];
 @endphp
 @foreach ($cities as $city)
     @foreach ($keywords as $keyword)
