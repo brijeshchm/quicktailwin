@@ -436,7 +436,7 @@ function bannerSlider(banners, interval = 4000) {
     <div x-show="showAd" x-cloak
          class="relative w-full overflow-hidden h-48"
          style="background-image: url('{{ $bgImage }}'); background-size: cover; background-position: center;">
-        <div class="absolute inset-0 bg-indigo-900/50"></div>
+        <div class="absolute inset-0"></div>
         <div class="relative w-full px-3 sm:px-8 py-3 sm:py-5 flex items-center gap-3 sm:gap-5 h-full">
             <div class="flex-1 min-w-0">
                 
