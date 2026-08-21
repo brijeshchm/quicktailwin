@@ -359,7 +359,7 @@ $schema = [
                      class="w-full h-full object-cover" />
             </template>
 
-            <div class="absolute inset-0 bg-indigo-900/50 pointer-events-none"></div>
+            <div class="absolute inset-0 pointer-events-none"></div>
 
             <div class="absolute inset-0 px-3 sm:px-8 py-3 sm:py-5 flex items-center gap-3 sm:gap-5 pointer-events-none">
                 <div class="flex-1 min-w-0 text-white"></div>
