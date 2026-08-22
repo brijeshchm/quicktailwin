@@ -275,7 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </svg>
                     @endfor
                 </div>
-                <span class="text-[10px] sm:text-sm text-gray-400">({{ $reviewCount }} Reviews)</span>
+                <span class="text-[10px] sm:text-sm text-gray-400">({{ $reviewCount }} Rating)</span>
                 @if($openUntil)
                 <span class="hidden sm:inline text-sm text-gray-400">🕐 Open Hrs {{ $openUntil }}</span>
                 @endif
