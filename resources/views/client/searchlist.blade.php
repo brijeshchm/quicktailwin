@@ -8,7 +8,7 @@
     ];
 
     $singleCities = [
-        'faridabad','noida','delhi','bangalore'
+        'faridabad','noida'
     ];
     $keywordArray = [
         'artificial-intelligence-training', 'python-training', 'workday-training',
@@ -18,11 +18,8 @@
     $currentKeyword = strtolower(trim($kwData['keyword_slug'] ?? ''));
 
     $shouldIndex = in_array($currentCity, $allowedCities) 
-        && in_array($currentKeyword, $keywordArray);
- 
-   
+        && in_array($currentKeyword, $keywordArray);   
 @endphp
-
 @section('meta_robots')
 <meta name="robots" content="{{ $shouldIndex ? 'index, follow' : 'noindex, nofollow' }}">
 @endsection
@@ -1938,7 +1935,189 @@ The duration depends on the course plan, so students should check the current ba
 
     @endif
 
-  @else 
+  @elseif($shouldIndex && $cityName =='noida')
+
+    @if($kwData['keyword_slug']=='cloud-computing-training' && $cityName =='noida')
+
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            💬 Frequently Asked Questions About Cloud Computing in Noida</h3>
+        <div class="space-y-2">           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 1 ? null : 1"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h3>What is the duration of a cloud computing course in Noida?</h3> 
+                    <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                The duration depends on the course level. Basic training can take around 45–60 days, while bigger cloud and DevOps programmes may take 3–6 months. Some short cloud computing course in Noida are completed in a few days. So, check the syllabus before choosing a course.
+                 </div>
+            </div>
+              <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 2 ? null : 2"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h3>How much does cloud computing training cost in Noida?</h3> 
+                    <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+The fee is usually around ₹15,000 to ₹50,000 for many basic to certification-focused courses. Advanced multi-cloud programs can cost more. For example, current Noida listings show courses from about ₹16,500 to ₹50,000+. Fees depend on duration, platform, projects and certification support. 
+</div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 3 ? null : 3"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h3>Which cloud computing course is best for beginners?</h3> 
+                    <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+        For beginners, a course covering cloud basics, Linux, networking, storage, security and one platform is a good start. AWS, Azure or Google Cloud can be chosen based on your career plan. A course with hands-on labs is better because students can practise what they learn. 
+    </div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 4 ? null : 4"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h3>Are online and classroom cloud computing classes available in Noida?</h3> 
+                    <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+           Yes, both online and classroom classes are available in Noida. Some institutes also offer hybrid learning, weekday and weekend batches. For example, current course listings show online and offline options with different batch timings. Check the mode and timing before paying the course fee. 
+             </div>
+            </div>           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 5 ? null : 5"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h3>How do I choose the right cloud computing training institute in Noida?</h3> 
+                    <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+            First, check the syllabus, trainer, practical labs, projects, course duration, and certification help. Then compare fees, batch timings, location, and recent reviews. Also ask about career support if you need it. Do not choose an institute only because it promises a job or high salary.  
+                </div>
+            </div>            
+        </div>
+    </div>
+
+    @elseif($kwData['keyword_slug']=='aws-training' && $cityName =='noida')
+    
+    
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            💬 Frequently Asked Questions About AWS Training in Noida</h3>
+        <div class="space-y-2">           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 1 ? null : 1"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h3>What is the duration of an AWS course in Noida?</h3> 
+                    <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+            On average, an AWS course in Noida can take around 2 to 6 months. Basic courses may finish faster, while courses covering advanced AWS services, projects, DevOps, and certification preparation can take more time. Weekend and part-time batches may also take longer than regular classes.   
+                 </div>
+            </div>
+              <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 2 ? null : 2"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h3>How much does AWS training cost in Noida?</h3> 
+                    <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+The average AWS training fee in Noida can be around ₹20,000 to ₹60,000, depending on the course and institute. Basic AWS coaching in Noida is usually cheaper, while advanced training with practical labs, projects, and certification preparation may cost more. It is better to ask the institute for the latest fee before joining. 
+</div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 3 ? null : 3"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h3>Is AWS training suitable for beginners?</h3> 
+                    <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+        Yes, beginners can learn AWS. You do not need to know every AWS service before starting. A good beginner AWS training in Noida should first explain basic cloud concepts and then move to services like EC2, S3, IAM, and VPC. Later, students can learn advanced topics based on their career goals</div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 4 ? null : 4"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h3>Which AWS certification should I choose as a beginner?</h3> 
+                    <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+           If you are completely new to AWS, AWS Certified Cloud Practitioner can be a simple starting point. It covers basic AWS Cloud knowledge. If you already have some IT or cloud knowledge, you can also look at an Associate certification like Solutions Architect or Developer. 
+             </div>
+            </div>           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 5 ? null : 5"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h3>How do I choose the best AWS training institute in Noida?</h3> 
+                    <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+           Before joining, compare the syllabus, fees, course duration, trainer, practical labs, projects, reviews, and class timings. Also ask if the course includes certification preparation and career support. Do not select AWS coaching in Noida only because it promises a job. Choose one where you can get enough practical AWS practice.  
+                </div>
+            </div>            
+        </div>
+    </div>
+
+    @elseif($kwData['keyword_slug']=='devops-training' && $cityName =='noida')
+    
+    
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            💬 Frequently Asked Questions About DevOps course in Noida</h3>
+        <div class="space-y-2">           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 1 ? null : 1"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h3>What is the duration of a DevOps course in Noida?</h3> 
+                    <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                DevOps course in Noida may take up to 2 to 6 months at some institutes. A short course might be completed earlier, but an advanced course might take a long time. This is because it will require extra time if the course consists of AWS, Kubernetes, projects, and interview preparation.
+                 </div>
+            </div>
+              <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 2 ? null : 2"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h3>How much does DevOps training cost in Noida?</h3> 
+                    <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+The usual DevOps classes could cost you anywhere between ₹16,000 and ₹35,000. However, the cost is not set in stone. It may be higher depending on the advanced classes. It all depends on tools, class duration, cloud training, and projects and labs. Consult the institution for the current cost.
+</div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 3 ? null : 3"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h3>Is DevOps suitable for beginners?</h3> 
+                    <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+        DevOps is something that any beginner can learn. It is always preferable if beginners get an understanding of the basics of Linux, Networking, and programming before starting. The beginners’ training program needs to introduce all these before Git, Jenkins, Docker, Kubernetes, and cloud.</div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 4 ? null : 4"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h3>Which tools are covered in DevOps classes in Noida?</h3> 
+                    <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+           Most DevOps course curricula cover topics like Git, Jenkins, Docker, Kubernetes, Terraform, and Ansible. Some courses also include learning about Amazon Web Services (AWS) or Microsoft Azure. Advanced courses may also have monitoring, logging, and DevSecOps included in the course. 
+             </div>
+            </div>           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 5 ? null : 5"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h3>How do I choose the right DevOps training institute in Noida?</h3> 
+                    <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+Firstly, compare syllabus, instructor, fees, ratings, timing of classes, and labs. See whether the courses offer important tools such as Jenkins, Docker, Kubernetes, Terraform, and Ansible. Ask questions related to projects and career assistance as well. Do not just choose a college that offers you employment or a discount.
+                </div>
+            </div>            
+        </div>
+    </div>
+
+    @endif
+
+
+  @else
     {{-- FAQ --}}
     @if(!empty($faqs))
     <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
