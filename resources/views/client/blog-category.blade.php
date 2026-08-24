@@ -5,7 +5,9 @@
 @section('og_image', !empty($kwData['category_icon'])
     ? asset($kwData['category_icon'])
     : asset('client/images/quickdials-og.png')) 
-
+@section('meta_robots')
+<meta name="robots" content="noindex, nofollow">
+@endsection
 @section('content')	
 @include('client.components.banner-section')
 @php
