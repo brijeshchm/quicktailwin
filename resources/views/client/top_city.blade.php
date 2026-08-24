@@ -5,11 +5,9 @@
 
 @php
     $allowedCities = [
-        'faridabad',
-        'delhi',
-        'noida',
-        'gurgaon',
-        'bangalore'
+        'faridabad',        
+        'noida',       
+                
     ];
 
     $keywordArray = [
