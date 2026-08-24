@@ -303,8 +303,8 @@ document.addEventListener('DOMContentLoaded', () => {
         <p class="text-sm text-gray-500 line-clamp-2">
             {!! strip_tags($business['businessDescription']) !!}
         </p>
-
-        <button
+ Read More
+       <!--<button
             type="button"
             @click="
                 showDescription = true;
@@ -313,7 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
             class="text-xs font-semibold text-blue-600 mt-1"
         >
             Read More
-        </button>
+        </button>-->
     </div>
 
     {{-- Mobile Popup --}}
