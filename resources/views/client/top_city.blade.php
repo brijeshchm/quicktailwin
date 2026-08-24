@@ -5,9 +5,7 @@
 
 @php
     $allowedCities = [
-        'faridabad',        
-        'noida',       
-                
+        'faridabad'
     ];
 
     $keywordArray = [
@@ -17,7 +15,13 @@
         'sap-training',
         'banquet-hall',
         'cricket-academy',
-        'cloud-computing-training','aws-training','devops-training','digital-marketing-training','full-stack-developer-training','azure-training','pmp-certification-training','mba-distance','car-service','computer-repair','shooting-academy','swimming-academy','boxing','distance-education','data-science-training','salesforce-training','data-analytics-training','wedding-organisers','judo-karate'
+        'data-science-training',
+        'judo-karate',
+        'distance-education',
+        'data-analytics-training',
+        'salesforce-training',
+        'wedding-organisers'
+
     ];
 @endphp
 
@@ -36,4 +40,28 @@
 @endforeach
 
   
+
+@php
+    $noidaCities = [
+        'noida'
+    ];
+
+    $keywordArrayNoida = [
+        'aws-training','cloud-computing-training','devops-training','digital-marketing-training','full-stack-developer-training','azure-training','pmp-certification-training','mba-distance','car-service','computer-repair','shooting-academy','swimming-academy','boxing'
+    ];
+@endphp
+
+@foreach ($noidaCities as $cityNoida)
+    @foreach ($keywordArrayNoida as $keywordNoida)
+        <url>
+            <loc>{{ route('city.slug', [
+                'city_slug' => $cityNoida,
+                'service_slug' => $keywordNoida
+            ]) }}</loc>
+
+            <changefreq>daily</changefreq>
+            <priority>0.80</priority>
+        </url>
+    @endforeach
+@endforeach
 </urlset>
