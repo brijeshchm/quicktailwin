@@ -108,19 +108,14 @@
         </url>
     @endforeach
 @endforeach
-
-  
-
 @php
     $noidaCities = [
         'noida'
     ];
-
     $keywordArrayNoida = [
         'aws-training','cloud-computing-training','devops-training','digital-marketing-training','full-stack-developer-training','azure-training','pmp-certification-training','mba-distance','car-service','computer-repair','shooting-academy','swimming-academy','boxing'
     ];
 @endphp
-
 @foreach ($noidaCities as $cityNoida)
     @foreach ($keywordArrayNoida as $keywordNoida)
         <url>
@@ -128,10 +123,11 @@
                 'city_slug' => $cityNoida,
                 'service_slug' => $keywordNoida
             ]) }}</loc>
-
             <changefreq>daily</changefreq>
             <priority>0.80</priority>
         </url>
     @endforeach
 @endforeach
+
+
 </urlset>
