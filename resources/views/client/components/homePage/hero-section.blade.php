@@ -127,14 +127,7 @@
                 @if($bannerKeyword)
                 @foreach($bannerKeyword as $i => $card)
                
-                @php
-                $noCitySlugs = ['wedding-planning','spa-hub'];
-                // $catUrl = in_array($card['url'], $noCitySlugs)
-                //     ? route('showCity', $card['url'])
-                //     : route('city.slug', ['city_slug' => 'faridabad', 'service_slug' => $card['url']]);
-                $catUrl = route('showCity',$card['url']);
-                @endphp
-                    <a href="{{ $catUrl }}"
+        <a href="{{ route('showCity',$card['url']) }}"
             title="{{ $card['title'] ?? '' }}"
             class="banner-card relative shrink-0 rounded-t-2xl overflow-hidden cursor-pointer group h-[140px] sm:h-[155px] block {{ $colorMap[$i % count($colorMap)] }}">
 <img

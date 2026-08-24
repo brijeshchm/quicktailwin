@@ -76,19 +76,10 @@ $repairGradients = [
  
             @foreach($repairsServices as $i => $service)
                  
-            @php
-            $noCitySlugs = ['wedding-planning'];
-
-            // $catUrl = in_array($service['url'], $noCitySlugs)
-            // ? route('showCity', $service['url'])
-            // : route('city.slug', ['city_slug' => 'faridabad', 'service_slug' => $service['url']]);
-            $catUrl = route('showCity',$service['url']);
-            @endphp
-
                 @php
                     $grad = $repairGradients[$i % count($repairGradients)];
                 @endphp
-                <a href="{{ $catUrl }}"> 
+                <a href="{{ route('showCity',$service['url']) }}"> 
                 <div class="shrink-0 rounded-xl overflow-hidden relative group cursor-pointer border border-gray-100
                             hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
                      style="width:calc((100% - 12px) / 2.2); min-width:120px; max-width:200px;">

@@ -6,12 +6,7 @@
 @section('content')
 @include('client.components.homePage.hero-section')
 @include('client.components.homePage.category-grid')
-<!-- @include('client.components.homePage.service-cards') -->
-<!-- @include('client.components.homePage.repair-services') -->
-<!-- @include('client.components.homePage.wedding-planning') -->
-<!-- @include('client.components.homePage.featured-businesses') -->
 @include('client.components.homePage.blog-service')
 @include('client.components.homePage.stats-banner')
-<!-- @include('client.components.homePage.country-flags') -->
 @endsection
 

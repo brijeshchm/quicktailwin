@@ -35,13 +35,9 @@
                 @foreach($popularSearches as $svc)
                  
                @php
-                $noCitySlugs = ['wedding-planning'];
-    // $popSUrl = in_array($svc['url'], $noCitySlugs)
-    //     ? route('showCity', $svc['url'])
-    //     : route('city.slug', ['city_slug' => 'faridabad', 'service_slug' => $svc['url']]);
-            $popSUrl = route('showCity',$svc['url']);        
-            @endphp
-                 <a href="{{ $popSUrl }}"
+                $noCitySlugs = ['wedding-planning'];       
+                @endphp
+                 <a href="{{ route('showCity',$svc['url']) }}"
    title="{{ $svc['title'] ?? '' }}"
    class="block shrink-0 rounded-xl overflow-hidden relative group cursor-pointer shadow-sm hover:shadow-md transition-shadow duration-300"
    style="width:calc((100% - 12px) / 2.2); min-width:120px; max-width:200px;">

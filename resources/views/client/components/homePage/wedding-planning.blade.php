@@ -30,18 +30,9 @@
             @foreach($weddingPlanning as $i => $ws)
              
             @php
-            $noCitySlugs = ['wedding-planning'];
-
-            // $catUrl = in_array($ws['url'], $noCitySlugs)
-            // ? route('showCity', $ws['url'])
-            // : route('city.slug', ['city_slug' => 'faridabad', 'service_slug' => $ws['url']]);
-
-                $catUrl = route('showCity',$ws['url']);   
-            
+            $noCitySlugs = ['wedding-planning'];            
             @endphp
-
-
- <a href="{{ $catUrl }}">
+            <a href="{{ route('showCity',$ws['url']) }}">
             <div class="{{ $i >= 6 ? 'hidden md:block' : '' }} cursor-pointer group flex flex-col items-center gap-1.5">
                 <div class="w-full aspect-square rounded-lg overflow-hidden border border-yellow-500/30 group-hover:border-yellow-300/70 shadow-md group-hover:shadow-yellow-500/20 group-hover:shadow-lg transition-all duration-300">
                    

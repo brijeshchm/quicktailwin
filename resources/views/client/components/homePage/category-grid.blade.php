@@ -8,12 +8,10 @@
         
             @php
             $noCitySlugs = ['wedding-planning','spa-hub'];
-
             $popSUrl = in_array($cat['url'], $noCitySlugs)
             ? route('showCity', $cat['url'])
             : route('city.slug', ['city_slug' => 'faridabad', 'service_slug' => $cat['url']]);
-
-          
+     
             @endphp
 
 
