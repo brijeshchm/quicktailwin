@@ -373,7 +373,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
         : 'faridabad';
     @endphp
 
-    <a href="{{ route('city.slug', ['city_slug' => strtolower($city), 'service_slug' => $keySlug]) }}"
+    <a href="{{ route('showCity',$keySlug) }}"
        class="text-decoration-none">
 
         <div class="service-card reveal d-{{ min($i%6,5) }} rounded-xl p-3 flex flex-col gap-2 cursor-pointer border bg-white"
@@ -1063,15 +1063,15 @@ function selectCert(i) {
             </div>
             <div class="px-6 py-5">
                 <ul class="flex flex-wrap gap-2">
-                  @php
-    $city = (!empty($clientsList['city']) && !is_numeric($clientsList['city']))
-        ? Str::slug($clientsList['city'])
-        : '';
-@endphp
-@if($relatedList)
+                    @php
+                    $city = (!empty($clientsList['city']) && !is_numeric($clientsList['city']))
+                        ? Str::slug($clientsList['city'])
+                        : '';
+                    @endphp
+                    @if($relatedList)
                     @foreach($relatedList as $i => $item)                    
                     <li>
-                        <a href="{{ route('city.slug', ['city_slug'=>strtolower($city),'service_slug' => $item['slug']])}}" class="text-blue-600 hover:underline text-sm">
+                        <a href="{{ route('showCity',$item['slug'])}}" class="text-blue-600 hover:underline text-sm">
                             {{ $item['title'] }}{{ $i < count($relatedList)-1 ? ' |' : '' }}
                         </a>
                     </li>

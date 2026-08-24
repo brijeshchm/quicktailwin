@@ -106,7 +106,7 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
 
                     @endphp
                     <div class="animate-tile" style="animation-delay: {{ $delay }}ms">
-                        <a href="{{ $childSUrl }}" >
+                        <a href="{{ route('showCity',$url) }}" >
                             <div class="tile-card group bg-white border border-slate-200 rounded-xl overflow-hidden">
 
                                 {{-- Coloured image strip --}}
@@ -145,9 +145,6 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
                    
                 @endforelse
             </div>
-
-          
-
             @if(!empty($topDescription))
                @php
                     $defaultHeading = '';
@@ -163,8 +160,6 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
                     <p>{{ $topDescription }}</p>
                 </div>
             @endif
-
-
         </div>
 </main>
 
