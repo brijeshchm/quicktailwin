@@ -281,7 +281,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <main>
 @yield('content')
 </main>
-@include('client.layouts.footer')
+
 
 <script>
 var searchCity       = '';

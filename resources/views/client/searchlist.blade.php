@@ -7,15 +7,13 @@
         'gurgaon', 'bangalore'
     ];
 
-     $singleCities = [
+    $singleCities = [
         'faridabad','noida','delhi','bangalore'
     ];
     $keywordArray = [
         'artificial-intelligence-training', 'python-training', 'workday-training',
         'sap-training', 'banquet-hall', 'cricket-academy','cloud-computing-training','aws-training','devops-training','digital-marketing-training','full-stack-developer-training','azure-training','pmp-certification-training','mba-distance','car-service','computer-repair','shooting-academy','swimming-academy','boxing','distance-education','data-science-training','salesforce-training','data-analytics-training','wedding-organisers','judo-karate'
-    ];
-
-  
+    ];  
     $currentCity    = strtolower(trim($city ?? ''));
     $currentKeyword = strtolower(trim($kwData['keyword_slug'] ?? ''));
 

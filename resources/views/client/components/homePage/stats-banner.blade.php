@@ -3,9 +3,9 @@
 ───────────────────────────────────────── --}}
 <section class="py-10 md:py-16 relative overflow-hidden bg-gray-900">
     <div class="absolute inset-0 bg-gradient-to-r from-blue-700 to-blue-500 opacity-95"></div>
-    <div class="absolute inset-0 bg-cover bg-center mix-blend-overlay opacity-20"
-         style="background-image:url('https://images.unsplash.com/photo-1555529733-0e670560f7e1?q=80&w=2000&auto=format&fit=crop')"></div>
-    <div class="w-full px-4 md:px-8 relative z-10">
+    <div class="absolute inset-0 bg-cover bg-center"
+         style="background-image:url('img/client-count.png')"></div>
+    <!--<div class="w-full px-4 md:px-8 relative z-10">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12">
             @foreach([
                 ['value' => $citieslists, 'label' => 'Cities Covered'],
@@ -19,5 +19,5 @@
             </div>
             @endforeach
         </div>
-    </div>
+    </div>-->
 </section>

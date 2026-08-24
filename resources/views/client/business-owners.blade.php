@@ -294,7 +294,7 @@ select.form-input { padding-left:1rem; }
                 </div>
 
                 {{-- STATS GRID --}}
-                <div class="reveal grid grid-cols-3 gap-3" style="transition-delay:.16s;">
+             <!--   <div class="reveal grid grid-cols-3 gap-3" style="transition-delay:.16s;">
                     @foreach($stats as $stat)
                     <div class="stat-card bg-white/80 backdrop-blur rounded-2xl p-3.5
                                 border border-white shadow-sm text-center">
@@ -314,7 +314,7 @@ select.form-input { padding-left:1rem; }
                         </div>
                     </div>
                     @endforeach
-                </div>
+                </div>-->
 
                 {{-- BENEFITS --}}
                 <div class="reveal space-y-2.5" style="transition-delay:.22s;">
