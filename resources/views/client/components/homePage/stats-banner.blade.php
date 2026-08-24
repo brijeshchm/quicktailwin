@@ -5,7 +5,7 @@
     <div class="absolute inset-0 bg-gradient-to-r from-blue-700 to-blue-500 opacity-95"></div>
     <div class="absolute inset-0 bg-cover bg-center"
          style="background-image:url('img/client-count.png')"></div>
-    <div class="w-full px-4 md:px-8 relative z-10">
+    <!--<div class="w-full px-4 md:px-8 relative z-10">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12">
             @foreach([
                 ['value' => $citieslists, 'label' => 'Cities Covered'],
@@ -19,5 +19,5 @@
             </div>
             @endforeach
         </div>
-    </div>
+    </div>-->
 </section>
