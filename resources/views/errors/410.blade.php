@@ -44,16 +44,13 @@
                     <span class="text-gray-400 text-[11px] font-medium">Trending:</span>
                    
                     
+                     
                     @if(!empty($trending))
                         @foreach($trending as $tag)
-                            <button
-                                onclick="redirectSearch('{{ $tag['url'] ?? $tag['title'] }}', heroSelectedCity)"
-                                aria-label="Search {{ $tag['url'] }}"
-                                class="text-[11px] bg-gray-100 hover:bg-blue-50 border border-gray-200 hover:border-blue-200 text-gray-500 hover:text-blue-700 px-2.5 py-0.5 rounded-full transition-colors"
-                            >{{ $tag['title'] }}</button>
+                            <a href="{{ route('showCity', $tag['url']) }}" class="text-[11px] bg-gray-100 hover:bg-blue-50 border border-gray-200 hover:border-blue-200 text-gray-500 hover:text-blue-700 px-2.5 py-0.5 rounded-full transition-colors"
+                            >{{ $tag['title'] }}</a>
                         @endforeach
                     @endif
-
               
                 </div>
 
@@ -81,7 +78,7 @@
     window.location.href = `/${c}/${k}`;
 }
 </script>
-@include('client.layouts.footer')
+
 
 </body>
 </html>

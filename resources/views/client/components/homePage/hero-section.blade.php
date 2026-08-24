@@ -98,12 +98,9 @@
                                    
                     @if(!empty($trending))
                         @foreach($trending as $tag)
-                            <button
-                                onclick="redirectSearch('{{ $tag['url'] }}', heroSelectedCity)"
-                                aria-label="Search {{ $tag['url'] }}"
-                                class="text-[11px] bg-gray-100 hover:bg-blue-50 border border-gray-200 hover:border-blue-200 text-gray-500 hover:text-blue-700 px-2.5 py-0.5 rounded-full transition-colors"
-                            >{{ $tag['title'] }}</button>
-                        @endforeach                    
+                            <a href="{{ route('showCity', $tag['url']) }}" class="text-[11px] bg-gray-100 hover:bg-blue-50 border border-gray-200 hover:border-blue-200 text-gray-500 hover:text-blue-700 px-2.5 py-0.5 rounded-full transition-colors"
+                            >{{ $tag['title'] }}</a>
+                        @endforeach
                     @endif
                 </div>
             </div>
