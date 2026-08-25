@@ -1,42 +1,60 @@
 @extends('client.layouts.app')
 @section('title', $metaTitle ?? $keyword . ' in ' . ucwords(strtolower(str_replace('-', ' ', $city))) . ' | QuickDials')
 @section('description', $metaDescription ?? 'Find the best ' . $keyword . ' in ' . ucwords(strtolower(str_replace('-', ' ', $city))) . ' with QuickDials. Discover verified businesses, addresses, phone numbers, reviews, ratings, photos, maps, and top local services near you.')
-
 @php
-    // Single source of truth: city => allowed keyword slugs
-    $cityKeywordMap = [
-        'faridabad' => [
-            'artificial-intelligence-training','python-training','workday-training',
-            'sap-training','banquet-hall','cricket-academy','data-science-training',
-            'judo-karate','distance-education','data-analytics-training',
-            'salesforce-training','wedding-organisers',
-        ],
-        'noida' => [
-            'aws-training','cloud-computing-training','devops-training',
-            'digital-marketing-training','full-stack-developer-training',
-            'azure-training','pmp-certification-training','mba-distance',
-            'car-service','computer-repair','shooting-academy',
-            'swimming-academy','boxing',
-        ],
+    $allowedCities = [
+        'faridabad','noida'
     ];
 
+    $singleCities = [
+        'faridabad'
+    ];
+
+    $keywordArray = [
+        'artificial-intelligence-training', 'python-training', 'workday-training',
+        'sap-training', 'banquet-hall', 'cricket-academy','cloud-computing-training','aws-training','devops-training','digital-marketing-training','full-stack-developer-training','azure-training','pmp-certification-training','mba-distance','car-service','computer-repair','shooting-academy','swimming-academy','boxing','distance-education','data-science-training','salesforce-training','data-analytics-training','wedding-organisers','judo-karate'
+    ];  
+
+    $faridabadCities = [
+        'faridabad'
+    ];
+
+       $keywordArrayFaridabad = [
+        'artificial-intelligence-training',
+        'python-training',
+        'workday-training',
+        'sap-training',
+        'banquet-hall',
+        'cricket-academy',
+        'data-science-training',
+        'judo-karate',
+        'distance-education',
+        'data-analytics-training',
+        'salesforce-training',
+        'wedding-organisers'
+    ];
+    $noidaCities = [
+        'noida'
+    ];
+
+    $keywordArrayNoida = [
+        'aws-training','cloud-computing-training','devops-training','digital-marketing-training','full-stack-developer-training','azure-training','pmp-certification-training','mba-distance','car-service','computer-repair','shooting-academy','swimming-academy','boxing'
+    ];
+
+    
     $currentCity    = strtolower(trim($city ?? ''));
     $currentKeyword = strtolower(trim($kwData['keyword_slug'] ?? ''));
 
-    // TRUE only when this exact city+keyword combo is whitelisted
-    $shouldIndex = isset($cityKeywordMap[$currentCity])
-        && in_array($currentKeyword, $cityKeywordMap[$currentCity]);
+    $shouldIndex = in_array($currentCity, $allowedCities) && in_array($currentKeyword, $keywordArray); 
 
-    // Per-city flags — used ONLY to pick which content block to render
-    $faridabadIndex = $currentCity === 'faridabad' && $shouldIndex;
-    $noidaIndex      = $currentCity === 'noida' && $shouldIndex;
-  //  $delhiIndex      = $currentCity === 'delhi' && $shouldIndex;
- //   $bangaloreIndex      = $currentCity === 'bangalore' && $shouldIndex;
+    $faridabadIndex = in_array($currentCity, $faridabadCities) && in_array($currentKeyword, $keywordArrayFaridabad);   
 
-    // Does this page have curated, city-specific content at all?
-    $hasCuratedContent = $faridabadIndex || $noidaIndex;
+    $noidaIndex = in_array($currentCity, $noidaCities) && in_array($currentKeyword, $keywordArrayNoida);   
+
+
+
+
 @endphp
-
 @section('meta_robots')
 <meta name="robots" content="{{ $shouldIndex ? 'index, follow' : 'noindex, nofollow' }}">
 @endsection
@@ -917,8 +935,8 @@ function bannerSlider(banners, interval = 4000) {
         </div>
     </section>
     @endif
-
-@unless($hasCuratedContent)
+  @if( !in_array($cityName, $singleCities) ||
+    !in_array($kwData['keyword_slug'], $keywordArray))
     {{-- Course About --}}
     @if(!empty($kwData['heading']) && !empty($kwData['courseabout']))
     <div class="border rounded-lg p-4 bg-white shadow-sm mx-4">
@@ -939,7 +957,7 @@ function bannerSlider(banners, interval = 4000) {
         </section>
     </div>
     @endif
-@endunless
+@endif
 
     @if($faridabadIndex && $cityName =='faridabad')
        {{-- top_wcity_description --}}
@@ -953,7 +971,7 @@ function bannerSlider(banners, interval = 4000) {
     @endphp
 
     <div class="bg-white rounded-2xl p-6 mt-4 mx-4">
-        <h2 class="text-lg font-bold text-gray-900 mb-3">{{ $top_wcity_heading }}</h2>
+        <h2 class="text-lg font-bold text-gray-900 mb-3"> {{ $top_wcity_heading }}</h2>
         <div class="text-sm text-gray-600 leading-relaxed">{!! $kwData['top_wcity_description'] !!}</div>
     </div>
     @endif
@@ -973,13 +991,14 @@ function bannerSlider(banners, interval = 4000) {
     }   
     @endphp
     <div class="bg-white rounded-2xl p-6 mt-4 mx-4">
-        <h2 class="text-lg font-bold text-gray-900 mb-3">{{ $bottom_wcity_heading }}</h2>
+        <h2 class="text-lg font-bold text-gray-900 mb-3"> {{ $bottom_wcity_heading }}</h2>
         <div class="text-sm text-gray-600 leading-relaxed">{!! $kwData['bottom_wcity_description'] !!}</div>
     </div>
     @endif
 @endif
  
-  @unless($hasCuratedContent)
+   @if( !in_array($cityName, $singleCities) ||
+    !in_array($kwData['keyword_slug'], $keywordArray))
     {{-- Top Description --}}
     @if(!empty($topDescription))
     <div class="bg-white rounded-2xl p-6 mt-4 mx-4">
@@ -1000,7 +1019,7 @@ function bannerSlider(banners, interval = 4000) {
     </div>
     @endif
 
-@endunless
+@endif
 
 
 
@@ -1056,7 +1075,9 @@ function bannerSlider(banners, interval = 4000) {
     </style>
 
 
- @unless($hasCuratedContent)
+ 
+     @if( !in_array($cityName, $singleCities) ||
+    !in_array($kwData['keyword_slug'], $keywordArray))
     {{-- Bottom Description --}}
     @if(!empty($bottomDescription))
 
@@ -1076,7 +1097,7 @@ function bannerSlider(banners, interval = 4000) {
         <div class="text-sm text-gray-600 leading-relaxed">{!! $bottomDescription !!}</div>
     </div>
     @endif
-    @endunless
+    @endif
     
  @if($shouldIndex && $cityName =='delhi')
   
@@ -1103,7 +1124,10 @@ function bannerSlider(banners, interval = 4000) {
 
 
 
-  @unless($hasCuratedContent)
+
+      @if(!in_array($cityName, $singleCities) ||
+    !in_array($kwData['keyword_slug'], $keywordArray))
+
     {{-- extra_description --}}
     @if(!empty($kwData['extra_description']))
      @php
@@ -1121,7 +1145,7 @@ function bannerSlider(banners, interval = 4000) {
         <div class="text-sm text-gray-600 leading-relaxed">{!! $kwData['extra_description'] !!}</div>
     </div>
     @endif
-@endunless
+@endif
 
 
   @if($shouldIndex && $cityName =='faridabad')
