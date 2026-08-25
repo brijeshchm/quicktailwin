@@ -751,7 +751,7 @@ function bannerSlider(banners, interval = 4000) {
         decoding="async">
 </div>
                 <div>
-                        <h3 class="text-lg md:text-xl font-bold text-gray-800">Attention!</h3>
+                        <h2 class="text-lg md:text-xl font-bold text-gray-800">Attention!</h2>
                         <p class="text-sm md:text-base font-semibold text-gray-700">Advertise Owners</p>
                     </div>
                 </div>
@@ -796,7 +796,7 @@ function bannerSlider(banners, interval = 4000) {
                                     <span class="font-semibold text-gray-900">{{ $qb['rating'] ?? 0 }}</span>
                                     <span class="text-gray-500 text-sm">({{ $qb['reviewCount'] ?? 0 }} Ratings)</span>
                                 </div>
-                                <h3 class="font-semibold text-lg leading-tight mb-1 line-clamp-2">{{ $qb['name'] ?? '' }}</h3>
+                                <h2 class="font-semibold text-lg leading-tight mb-1 line-clamp-2">{{ $qb['name'] ?? '' }}</h2>
                                 <p class="text-gray-600 text-sm mb-4">{{ $qb['location'] ?? '' }}</p>
                                 <div class="flex gap-3">
                                     <a href="{{ route('business.details', $qb['slug']) }}" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-center py-3 rounded-xl font-medium transition-all flex items-center justify-center gap-2">
@@ -828,7 +828,7 @@ function bannerSlider(banners, interval = 4000) {
                             <div class="hidden md:block w-px h-10 bg-gray-400"></div>
                             <div><h3 class="text-xl font-bold text-orange-300">{{ $growthBusiness['ProductsServices']??'' }}</h3><p class="text-sm text-gray-200">Products Services</p></div>
                             <div class="hidden md:block w-px h-10 bg-gray-400"></div>
-                            <div><h3 class="text-xl font-bold text-orange-300">{{ $growthBusiness['GrowClient']??'' }}</h3><p class="text-sm text-gray-200">Listed Businesses</p></div>
+                            <div><h4 class="text-xl font-bold text-orange-300">{{ $growthBusiness['GrowClient']??'' }}</h4><p class="text-sm text-gray-200">Listed Businesses</p></div>
                         </div>
                         <a href="{{ route('login') }}" class="inline-block bg-orange-500 hover:bg-orange-600 px-6 py-3 rounded-md font-semibold mb-6 transition">Add Your Business</a>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-gray-200">
@@ -1137,7 +1137,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 1 ? null : 1"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Is AI training suitable for beginners?</h3> 
+                 <h4>Is AI training suitable for beginners?</h4> 
                     <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1150,7 +1150,7 @@ function bannerSlider(banners, interval = 4000) {
               <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 2 ? null : 2"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>What skills will AI training develop?</h3> 
+                 <h4>What skills will AI training develop?</h4> 
                     <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1162,7 +1162,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 3 ? null : 3"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>How long does artificial intelligence training take?</h3> 
+                 <h4>How long does artificial intelligence training take?</h4> 
                     <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1176,7 +1176,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 4 ? null : 4"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Does AI course provide placement assistance Faridabad?</h3> 
+                 <h4>Does AI course provide placement assistance Faridabad?</h4> 
                     <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1187,7 +1187,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 5 ? null : 5"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>How does AI course support career growth?</h3> 
+                 <h4>How does AI course support career growth?</h4> 
                     <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1211,7 +1211,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 1 ? null : 1"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>What is the duration of Python training in Faridabad?	</h3> 
+                 <h4>What is the duration of Python training in Faridabad?	</h4> 
                     <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1224,7 +1224,7 @@ function bannerSlider(banners, interval = 4000) {
               <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 2 ? null : 2"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3> How much does Python training cost in Faridabad?</h3> 
+                 <h4> How much does Python training cost in Faridabad?</h4> 
                     <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1236,7 +1236,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 3 ? null : 3"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Can beginners join Python classes in Faridabad?</h3> 
+                 <h4>Can beginners join Python classes in Faridabad?</h4> 
                     <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1250,7 +1250,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 4 ? null : 4"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Are online Python classes available in Faridabad?</h3> 
+                 <h4>Are online Python classes available in Faridabad?</h4> 
                     <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1261,7 +1261,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 5 ? null : 5"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Is Python useful for data science and AI careers?</h3> 
+                 <h4>Is Python useful for data science and AI careers?</h4> 
                     <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1286,7 +1286,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 1 ? null : 1"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>What is the duration of Workday training in Faridabad?</h3> 
+                 <h4>What is the duration of Workday training in Faridabad?</h4> 
                     <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1299,7 +1299,7 @@ function bannerSlider(banners, interval = 4000) {
               <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 2 ? null : 2"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>How much does Workday training cost in Faridabad?</h3> 
+                 <h4>How much does Workday training cost in Faridabad?</h4> 
                     <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1336,7 +1336,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 5 ? null : 5"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Do Workday courses include practical training?</h3> 
+                 <h4>Do Workday courses include practical training?</h4> 
                     <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1361,7 +1361,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 1 ? null : 1"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>How much does SAP training cost in Faridabad?</h3> 
+                 <h4>How much does SAP training cost in Faridabad?</h4> 
                     <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1374,7 +1374,7 @@ function bannerSlider(banners, interval = 4000) {
               <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 2 ? null : 2"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Which SAP module is best for beginners?</h3> 
+                 <h4>Which SAP module is best for beginners?</h4> 
                     <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1386,7 +1386,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 3 ? null : 3"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Can beginners join SAP classes in Faridabad?</h3> 
+                 <h4>Can beginners join SAP classes in Faridabad?</h4> 
                     <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1400,7 +1400,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 4 ? null : 4"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Are online SAP classes available in Faridabad?</h3> 
+                 <h4>Are online SAP classes available in Faridabad?</h4> 
                     <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1411,7 +1411,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 5 ? null : 5"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Which SAP modules are commonly offered by institutes?</h3> 
+                 <h4>Which SAP modules are commonly offered by institutes?</h4> 
                     <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1436,7 +1436,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 1 ? null : 1"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>How early should I book a wedding hall?</h3> 
+                 <h4>How early should I book a wedding hall?</h4> 
                     <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1449,7 +1449,7 @@ function bannerSlider(banners, interval = 4000) {
               <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 2 ? null : 2"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>What facilities should a wedding hall provide?</h3> 
+                 <h4>What facilities should a wedding hall provide?</h4> 
                     <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1461,7 +1461,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 3 ? null : 3"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Can banquet halls arrange catering and decoration?</h3> 
+                 <h4>Can banquet halls arrange catering and decoration?</h4> 
                     <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1475,7 +1475,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 4 ? null : 4"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Are banquet halls available for small wedding functions?</h3> 
+                 <h4>Are banquet halls available for small wedding functions?</h4> 
                     <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1486,7 +1486,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 5 ? null : 5"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Do banquet halls provide parking for wedding guests?</h3> 
+                 <h4>Do banquet halls provide parking for wedding guests?</h4> 
                     <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1507,7 +1507,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 1 ? null : 1"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>How much does cricket coaching cost in Faridabad?</h3> 
+                 <h4>How much does cricket coaching cost in Faridabad?</h4> 
                     <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1520,7 +1520,7 @@ function bannerSlider(banners, interval = 4000) {
               <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 2 ? null : 2"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Do cricket academies provide trial sessions?</h3> 
+                 <h4>Do cricket academies provide trial sessions?</h4> 
                     <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1532,7 +1532,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 3 ? null : 3"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>What facilities should a cricket academy provide?</h3> 
+                 <h4>What facilities should a cricket academy provide?</h4> 
                     <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1546,7 +1546,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 4 ? null : 4"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Are cricket coaching sessions available on weekends?</h3> 
+                 <h4>Are cricket coaching sessions available on weekends?</h4> 
                     <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1557,7 +1557,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 5 ? null : 5"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Does cricket coaching include fitness training?</h3> 
+                 <h4>Does cricket coaching include fitness training?</h4> 
                     <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1579,7 +1579,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 1 ? null : 1"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Who can pursue distance education in Faridabad?</h3> 
+                 <h4>Who can pursue distance education in Faridabad?</h4> 
                     <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1592,7 +1592,7 @@ function bannerSlider(banners, interval = 4000) {
               <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 2 ? null : 2"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>How does distance education work in Faridabad?</h3> 
+                 <h4>How does distance education work in Faridabad?</h4> 
                     <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1604,7 +1604,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 3 ? null : 3"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Is distance education suitable for working professionals?</h3> 
+                 <h4>Is distance education suitable for working professionals?</h4> 
                     <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1618,7 +1618,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 4 ? null : 4"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>What eligibility criteria apply to distance education courses?</h3> 
+                 <h4>What eligibility criteria apply to distance education courses?</h4> 
                     <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1631,7 +1631,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 5 ? null : 5"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Is study material provided for distance education students?</h3> 
+                 <h4>Is study material provided for distance education students?</h4> 
                     <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1652,7 +1652,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 1 ? null : 1"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Do I need programming experience to learn Salesforce?</h3> 
+                 <h4>Do I need programming experience to learn Salesforce?</h4> 
                     <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1665,7 +1665,7 @@ function bannerSlider(banners, interval = 4000) {
               <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 2 ? null : 2"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Do you provide Salesforce certification preparation?</h3> 
+                 <h4>Do you provide Salesforce certification preparation?</h4> 
                     <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1677,7 +1677,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 3 ? null : 3"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Is Salesforce training suitable for beginners?</h3> 
+                 <h4>Is Salesforce training suitable for beginners?</h4> 
                     <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1691,7 +1691,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 4 ? null : 4"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Are weekend Salesforce classes available?</h3> 
+                 <h4>Are weekend Salesforce classes available?</h4> 
                     <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1702,7 +1702,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 5 ? null : 5"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Do you provide practical Salesforce projects?</h3> 
+                 <h4>Do you provide practical Salesforce projects?</h4> 
                     <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1721,7 +1721,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 1 ? null : 1"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Where can I find data analytics training in Faridabad?</h3> 
+                 <h4>Where can I find data analytics training in Faridabad?</h4> 
                     <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1731,7 +1731,7 @@ function bannerSlider(banners, interval = 4000) {
               <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 2 ? null : 2"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>What tools are taught in Data Analytics training?</h3> 
+                 <h4>What tools are taught in Data Analytics training?</h4> 
                     <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1741,7 +1741,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 3 ? null : 3"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Is Excel enough to become a Data Analyst?</h3> 
+                 <h4>Is Excel enough to become a Data Analyst?</h4> 
                     <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1750,7 +1750,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 4 ? null : 4"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Does the course include SQL and Power BI?</h3> 
+                 <h4>Does the course include SQL and Power BI?</h4> 
                     <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1759,7 +1759,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 5 ? null : 5"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Will I learn Python for Data Analytics?</h3> 
+                 <h4>Will I learn Python for Data Analytics?</h4> 
                     <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1780,7 +1780,7 @@ function bannerSlider(banners, interval = 4000) {
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 1 ? null : 1"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Why hire wedding organisers for your Faridabad wedding?</h3> 
+                 <h4>Why hire wedding organisers for your Faridabad wedding?</h4> 
                     <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1790,7 +1790,7 @@ function bannerSlider(banners, interval = 4000) {
               <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 2 ? null : 2"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>How early should I book wedding organisers?</h3> 
+                 <h4>How early should I book wedding organisers?</h4> 
                     <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1799,7 +1799,7 @@ It is better to book them 3–6 months before the wedding, especially if you hav
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 3 ? null : 3"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Do wedding organisers help select wedding venues locally?</h3> 
+                 <h4>Do wedding organisers help select wedding venues locally?</h4> 
                     <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1808,7 +1808,7 @@ It is better to book them 3–6 months before the wedding, especially if you hav
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 4 ? null : 4"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Can wedding organisers work within my wedding budget?</h3> 
+                 <h4>Can wedding organisers work within my wedding budget?</h4> 
                     <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1818,7 +1818,7 @@ It is better to book them 3–6 months before the wedding, especially if you hav
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 5 ? null : 5"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Can wedding organisers handle guest accommodation and transportation?</h3> 
+                 <h4>Can wedding organisers handle guest accommodation and transportation?</h4> 
                     <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1837,7 +1837,7 @@ It is better to book them 3–6 months before the wedding, especially if you hav
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 1 ? null : 1"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Who can join judo karate classes in Faridabad?</h3> 
+                 <h4>Who can join judo karate classes in Faridabad?</h4> 
                     <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1847,7 +1847,7 @@ It is better to book them 3–6 months before the wedding, especially if you hav
               <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 2 ? null : 2"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>What age groups can learn judo karate in Faridabad?</h3> 
+                 <h4>What age groups can learn judo karate in Faridabad?</h4> 
                     <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1856,7 +1856,7 @@ Many academies have classes for kids, teens, and adults. The exact age can be di
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 3 ? null : 3"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>What skills are taught in judo karate classes?</h3> 
+                 <h4>What skills are taught in judo karate classes?</h4> 
                     <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1865,7 +1865,7 @@ Many academies have classes for kids, teens, and adults. The exact age can be di
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 4 ? null : 4"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Are judo karate classes suitable for beginners?</h3> 
+                 <h4>Are judo karate classes suitable for beginners?</h4> 
                     <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1875,7 +1875,7 @@ Many academies have classes for kids, teens, and adults. The exact age can be di
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 5 ? null : 5"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Can adults join judo karate classes in Faridabad?</h3> 
+                 <h4>Can adults join judo karate classes in Faridabad?</h4> 
                     <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1893,7 +1893,7 @@ Many academies have classes for kids, teens, and adults. The exact age can be di
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 1 ? null : 1"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>What topics are covered in data science training?</h3> 
+                 <h4>What topics are covered in data science training?</h4> 
                     <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1903,7 +1903,7 @@ Many academies have classes for kids, teens, and adults. The exact age can be di
               <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 2 ? null : 2"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>How long does data science training take here?</h3> 
+                 <h4>How long does data science training take here?</h4> 
                     <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1915,7 +1915,7 @@ The duration depends on the course plan, so students should check the current ba
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 3 ? null : 3"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Is data science training available for beginners here?</h3> 
+                 <h4>Is data science training available for beginners here?</h4> 
                     <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1924,7 +1924,7 @@ The duration depends on the course plan, so students should check the current ba
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 4 ? null : 4"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Does training include practical data science projects?</h3> 
+                 <h4>Does training include practical data science projects?</h4> 
                     <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1934,7 +1934,7 @@ The duration depends on the course plan, so students should check the current ba
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 5 ? null : 5"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Which programming languages are taught during data science training?</h3> 
+                 <h4>Which programming languages are taught during data science training?</h4> 
                     <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1957,7 +1957,7 @@ The duration depends on the course plan, so students should check the current ba
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 1 ? null : 1"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>What is the duration of a cloud computing course in Noida?</h3> 
+                 <h4>What is the duration of a cloud computing course in Noida?</h4> 
                     <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1967,7 +1967,7 @@ The duration depends on the course plan, so students should check the current ba
               <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 2 ? null : 2"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>How much does cloud computing training cost in Noida?</h3> 
+                 <h4>How much does cloud computing training cost in Noida?</h4> 
                     <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1977,7 +1977,7 @@ The fee is usually around ₹15,000 to ₹50,000 for many basic to certification
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 3 ? null : 3"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Which cloud computing course is best for beginners?</h3> 
+                 <h4>Which cloud computing course is best for beginners?</h4> 
                     <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1987,7 +1987,7 @@ The fee is usually around ₹15,000 to ₹50,000 for many basic to certification
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 4 ? null : 4"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Are online and classroom cloud computing classes available in Noida?</h3> 
+                 <h4>Are online and classroom cloud computing classes available in Noida?</h4> 
                     <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -1997,7 +1997,7 @@ The fee is usually around ₹15,000 to ₹50,000 for many basic to certification
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 5 ? null : 5"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>How do I choose the right cloud computing training institute in Noida?</h3> 
+                 <h4>How do I choose the right cloud computing training institute in Noida?</h4> 
                     <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -2017,7 +2017,7 @@ The fee is usually around ₹15,000 to ₹50,000 for many basic to certification
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 1 ? null : 1"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>What is the duration of an AWS course in Noida?</h3> 
+                 <h4>What is the duration of an AWS course in Noida?</h4> 
                     <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -2027,7 +2027,7 @@ The fee is usually around ₹15,000 to ₹50,000 for many basic to certification
               <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 2 ? null : 2"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>How much does AWS training cost in Noida?</h3> 
+                 <h4>How much does AWS training cost in Noida?</h4> 
                     <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -2037,7 +2037,7 @@ The average AWS training fee in Noida can be around ₹20,000 to ₹60,000, depe
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 3 ? null : 3"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Is AWS training suitable for beginners?</h3> 
+                 <h4>Is AWS training suitable for beginners?</h4> 
                     <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -2046,7 +2046,7 @@ The average AWS training fee in Noida can be around ₹20,000 to ₹60,000, depe
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 4 ? null : 4"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Which AWS certification should I choose as a beginner?</h3> 
+                 <h4>Which AWS certification should I choose as a beginner?</h4> 
                     <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -2056,7 +2056,7 @@ The average AWS training fee in Noida can be around ₹20,000 to ₹60,000, depe
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 5 ? null : 5"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>How do I choose the best AWS training institute in Noida?</h3> 
+                 <h4>How do I choose the best AWS training institute in Noida?</h4> 
                     <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -2076,7 +2076,7 @@ The average AWS training fee in Noida can be around ₹20,000 to ₹60,000, depe
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 1 ? null : 1"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>What is the duration of a DevOps course in Noida?</h3> 
+                 <h4>What is the duration of a DevOps course in Noida?</h4> 
                     <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -2086,7 +2086,7 @@ The average AWS training fee in Noida can be around ₹20,000 to ₹60,000, depe
               <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 2 ? null : 2"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>How much does DevOps training cost in Noida?</h3> 
+                 <h4>How much does DevOps training cost in Noida?</h4> 
                     <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -2096,7 +2096,7 @@ The usual DevOps classes could cost you anywhere between ₹16,000 and ₹35,000
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 3 ? null : 3"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Is DevOps suitable for beginners?</h3> 
+                 <h4>Is DevOps suitable for beginners?</h4> 
                     <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -2105,7 +2105,7 @@ The usual DevOps classes could cost you anywhere between ₹16,000 and ₹35,000
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 4 ? null : 4"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>Which tools are covered in DevOps classes in Noida?</h3> 
+                 <h4>Which tools are covered in DevOps classes in Noida?</h4> 
                     <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -2115,7 +2115,7 @@ The usual DevOps classes could cost you anywhere between ₹16,000 and ₹35,000
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 5 ? null : 5"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3>How do I choose the right DevOps training institute in Noida?</h3> 
+                 <h4>How do I choose the right DevOps training institute in Noida?</h4> 
                     <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
@@ -2142,7 +2142,7 @@ Firstly, compare syllabus, instructor, fees, ratings, timing of classes, and lab
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === {{ $fi }} ? null : {{ $fi }}"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3> {{ $faq['q'] }}</h3> 
+                 <h4> {{ $faq['q'] }}</h4> 
                     <span x-text="openFaq === {{ $fi }} ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === {{ $fi }}" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
