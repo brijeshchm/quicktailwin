@@ -672,7 +672,7 @@ function bannerSlider(banners, interval = 4000) {
             {{-- Reviews Section --}}
             <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mt-4">
                 <div class="flex items-center justify-between mb-5">
-                    <h2 class="text-lg font-bold text-gray-900">User Reviews</h2>
+                    <span class="text-lg font-bold text-gray-900">User Reviews</span>
                     
                 </div>
 
@@ -751,7 +751,7 @@ function bannerSlider(banners, interval = 4000) {
         decoding="async">
 </div>
                 <div>
-                        <h2 class="text-lg md:text-xl font-bold text-gray-800">Attention!</h2>
+                        <span class="text-lg md:text-xl font-bold text-gray-800">Attention!</span>
                         <p class="text-sm md:text-base font-semibold text-gray-700">Advertise Owners</p>
                     </div>
                 </div>
@@ -993,9 +993,7 @@ function bannerSlider(banners, interval = 4000) {
     }    
     @endphp
 
-    <h2 class="text-lg font-bold text-gray-900 mb-3">
-         {{ $defaultHeading }}
-    </h2>
+    <h2 class="text-lg font-bold text-gray-900 mb-3">{{ $defaultHeading }}</h2>
     <div class="text-sm text-gray-600 leading-relaxed">{!! $topDescription !!}</div>
     </div>
     @endif
@@ -1011,18 +1009,16 @@ function bannerSlider(banners, interval = 4000) {
     @if(!empty($noidatopDescription))
     <div class="bg-white rounded-2xl p-6 mt-4 mx-4">
     @php
-    $defaultHeading = '';
+    $noidadefaultHeading = '';
 
     if (!empty($kwData['noida_top_heading'])) {
-        $defaultHeading=  $kwData['noida_top_heading'];
+        $noidadefaultHeading=  $kwData['noida_top_heading'];
     }else{
-     $defaultHeading = 'Trusted '. $keyword . ' in ' . ucwords(strtolower(str_replace('-', ' ', $city)));
+     $noidadefaultHeading = 'Trusted '. $keyword . ' in ' . ucwords(strtolower(str_replace('-', ' ', $city)));
     }    
     @endphp
 
-    <h2 class="text-lg font-bold text-gray-900 mb-3">
-         {{ $defaultHeading }}
-    </h2>
+    <h2 class="text-lg font-bold text-gray-900 mb-3">{{ $noidadefaultHeading }}</h2>
     <div class="text-sm text-gray-600 leading-relaxed">{!! $noidatopDescription !!}</div>
     </div>
     @endif
