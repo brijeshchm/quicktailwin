@@ -2121,6 +2121,65 @@ Firstly, compare syllabus, instructor, fees, ratings, timing of classes, and lab
         </div>
     </div>
 
+    @elseif($kwData['keyword_slug']=='digital-marketing-training' && $cityName =='noida')
+    
+    
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            💬 Frequently Asked Questions About Digital Marketing Training in Noida</h3>
+        <div class="space-y-2">           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 1 ? null : 1"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What is the duration of a digital marketing course in Noida?</h4> 
+                    <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                There is no specific time period. Short-term courses may run for weeks or months, but wider programs may continue for many months. In case of present-day institutions offering such programs, there are various options available, starting from approximately 3 months to 6 months or even more than that.
+                 </div>
+            </div>
+              <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 2 ? null : 2"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How much does digital marketing training cost in Noida?</h4> 
+                    <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+The cost will depend on the level of the digital marketing course in Noida, its length, number of modules, hands-on training, and mode of learning. Prices may differ drastically from one provider to another based on current listings. A better approach would be to ask for updated fees from each provider.
+</div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 3 ? null : 3"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Is digital marketing suitable for beginners?</h4> 
+                    <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+        Yes, but for beginners, there is always SEO, content, social media, and advertising to begin with, and then you move to analytics and performance marketing. You don’t have to know every tool out there to join this group, but practice makes perfect, since digital marketing revolves around website work and data analysis.</div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 4 ? null : 4"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What topics are covered in digital marketing classes in Noida?</h4> 
+                    <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+           The subjects differ from institution to institution, but some of them are SEO, Google Ads or PPC, social media marketing, content marketing, email marketing, analysis, conversion optimisation, and e-commerce marketing. Some of the courses even offer AI applications, affiliate marketing, ORM, and automation.
+             </div>
+            </div>           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 5 ? null : 5"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How do I choose the right digital marketing training institute in Noida?</h4> 
+                    <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                It is better to start by comparing syllabus, trainer, hands-on projects, resources, duration, timings, delivery mode, cost, and reviews. Do not pick any digital marketing training institute in Noida just because it mentions “advanced” and “job-oriented” in its course title. What do you get to do in the course? Does it offer any relevant projects and career guidance?
+                </div>
+            </div>            
+        </div>
+    </div>
+
     @endif
 
 

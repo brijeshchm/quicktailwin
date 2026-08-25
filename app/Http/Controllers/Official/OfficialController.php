@@ -533,7 +533,7 @@ class OfficialController extends Controller
     public function blogCategory(Request $request, $slug)
     {
     $childCategory = ChildCategory::where('child_slug', $slug)->first();
-// dd($childCategory);
+
     // Bug #2 & #6 fix — bail out cleanly instead of null-property errors
     if (!$childCategory) {
         abort(404);
