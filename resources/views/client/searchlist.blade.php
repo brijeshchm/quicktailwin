@@ -771,7 +771,10 @@ function bannerSlider(banners, interval = 4000) {
                     <div class="flex items-center gap-3 mb-8">
                         <div class="text-4xl">⏱️</div>
                         <div>
-                            <span class="text-1xl font-bold text-gray-900">Get Quick Responses in <span class="text-blue-600">less than 60 Minutes {{ $keyword }}</span></span>
+                        
+                             <p class="text-1xl font-bold text-gray-900" role="heading" aria-level="2">
+                        Get Quick Responses in <span class="text-blue-600">less than 60 Minutes {{ $keyword }}</span>
+                        </p>
                             <p class="text-gray-600 mt-1">Businesses shown here are currently active and respond faster than average</p>
                         </div>
                     </div>

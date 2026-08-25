@@ -539,8 +539,7 @@ $schema = [
             {{-- Reviews Section --}}
             <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mt-4">
                 <div class="flex items-center justify-between mb-5">
-                    <h2 class="text-lg font-bold text-gray-900">User Reviews</h2>
-                    
+                    <span class="text-lg font-bold text-gray-900">User Reviews</span>                    
                 </div>
 
                 {{-- Rating summary --}}
@@ -617,7 +616,7 @@ $schema = [
         decoding="async">
 </div>
                 <div>
-                        <h3 class="text-lg md:text-xl font-bold text-gray-800">Attention!</h3>
+                        <span class="text-lg md:text-xl font-bold text-gray-800">Attention!</span>
                         <p class="text-sm md:text-base font-semibold text-gray-700">Advertise Owners</p>
                     </div>
                 </div>
@@ -636,8 +635,10 @@ $schema = [
                 <div class="px-4">
                     <div class="flex items-center gap-3 mb-8">
                         <div class="text-4xl">⏱️</div>
-                        <div>
-                            <h2 class="text-3xl font-bold text-gray-900">Get Quick Responses in <span class="text-blue-600">less than 60 Minutes {{ $keyword }}</span></h2>
+                        <div>                           
+                        <p class="text-1xl font-bold text-gray-900" role="heading" aria-level="2">
+                        Get Quick Responses in <span class="text-blue-600">less than 60 Minutes {{ $keyword }}</span>
+                        </p>
                             <p class="text-gray-600 mt-1">Businesses shown here are currently active and respond faster than average</p>
                         </div>
                     </div>
@@ -854,11 +855,7 @@ $schema = [
     }    
     @endphp
 
-
-
-    <h2 class="text-lg font-bold text-gray-900 mb-3">
-         {{ $defaultHeading }}
-    </h2>
+    <h2 class="text-lg font-bold text-gray-900 mb-3">{{ $defaultHeading }}</h2>
     <div class="text-sm text-gray-600 leading-relaxed">{!! $topDescription !!}</div>
     </div>
     @endif
@@ -897,7 +894,7 @@ $schema = [
     @endphp
 
     <div class="bg-white rounded-2xl p-6 mt-4 mx-4">
-        <h2 class="text-lg font-bold text-gray-900 mb-3"> {{ $extra_heading }}</h2>
+        <h2 class="text-lg font-bold text-gray-900 mb-3">{{ $extra_heading }}</h2>
         <div class="text-sm text-gray-600 leading-relaxed">{!! $kwData['extra_description'] !!}</div>
     </div>
     @endif
@@ -906,16 +903,14 @@ $schema = [
        {{-- FAQ --}}
     @if(count($faqs ?? []) > 0)
     <div class="bg-white rounded-2xl p-6 mt-4 mx-4" x-data="{ openFaq: null }">
-        <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-        Frequently Asked Questions(FAQ's) of {{ $keyword }}
-        </h2>
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">Frequently Asked Questions(FAQ's) of {{ $keyword }}</h3>
         <div class="space-y-2">
             @foreach($faqs as $fi => $faq)
             @if(!empty($faq['q']) && !empty($faq['a']))
             <div class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === {{ $fi }} ? null : {{ $fi }}"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors">
-                 <h3>   {{ $faq['q'] }}</h3>
+                 <h4>{{ $faq['q'] }}</h4>
                     <span x-text="openFaq === {{ $fi }} ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === {{ $fi }}" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3">
@@ -947,7 +942,7 @@ $schema = [
 
     {{-- Other Cities --}}
     <div class="bg-white rounded-2xl p-6 mt-4 mx-4">
-        <h2 class="text-base font-bold text-gray-900 mb-3 flex items-center gap-2"> Find {{ $keyword }} in Popular City</h2>
+        <h2 class="text-base font-bold text-gray-900 mb-3 flex items-center gap-2">Find {{ $keyword }} in Popular City</h2>
         <ul class="flex flex-wrap gap-2 text-sm text-gray-600">
             @foreach($otherCities as $i => $c)
             <li class="flex items-center">
