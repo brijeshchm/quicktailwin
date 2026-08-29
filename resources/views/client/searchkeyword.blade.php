@@ -6,19 +6,16 @@
     ? asset($kwData['key_icon'])
     : asset('client/images/quickdials-og.png'))
 @php   
-     $keywordArray = [
-        'artificial-intelligence-training', 'python-training', 'workday-training',
-        'sap-training', 'banquet-hall', 'cricket-academy','cloud-computing-training','aws-training','devops-training','digital-marketing-training','full-stack-developer-training','azure-training','pmp-certification-training','mba-distance','car-service','computer-repair','shooting-academy','swimming-academy','boxing','distance-education','data-science-training','salesforce-training','data-analytics-training','wedding-organisers','judo-karate'
-    ];
-    $currentKeyword = strtolower(trim($kwData['keyword_slug'] ?? ''));
-    $shouldIndex = in_array($currentKeyword, $keywordArray); 
-
-    
+$keywordArray = [
+'artificial-intelligence-training', 'python-training', 'workday-training',
+'sap-training', 'banquet-hall', 'cricket-academy','cloud-computing-training','aws-training','devops-training','digital-marketing-training','full-stack-developer-training','azure-training','pmp-certification-training','mba-distance','car-service','computer-repair','shooting-academy','swimming-academy','boxing','distance-education','data-science-training','salesforce-training','data-analytics-training','wedding-organisers','judo-karate','sap-training','sap-mm-training','sap-fico-training',''
+];
+$currentKeyword = strtolower(trim($kwData['keyword_slug'] ?? ''));
+$shouldIndex = in_array($currentKeyword, $keywordArray);     
 @endphp
 @section('meta_robots')
 <meta name="robots" content="{{ $shouldIndex ? 'index, follow' : 'noindex, nofollow' }}">
 @endsection
-
 
 @section('content') 
 <style>
