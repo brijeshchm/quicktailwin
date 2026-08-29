@@ -494,7 +494,7 @@ var dataTableAssignedZones = $('#datatable-assigned-zones').on('draw.dt',functio
 	"serverSide":true,
 	"paging":true,
 	"ordering":false,	
-	"lengthMenu": [ 10, 25, 50, 75, 100,5000 ],	
+	"lengthMenu": [ 10, 25, 50, 75, 100,1000,5000 ],	
 	"ajax":{		 
 		url:removeHashFromURL(window.location.href)+"/get-assigned-zones",
 		data:function(d){
