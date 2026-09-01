@@ -2615,14 +2615,14 @@ $reviewList = DB::table('clients')
 
     // ---- Resolve city (no DB call) ----
     $cityName = $this->resolveBestCandidate($citySlug, $cityMap);
-   $slugUrl = $this->resolveBestCandidate($newSlug, $keywordMap);
+   	$slugUrl = $this->resolveBestCandidate($newSlug, $keywordMap);
  
     if (!$cityName) {
   
  		$cityData = $cityMap[$cityName] ?? null;
         if (!isset($cityData) && !$slugUrl) {			 
-			abort(410);
-            //return redirect()->route('home');
+			//abort(410);
+            return redirect()->route('home');
         }
         // return redirect()->route('city.slug', [
         //     'city_slug'    => $defaultCity,
@@ -2653,7 +2653,8 @@ $reviewList = DB::table('clients')
 
         $response = $this->fetchData($cityName, $slugUrl);
         if (!$response) {
-            abort(410);
+           // abort(410);
+			return redirect()->route('home');
         }
 
         return $this->getsearchlist($response, $slugUrl, $cityName);
@@ -2671,7 +2672,8 @@ $reviewList = DB::table('clients')
 
     if ($slugUrl) {
         if (!$this->clientsExists($slugUrl)) {
-            abort(410);
+           // abort(410);
+			return redirect()->route('home');
         }
         $businessResponse = $this->fetchBusinessData($slugUrl,$cityName);
         if (!$businessResponse) {
