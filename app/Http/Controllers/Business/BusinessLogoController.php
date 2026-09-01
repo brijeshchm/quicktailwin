@@ -191,7 +191,11 @@ private function saveImageSmart($file, $destinationPath, $width = null, $height 
         $file->move($destinationPath, $finalName);
         return $finalName;
     }
-
+	if ($ext === 'webp') {
+			$finalName = $filename . '.webp';
+			$file->move($destinationPath, $finalName);
+			return $finalName;
+		}
     // ✅ Raster → Convert to WEBP
     $imagePath = $file->getPathname();
 
@@ -205,10 +209,7 @@ private function saveImageSmart($file, $destinationPath, $width = null, $height 
             imagepalettetotruecolor($src);
             imagealphablending($src, true);
             imagesavealpha($src, true);
-            break;
-        case 'webp':
-            $src = imagecreatefromwebp($imagePath);
-            break;
+            break;        
         default:
             throw new \Exception('Unsupported image type');
     }
