@@ -18,6 +18,11 @@
             'car-service','computer-repair','shooting-academy',
             'swimming-academy','boxing'
         ],
+        'delhi' => [
+           	'sap-mm-training','sap-fico-training','sap-hana-training','power-bi-training','machine-learning-training','react-native-training','cyber-security-training','certified-ethical-hacking-training','nodejs-training','taekwondo','football-academy','photo-and-videography'
+        ],
+
+
     ];
 
     $currentCity    = strtolower(trim($city ?? ''));
@@ -30,11 +35,11 @@
     // Per-city flags — used ONLY to pick which content block to render
     $faridabadIndex = $currentCity === 'faridabad' && $shouldIndex;
     $noidaIndex      = $currentCity === 'noida' && $shouldIndex;
-  //  $delhiIndex      = $currentCity === 'delhi' && $shouldIndex;
+    $delhiIndex      = $currentCity === 'delhi' && $shouldIndex;
  //   $bangaloreIndex      = $currentCity === 'bangalore' && $shouldIndex;
 
     // Does this page have curated, city-specific content at all?
-    $hasCuratedContent = $faridabadIndex || $noidaIndex;
+    $hasCuratedContent = $faridabadIndex || $noidaIndex || $delhiIndex;
 @endphp
 
 @section('meta_robots')
@@ -1077,7 +1082,7 @@ function bannerSlider(banners, interval = 4000) {
     @endif
     @endunless
     
- @if($shouldIndex && $cityName =='delhi')
+ @if($delhiIndex && $cityName =='delhi')
   
     {{-- Bottom Description --}}
     @if(!empty($delhibottomDescription))
