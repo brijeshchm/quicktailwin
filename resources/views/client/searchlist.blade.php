@@ -2359,6 +2359,355 @@ There is no definite fee for Microsoft Azure training in Noida because the fees 
         </div>
     </div>
 
+    @elseif($kwData['keyword_slug']=='mba-distance' && $cityName =='noida')
+    
+    
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            💬 Frequently Asked Questions Distance MBA in Noida</h3>
+        <div class="space-y-2">           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 1 ? null : 1"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What is the difference between a distance MBA and an online MBA?</h4> 
+                    <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                A distance MBA will mostly have a greater emphasis on self-study through study material and other resources as compared to an online MBA, which is usually provided through online means. There could be differences in the learning formats of both programs from one distance MBA in Noida to another. Make sure to know about the learning format in advance prior to your admission.
+                 </div>
+            </div>
+              <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 2 ? null : 2"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What are the eligibility requirements for a distance MBA in Noida?</h4> 
+                    <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+               The eligibility criteria are different for different institutes and <strong>MBA colleges in Noida</strong>. However, graduation is a common criterion, but there may be variations in minimum marks and other criteria for admission in a distance MBA program.
+                </div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 3 ? null : 3"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How much does a distance MBA cost in Noida?</h4> 
+                    <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+        Every distance MBA course will have a different fee in Noida. There is no fixed fee for every <strong>distance MBA in Noida.</strong> The fee may depend on different factors like institution, specialization, duration of program, mode of learning, study material, and mode of examination.
+
+</div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 4 ? null : 4"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How do I choose the right distance MBA college in Noida?</h4> 
+                    <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+         Compare the recognition of the institution currently by the UGC-DEB, course details, specializations offered, eligibility criteria, fees, resources provided for studies, examination procedure, assistance provided, reviews, and reputation. Do not base your choice entirely on rankings or advertisements. As suggested by UGC, learners need to ensure recognition for that particular admission year.
+             </div>
+            </div>           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 5 ? null : 5"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Is a distance MBA suitable for working professionals?</h4> 
+                    <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                Yes, a distance MBA could be appropriate for professionals who wish to pursue management studies while also continuing their job. It may provide more flexibility compared to the traditional mode of studies. Make sure you know all the aspects of the course before joining.
+                </div>
+            </div>            
+        </div>
+    </div>
+    @elseif($kwData['keyword_slug']=='car-service' && $cityName =='noida')
+    
+    
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            💬 Frequently Asked Questions car service in Noida</h3>
+        <div class="space-y-2">           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 1 ? null : 1"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How often should I get my car serviced in Noida?</h4> 
+                    <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+              It depends on the make, model, age, mileage, and usage of the car that determines the frequency of car service. There cannot be one single answer to it for all types of vehicles. Refer to the car's service schedule and service manual for more details. In case of any warning light, noise, leakage, or brake-related problem, get it checked right away.
+                 </div>
+            </div>
+              <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 2 ? null : 2"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How much does car servicing cost in Noida?</h4> 
+                    <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+               There cannot be one price for all car services. It can vary depending on the model of the car, service type, parts, labour, and the workshop. Any additional work and cleaning service can add to the total amount of the bill. Get an estimate from the workshop before accepting the work.
+                </div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 3 ? null : 3"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What is included in a regular car service?</h4> 
+                    <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+      It depends on the workshop and the type of vehicle; what exactly will be done during a regular service. A regular <strong>car service in Noida</strong> can be defined as a general inspection and maintenance of the car according to the service schedule of the vehicle.</div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 4 ? null : 4"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How do I find a reliable car mechanic in Noida?</h4> 
+                    <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+         Consider the experience of mechanics, knowledge about cars, customer reviews, ratings, diagnostic procedures, estimates for repairs, and parts used. You may even check the past performance and inquire about a warranty in case it is offered. Do not settle for the workshop that describes itself as “the best” without considering whether it fits your specific requirements.
+             </div>
+            </div>           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 5 ? null : 5"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What should I check before choosing a car service center in Noida?</h4> 
+                    <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                Look into services provided, location of workshop, customer reviews, ratings, experience of mechanics, and experience with the car model you have. In addition, inquire about estimates, parts, timeline, and warranty in case it is offered. For instance, if you require pick-up or delivery services, ensure availability before booking.
+                </div>
+            </div>            
+        </div>
+    </div>
+    @elseif($kwData['keyword_slug']=='computer-repair' && $cityName =='noida')
+    
+    
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            💬 Frequently Asked Questions computer repair in Noida</h3>
+        <div class="space-y-2">           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 1 ? null : 1"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How much does computer repair cost in Noida?</h4> 
+                    <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+              Computer repair costs vary depending on the issue being repaired, the model of the computer, parts, and other factors. Therefore, the price of software repair differs significantly from that of hardware repair. Before approving any major <strong>computer repair in Noida</strong>, you should consult a service provider about diagnosis and costs of the job.</div>
+            </div>
+              <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 2 ? null : 2"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What types of computer problems can a repair shop fix?</h4> 
+                    <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+              Among the issues a repair shop can solve, there may be problems with the monitor, keyboard, battery, charger, hard drive, and other components. Additionally, some <strong>computer service in Noida</strong> companies provide services for OS installation and upgrades, virus removal, as well as data restoration.
+                </div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 3 ? null : 3"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How do I choose a reliable computer repair shop in Noida?</h4> 
+                    <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+      To find a reliable <strong>computer repair shop in Noida</strong>, consider the following criteria: experience of technicians, list of serviced brands, customer reviews, diagnostic procedure, repair parts, estimated cost of repair, and warranty (if applicable). Moreover, you should inquire how your data will be managed during repairs. Comparing several shops in Noida will help you to choose.</div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 4 ? null : 4"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Do computer repair services in Noida support both laptops and desktops?</h4> 
+                    <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+         Most providers can repair both laptops and desktops, though this may not be the case with all repair shops. While some repair shops specialize in repairing only laptops, others provide services for repairing both laptops and desktops, workstations, or business computers. Mention your computer make, model, and issue to know whether the service is offered.
+             </div>
+            </div>           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 5 ? null : 5"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How long does computer repair usually take?</h4> 
+                    <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+               It depends on the nature of the problem your computer is facing. The time taken to repair a computer varies depending on whether the problem is software-related or hardware-related. Simple repairs may not take too much time compared to repairing a motherboard or when your computer is affected by liquid spillage.
+                </div>
+            </div>            
+        </div>
+    </div>
+    
+    @elseif($kwData['keyword_slug']=='shooting-academy' && $cityName =='noida')
+    
+    
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            💬 Frequently Asked Questions shooting academy in Noida</h3>
+        <div class="space-y-2">           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 1 ? null : 1"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How do I choose a shooting academy in Noida?</h4> 
+                    <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+              Compare the experience of the coach, the method of coaching, range facilities, safety procedures, equipment, practice sessions, timings, costs, and reviews. Also, determine whether the <strong>shooting academy in Noida</strong> offers your chosen sport, such as air rifle or air pistol. If competition is what you are aiming for, determine whether there is any competition-oriented coaching offered.</div>
+            </div>
+              <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 2 ? null : 2"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How much does shooting training cost in Noida?</h4> 
+                    <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+             There is no fixed fee for every shooting academy. The cost can depend on training level, session frequency, coaching type, membership, and equipment use. Some academies may have monthly or session-based plans. Contact the academy directly to confirm current fees and what the fee includes. 
+                </div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 3 ? null : 3"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Are shooting academies in Noida suitable for beginners?</h4> 
+                    <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+      Yes, some Noida academies offer training for beginners. The exact age groups and beginner programmes differ by academy. New learners should look for structured coaching, clear safety rules, and proper trainer supervision. Ask about a beginner batch or trial session if the academy offers one.</div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 4 ? null : 4"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What types of shooting training are available in Noida?</h4> 
+                    <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+         The available training depends on the academy. Local providers commonly advertise <strong>10m air rifle and 10m air pistol</strong> training. Some may offer other pistol or rifle events. Check the current programme of each academy before joining to confirm the discipline, range setup, and equipment available. 
+             </div>
+            </div>           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 5 ? null : 5"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What should I check before choosing a shooting range in Noida?</h4> 
+                    <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+               Check the range type, shooting discipline, equipment, safety procedures, trainer supervision, timings, location, and session options. Also ask about fees and membership if applicable. Read recent reviews and confirm whether the range supports beginners or competition practice, depending on your reason for joining.
+                </div>
+            </div>            
+        </div>
+    </div>
+    
+    @elseif($kwData['keyword_slug']=='swimming-academy' && $cityName =='noida')
+    
+    
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            💬 Frequently Asked Questions swimming academy in Noida</h3>
+        <div class="space-y-2">           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 1 ? null : 1"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How much do swimming classes cost in Noida?</h4> 
+                    <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+              The <strong>swimming classes in Noida with fees</strong> vary from one institution to another. The amount charged may depend on various factors such as the academy itself, the pool where you will learn, the number of sessions, the type of training offered, the age group, and how long the courses last.</div>
+            </div>
+              <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 2 ? null : 2"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What is the duration of swimming classes in Noida?</h4> 
+                    <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+             Duration may refer to either the length of individual classes or the total period of the entire course. Some providers provide monthly or multi-month courses; however, the timings of individual classes may also vary. You need to inquire with the academy regarding this aspect.
+                </div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 3 ? null : 3"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Are swimming classes available for beginners and adults?</h4> 
+                    <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+      Yes, there are<strong> swimming classes in Noida </strong>where swimming lessons are provided to learners as well as adults. The type of batch may vary based on which academy you visit. If you are a novice swimmer, get a beginner batch and see if the trainer has worked with adult novices before.</div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 4 ? null : 4"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Are swimming classes available for children in Noida?</h4> 
+                    <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+         Yes, certain swimming institutes in Noida conduct classes for children. But the minimum age and batches will vary. It is recommended that parents verify the age limit, trainer supervision, the number of students in each batch, class times, and security measures before enrolling their child in such classes.
+             </div>
+            </div>           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 5 ? null : 5"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How do I choose the right swimming academy in Noida?</h4> 
+                    <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+               Comparing the trainer’s experience, pool facilities, safety measures, size of the batch, timing, location, reviews, ratings, and prices would be useful. Checking if the academy provides beginner, kids, adults, or advanced classes as per your requirements is also necessary. If possible, it is better to go for a trial class to understand their teaching methodology.
+                </div>
+            </div>            
+        </div>
+    </div>
+    @elseif($kwData['keyword_slug']=='boxing' && $cityName =='noida')
+    
+    
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            💬 Frequently Asked Questions boxing in Noida</h3>
+        <div class="space-y-2">           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 1 ? null : 1"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How much do boxing classes cost in Noida?</h4> 
+                    <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+              There is no set fee for all the boxing classes in Noida. The fee depends on many factors such as the academy where you are taking <strong>boxing coaching in Noida</strong>, how many sessions you want, your training level, how long the course will last, facilities available, and whether it is personal training or in groups.</div>
+            </div>
+              <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 2 ? null : 2"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Can beginners learn boxing in Noida?</h4> 
+                    <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+             Yes, beginners will be able to find classes for boxing for those with very little or no experience at all. The beginners' class involves the fundamentals of boxing such as the basic stance, movements, punches, and fitness. The specific programme will depend on the academy.
+                </div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 3 ? null : 3"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What is included in boxing training classes?</h4> 
+                    <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+      The boxing training program may include fundamental boxing techniques, boxing stance, footwork, punching techniques, defense, pad or bag training, and physical exercises. Some academies might also provide sparring or competition training. The format of the training program might vary, so please inquire with the boxing academy.</div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 4 ? null : 4"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Are boxing classes available for children and adults in Noida?</h4> 
+                    <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+         Boxing lessons for different age groups, including kids, teens, and adults, can be found in some academies. Nevertheless, the restrictions in terms of age and timing may differ. The minimum age, presence of the instructor, and group composition should be clarified by parents before signing up their children.
+             </div>
+            </div>           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 5 ? null : 5"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How do I choose the right boxing academy in Noida?</h4> 
+                    <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+             Compare the coach's experience, training technique, safety procedures, equipment used, number of people in the class, location of the class, schedule, and cost. Consider whether the <strong>boxing coaching in Noida</strong> is oriented to fitness, boxing in general, or competition training. A trial class offered by the academy will give you more insights into the programme.
+                </div>
+            </div>            
+        </div>
+    </div>
+
     @endif
 
 
