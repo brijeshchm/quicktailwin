@@ -398,29 +398,39 @@ $test = New Animal(); // wrong not direct object create<br>
   <div class="example">
  <div class="code"><code>
  
-interface Shape {<br>
-    &nbsp public function area();<br>
-    &nbsp public function perimeter();<br>
-}<br>
  
-class Circle implements Shape {<br>
-    &nbsp private $radius;<br>
 
-    &nbsp public function __construct($r) {<br>
-        &nbsp &nbsp $this-&gt;radius = $r;<br>
+interface Payment<br>
+{<br>
+    public function pay($amount);<br>
+    public function refund($amount);<br>
+}<br>
+
+class CreditCardPayment implements Payment<br>
+{<br>
+    private $cardNumber;<br>
+
+    public function __construct($cardNumber)<br>
+    {<br>
+        $this->cardNumber = $cardNumber;<br>
     }<br>
 
-    public function area() {<br>
-       &nbsp return pi() * $this-&gt;radius ** 2;<br>
+    public function pay($amount)<br>
+    {<br>
+        return "Paid ₹" . $amount . " using Credit Card";<br>
     }<br>
 
-    public function perimeter() {<br>
-      &nbsp  return 2 * pi() * $this-&gt;radius;<br>
+    public function refund($amount)<br>
+    {<br>
+        return "Refunded ₹" . $amount . " to Credit Card";<br>
     }<br>
 }<br>
 
-$circle = new Circle(5);<br>
-echo $circle-&gt;area(); // Output: 78.539...<br>
+$payment = new CreditCardPayment("123456789");<br>
+
+echo $payment->pay(5000);<br>
+
+ 
    </code></div></div></td></tr></tbody></table>
   </div>
 
