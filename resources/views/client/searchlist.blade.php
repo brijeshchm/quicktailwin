@@ -1128,9 +1128,10 @@ function bannerSlider(banners, interval = 4000) {
 @endunless
 
 
-  @if($shouldIndex && $cityName =='faridabad')
+@if($shouldIndex && $cityName =='faridabad')
               
-  @if($kwData['keyword_slug']=='artificial-intelligence-training' && $cityName =='faridabad')
+    @if($kwData['keyword_slug']=='artificial-intelligence-training' && $cityName =='faridabad')
+    
     <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
         <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
             💬 Frequently Asked Questions(FAQ's) {{ $city }}
@@ -2713,7 +2714,7 @@ There is no definite fee for Microsoft Azure training in Noida because the fees 
         </div>
     </div>
 
-
+    @endif
     @elseif($shouldIndex && $cityName =='delhi')
 
     @if($kwData['keyword_slug']=='sap-mm-training' && $cityName =='delhi')
@@ -3260,73 +3261,5 @@ function listingPage() {
     }
 }
 </script>
-
-<!-- <script>
-function listingPage() {
-    return {
-        showAd: true,
-        view: 'list',
-        search: '',
-        sortBy: 'Best Match',
-        activeCategory: 'All',
-        minRating: 0,      
-        verifiedOnly: 0,
-        GstOnly: 0,
-        showFilters: true,
-        filteredCount: {{ count(collect($businesses)->flatten(1)->all()) }},
-
-        get activeFilterCount() {
-            return [this.verifiedOnly, this.GstOnly, this.minRating> 0].filter(Boolean).length;
-        },
-
-        init() {
-            this.applyFilters();
-        },
-
-        shouldShow(el) {
-            console.log(el);
-            const q = this.search.toLowerCase();
-            const name = el.dataset.name ?? '';
-            const cat = el.dataset.category ?? '';
-            const rating = parseFloat(el.dataset.rating ?? 0);
-            const gstStatus = el.dataset.gstStatus;
-          
-            const verified = el.dataset.verified === '1';
-            const open = el.dataset.open === '1';
-
-            const matchSearch = !q || name.includes(q) || cat.includes(q);
-            const matchCat = this.activeCategory === 'All' || cat.includes(this.activeCategory.toLowerCase());
-            const matchRating = rating >= this.minRating;
-           
-            const matchVerified = !this.verifiedOnly || verified;
-            const matchOpen = !this.GstOnly || open;
-
-            return matchSearch && matchCat && matchRating && matchVerified && matchOpen;
-        },
-
-        applyFilters() {
-            this.$nextTick(() => {
-                const cards = document.querySelectorAll('.business-card');
-                let count = 0;
-                cards.forEach(card => {
-                    const visible = this.shouldShow(card);
-                    card.style.display = visible ? '' : 'none';
-                    if (visible) count++;
-                });
-                this.filteredCount = count;
-            });
-        },
-
-        resetFilters() {
-            this.search = '';
-            this.activeCategory = 'All';
-            this.minRating = 0;
-            this.verifiedOnly = false;
-            this.GstOnly = false;
-            this.applyFilters();
-        }
-    }
-}
-</script>
-   -->
+ 
 @endsection
