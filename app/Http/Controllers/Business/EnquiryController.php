@@ -159,7 +159,7 @@ class EnquiryController extends Controller
                 </div>
                 
                 <div class="col-md-4">
-                <label for="remark">Counsellor Remark <span class="required">*</span></label>
+                <label for="remark">Remark <span class="required">*</span></label>
                 <textarea name="remark" rows="1" class="form-control col-md-7 col-xs-12"></textarea>
                 </div>
                 </div>
@@ -179,7 +179,7 @@ class EnquiryController extends Controller
 							<thead>
 								<tr>
 									<th>Date</th>
-									<th>Counsellor Remark</th>
+									<th>Remark</th>
 									<th>Status</th>
 									<th>Expected Date</th>
 								</tr>

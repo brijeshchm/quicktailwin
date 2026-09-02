@@ -242,7 +242,7 @@ class ReviewController extends Controller
                 
                 
                 <div class="col-md-12">
-                <label for="remark">Counsellor Remark <span class="required">*</span></label>
+                <label for="remark">Remark <span class="required">*</span></label>
                 <textarea name="remark" rows="4" class="form-control col-md-7 col-xs-12">'.$comments->comment_content.'</textarea>
                 </div>
                 </div>

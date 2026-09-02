@@ -8,14 +8,13 @@ Prepare with PHP interview questions and answers covering OOP, arrays, sessions,
 @section('content')	 
 <div class='main light-grey' id='belowtopnav' style='margin-left:220px;'>
   <div class='row white'>
-    <div class='col l11 m12' id='main'>
-       
-<h1>PHP<span class="color_h1"> Interview Question & Answer</span></h1>
-<div class="clear nextprev">
-<a class="left btn" href="{{url('interviews/php-interview-question-answer')}}">&#10094; Previous</a>
-<a class="right btn" href="{{url('interviews/mysql-interview-question-answer')}}">Next &#10095;</a>
-</div>
-<hr>
+    <div class='col l11 m12' id='main'>       
+    <h1>PHP<span class="color_h1"> Interview Question & Answer</span></h1>
+    <div class="clear nextprev">
+    <a class="left btn" href="{{url('interviews/php-interview-question-answer')}}">&#10094; Previous</a>
+    <a class="right btn" href="{{url('interviews/mysql-interview-question-answer')}}">Next &#10095;</a>
+    </div>
+    <hr>
  <div class="light">
   
  <section id="services-section" class="py-12 bg-gray-100"><div class="container mx-auto px-4">
@@ -256,7 +255,21 @@ echo $userService-&gt;getUser()<br>
 <div class="question">  
 <h2 class="text-3xl font-bold text-primary mt-5 mb-4">What's the OOPs PHP?</h2>
 </div>
-<p class="text-lg text-gray-700"><strong>Class: </strong>Classes define the blueprint for creating objects.</p><p class="text-lg text-gray-700"><strong>Object:</strong> Objects are instance of classes an instance of a class containing real data and behavior.</p><p class="text-lg text-gray-700"><strong>Encapsulation:</strong>Encapsulation involves restricting access to certain class members to prevent direct modification from outside the class with the help of getters and setters.</p><p class="text-lg text-gray-700"><strong>Access Modifies:</strong><ul><li><strong>Public:</strong> Accessible from any where - inside or outside the class.</li><li><strong>Protected:</strong> Accessible within the class and by inheriting class or derived class.</li><li><strong>Private:</strong>Accessible only within the class itself. </li><li><strong>Getters:</strong>Allow you to retrieving the value of private properties. </li><li><strong>Setters:</strong>Allow you to modify the values of private properties sately.</li></ul><ul class="mt-2 bg-gray-200 p-4 shadow-lg"><li class="bg-white p-3 border-l-4 border-green-500 text-sm">
+<p class="text-lg text-gray-700"><strong>Class: </strong>Classes define the blueprint for creating objects.</p><p class="text-lg text-gray-700"><strong>Object:</strong> Objects are instance of classes an instance of a class containing real data and behavior.</p><p class="text-lg text-gray-700"><strong>Encapsulation:</strong>Encapsulation is the process of bundling data and the methods that operate on that data into a single unit while restricting direct access to the internal details.</p><p class="text-lg text-gray-700">
+  
+
+ 
+
+
+<ul><li><strong>Definition:</strong> Combining variables (attributes) and functions (methods) into a single class.</li><li><strong>Data Hiding:</strong> Making internal fields private so external code cannot change them directly.</li><li><strong>Controlled Access:</strong>Using public getter and setter methods to read or update hidden data safely. </li><li><strong>Benefit:</strong>Protects data integrity and allows internal code changes without breaking outside programs. </li></ul>
+
+<strong>Access Modifies:</strong>
+<ul><li><strong>Public:</strong> Accessible from any where - inside or outside the class.</li><li><strong>Protected:</strong> Accessible within the class and by inheriting class or derived class.</li><li><strong>Private:</strong>Accessible only within the class itself. </li><li><strong>Getters:</strong>Allow you to retrieving the value of private properties. </li><li><strong>Setters:</strong>Allow you to modify the values of private properties sately.</li></ul>
+
+
+
+
+<ul class="mt-2 bg-gray-200 p-4 shadow-lg"><li class="bg-white p-3 border-l-4 border-green-500 text-sm">
   <div class="example">
  <div class="code">
   

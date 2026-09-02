@@ -7,8 +7,14 @@
     : asset('client/images/quickdials-og.png'))
 @php   
 $keywordArray = [
-'artificial-intelligence-training', 'python-training', 'workday-training',
-'sap-training', 'banquet-hall', 'cricket-academy','cloud-computing-training','aws-training','devops-training','digital-marketing-training','full-stack-developer-training','azure-training','pmp-certification-training','mba-distance','car-service','computer-repair','shooting-academy','swimming-academy','boxing','distance-education','data-science-training','salesforce-training','data-analytics-training','wedding-organisers','judo-karate','sap-training','sap-mm-training','sap-fico-training',''
+   'artificial-intelligence-training','python-training','workday-training',
+    'sap-training','banquet-hall','cricket-academy','data-science-training',
+    'judo-karate','distance-education','data-analytics-training',
+    'salesforce-training','wedding-organisers','aws-training','cloud-computing-training','devops-training',
+    'digital-marketing-training','full-stack-developer-training',
+    'azure-training','pmp-certification-training','mba-distance',
+    'car-service','computer-repair','shooting-academy',
+    'swimming-academy','boxing','sap-mm-training','sap-fico-training','sap-hana-training','power-bi-training','machine-learning-training','react-native-training','cyber-security-training','certified-ethical-hacking-training','nodejs-training','taekwondo','football-academy','photo-and-videography'
 ];
 $currentKeyword = strtolower(trim($kwData['keyword_slug'] ?? ''));
 $shouldIndex = in_array($currentKeyword, $keywordArray);     
