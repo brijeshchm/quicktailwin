@@ -1950,7 +1950,7 @@ The duration depends on the course plan, so students should check the current ba
 
     @endif
 
-  @elseif($shouldIndex && $cityName =='noida')
+    @elseif($shouldIndex && $cityName =='noida')
 
     @if($kwData['keyword_slug']=='cloud-computing-training' && $cityName =='noida')
 
@@ -2188,7 +2188,7 @@ The cost will depend on the level of the digital marketing course in Noida, its 
         </div>
     </div>
 
-     @elseif($kwData['keyword_slug']=='full-stack-developer-training' && $cityName =='noida')
+    @elseif($kwData['keyword_slug']=='full-stack-developer-training' && $cityName =='noida')
     
     
     <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
@@ -2247,7 +2247,7 @@ There is no single fee for all such Full Stack developer course in Noida. It wil
         </div>
     </div>
 
-  @elseif($kwData['keyword_slug']=='azure-training' && $cityName =='noida')
+    @elseif($kwData['keyword_slug']=='azure-training' && $cityName =='noida')
     
     
     <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
@@ -2305,7 +2305,7 @@ There is no definite fee for Microsoft Azure training in Noida because the fees 
             </div>            
         </div>
     </div>
-  @elseif($kwData['keyword_slug']=='pmp-certification-training' && $cityName =='noida')
+    @elseif($kwData['keyword_slug']=='pmp-certification-training' && $cityName =='noida')
     
     
     <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
@@ -2369,7 +2369,7 @@ There is no definite fee for Microsoft Azure training in Noida because the fees 
     
     <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
         <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-            💬 Frequently Asked Questions Distance MBA in Noida</h3>
+            💬 Frequently Asked Questions for Distance MBA in Noida</h3>
         <div class="space-y-2">           
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 1 ? null : 1"
@@ -2429,7 +2429,7 @@ There is no definite fee for Microsoft Azure training in Noida because the fees 
     
     <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
         <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-            💬 Frequently Asked Questions car service in Noida</h3>
+            💬 Frequently Asked Questions for car service in Noida</h3>
         <div class="space-y-2">           
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 1 ? null : 1"
@@ -2487,7 +2487,7 @@ There is no definite fee for Microsoft Azure training in Noida because the fees 
     
     <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
         <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-            💬 Frequently Asked Questions computer repair in Noida</h3>
+            💬 Frequently Asked Questions for computer repair in Noida</h3>
         <div class="space-y-2">           
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 1 ? null : 1"
@@ -2545,7 +2545,7 @@ There is no definite fee for Microsoft Azure training in Noida because the fees 
     
     <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
         <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-            💬 Frequently Asked Questions shooting academy in Noida</h3>
+            💬 Frequently Asked Questions for shooting academy in Noida</h3>
         <div class="space-y-2">           
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 1 ? null : 1"
@@ -2603,7 +2603,7 @@ There is no definite fee for Microsoft Azure training in Noida because the fees 
     
     <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
         <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-            💬 Frequently Asked Questions swimming academy in Noida</h3>
+            💬 Frequently Asked Questions for swimming academy in Noida</h3>
         <div class="space-y-2">           
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 1 ? null : 1"
@@ -2660,7 +2660,7 @@ There is no definite fee for Microsoft Azure training in Noida because the fees 
     
     <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
         <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-            💬 Frequently Asked Questions boxing in Noida</h3>
+            💬 Frequently Asked Questions for boxing in Noida</h3>
         <div class="space-y-2">           
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === 1 ? null : 1"
@@ -2713,6 +2713,362 @@ There is no definite fee for Microsoft Azure training in Noida because the fees 
         </div>
     </div>
 
+
+    @elseif($shouldIndex && $cityName =='delhi')
+
+    @if($kwData['keyword_slug']=='sap-mm-training' && $cityName =='delhi')
+
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            💬 Frequently Asked Questions for SAP MM course in Delhi</h3>
+        <div class="space-y-2">           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 1 ? null : 1"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Can beginners opt for the SAP MM course Delhi?</h4> 
+                    <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                Definitely, a beginner can go for an SAP MM course in Delhi. There are several SAP MM courses which begin from the basics of SAP MM. Having any previous knowledge of SAP is not always essential. 
+                 </div>
+            </div>
+              <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 2 ? null : 2"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How long will an SAP MM course take?</h4> 
+                    <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                Not all SAP MM training courses take a certain amount of time because it is dependent upon the course curriculum, training hours, practical sessions, and level of the course. The institutes provide training during weekdays or weekends based on their convenience. 
+                </div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 3 ? null : 3"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Who should take up SAP MM Delhi training?</h4> 
+                    <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                Students, graduates, and professionals can attend SAP MM training courses in Delhi. Also, people who work in the field of procurement, purchasing, or inventory can attend the SAP MM course training. 
+                </div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 4 ? null : 4"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What is the cost of SAP MM training in Delhi?</h4> 
+                    <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+           Costs of SAP MM training differ based on the institute. Currently, SAP MM course costs range between ₹25,000 and ₹45,000. 
+             </div>
+            </div>           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 5 ? null : 5"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How to select the best SAP MM training institute in Delhi?</h4> 
+                    <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                You should consider aspects such as syllabus, SAP version used, instructor experience, practical training, projects, timings, format, reputation, and cost, among others.  
+                </div>
+            </div>            
+        </div>
+    </div>
+
+    @elseif($kwData['keyword_slug']=='sap-fico-training' && $cityName =='delhi')
+    
+    
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            💬 Frequently Asked Questions for SAP FICO Training in Delhi</h3>
+        <div class="space-y-2">           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 1 ? null : 1"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Is SAP FICO training good for beginners?</h4> 
+                    <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+            Sure, SAP FICO Training is suitable for beginners if the course begins from the basics of accounting and SAP. Select a training that has a simple curriculum, practical training, and good trainer support.
+                 </div>
+            </div>
+              <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 2 ? null : 2"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How many days will an SAP FICO course in Delhi take?</h4> 
+                    <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                There is no specific period for every SAP FICO course, as the period varies according to the syllabus, training hours, and practical sessions. It can be a short-term course offered by certain institutes, while others may have a longer period. 
+                </div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 3 ? null : 3"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Who can join SAP FICO Delhi course?</h4> 
+                    <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+        Students, graduates, accountants, finance professionals and working professionals can opt for SAP FICO classes. Beginners can enroll for basic classes, whereas those having experience in finance can opt for advanced classes.</div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 4 ? null : 4"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What are the fees for SAP FICO course?</h4> 
+                    <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                It depends upon the institute and varies depending on whether it is an individual trainer, duration, format of training, practical knowledge, and certification. Current <strong>SAP FICO course fees in Delhi</strong> are generally around ₹25,000–₹45,000 for standard training. 
+             </div>
+            </div>           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 5 ? null : 5"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What should be considered while choosing the best SAP FICO training institute in Delhi?</h4> 
+                    <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                You need to consider the syllabus, SAP version, experience of the trainer, practical training, projects, training time, format, reviews, and fees.
+                </div>
+            </div>            
+        </div>
+    </div>
+
+    @elseif($kwData['keyword_slug']=='sap-hana-training' && $cityName =='delhi')
+    
+    
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            💬 Frequently Asked Questions for SAP HANA Training in Delhi</h3>
+        <div class="space-y-2">           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 1 ? null : 1"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Is SAP HANA hard to learn for beginners?</h4> 
+                    <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                Learning SAP HANA is possible for beginners, provided that the course begins with basic learning. The best <strong>SAP HANA training in Delhi</strong> should cover basics of databases and HANA technologies.
+                 </div>
+            </div>
+              <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 2 ? null : 2"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What is the average fee of SAP HANA training in Delhi?</h4> 
+                    <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                It may depend on the institute, duration of <strong>SAP HANA course in Delhi</strong>, availability of practicals and type of training. Market rates currently suggest a broad range of prices, but practical training may cost about ₹25,000-₹55,000. Always check the current rate before attending.
+                </div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 3 ? null : 3"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What is the duration of SAP HANA training in Delhi?</h4> 
+                    <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+        The duration of each <strong>SAP HANA classes in Delhi</strong> is different for each. The training duration of basic programs can be less while that of administration, development or HANA Cloud programs can be more.</div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 4 ? null : 4"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Is there any practical training in SAP HANA classes in Delhi?</h4> 
+                    <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                Some training institutions provide you with practical training but this is not universal across all <strong>SAP HANA classes in Delhi</strong>. It is recommended to find out in advance whether you will have access to the practical or live SAP HANA system.
+             </div>
+            </div>           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 5 ? null : 5"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How do I choose a good SAP HANA training institute in Delhi?</h4> 
+                    <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+               You should compare syllabus, trainer's experience, practical system access, HANA version, course duration, classroom style, reviews, ratings and costs of training institution. 
+                </div>
+            </div>            
+        </div>
+    </div>
+
+     @elseif($kwData['keyword_slug']=='power-bi-training' && $cityName =='delhi')
+    
+    
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            💬 Frequently Asked Questions for Power BI Training in Delhi</h3>
+        <div class="space-y-2">           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 1 ? null : 1"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Can beginners use Power BI?</h4> 
+                    <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+              Yes, beginners can use Power BI. Beginners can begin by learning how to import data into Power BI, using Power Query, and creating basic charts and dashboards before getting into DAX and modeling.
+                 </div>
+            </div>
+              <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 2 ? null : 2"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What is the usual fee for Power BI courses in Delhi?</h4> 
+                    <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                A typical course can normally be priced at around ₹15,000 – ₹40,000 in Delhi, based on the <strong>Power BI course fees in Delhi</strong> listed currently. Higher fees will apply for advanced courses. The final fee will depend upon duration, trainer, projects, and practical sessions.
+                </div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 3 ? null : 3"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What is the duration of Power BI training in Delhi?</h4> 
+                    <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+        The duration for most basic to intermediate levels ranges between 1 to 3 months. There are some short courses available in 30-45 days, while bigger data analytics courses may take more time. Make sure to always consider the number of training hours too.</div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 4 ? null : 4"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Is there any course which includes Power BI PL-300 certification training?</h4> 
+                    <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+               While some courses include PL-300, not all of them have it. Always verify the course syllabus first. According to Microsoft, the PL-300 exam tests data preparation, modeling, visualization, analysis, and management of Power BI assets.
+             </div>
+            </div>           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 5 ? null : 5"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How to pick the best Power BI training institute in Delhi?</h4> 
+                    <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+               Compare the syllabus, trainer, practical classes, projects, duration, cost, class type, reviews, and ratings. If you want to pursue PL-300 certification, find out whether this training is covered in the course or not.
+                </div>
+            </div>            
+        </div>
+    </div>
+
+    @elseif($kwData['keyword_slug']=='machine-learning-training' && $cityName =='delhi')
+    
+    
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            💬 Frequently Asked Questions for Machine Learning Training in Delhi</h3>
+        <div class="space-y-2">           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 1 ? null : 1"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Is machine learning good for beginners?</h4> 
+                    <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+              Yes, beginners can learn machine learning if they begin with basic Python and data handling, along with some basics of machine learning. One should opt for <strong>machine learning training in Delhi</strong> that explains the concepts step by step rather than going right into complex models.
+                 </div>
+            </div>
+              <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 2 ? null : 2"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How much does it usually cost to take a machine learning course in Delhi?</h4> 
+                    <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                Short basic courses could cost you ₹10,000- ₹25,000, whereas professional training could cost ₹15,000- ₹60,000 or more. Fees for advanced university programs <strong>machine learning course fees in Delhi</strong> could be much more. The exact fee depends on the institute and many other factors.
+                </div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 3 ? null : 3"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How much time does a machine learning course require in Delhi?</h4> 
+                    <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+        A simple course can require about 1–3 months, but professional courses require 3–6 months. Big AI and Data Science programs can last for 6–12 months. Make sure you know how many training hours are included besides the duration of the course.</div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 4 ? null : 4"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Should I know Python before enrolling in machine learning classes?</h4> 
+                    <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+              Some basics of Python will help because most machine learning programs are done using Python to handle the data and build the models. Some basic courses start by teaching Python; some advanced courses assume that you already know Python.
+             </div>
+            </div>           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 5 ? null : 5"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How can I select the best machine learning program in Delhi?</h4> 
+                    <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+              Compare the syllabus, experience of the trainer, practical classes, projects, duration, fees, format of machine learning institute in Delhi, reviews, and ratings. Also, make sure that the course includes the machine learning subjects that you are interested in.
+                </div>
+            </div>            
+        </div>
+    </div>
+
+     @elseif($kwData['keyword_slug']=='react-native-training' && $cityName =='delhi')
+    
+    
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            💬 Frequently Asked Questions for React Native Training in Delhi</h3>
+        <div class="space-y-2">           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 1 ? null : 1"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Is there any beginner course for React Native in Delhi?</h4> 
+                    <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+              Some React Native training courses cater specifically to beginners. It helps if you have prior programming knowledge or basic JavaScript programming skills, but there are specific training courses that begin right from the basics.
+                 </div>
+            </div>
+              <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 2 ? null : 2"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How much does a React Native course cost on average in Delhi?</h4> 
+                    <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                According to the listings available in Delhi at present, the React Native course price varies from ₹15,000 to ₹30,000 for most practical training courses, even though there may be other training courses outside this range. Presently, ₹20,000 and ₹30,000 are among them.
+                </div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 3 ? null : 3"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What is the duration of React Native Training in Delhi?</h4> 
+                    <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+        The duration for a basic training course is 1–3 months, while the duration for larger programs is 5-6 months.</div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 4 ? null : 4"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Is there any practical or project involved in React Native training?</h4> 
+                    <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+              Yes, most courses have hands-on training sessions and projects, but the number and kind of projects can vary. You must check whether you are going to make full applications and whether the project charges are included in the program.
+             </div>
+            </div>           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 5 ? null : 5"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How do I select the right React Native training institute in Delhi?</h4> 
+                    <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+              Consider the syllabus, trainer’s expertise, practical training, number of projects, duration, cost, type of classes, reviews, and timings. Also check whether the courses cover all important topics like navigation, APIs, device features, and application distribution.
+                </div>
+            </div>            
+        </div>
+    </div>
     @endif
 
 
