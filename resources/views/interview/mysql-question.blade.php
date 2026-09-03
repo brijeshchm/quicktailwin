@@ -209,7 +209,18 @@ CREATE FULLTEXT INDEX idx_content ON posts(content);</code>
     <div class="question">  
   <h2 class="text-3xl font-bold text-primary mt-5 mb-4">What is SQL Injection? </h2>
   </div>
+  <p class="text-lg text-gray-700">SQL Injection occurs when an attacker inserts malicious SQL into user input.</p>
+  <p class="text-lg text-gray-700"><strong>Unsafe</strong></strong></p>
+  
+  <div class="example"> 
+<div class="code"> 
+  <code>$email = $_POST['email'];
+
+$sql = "SELECT * FROM users WHERE email = '$email'";</code>
+  
+  </div></div>
   <p class="text-lg text-gray-700"><strong>SQL Injection</strong>  is a security vulnerability that allows an attacker to interfere with the SQL queries your application sends to the database.</p><p class="text-lg text-gray-700">  <strong> Use Prepared Statements / Parameterized Queries</strong></p>
+  
   
   <div class="example"> 
 <div class="code"> 
@@ -217,8 +228,11 @@ CREATE FULLTEXT INDEX idx_content ON posts(content);</code>
     
   $stmt-&gt;bind_param("ss", $username, $password); <br>
   $stmt-&gt;execute();</code>
+<p class="text-lg text-gray-700"><strong>In Laravel, use Eloquent/query builder rather than concatenating SQL:</strong> </p>
+  <code>$user = User::where('email', $email)->first();</code>
   
   </div></div>
+
   <p class="text-lg text-gray-700"> <strong>Unauthorized access</strong> to sensitive data (like passwords, credit card numbers) </p><p>Bypassing login authentication</p><p>Modifying or deleting data</p><p>Taking full control of the database server</p><p class="text-lg text-gray-700">SQL injection is a code injection technique that might destroy your database.</p><p class="text-lg text-gray-700">SQL Injection is one of the most common web hacking technique get request string ('userid').</p><p class="text-lg text-gray-700">THe sql above is valid and will return all rows from the user table since or 1=1 is always true.</p></div>
   
  
@@ -289,6 +303,40 @@ SET<br>
 </div>
 </div>
 </div>
+
+
+
+<div class="mb-12">
+  <div class="question">  
+  <h2 class="text-3xl font-bold text-primary mt-5 mb-4">XSS — Cross-Site Scripting </h2>
+
+  </div>
+  
+   <div class="example"> 
+    <p>XSS occurs when an attacker injects JavaScript into a webpage.</p> 
+<div class="code">
+ <p><strong>Unsafe</strong></p>
+<code> 
+echo $_GET['name'];<br>
+ 
+ 
+</code>
+</div>
+<div class="code">
+ <p><strong>Safe</strong></p>
+<code> 
+echo htmlspecialchars(<br>
+    $_GET['name'],<br>
+    ENT_QUOTES,<br>
+    'UTF-8'<br>
+);<br>
+ 
+ 
+</code>
+</div>
+</div>
+</div>
+
 
 
 <div class="mb-12">

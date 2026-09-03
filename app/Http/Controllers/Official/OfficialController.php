@@ -463,6 +463,15 @@ class OfficialController extends Controller
 
         if (!$data) abort(410);
  
+        if($slug){
+            $blog = Blogdetails::where('slug', $slug)->firstOrFail();
+ 
+            if (!session()->has('blog_view_' . $blog->id)) {
+                $blog->increment('views');
+                session()->put('blog_view_' . $blog->id, true);
+            }
+        }
+
         // Handle both { data: {} } and { data: [{}] }
         $raw = $data['data'] ?? null;
         if (is_array($raw) && isset($raw[0])) {

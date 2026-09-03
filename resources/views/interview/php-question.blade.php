@@ -459,6 +459,44 @@ $result = MathHelper::add(4, 6); // call :: <br>
 
 
 </div>
+
+<div class="mb-12">
+  <div class="question">  
+  <h2 class="text-3xl font-bold text-primary mt-5 mb-4">Autowiring and Autoconfiguration?</h2>
+  </div>
+  <p class="text-lg text-gray-700">These concepts are especially common in Symfony.</p>
+   <p class="text-lg text-gray-700"><strong> Autowiring.</strong> </p>
+   <p>Symfony automatically determines which dependencies need to be injected based on type hints.</p>
+<div class="example">
+ <div class="code">
+ 
+<code> class UserController</br>
+{</br>
+    public function __construct(</br>
+        private UserService $userService</br>
+    ) {}</br>
+}</br>
+
+Automatically resolves dependencies.
+</code>
+</div>
+</div>
+
+<p class="text-lg text-gray-700"><strong> Autoconfiguration.</strong> </p>
+   <p>Symfony automatically configures services based on their interfaces/base classes.</p>
+<div class="example">
+ <div class="code">
+ 
+<code> class UserEventSubscriber implements EventSubscriberInterface</br>
+{</br>
+}</br>
+
+Automatically applies service configuration/tags based on the class/interface.
+</code>
+</div>
+</div>
+
+</div>
   
   
   

@@ -415,7 +415,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
                             <circle cx="12" cy="12" r="3"/>
                         </svg>
-                        <span id="view-count">—</span> views
+                        <span id="view-count">{{ $blogDetails['views'] }}</span> views
                     </span>
                 </div>
 
@@ -742,8 +742,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
     }, { passive: true });
 
     /* ── Random stable view count ── */
-    const vc = document.getElementById('view-count');
-    if (vc) vc.textContent = (Math.floor(Math.random() * 8000) + 1200).toLocaleString();
+    
 
     /* ── IntersectionObserver — reveal on scroll ── */
     const observer = new IntersectionObserver((entries) => {
