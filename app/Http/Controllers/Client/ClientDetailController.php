@@ -41,6 +41,7 @@ class ClientDetailController extends Controller
 		}
 
 
+       
         try {
         $res = Http::timeout(10)
         ->withoutVerifying()
@@ -58,7 +59,15 @@ class ClientDetailController extends Controller
         if (!$response) {
         abort(410);
         }
-
+ 
+        if($newSlug){
+            $client = Client::where('business_slug', $newSlug)->firstOrFail(); 
+            if (!session()->has('client_view_' . $client->id)) {
+                $client->increment('views');
+                session()->put('client_view_' . $client->id, true);
+            }
+        }
+        
         $data = $response['data'] ?? [];
         $clientsList = $data['clientsList']       ?? [];
       

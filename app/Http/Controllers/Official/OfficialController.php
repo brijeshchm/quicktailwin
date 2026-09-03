@@ -71,8 +71,12 @@ class OfficialController extends Controller
     
         $popularArticles = array_slice($featuredArticle, 1, 3);
         $tickerArticles  = array_slice($featuredArticle, 4, 10);
-        $listArticles    = array_slice($featuredArticle, 1);   
+        $listArticles    = array_slice($featuredArticle, 1);
+        $firstNews = [];
+        if($featuredArticle['0']){   
         $firstNews    = $featuredArticle['0'];   
+        }
+
         $categories = NewsArticle::select('category_name as name', DB::raw('COUNT(*) as count'))
         ->whereNotNull('category_name')
         ->where('category_name', '!=', '')
@@ -418,7 +422,12 @@ class OfficialController extends Controller
         $popularArticles = array_slice($featuredArticle, 1, 3);
         $tickerArticles  = array_slice($featuredArticle, 4, 10);
         $listArticles    = array_slice($featuredArticle, 1);   
+        
+
+         $firstBlog = [];
+        if($featuredArticle['0']){   
         $firstBlog    = $featuredArticle['0'];   
+        }
         $categories = Blogdetails::select('category_name as name', DB::raw('COUNT(*) as count'))
         ->whereNotNull('category_name')
         ->where('category_name', '!=', '')

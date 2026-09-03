@@ -231,6 +231,16 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                 </a>
             </div>
         </div>
+
+       
+
+          <button 
+                class="flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold text-sm text-blue-700 border border-blue-200 hover:bg-blue-50">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                <circle cx="12" cy="12" r="3"/>
+            </svg> {{ !empty($clientsList['views']) ? $clientsList['views'] : '' }} Views
+        </button>
     </div>
 </div>
 
