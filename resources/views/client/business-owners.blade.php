@@ -1,6 +1,6 @@
  
 @extends('client.layouts.app')
-@section('title', $metaTitle ?? 'QuickDials | A Local Search Engine for Businesses')
+@section('title', 'Free Business Listing | A Local Search Engine for Businesses')
 @section('description', $metaDescription ?? 'Find certified training institutes and local businesses on QuickDials. Explore hotels, salons, real estate, travel, healthcare, and education with reviews, phone numbers, addresses, photos, and maps.')
 @section('keywords', $metaKeywords ?? 'Find Best It Training Centre near You, Find Best It Training Institute near You, Find Top 10 IT Training Institute near You, Find Best Entrance Exam Preparation Centre Near you, Top 10 Entrance Exam Centre Near you, Find Best Distance Education Centre Near You, Find Top 10 Distance Education Centre Near You, Find Best School And Colleges Near You, Find Top 10 school And College Near You, Get Education Loan, GET Free career Counselling, Find Best overseas education consultants Near you, Find Top 10 overseas education consultants Near you')
 @section('content')
