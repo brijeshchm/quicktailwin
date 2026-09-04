@@ -130,4 +130,26 @@
 @endforeach
 
 
+@php
+    $delhiCities = [
+        'delhi'
+    ];
+    $keywordArrayDelhi = [
+        'sap-mm-training','sap-fico-training','sap-hana-training','power-bi-training','machine-learning-training','react-native-training','cyber-security-training','certified-ethical-hacking-training','nodejs-training','taekwondo','football-academy','photo-and-videography'
+    ];
+@endphp
+@foreach ($delhiCities as $cityDelhi)
+    @foreach ($keywordArrayDelhi as $keywordDelhi)
+        <url>
+            <loc>{{ route('city.slug', [
+                'city_slug' => $cityDelhi,
+                'service_slug' => $keywordDelhi
+            ]) }}</loc>
+            <changefreq>daily</changefreq>
+            <priority>0.80</priority>
+        </url>
+    @endforeach
+@endforeach
+
+
 </urlset>
