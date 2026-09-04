@@ -84,7 +84,7 @@
                 style="font-family:Arial,Helvetica,sans-serif;font-size:11px;color:rgba(255,255,255,.75);line-height:1.8;">
               <strong style="color:#ffffff;font-size:13px;display:block;margin-bottom:4px;">QuickDials Pvt. Ltd.</strong>
               UNIT 101 Oxford Towers, HAL Airport Rd,<br>
-              faridabad — 560008, Karnataka<br>
+              Bangalore — 560008, Karnataka<br>
               CIN: U63112KA2026PTC215594<br>
               TAN: BLRQ01951F
             </td>
@@ -320,7 +320,7 @@
             <td valign="middle" style="font-family:Arial,Helvetica,sans-serif;font-size:11px;color:rgba(255,255,255,.6);line-height:1.7;">
               <strong style="color:rgba(255,255,255,.9);">Regd. Office:</strong><br>
               UNIT 101 Oxford Towers, 139/88 HAL Old Airport Rd,<br>
-              H.A.L II Stage, faridabad North — 560008, Karnataka, India.
+              H.A.L II Stage, Bangalore North — 560008, Karnataka, India.
             </td>
             <td valign="middle" align="right"
                 style="font-family:Arial,Helvetica,sans-serif;font-size:11px;color:rgba(255,255,255,.5);text-align:right;">

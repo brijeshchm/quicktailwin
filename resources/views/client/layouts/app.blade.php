@@ -171,8 +171,8 @@ if (request()->is('/')){
 
     'address' => [
         '@type'          => 'PostalAddress',
-        'streetAddress'  => 'UNIT 101 OXFORD TOWERS, 139/88 HAL OLD AIRPORT RD, H.A.L II Stage, faridabad North, faridabad- 560008, Karnataka',
-        'addressLocality'=> 'faridabad',
+        'streetAddress'  => 'UNIT 101 OXFORD TOWERS, 139/88 HAL OLD AIRPORT RD, H.A.L II Stage, Bangalore North, Bangalore- 560008, Karnataka',
+        'addressLocality'=> 'Bangalore',
         'postalCode'     => '560008',
         'addressCountry' => 'IN',
     ],
@@ -213,7 +213,7 @@ if (request()->is('/')){
         ['@type' => 'City', 'name' => 'Indore'],
         ['@type' => 'City', 'name' => 'Pune'],
         ['@type' => 'City', 'name' => 'Mumbai'],
-        ['@type' => 'City', 'name' => 'faridabad'],
+        ['@type' => 'City', 'name' => 'Bangalore'],
       
     ],
 ];

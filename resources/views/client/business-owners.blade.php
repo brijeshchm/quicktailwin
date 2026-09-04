@@ -360,7 +360,7 @@ select.form-input { padding-left:1rem; }
                         <span class="text-[10px] text-blue-500 font-medium">500+ cities</span>
                     </div>
                     <div class="flex flex-wrap gap-1.5">
-                        @foreach([['Mumbai','1.2K'],['Delhi','1.1K'],['faridabad','980'],['Hyderabad','870'],['Ahmedabad','760'],['Chennai','720'],['Pune','680'],['Surat','540'],['Jaipur','460'],['Kolkata','420'],['Lucknow','390']] as $i => $city)
+                        @foreach([['Mumbai','1.2K'],['Delhi','1.1K'],['Bangalore','980'],['Hyderabad','870'],['Ahmedabad','760'],['Chennai','720'],['Pune','680'],['Surat','540'],['Jaipur','460'],['Kolkata','420'],['Lucknow','390']] as $i => $city)
                         <span class="city-chip inline-flex items-center gap-1 text-[10px] font-semibold
                                      px-2.5 py-1 rounded-full border cursor-default
                                      bg-blue-50 text-blue-600 border-blue-100 hover:bg-blue-100">
@@ -532,7 +532,7 @@ select.form-input { padding-left:1rem; }
                     <div class="divide-y divide-slate-50">
                         @foreach([
                             ['PF','Priya Fashion House','Surat','Growth','2 min ago','from-pink-400 to-rose-500'],
-                            ['TV','TechVision Solutions','faridabad','Premium','11 min ago','from-blue-400 to-indigo-500'],
+                            ['TV','TechVision Solutions','Bangalore','Premium','11 min ago','from-blue-400 to-indigo-500'],
                             ['ME','Mehta Electronics','Ahmedabad','Starter','23 min ago','from-amber-400 to-orange-500'],
                             ['GL','GreenLeaf Organics','Pune','Growth','38 min ago','from-emerald-400 to-teal-500'],
                         ] as $item)

@@ -247,7 +247,7 @@
             <td style="font-family:Arial,Helvetica,sans-serif;font-size:11px;color:rgba(255,255,255,.6);line-height:1.8;">
               <strong style="color:rgba(255,255,255,.9);">QuickDials Pvt. Ltd.</strong><br>
               UNIT 101 Oxford Towers, 139/88 HAL Old Airport Rd,<br>
-              faridabad North — 560008, Karnataka, India.
+              Bangalore North — 560008, Karnataka, India.
             </td>
             <td valign="top" align="right"
                 style="font-family:Arial,Helvetica,sans-serif;font-size:11px;color:rgba(255,255,255,.5);text-align:right;">

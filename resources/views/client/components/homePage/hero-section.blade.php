@@ -188,9 +188,8 @@ setInterval(() => {
 
 // ─── Hero City ────────────────────────────────────────────────────────────
 let heroSelectedCity = 'faridabad';
-// const CITIES = ['Mumbai','Delhi','faridabad','Hyderabad','Chennai','Pune','Kolkata','Ahmedabad'];
-
-const cityNames = ['Mumbai', 'Delhi', 'faridabad', 'Hyderabad', 'Chennai', 'Pune', 'Kolkata', 'Ahmedabad'];
+ 
+const cityNames = ['Mumbai', 'Delhi', 'Bangalore', 'Hyderabad', 'Chennai', 'Pune', 'Kolkata', 'Ahmedabad'];
 
 const CITIES = cityNames.map(name => ({
     city: name.toLowerCase(),

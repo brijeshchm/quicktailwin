@@ -402,7 +402,7 @@
         <img src="https://www.quickdials.com/client/images/small-logo.png" alt="QuickDials">
         <h1>QuickDials Internet Pvt. Ltd.</h1>
         <p>
-          Pillar No.33, NH-19, Faridabad, Haryana<br>
+          UNIT 101 OXFORD TOWERS, 139/88 HAL OLD AIRPORT RD, H.A.L II Stage, Bangalore North, Bangalore- 560008<br>
           📞 +91-75-5943-5943 &nbsp;|&nbsp; ✉ info@quickdials.com &nbsp;|&nbsp; 🌐 www.quickdials.com
         </p>
       </div>
@@ -568,7 +568,7 @@
       </a>
       <p>Looking forward to a long and fruitful association with you!</p>
       <p class="regd-office">
-        Regd. Office: Unit 101, Oxford Towers, 139/88 HAL Old Airport Rd, H.A.L II Stage, faridabad North, faridabad — 560008, Karnataka.
+        Regd. Office: Unit 101, Oxford Towers, 139/88 HAL Old Airport Rd, H.A.L II Stage, Bangalore North, Bangalore — 560008, Karnataka.
       </p>
     </div>
     <div class="thank-block">

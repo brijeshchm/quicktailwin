@@ -61,7 +61,7 @@
                             </div>
                         </div>
                         <div class="max-h-48 overflow-y-auto py-1" id="sticky-city-list">
-                            @foreach(['Mumbai','Delhi','faridabad','Hyderabad','Chennai','Pune','Kolkata','Ahmedabad'] as $city)
+                            @foreach(['Mumbai','Delhi','Bangalore','Hyderabad','Chennai','Pune','Kolkata','Ahmedabad'] as $city)
                               
                                 <button
                                     onclick="selectStickyCity('{{ $city }}')"
@@ -790,7 +790,7 @@ window.addEventListener('scroll', () => {
 let stickySelectedCity = 'faridabad';
  
 
-const cityStickyNames = ['Mumbai', 'Delhi', 'faridabad', 'Hyderabad', 'Chennai', 'Pune', 'Kolkata', 'Ahmedabad'];
+const cityStickyNames = ['Mumbai', 'Delhi', 'Bangalore', 'Hyderabad', 'Chennai', 'Pune', 'Kolkata', 'Ahmedabad'];
 
 const FALLBACK_CITIES = cityStickyNames.map(name => ({
     city: name.toLowerCase(),
