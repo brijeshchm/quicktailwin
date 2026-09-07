@@ -14,7 +14,7 @@ $keywordArray = [
     'digital-marketing-training','full-stack-developer-training',
     'azure-training','pmp-certification-training','mba-distance',
     'car-service','computer-repair','shooting-academy',
-    'swimming-academy','boxing','sap-mm-training','sap-fico-training','sap-hana-training','power-bi-training','machine-learning-training','react-native-training','cyber-security-training','certified-ethical-hacking-training','nodejs-training','taekwondo','football-academy','photo-and-videography'
+    'swimming-academy','boxing','sap-mm-training','sap-fico-training','sap-hana-training','power-bi-training','machine-learning-training','react-native-training','cyber-security-training','certified-ethical-hacking-training','nodejs-training','taekwondo','football-academy','photo-and-videography',	'sap-sd-training','sap-hcm-training','sap-success-factors-training','workday-hcm-functional','tableau-training','deep-learning-training','php-training','mern-stack-training','catering-services','event-organizers','tent-house','table-tennis','archery'
 ];
 $currentKeyword = strtolower(trim($kwData['keyword_slug'] ?? ''));
 $shouldIndex = in_array($currentKeyword, $keywordArray);     
