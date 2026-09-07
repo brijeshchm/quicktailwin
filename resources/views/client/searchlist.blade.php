@@ -22,6 +22,10 @@
            	'sap-mm-training','sap-fico-training','sap-hana-training','power-bi-training','machine-learning-training','react-native-training','cyber-security-training','certified-ethical-hacking-training','nodejs-training','taekwondo','football-academy','photo-and-videography'
         ],
 
+        'bangalore' => [
+           	'sap-sd-training','sap-hcm-training','sap-success-factors-training','workday-hcm-functional','tableau-training','deep-learning-training','php-training','mern-stack-training','catering-services','event-organizers','tent-house','table-tennis','archery'
+        ],
+
 
     ];
 
@@ -36,10 +40,10 @@
     $faridabadIndex = $currentCity === 'faridabad' && $shouldIndex;
     $noidaIndex      = $currentCity === 'noida' && $shouldIndex;
     $delhiIndex      = $currentCity === 'delhi' && $shouldIndex;
- //   $bangaloreIndex      = $currentCity === 'bangalore' && $shouldIndex;
+    $bangaloreIndex      = $currentCity === 'bangalore' && $shouldIndex;
 
     // Does this page have curated, city-specific content at all?
-    $hasCuratedContent = $faridabadIndex || $noidaIndex || $delhiIndex;
+    $hasCuratedContent = $faridabadIndex || $noidaIndex || $delhiIndex || $bangaloreIndex;
 @endphp
 
 @section('meta_robots')
@@ -970,7 +974,7 @@ function bannerSlider(banners, interval = 4000) {
 
 @endif
 
-@if($shouldIndex && $cityName =='bangalore')
+@if($bangaloreIndex && $cityName =='bangalore')
      {{-- bottom_wcity_heading --}}
     @if(!empty($kwData['bottom_wcity_description']))
     
@@ -1105,6 +1109,7 @@ function bannerSlider(banners, interval = 4000) {
     @endif
     @endif
 
+ 
 
 
   @unless($hasCuratedContent)
