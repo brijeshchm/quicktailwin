@@ -3070,6 +3070,370 @@ There is no definite fee for Microsoft Azure training in Noida because the fees 
             </div>            
         </div>
     </div>
+    
+     @elseif($kwData['keyword_slug']=='cyber-security-training' && $cityName =='delhi')
+       
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            💬 Frequently Asked Questions for Cyber Security in Delhi</h3>
+        <div class="space-y-2">           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 1 ? null : 1"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What are the fees for cyber security courses in Delhi?</h4> 
+                    <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+              Fees for short certificate courses can range from ₹4,000 to ₹25,000, whereas job-orientated programmes can cost roughly ₹25,000–₹60,000. Advanced diploma and university programs can be costly. Check if the <strong>cyber security course fees in Delhi</strong> include lab facilities, study materials, and certification/examination charges.
+                 </div>
+            </div>
+              <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 2 ? null : 2"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How long does it take to learn cyber security in Delhi?</h4> 
+                    <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                It depends on the <strong>cyber security classes in Delhi</strong> chosen by you. If you choose a short-term program, then it can be finished in a couple of weeks/months. Job-orientated programmes take around 3–6 months. Advanced diplomas take 6–12 months. Always check the total training duration.
+
+
+                </div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 3 ? null : 3"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Can a beginner join a cyber security course in Delhi?</h4> 
+                    <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                    Yes, there are a few beginner-level courses available. You can first start with networking, security basics and Linux then move to advanced level. But certain specialized courses may require prior knowledge. So, see the eligibility criteria of the institute.</div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 4 ? null : 4"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Do cyber security courses provide lab training?</h4> 
+                    <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+              Some do, but this is not the case with all providers. Inquire about lab facility. See how many practical hours are provided and whether practicals are really done or just demonstration is taken place.
+             </div>
+            </div>           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 5 ? null : 5"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How should I select a good cyber security institute in Delhi?</h4> 
+                    <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+              See syllabus, trainer experience, practical lab facility, duration of the course, cost, tools, projects, reviews and class mode. If you are interested in certain area like ethical hacking, SOC or cloud security, see whether that area receives proper attention in the course or not.
+                </div>
+            </div>            
+        </div>
+    </div>
+    
+     @elseif($kwData['keyword_slug']=='certified-ethical-hacking-training' && $cityName =='delhi')
+       
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            💬 Frequently Asked Questions for Ethical Hacking in Delhi</h3>
+        <div class="space-y-2">           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 1 ? null : 1"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What is the cost of Delhi ethical hacking training?</h4> 
+                    <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+              The latest listings from Delhi offer many courses at about ₹20,000 – ₹60,000; however, shorter courses can be cheaper, and advanced CEH programs cost more. As an example, some <strong>ethical hacking course fees in Delhi</strong> cost ₹32,000 to ₹60,000.
+
+
+                 </div>
+            </div>
+              <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 2 ? null : 2"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How long does ethical hacking training last in Delhi?</h4> 
+                    <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+              It depends on the program. A short training course may take about 2 months, while the long one will take 3-6 months.
+                </div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 3 ? null : 3"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Is there any option for beginners to take up an ethical hacking course in Delhi?</h4> 
+                    <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                  Yes, certain beginner-level courses exist. Knowledge of computers and networking can be useful. Hacking experience is not necessary for all <strong>ethical hacking classes in Delhi</strong>, while advanced courses may require certain prerequisites.      
+                </div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 4 ? null : 4"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Are the practical sessions provided in ethical hacking courses?</h4> 
+                    <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+              Most ethical hacking courses provide practical labs; however, the quantity varies. It is recommended to inquire about whether or not the institute provides you with practical access to various security tools and environments.
+             </div>
+            </div>           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 5 ? null : 5"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How to select the best institute for ethical hacking?</h4> 
+                    <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+              It is important to compare the syllabus, practical labs, trainer experience, tools, projects, duration, fees, and reviews offered by the institute. If you require a CEH preparation course, make sure that exam preparation is provided separately or not.
+                </div>
+            </div>            
+        </div>
+    </div>
+    
+    
+     @elseif($kwData['keyword_slug']=='nodejs-training' && $cityName =='delhi')
+       
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            💬 Frequently Asked Questions for Node JS Training in Delhi</h3>
+        <div class="space-y-2">           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 1 ? null : 1"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Is Node.js good for beginners?</h4> 
+                    <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+              Yes, beginners can learn Node.js, especially if they first understand basic JavaScript. Some Delhi courses are designed for beginners, while advanced programmes expect previous programming knowledge.
+                 </div>
+            </div>
+              <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 2 ? null : 2"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What is the average Node.js course fee in Delhi?</h4> 
+                    <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+              Many instructor-led courses currently fall around <strong>₹15,000–₹30,000.</strong> Current listings include ₹16,500, ₹25,000, and ₹30,000 programmes. The final fee depends on duration, projects, format, and syllabus.
+                </div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 3 ? null : 3"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How long does Node.js training take in Delhi?</h4> 
+                    <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                  A standalone course commonly takes around 2–3 months. Current Delhi listings also show shorter 45–60 day programmes. Larger full-stack courses can take longer.    
+                </div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 4 ? null : 4"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Does Node.js training include MongoDB and Express?</h4> 
+                    <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+              Many <strong>Node JS course in Delhi</strong> include both, but it is not guaranteed. Current Delhi course syllabi commonly cover Express, REST APIs, and MongoDB. Always check the syllabus before enrolling.
+             </div>
+            </div>           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 5 ? null : 5"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How do I choose a Node JS training institute in Delhi?</h4> 
+                    <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+              Compare the <strong>Node JS training in Delhi</strong> syllabus, trainer, practical coding, projects, database topics, API development, duration, fees, class format, and reviews. If you want backend development, make sure the course gives enough focus to Express, APIs, and databases.
+                </div>
+            </div>            
+        </div>
+    </div>
+    
+    
+     @elseif($kwData['keyword_slug']=='taekwondo' && $cityName =='delhi')
+       
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            💬 Frequently Asked Questions for taekwondo in Delhi</h3>
+        <div class="space-y-2">           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 1 ? null : 1"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What is the cost of attending Taekwondo classes in Delhi?</h4> 
+                    <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+              Group classes would typically have charges varying between ₹800 and ₹2,000 per month, according to current advertisements of Delhi. Private training sessions will be charged even higher. The <strong>taekwondo classes in Delhi</strong> fees will vary according to the frequency of classes, academy, instructor and the level of training. Make sure that you are aware of the exact fee.
+                 </div>
+            </div>
+              <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 2 ? null : 2"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Can I join a Taekwondo academy in Delhi as a beginner?</h4> 
+                    <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+              Yes, there are many academies where you can attend classes as a beginner. It is not necessary to have any prior knowledge about Taekwondo in order to join these classes.
+                </div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 3 ? null : 3"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How long does it take to learn the basics of Taekwondo?</h4> 
+                    <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                The basics can be learned in a few weeks but learning itself requires regular practice. The <strong>Taekwondo training in Delhi</strong> through the belts can take months or even more.    
+                </div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 4 ? null : 4"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Is there Taekwondo training for kids as well as adults?</h4> 
+                    <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+              Some institutes in Delhi conduct separate training for kids, teenagers and adults. Different institutes cater to different age groups. Make sure you know about the available batch before you join. Some of the available institutes have kids’ training from the age of 4 years.
+             </div>
+            </div>           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 5 ? null : 5"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What do I need to know before I join Taekwondo training in Delhi?</h4> 
+                    <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+              Make sure you know about the trainer’s experience, age group, batch size, training area, safety, timing, fees and reviews. If you want to train for competing, make sure you ask about a competitive training program.
+                </div>
+            </div>            
+        </div>
+    </div>
+    
+    
+    
+     @elseif($kwData['keyword_slug']=='football-academy' && $cityName =='delhi')
+       
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            💬 Frequently Asked Questions for football academy  in Delhi</h3>
+        <div class="space-y-2">           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 1 ? null : 1"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What is the fee charged by football academies in Delhi?</h4> 
+                    <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+             Several football academy fees in Delhi are around ₹2,000 to ₹5,000 per month. However, some football academies charge more than ₹7,000 per month. Fees may vary depending on the duration of sessions, location, facility and training level.
+                 </div>
+            </div>
+              <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 2 ? null : 2"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How long does one football training session last?</h4> 
+                    <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+              One football training session may last for 60 to 90 minutes, or may go up to 120 minutes depending on the academy, age group and training level.
+                </div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 3 ? null : 3"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Are there football classes for beginners in Delhi?</h4> 
+                    <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+               Yes, there are many academies where beginners can enroll to learn basic skills like controlling the ball, passing, moving, and shooting. Age group and beginner class information should be considered before enrolling.   
+                </div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 4 ? null : 4"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Do any football academies offer classes for adults?</h4> 
+                    <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+              Some of the football classes in Delhi are open to adults, while many others in Delhi mostly target kids and teenagers. As for the current listings, the age group and level of academies are included so that users can compare.
+             </div>
+            </div>           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 5 ? null : 5"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What should I consider when selecting a football academy?</h4> 
+                    <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+             Coach, ground facilities, class size, age group, number of classes in a week, fees, and reviews should be checked when choosing an academy.
+                </div>
+            </div>            
+        </div>
+    </div>
+        
+     @elseif($kwData['keyword_slug']=='photo-and-videography' && $cityName =='delhi')
+       
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            💬 Frequently Asked Questions for Photo and Videography in Delhi</h3>
+        <div class="space-y-2">           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 1 ? null : 1"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What are the rates for wedding photographers in Delhi?</h4> 
+                    <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+             The rates for wedding photographers may vary to a large extent. The present listings from Delhi NCR include basic wedding packages ranging from ₹15,000 – ₹50,000, mid-ranged packages from ₹50,000 – ₹1.5 lakh and premium packages starting at more than ₹1.5 lakh.
+                 </div>
+            </div>
+              <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 2 ? null : 2"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What are the charges for pre-wedding photography in Delhi?</h4> 
+                    <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+              The cheapest pre-wedding photography will cost around ₹15,000 – ₹30,000. Packages that include videography, more than one shooting location, styling and high production value will cost from ₹40,000 – ₹1 lakh or even more.
+                </div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 3 ? null : 3"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What services should be included in wedding photography packages?</h4> 
+                    <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+               The package can include photography, videography, candid photographs, regular photographs, edited photographs, wedding film, and album. But not all the packages contain all these services. You should enquire about these services before you get a wedding photographer. 
+                </div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 4 ? null : 4"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How long in advance should I book a wedding photographer?</h4> 
+                    <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+             As far as possible, you should begin the process of choosing the <strong>best wedding photographers in Delhi</strong> when you have decided the dates of your wedding. Many photographers would be fully booked for some dates that are popular for weddings. 
+             </div>
+            </div>           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 5 ? null : 5"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How can I select the best wedding photographers Delhi?</h4> 
+                    <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+            Choose the kind of photography that you want first. Then compare the portfolio, reviews, package cost, delivery, team, services and other booking details of various photographers. 
+                </div>
+            </div>            
+        </div>
+    </div>
+    
+    
+    
     @endif
 
 
