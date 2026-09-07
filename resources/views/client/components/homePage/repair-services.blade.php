@@ -86,7 +86,7 @@ $repairGradients = [
  
                     {{-- Image area --}}
                     <div class="relative overflow-hidden" style="height:100px;">
-                        <a href="{{ $catUrl }}">
+                        <a href="{{ route('showCity',$service['url']) }}">
                             <img src="{{ $service['img'] ?? '' }}"
                                  alt="{{ $service['alt'] ?? '' }}"
                                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-out"
@@ -104,7 +104,7 @@ $repairGradients = [
                     {{-- Card body --}}
                     <div class="p-2 bg-white relative">
                         <p class="text-[11px] font-bold text-gray-900 truncate mb-0.5">
-                            <a href="{{ $catUrl }}">{{ $service['title'] ?? '' }}</a>
+                            <a href="{{ route('showCity',$service['url']) }}">{{ $service['title'] ?? '' }}</a>
                         </p>
                         <div class="flex items-center justify-between">
                             <span class="flex items-center gap-0.5 text-[9px] text-gray-500">
