@@ -124,7 +124,8 @@
  
         {{-- All services in ONE flat loop --}}
         <div class="flex flex-wrap gap-2">
-            @foreach($allServices as $service)
+            @if(!empty($allServices_old))
+            @foreach($allServices_old as $service)
                 @php
               $cityName = !empty($city) && is_string($city) ? strtolower(str_replace(' ', '-', trim($city))) : 'faridabad';
                     $href = $service['type'] === 'online'
@@ -140,6 +141,7 @@
                     {{ $service['name'] }}
                 </a>
             @endforeach
+            @endif
         </div>
     </div>
 </section>
@@ -224,8 +226,8 @@
                 ],
             ];
             @endphp
-
-            @foreach($seoSections as $section)
+@if(!empty($seoSections_old))
+            @foreach($seoSections_old as $section)
                 <div class="px-5 py-4">
                     <h4 class="text-xs font-black text-gray-900 uppercase tracking-wider mb-3">{{ $section['heading'] }}</h4>
                     <p class="text-xs text-gray-500 leading-relaxed">
@@ -247,6 +249,7 @@
                     </p>
                 </div>
             @endforeach
+                        @endif
         </div>
 
         {{-- ─── Main Footer Grid ─── --}}
@@ -263,12 +266,9 @@
                         ['name' => 'Careers',                   'route'=>route('careers')],
                         ['name' => 'Interviews',                   'route'=>route('interviews')],
                         ['name' => 'Blog',                      'route'=>route('blog.show')],
-                        ['name' => 'Pricing',                  'route'=>route('pricing')],
+                       
                       //  ['name' => 'Advertise on QuickDials',   'href' => '/business-owners','route'=>route('login')],
-                        ['name' => 'Privacy Policy',            'route'=>route('privacy.policy')],
-                        ['name' => 'Terms of Service',          'route'=>route('terms.conditions')],
-                        ['name' => 'Copyright Policy',          'route'=>route('copyright.policy')],
-                        ['name' => 'Refund Policy',             'route'=>route('refund.policy')],
+                       
                     ] as $link)
 
                         <li>
@@ -308,10 +308,14 @@
                 <ul class="space-y-2">
                     @foreach([
                         ['name' => 'Add your Business',  'href' => 'business-owners','route'=>route('login')],
-                        ['name' => 'Claim your Business','href' => 'business-owners','route'=>route('login')],
-                        ['name' => 'Advertise with Us',  'href' => 'contact-us','route'=>route('advertise')],
-                        ['name' => 'Business Support',   'href' => 'contact-us','route'=>route('contactUs')],
+                    //    ['name' => 'Claim your Business','href' => 'business-owners','route'=>route('login')],
+                       // ['name' => 'Advertise with Us',  'href' => 'contact-us','route'=>route('advertise')],
+                        //['name' => 'Business Support',   'href' => 'contact-us','route'=>route('contactUs')],
                         ['name' => 'Pricing',            'href' => 'pricing','route'=>route('pricing')],
+                        ['name' => 'Privacy Policy',            'route'=>route('privacy.policy')],
+                        ['name' => 'Terms of Service',          'route'=>route('terms.conditions')],
+                        ['name' => 'Copyright Policy',          'route'=>route('copyright.policy')],
+                        ['name' => 'Refund Policy',             'route'=>route('refund.policy')],
                     ] as $link)
                         <li>
                             <a href="{{ $link['route'] }}" class="text-gray-500 text-sm hover:text-primary transition-colors">{{ $link['name'] }}</a>
