@@ -279,7 +279,7 @@
             </div>
           
             <div>
-                
+<!--                 
                 <ul class="space-y-2">
 
                     @foreach([
@@ -296,7 +296,7 @@
                             <a href="{{ $catUrl }}" class="text-gray-500 text-sm hover:text-primary transition-colors">{{ $link['name'] }}</a>
                         </li>
                     @endforeach
-                </ul>
+                </ul> -->
             </div>
 
          
