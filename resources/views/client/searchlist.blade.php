@@ -133,6 +133,8 @@ $starPercentages = collect([5,4,3,2,1])->map(fn($s) => [
 
   @php
     $hasBanners = is_countable($keywordBanners) && count($keywordBanners) > 0;
+
+    
 @endphp
 
 @php     
@@ -345,6 +347,8 @@ $schema = [
 ) !!}
 </script>
 @endif 
+
+
 @if($hasBanners)
 <div x-data='bannerSlider(@json($keywordBanners), 4000)'
      x-init="init()"
@@ -2899,7 +2903,7 @@ There is no definite fee for Microsoft Azure training in Noida because the fees 
         </div>
     </div>
 
-     @elseif($kwData['keyword_slug']=='power-bi-training' && $cityName =='delhi')
+    @elseif($kwData['keyword_slug']=='power-bi-training' && $cityName =='delhi')
     
     
     <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
@@ -3017,7 +3021,7 @@ There is no definite fee for Microsoft Azure training in Noida because the fees 
         </div>
     </div>
 
-     @elseif($kwData['keyword_slug']=='react-native-training' && $cityName =='delhi')
+    @elseif($kwData['keyword_slug']=='react-native-training' && $cityName =='delhi')
     
     
     <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
@@ -3076,7 +3080,7 @@ There is no definite fee for Microsoft Azure training in Noida because the fees 
         </div>
     </div>
     
-     @elseif($kwData['keyword_slug']=='cyber-security-training' && $cityName =='delhi')
+    @elseif($kwData['keyword_slug']=='cyber-security-training' && $cityName =='delhi')
        
     <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
         <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
@@ -3136,7 +3140,7 @@ There is no definite fee for Microsoft Azure training in Noida because the fees 
         </div>
     </div>
     
-     @elseif($kwData['keyword_slug']=='certified-ethical-hacking-training' && $cityName =='delhi')
+    @elseif($kwData['keyword_slug']=='certified-ethical-hacking-training' && $cityName =='delhi')
        
     <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
         <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
@@ -3198,7 +3202,7 @@ There is no definite fee for Microsoft Azure training in Noida because the fees 
     </div>
     
     
-     @elseif($kwData['keyword_slug']=='nodejs-training' && $cityName =='delhi')
+    @elseif($kwData['keyword_slug']=='nodejs-training' && $cityName =='delhi')
        
     <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
         <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
@@ -3258,7 +3262,7 @@ There is no definite fee for Microsoft Azure training in Noida because the fees 
     </div>
     
     
-     @elseif($kwData['keyword_slug']=='taekwondo' && $cityName =='delhi')
+    @elseif($kwData['keyword_slug']=='taekwondo' && $cityName =='delhi')
        
     <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
         <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
@@ -3319,7 +3323,7 @@ There is no definite fee for Microsoft Azure training in Noida because the fees 
     
     
     
-     @elseif($kwData['keyword_slug']=='football-academy' && $cityName =='delhi')
+    @elseif($kwData['keyword_slug']=='football-academy' && $cityName =='delhi')
        
     <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
         <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
@@ -3378,7 +3382,7 @@ There is no definite fee for Microsoft Azure training in Noida because the fees 
         </div>
     </div>
         
-     @elseif($kwData['keyword_slug']=='photo-and-videography' && $cityName =='delhi')
+    @elseif($kwData['keyword_slug']=='photo-and-videography' && $cityName =='delhi')
        
     <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
         <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
@@ -3436,11 +3440,378 @@ There is no definite fee for Microsoft Azure training in Noida because the fees 
             </div>            
         </div>
     </div>
-    
-    
-    
     @endif
+    @elseif($shouldIndex && $cityName =='bangalore')
 
+    @if($kwData['keyword_slug']=='sap-sd-training' && $cityName =='bangalore')
+
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            💬 Frequently Asked Questions for SAP SD Training in Bangalore</h3>
+        <div class="space-y-2">           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 1 ? null : 1"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Is SAP SD good for beginners?</h4> 
+                    <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                Yes. For beginners, there is an option to get started with SAP SD training provided the course begins from SAP ERP and basics of SD module.
+                 </div>
+            </div>
+              <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 2 ? null : 2"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How much would be the average fee for an SAP SD course in Bangalore?</h4> 
+                    <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                Most of the present <strong>SAP SD course fees in Bangalore</strong> are between ₹15,000–₹30,000, whereas the higher or premium courses have a different fee structure.
+                </div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 3 ? null : 3"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What is the duration of SAP SD Training in Bangalore?</h4> 
+                    <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+               The typical duration is about 2–3 months. There are SAP SD course in Bangalore which are less in duration and are calculated in terms of training hours, whereas there are advanced courses which last longer. Duration along with the number of training hours should always be compared.
+                </div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 4 ? null : 4"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Does SAP SD Training in Bangalore cover S/4HANA?</h4> 
+                    <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+           S/4HANA concepts are a part of many current courses, but not all <strong>SAP SD training institute in Bangalore</strong> have them in their courses. One must go through the syllabus and make sure that the required concept of S/4HANA and its other business processes are covered or not. 
+             </div>
+            </div>           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 5 ? null : 5"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How to choose an institute for SAP SD Training in Bangalore?</h4> 
+                    <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                Compare syllabus, trainer expertise, SAP system accessibility, hands-on sessions, projects, duration, fee structure, classroom sessions and reviews. If S/4HANA, O2C and other integration concepts like MM/FICO are required by your job profile, then you must make sure that they are covered or not.  
+                </div>
+            </div>            
+        </div>
+    </div>
+
+    @elseif($kwData['keyword_slug']=='sap-hcm-training' && $cityName =='bangalore')
+    
+    
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            💬 Frequently Asked Questions for SAP HCM Training in bangalore</h3>
+        <div class="space-y-2">           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 1 ? null : 1"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Is SAP HCM a good choice for beginners?</h4> 
+                    <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+            Yes, as they can opt for an entry-level SAP HCM course with proper knowledge about HR and SAP basics to start learning. Individuals from HR, payroll, IT and other different professions can venture into it.
+                 </div>
+            </div>
+              <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 2 ? null : 2"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What are the average course fees of SAP HCM in Bangalore?</h4> 
+                    <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+               Some of the courses that have been advertised recently in Bangalore come at a cost of ₹15,000-₹30,000, and even more comprehensive <strong>SAP HCM course fees in Bangalore</strong> is ₹45,000 and above, depending on the practical sessions and syllabus. 
+                </div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 3 ? null : 3"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What is the time duration of SAP HCM training in Bangalore?</h4> 
+                    <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+        The usual time taken to complete the regular <strong>SAP HCM training in Bangalore</strong> ranges between 2–3 months. Other courses listed are in terms of 45+ or 80-100 training hours.</div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 4 ? null : 4"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Does SAP HCM training include payroll?</h4> 
+                    <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                Many <strong>SAP HCM training institute in Bangalore</strong> include Payroll, but it is not guaranteed. Check the syllabus before joining. Payroll can also be taught as a separate or advanced part of the programme.
+
+
+             </div>
+            </div>           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 5 ? null : 5"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Should I learn SAP HCM or SuccessFactors?</h4> 
+                    <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+               It will depend on the objective of your career. SAP HCM is concerned with HR processes, whereas SuccessFactors has HR solutions that are cloud-based, such as Employee Central. Refer to the current syllabus of the course and the SAP HR job you desire.
+                </div>
+            </div>            
+        </div>
+    </div>
+
+    
+    @elseif($kwData['keyword_slug']=='sap-success-factors-training' && $cityName =='bangalore')
+    
+    
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            💬 Frequently Asked Questions for SAP Success Factors Training in bangalore</h3>
+        <div class="space-y-2">           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 1 ? null : 1"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Are SAP SuccessFactors suitable for beginners?</h4> 
+                    <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+           Yes, it would be great for beginners to take up basic sap successfactors training in bangalore. It is wise to opt for a course which first covers the HR processes and SuccessFactors platform and then goes to configuration and advanced stuff.
+                 </div>
+            </div>
+              <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 2 ? null : 2"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What is the average fee for SAP SuccessFactors training?</h4> 
+                    <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+               The average fees for most of the private training currently being offered ranges from ₹14,000-₹35,000 based on the module, practical exposure, and duration of the course. The fees could be much higher for advanced and premium courses.
+
+ 
+                </div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 3 ? null : 3"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How long does SAP SuccessFactors training last?</h4> 
+                    <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+        Courses with shorter durations would be 40-50 hours long, whereas those that cover more topics would last for 50-65 hours or even more than 65 hours, which is approximately 2-3 months.</div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 4 ? null : 4"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Which SuccessFactors course should I learn first?</h4> 
+                    <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                Employee Central is often the first module to start with as it deals with basic employee and HR data. Post that, you can learn modules such as Recruiting, Performance & Goals, Compensation and so on, according to your career goals.
+             </div>
+            </div>           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 5 ? null : 5"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How do I select the SuccessFactors training institute in Bangalore?</h4> 
+                    <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+              Compare the sap successfactors course in bangalore curriculum, trainer’s experience, hands-on system access, modules, course duration, fees, reviews, and class timings. Check if the course includes the particular SuccessFactors module that you would like to learn.
+
+
+                </div>
+            </div>            
+        </div>
+    </div>
+
+    
+    
+
+    
+    @elseif($kwData['keyword_slug']=='workday-hcm-functional' && $cityName =='bangalore')
+    
+    
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            💬 Frequently Asked Questions for Workday HCM Functional in bangalore</h3>
+        <div class="space-y-2">           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 1 ? null : 1"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Is Workday HCM beginner-friendly?</h4> 
+                    <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+          Yes. Beginners can take a starter course on Workday HCM where they will learn about HR processes, navigating Workday and Core HCM. Having an HR background is useful but not always required as it depends on the particular training provider.
+                         </div>
+            </div>
+              <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 2 ? null : 2"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How much does an average Workday HCM course cost in Bangalore?</h4> 
+                    <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+              Based on the currently available offers in Bangalore, there are plenty of courses at prices starting from ₹14,500 – ₹40,000 depending on the difficulty level, instructor, practical access and course length. 
+                </div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 3 ? null : 3"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What is the time taken for Workday HCM training?</h4> 
+                    <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+        It depends and varies from course to course. At present, Workday HCM courses have durations between 40 to 100+ hours; few programmes even extend up to 2–3 months. It would be better if you compare the total hours and syllabus before joining the <strong>Workday HCM course in Bangalore</strong>.</div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 4 ? null : 4"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What is Workday HCM functional training?</h4> 
+                    <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                Functional training involves training of HR process, Business Process, Organisation management, configuration, reporting and all the other Workday functions. Functional training is completely different from technical training, which might include integration and Workday Studio training.
+             </div>
+            </div>           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 5 ? null : 5"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How should I select the Workday HCM training institute in Bangalore?</h4> 
+                    <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+             You can compare their syllabus, trainer experience, practical session, number of course hours, fees, class timing, study format and also check their recent reviews to get an idea about their performance.
+                </div>
+            </div>            
+        </div>
+    </div>
+
+    
+
+    
+    @elseif($kwData['keyword_slug']=='tableau-training' && $cityName =='bangalore')
+    
+    
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            💬 Frequently Asked Questions for Tableau Training in bangalore</h3>
+        <div class="space-y-2">           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 1 ? null : 1"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What is the cost of a Tableau course in Bangalore?</h4> 
+                    <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+          The cost of many ordinary Tableau courses is estimated to be ₹15,000-₹35,000 at present. Advanced courses will be expensive depending on the project, training and support hours. You should always check the current <strong>Tableau course fees in Bangalore</strong> from the service provider.
+                         </div>
+            </div>
+              <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 2 ? null : 2"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What is the duration of the Tableau course in Bangalore?</h4> 
+                    <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+             Short courses last 30-40 hours; long courses may last 70+ hours or 2-3 months.
+                </div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 3 ? null : 3"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Can a beginner learn Tableau?</h4> 
+                    <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+         Yes. A beginner can begin by understanding some of the basic aspects of Tableau such as linking data, making charts and constructing dashboards. The advanced aspects of Tableau such as calculations, Tableau Prep and server can be learned after that.</div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 4 ? null : 4"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Does Tableau training in Bangalore have projects included in it?</h4> 
+                    <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                Yes, some have projects but not all. Currently, some courses offer live projects, assignments and business scenarios. Inquire from the institutes on the number of projects and also if the learners get to construct the dashboards.
+             </div>
+            </div>           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 5 ? null : 5"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How do I choose a Tableau training institute in Bangalore?</h4> 
+                    <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+             It can be done through comparing the following factors; curriculum, trainer’s experience, practical projects, number of hours, costs, class method, feedback, and time of batches. Do not enroll just because the fee of the course is low in an institute.
+                </div>
+            </div>            
+        </div>
+    </div>
+
+    
+    @elseif($kwData['keyword_slug']=='deep-learning-training' && $cityName =='bangalore')
+    
+    
+    <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
+        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            💬 Frequently Asked Questions for Deep Learning Training in bangalore</h3>
+        <div class="space-y-2">           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 1 ? null : 1"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What is the average fee for deep learning training in Bangalore?</h4> 
+                    <span x-text="openFaq === 1 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 1" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+          Many regular deep learning programmes are around <strong>₹20,000–₹35,000,</strong> while advanced AI programmes can cost more. Current listings show examples around ₹19,999 and ₹34,999. Fees depend on duration, projects, trainer and course coverage. 
+                         </div>
+            </div>
+              <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 2 ? null : 2"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How long does a deep learning course take in Bangalore?</h4> 
+                    <span x-text="openFaq === 2 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 2" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+            Short programmes may take around 1–2 months, while detailed courses can run for 3–6 months. The duration depends on whether Python, machine learning, projects and advanced AI topics are included. 
+                </div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 3 ? null : 3"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>Can beginners join deep learning classes in Bangalore?</h4> 
+                    <span x-text="openFaq === 3 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 3" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+         Yes, but deep learning is easier when you know basic Python and machine learning first. Some courses start with these basics, while others expect them from learners. Check the prerequisites before joining.</div>
+            </div>
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 4 ? null : 4"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>What tools are taught in deep learning training?</h4> 
+                    <span x-text="openFaq === 4 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 4" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+                Common tools include <strong>TensorFlow, Keras and PyTorch.</strong> Courses may also cover Python and OpenCV for computer vision work. The exact tools depend on the syllabus of the training provider.</div>
+            </div>           
+            <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
+                <button @click="openFaq = openFaq === 5 ? null : 5"
+                        class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
+                 <h4>How do I choose a deep learning training institute in Bangalore?</h4> 
+                    <span x-text="openFaq === 5 ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
+                </button>
+                <div x-show="openFaq === 5" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
+             Compare the syllabus, trainer experience, practical projects, tools covered, total training hours, fees, batch timings, learning mode and reviews. Also check whether the <strong>deep learning training institute in bangalore</strong> is only deep learning or includes Python and machine learning basics.
+                </div>
+            </div>            
+        </div>
+    </div>
+   
+    @endif
 
   @else
     {{-- FAQ --}}

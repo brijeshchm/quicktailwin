@@ -70,11 +70,14 @@ class CitySlugController extends Controller
 		$noida_top_heading ="";
 		$delhi_bottom_heading ="";
 		$extra_heading ="";
+		$child_banner ="";
+		$category_banner ="";
 		$extra_description ="";
         if (!$keywordDetails) {
             return null;  
         }
-	 
+	  
+
 
 		$keywordBanners = [];
 		if($keywordDetails){				 			
@@ -90,8 +93,7 @@ class CitySlugController extends Controller
 			})
 			->values();
 		}
-	
-		$category_banner = config('app.website') . 'client/images/computer-courses-training.jpg';
+		//$category_banner = config('app.website') . 'client/images/computer-courses-training.jpg';
 
 		$alt = "";
 
@@ -118,6 +120,17 @@ class CitySlugController extends Controller
 				$alt = $cicons['category_banner']['name'];
 			}
 		}
+
+		if (!empty($keywordDetails->child_banner)) {
+			$cicons = unserialize($keywordDetails->child_banner);
+
+			if (!empty($cicons)) {
+				$child_banner = config('app.website') . $cicons['child_banner']['src'];
+				$alt = $cicons['child_banner']['name'];
+			}
+		}
+
+
 		$child_icon =config('app.website') . 'client/images/it_training.jpg';
 		$key_icon =config('app.website') . 'client/images/it_training.jpg';
 		$child_alt =$keywordDetails->keyword;
@@ -244,11 +257,12 @@ class CitySlugController extends Controller
 		if (!empty($keywordDetails->extra_heading)) {
 			$extra_heading = preg_replace('/{{city}}/i', ucfirst($area), $keywordDetails->extra_heading);
 		}
-
+ 
 		$data['keyword'] = array(
 			'keyword' => $keywordDetails->keyword,
 			'keyword_slug' => generate_slug($keywordDetails->keyword),
 			'category_banner' => $category_banner,
+			'child_banner' => $child_banner,
 			'child_icon' => $child_icon,
 			'child_alt' => $child_alt,
 			'key_icon' => $key_icon,
@@ -855,11 +869,13 @@ $reviewList = DB::table('clients')
 			$paragraph6 ="";
 			$paragraph7 ="";
 			$paragraph8 ="";
+			$child_banner ="";
+			$category_banner ="";
 
 			if(!$keywordDetails){
 				return  null;
 			}
-		$category_banner = config('app.website') . 'client/images/computer-courses-training.jpg';
+		 
 		$child_icon =config('app.website') . 'client/images/it_training.jpg';
 		$key_icon =config('app.website') . 'client/images/it_training.jpg';
 		$child_alt =$keywordDetails->keyword;
@@ -874,6 +890,29 @@ $reviewList = DB::table('clients')
 			}
 		}
 		
+		$keywordBanners = [];
+		if($keywordDetails){				 			
+		$keywordBanners = DB::table('keyword_banners')
+		->where('keyword_id', $keywordDetails->key_id)
+		->orderBy('sort_order')
+		->get()
+		->map(function ($b) {
+			$b->image_url = $b->image_path ? asset($b->image_path) :'';
+			$b->alt_text  = $b->alt_text ?: 'Banner';
+			$b->click_url = $b->client_slug ? '/businessdetails/' . $b->client_slug : null;
+			return $b;
+		})
+		->values();
+		}
+		
+		if (!empty($keywordDetails->child_banner)) {
+			$cicons = unserialize($keywordDetails->child_banner);
+
+			if (!empty($cicons)) {
+				$child_banner = config('app.website') . $cicons['child_banner']['src'];
+				$alt = $cicons['child_banner']['name'];
+			}
+		}
 		if (!empty($keywordDetails->pc_icon)) {
 			$childcons = unserialize($keywordDetails->pc_icon);
 
@@ -973,6 +1012,7 @@ $reviewList = DB::table('clients')
 			'keyword' => $keywordDetails->keyword,
 			'keyword_slug' => $keywordDetails->slug,
 			'category_banner' => $category_banner,
+			'child_banner' => $child_banner,
 			'alt' => $alt,
 			'child_icon' => $child_icon,
 			'child_alt' => $child_alt,
@@ -1011,6 +1051,7 @@ $reviewList = DB::table('clients')
 			'parent_slug' => $keywordDetails->parent_slug,
 			'child_category' => $keywordDetails->child_category,
 			'child_slug' => $keywordDetails->child_slug,
+			'keywordBanners' => $keywordBanners,
 
 		);
 
@@ -2417,8 +2458,8 @@ $reviewList = DB::table('clients')
         $childCat   = $kwData['child_category'] ?? '';
         $ratingCount = (int) ($kwData['ratingcount'] ?? 0);
         $ratingValue = (float) ($kwData['ratingvalue'] ?? 0);
-        $bgImage    = $kwData['category_banner'] ?? '/computer-courses-training.jpg';
-  
+       	$bgImage = !empty($kwData['child_banner']) ? $kwData['child_banner'] : ($kwData['category_banner'] ?? '');
+//  dd($bgImage);
 		$topDescription = !empty($kwData['top_description']) ? replaceCity($kwData['top_description'], $area) : '';
 		$bottomDescription = !empty($kwData['bottom_description']) ? replaceCity($kwData['bottom_description'], $area) : '';
 
@@ -2737,7 +2778,7 @@ $reviewList = DB::table('clients')
 
         $ratingCount      = $kwData['ratingcount']       ?? 0;
         $ratingValue      = $kwData['ratingvalue']       ?? 0;
-        $bgImage          = $kwData['category_banner']   ?? '/computer-courses-training.jpg';
+        $bgImage          = $kwData['category_banner']   ?? '';
        		 
 		$metaTitle = !empty($kwData['meta_title']) ? replaceCity($kwData['meta_title'], $city) : '';
 		$metaDescription = !empty($kwData['meta_description']) ? replaceCity($kwData['meta_description'], $city) : '';
@@ -2819,10 +2860,10 @@ $reviewList = DB::table('clients')
 		$topDescription = !empty($kwData['top_description']) ? replaceCity($kwData['top_description'], $city) : '';
 		$bottomDescription = !empty($kwData['bottom_description']) ? replaceCity($kwData['bottom_description'], $city) : '';
       
-        $ratingCount      = $kwData['ratingcount']       ?? 0;
-        $ratingValue      = $kwData['ratingvalue']       ?? 4.8;
-        $bgImage          = $kwData['category_banner']   ?? '/computer-courses-training.jpg';
-
+        $ratingCount      = $kwData['ratingcount']       ?? '0';
+        $ratingValue      = $kwData['ratingvalue']       ?? '0';
+		$bgImage = !empty($kwData['child_banner']) ? $kwData['child_banner'] : ($kwData['category_banner'] ?? '');
+ 
     
 		$metaTitle = !empty($kwData['meta_title']) ? replaceCity($kwData['meta_title'], $city) : '';
 		$metaDescription = !empty($kwData['meta_description']) ? replaceCity($kwData['meta_description'], $city) : '';
@@ -3034,8 +3075,9 @@ private function resolveBestCandidate(string $inputSlug, array $slugMap): ?strin
         $childSlug  = $kwData['child_slug'] ?? '';
         $childCat   = $kwData['child_category'] ?? '';
         $ratingCount = (int) ($kwData['ratingcount'] ?? 0);
-        $ratingValue = (float) ($kwData['ratingvalue'] ?? 4.8);
-        $bgImage    = $kwData['category_banner'] ?? '/client/images/computer-courses-training.jpg';  
+        $ratingValue = (float) ($kwData['ratingvalue'] ?? 4.8);       
+ 		$bgImage = !empty($kwData['child_banner']) ? $kwData['child_banner'] : ($kwData['category_banner'] ?? '');
+  		$keywordBanners   = $kwData['keywordBanners'] ?? [];
 
 		$topDescription = !empty($kwData['top_description']) ? replaceCity($kwData['top_description'], $area) : '';
 		$bottomDescription = !empty($kwData['bottom_description']) ? replaceCity($kwData['bottom_description'], $area) : '';
@@ -3102,7 +3144,7 @@ private function resolveBestCandidate(string $inputSlug, array $slugMap): ?strin
             'childSlug', 'childCat','cityDetails',
             'ratingCount', 'ratingValue', 'bgImage',
             'topDescription', 'bottomDescription',
-            'faqs', 'kwData',
+            'faqs', 'kwData','keywordBanners',
             'businesses', 'businessChunks',
             'agents', 'reviews', 'categories',
             'relatedCategory', 'servicesRelated',
