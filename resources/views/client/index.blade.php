@@ -106,10 +106,7 @@
                         {{ $title }}
 
                     </span>
-
-                    <span class="text-[10px] text-gray-400">
-                        {{ ucfirst($city) }}
-                    </span>
+                   
 
                 </a>
 
