@@ -2304,6 +2304,22 @@ $reviewList = DB::table('clients')
             ->limit(50)
             ->get();
 
+   			$faqs = [];
+			$clientFaq = $clientsList['faqs'] ?? [];
+
+			if (!empty($clientFaq)) {
+				for ($i = 1; $i <= 10; $i++) {
+					$q = $clientFaq["faqq{$i}"] ?? null;
+					$a = $clientFaq["faqa{$i}"] ?? null;
+
+					if (!empty($q) && !empty($a)) {
+						$faqs[] = [
+							'q' => $q,
+							'a' => $a,
+						];
+					}
+				}
+			}
            
 
             // 🔹 Merge client data only when searching
@@ -2430,7 +2446,7 @@ $reviewList = DB::table('clients')
 
         return view('client.client-detail', compact(
             'slug', 'clientsList', 'keywordList','certificate','metaTitle','metaKeywords','metaDescription','keyword',
-            'comment', 'areaBusiness', 'overviewBusiness',
+            'comment', 'areaBusiness', 'overviewBusiness','faqs',
             'relatedList', 'gallery', 'hImages', 'vImages',
             'assignKeyword', 'certifications', 'govDocs', 'reviews',
             'gradients', 'bgColors', 'iconColors', 'planOptions',
