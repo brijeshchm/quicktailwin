@@ -331,7 +331,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
             </div>
 
             {{-- ── TITLE & META ── --}}
-            <div class="reveal mb-8" style="transition-delay:0.1s;">
+            <div class="reveal mb-8">
 
 
 
@@ -451,7 +451,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
 
             {{-- ── ABOUT News SECTION ── --}}
             @if(!empty($newsDetails['heading']) && !empty($newsDetails['about_news']))
-            <div class="reveal mb-8" style="transition-delay:0.15s;">
+            <div class="reveal mb-8" >
                 <div class="border rounded-lg p-4 bg-white shadow-sm">
                     <section class="bg-gray-100 border rounded-md p-6">
                         <h2 class="text-2xl md:text-3xl font-semibold text-blue-900">
@@ -488,7 +488,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                 @endif
 
                 @if(!empty($newsDetails['description']))
-                <div class="reveal" style="transition-delay:0.05s;">
+                <div class="reveal" >
                     {!! $newsDetails['description'] !!}
                 </div>
                 @endif
@@ -497,7 +497,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                  <h2>                    
                     {{ $newsDetails['top_heading'] }}
                 </h2>
-                <div class="reveal" style="transition-delay:0.1s;">
+                <div class="reveal" >
                 
 
                     {!! $newsDetails['top_content'] !!}
@@ -506,7 +506,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
 
                 @if(!empty($newsDetails['bottom_content']))
                    
-                <div class="reveal" style="transition-delay:0.15s;">
+                <div class="reveal">
                     <h2>
                                   {{ $newsDetails['bottom_heading'] }}
                 </h2>
@@ -614,7 +614,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                 {{-- ── RELATED ARTICLES ── --}}
                 @if(count($newsList))
                 <div class="reveal-right bg-white p-5 rounded-xl border border-gray-200 shadow-sm"
-                     style="transition-delay:0.1s;">
+                     >
                     <h4 class="text-sm font-bold text-slate-900 mb-4 uppercase tracking-widest
                                flex items-center gap-2">
                         <span class="w-1 h-4 bg-blue-500 rounded-full inline-block"></span>
@@ -668,7 +668,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
 
                 {{-- ── NEWSLETTER ── --}}
                 <div class="reveal-right newsletter-bg p-5 rounded-xl shadow-md text-white"
-                     style="transition-delay:0.2s;">
+                     >
                     <div class="relative z-10">
                         <h4 class="text-base font-bold mb-1">Never Miss a Post</h4>
                         <p class="text-white/70 text-xs mb-4 leading-relaxed">
@@ -693,7 +693,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
 
                 {{-- ── SHARE SIDEBAR ── --}}
                 <div class="reveal-right bg-white p-5 rounded-xl border border-gray-200 shadow-sm"
-                     style="transition-delay:0.3s;">
+                     >
                     <h4 class="text-sm font-bold text-slate-900 mb-3 uppercase tracking-widest
                                flex items-center gap-2">
                         <svg class="w-3.5 h-3.5 text-blue-500" fill="none" viewBox="0 0 24 24"

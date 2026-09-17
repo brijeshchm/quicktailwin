@@ -223,7 +223,7 @@
                             <span class="text-xs font-semibold text-violet-700 tracking-wider uppercase">Our Mission</span>
                         </div>
                         <p class="reveal text-xl sm:text-2xl font-bold text-gray-400 leading-snug"
-                           style="transition-delay:.08s;">
+                           >
                             "QuickDials was started with the objective of making the search for a service easy
                             and reliable. The idea behind it is to bring users and service providers together on
                             a single platform. The idea here is the establishment of a basis of trust, quality,
@@ -249,7 +249,7 @@
                             <span class="text-xs font-semibold text-violet-700 tracking-wider uppercase">USP's</span>
                         </div>
                         <p class="reveal text-xl sm:text-2xl font-bold text-gray-400 leading-snug"
-                           style="transition-delay:.08s;">
+                           >
                             "QuickDials uses technology to match users with the right services based on their
                             real needs. It does not show random results. The platform focuses on genuine listings,
                             correct details, and real user interest. This helps users get better results and
@@ -435,7 +435,7 @@
                     <div class="relative z-10">
                         <div class="reveal-scale inline-flex items-center gap-2 px-3.5 py-1.5
                                     rounded-full border border-white/30 bg-white/10 mb-5"
-                             style="transition-delay:.1s;">
+                             >
                             ✨
                             <span class="text-xs font-semibold text-white tracking-wider uppercase">Join us</span>
                         </div>

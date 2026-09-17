@@ -443,7 +443,7 @@
                 {{-- ── POPULAR POSTS ── --}}
                 @if(count($popularArticles))
                 <div class="sidebar-reveal bg-white p-6 rounded-xl border border-gray-200 shadow-sm"
-                     style="transition-delay: 0.12s;">
+                     >
                     <h4 class="text-lg font-bold text-slate-900 mb-4 border-b border-gray-100 pb-3">
                         Popular Reads
                     </h4>
@@ -494,7 +494,7 @@
 
                 {{-- ── TAGS ── --}}
                 <div class="sidebar-reveal bg-white p-6 rounded-xl border border-gray-200 shadow-sm"
-                     style="transition-delay: 0.24s;">
+                     >
                     <h4 class="text-lg font-bold text-slate-900 mb-4 border-b border-gray-100 pb-3
                                flex items-center gap-2">
                         <svg class="w-4 h-4 text-blue-500" fill="none" viewBox="0 0 24 24"

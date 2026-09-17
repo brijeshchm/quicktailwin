@@ -180,8 +180,7 @@ $colorMap = [
 
         <div id="cat-{{ $slug }}"
              class="reveal {{ $css }} bg-white rounded-2xl border border-gray-100
-                    shadow-sm overflow-hidden"
-             style="transition-delay:{{ min($k * 0.04, 0.3) }}s;">
+                    shadow-sm overflow-hidden">
 
             {{-- Section header --}}
             <div class="cat-head px-5 py-3 flex items-center gap-2">

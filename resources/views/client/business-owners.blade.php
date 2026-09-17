@@ -281,7 +281,7 @@ select.form-input { padding-left:1rem; }
                 </div>
 
                 {{-- Animated Title --}}
-                <div class="reveal" style="transition-delay:.08s;">
+                <div class="reveal">
                     <h1 class="text-4xl sm:text-5xl lg:text-[3.5rem] font-extrabold
                                text-slate-900 leading-tight mb-4 tracking-tight">
                         Grow <span class="gradient-text">Your</span> Business<br>
@@ -317,7 +317,7 @@ select.form-input { padding-left:1rem; }
                 </div>-->
 
                 {{-- BENEFITS --}}
-                <div class="reveal space-y-2.5" style="transition-delay:.22s;">
+                <div class="reveal space-y-2.5" >
                     @foreach($benefits as $b)
                     <div class="benefit-row flex items-center gap-3 bg-white/70 backdrop-blur
                                 rounded-xl p-3.5 border {{ $b['border'] }}">
@@ -338,7 +338,7 @@ select.form-input { padding-left:1rem; }
                 </div>
 
                 {{-- SUCCESS STORY SLIDER --}}
-                <div class="reveal" style="transition-delay:.28s;">
+                <div class="reveal" >
                     <div id="story-slider" class="relative rounded-2xl overflow-hidden"
                          data-stories="{{ json_encode($successStories) }}">
                         {{-- Rendered by JS --}}
@@ -351,7 +351,7 @@ select.form-input { padding-left:1rem; }
 
                 {{-- CITIES --}}
                 <div class="reveal bg-white/70 backdrop-blur rounded-2xl border border-white
-                            shadow-sm p-4" style="transition-delay:.34s;">
+                            shadow-sm p-4" >
                     <div class="flex items-center justify-between mb-3">
                         <div class="flex items-center gap-2">
                             <svg class="w-3.5 h-3.5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
@@ -375,7 +375,7 @@ select.form-input { padding-left:1rem; }
 
                 {{-- TRUSTED BY --}}
                 <div class="reveal bg-white/70 backdrop-blur rounded-2xl border border-white
-                            shadow-sm p-4" style="transition-delay:.40s;">
+                            shadow-sm p-4" >
                     <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3 text-center">
                         Trusted by businesses across India
                     </div>
@@ -657,7 +657,7 @@ select.form-input { padding-left:1rem; }
             ] as $i => $step)
             <div class="step-card reveal relative bg-white/80 backdrop-blur rounded-2xl p-5
                         border border-white shadow-sm hover:border-blue-100 cursor-default"
-                 style="transition-delay:{{ $i * 0.12 }}s;">
+                 >
                 <div class="flex items-center justify-between mb-4">
                     <div class="w-12 h-12 rounded-2xl bg-gradient-to-br {{ $step[4] }}
                                 flex items-center justify-center shadow-lg text-xl">
@@ -689,7 +689,7 @@ select.form-input { padding-left:1rem; }
             @foreach($features as $i => $feat)
             <div class="reveal bg-white rounded-2xl p-6 shadow-md hover:shadow-xl
                         transition-all duration-300 hover:scale-105 cursor-default"
-                 style="transition-delay:{{ $i * 0.1 }}s;">
+                 >
                 <div class="text-4xl mb-4">{{ $feat['icon'] }}</div>
                 <h3 class="font-semibold text-lg mb-2">{{ $feat['title'] }}</h3>
                 <p class="text-gray-500 text-sm">{{ $feat['desc'] }}</p>
@@ -730,7 +730,7 @@ select.form-input { padding-left:1rem; }
                 @endforeach
             </ul>
         </div>
-        <div class="reveal" style="transition-delay:.2s;">
+        <div class="reveal" >
             <h3 class="text-xl font-semibold mb-3">Why choose QuickDials for growing your business?</h3>
             <ul class="space-y-2 mb-6">
                 @foreach(['Unique work module different from others','Conversion-focused system','Manually verified leads','Organic + inorganic lead generation','Strong channel partnerships','Double verified leads by experts'] as $item)
@@ -838,7 +838,7 @@ select.form-input { padding-left:1rem; }
             @foreach($faqs as $i => $faq)
             <div class="faq-item reveal relative rounded-2xl border border-slate-200 bg-white/80
                         overflow-hidden transition-all duration-300 hover:border-blue-200 hover:shadow-md"
-                 style="transition-delay:{{ $i * 0.05 }}s;">
+                 >
                 <div class="faq-bar"></div>
                 <button class="faq-trigger w-full flex items-center gap-3.5 px-5 py-4 text-left group">
                     <div class="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center

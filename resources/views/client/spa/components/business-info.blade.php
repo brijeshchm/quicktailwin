@@ -205,7 +205,6 @@
                 @php $p = $palette[$c['color_key']]; @endphp
                 <div
                     data-bi-reveal
-                    style="transition-delay: {{ $i * 80 }}ms;"
                     class="bi-contact group flex flex-wrap items-center gap-4 overflow-hidden rounded-2xl border-[1.5px] border-slate-200 bg-white px-5 py-4 transition-all duration-300
                            hover:translate-x-1 hover:shadow-lg
                            {{ $p['shadow'] }} {{ $p['accent'] }}
@@ -252,7 +251,6 @@
             {{-- ─── Hours card ──────────────────────────────── --}}
             <div
                 data-bi-reveal
-                style="transition-delay: 100ms;"
                 class="rounded-3xl border-[1.5px] border-slate-200 bg-white p-6 shadow-[0_8px_32px_rgba(0,0,0,0.05)] sm:p-7"
             >
                 <div class="mb-5 flex items-center justify-between">
@@ -300,7 +298,6 @@
             {{-- ─── Map card with floating pin ──────────────── --}}
             <div
                 data-bi-reveal
-                style="transition-delay: 180ms;"
                 class="relative overflow-hidden rounded-[20px] border-[1.5px] border-orange-500/20 bg-gradient-to-br from-orange-50 to-amber-100 p-6"
             >
                 {{-- Grid texture --}}
@@ -345,8 +342,7 @@
 
             {{-- ─── Quick action strip ──────────────────────── --}}
             <div
-                data-bi-reveal
-                style="transition-delay: 260ms;"
+                data-bi-reveal               
                 class="flex gap-2.5 max-sm:flex-col"
             >
                 @foreach ($quickActions as $a)
