@@ -642,7 +642,7 @@ if(!empty($clientcheck)){
                 >
                     <div class="p-2 border-b border-gray-100">
                         <div class="flex items-center gap-1.5 bg-gray-50 rounded-lg px-2.5 py-1.5 border border-gray-200">
-                            <i data-lucide="search" class="w-3.5 h-3.5 text-gray-400 shrink-0"></i>
+                            <i data-lucide="search" class="w-3.5 h-3.5 text-gray-400 shrink-0" aria-hidden="true"></i>
                             <input
                                 id="mobile-city-search"
                                 type="text"
@@ -675,7 +675,7 @@ if(!empty($clientcheck)){
                 onclick="doMobileSearch()"
                 class="shrink-0 bg-orange-500 hover:bg-orange-600 text-white h-9 px-3 rounded-r-xl flex items-center transition-colors"
             >
-                <i data-lucide="search" class="w-3.5 h-3.5"></i>
+                <i data-lucide="search" class="w-3.5 h-3.5" aria-hidden="true"></i>
             </button>
         </div>
 
@@ -711,7 +711,7 @@ if(!empty($clientcheck)){
         </nav>
         <div class="flex flex-col gap-2 border-t border-gray-100 pt-3">
             <button onclick="openLoginModal()" class="w-full flex items-center justify-center gap-2 text-sm h-9 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors font-medium">
-                <i data-lucide="user" class="w-4 h-4"></i>
+                <i data-lucide="user" class="w-4 h-4" aria-hidden="true" aria-hidden="true"></i>
                 Login / Register
             </button>
             <a href="{{ route('login') }}" class="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-orange-500 to-orange-400 text-white text-sm h-9 rounded-full font-bold">

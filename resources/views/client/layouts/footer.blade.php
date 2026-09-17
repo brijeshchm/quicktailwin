@@ -105,14 +105,15 @@
         }
     }
 
-    // Optional: shuffle for variety on each page load
-    // shuffle($allServices);
+ 
 @endphp
 
+
+<!--
 <section class="bg-gray-50 border-t border-gray-100 py-10" aria-label="Popular services on QuickDials">
     <div class="mx-auto px-4">
 
-        {{-- Section Header --}}
+      
         <div class="mb-8 text-center md:text-left">
             <span class="text-lg md:text-2xl font-bold text-gray-800">
                 Trending Services on QuickDials
@@ -122,7 +123,7 @@
             </p>
         </div>
  
-        {{-- All services in ONE flat loop --}}
+    
         <div class="flex flex-wrap gap-2">
             @if(!empty($allServices_old))
             @foreach($allServices_old as $service)
@@ -144,9 +145,8 @@
             @endif
         </div>
     </div>
-</section>
+</section>-->
  
-
 
         {{-- ─── SEO Category Grid ─── --}}
         <div class="mb-10 bg-white rounded-2xl border border-gray-100 shadow-sm divide-y divide-gray-100 overflow-hidden">

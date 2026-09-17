@@ -10,9 +10,9 @@
 @include('client.components.homePage.stats-banner')
 
   <section class="py-10 px-4 md:px-8">
-    <h2 class="text-xl font-black text-gray-900 mb-6">
+    <span class="text-xl font-black text-gray-900 mb-6">
         Browse Search
-    </h2>
+    </span>
 
     <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
 

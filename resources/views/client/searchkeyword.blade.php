@@ -688,7 +688,7 @@ function bannerSlider(banners, interval = 4000) {
                 {{-- Review list --}}
                 @forelse($reviews ?? [] as $review)
                 @php
-                    $rName = $review->business_name ?? 'Anonymous';
+                    $rName = $review->comment_author ?? 'Anonymous';
                     $rWords = explode(' ', $rName);
                     $rInitials = strtoupper(substr($rWords[0], 0, 1) . (isset($rWords[1]) ? substr($rWords[1], 0, 1) : ''));
                     $rRating = round(floatval($review->avg_rating ?? 0));
