@@ -24,10 +24,20 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
 
  @endphp
 @include('client.layouts.common_country_data')
-<div x-show="showAd" x-cloak
-         class="relative w-full overflow-hidden h-40"
-         style="background-image: url('{{ $bgImage }}'); background-size: cover; background-position: center;">
-        <div class="absolute inset-0"></div>
+     <div
+    x-show="showAd"
+    x-cloak
+    class="relative w-full overflow-hidden bg-white"
+>
+    {{-- Full Responsive Banner Image --}}
+    <img
+        src="{{ $bgImage }}"
+        alt="Quickdials Advertisement"
+        class="block w-full h-auto object-cover h-[130px] sm:h-[170px]"
+        loading="eager"
+    >
+ 
+     <div class="absolute inset-0"></div>
         <div class="relative w-full px-3 sm:px-8 py-3 sm:py-5 flex items-center gap-3 sm:gap-5 h-full">
             <div class="flex-1 min-w-0">
                 
@@ -37,7 +47,9 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
                 
             </div>
         </div>
-    </div>
+</div> 
+
+
 
 {{-- ══════════════════════════════════════
      MAIN CONTENT
