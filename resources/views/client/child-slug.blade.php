@@ -24,7 +24,7 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
 
  @endphp
 @include('client.layouts.common_country_data')
-     <div
+    <div
     x-show="showAd"
     x-cloak
     class="relative w-full overflow-hidden bg-white"
@@ -47,10 +47,7 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
                 
             </div>
         </div>
-</div> 
-
-
-
+    </div> 
 {{-- ══════════════════════════════════════
      MAIN CONTENT
 ════════════════════════════════════════ --}}
