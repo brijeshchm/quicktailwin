@@ -902,7 +902,7 @@ function bannerSlider(banners, interval = 4000) {
                     <tr>
                         <th class="border px-4 py-3 text-left font-semibold min-w-[150px]">Name</th>
                         @foreach($agents as $agent)
-                        <th class="border px-4 py-3 text-left text-blue-600 hover:underline cursor-pointer whitespace-nowrap">{{ $agent['name'] }}</th>
+                        <th class="border px-4 py-3 text-left text-blue-600 hover:underline whitespace-nowrap">{{ $agent['name'] }}</th>
                         @endforeach
                     </tr>
                 </thead>
@@ -1144,7 +1144,7 @@ function bannerSlider(banners, interval = 4000) {
     
     <div class="bg-white rounded-2xl shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
         <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-            💬 Frequently Asked Questions(FAQ's) {{ $city }}
+             Frequently Asked Questions(FAQ's) {{ $city }}
         </h3>
         <div class="space-y-2">
         

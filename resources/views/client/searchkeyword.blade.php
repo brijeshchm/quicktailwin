@@ -688,7 +688,7 @@ function bannerSlider(banners, interval = 4000) {
                 {{-- Review list --}}
                 @forelse($reviews ?? [] as $review)
                 @php
-                    $rName = $review->comment_author ?? 'Anonymous';
+                    $rName = $review->business_name ?? 'Anonymous';
                     $rWords = explode(' ', $rName);
                     $rInitials = strtoupper(substr($rWords[0], 0, 1) . (isset($rWords[1]) ? substr($rWords[1], 0, 1) : ''));
                     $rRating = round(floatval($review->avg_rating ?? 0));
@@ -877,7 +877,7 @@ function bannerSlider(banners, interval = 4000) {
                     <tr>
                         <th class="border px-4 py-3 text-left font-semibold min-w-[150px]">Name</th>
                         @foreach($agents as $agent)
-                        <th class="border px-4 py-3 text-left text-blue-600 hover:underline cursor-pointer whitespace-nowrap">{{ $agent['name'] }}</th>
+                        <th class="border px-4 py-3 text-left text-blue-600 hover:underline whitespace-nowrap">{{ $agent['name'] }}</th>
                         @endforeach
                     </tr>
                 </thead>

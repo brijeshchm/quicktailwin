@@ -304,91 +304,18 @@ document.addEventListener('DOMContentLoaded', () => {
             {!! strip_tags($business['businessDescription']) !!}
         </p>
  Read More
-       <!--<button
-            type="button"
-            @click="
-                showDescription = true;
-                document.body.style.overflow = 'hidden';
-            "
-            class="text-xs font-semibold text-blue-600 mt-1"
-        >
-            Read More
-        </button>-->
+        
     </div>
 
-    {{-- Mobile Popup --}}
-
-
-<div
-    x-show="showDescription"
-    x-cloak
-    class="fixed inset-0 z-[99999] sm:hidden bg-black/50"
->
-    <div
-        class="absolute inset-x-0 bottom-0
-               bg-white
-               rounded-t-3xl
-               shadow-2xl
-               h-[75vh]
-               max-h-[75vh]
-               flex flex-col
-               overflow-hidden
-               z-[100000]"
-    >
-
-        {{-- Header --}}
-        <div class="flex-none flex items-center justify-between
-                    px-5 py-4
-                    bg-white
-                    border-b border-gray-200">
-
-            <h3 class="text-base font-bold text-gray-900">
-                Business Description
-            </h3>
-
-            <button
-                type="button"
-                @click="showDescription = false"
-                class="w-9 h-9 flex items-center justify-center
-                       rounded-full bg-gray-100 text-gray-600"
-            >
-                ✕
-            </button>
-        </div>
-
-        {{-- Scrollable Content --}}
-        <div class="flex-1 min-h-0
-                    overflow-y-auto
-                    overflow-x-hidden
-                    overscroll-contain
-                    px-5 py-5
-                    bg-white">
-
-            <div class="text-sm text-gray-700
-                        leading-6
-                        break-words
-                        whitespace-normal">
-                {!! $business['businessDescription'] !!}
-            </div>
-
-        </div>
-
-    </div>
-</div>
+ 
+ 
 
     
 
 </div>
 
 @endif
-            {{-- Tags/Category --}}
-            <!-- @if(count($category) > 0)
-            <div class="flex items-center gap-1.5 mt-2 flex-wrap">
-                @foreach(array_slice($category, 0, 5) as $tag)
-                <span class="text-[9px] sm:text-sm text-indigo-600 bg-indigo-50 border border-indigo-100 px-1.5 sm:px-2 py-0.5 rounded-full font-medium">{{ $tag }}</span>
-                @endforeach
-            </div>
-            @endif -->
+           
         </div>
     </div>
 
