@@ -877,7 +877,7 @@ function bannerSlider(banners, interval = 4000) {
                     <tr>
                         <th class="border px-4 py-3 text-left font-semibold min-w-[150px]">Name</th>
                         @foreach($agents as $agent)
-                        <th class="border px-4 py-3 text-left text-blue-600 hover:underline whitespace-nowrap">{{ $agent['name'] }}</th>
+                        <th class="border px-4 py-3 text-left text-blue-600 whitespace-nowrap">{{ $agent['name'] }}</th>
                         @endforeach
                     </tr>
                 </thead>
