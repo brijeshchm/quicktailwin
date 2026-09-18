@@ -3,8 +3,7 @@
 @section('description', $metaDescription ?? 'Find the best ' . $keyword . ' in ' . ucwords(strtolower(str_replace('-', ' ', $city))) . ' with QuickDials. Discover verified businesses, addresses, phone numbers, reviews, ratings, photos, maps, and top local services near you.')
 
 @php
- 
-    // Single source of truth: city => allowed keyword slugs
+     // Single source of truth: city => allowed keyword slugs
     $cityKeywordMap = [
         'faridabad' => [
             'artificial-intelligence-training','python-training','workday-training',
@@ -529,7 +528,7 @@ function bannerSlider(banners, interval = 4000) {
             <div class="flex items-center gap-2 flex-wrap">
                 <div class="relative">
                     <label for="sort-businesses" class="sr-only">
-                    Sort businesses
+                    Sort businesses list
                     </label>
                     <select x-model="sortBy" @change="applyFilters()" class="appearance-none pl-3 pr-7 py-1.5 text-xs font-medium text-gray-700 bg-gray-50 border border-gray-200 rounded-xl outline-none cursor-pointer hover:border-indigo-300 transition-colors">
                         @foreach($sortOptions as $opt)
