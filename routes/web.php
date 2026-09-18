@@ -352,10 +352,6 @@ Route::post('/sales/login/otp',[App\Http\Controllers\Auth\AuthSalesController::c
 
 
 
-
-
-
-
 Route::get('/cities/getajaxcities', [App\Http\Controllers\CitiesController::class, 'getAjaxCities']);
 Route::get('/location/getAjaxLocation', [App\Http\Controllers\CitiesController::class, 'getAjaxLocation']);
 Route::get('/location/getAjaxService', [App\Http\Controllers\CitiesController::class, 'getAjaxService']);
