@@ -139,7 +139,7 @@ class BusinessLogoController extends Controller
 
 		$edit_data = array('logo' => "", );
 		$del = Client::where('id', $id)->update($edit_data);
-		return redirect('business/profile-logo');
+		return redirect('profile/media');
 
 	}
 
@@ -165,7 +165,7 @@ class BusinessLogoController extends Controller
 		}
 		$edit_data = array('profile_pic' => "", );
 		$del = Client::where('id', $id)->update($edit_data);
-		return redirect('business/profile-logo');
+		return redirect('profile/media');
 
 	}
 	public function uploadPictures(Request $request)
@@ -239,6 +239,8 @@ private function saveImageSmart($file, $destinationPath, $width = null, $height 
 
 public function saveGallary(Request $request)
 {
+
+ 
     $client = Client::findOrFail($request->business_id);
     $oldImages = !empty($client->pictures) ? unserialize($client->pictures) : [];
     $images = [];
@@ -335,7 +337,7 @@ public function saveGallary(Request $request)
     }
 
     $request->session()->flash('success_msg', $msg);
-    return redirect("/business/gallery-pictures");
+    // return redirect("/business/gallery-pictures");
 }
 	 
 public function saveGallary___old(Request $request)

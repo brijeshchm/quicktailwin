@@ -830,8 +830,17 @@ protected function deleteOldImage($jsonString)
 
 		$edit_data = array($slug => "", );
 		$del = Client::where('id', $id)->update($edit_data);
-
-		return redirect('business/recent-activity');
+		if($del){
+   			return response()->json([
+            'status' => true,
+            'msg'    => 'Delete successfully!',
+        ], 200);
+		}else{
+			return response()->json([
+            'status' => false,
+            'msg'    => 'Not Delete successfully!',
+        ], 200);
+		}
 
 	}
 
