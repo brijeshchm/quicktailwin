@@ -1,2 +1,22 @@
 User-agent: *
-Disallow: /
+Allow: /
+
+Disallow: /developer/login/
+Disallow: /google-login/
+Disallow: /auth/google/callback/
+Disallow: /admin/
+Disallow: /business/
+
+ 
+Allow: /public/*.css
+Allow: /public/*.js
+Allow: /public/*.png
+Allow: /public/*.jpg
+Allow: /public/*.jpeg
+Allow: /public/*.gif
+Allow: /public/*.svg
+Disallow: /upload/crs/
+
+
+Sitemap: https://www.quickdials.com/sitemap.xml
+Sitemap: https://www.quickdials.com/sitemap-blog.xml
