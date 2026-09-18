@@ -18,5 +18,5 @@ Allow: /public/*.svg
 Disallow: /upload/crs/
 
 
-Sitemap: https://www.quickdials.com/sitemap.xml
+Sitemap: https://www.quickdials.com/top-city.xml
 Sitemap: https://www.quickdials.com/sitemap-blog.xml
