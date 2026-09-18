@@ -2021,3 +2021,5 @@ function saveImageSmart($file, $destinationPath, $width = null, $height = null)
         ];
 	return $map;
 }
+
+ 

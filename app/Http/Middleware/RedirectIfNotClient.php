@@ -19,6 +19,8 @@ class RedirectIfNotClient
             // Instead of redirecting to 'login', show the popup or redirect elsewhere
             return redirect('/business-owners'); // Or trigger your popup (e.g., via a query parameter)
         }
+
+        
         return $next($request);
     }
 }

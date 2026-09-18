@@ -5,7 +5,6 @@
 @endsection
 @section('keyword')
   Certificate
-
 @endsection
 @section('description')
   Find Only Certified Training Institutes, Coaching Centers near you on QuickDials and Get Free counseling, Free Demo

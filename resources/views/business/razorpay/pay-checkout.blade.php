@@ -242,11 +242,7 @@ document.getElementById("merchant_order_id").value = o;
 			</div>
 			<div class="payment-trans-button">
 			
-		
-	
-		 	
-
-				<form name="razorpay_frm_payment" class="razorpay-frm-payment" id="razorpay-frm-payment" method="post">
+			<form name="razorpay_frm_payment" class="razorpay-frm-payment" id="razorpay-frm-payment" method="post">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}" />
 				
 				<input type="hidden" name="tid" id="tid" readonly />
@@ -254,14 +250,12 @@ document.getElementById("merchant_order_id").value = o;
 				<input type="hidden" name="language" value="EN"> 
 				<input type="hidden" name="currency" id="currency" value="INR"> 
 					
+				<input type="hidden" name="surl" id="surl" value="{{ route('pay.success')}}"> 
+				<input type="hidden" name="furl" id="furl" value="{{ route('pay.failed')}}">
 
-
-					<!-- <input type="hidden" name="surl" id="surl" value="{{ url('business/success')}} "> 
-				<input type="hidden" name="furl" id="furl" value="{{ url('business/failed')}} ">   -->
-
-
+<!-- 
 				<input type="hidden" name="surl" id="surl" value="https://www.quickdials.com/business/success/"> 
-				<input type="hidden" name="furl" id="furl" value="https://www.quickdials.com/business/failed/"> 
+				<input type="hidden" name="furl" id="furl" value="https://www.quickdials.com/business/failed/">  -->
 
 				<input type="hidden" class="form-control" id="amount1" placeholder="amount" value="<?php if($data->amt){ echo $data->amt; } ?>" readonly="readonly">
 				<input type="hidden" class="form-control" id="amount2" placeholder="amount" value="<?php if($data->amt){ echo $data->amt; } ?>" readonly="readonly">
@@ -285,9 +279,9 @@ document.getElementById("merchant_order_id").value = o;
 					<input type="hidden" name="RAZOR_KEY_ID" class="form-control" id="RAZOR_KEY_ID" value="<?php echo RAZOR_KEY_ID; ?>" >
 
 				<div class="trans-button">
-					<!-- <a class="payment-edit-button mb-md-2" href="{{url('business/package')}}">Edit Now</a> -->
+				 
 					
-				<a href="{{url('/business/package')}}" class="payment-cancel-button mb-md-2">Cancel</a>
+				<a href="{{route('business.package')}}" class="payment-cancel-button mb-md-2">Cancel</a>
 				
 					<button type="submit"  class="payment-proceed-button mb-md-2" id="razor-pay-now" >Pay</button>
 					
@@ -328,8 +322,415 @@ document.getElementById("merchant_order_id").value = o;
 
   </main><!-- End #main -->
 
-	     
-  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-  
-   
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+ 
+$(document).on('click', '#razor-pay-now', function (e) {
+
+    e.preventDefault();
+
+    const button = $(this);
+    const form = $('#razorpay-frm-payment');
+console.log('payment');
+    // Prevent double click
+    if (button.prop('disabled')) {
+        return;
+    }
+
+    const gstTotalAmount = parseFloat(
+        form.find('#gst_total_amount').val()
+    ) || 0;
+
+    if (gstTotalAmount <= 0) {
+        alert('Invalid payment amount.');
+        return;
+    }
+
+    // Razorpay accepts amount in paise
+    const merchant_total = Math.round(gstTotalAmount * 100);
+
+    const merchant_order_id = form.find('#merchant_order_id').val();
+    const merchant_surl_id   = form.find('#surl').val();
+    const merchant_furl_id   = form.find('#furl').val();
+
+    const card_holder_name_id = form.find('#billing-name').val();
+    const email                = form.find('#billing-email').val();
+    const phone                = form.find('#billing-phone').val();
+
+    const paid_amount    = form.find('#paid_amount').val();
+    const merchant_amount = form.find('#gst_total_amount').val();
+    const gst_tax         = form.find('#gst_tax').val();
+
+    const currency_code_id = form.find('#currency').val();
+    const key_id            = form.find('#RAZOR_KEY_ID').val();
+
+    const coins           = form.find('#coins').val();
+    const client_id       = form.find('#client_id').val();
+    const username        = form.find('#username').val();
+    const billing_country = form.find('#billing_country').val();
+    const billing_state   = form.find('#billing_state').val();
+    const city            = form.find('#city').val();
+
+    const csrfToken = form.find('input[name="_token"]').val();
+
+
+    // Validation
+    $('.text-danger').remove();
+
+    if (!card_holder_name_id) {
+
+        alert('Please enter customer name.');
+        return;
+    }
+
+    if (!email) {
+
+        alert('Please enter valid email.');
+        return;
+    }
+
+    if (!phone) {
+
+        alert('Please enter valid phone number.');
+        return;
+    }
+
+    if (!key_id) {
+
+        alert('Razorpay Key ID is missing.');
+        console.error('RAZOR_KEY_ID is empty');
+        return;
+    }
+
+    if (typeof Razorpay === 'undefined') {
+
+        alert('Razorpay could not be loaded. Please refresh the page.');
+        console.error('Razorpay checkout.js not loaded');
+
+        return;
+    }
+
+
+    const razorpay_options = {
+
+        key: key_id,
+
+        amount: merchant_total,
+
+        currency: currency_code_id,
+
+        name: 'QuickDials Pvt Ltd',
+
+        description: 'Package Pay',
+
+        image: 'https://www.quickdials.com/client/images/small-logo.jpg',
+
+        prefill: {
+
+            name: card_holder_name_id,
+
+            email: email,
+
+            contact: phone
+
+        },
+
+        notes: {
+
+            merchant_order_id: merchant_order_id
+
+        },
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | PAYMENT SUCCESS
+        |--------------------------------------------------------------------------
+        */
+
+        handler: function (transaction) {
+
+            button.prop('disabled', true).text('Processing...');
+
+            $.ajax({
+               
+ 				url: "{{ route('business.razorpay.checkout') }}",
+    			type: "POST",
+                headers: {
+
+                    'X-CSRF-TOKEN': csrfToken,
+
+                    'X-Requested-With': 'XMLHttpRequest',
+
+                    'Accept': 'application/json'
+
+                },
+
+                data: {
+
+                    razorpay_payment_id:
+                        transaction.razorpay_payment_id,
+
+                    merchant_order_id:
+                        merchant_order_id,
+
+                    merchant_surl_id:
+                        merchant_surl_id,
+
+                    merchant_furl_id:
+                        merchant_furl_id,
+
+                    card_holder_name_id:
+                        card_holder_name_id,
+
+                    merchant_total:
+                        merchant_total,
+
+                    merchant_amount:
+                        merchant_amount,
+
+                    currency_code_id:
+                        currency_code_id,
+
+                    pay:
+                        'QuickDials Pvt Ltd',
+
+                    email:
+                        email,
+
+                    phone:
+                        phone,
+
+                    billing_country:
+                        billing_country,
+
+                    billing_state:
+                        billing_state,
+
+                    city:
+                        city,
+
+                    coins:
+                        coins,
+
+                    client_id:
+                        client_id,
+
+                    username:
+                        username,
+
+                    gst_tax:
+                        gst_tax,
+
+                    paid_amount:
+                        paid_amount
+
+                },
+ 				dataType: 'json',
+
+                success: function (res) {
+          
+ 
+                    if (!res.redirectURL) {
+
+                        alert('Payment completed but redirect URL is missing.');
+
+                        button
+                            .prop('disabled', false)
+                            .text('Pay');
+
+                        return;
+                    }
+
+
+                    let obj = res.data;
+
+
+                    /*
+                    | If controller sends JSON string
+                    */
+
+                    if (typeof obj === 'string') {
+
+                        try {
+
+                            obj = JSON.parse(obj);
+
+                        } catch (error) {
+
+                            console.error(
+                                'Invalid response data:',
+                                error
+                            );
+
+                            alert('Invalid server response.');
+
+                            button
+                                .prop('disabled', false)
+                                .text('Pay');
+
+                            return;
+                        }
+
+                    }
+
+
+                    const params =
+                        new URLSearchParams({
+
+                            getpay:
+                                obj.getpay ?? '',
+
+                            card_holder_name:
+                                obj.card_holder_name ?? '',
+
+                            merchant_amount:
+                                obj.merchant_amount ?? '',
+
+                            order_id:
+                                obj.order_id ?? '',
+
+                            currency_code_id:
+                                obj.currency_code ?? '',
+
+                            pay_to:
+                                obj.pay_to ?? '',
+
+                            coins:
+                                obj.coins ?? '',
+
+                            email:
+                                obj.email ?? '',
+
+                            phone:
+                                obj.phone ?? '',
+
+                            payment_id:
+                                obj.razorpay_payment_id ??
+                                transaction.razorpay_payment_id,
+
+                            billing_country:
+                                obj.billing_country ?? '',
+
+                            billing_state:
+                                obj.billing_state ?? '',
+
+                            city:
+                                obj.city ?? ''
+
+                        });
+
+
+                    window.location.href =
+                        res.redirectURL +
+                        '?' +
+                        params.toString();
+
+                },
+
+
+                error: function (xhr) {
+
+                    console.error(
+                        'RazorPay Checkout Error:',
+                        xhr.responseText
+                    );
+
+                    button
+                        .prop('disabled', false)
+                        .text('Pay');
+
+
+                    alert(
+                        xhr.responseJSON?.message ||
+                        'Payment saved failed. Please try again.'
+                    );
+
+                }
+
+            });
+
+        },
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | POPUP CLOSED
+        |--------------------------------------------------------------------------
+        */
+
+        modal: {
+
+            ondismiss: function () {
+
+                button
+                    .prop('disabled', false)
+                    .text('Pay');
+
+            }
+
+        },
+
+        theme: {
+
+            color: '#2563eb'
+
+        }
+
+    };
+
+
+    try {
+
+        const razorpay =
+            new Razorpay(
+                razorpay_options
+            );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | PAYMENT FAILURE
+        |--------------------------------------------------------------------------
+        */
+
+        razorpay.on(
+            'payment.failed',
+            function (response) {
+
+                console.error(
+                    'Payment failed:',
+                    response.error
+                );
+
+
+                alert(
+                    response.error.description ||
+                    'Payment failed.'
+                );
+
+            }
+        );
+
+
+        razorpay.open();
+
+    } catch (error) {
+
+        console.error(
+            'Razorpay initialization error:',
+            error
+        );
+
+
+        alert(
+            'Unable to open payment window.'
+        );
+
+    }
+
+});
+</script>   
 @endsection

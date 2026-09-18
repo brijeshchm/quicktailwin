@@ -163,12 +163,17 @@ Find Only Certified Training Institutes, Coaching Centers near you on Quickinida
   {{ $datav['coins'] }} Coins
   </div>
 
-  <div class="price-action">
-  <a href="{{url('business/pay-deposit/?status=correction&o='.$datav['encrypt'])}}">
-  {{ $datav['package_bottom'] }}
-  </a>
-  </div>
-  </div>
+    <div class="price-action">
+     
+
+
+    <a href="{{ url('business/pay-deposit?status=correction&o=' . urlencode($datav['encrypt'])) }}">
+    {{ $datav['package_bottom'] }}
+</a>
+
+
+    </div>
+    </div>
                   <!-- <div class="row">
                       <div class="col-lg-2 col-md-4 label "><i class="bi bi-currency-rupee"></i> {{ $datav['amt'] }}: </div>
                       <div class="col-lg-2 col-md-8"> {{$datav['coins']}} Coins</div>

@@ -22,27 +22,23 @@ Route::middleware('auth:guest')->group(function () {
 		Route::get('user/service',          [ServiceController::class, 'service'])->name('user.service.index');         
 		Route::get('user/vouchers',         [VouchersController::class, 'vouchers'])->name('user.vouchers.index');
 		Route::get('user/rewards',         [RewardController::class, 'index'])->name('user.rewards.index');
-Route::post('/rewards/redeem',                      [RewardController::class, 'redeem'])->name('user.rewards.redeem');
-    Route::post('/rewards/redemptions/{redemption}/confirm', [RewardController::class, 'confirmRedemption'])->name('user.rewards.confirm');
+		Route::post('/rewards/redeem',                      [RewardController::class, 'redeem'])->name('user.rewards.redeem');
+    	
+		Route::post('/rewards/redemptions/{redemption}/confirm', [RewardController::class, 'confirmRedemption'])->name('user.rewards.confirm');
 
 		Route::get('user/admin-dashboard',         [VouchersController::class, 'adminDashboard'])->name('user.admindashboard.index');	
 		
 
-Route::post('user/autosave-avatar', [ProfileController::class, 'autosaveAvatar'])->name('user.profile.autosave-avatar');
+		Route::post('user/autosave-avatar', [ProfileController::class, 'autosaveAvatar'])->name('user.profile.autosave-avatar');
         
         Route::post('user/profile/send-otp',  [ProfileController::class, 'sendOtp'])->name('user.userprofile.send-otp');
         Route::post('user/profile/verify-otp',[ProfileController::class, 'verifyOtp'])->name('user.profile.verify-otp');
-    
 
- 
-    Route::get('/vouchers/my',       [VouchersController::class, 'myVouchers'])->name('user.vouchers.my');
-    Route::post('vouchers/claim',   [VouchersController::class, 'claim'])->name('user.vouchers.claim');
-    Route::post('vouchers/continue',[VouchersController::class, 'continue'])->name('user.vouchers.continue');
- 
-    
-    Route::get('/user/logout',       [ProfileController::class, 'userLogout'])->name('user.userLogout');
-
-
+		Route::get('/vouchers/my',       [VouchersController::class, 'myVouchers'])->name('user.vouchers.my');
+		Route::post('vouchers/claim',   [VouchersController::class, 'claim'])->name('user.vouchers.claim');
+		Route::post('vouchers/continue',[VouchersController::class, 'continue'])->name('user.vouchers.continue');
+		
+		Route::get('/user/logout',       [ProfileController::class, 'userLogout'])->name('user.userLogout');
 
 });
 
@@ -64,9 +60,7 @@ Route::post('/language/change', function (\Illuminate\Http\Request $request) {
 	$exitCode = Artisan::call('cache:clear');
 	//$exitCode = Artisan::call('route:cache');
 	Artisan::call('optimize:clear');
-
 	// $exitCode = Artisan::call('optimize');
-
 	return '<h1>Cache cleared</h1>';
 });
 
@@ -79,15 +73,82 @@ Route::get('/client/dashboard', [App\Http\Controllers\ClientAuth\AuthController:
 Route::get('/user/dashboard', [App\Http\Controllers\ClientAuth\AuthController::class, 'userDashboard'])->name('user.dashboard');
 
 
-Route::middleware('auth:clients')->group(function () {
-	//Auth::routes();
 
-	 
-	Route::get('/business/dashboard', [App\Http\Controllers\Business\BusinessDashboardController::class, 'dashboard'])->name('business.dashboard');
-	Route::get('/business-owners/get-leads', [EnquiryController::class, 'getLeads']);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+use App\Http\Controllers\Business\DashboardController;
+
+Route::middleware('auth:clients')->group(function () {
+
+// Auth::routes();
+
+Route::controller(DashboardController::class)->group(function(){
+	
+ 
+ 
+ Route::get('/business/leads/{tab?}','leads')->name('leads');
+
+//   Route::patch('/leads/{id}','updateLead')->name('leads.update');
+ Route::post('/business/leads/{lead}/follow-ups','addFollowUp')->name('followups.add'); 
+ Route::patch('/business/follow-ups/{id}','updateFollowUp')->name('followups.update'); 
+ Route::delete('/business/follow-ups/{id}','deleteFollowUp')->name('followups.delete');
+ Route::get('/business/leads/{leadId}/follow-ups/list', 'followUpsList')->name('leads.followups.list');
+ Route::get('/business/follow-ups','followUps')->name('followups');
+ Route::get('/business/listings','listings')->name('listings'); 
+ Route::post('/business/listings','addListing')->name('listings.add'); 
+ Route::patch('/business/listings/{id}','updateListing')->name('listings.update');
+ Route::delete('/business/listings/{id}','deleteListing')->name('listings.delete');
+ Route::get('/business/reviews','reviews')->name('reviews');
+ Route::get('/business/pending-profile','pendingProfile')->name('pending-profile');
+  
+ Route::post('/business/reviews/{id}/reply','replyReview')->name('reviews.reply');
+ Route::get('/business/team','team')->name('team'); Route::post('/team','addMember')->name('team.add'); 
+ Route::patch('/business/team/{id}','updateMember')->name('team.update');
+ Route::delete('/business/team/{id}','deleteMember')->name('team.delete');
+ 
+ Route::get('/business/profile/{tab?}','profile')->name('profile'); 
+ 
+ Route::patch('/business/profile','updateProfile')->name('profile.update');
+ 
+Route::delete('/business/profile/gallery/{id}','deleteGallery')->name('profile.gallery.delete');
+Route::post('/profile/awards/add','addAward')->name('profile.awards.add');
+Route::delete('/business/profile/awards/{id}','deleteAward')->name('profile.awards.delete'); 
+Route::patch('/business/profile/certificates','updateCertificates')->name('profile.certificates.update');
+Route::get('/business/account/{tab?}','account')->name('account');
+Route::patch('/business/account','updateAccount')->name('account.update');
+Route::post('/business/account/buy-package','buyPackage')->name('account.buy');
+Route::get('/business/invoices/{id}/download','invoice')->name('invoice.download');
+Route::get('/business/contact','contact')->name('contact');
+Route::post('/business/reset-demo','reset')->name('demo.reset');
+Route::post('/business/sign-out','signOut')->name('signout');
+});
+
+	
+	Route::get('/business/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+	// Route::get('/business/leads', [EnquiryController::class, 'getLeads']);
 	Route::get('/business/enquiry', [EnquiryController::class, 'enquiry']);
 	Route::get('/business/lead-follow-up', [EnquiryController::class, 'leadFollowUp']);
-	Route::get('/business/new-enquiry', [EnquiryController::class, 'newEnquiry']);
+	//Route::get('/business/new-enquiry', [DashboardController::class, 'newEnquiry'])->name('new.enquiry');
 	Route::get('/business/myLead', [EnquiryController::class, 'myLead']);
 	Route::get('/business/favorite-enquiry', [EnquiryController::class, 'favoriteEnquiry']);
 	Route::get('/business/manage-enquiry', [EnquiryController::class, 'manageEnquiry']);
@@ -98,15 +159,16 @@ Route::middleware('auth:clients')->group(function () {
 	Route::post('/business-owners/export-excel', [App\Http\Controllers\Business\EnquiryController::class, 'getLeadsExcel']);
 
 	 
-	Route::get('/business/personal-details', [App\Http\Controllers\Business\PersonalDetailsController::class, 'personalDetails']);
+	//Route::get('/business/personal-details', [App\Http\Controllers\Business\PersonalDetailsController::class, 'personalDetails']);
 	Route::get('/business/profileInfo', [App\Http\Controllers\Business\ProfileController::class, 'profileInfo']);
-	Route::post('/business/saveProfileInfo/{id}', [App\Http\Controllers\Business\ProfileController::class, 'saveProfileInfo']);
-	Route::post('/business/saveBusinessLocation/{id}', [App\Http\Controllers\Business\ProfileController::class, 'saveBusinessLocation']);
+	Route::post('/business/saveProfileInfo', [App\Http\Controllers\Business\ProfileController::class, 'saveProfileInfo'])->name('business.profile.info');
+	Route::post('/business/saveBusinessLocation', [App\Http\Controllers\Business\ProfileController::class, 'saveBusinessLocation'])->name('profile.locations.add');
+	Route::delete('/business/assignZoneDelete/{id}', [App\Http\Controllers\Business\ProfileController::class, 'assignZoneDelete'])->name('profile.locations.delete');
 
 
 	Route::get('/business/business-social', [App\Http\Controllers\Business\ProfileController::class, 'getBusinessSocial']);
 
-	Route::post('/business/editSaveSocials/{id}', [App\Http\Controllers\Business\ProfileController::class, 'saveBusinessSocial']);
+	Route::post('/business/editSaveSocials', [App\Http\Controllers\Business\ProfileController::class, 'saveBusinessSocial'])->name('profile.socials.save');
 
 
 
@@ -124,22 +186,22 @@ Route::middleware('auth:clients')->group(function () {
 	Route::get('/business/award/{slug}/{id}', [App\Http\Controllers\Business\CertificateController::class, 'awardDel']);
 	Route::get('/business/business-award', [App\Http\Controllers\Business\CertificateController::class, 'getBusinessAward']);
 	
-	Route::post('/business/save-recent-activity-auto', [App\Http\Controllers\Business\CertificateController::class, 'saveBusinessRecentActivity']);
-	Route::get('/business/recent/{slug}/{id}', [App\Http\Controllers\Business\CertificateController::class, 'recentActivityDel']);
+	Route::post('/business/save-recent-activity-auto', [App\Http\Controllers\Business\CertificateController::class, 'saveBusinessRecentActivity'])->name('recent.activity.save');
+	Route::delete('/business/recent/{slug}/{id}', [App\Http\Controllers\Business\CertificateController::class, 'recentActivityDel']);
 	Route::get('/business/recent-activity', [App\Http\Controllers\Business\CertificateController::class, 'getBusinessRecentActivity']);
 	
 
 
-	Route::post('/business/savePersonalDetails/{id}', [App\Http\Controllers\Business\PersonalDetailsController::class, 'savePersonalDetails']);
+	Route::post('/business/savePersonalDetails', [App\Http\Controllers\Business\PersonalDetailsController::class, 'savePersonalDetails'])->name('business.profile.update');
 
 	Route::get('/business/profile-logo', [App\Http\Controllers\Business\BusinessLogoController::class, 'profileLogo']);
-	Route::post('/business/saveProfileLogo', [App\Http\Controllers\Business\BusinessLogoController::class, 'saveProfileLogo']);
-	Route::get('/business/profileLogo/logoDel/{id}', [App\Http\Controllers\Business\BusinessLogoController::class, 'logoDel']);
-	Route::get('/business/profileLogo/profilePicDel/{id}', [App\Http\Controllers\Business\BusinessLogoController::class, 'profilePicDel']);
+	Route::post('/business/saveProfileLogo', [App\Http\Controllers\Business\BusinessLogoController::class, 'saveProfileLogo'])->name('profile.logo.upload');
+	Route::get('/business/profileLogo/logoDel/{id}', [App\Http\Controllers\Business\BusinessLogoController::class, 'logoDel'])->name('profile.logo.delete');
+	Route::get('/business/profileLogo/profilePicDel/{id}', [App\Http\Controllers\Business\BusinessLogoController::class, 'profilePicDel'])->name('profile.banner.remove');
 
 	Route::get('/business/gallery-pictures', [App\Http\Controllers\Business\BusinessLogoController::class, 'uploadPictures']);
 
-	Route::post('/business/saveGallary', [App\Http\Controllers\Business\BusinessLogoController::class, 'saveGallary']);
+	Route::post('/business/saveGallary', [App\Http\Controllers\Business\BusinessLogoController::class, 'saveGallary'])->name('profile.gallery.upload');
 
 
 	Route::get('/business/location-information', [App\Http\Controllers\Business\BusinessLocationController::class, 'locationInformation']);
@@ -153,14 +215,14 @@ Route::middleware('auth:clients')->group(function () {
 	Route::post('/business/review/update-review/{id}', [App\Http\Controllers\Business\ReviewController::class, 'updateReviewEdit']);
 
 
-	Route::post('/business/pauseLead', [App\Http\Controllers\Business\EnquiryController::class, 'pauseLead']);
+	Route::post('/business/pauseLead', [App\Http\Controllers\Business\EnquiryController::class, 'pauseLead'])->name('pause.lead');
 	Route::post('/business/scrapLead', [App\Http\Controllers\Business\EnquiryController::class, 'scrapLead']);
 	Route::post('/business/readLead', [App\Http\Controllers\Business\EnquiryController::class, 'readLead']);
 	Route::post('/business/favoritleads', [App\Http\Controllers\Business\EnquiryController::class, 'favoritleads']);
 
-	Route::post('/business/cities/getajaxcities', [App\Http\Controllers\Client\BusinessController::class, 'getAjaxCities']);
+	Route::post('/business/cities/getajaxcities', [App\Http\Controllers\Client\BusinessController::class, 'getAjaxCities'])->name('business.cities.ajax');
 	Route::post('/business/state/getAjaxSate', [App\Http\Controllers\Client\BusinessController::class, 'getAjaxSate']);
-	Route::post('/business/zone/getAjaxZone', [App\Http\Controllers\Client\BusinessController::class, 'getAjaxZone']);
+	Route::post('/business/zone/getAjaxZone', [App\Http\Controllers\Client\BusinessController::class, 'getAjaxZone'])->name('business.zone.ajax');
 	Route::get('/business/get-assigned-zones', [App\Http\Controllers\Client\BusinessController::class, 'getAssignedZonesPagination']);
 
 	Route::get('/business/assignZone/delete/{id}', [App\Http\Controllers\Client\BusinessController::class, 'assignZoneDelete']);
@@ -168,7 +230,7 @@ Route::middleware('auth:clients')->group(function () {
 	Route::post('/business/assignLocation/selectAssignZoneDelete', [App\Http\Controllers\Client\BusinessController::class, 'selectAssignZoneDelete']);
 
 
-	Route::get('/business/package', [App\Http\Controllers\Business\AccountController::class, 'package']);
+	Route::get('/business/package', [App\Http\Controllers\Business\AccountController::class, 'package'])->name('business.package');
 	Route::get('/business/account-settings', [App\Http\Controllers\Business\AccountController::class, 'accountSettings']);
 	Route::get('/business/business-location', [App\Http\Controllers\Business\BusinessLocationController::class, 'businessLocation']);
 	
@@ -176,7 +238,7 @@ Route::middleware('auth:clients')->group(function () {
 	Route::post('/business/saveBusinessOverview/{id}', [App\Http\Controllers\Business\BusinessController::class, 'saveBusinessOverview']);
 
 	Route::get('/business/business-meta', [App\Http\Controllers\Business\BusinessController::class, 'businessMeta']);
-	Route::post('/business/saveBusinessMeta/{id}', [App\Http\Controllers\Business\BusinessController::class, 'saveBusinessMeta']);
+	Route::post('/business/saveBusinessMeta', [App\Http\Controllers\Business\BusinessController::class, 'saveBusinessMeta'])->name('updateBusiness.meta');
 
 	Route::get('/business/buy-package', [App\Http\Controllers\Business\AccountController::class, 'buyPackage']);
 
@@ -199,11 +261,6 @@ Route::middleware('auth:clients')->group(function () {
  
     Route::post('business/redemptions/{redemption}/complete', [App\Http\Controllers\Business\RewardsController::class, 'completeRedemption'])
         ->name('redemptions.complete');
-
-
- 
-
-
 
 	//Route::get('/business/getinvoiceBillingPrintPdf/{id}',[App\Http\Controllers\Business\InvoiceController::class, 'getinvoiceBillingPrintPdf']);
 	Route::get(
@@ -229,11 +286,11 @@ Route::middleware('auth:clients')->group(function () {
 
 	Route::get('/business/keywords', [App\Http\Controllers\Business\BusinessKeywordController::class, 'keywords']);
 	Route::get('/business/faqs', [App\Http\Controllers\Business\BusinessController::class, 'businessFaqs']);
-	Route::post('/business/saveBusinessFaqs/{id}', [App\Http\Controllers\Business\BusinessController::class, 'saveBusinessFaqs']);
+	Route::post('/business/saveBusinessFaqs', [App\Http\Controllers\Business\BusinessController::class, 'saveBusinessFaqs'])->name('business.faqs.save');
 
 
-	Route::post('/business/saveKeywordAssign/{id}', [App\Http\Controllers\Business\BusinessKeywordController::class, 'saveKeywordAssign']);
-	Route::get('/business/assignKeyword/delete/{id}', [App\Http\Controllers\Business\BusinessKeywordController::class, 'assignKeywordDelete']);
+	Route::post('/business/saveKeywordAssign', [App\Http\Controllers\Business\BusinessKeywordController::class, 'saveKeywordAssign'])->name('profile.keywords.add');
+	Route::post('/business/assignKeyword/delete/{id}', [App\Http\Controllers\Business\BusinessKeywordController::class, 'assignKeywordDelete'])->name('profile.keywords.delete');
 	Route::get('/business/get-paginated-assigned-keywords', [App\Http\Controllers\Business\BusinessKeywordController::class, 'getPaginatedAssignedKeywords']);
 
 
@@ -247,13 +304,13 @@ Route::middleware('auth:clients')->group(function () {
 	/* Change Password - CLIENT */
 
 	/* Change Password - CLIENT */
-	Route::get('/business/pay-deposit', [App\Http\Controllers\Business\RazorpayController::class, 'payDeposit']);
+	Route::get('/business/pay-deposit', [App\Http\Controllers\Business\RazorpayController::class, 'payDeposit'])->name('business.pay-deposit');
 	Route::get('/business/subscribe-free', [App\Http\Controllers\Business\RazorpayController::class, 'subscribeFree']);
 	Route::post('/business/saveSubscribeFree/{id}', [App\Http\Controllers\Business\RazorpayController::class, 'saveSubscribeFree']);
-	Route::post('/business/razorPayCheckout', [App\Http\Controllers\Business\RazorpayController::class, 'razorPayCheckout']);
+	Route::post('/business/razorPayCheckout', [App\Http\Controllers\Business\RazorpayController::class, 'razorPayCheckout'])->name('business.razorpay.checkout');
 	Route::post('/business/save-processing', [App\Http\Controllers\Business\RazorpayController::class, 'saveProcessing']);
-	Route::get('/business/success', [App\Http\Controllers\Business\RazorpayController::class, 'success']);
-	Route::get('/business/failed', [App\Http\Controllers\Business\RazorpayController::class, 'failed']);
+	Route::get('/business/success', [DashboardController::class, 'success'])->name('pay.success');
+	Route::get('/business/failed', [DashboardController::class, 'failed'])->name('pay.failed');
 
 
 
@@ -283,12 +340,33 @@ Route::post('/developer/login/otp',[App\Http\Controllers\Auth\AuthController::cl
 
 
 
+
+Route::post('/sales/login', [App\Http\Controllers\Auth\AuthSalesController::class, 'authenticate']);
+Route::get('/sales/login', [App\Http\Controllers\Auth\AuthSalesController::class, 'showLoginForm'])->name('developer.login');
+Route::get('/sales/check/login',[App\Http\Controllers\Auth\AuthSalesController::class, 'checklogin']);
+Route::post('/sales/check/login',[App\Http\Controllers\Auth\AuthSalesController::class, 'authenticate']);
+//Route::get('/login/otp',function(){return view('auth.otp');});
+Route::get('/sales/login/otp',[App\Http\Controllers\Auth\AuthSalesController::class,'getOTP']);
+Route::post('/sales/login/otp',[App\Http\Controllers\Auth\AuthSalesController::class,'authenticate']);
+
+
+
+
+
+
+
+
 Route::get('/cities/getajaxcities', [App\Http\Controllers\CitiesController::class, 'getAjaxCities']);
 Route::get('/location/getAjaxLocation', [App\Http\Controllers\CitiesController::class, 'getAjaxLocation']);
 Route::get('/location/getAjaxService', [App\Http\Controllers\CitiesController::class, 'getAjaxService']);
 
 Route::prefix('developer')->name('developer.')->middleware(['auth:developer'])->as('developer.')->group(function () {
 	require __DIR__ . '/developer.php';
+});
+
+
+Route::prefix('sales')->name('sales.')->middleware(['auth:sales'])->group(function () {
+	require __DIR__ . '/sales.php';
 });
 
 

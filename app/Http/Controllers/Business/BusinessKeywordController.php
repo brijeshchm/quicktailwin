@@ -43,6 +43,8 @@ class BusinessKeywordController extends Controller
 	 */
 	public function assignKeywordDelete(Request $request, $id)
 	{
+ 
+ 
 		$assignedKWDS = AssignedKWDS::findOrFail($id);
 		if ($assignedKWDS->delete()) {
 			$status = 1;
@@ -125,11 +127,13 @@ class BusinessKeywordController extends Controller
 		return view('business.keywords', ['search' => $search, 'citylist' => $citylist, 'keywordlist' => $keywordlist, 'clientID' => $clientID]);
 	}
 
-	public function saveKeywordAssign(Request $request, $id)
+	public function saveKeywordAssign(Request $request)
 	{
-
+ 
 		if ($request->ajax()) {
 
+
+			$id = $request->client_id;
 			$client = Client::withTrashed()->where('id', $id)->first();
 
 

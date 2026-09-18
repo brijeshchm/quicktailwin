@@ -1136,7 +1136,7 @@ function selectCert(i) {
 
 
     {{-- FAQ --}}
-    @if(count($faqs ?? []) > 0)
+    @if(!empty($faqs))
     <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mt-4 mx-4" x-data="{ openFaq: null }">
         <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
             💬 Frequently Asked Questions(FAQ's) {{ $clientsList['business_name'] }}

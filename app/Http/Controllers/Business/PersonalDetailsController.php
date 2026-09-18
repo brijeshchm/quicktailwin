@@ -41,27 +41,29 @@ class PersonalDetailsController extends Controller
 		return view('business.personal-details', ['edit_data' => $edit_data, 'occupations' => $occupations, 'citys' => $citys, 'states' => $states]);
 	}
 
-	public function savePersonalDetails(Request $request, $id)
+	public function savePersonalDetails(Request $request)
 	{ 
+
+ 
 		if (!$request->ajax()) {
 			return response()->json([
 				'status' => 0,
 				'msg' => 'Invalid request'
 			], 400);
 		}
-
+		$id= $request->client_id;
 		// ✅ Validation (fixed field name mismatches)
 		$validator = Validator::make($request->all(), [
-			'sirName' => 'required|string|max:255',
+	 
 			'first_name' => 'required|string|max:255',
-			'dob' => 'required|date',
+	 
 			'personal_email' => 'required|email',
-			'marital' => 'required|string',
+	 
 			'personal_phone' => 'required|string|max:15',
-			'country' => 'required',
+	 
 			'personal_state' => 'required|integer',
 			'personal_city' => 'required|integer',
-			'personal_zone' => 'required|integer',
+			 
 			'personal_area' => 'required|string',
 			'personal_pincode' => 'required|string|max:10',
 			'personal_address' => 'required|string',
@@ -88,11 +90,11 @@ class PersonalDetailsController extends Controller
 		$client->first_name = ucfirst($request->first_name);
 		$client->middle_name = $request->middle_name;
 		$client->last_name = $request->last_name;
-		$client->dob =date('Y-m-d',strtotime($request->dob));
+		// $client->dob =date('Y-m-d',strtotime($request->dob));
 		$client->personal_email = $request->personal_email;
 		$client->marital = $request->marital;
 		$client->personal_phone = $request->personal_phone;	 
-		$client->gender = $request->gender;		 
+		// $client->gender = $request->gender;		 
 		$client->personal_area = $request->personal_area;
 		$client->personal_pincode = $request->personal_pincode;
  
@@ -110,10 +112,10 @@ class PersonalDetailsController extends Controller
 			$client->personal_state = $state->name;
 		}
 		// ✅ State mapping
-		if ($zone = Zone::find($request->personal_zone)) {
-			$client->personal_zone_id = $zone->id;
-			$client->personal_zone = $zone->zone;
-		}
+		// if ($zone = Zone::find($request->personal_zone)) {
+		// 	$client->personal_zone_id = $zone->id;
+		// 	$client->personal_zone = $zone->zone;
+		// }
 
 		$client->save();
 

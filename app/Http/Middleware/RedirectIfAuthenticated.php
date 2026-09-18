@@ -29,6 +29,11 @@ class RedirectIfAuthenticated
 				if(empty(Auth::guard('developer')->check())){
 				return redirect()->route('developer.dashboard');
 				} 
+
+	            if(empty(Auth::guard('sales')->check())){
+				return redirect()->route('sales.dashboard');
+				} 
+
             }
         }
 

@@ -54,6 +54,10 @@ return [
 			'driver' => 'session',
 			'provider' => 'developers',
 		],
+        'sales' => [
+			'driver' => 'session',
+			'provider' => 'sales',
+		],
     ],
 
     /*
@@ -92,6 +96,10 @@ return [
 			'model' => App\Models\Guest::class,
 		],
         'developers' => [
+			'driver' => 'eloquent',
+			'model' =>  App\Models\User::class,
+		],
+        'sales' => [
 			'driver' => 'eloquent',
 			'model' =>  App\Models\User::class,
 		],
@@ -135,6 +143,12 @@ return [
             'throttle' => 60,
         ],
 		 'guests' => [
+            'provider' => 'guests',
+            'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'sales' => [
             'provider' => 'guests',
             'table' => 'password_reset_tokens',
             'expire' => 60,

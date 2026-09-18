@@ -62,11 +62,11 @@ class ProfileController extends Controller
 
 
 
-	public function saveProfileInfo(Request $request, $id)
+	public function saveProfileInfo(Request $request)
 	{
  
 		if ($request->ajax()) {
-
+			$id = $request->client_id;
 			$validator = Validator::make($request->all(), [
 
 				'business_name' => [
@@ -93,7 +93,7 @@ class ProfileController extends Controller
 				'city' => 'required',
 				'state' => 'required',
 				'zone' => 'required',
-				'country' => 'required',
+				// 'country' => 'required',
 				'pincode' => 'required',
 		 
 				'website' => 'nullable|string|max:150',
@@ -117,9 +117,11 @@ class ProfileController extends Controller
 			$client->email = $request->input('email');
 			$client->mobile = $request->input('mobile');
 			$client->whatsapp = $request->input('whatsapp');
+			$client->second_mobile = $request->input('second_mobile');
+			$client->second_whatsapp = $request->input('second_whatsapp');
 			$client->address = $request->input('address');
 			$client->landmark = $request->input('landmark');
-			$client->country = $request->input('country');
+			$client->country ="101";
  
 			$zone = Zone::find($request->zone);
 			if ($zone) {
@@ -143,33 +145,7 @@ class ProfileController extends Controller
 			$client->business_map = $request->input('business_map');
 	 
 			$client->website = $request->input('website');
-			//    if ($request->address) {
-			//         $address = urlencode($request->address);
-			//       $url = "https://nominatim.openstreetmap.org/search?q={$address}&format=json&limit=1";
-
-
-			//         $options = [
-			//             "http" => [
-			//                 "header" => "User-Agent: MyWebsite/1.0 (contact@mywebsite.com)\r\n"
-			//             ]
-			//         ];
-
-			//         $context = stream_context_create($options);
-			//         $response = file_get_contents($url, false, $context);
-			//         $geodata = json_decode($response, true);
-
-			//         if (!empty($geodata[0])) {
-			//             $latitude = $geodata[0]['lat'];
-			//             $longitude = $geodata[0]['lon'];
-			//             $map = 'https://www.google.com/maps?q=' . $latitude . ',' . $longitude;
-			//         }else{
-			//             $map = "";
-			//         }
-
-			//     } else {
-			//         $map = "";
-			//     }
-
+			 
 	 
 				$time = $request->input('time');
 				if (is_array($time) && !empty($time)) {
@@ -196,13 +172,139 @@ class ProfileController extends Controller
 		return view('business.social', ['client' => $client]);
 	}
 
+ 
+
+public function saveBusinessSocial(Request $request)
+{
+    
+
+    $validator = Validator::make($request->all(), [
+
+        'business_id'   => 'required|integer',
+
+        'facebook_url'  => 'nullable|url|max:255',
+        'instagram_url' => 'nullable|url|max:255',
+        'twitter_url'   => 'nullable|url|max:255',
+        'linkedin_url'  => 'nullable|url|max:255',
+        'pinterest_url' => 'nullable|url|max:255',
+        'youtube_url'   => 'nullable|url|max:255',
+
+    ]);
 
 
-	public function saveBusinessSocial(Request $request, $id)
+    /*
+    |--------------------------------------------------------------------------
+    | Validation Error
+    |--------------------------------------------------------------------------
+    */
+
+    if ($validator->fails()) {
+
+        return response()->json([
+
+            'status'  => false,
+
+            'message' => 'Please check validation errors.',
+
+            'errors'  => $validator
+                ->errors()
+                ->toArray(),
+
+        ], 422);
+
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Find Business
+    |--------------------------------------------------------------------------
+    */
+
+    $client = Client::find(
+        $request->business_id
+    );
+
+
+    if (!$client) {
+
+        return response()->json([
+
+            'status'  => false,
+
+            'message' => 'Business not found.',
+
+        ], 404);
+
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Update Social Links
+    |--------------------------------------------------------------------------
+    */
+
+    $client->facebook_url =
+        $request->facebook_url;
+
+    $client->instagram_url =
+        $request->instagram_url;
+
+    $client->twitter_url =
+        $request->twitter_url;
+
+    $client->linkedin_url =
+        $request->linkedin_url;
+
+    $client->pinterest_url =
+        $request->pinterest_url;
+
+    $client->youtube_url =
+        $request->youtube_url;
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Save
+    |--------------------------------------------------------------------------
+    */
+
+    if ($client->save()) {
+
+        return response()->json([
+
+            'status'  => true,
+
+            'message' => 'Social media links updated successfully.',
+
+            'msg'     => 'Social media links updated successfully.',
+
+        ], 200);
+
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Failed
+    |--------------------------------------------------------------------------
+    */
+
+    return response()->json([
+
+        'status'  => false,
+
+        'message' => 'Social media links could not be updated. Please try again.',
+
+    ], 500);
+}
+
+	public function saveBusinessSocial_old(Request $request)
 	{
 
 		if ($request->ajax()) {
-
+ 
 			$validator = Validator::make($request->all(), [
 
 				'facebook_url' => 'nullable|url|max:255',
@@ -217,15 +319,15 @@ class ProfileController extends Controller
 				return response()->json(['status' => 1, 'errors' => $errorsBag], 400);
 			}
 
-
+// dd($request->facebook_url);
 			$client = Client::find($request->business_id);
 
-			$client->facebook_url = $request->input('facebook_url');
-			$client->instagram_url = $request->input('instagram_url');
-			$client->twitter_url = $request->input('twitter_url');
-			$client->linkedin_url = $request->input('linkedin_url');
-			$client->pinterest_url = $request->input('pinterest_url');
-			$client->youtube_url = $request->input('youtube_url');
+			$client->facebook_url = $request->facebook_url;
+			$client->instagram_url = $request->instagram_url;
+			$client->twitter_url = $request->twitter_url;
+			$client->linkedin_url = $request->linkedin_url;
+			$client->pinterest_url = $request->pinterest_url;
+			$client->youtube_url = $request->youtube_url;
 
 			if ($client->save()) {
 				$status = 1;
@@ -239,14 +341,14 @@ class ProfileController extends Controller
 
 	}
 
-	public function saveBusinessLocation(Request $request, $id)
+	public function saveBusinessLocation(Request $request)
 	{
 		if ($request->ajax()) {
 
 			if ($request->input('zone_id') == "Other") {
 				$validator = Validator::make($request->all(), [
 					'state_id' => 'required|max:32',
-					'cityiesid' => 'required|max:32',
+					'city_id' => 'required|max:32',
 					'other' => 'required|min:3|max:32|regex:/^(?!.*(.)\1{3,}).+$/',
 				]);
 
@@ -262,18 +364,20 @@ class ProfileController extends Controller
 				$errorsBag = $validator->getMessageBag()->toArray();
 				return response()->json(['status' => 1, 'errors' => $errorsBag], 400);
 			}
-			$client = Client::find($id);
-			if (empty($request->input('zone_id')) && !empty($request->input('cityiesid')) && !empty($request->input('state_id'))) {
 
-				$zones = Zone::where('city_id', $request->input('cityiesid'))->get();
+			$id = $request->input('client_id');
+			$client = Client::find($id);
+			if (empty($request->input('zone_id')) && !empty($request->input('city_id')) && !empty($request->input('state_id'))) {
+
+				$zones = Zone::where('city_id', $request->input('city_id'))->get();
 				if (!empty($zones)) {
 					foreach ($zones as $zone) {
 						$assignedZone = new AssignedZone;
-						$assignedZone->city_id = $request->input('cityiesid');
+						$assignedZone->city_id = $request->input('city_id');
 						$assignedZone->zone_id = $zone->id;
 						$assignedZone->client_id = $client->id;
 						$assignedZone->state_id = $request->input('state_id');
-						$checkAssignedZone = AssignedZone::where('client_id', $client->id)->where('zone_id', $zone->id)->where('city_id', $request->input('cityiesid'))->where('state_id', $request->input('state_id'))->first();
+						$checkAssignedZone = AssignedZone::where('client_id', $client->id)->where('zone_id', $zone->id)->where('city_id', $request->input('city_id'))->where('state_id', $request->input('state_id'))->first();
 
 						if (empty($checkAssignedZone)) {
 							if ($assignedZone->save()) {
@@ -287,10 +391,10 @@ class ProfileController extends Controller
 										$assigneddArea = new AssigneddArea;
 										$assigneddArea->client_id = $client->id;
 										$assigneddArea->state_id = $request->input('state_id');
-										$assigneddArea->city_id = $request->input('cityiesid');
+										$assigneddArea->city_id = $request->input('city_id');
 										$assigneddArea->assigned_zone_id = $zone->id;
 										$assigneddArea->area_id = $area->id;
-										$checkAssignedArea = AssigneddArea::where('client_id', $client->id)->where('assigned_zone_id', $zone->id)->where('city_id', $request->input('cityiesid'))->where('area_id', $area->id)->where('state_id', $request->input('state_id'))->first();
+										$checkAssignedArea = AssigneddArea::where('client_id', $client->id)->where('assigned_zone_id', $zone->id)->where('city_id', $request->input('city_id'))->where('area_id', $area->id)->where('state_id', $request->input('state_id'))->first();
 										if (empty($checkAssignedArea)) {
 											$assigneddArea->save();
 										} else {
@@ -327,7 +431,7 @@ class ProfileController extends Controller
 
 
 
-			} else if (empty($request->input('zone_id')) && empty($request->input('cityiesid')) && !empty($request->input('state_id'))) {
+			} else if (empty($request->input('zone_id')) && empty($request->input('city_id')) && !empty($request->input('state_id'))) {
 
 				//state
 				$states = State::where('id', $request->input('state_id'))->first();
@@ -390,14 +494,14 @@ class ProfileController extends Controller
 					}
 				}
 
-			} elseif (!empty($request->input('zone_id')) && ($request->input('zone_id') != 'Other') && !empty($request->input('cityiesid')) && !empty($request->input('state_id'))) {
+			} elseif (!empty($request->input('zone_id')) && ($request->input('zone_id') != 'Other') && !empty($request->input('city_id')) && !empty($request->input('state_id'))) {
 				//zone
 				$assignedZone = new AssignedZone;
-				$assignedZone->city_id = $request->input('cityiesid');
+				$assignedZone->city_id = $request->input('city_id');
 				$assignedZone->zone_id = $request->input('zone_id');
 				$assignedZone->client_id = $request->input('client_id');
 				$assignedZone->state_id = $request->input('state_id');
-				$checkAssignedZone = AssignedZone::where('client_id', $request->input('client_id'))->where('zone_id', $request->input('zone_id'))->where('city_id', $request->input('cityiesid'))->first();
+				$checkAssignedZone = AssignedZone::where('client_id', $request->input('client_id'))->where('zone_id', $request->input('zone_id'))->where('city_id', $request->input('city_id'))->first();
 
 				if (empty($checkAssignedZone)) {
 					if ($assignedZone->save()) {
@@ -410,10 +514,10 @@ class ProfileController extends Controller
 								$assigneddArea = new AssigneddArea;
 								$assigneddArea->client_id = $request->input('client_id');
 								$assigneddArea->state_id = $request->input('state_id');
-								$assigneddArea->city_id = $request->input('cityiesid');
+								$assigneddArea->city_id = $request->input('city_id');
 								$assigneddArea->assigned_zone_id = $request->input('zone_id');
 								$assigneddArea->area_id = $area->id;
-								$checkAssignedArea = AssigneddArea::where('client_id', $request->input('client_id'))->where('assigned_zone_id', $request->input('zone_id'))->where('city_id', $request->input('cityiesid'))->where('area_id', $area->id)->where('state_id', $request->input('state_id'))->first();
+								$checkAssignedArea = AssigneddArea::where('client_id', $request->input('client_id'))->where('assigned_zone_id', $request->input('zone_id'))->where('city_id', $request->input('city_id'))->where('area_id', $area->id)->where('state_id', $request->input('state_id'))->first();
 								if (empty($checkAssignedArea)) {
 									$assigneddArea->save();
 
@@ -442,16 +546,16 @@ class ProfileController extends Controller
 						$code = 400;
 					}
 				}
-			} else if (!empty($request->input('zone_id') == 'Other') && !empty($request->input('cityiesid')) && !empty($request->input('state_id')) && !empty($request->input('other'))) {
+			} else if (!empty($request->input('zone_id') == 'Other') && !empty($request->input('city_id')) && !empty($request->input('state_id')) && !empty($request->input('other'))) {
 
 				//Other
 				$assignedZone = new AssignedZone;
-				$assignedZone->city_id = $request->input('cityiesid');
+				$assignedZone->city_id = $request->input('city_id');
 				if ($request->input('zone_id') == "Other") {
-					$checkZone = Zone::where('zone', $request->input('other'))->where('city_id', $request->input('cityiesid'))->first();
+					$checkZone = Zone::where('zone', $request->input('other'))->where('city_id', $request->input('city_id'))->first();
 					if (empty($checkZone)) {
 						$zone = new Zone;
-						$zone->city_id = $request->input('cityiesid');
+						$zone->city_id = $request->input('city_id');
 						$zone->zone = ucfirst($request->input('other'));
 						$zone->save();
 						$zone_id = $zone->id;
@@ -465,7 +569,7 @@ class ProfileController extends Controller
 				$assignedZone->zone_id = $zone_id;
 				$assignedZone->client_id = $request->input('client_id');
 				$assignedZone->state_id = $request->input('state_id');
-				$checkAssignedZone = AssignedZone::where('client_id', $request->input('client_id'))->where('zone_id', $zone_id)->where('city_id', $request->input('cityiesid'))->where('state_id', $request->input('state_id'))->first();
+				$checkAssignedZone = AssignedZone::where('client_id', $request->input('client_id'))->where('zone_id', $zone_id)->where('city_id', $request->input('city_id'))->where('state_id', $request->input('state_id'))->first();
 				if (empty($checkAssignedZone)) {
 					if ($assignedZone->save()) {
 						$status = 1;
@@ -485,10 +589,33 @@ class ProfileController extends Controller
 			return response()->json(['status' => $status, 'msg' => $msg], 200);
 		}
 
+ 
 	}
 
 
+ /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function assignZoneDelete(Request $request, $id)
+    { 
 
+	 
+		$assignedZone = AssignedZone::findOrFail($id);
+		if (!empty($assignedZone)) {
+			AssigneddArea::where('assigned_zone_id',$assignedZone->zone_id)->where('client_id',$assignedZone->client_id)->where('state_id',$assignedZone->state_id)->where('city_id',$assignedZone->city_id)->delete();		 					 
+			if ($assignedZone->delete()) {
+				$status=1;							 
+				$msg="Assigned Zone Successfully!";	
+			}else{
+				$status=0;							 
+				$msg="Assigned Zone could not be Deleted!";	
+			}
+			return response()->json(['status'=>$status,'msg'=>$msg],200); 
+    	}
+	}
 
 	
 	public function getBusinessCertificate(Request $request)

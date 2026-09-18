@@ -7,12 +7,12 @@ use Session;
 use App\Models\Citieslists;
 use App\Models\State;
 use App\Models\Country;
-
+use DB;
 
 use App\Models\RazorpayHistory;
 use App\Models\PaymentHistory;
-use App\Models\Client\Client;
-
+ 
+use App\Models\Client;
 use Mail;
 
 class RazorpayController extends Controller
@@ -29,6 +29,96 @@ class RazorpayController extends Controller
 		define('RAZOR_KEY_SECRET', 'k7hFQ9R5yfSaMnhuC3ps9S9O');
 
 	}
+
+	private function common(): array { 
+ 
+    // $clientID = auth()->guard('clients')->user()->id;
+    $clientID = '1748';
+    $client = Client::find($clientID); 
+
+	$leads = DB::table('leads')
+				   ->join('assigned_leads','leads.id','=','assigned_leads.lead_id')				  
+				   ->select('leads.*','assigned_leads.client_id','assigned_leads.lead_id','assigned_leads.created_at as created')				 
+				   
+				   ->orderBy('assigned_leads.created_at','desc')
+				   ->where('assigned_leads.readLead','0')
+				   ->where('assigned_leads.client_id',$clientID)->get()->count();
+  
+ 
+ 
+ $completion = $client->getProfileCompletionBreakdown();
+
+ 
+    $percent = $completion['total'];
+
+    
+	$profile=[
+        'name'=>$client->business_name,
+        'category'=>'',
+        'verified'=>$client->verified,
+        'profileCompletion'=>$percent,
+        'yearEstablished'=>$client->year_of_estb,
+        'description'=>$client->business_description,        
+        'overview'=>$client->business_overview,
+        'ownerName'=>$client->first_name.' '.$client->last_name,
+        'ownerPhone'=>$client->personal_phone,
+        'ownerEmail'=>$client->personal_email,
+        'phone'=>$client->mobile,
+        'email'=>$client->email,
+        'website'=>$client->website,
+        'city'=>$client->city,
+        'state'=>$client->state,
+        'zone'=>$client->zone,
+        'area'=>$client->area,
+        'pincode'=>$client->pincode,
+        'landmark'=>$client->landmark,
+        'certifications'=>$client->certifications,
+        'business_map'=>$client->business_map,
+        'address'=>$client->address,        
+        'hours'=>'Mon-Sat: 9:00 AM - 7:00 PM',
+        'metaTitle'=>'',
+        'metaDescription'=>'',
+        'metaKeyword'=>'',
+        'logoUrl'=>optional(unserialize($client->logo))['large']['src'] ?? '#',
+        'bannerUrl'=>optional(unserialize($client->profile_pic))['large']['src'] ?? '#',
+        'facebookUrl'=>$client->facebook_url,
+        'instagramUrl'=>$client->instagram_url,
+        'twitterUrl'=>$client->twitter_url,
+        'linkedinUrl'=>$client->linkedin_url,
+        'youtubeUrl'=>$client->youtube_url,
+        'pinterestUrl'=>$client->pinterest_url,
+        'newLead'=>$leads
+        ];
+
+
+		$today=now(); 
+	
+	 $account=[        
+        'coins'=>$client->coins_amt,     
+        'pauseLeads'=>$client->pauseLead,
+        'activeStatus'=>$client->active_status,
+        'paidStatus'=>$client->paid_status,
+        'certifiedStatus'=>$client->certified_status,
+        'trustedStatus'=>$client->trusted_status,
+        'gstStatus'=>$client->gst_status,
+        'chatFeature'=>true,
+        'clientContactStatus'=>true,
+        'clientTransferStatus'=>false,
+        'clientGSTStatus'=>$client->gst_status,
+        'postingAndReceivingStatus'=>true,
+        'membershipType'=>$client->client_type,
+        'packageName'=>ucfirst($client->client_type),
+        'memberSince'=>date('d-m-Y',strtotime($client->expired_from)),
+        'membershipEndsOn'=>date('d-m-Y',strtotime($client->expired_on)),
+        'dailyLeadLimit'=>25,
+        'leadsUsedToday'=>8
+     ];
+		$tabs=['general'=>'Basic Info','personal'=>'Personal Details','seo'=>'SEO Meta','keywords'=>'Service Keywords','locations'=>'Service Areas','media'=>'Media & Gallery','awards'=>'Awards','certs'=>'Certificates','socials'=>'Social Links','recent'=>'Recent Activity','faqs'=>'FAQ`s'];
+
+		return ['profile'=>$profile,'account'=>$account,'completion'=>$completion,'tabs'=>$tabs]; 
+	
+	}
+	
 
 	public function validation_input($data)
 	{
@@ -55,6 +145,8 @@ class RazorpayController extends Controller
 	}
 	public function payDeposit(Request $request)
 	{
+
+	//dd('asdsd');
 		if (isset($_GET['status'], $_GET['o']) && !empty($_GET['o'])) {
 			$o = base64_decode($_GET['o'], $strict = false);
 			$data = json_decode($o);
@@ -62,7 +154,9 @@ class RazorpayController extends Controller
 		} else {
 			$data = array();
 		}
-		return view('business.razorpay.pay-checkout', ['data' => $data]);
+
+		// dd($data);
+		return view('business.razorpay.pay-checkout',array_merge($this->common(), ['data' => $data]));
 
 	}
 
@@ -165,10 +259,6 @@ class RazorpayController extends Controller
 		return view('business.razorpay.pay-checkout', ['data' => $data]);
 	}
 
-
-
-
-
 	function get_curl_handle($payment_id, $data)
 	{
 		$url = 'https://api.razorpay.com/v1/payments/' . $payment_id . '/capture';
@@ -190,6 +280,8 @@ class RazorpayController extends Controller
 
 	public function razorPayCheckout(Request $request)
 	{
+ 
+ 
 		if (!empty($request->razorpay_payment_id) && !empty($request->merchant_order_id)) {
 
 			$json = array();
@@ -265,6 +357,8 @@ class RazorpayController extends Controller
 				$success = false;
 				$error = $e->getMessage();
 			}
+// dd($success);
+
 			if ($success === true) {
 				if (!$order_info['order_status_id']) {
 
@@ -325,8 +419,61 @@ class RazorpayController extends Controller
 			} else {
 
 
-				$json['data'] = json_encode($paymentInfo);
-				$json['redirectURL'] = $_POST['merchant_furl_id'];
+ 
+			//after testing comment
+			$clientdeatails = Client::find($paymentInfo['client_id']);
+					$paymenthistory = new PaymentHistory;
+					$paymenthistory->client_id = $paymentInfo['client_id'];
+					$paymenthistory->paymentcollect = $paymentInfo['client_id'];
+					$paymenthistory->customer_name = $paymentInfo['card_holder_name'];
+					$paymenthistory->order_number = $paymentInfo['order_id'];
+					$paymenthistory->business_name = $clientdeatails->business_name;
+					$paymenthistory->mobile = $paymentInfo['phone'];
+					$paymenthistory->email = $paymentInfo['email'];
+					$paymenthistory->package_name = $clientdeatails->client_type;
+					$paymenthistory->coins_amt = $paymentInfo['coins'];
+					$paymenthistory->selectproofid = "";
+					$paymenthistory->proofid = "";
+					$paymenthistory->paid_amount = $paymentInfo['paid_amount'];
+					$paymenthistory->tds_status = "No";
+					$paymenthistory->tds_amount = "0";
+					$paymenthistory->gst_tax = $paymentInfo['gst_tax'];
+					$paymenthistory->gst_total_amount = $paymentInfo['merchant_amount'];
+					$paymenthistory->gst_status = "Yes";
+					$paymenthistory->total_amount = $paymentInfo['merchant_amount'];
+					$paymenthistory->transactionid = $paymentInfo['razorpay_payment_id'];
+					$paymenthistory->paymentcollect = 0;
+					$paymenthistory->payment_mode = "razorpay";
+					$paymenthistory->payment_bank = "";
+					$paymenthistory->save();
+
+					$clientdeatails->coins_amt = $clientdeatails->coins_amt + $paymentInfo['coins'];
+					if ($clientdeatails->expired_on == '0000-00-00 00:00:00' || $clientdeatails->expired_on == 'NULL') {
+
+						$newDate = date('Y-m-d', strtotime(now() . ' +365 days'));
+
+					} else if (strtotime($clientdeatails->expired_on) > strtotime(date('Y-m-d'))) {
+						$newDate = date('Y-m-d', strtotime($clientdeatails->expired_on . ' +365 days'));
+
+					} else if (strtotime($clientdeatails->expired_on) < strtotime(date('Y-m-d'))) {
+						$newDate = date('Y-m-d', strtotime(now() . ' +365 days'));
+
+					} else {
+						$newDate = date('Y-m-d', strtotime(now() . ' +365 days'));
+					}
+					$clientdeatails->expired_on = $newDate;
+					$clientdeatails->active_status = "0";
+					$clientdeatails->paid_status = "0";
+					$clientdeatails->save();
+
+					$json['data'] = json_encode($paymentInfo);
+					$json['redirectURL'] = $request->merchant_surl_id;
+
+
+
+
+				// $json['data'] = json_encode($paymentInfo);
+				// $json['redirectURL'] = $_POST['merchant_furl_id'];
 			}
 			$json['msg'] = 'success';
 		} else {

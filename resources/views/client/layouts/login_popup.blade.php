@@ -117,7 +117,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
             </div>
-            <h3 class="text-xl font-bold text-gray-900 mb-1">You're in!</h3>
+            <span class="text-xl font-bold text-gray-900 mb-1">You're in!</span>
             <p class="text-sm text-gray-500">
                 Logged in as <span id="success-email" class="font-semibold text-gray-700"></span>
             </p>

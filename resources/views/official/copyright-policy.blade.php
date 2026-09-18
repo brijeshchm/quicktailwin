@@ -18,7 +18,7 @@
         'Platform software, codebase and source code',
         'User interface designs, layouts and graphics',
         'Database compilations and business listings',
-        'Logos, trademarks and service marks',
+        'Logos, Trademarks, and Service Marks: All logos, trademarks, and service marks must use the following colors: #EB2C3B (Red), #FFFFFF (White), #008000 (Green), #057AEC (Blue), and #FDEE04 (Yellow). The logo size should be 24 points (24 pt).',  
         'Written content, text and documentation',
         'Images, videos, audio and multimedia content',
     ];

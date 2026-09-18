@@ -1,525 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>@yield('title')</title>
-<meta name="keywords" content="@yield('keyword')" >
-<meta name="description" content="@yield('description')" > 
-<meta name="csrf-token" content="{{ csrf_token() }}">
-<link href="{{asset('client/images/favicon.png')}}" rel="icon">  
-<link href="https://fonts.gstatic.com" rel="preconnect">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet"> 
-<link href="{{asset('business/assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-<link href="{{asset('/business/assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
-
- <link href="{{asset('/vendor/select2/css/select2.min.css')}}" rel="stylesheet">
-<link href="{{asset('/vendor/select2/css/select2-bootstrap.css')}}" rel="stylesheet">
- 
-<link href="{{asset('vendor/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css')}}" rel="stylesheet">    
-<link href="{{asset('admin/vendor/datepicker/jquery-ui.css')}}" rel="stylesheet">
-<link href="{{asset('business/assets/css/daterangepicker.css')}}" rel="stylesheet">  
-<link href="{{asset('/admin/vendor/datatables-plugins/dataTables.bootstrap.css')}}" rel="stylesheet">
-<!-- DataTables Responsive CSS -->
-<link href="{{asset('/admin/vendor/datatables-responsive/dataTables.responsive.css')}}" rel="stylesheet">
-<link href="{{asset('business/assets/css/style.css')}}" rel="stylesheet">  
-
-
-</head>
-<body>
-
-  <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top d-flex align-items-center">
- <?php  
-    $clientID = auth()->guard('clients')->user()->id;
-
-    $client = App\Models\Client\Client::find($clientID); 
-
-		$leads = DB::table('leads')
-				   ->join('assigned_leads','leads.id','=','assigned_leads.lead_id')				  
-				   ->select('leads.*','assigned_leads.client_id','assigned_leads.lead_id','assigned_leads.created_at as created')				 
-				   
-				   ->orderBy('assigned_leads.created_at','desc')
-				   ->where('assigned_leads.readLead','0')
-				   ->where('assigned_leads.client_id',$clientID)->get()->count();
-  
-
-     ?>
-       <i class="bi bi-list toggle-sidebar-btn"></i>
-   
-    <div class="d-flex align-items-center justify-content-between">
-      <a href="{{url('/')}}" class="logo d-flex align-items-center">
-       
-        <img loading="lazy" src="{{asset('client/images/small-logo.jpg')}}" alt="Logo">
-        <span class="d-none d-lg-block"></span>
-      </a>
-    
-
-      
-    </div><!-- End Logo -->
-
-  <style>
- 
-
-
-
-.patti-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1px 2px;
-    flex-wrap: wrap;
-    width: 100%;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
-
-.info-head, .notifi {
-    display: flex;
-    align-items: center;
-    color: #606770;
-    flex-wrap: wrap; /* Allow wrapping within these containers */
-}
-
-.info-head div, .notifi div {
-    margin: 5px 10px;
-    font-size: 16px; /* Base font size for readability */
-}
-
-.ddd {
-    margin-right: 10px;
-}
-
-.bell {
-    color: #1a73e8;
-    margin-left: 5px;
-}
-
-.form-check {
-    display: flex;
-    align-items: center;
-    margin: 5px 10px;
-}
-
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-    .patti-header {
-        flex-direction: column;
-        text-align: center;
-        padding: 10px;
-    }
-.remain-code{
-  display: none;
-}
-.expire{
-  display: none;
-}
-.new-lead{
-  display: none;
-}
-    .info-head, .notifi {
-        margin: 3px 0;
-        width: 100%;
-        display: flex;
-        padding: 0px 2px;
-        place-content: space-evenly;
-    }
-
-    .info-head div, .notifi div {
-        margin: 5px 0;
-        font-size: 14px; /* Slightly smaller font for mobile */
-    }
-
-    .form-check {
-        justify-content: center;
-    }
-}
-
-/* Extra small screens */
-@media (max-width: 480px) {
-    .patti-header {
-        padding: 8px;
-    }
-
-    .info-head div, .notifi div {
-        font-size: 12px; /* Even smaller font for very small screens */
-    }
-
-    .form-check-label {
-        font-size: 12px;
-    }
-}
-</style>
-
-
-<div class="patti-header">
-    <div class="info-head">
-        <div class="package"><?php  if($client->coins_free =='0'){   ?>
-        <a href="{{ url('business/package')}}">Free subscribed Coins </a> <?php 
-
-        }else{  ?>  <a href="{{ url('business/package')}}">
-        <?php if($client->client_type=='count_based_subscription'){ echo "Subscription"; }else{  echo ucfirst($client->client_type); } ?> </a> <?php  } ?>
-      
-      
-      </div>
-       
-        <!-- <div class="expire">Expire: {{ date('d M, Y',strtotime($client->expired_on)) ?? '' }}</div> -->
-       <form class="profileSave" method="POST">
-        <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"  value="{{ $client->pauseLead??'' }}" data-client-id="{{ $client->id }}" @if(!empty($client->pauseLead)) {{ "checked"}} @endif>
-            <label class="form-check-label" for="flexSwitchCheckChecked">Pause Lead </label>
-        </div>
-        </form>
-        <div class="remain-code">Remaining Cons: {{ $client->coins_amt ?? '' }}</div>
-        <div class="new-lead"><a href="{{ url('business/new-enquiry') }}"> <span class="bell"><i class="bi bi-envelope"></i> {{ $leads??''}}</span></a></div>
-    </div>
-    <div class="notifi">
-<style>
-.profile-btn{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    padding:12px 18px;
-    background:#0ea5e9;
-    color:#fff;
-    text-decoration:none;
-    border-radius:8px;
-    font-size:13px;
-    font-weight:600;
-    box-shadow:0 2px 8px rgba(0,0,0,.15);
-    transition:all .3s ease;
-}
-
-.profile-btn:hover{
-    background:#0284c7;
-    transform:translateY(-1px);
-}
-
-.profile-btn i{
-    width:16px;
-    height:16px;
-}
-</style>
-    </div>
-</div>
-   
-  
-
-    <nav class="header-nav ms-auto">
-     
-      <ul class="d-flex align-items-center">
-
-   
-
- 
-         <li class="nav-item dropdown">
-
-            
-          
-
-        </li> 
-
-        <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">{{ $leads??''}}</span>
-          </a><!-- End Notification Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header">
-              You have {{ $leads??''}} new notifications
-              <a href="{{ url('business/new-enquiry') }}"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-           
- 
- 
-
-         
-
-          </ul> 
-
-        </li>
-       
-       
-
-        <li class="nav-item dropdown pe-3">
-
-          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown"> 
-           
-              <?php
-							 
-							if(!empty($client->logo)){
-								$logo = unserialize($client->logo);
-								if(!isset($logo['thumbnail'])){
-									$logo['thumbnail'] = $logo['large'];
-								}
-								$image = $logo['large']['src'];
-					 
-    	      ?>
-            <img loading="lazy" src="<?php echo asset(''.$image); ?>" alt="Profile" class="rounded-circle">
-            
-            <?php }else{ ?>
-             <img loading="lazy" src="{{asset('business/assets/img/user.png')}}" alt="Profile" class="rounded-circle">
-            
-            <?php } ?>
-            <span class="d-none d-md-block dropdown-toggle ps-2">{{ auth()->guard('clients')->user()->first_name }}
-             
-            </span>
-          </a> 
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-            <li class="dropdown-header">
-              <h6>{{ auth()->guard('clients')->user()->first_name }} </h6>              
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="{{url('business/personal-details')}}">
-                <i class="bi bi-person"></i>
-                <span>My Profile</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="{{url('business/account-settings')}}">
-                <i class="bi bi-gear"></i>
-                <span>Account Settings</span>
-              </a>
-            </li>         
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="{{url('business/favorite-enquiry')}}">
-                 <i class="bi bi-star"></i>
-                <span>Favorite Enquiry</span>
-              </a>
-            </li>
-
-            <li>
-            <a class="dropdown-item d-flex align-items-center" href="{{url('business/manage-enquiry')}}">
-                 <i class="bi bi-envelope"></i>
-                <span>Manage Enquiry</span>
-              </a>
-            </li>
-            
-          <li>
-            <a class="dropdown-item d-flex align-items-center" href="">
-                 <i class="bi bi-briefcase-fill"></i>
-                <span>Occupation</span>
-              </a>
-          </li>
-          <li>
-            <a class="dropdown-item d-flex align-items-center" href="">
-                 <i class="bi bi-shop"></i>
-                <span>My Business</span>
-              </a>
-          </li>
-
-          <li>
-              <a class="dropdown-item d-flex align-items-center" href="{{url('business/keywords')}}">
-                 <i class="bi bi-book-half"></i>
-                <span>Service Keywords</span>
-              </a>
-          </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="{{url('business/package')}}">
-                <i class="bi bi-currency-rupee"></i>
-                <span>Package</span>
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="{{url('business/billing-history')}}">
-                <i class="bi bi-currency-rupee"></i>
-                <span>My Transaction</span>
-              </a>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="{{url('business/help')}}">
-                <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
-              </a>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="{{ url('client/logout') }}">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Sign Out</span>
-              </a>
-            </li>
-
-          </ul><!-- End Profile Dropdown Items -->
-        </li><!-- End Profile Nav -->
-
-      </ul>
-    </nav><!-- End Icons Navigation -->
-
-  </header><!-- End Header -->
-
-  <aside id="sidebar" class="sidebar">
-
-    <ul class="sidebar-nav" id="sidebar-nav">
- @include('business.layouts.sidebar')
-</ul>
-</aside>
-
-  
- 
-
-    @yield('content')
-
-  <div id="pageLoader" style="display:none;">
-  <div class="loader"></div>
-  </div>
- 
- 
-<footer>
-        <div class="footer-item">
-            <span><a href="{{ url('business/dashboard') }}"><i class="bi bi-grid"></i>Home</a></span>
-        </div>
-        <div class="footer-item">
-          
-           
-            <span><a href="{{ url('business/package') }}"><i class="bi bi-currency-rupee"></i>Package</a></span>
-        </div>
-        <div class="footer-item">
-            <span><a href="{{ url('business/new-enquiry') }}"><i class="bi bi-people"></i>Leads</a></span>
-        </div>
-        <div class="footer-item">
-            <span><a href="{{ url('business/account-settings') }}"><i class="bi bi-gear"></i>Settings</a></span>
-        </div>
-    </footer>
- 
- 
- 
- <div id="messaged" class="modal fade" role="dialog" data-backdrop="static"><div class="modal-dialog"><div class="modal-content">
-    <h5 class="modal-title">QuickDials Sevice</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-   <div class="modal-body" style="padding:10px;padding-top:5px">
-        <div class="imgclass"></div>
-    <div class="successhtml"></div><div class="failedhtml"></div><div style="text-align:center;"></div></div></div></div>
-  
-  </div>
-
-
-  <div id="followUpModal" class="modal fade" role="" aria-hidden="false">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header">
-				<!--	<button type="button" class="close" data-dismiss="modal" style="float: right;">&times;</button>-->
-					
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					<h4 class="modal-title">Follow Up</h4>
-				</div>
-				<div class="modal-body" style="padding-top:0">
-				</div>
-			</div>
-		</div>
-	</div>
-  <!-- Vendor JS Files -->
-   
-  <script src="{{asset('business/assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script> 
-  
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-   
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-   
-       <script src="{{asset('/business/assets/js/moment.min.js')}}"></script>
-    <script src="{{asset('/business/assets/js/daterangepicker.js')}}"></script>
-
-<script src="{{asset('admin/vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('/admin/vendor/datatables-plugins/dataTables.bootstrap.min.js')}}"></script>
-<script src="{{asset('/admin/vendor/datatables-responsive/dataTables.responsive.js')}}"></script>
- 	
-
-    
-  <script src="{{asset('business/assets/js/main.js')}}"></script>
-   <script src="{{asset('/vendor/select2/js/select2.full.js')}}"></script>
- 
- 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>@yield('title', 'Dashboard') · QuickDials</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
-    $(".select2-single").select2({
-        theme: "bootstrap",
-        placeholder: "Select a City",
-        maximumSelectionSize: 6,
-        containerCssClass: ":all:",
-        ajax: {
-            url: "/business/cities/getajaxcities",
-            dataType: 'json',
-            delay: 250,
-            data: function(params) {
-                return {
-                    q: params.term
-                }
+        tailwind.config = { theme: { extend: {
+            colors: {
+                background:'hsl(var(--background) / <alpha-value>)', foreground:'hsl(var(--foreground) / <alpha-value>)',
+                card:'hsl(var(--card) / <alpha-value>)', border:'hsl(var(--border) / <alpha-value>)', input:'hsl(var(--input) / <alpha-value>)', ring:'hsl(var(--ring) / <alpha-value>)',
+                primary:'hsl(var(--primary) / <alpha-value>)', secondary:'hsl(var(--secondary) / <alpha-value>)', muted:'hsl(var(--muted) / <alpha-value>)',
+                accent:'hsl(var(--accent) / <alpha-value>)', destructive:'hsl(var(--destructive) / <alpha-value>)'
             },
-            processResults: function(data) {
-                return {
-                    results: $.map(data.cities, function(obj) {
-                        return {
-                            id: obj.city,
-                            text: obj.city
-                        };
-                    })
-                }
-            },
-            cache: true
-        }
-    });
-    $(".select2-single-state").select2({
-        theme: "bootstrap",
-        placeholder: "Select State",
-        maximumSelectionSize: 6,
-        containerCssClass: ":all:"
-    });
+            fontFamily:{sans:['Plus Jakarta Sans','sans-serif'],display:['Outfit','sans-serif']},
+            borderRadius:{xl:'1rem','2xl':'1.25rem'}, boxShadow:{card:'0 8px 30px rgba(15,23,42,.06)'}
+        }}}
+    </script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+    <style>
+        :root{--background:210 20% 98%;--foreground:222 47% 11%;--card:0 0% 100%;--border:214 32% 91%;--input:214 32% 91%;--ring:230 90% 55%;--primary:230 90% 55%;--secondary:210 40% 96%;--muted:210 40% 96%;--accent:24 95% 53%;--destructive:0 84% 60%}
+        [x-cloak]{display:none!important} *{border-color:hsl(var(--border))} html{scroll-behavior:smooth} body{margin:0;background:hsl(var(--background));color:hsl(var(--foreground));font-family:'Plus Jakarta Sans',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden} h1,h2,h3,h4,h5,h6{font-family:'Outfit',sans-serif;letter-spacing:-.02em}
+        .glass-nav{background:rgba(255,255,255,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)} .hide-scrollbar{-ms-overflow-style:none;scrollbar-width:none}.hide-scrollbar::-webkit-scrollbar{display:none}.pb-safe{padding-bottom:max(.5rem,env(safe-area-inset-bottom))}
+        .animate-fade-in{animation:fadeIn .35s ease-out both}.animate-slide-up{animation:slideUp .5s cubic-bezier(.16,1,.3,1) both}.stagger-1{animation-delay:.05s}.stagger-2{animation-delay:.1s}.stagger-3{animation-delay:.15s}.stagger-4{animation-delay:.2s}.stagger-5{animation-delay:.25s}@keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes slideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+        .form-input{width:100%;height:2.75rem;border:1px solid hsl(var(--input));border-radius:.75rem;background:transparent;padding:.5rem .9rem;font-size:.875rem;outline:none;transition:.2s}.form-input:focus{box-shadow:0 0 0 3px hsl(var(--ring)/.14);border-color:hsl(var(--ring))}.form-textarea{min-height:7rem;height:auto;resize:vertical;padding-top:.75rem}.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;white-space:nowrap;border-radius:.75rem;font-weight:600;font-size:.875rem;height:2.5rem;padding:0 1rem;transition:.18s;cursor:pointer}.btn:active{transform:scale(.98)}.btn-primary{background:hsl(var(--primary));color:white;box-shadow:0 8px 20px hsl(var(--primary)/.18)}.btn-primary:hover{filter:brightness(.96)}.btn-outline{border:1px solid hsl(var(--border));background:white}.btn-outline:hover,.btn-ghost:hover{background:hsl(var(--secondary))}.btn-ghost{background:transparent}.btn-danger{background:hsl(var(--destructive)/.1);color:hsl(var(--destructive))}.card{background:white;border-radius:1rem;box-shadow:0 8px 30px rgba(15,23,42,.06)}.badge{display:inline-flex;align-items:center;gap:.3rem;border-radius:999px;padding:.25rem .6rem;font-size:.72rem;font-weight:700}.icon-sm{width:1rem;height:1rem}.icon-md{width:1.25rem;height:1.25rem}.icon-lg{width:1.5rem;height:1.5rem}
+        @supports(padding-bottom:env(safe-area-inset-bottom)){.pb-safe{padding-bottom:env(safe-area-inset-bottom)}}
+    </style>
+    @stack('head')
+</head>
+@php
+$nav=[
+ ['route'=>'dashboard','label'=>'Overview','icon'=>'layout-dashboard','path'=>'/'],['route'=>'leads','label'=>'Leads','icon'=>'message-square-text','path'=>'/leads'],['route'=>'followups','label'=>'Follow-ups','icon'=>'calendar-check','path'=>'/follow-ups'],['route'=>'listings','label'=>'Listings','icon'=>'list','path'=>'/listings'],['route'=>'reviews','label'=>'Reviews','icon'=>'star','path'=>'/reviews'],['route'=>'team','label'=>'Team','icon'=>'users','path'=>'/team']];
+$profileTabs=['general'=>'Basic Info','seo'=>'SEO Meta','keywords'=>'Service Keywords','locations'=>'Service Areas','media'=>'Media & Gallery','awards'=>'Awards','certs'=>'Certificates','socials'=>'Social Links'];
+$accountTabs=['settings'=>'Account Settings','package'=>'Package','invoices'=>'Invoice History','coins_history'=>'Coins History','transactions'=>'Transactions'];
+$pageName=request()->is('profile*')?'Profile':(request()->is('account*')?'Account':collect(array_merge($nav,[['route'=>'contact','label'=>'Contact'],['route'=>'team','label'=>'Team']]))->first(fn($n)=>request()->routeIs($n['route']??''))['label']??'Dashboard');
 
-     $(".select2-cat-service").select2({
-        theme: "bootstrap",
-        placeholder: "Select service",
-        maximumSelectionSize: 6,
-        containerCssClass: ":all:"
-    });
-     $(".select2-city").select2({
-        theme: "bootstrap",
-        placeholder: "Select City",
-        maximumSelectionSize: 6,
-        containerCssClass: ":all:"
-    });
-     $(".search_city").select2();
-     $(".search_zone").select2();
-</script>
+ 
+@endphp
+<body x-data="{profileOpen:{{ request()->is('profile*')?'true':'false' }},accountOpen:{{ request()->is('account*')?'true':'false' }}}">
+<div class="flex min-h-[100dvh] w-full flex-col bg-background md:flex-row">
+    <aside class="fixed inset-y-0 z-20 hidden w-64 flex-col border-r bg-card shadow-sm md:flex">
+        <a href="{{ route('dashboard') }}" class="flex items-center gap-3 p-6"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary font-display text-lg font-bold text-white">Q</span><span class="font-display text-xl font-bold tracking-tight">QuickDials</span></a>
+        <div class="px-4 pb-4"><div class="rounded-xl border bg-secondary/50 p-4"><h3 class="truncate text-sm font-semibold">{{ $profile['name'] }}</h3><p class="truncate text-xs text-slate-500">{{ $profile['category'] }}</p><form action="{{ route('signout') }}" method="POST">@csrf<button class="mt-3 flex w-full items-center justify-center gap-2 rounded-lg bg-destructive/10 px-3 py-2 text-xs font-semibold text-destructive hover:bg-destructive/20"><i data-lucide="log-out" class="h-3.5 w-3.5"></i> Sign out</button></form></div></div>
+        <nav class="hide-scrollbar flex-1 space-y-1 overflow-y-auto px-4 pb-5">
+            @foreach($nav as $item)
+                <a href="{{ route($item['route']) }}" class="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition {{ request()->routeIs($item['route'])?'bg-primary text-white shadow-md shadow-primary/20':'text-slate-500 hover:bg-secondary hover:text-foreground' }}"><i data-lucide="{{ $item['icon'] }}" class="h-5 w-5"></i>{{ $item['label'] }}</a>
+            @endforeach
+            <div>
+                <button @click="profileOpen=!profileOpen" type="button" class="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition {{ request()->is('profile*')?'bg-primary text-white shadow-md shadow-primary/20':'text-slate-500 hover:bg-secondary hover:text-foreground' }}"><i data-lucide="user" class="h-5 w-5"></i>Profile<i data-lucide="chevron-down" class="ml-auto h-4 w-4 transition" :class="profileOpen&&'rotate-180'"></i></button>
+                <div x-show="profileOpen" class="ml-4 mt-1 space-y-0.5 border-l pl-4">
+                    
+                @foreach($profileTabs as $key=>$label)
+                
+                <a href="{{ route('profile',['tab'=>$key]) }}" class="block rounded-lg px-3 py-2 text-sm {{ request()->route('tab','general')===$key&&request()->is('profile*')?'bg-primary/10 font-semibold text-primary':'text-slate-500 hover:bg-secondary hover:text-foreground' }}">{{ $label }} sss</a>
+                
+                @endforeach
+            
+                </div>
+
+            </div>
+            <div>
+                <button @click="accountOpen=!accountOpen" type="button" class="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition {{ request()->is('account*')?'bg-primary text-white shadow-md shadow-primary/20':'text-slate-500 hover:bg-secondary hover:text-foreground' }}"><i data-lucide="wallet" class="h-5 w-5"></i>Account<i data-lucide="chevron-down" class="ml-auto h-4 w-4 transition" :class="accountOpen&&'rotate-180'"></i></button>
+                <div x-show="accountOpen" class="ml-4 mt-1 space-y-0.5 border-l pl-4">
+                    
+                @foreach($accountTabs as $key=>$label)<a href="{{ route('account',['tab'=>$key]) }}" class="block rounded-lg px-3 py-2 text-sm {{ request()->route('tab','settings')===$key&&request()->is('account*')?'bg-primary/10 font-semibold text-primary':'text-slate-500 hover:bg-secondary hover:text-foreground' }}">{{ $label }}</a>@endforeach
+            
+            </div>
+            </div>
+            <a href="{{ route('contact') }}" class="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition {{ request()->routeIs('contact')?'bg-primary text-white shadow-md shadow-primary/20':'text-slate-500 hover:bg-secondary hover:text-foreground' }}"><i data-lucide="headset" class="h-5 w-5"></i>Contact</a>
+        </nav>
+    </aside>
+    <main class="relative flex min-h-[100dvh] w-full flex-1 flex-col pb-[calc(5.5rem+env(safe-area-inset-bottom))] md:pl-64 md:pb-0">
+        <header class="glass-nav sticky top-0 z-30 flex flex-col gap-2 border-b px-4 py-2 md:hidden">
+            <div class="flex items-center justify-between"><a href="{{ route('dashboard') }}" class="flex items-center gap-2"><span class="flex h-7 w-7 items-center justify-center rounded-md bg-primary font-display text-sm font-bold text-white">Q</span><span class="font-display text-lg font-bold">QuickDials</span></a><div class="flex items-center gap-2"><a href="{{ route('account') }}" class="flex items-center gap-1.5 rounded-lg border bg-secondary/80 px-2.5 py-1.5 text-sm font-semibold"><i data-lucide="coins" class="h-4 w-4 text-accent"></i>{{ number_format($account['coins']) }}</a><button class="relative flex h-8 w-8 items-center justify-center rounded-full bg-secondary"><i data-lucide="bell" class="h-4 w-4"></i><span class="absolute right-0 top-0 h-2.5 w-2.5 rounded-full border-2 border-background bg-accent"></span></button></div></div>
 
 
+            @if(request()->routeIs('leads'))
+            
+            <form action="{{ route('account.update') }}" method="POST" class="flex items-center justify-between rounded-xl border border-primary/10 bg-primary/5 px-3 py-2">@csrf @method('PATCH')<input type="hidden" name="pauseLeads" value="{{ $account['pauseLeads']?0:1 }}"><div class="flex items-center gap-2"><span class="h-2 w-2 rounded-full {{ $account['pauseLeads']?'bg-destructive':'animate-pulse bg-emerald-500' }}"></span><span class="text-xs font-semibold">{{ $account['pauseLeads']?'Leads Paused':'Receiving Leads' }}</span></div><button class="relative h-6 w-11 rounded-full {{ $account['pauseLeads']?'bg-slate-300':'bg-primary' }}"><span class="absolute top-1 h-4 w-4 rounded-full bg-white transition {{ $account['pauseLeads']?'left-1':'left-6' }}"></span></button></form>
+            
+            @endif
+        </header>
+        <header class="sticky top-0 z-10 hidden h-16 items-center justify-between border-b bg-background/80 px-8 backdrop-blur-md md:flex"><h1 class="font-display text-xl font-semibold">{{ $pageName }}</h1><div class="flex items-center gap-6"><div class="flex items-center gap-3 rounded-xl border bg-secondary/50 px-3 py-1.5">@if(request()->routeIs('leads'))<form action="{{ route('account.update') }}" method="POST" class="flex items-center gap-2 border-r pr-3">@csrf @method('PATCH')<input type="hidden" name="pauseLeads" value="{{ $account['pauseLeads']?0:1 }}"><span class="text-sm font-medium text-slate-500">Pause Leads</span><button class="relative h-6 w-11 rounded-full {{ $account['pauseLeads']?'bg-primary':'bg-slate-300' }}"><span class="absolute top-1 h-4 w-4 rounded-full bg-white transition {{ $account['pauseLeads']?'left-6':'left-1' }}"></span></button></form>@endif<a href="{{ route('account') }}" class="flex items-center gap-2"><i data-lucide="coins" class="h-5 w-5 text-accent"></i><span class="font-display font-bold">{{ number_format($account['coins']) }}</span></a></div><button class="relative flex h-9 w-9 items-center justify-center rounded-full border bg-card text-slate-500 shadow-sm"><i data-lucide="bell" class="h-4 w-4"></i><span class="absolute right-0 top-0 h-2.5 w-2.5 rounded-full border-2 border-card bg-accent"></span></button></div></header>
+        <div class="mx-auto w-full max-w-6xl flex-1 p-3 md:p-8">@yield('content')</div>
+    </main>
+    <nav class="glass-nav pb-safe fixed inset-x-0 bottom-0 z-40 border-t md:hidden"><div class="hide-scrollbar flex items-center justify-around overflow-x-auto px-2 py-2">
+        @foreach(array_merge($nav,[['route'=>'profile','label'=>'Profile','icon'=>'user'],['route'=>'account','label'=>'Account','icon'=>'wallet'],['route'=>'contact','label'=>'Contact','icon'=>'headset']]) as $item)
+        @php         
+        $active=$item['route']==='business/profile'?request()->is('business/profile*'):($item['route']==='account'?request()->is('account*'):request()->routeIs($item['route']));
+        @endphp
 
- <script>
-document.addEventListener('DOMContentLoaded', function () {
-  const toggleBtn = document.querySelector('.toggle-sidebar-btn');
-  const sidebar = document.querySelector('.sidebar');
 
-  if (toggleBtn && sidebar) {
-    toggleBtn.addEventListener('click', function () {
-      sidebar.classList.toggle('active');
-    });
-  }
-});
-</script>
-</body>
-
-</html>
+        <a href="{{ route($item['route']) }}" class="flex min-w-[56px] shrink-0 flex-col items-center gap-0.5 rounded-xl p-1.5 transition {{ $active?'text-primary':'text-slate-500' }}"><span class="flex h-7 w-7 items-center justify-center rounded-full {{ $active?'bg-primary/10':'' }}"><i data-lucide="{{ $item['icon'] }}" class="h-5 w-5"></i></span><span class="text-[10px] font-medium">{{ $item['label'] }} fff</span></a>
+        @endforeach
+    </div></nav>
+</div>
+@if(session('success'))<div x-data="{show:true}" x-init="setTimeout(()=>show=false,3500)" x-show="show" x-transition class="fixed right-4 top-20 z-50 flex max-w-sm items-start gap-3 rounded-xl border bg-white p-4 shadow-xl"><span class="flex h-9 w-9 items-center justify-center rounded-full bg-emerald-100 text-emerald-600"><i data-lucide="check" class="h-5 w-5"></i></span><div><p class="text-sm font-semibold">Success</p><p class="text-xs text-slate-500">{{ session('success') }}</p></div><button @click="show=false"><i data-lucide="x" class="h-4 w-4 text-slate-400"></i></button></div>@endif
+@if($errors->any())<div x-data="{show:true}" x-show="show" class="fixed right-4 top-20 z-50 max-w-sm rounded-xl border border-red-200 bg-white p-4 shadow-xl"><div class="flex gap-3"><i data-lucide="circle-alert" class="h-5 w-5 text-destructive"></i><div><p class="text-sm font-semibold">Please check the form</p>@foreach($errors->all() as $error)<p class="mt-1 text-xs text-slate-500">{{ $error }}</p>@endforeach</div><button @click="show=false"><i data-lucide="x" class="h-4 w-4"></i></button></div></div>@endif
+<script>document.addEventListener('DOMContentLoaded',()=>lucide.createIcons());document.addEventListener('alpine:initialized',()=>setTimeout(()=>lucide.createIcons(),30));</script>
+@stack('scripts')
+</body></html>
