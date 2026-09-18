@@ -399,8 +399,6 @@ $finalCounts = collect($statusLabels)->mapWithKeys(function ($label) use ($statu
         ->get()
         ->map(fn ($fu) => (array) $fu);
         $statues = Status::where('lead_follow_up', '1')->get();	 
-
-
 		return view('business.business.dashboard',array_merge($this->common(),
 		['stats'=>$stats,'monthsFollow'=>$monthsFollow,'statues'=>$statues,'series'=>$series,'recentActivity'=>$recentActivity,'leads'=>$leads,'followups'=>$followups]));
 
