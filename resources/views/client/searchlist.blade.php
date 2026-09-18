@@ -100,9 +100,10 @@ $starMap = [
     3.5 => 'star_3.5.png', 4 => 'star_4.png', 4.5 => 'star_4.5.png',
     4.75 => 'star_4.75.png', 5 => 'star_5.png',
 ];
-
-$bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
-
+ 
+$bgImage = !empty($bgImage)
+    ? $bgImage
+    : '/client/images/computer-courses-training.jpg';
 // Calculate star image key
 $starKey = 0;
 foreach ($starMap as $k => $v) {

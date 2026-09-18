@@ -18,7 +18,10 @@
 @section('content')	 
 @include('client.components.banner-section')
 @php
-$bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
+ 
+$bgImage = !empty($bgImage)
+    ? $bgImage
+    : '/client/images/computer-courses-training.jpg';
 @endphp
 @include('client.layouts.common_country_data')
 <div x-show="showAd" x-cloak
