@@ -1,5 +1,0 @@
----
-deployment:
-  tasks:
-    - export DEPLOYPATH=/home/quickorg/quickdials.com/
-    - /bin/rsync -a --exclude='.git' --exclude='.env' --exclude='.cpanel.yml' ./ $DEPLOYPATH
