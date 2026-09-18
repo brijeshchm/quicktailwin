@@ -19,8 +19,10 @@
 @section('content')	
 @include('client.components.banner-section')
 @php
-
-$bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
+ 
+$bgImage = !empty($bgImage)
+    ? $bgImage
+    : '/client/images/computer-courses-training.jpg';
 
  @endphp
 @include('client.layouts.common_country_data')
@@ -32,7 +34,7 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
     {{-- Full Responsive Banner Image --}}
     <img
         src="{{ $bgImage }}"
-        alt="Quickdials Advertisement"
+        alt="{{ $keyword }}"
         class="block w-full h-auto object-cover h-[130px] sm:h-[170px]"
         loading="eager"
     >
