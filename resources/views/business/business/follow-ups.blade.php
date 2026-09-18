@@ -234,7 +234,12 @@ window.followupManager = function () {
     $overdue = false;
     $pastDays = 0;
 
-  if (!empty($lead->expected_date_time)) {
+   if (!empty($lead->expected_date_time)  && !in_array($lead->status_name, [
+    'Meeting Close',
+    'Sales Close',
+    'Joined',
+    'Invalid Number',
+    ])) {
         $followDate = \Carbon\Carbon::parse($lead->expected_date_time)->startOfDay();
         $today = \Carbon\Carbon::today();
         $overdue = $followDate->lt($today);
@@ -287,6 +292,9 @@ window.followupManager = function () {
       </div>
       <p class="text-xs leading-relaxed text-slate-800 sm:text-sm">&ldquo;{!! $lead->remarks !!}&rdquo;</p>
 
+       <p class="text-sm"><strong>Current Status: </strong> {{ $lead->status_name }}</p>
+
+       
         @if(!empty($lead->expected_date_time))
         <p class="mt-1 text-xs text-slate-500">
         {{ get_time(strtotime($lead->expected_date_time)) }} ago

@@ -68,7 +68,7 @@ class SitemapsController extends Controller
 		 
 		$keywords = $keywords->get();
 		foreach ($keywords as $keyword) {
-			$sitemap->add(URL::to('/' . generate_slug($keyword->city) . '/' . $keyword->slug), $keyword->updated_at, '0.80', 'weekly');
+			$sitemap->add(URL::to('/' . $keyword->slug), $keyword->updated_at, '0.80', 'weekly');
 		}
 	 
 		$sitemap->store('xml', 'sitemap');

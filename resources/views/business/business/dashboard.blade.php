@@ -55,11 +55,7 @@
                 Here's what's happening with your business today.
             </p>
         </div>
-
-        <a href="{{ route('listings') }}#new-listing" class="btn btn-primary">
-            <i data-lucide="plus" class="h-4 w-4"></i>
-            New Listing
-        </a>
+ 
     </div>
 
 
@@ -134,6 +130,7 @@
         <div class="divide-y border-b">
             @forelse($leads->getCollection() as $lead)
                 @php
+ 
                     $leadFus = $followups
                         ->where('lead_id', $lead->lead_id)
                         ->whereNotNull('notes')
@@ -142,8 +139,13 @@
                     $pending = '';
                     $overdue = false;
                     $pastDays = 0;
-
-                    if (!empty($lead->expected_date_time)) {
+    
+                    if (!empty($lead->expected_date_time)  && !in_array($lead->status_name, [
+                    'Meeting Close',
+                    'Sales Close',
+                    'Joined',
+                    'Invalid Number',
+                    ])) {
                         $followDate = \Carbon\Carbon::parse($lead->expected_date_time)->startOfDay();
                         $today = \Carbon\Carbon::today();
                         $overdue = $followDate->lt($today);
@@ -169,11 +171,13 @@
 
                                 @if(!empty($lead->remarks))
                                     <p class="mt-1 line-clamp-1 text-sm">
-                                        {!! $lead->remarks !!}
+                                        {!! $lead->remarks !!} 
                                     </p>
+                                    <p class="text-sm"><strong>Current Status: </strong> {{ $lead->status_name }}</p>
+
                                 @endif
 
-                                @if(!empty($lead->expected_date_time))
+                                @if(!empty($lead->expected_date_time) )
                                     <p class="mt-1 text-xs text-slate-500">
                                         {{ get_time(strtotime($lead->expected_date_time)) }} ago
 
@@ -184,6 +188,13 @@
                                         @endif
                                     </p>
                                 @endif
+
+                                @if(!empty($lead->status_name))
+                                    <p class="mt-1 line-clamp-1 text-sm">
+                                       
+                                    </p>
+                                @endif
+
                             </div>
                         </div>
 

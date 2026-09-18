@@ -2,6 +2,8 @@
 @section('title', $metaTitle ?? $keyword . ' in ' . ucwords(strtolower(str_replace('-', ' ', $city))) . ' | QuickDials')
 @section('description', $metaDescription ?? 'Find the best ' . $keyword . ' in ' . ucwords(strtolower(str_replace('-', ' ', $city))) . ' with QuickDials. Discover verified businesses, addresses, phone numbers, reviews, ratings, photos, maps, and top local services near you.')
 @php
+
+
     $allowedCities = [
         'faridabad','noida'
     ];

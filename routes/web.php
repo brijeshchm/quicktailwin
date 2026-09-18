@@ -399,8 +399,6 @@ Route::get('/sitemap-blog.xml', function () {
 		->header('Content-Type', 'application/xml; charset=UTF-8');
 
 });
-
- 
  
 
 Route::get('/llms.txt', function () {
@@ -410,30 +408,30 @@ Route::get('/llms.txt', function () {
 })->name('llms');
 
 
-Route::get('/sitemap.xml', function () {
+// Route::get('/sitemap.xml', function () {
  
-		$keywords =  DB::table('keyword')
-			->where('seo_type', '1')
-			->select('slug', 'updated_at')
-			->get();
+// 		$keywords =  DB::table('keyword')
+// 			->where('seo_type', '1')
+// 			->select('slug', 'updated_at')
+// 			->get();
 	 
-		$categories =  DB::table('parent_category')
-			->where('status', '1')
-			->select('parent_slug', 'updated_at')
-			->get();
+// 		$categories =  DB::table('parent_category')
+// 			->where('status', '1')
+// 			->select('parent_slug', 'updated_at')
+// 			->get();
  
 	 
-		$childCategories =  DB::table('child_category')
-			->where('status', '1')
-			->select('child_slug', 'updated_at')
-			->get();
+// 		$childCategories =  DB::table('child_category')
+// 			->where('status', '1')
+// 			->select('child_slug', 'updated_at')
+// 			->get();
 	 
 
-	return response()
-		->view('client.sitemap', compact('keywords','categories','childCategories'))
-	 ->header('Content-Type', 'application/xml; charset=UTF-8');
+// 	return response()
+// 		->view('client.sitemap', compact('keywords','categories','childCategories'))
+// 	 ->header('Content-Type', 'application/xml; charset=UTF-8');
 
-});
+// });
  
 Route::get('/top-city.xml', function () {
 	 
@@ -442,96 +440,99 @@ Route::get('/top-city.xml', function () {
         ->header('Content-Type', 'application/xml; charset=UTF-8');
 });
 
-Route::get('/sitemap-online.xml', function () { 
-	$keywords =  DB::table('keyword')
-			->where('seo_type', '1')
-			->select('slug', 'updated_at')
-			->get(); 
+// Route::get('/sitemap-online.xml', function () { 
+// 	$keywords =  DB::table('keyword')
+// 			->where('seo_type', '1')
+// 			->select('slug', 'updated_at')
+// 			->get(); 
 
-	return response()
-		->view('client.sitemap_online', compact('keywords'))
-		->header('Content-Type', 'application/xml; charset=UTF-8');
+// 	return response()
+// 		->view('client.sitemap_online', compact('keywords'))
+// 		->header('Content-Type', 'application/xml; charset=UTF-8');
 
-});
+// });
 
-Route::get('/sitemap-city.xml', function () {
+// Route::get('/sitemap-city.xml', function () {
 
 	 
-		$keywords =  DB::table('keyword')
-			->where('seo_type', '1')
-			->select('slug', 'updated_at')
-			->get();
+// 		$keywords =  DB::table('keyword')
+// 			->where('seo_type', '1')
+// 			->select('slug', 'updated_at')
+// 			->get();
  
 
-	return response()
-		->view('client.sitemap_city', compact('keywords'))
-		->header('Content-Type', 'application/xml; charset=UTF-8');
+// 	return response()
+// 		->view('client.sitemap_city', compact('keywords'))
+// 		->header('Content-Type', 'application/xml; charset=UTF-8');
 
-});
+// });
 
-Route::get('/sitemap-city-1.xml', function () {
+// Route::get('/sitemap-city-1.xml', function () {
 
 	 
-		$keywords =  DB::table('keyword')
-			->where('seo_type', '1')
-			->select('slug', 'updated_at')
-			->get();
-	 	 return response()
-        ->view('client.sitemap_city_1', compact('keywords'))
-        ->header('Content-Type', 'application/xml; charset=UTF-8');
+// 		$keywords =  DB::table('keyword')
+// 			->where('seo_type', '1')
+// 			->select('slug', 'updated_at')
+// 			->get();
+// 	 	 return response()
+//         ->view('client.sitemap_city_1', compact('keywords'))
+//         ->header('Content-Type', 'application/xml; charset=UTF-8');
 
-});
+// });
 
-Route::get('/sitemap-city-2.xml', function () {
+// Route::get('/sitemap-city-2.xml', function () {
 
-	$keywords = DB::table('keyword')
-		->where('seo_type', '1')
-		->select('slug', 'updated_at')
-		->get();
-	return response()
-		->view('client.sitemap_city-2', compact('keywords'))
-		->header('Content-Type', 'application/xml; charset=UTF-8');
+// 	$keywords = DB::table('keyword')
+// 		->where('seo_type', '1')
+// 		->select('slug', 'updated_at')
+// 		->get();
+// 	return response()
+// 		->view('client.sitemap_city-2', compact('keywords'))
+// 		->header('Content-Type', 'application/xml; charset=UTF-8');
 
-});
-Route::get('/sitemap-businesses.xml', function () {
+// });
 
-	$clients = DB::table('clients')
-		->where('active_status', '1')
-		->select('business_slug', 'updated_at')
-		->get();
-	return response()
-		->view('client.sitemap-businesses', compact('clients'))
-		->header('Content-Type', 'application/xml; charset=UTF-8');
 
-});
+// Route::get('/sitemap-businesses.xml', function () {
 
-Route::get('/sitemap-city-3.xml', function () {
+// 	$clients = DB::table('clients')
+// 		->where('active_status', '1')
+// 		->select('business_slug', 'updated_at')
+// 		->get();
+// 	return response()
+// 		->view('client.sitemap-businesses', compact('clients'))
+// 		->header('Content-Type', 'application/xml; charset=UTF-8');
 
-	$keywords = DB::table('keyword')
-		->where('seo_type', '1')
-		->select('slug', 'updated_at')
-		->get();
-	return response()
-		->view('client.sitemap_city-3', compact('keywords'))
-		->header('Content-Type', 'application/xml; charset=UTF-8');
+// });
 
-});
-Route::get('/sitemap-city-4.xml', function () {
+// Route::get('/sitemap-city-3.xml', function () {
 
-	$keywords = DB::table('keyword')
-		->where('seo_type', '1')
-		->select('slug', 'updated_at')
-		->get();
-	return response()
-		->view('client.sitemap_city-4', compact('keywords'))
-		->header('Content-Type', 'application/xml; charset=UTF-8');
+// 	$keywords = DB::table('keyword')
+// 		->where('seo_type', '1')
+// 		->select('slug', 'updated_at')
+// 		->get();
+// 	return response()
+// 		->view('client.sitemap_city-3', compact('keywords'))
+// 		->header('Content-Type', 'application/xml; charset=UTF-8');
 
-});
+// });
 
-Route::get('/quickdialssitemap.xml', function () {
-	return response()->view('client.quickdialssitemap')
-	->header('Content-Type', 'application/xml; charset=UTF-8');
-});
+// Route::get('/sitemap-city-4.xml', function () {
+
+// 	$keywords = DB::table('keyword')
+// 		->where('seo_type', '1')
+// 		->select('slug', 'updated_at')
+// 		->get();
+// 	return response()
+// 		->view('client.sitemap_city-4', compact('keywords'))
+// 		->header('Content-Type', 'application/xml; charset=UTF-8');
+
+// });
+
+// Route::get('/quickdialssitemap.xml', function () {
+// 	return response()->view('client.quickdialssitemap')
+// 	->header('Content-Type', 'application/xml; charset=UTF-8');
+// });
  
 Route::post('/apiddd/lead/add', [App\Http\Controllers\Client\HomePageController::class, 'addLadsss']);
 
@@ -627,9 +628,9 @@ Route::post('razorPayCheckout', [App\Http\Controllers\Client\WebsiteRazorpayCont
 Route::get('/payment-done', [App\Http\Controllers\Client\WebsiteRazorpayController::class, 'success']);
 Route::get('/failed', [App\Http\Controllers\Client\WebsiteRazorpayController::class, 'failed']);
  
-Route::match(['GET', 'HEAD'], '/business-details/{slug}', function () {
-    abort(410, 'This business listing has been permanently removed.');
-})->where('slug', '.*');
+// Route::match(['GET', 'HEAD'], '/business-details/{slug}', function () {
+//     abort(410, 'This business listing has been permanently removed.');
+// })->where('slug', '.*');
 
 // Route::get('search', [App\Http\Controllers\Client\CitySlugController::class, 'searchKW'])->name('kw.search');
 Route::get('/{city}', [CitySlugController::class, 'showCityOrService'])

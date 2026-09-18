@@ -45,7 +45,7 @@ class ClientDetailController extends Controller
         try {
         $res = Http::timeout(10)
         ->withoutVerifying()
-        ->get('https://api.quickdials.com/api/website/business-details', [
+        ->get('https://api.quickdials.com/api/website/businessdetails', [
         'business_slug' => $finalSlug,
         ]);
 
@@ -347,7 +347,7 @@ class ClientDetailController extends Controller
 
 
 
-         return view('client.business-details', compact(
+         return view('client.businessdetails', compact(
             'city', 'zones','growthBusiness',
          
             'businesses', 'businessChunks',

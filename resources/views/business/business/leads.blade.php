@@ -65,19 +65,29 @@ $statusClass=['new'=>'border-blue-200 bg-blue-50 text-blue-700','contacted'=>'bo
    $leadFus  = $followups->where('lead_id', $lead['lead_id'])->whereNotNull('notes')
         ->where('notes', '!=', '');
 
-//  dd($leadFus);
- 
     $followDate = \Carbon\Carbon::parse($lead['followDate'])->startOfDay();
-    $today = \Carbon\Carbon::today();
-
-    $pastDays = $followDate->lt($today)
-        ? $followDate->diffInDays($today)
-        : 0;
  
    // FIX #2: 'status' isn't a key on the followups array — the boolean is 'done'.
-   $pending  = '';
-   $overdue  = $leadFus->filter(fn($f) => $f['dueAt'] && \Carbon\Carbon::parse($lead['followDate'])->isPast())->count();
-   $assignee = collect($team)->firstWhere('id', (int) $lead['assignedTo']);
+   
+    $assignee = "";
+ 
+    $pending = '';
+    $overdue = false;
+    $pastDays = 0;
+
+   if (!empty($lead->expected_date_time)  && !in_array($lead->status_name, [
+    'Meeting Close',
+    'Sales Close',
+    'Joined',
+    'Invalid Number',
+    ])) {
+        $followDate = \Carbon\Carbon::parse($lead->expected_date_time)->startOfDay();
+        $today = \Carbon\Carbon::today();
+        $overdue = $followDate->lt($today);
+        $pastDays = $overdue ? $followDate->diffInDays($today) : 0;
+    }
+
+
   @endphp
   <div class="card animate-slide-up stagger-{{ ($i % 5) + 1 }} relative overflow-hidden {{ $lead['archived'] ? 'opacity-70 grayscale-[20%]' : '' }} {{ $lead['readLead'] == '0' ? 'assignedLeadsClick cursor-pointer bg-gray-200' : '' }}" data-assigned-id="{{ $lead['assignId'] }}" data-client-id="{{ $lead['clientId'] }}" >
  
@@ -496,33 +506,24 @@ $statusClass=['new'=>'border-blue-200 bg-blue-50 text-blue-700','contacted'=>'bo
                                 Status
                             </label>
 
-                            <select
-                                name="status"
-                                id="followup_status"
-                                class="form-input"
-                                onchange="toggleFollowUpDate(this)"
-                            >
 
-                                <option value="">
-                                    Select Status
+                                 <select
+                            name="status"
+                            id="followup_status"
+                            class="form-input"
+                            x-model.number="followupStatusid"
+                            @change="toggleFollowUpDate($event.target)"
+                        >
+                            <option value="">Select Status</option>
+                            @foreach($statues as $status)
+                                <option value="{{ $status->id }}" data-name="{{ strtolower(trim($status->name)) }}">
+                                    {{ $status->name }}
                                 </option>
+                            @endforeach
+                        </select>
 
-                                @if($statues)
 
-                                    @foreach($statues as $status)
-
-                                        <option
-                                            value="{{ $status->id }}"
-                                            data-name="{{ strtolower(trim($status->name)) }}"
-                                        >
-                                            {{ $status->name }}
-                                        </option>
-
-                                    @endforeach
-
-                                @endif
-
-                            </select>
+                            
 
                         </div>
 
@@ -723,6 +724,8 @@ $statusClass=['new'=>'border-blue-200 bg-blue-50 text-blue-700','contacted'=>'bo
 </div>
 
 {{-- FIX #4: enquiryController didn't exist — this is the missing piece that actually loads the table --}}
+ 
+
 <script>
 function toggleFollowUpDate(select) {
 
@@ -730,7 +733,7 @@ function toggleFollowUpDate(select) {
     const statusName = selectedOption.dataset.name || '';
 
     const dateInput = document.getElementById('expected_date_time');
-    const applyBtn = document.getElementById('applyFollowUpDateBtn');
+    // const applyBtn = document.getElementById('applyFollowUpDateBtn');
 
     if (statusName === 'not interested') {
 
@@ -741,7 +744,7 @@ function toggleFollowUpDate(select) {
         dateInput.disabled = true;
 
         // Disable Apply button
-        applyBtn.disabled = true;
+        // applyBtn.disabled = true;
 
         // Tailwind disabled appearance
         dateInput.classList.add(
@@ -750,15 +753,15 @@ function toggleFollowUpDate(select) {
             'opacity-60'
         );
 
-        applyBtn.classList.add(
-            'cursor-not-allowed',
-            'opacity-50'
-        );
+        // applyBtn.classList.add(
+        //     'cursor-not-allowed',
+        //     'opacity-50'
+        // );
 
     } else {
 
         dateInput.disabled = false;
-        applyBtn.disabled = false;
+        // applyBtn.disabled = false;
 
         dateInput.classList.remove(
             'cursor-not-allowed',
@@ -766,14 +769,13 @@ function toggleFollowUpDate(select) {
             'opacity-60'
         );
 
-        applyBtn.classList.remove(
-            'cursor-not-allowed',
-            'opacity-50'
-        );
+        // applyBtn.classList.remove(
+        //     'cursor-not-allowed',
+        //     'opacity-50'
+        // );
     }
 }
 </script>
-
 <script>
 function getLocalDateTime() {
     const now = new Date();
