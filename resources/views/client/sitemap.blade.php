@@ -1,7 +1,9 @@
-<?php echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<?php echo '<?xml version="1.0" encoding="UTF-8"?>'; ?> 
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"> 
 <url>
 <loc>https://www.quickdials.com/</loc>
 <lastmod>2026-06-09T10:30:00+00:00</lastmod>
@@ -74,103 +76,34 @@
 <priority>0.80</priority>
 </url>  
 @php
-    $allowedCities = [
-        'faridabad'
-    ];
-
-    $keywordArray = [
-        'artificial-intelligence-training',
-        'python-training',
-        'workday-training',
-        'sap-training',
-        'banquet-hall',
-        'cricket-academy',
-        'data-science-training',
-        'judo-karate',
-        'distance-education',
-        'data-analytics-training',
-        'salesforce-training',
-        'wedding-organisers'
-
-    ];
+    $cities = ['faridabad','ajmer','kolhapur','firozabad','aligarh','bareilly','udaipur','mysuru','visakhapatnam','jamshedpur','jabalpur'];
 @endphp
 
-@foreach ($allowedCities as $city)
-    @foreach ($keywordArray as $keyword)
-        <url>
-            <loc>{{ route('city.slug', [
-                'city_slug' => $city,
-                'service_slug' => $keyword
-            ]) }}</loc>
-
-            <changefreq>daily</changefreq>
-            <priority>0.80</priority>
-        </url>
+@foreach ($cities as $city)
+    @foreach ($keywords as $keyword)
+    <url>
+        <loc>{{ route('city.slug', ['city_slug' => $city, 'service_slug' => $keyword->slug]) }}</loc>
+        <lastmod>{{ \Carbon\Carbon::parse($keyword->updated_at)->toAtomString() }}</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.80</priority>
+    </url>
     @endforeach
 @endforeach
-@php
-    $noidaCities = [
-        'noida'
-    ];
-    $keywordArrayNoida = [
-        'aws-training','cloud-computing-training','devops-training','digital-marketing-training','full-stack-developer-training','azure-training','pmp-certification-training','mba-distance','car-service','computer-repair','shooting-academy','swimming-academy','boxing'
-    ];
-@endphp
-@foreach ($noidaCities as $cityNoida)
-    @foreach ($keywordArrayNoida as $keywordNoida)
-        <url>
-            <loc>{{ route('city.slug', [
-                'city_slug' => $cityNoida,
-                'service_slug' => $keywordNoida
-            ]) }}</loc>
-            <changefreq>daily</changefreq>
-            <priority>0.80</priority>
-        </url>
-    @endforeach
+@foreach ($categories as $category)
+<url>
+    <loc>{{ route('showCity',$category->parent_slug) }}</loc>
+    <lastmod>{{ \Carbon\Carbon::parse($category->updated_at ?? now())->toAtomString() }}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.80</priority>
+</url>
 @endforeach
 
-
-@php
-    $delhiCities = [
-        'delhi'
-    ];
-    $keywordArrayDelhi = [
-        'sap-mm-training','sap-fico-training','sap-hana-training','power-bi-training','machine-learning-training','react-native-training','cyber-security-training','certified-ethical-hacking-training','nodejs-training','taekwondo','football-academy','photo-and-videography'
-    ];
-@endphp
-@foreach ($delhiCities as $cityDelhi)
-    @foreach ($keywordArrayDelhi as $keywordDelhi)
-        <url>
-            <loc>{{ route('city.slug', [
-                'city_slug' => $cityDelhi,
-                'service_slug' => $keywordDelhi
-            ]) }}</loc>
-            <changefreq>daily</changefreq>
-            <priority>0.80</priority>
-        </url>
-    @endforeach
+@foreach ($childCategories as $child)
+<url>
+    <loc>{{ route('showCity',$child->child_slug) }}</loc>
+    <lastmod>{{ \Carbon\Carbon::parse($child->updated_at ?? now())->toAtomString() }}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.80</priority>
+</url>
 @endforeach
-
-@php
-    $bangaloreCities = [
-        'bangalore'
-    ];
-    $keywordArrayBangalore = [
-       	'sap-sd-training','sap-hcm-training','sap-success-factors-training','workday-hcm-functional','tableau-training','deep-learning-training','php-training','mern-stack-training','catering-services','event-organizers','tent-house','table-tennis','archery'
-    ];
-@endphp
-@foreach ($bangaloreCities as $cityBangalore)
-    @foreach ($keywordArrayBangalore as $keywordBangalore)
-        <url>
-            <loc>{{ route('city.slug', [
-                'city_slug' => $cityBangalore,
-                'service_slug' => $keywordBangalore
-            ]) }}</loc>
-            <changefreq>daily</changefreq>
-            <priority>0.80</priority>
-        </url>
-    @endforeach
-@endforeach
-
-
 </urlset>
