@@ -1498,10 +1498,16 @@ class BackEndClientsController extends Controller
 		$name = str_replace(' ', '_', $name);
 		$filename = bin2hex(random_bytes(5)).'_Quickdials';
 
-		 
+	 
 		// ✅ SVG → Save directly
 		if ($ext === 'svg') {
 			$finalName = $filename . '.svg';
+			$file->move($destinationPath, $finalName);
+			return $finalName;
+		}
+		
+		if ($ext === 'webp') {
+			$finalName = $filename . '.webp';
 			$file->move($destinationPath, $finalName);
 			return $finalName;
 		}
@@ -1519,11 +1525,7 @@ class BackEndClientsController extends Controller
 				imagepalettetotruecolor($src);
 				imagealphablending($src, true);
 				imagesavealpha($src, true);
-				break;
-			case 'webp':
-				$src = imagecreatefromwebp($imagePath);
-				imagewebp($src, $imagePath, 70);
-				break;
+				break;		  
 			default:
 				throw new \Exception('Unsupported image type');
 		}

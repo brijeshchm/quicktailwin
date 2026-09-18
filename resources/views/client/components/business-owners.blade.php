@@ -504,7 +504,7 @@
                 ['step'=>'04','title'=>'Grow',     'desc'=>'Receive leads & manage via your dashboard',         'icon'=>'trending-up',   'grad'=>'from-emerald-500 to-teal-600','soft'=>'bg-emerald-50', 'tc'=>'text-emerald-600','time'=>'Ongoing'],
             ] as $i => $step)
             <div class="slide-up relative bg-white/80 backdrop-blur rounded-2xl p-5 border border-white shadow-sm hover:shadow-lg hover:border-blue-100 transition-all duration-300 group cursor-default hover:-translate-y-1.5"
-                 style="transition-delay:{{ $i * 120 }}ms">
+                 >
                 <div class="flex items-center justify-between mb-4">
                     <div class="w-12 h-12 rounded-2xl bg-gradient-to-br {{ $step['grad'] }} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                         <i data-lucide="{{ $step['icon'] }}" class="w-5 h-5 text-white"></i>

@@ -33,7 +33,7 @@
                                 class="flex items-center gap-1.5 h-11 px-3 text-sm font-semibold text-blue-700 border-r border-gray-200 hover:bg-blue-50 transition-colors whitespace-nowrap rounded-l-xl"
                             >
                                 <i data-lucide="map-pin" class="w-3.5 h-3.5 text-blue-500"></i>
-                                <span id="hero-city-label">Bangalore</span>
+                                <span id="hero-city-label">faridabad</span>
                                 <i data-lucide="chevron-down" id="hero-city-chevron" class="w-3 h-3 text-gray-400 transition-transform duration-200"></i>
                             </button>
 
@@ -95,23 +95,11 @@
                 {{-- Trending tags --}}
                 <div class="flex flex-wrap items-center gap-1.5 mt-2 justify-center" id="trending-tags">
                     <span class="text-gray-400 text-[11px] font-medium">Trending:</span>
-                   
-                    
+                                   
                     @if(!empty($trending))
                         @foreach($trending as $tag)
-                            <button
-                                onclick="redirectSearch('{{ $tag['url'] ?? $tag['title'] }}', heroSelectedCity)"
-                                aria-label="Search {{ $tag['url'] }}"
-                                class="text-[11px] bg-gray-100 hover:bg-blue-50 border border-gray-200 hover:border-blue-200 text-gray-500 hover:text-blue-700 px-2.5 py-0.5 rounded-full transition-colors"
-                            >{{ $tag['title'] }}</button>
-                        @endforeach
-                    @else
-                        @foreach(['AC Repair Service','Wedding Planner','Home Loan','Dentist','Pizza Near Me'] as $tag)
-                            <button
-                                onclick="redirectSearch('{{ Str::slug($tag) }}', heroSelectedCity)"
-                                aria-label="Search {{ Str::slug($tag) }}"
-                                class="text-[11px] bg-gray-100 hover:bg-blue-50 border border-gray-200 hover:border-blue-200 text-gray-500 hover:text-blue-700 px-2.5 py-0.5 rounded-full transition-colors"
-                            >{{ $tag }}</button>
+                            <a href="{{ route('showCity', $tag['url']) }}" class="text-[11px] bg-gray-100 hover:bg-blue-50 border border-gray-200 hover:border-blue-200 text-gray-500 hover:text-blue-700 px-2.5 py-0.5 rounded-full transition-colors"
+                            >{{ $tag['title'] }}</a>
                         @endforeach
                     @endif
                 </div>
@@ -134,20 +122,12 @@
             <div id="slider-track" class="flex slider-track" style="gap:4px">
                 @php
                 $colorMap = ['bg-blue-600','bg-indigo-600','bg-rose-800','bg-violet-700','bg-teal-600','bg-orange-500','bg-rose-600','bg-amber-600','bg-indigo-600','bg-rose-800','bg-teal-600','bg-amber-600','bg-blue-600','bg-orange-500','bg-violet-700','bg-blue-600'];
-              
-                
+               
                 @endphp
                 @if($bannerKeyword)
                 @foreach($bannerKeyword as $i => $card)
-
-                @php
-                $catUrl = match($card['type'] ?? '') {                
-                'keyword'    => route('city.slug', ['city_slug'=> 'bangalore','service_slug' => $card['url']]),
-                'child'      => route('child.show',      $card['url']),
-                'categories' => route('categories.show', $card['url'])
-                };
-                @endphp
-                    <a href="{{ $catUrl }}"
+               
+        <a href="{{ route('showCity',$card['url']) }}"
             title="{{ $card['title'] ?? '' }}"
             class="banner-card relative shrink-0 rounded-t-2xl overflow-hidden cursor-pointer group h-[140px] sm:h-[155px] block {{ $colorMap[$i % count($colorMap)] }}">
 <img
@@ -187,6 +167,8 @@
 
             <div class="flex justify-center gap-1.5 pt-2 pb-1" id="slider-dots"></div>
         </div>
+    
+    
     </div>
 </section>
 
@@ -205,9 +187,8 @@ setInterval(() => {
 }, 2200);
 
 // ─── Hero City ────────────────────────────────────────────────────────────
-let heroSelectedCity = 'bangalore';
-// const CITIES = ['Mumbai','Delhi','Bangalore','Hyderabad','Chennai','Pune','Kolkata','Ahmedabad'];
-
+let heroSelectedCity = 'faridabad';
+ 
 const cityNames = ['Mumbai', 'Delhi', 'Bangalore', 'Hyderabad', 'Chennai', 'Pune', 'Kolkata', 'Ahmedabad'];
 
 const CITIES = cityNames.map(name => ({
@@ -220,6 +201,7 @@ function renderHeroCityList(list, q = '') {
     const el = document.getElementById('hero-city-list');
 
     el.innerHTML = list.map((city, index) => {
+        
         const cityName = city.city || city.name || '';
         const cityDetails = city.cityDetails || cityName;
 
@@ -257,7 +239,7 @@ function toggleHeroCity() {
     const panel = document.getElementById('hero-city-panel');
     const chevron = document.getElementById('hero-city-chevron');
     const search = document.getElementById('hero-city-search');
-
+ 
     const isHidden = panel.classList.contains('hidden');
 
     if (isHidden) {
@@ -273,6 +255,7 @@ function toggleHeroCity() {
 
 let heroCityTimeout = null;
 function filterHeroCities(q) {
+     
     document.getElementById('hero-city-clear').classList.toggle('hidden', !q);
     clearTimeout(heroCityTimeout);
     if (q.length < 1) { renderHeroCityList(CITIES); return; }
@@ -301,7 +284,7 @@ function clearHeroCitySearch() {
 
 function selectHeroCity(city) {
     heroSelectedCity = city;
-   
+    localStorage.setItem('city', city);
     document.getElementById('hero-city-label').textContent = city;
     // document.getElementById('sticky-city-label').textContent = city;
     // document.getElementById('mobile-city-label').textContent = city;
@@ -495,6 +478,35 @@ function redirectSearch(keyword, city) {
 })();
 
 
+
+// ─── Navbar scroll behavior ────────────────────────────────────────────────
+const navbarhome      = document.getElementById('main-navbar');
+const stickyWraphome  = document.getElementById('sticky-search-wrapper');
+const desktopNavhome  = document.getElementById('desktop-nav');
+
+window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+  
+    const scrolled = y > 140;
+    const showSearch = y > 140;
+ 
+    navbarhome.classList.toggle('bg-white/95', scrolled || false);
+    navbarhome.classList.toggle('backdrop-blur-md', scrolled);
+    navbarhome.classList.toggle('shadow-sm', scrolled);
+    navbarhome.classList.toggle('border-b', scrolled);
+    navbarhome.classList.toggle('border-gray-100', scrolled);
+    navbarhome.classList.toggle('bg-transparent', !scrolled);
+
+    if (showSearch) {
+        stickyWraphome.classList.remove('opacity-0', 'pointer-events-none');
+        stickyWraphome.classList.add('opacity-100');
+        desktopNavhome.classList.add('opacity-0', 'overflow-hidden', 'pointer-events-none', 'w-0');
+    } else {
+        stickyWraphome.classList.add('opacity-0', 'pointer-events-none');
+        stickyWraphome.classList.remove('opacity-100');
+        desktopNavhome.classList.remove('opacity-0', 'overflow-hidden', 'pointer-events-none', 'w-0');
+    }
+}, { passive: true });
 
 
 </script>

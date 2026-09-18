@@ -1,7 +1,6 @@
 @extends('client.layouts.app')
-@section('title', 'Blog | QuickDials - Business, Education & Local Service Insights')
+@section('title', 'QuickDials Blog | Business, Education & Local Service Insights')
 @section('description', 'Explore the QuickDials blog for the latest updates, business tips, education guides, career advice, local service insights, digital marketing trends, technology news, and helpful articles to grow your business and stay informed.')
-@section('keywords', 'QuickDials blog, business blog India, local business tips, education articles, career guidance, digital marketing tips, technology news, startup tips, local services blog, IT training guides, business growth strategies, online business directory blog, QuickDials articles')
 @section('content') 
 @include('client.components.banner-section')
 <style>
@@ -444,7 +443,7 @@
                 {{-- ── POPULAR POSTS ── --}}
                 @if(count($popularArticles))
                 <div class="sidebar-reveal bg-white p-6 rounded-xl border border-gray-200 shadow-sm"
-                     style="transition-delay: 0.12s;">
+                     >
                     <h4 class="text-lg font-bold text-slate-900 mb-4 border-b border-gray-100 pb-3">
                         Popular Reads
                     </h4>
@@ -495,7 +494,7 @@
 
                 {{-- ── TAGS ── --}}
                 <div class="sidebar-reveal bg-white p-6 rounded-xl border border-gray-200 shadow-sm"
-                     style="transition-delay: 0.24s;">
+                     >
                     <h4 class="text-lg font-bold text-slate-900 mb-4 border-b border-gray-100 pb-3
                                flex items-center gap-2">
                         <svg class="w-4 h-4 text-blue-500" fill="none" viewBox="0 0 24 24"

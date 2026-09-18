@@ -1,10 +1,7 @@
- @extends('interview.layouts.app')
+@extends('interview.layouts.app')
 @section('title')
-QuickDials- Business Services
-@endsection 
-@section('keywords')
-QuickDials-  Business Services list 
-@endsection
+laravel Interview Questions & Answers
+@endsection  
 @section('description'),  
 Explore top Laravel interview questions and answers covering routing, Eloquent, middleware, authentication, APIs, and advanced concepts.
 @endsection

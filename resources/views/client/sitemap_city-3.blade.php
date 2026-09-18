@@ -5,18 +5,16 @@
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 @php
-$cities = ['hyderabad','jammu','jalandhar','nagpur','jhansi','bhopal','saharanpur','vadodara','chennai','moradabad','jaipur'];
+$cities = ['hyderabad', 'jammu', 'jalandhar', 'nagpur', 'jhansi','bhopal','saharanpur','vadodara','chennai','moradabad','jaipur'];
 @endphp
-
 @foreach ($cities as $city)
     @foreach ($keywords as $keyword)
     <url>
         <loc>{{ route('city.slug', ['city_slug' => $city, 'service_slug' => $keyword->slug]) }}</loc>
         <lastmod>{{ \Carbon\Carbon::parse($keyword->updated_at)->toAtomString() }}</lastmod>
-        <changefreq>weekly</changefreq>
+        <changefreq>daily</changefreq>
         <priority>0.80</priority>
     </url>
     @endforeach
-@endforeach
- 
+@endforeach 
 </urlset>

@@ -172,6 +172,7 @@ Find Only Certified Training Institutes, Coaching Centers near you on QuickDials
         <label>Google Map :</label>
         <input name="business_map" type="text" class="form-control auto-save-field" value="{{ old('business_map', $client->business_map ?? '') }}" placeholder="Enter business Map">
     </div>
+    
     <?php
     $days = ['monday','tuesday','wednesday','thursday','friday','saturday','sunday'];
     $times = ["24:00" => "Open 24 Hrs", "00:00" => "Closed"];

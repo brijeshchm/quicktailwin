@@ -565,6 +565,11 @@ class CertificateController extends Controller
 			$file->move($destinationPath, $finalName);
 			return $finalName;
 		}
+		if ($ext === 'webp') {
+			$finalName = $filename . '.webp';
+			$file->move($destinationPath, $finalName);
+			return $finalName;
+		}
 
 		// ✅ Raster → Convert to WEBP
 		$imagePath = $file->getPathname();
@@ -579,10 +584,7 @@ class CertificateController extends Controller
 				imagepalettetotruecolor($src);
 				imagealphablending($src, true);
 				imagesavealpha($src, true);
-				break;
-			case 'webp':
-				$src = imagecreatefromwebp($imagePath);
-				break;
+				break;			 
 			default:
 				throw new \Exception('Unsupported image type');
 		}

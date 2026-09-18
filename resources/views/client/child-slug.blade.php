@@ -5,18 +5,41 @@
 @section('og_image', !empty($kwData['child_icon'])
     ? asset($kwData['child_icon'])
     : asset('client/images/quickdials-og.png')) 
+@php    
+    $keywordArray = [
+        'artificial-intelligence-training', 'python-training', 'workday-training',
+        'sap-training', 'banquet-hall', 'cricket-academy'
+    ];   
+    $currentKeyword = strtolower(trim($kwData['child_slug'] ?? ''));
+    $shouldIndex = in_array($currentKeyword, $keywordArray); 
+@endphp
+@section('meta_robots')
+<meta name="robots" content="{{ $shouldIndex ? 'index, follow' : 'noindex, nofollow' }}">
+@endsection
 @section('content')	
 @include('client.components.banner-section')
- @php
+@php
  
-$bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
+$bgImage = !empty($bgImage)
+    ? $bgImage
+    : '/client/images/computer-courses-training.jpg';
 
  @endphp
 @include('client.layouts.common_country_data')
-<div x-show="showAd" x-cloak
-         class="relative w-full overflow-hidden h-40"
-         style="background-image: url('{{ $bgImage }}'); background-size: cover; background-position: center;">
-        <div class="absolute inset-0 bg-indigo-900/50"></div>
+    <div
+    x-show="showAd"
+    x-cloak
+    class="relative w-full overflow-hidden bg-white"
+>
+    {{-- Full Responsive Banner Image --}}
+    <img
+        src="{{ $bgImage }}"
+        alt="{{ $keyword }}"
+        class="block w-full h-auto object-cover h-[130px] sm:h-[170px]"
+        loading="eager"
+    >
+ 
+     <div class="absolute inset-0"></div>
         <div class="relative w-full px-3 sm:px-8 py-3 sm:py-5 flex items-center gap-3 sm:gap-5 h-full">
             <div class="flex-1 min-w-0">
                 
@@ -26,8 +49,7 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
                 
             </div>
         </div>
-    </div>
-
+    </div> 
 {{-- ══════════════════════════════════════
      MAIN CONTENT
 ════════════════════════════════════════ --}}
@@ -38,18 +60,17 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
         <div>
             <nav class="text-xs sm:text-sm text-slate-500 mb-1 flex items-center gap-1.5 flex-wrap">
                 <a href="{{ route('home') }}" class="hover:text-indigo-600 transition-colors">Home</a>
-                <span>›</span>
-           
-                    <a href="{{ route('child.list') }}" class="hover:text-indigo-600 transition-colors">Child</a>
-                    <span>›</span>
-            
-                <span class="text-slate-600">{{ $keyword }}</span>
+                <span>›</span>                                   
+                    <span>{{ $keyword }} </span>
+                       
+                    <!-- <span>›</span>            
+                <span class="text-slate-600">{{ $keyword }}</span> -->
             </nav>
 
 
               <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
                     <div itemprop="name">
-                        <h1 class="text-lg font-bold text-gray-900 leading-tight">{{ $kwData['h1_heading']??$keyword??"Sub Category" }}</h1>
+                        <h1 class="text-lg font-bold text-gray-900 leading-tight">{{ !empty($kwData['h1_heading']) ? replaceCity($kwData['h1_heading'], $city) : '' }}</h1>
                     </div>                           
                     <div itemprop="aggregateRating"
                         itemscope
@@ -92,10 +113,11 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
                         $title = $course['title']    ?? ($course['name'] ?? '');
                         $url   = $course['url']      ?? '#';
                         $rating= $course['rating']   ?? '';
+                        $childSUrl = route('showCity',$url);
 
                     @endphp
                     <div class="animate-tile" style="animation-delay: {{ $delay }}ms">
-                        <a href="{{ route('city.slug', ['city_slug'=> 'bangalore','service_slug' => $url])}}" >
+                        <a href="{{ route('showCity',$url) }}" >
                             <div class="tile-card group bg-white border border-slate-200 rounded-xl overflow-hidden">
 
                                 {{-- Coloured image strip --}}
@@ -134,15 +156,12 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
                    
                 @endforelse
             </div>
-
-          
-
             @if(!empty($topDescription))
                @php
                     $defaultHeading = '';
 
                     if (!empty($kwData['top_heading'])) {
-                    $defaultHeading=  $kwData['top_heading'];
+                    $defaultHeading=  replaceCity($kwData['top_heading'],$city);
                     }else{
                     $defaultHeading = 'Trusted '. $keyword;
                     }    
@@ -152,8 +171,6 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
                     <p>{{ $topDescription }}</p>
                 </div>
             @endif
-
-
         </div>
 </main>
 
@@ -218,17 +235,18 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
 
     {{-- Course About --}}
     @if(!empty($kwData['heading']) && !empty($kwData['courseabout']))
-    <div class="border rounded-lg p-4 bg-white shadow-sm mx-4">
+    <div class="bg-white rounded-2xl mt-4 pt-4">
         <section class="rounded-md p-1">
-            <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-blue-900">{{ $kwData['heading'] }}</h2>
+            <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-blue-900">{{ replaceCity($kwData['heading'],$city) }}</h2>
             <div class="w-full h-[2px] bg-teal-500 mt-3 mb-5"></div>
-            <div class="text-gray-800 leading-relaxed mb-5">{!! $kwData['courseabout'] !!}</div>
+            <div class="text-gray-800 leading-relaxed mb-5">
+          <p>  {!! replaceCity($kwData['courseabout'],$city) !!}</p></div>
             <ul class="space-y-3">
                 @foreach(['paragraph1','paragraph2','paragraph3','paragraph4','paragraph5','paragraph6'] as $p)
                 @if(!empty($kwData[$p]))
                 <li class="flex items-start gap-2 text-gray-800">
                     <span class="text-orange-500 mt-1">✔</span>
-                    <span>{!! $kwData[$p] !!}</span>
+                    <span>{!! replaceCity($kwData[$p],$city) !!}</span>
                 </li>
                 @endif
                 @endforeach
@@ -245,14 +263,15 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
     $bottom_heading = '';
 
     if (!empty($kwData['bottom_heading'])) {
-        $bottom_heading=  $kwData['bottom_heading'];
+        $bottom_heading=  replaceCity($kwData['bottom_heading'],$city);
     }else{
      $bottom_heading = 'Find the Best ' .$keyword;
     }    
     @endphp
-    <div class="bg-white rounded-2xl mt-4">
-        <h3 class="text-lg font-bold text-gray-900 mb-3"> {{ $bottom_heading }} </h3>
-        <div class="text-sm text-gray-600 leading-relaxed">{!! $bottomDescription !!}</div>
+    <div class="bg-white rounded-2xl mt-4 pt-4">
+        <h3 class="text-lg font-bold text-gray-900 mb-3"> {{ replaceCity($bottom_heading,$city) }} </h3>
+        <div class="text-sm text-gray-600 leading-relaxed">
+        <p>{!! $bottomDescription !!}</p></div>
     </div>
     @endif
 
@@ -260,7 +279,7 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
     @if(count($faqs ?? []) > 0)
     <div class="bg-white rounded-2xl mt-4" x-data="{ openFaq: null }">
         <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-            💬 Frequently Asked Questions(FAQ's) {{ $keyword }}
+            💬 Frequently Asked Questions(FAQ's) {{ $keyword }} in {{ $city }}
         </h3>
         <div class="space-y-2">
         
@@ -269,11 +288,11 @@ $bgImage = $bgImage ?? '/client/images/computer-courses-training.jpg';
             <div  class="border border-gray-100 rounded-xl overflow-hidden mt-4">
                 <button @click="openFaq = openFaq === {{ $fi }} ? null : {{ $fi }}"
                         class="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors" >
-                 <h3> {{ $faq['q'] }} </h3>
+                 <h3> {{ replaceCity($faq['q'],$city) }} </h3>
                     <span x-text="openFaq === {{ $fi }} ? '▲' : '▼'" class="text-gray-600 text-base flex-shrink-0 ml-2"></span>
                 </button>
                 <div x-show="openFaq === {{ $fi }}" x-cloak class="px-4 pb-4 text-xs text-gray-500 leading-relaxed border-t border-gray-100 pt-3" >
-                   {!! $faq['a'] !!}
+                   {!! replaceCity($faq['a'],$city) !!}
                 </div>
             </div>
             @endif
@@ -323,7 +342,7 @@ const COUNTRIES = [
 ];
 
 const LOCATIONS = [
-    "Abu Dhabi","Ahmedabad","Amsterdam","Auckland","Bangalore","Bangkok","Barcelona",
+    "Abu Dhabi","Ahmedabad","Amsterdam","Auckland","faridabad","Bangkok","Barcelona",
     "Beijing","Berlin","Brisbane","Brussels","Budapest","Cairo","Cape Town","Chennai",
     "Chicago","Colombo","Copenhagen","Dallas","Delhi","Dubai","Dublin","Frankfurt",
     "Glasgow","Guangzhou","Helsinki","Ho Chi Minh City","Hong Kong","Houston","Hyderabad",

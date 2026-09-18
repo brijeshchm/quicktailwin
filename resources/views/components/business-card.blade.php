@@ -21,16 +21,16 @@
 
     $rating = $business['rating'] ?? 0;
     $reviewCount = $business['reviewCount'] ?? 0;
-  
-    $isOpen = $business['active_status'] ?? true;
+     //echo "<pre>";print_r($business);
+    $isOpen = $business['active_status'] ?? false;
+    $gstStatus = $business['gst_status'] ?? false;
     $verified = $business['verified'] ?? false;
     $trending = $business['trending'] ?? false;
     $topSearch = $business['topSearch'] ?? false;
     $featured = $business['featured'] ?? false;
     $address = $business['address'] ?? '';
     $city = $business['city'] ?? '';
-    $established = $business['established'] ?? '';
- 
+    $established = $business['established'] ?? ''; 
     $tags = $business['tags'] ?? [];
     $category = is_array($business['category'] ?? '') ? $business['category'] : [$business['category'] ?? ''];
     $phone = $business['phone'] ?? '';
@@ -225,13 +225,19 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="flex items-start justify-between gap-1">
                 <div class="flex-1 min-w-0">
                     <div class="flex items-center gap-1.5 flex-wrap">
-                        <h3 class="font-bold text-gray-900 text-[13px] sm:text-[15px] leading-tight group-hover:text-indigo-600 transition-colors">
+                        <h2 class="font-bold text-gray-900 text-[13px] sm:text-[15px] leading-tight group-hover:text-indigo-600 transition-colors">
                             <a href="{{ route('business.details', $business['business_slug']) }}"  rel="noopener noreferrer nofollow">{{ $name }}</a>
-                        </h3>
+                        </h2>
                         @if($verified)
                         <span class="flex items-center gap-0.5 text-[9px] sm:text-[10px] font-semibold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full border border-emerald-100" aria-label="Verified Business">
                             <svg class="w-2 h-2 sm:w-2.5 sm:h-2.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
                             Verified
+                        </span>
+                        @endif
+                           @if($gstStatus)
+                        <span class="flex items-center gap-0.5 text-[9px] sm:text-[10px] font-semibold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full border border-emerald-100" aria-label="Verified Business">
+                            <svg class="w-2 h-2 sm:w-2.5 sm:h-2.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                        GST Verified 
                         </span>
                         @endif
                         @if($trending)
@@ -269,7 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </svg>
                     @endfor
                 </div>
-                <span class="text-[10px] sm:text-sm text-gray-400">({{ $reviewCount }} Reviews)</span>
+                <span class="text-[10px] sm:text-sm text-gray-400">({{ $reviewCount }} Rating)</span>
                 @if($openUntil)
                 <span class="hidden sm:inline text-sm text-gray-400">🕐 Open Hrs {{ $openUntil }}</span>
                 @endif
@@ -282,22 +288,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span class="line-clamp-1">{{ collect([$address, $city])->filter()->implode(', ') }}</span>
             </p>
             @endif
-         
-            @if(!empty($business['businessDescription']))
-            <p class="sm:block text-sm text-gray-500 mt-1 line-clamp-1">
-            {!! $business['businessDescription'] !!}
-            </p>
-            @endif
-                
-              
-            {{-- Tags/Category --}}
-            @if(count($category) > 0)
-            <div class="flex items-center gap-1.5 mt-2 flex-wrap">
-                @foreach(array_slice($category, 0, 5) as $tag)
-                <span class="text-[9px] sm:text-sm text-indigo-600 bg-indigo-50 border border-indigo-100 px-1.5 sm:px-2 py-0.5 rounded-full font-medium">{{ $tag }}</span>
-                @endforeach
-            </div>
-            @endif
+ 
+             @if(!empty($business['businessDescription']))
+
+<div x-data="{ showDescription: false }">
+
+    {{-- Desktop Description --}}
+    <p class="hidden sm:block text-sm text-gray-500 mt-1 line-clamp-3">
+        {!! $business['businessDescription'] !!}
+    </p>
+
+    {{-- Mobile Description --}}
+    <div class="sm:hidden mt-1">
+        <p class="text-sm text-gray-500 line-clamp-2">
+            {!! strip_tags($business['businessDescription']) !!}
+        </p>
+ Read More
+        
+    </div>
+
+ 
+ 
+
+    
+
+</div>
+
+@endif
+           
         </div>
     </div>
 
@@ -308,7 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
             $actionClass = 'flex items-center justify-center gap-1 rounded-xl py-2 text-[10px] font-semibold text-white transition sm:text-xs';
         @endphp
 
-        <div class="grid w-full grid-cols-4 gap-2">
+        <div class="grid w-full grid-cols-4 gap-2 ">
             <!-- <a href="tel:{{ $business['mobile'] ?? '' }}" rel="nofollow"
             class="{{ $actionClass }} bg-indigo-600 hover:bg-indigo-700">
                 📞 <span>Call</span>

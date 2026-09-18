@@ -59,9 +59,8 @@ class BlogController extends Controller
 				'ratingcount' => 'required|integer|min:0',
 				'title' => 'required|string|min:50|max:175',
 				'slug' => 'required|string|min:50|max:175',
-				'meta_title' => 'required|string|min:50|max:85',
-				'h1_heading' => 'required|string|max:255',
-				'meta_description' => 'required|string|min:150|max:165',
+				'meta_title' => 'required|string|min:30|max:71',			
+				'meta_description' => 'required|string|min:70|max:161',
 				'description' => 'required|string|max:500',
 			]);
 
@@ -78,7 +77,7 @@ class BlogController extends Controller
 			$blogdetails->slug = generate_slug($request->input('title'));
 			$blogdetails->description = $request->input('description');
 			$blogdetails->meta_title = $request->input('meta_title');
-			$blogdetails->h1_heading = $request->input('h1_heading');
+		
 			$blogdetails->meta_description = $request->input('meta_description');
 
 			if ($blogdetails->save()) {
@@ -108,8 +107,8 @@ class BlogController extends Controller
 					'title' => 'required|string|min:10|max:175',
 
 					'meta_title' => 'required|string',
-					'h1_heading' => 'required|string|max:255',
-					'meta_description' => 'required|string',
+		
+					'meta_description' => 'required|string|min:70|max:161',
 
 				]);
 
@@ -126,7 +125,7 @@ class BlogController extends Controller
 				$blogdetails->slug = generate_slug($request->input('title'));
 				$blogdetails->description = $request->input('description');
 				$blogdetails->meta_title = $request->input('meta_title');
-				$blogdetails->h1_heading = $request->input('h1_heading');
+	
 				$blogdetails->meta_description = $request->input('meta_description');
 				$blogdetails->ratingvalue = $request->input('ratingvalue');
 				$blogdetails->ratingcount = $request->input('ratingcount');
@@ -247,11 +246,8 @@ class BlogController extends Controller
 			$this->validate($request, [
 				'name' => 'required|max:200',
 				'description' => 'required',
-				// 'image' => 'required',
-				'meta_title' => 'required',
-				'h1_heading' => 'required',
-				'meta_description' => 'required',
-
+				'meta_title' => 'required|min:30|max:71',			
+				'meta_description' => 'required|min:70|max:161',
 			]);
 
 			$blogdetails = Blogdetails::find($id);
@@ -259,8 +255,7 @@ class BlogController extends Controller
 			$blogdetails->author = $request->input('author');
 			$blogdetails->slug = generate_slug($request->input('meta_title'));
 			$blogdetails->description = $request->input('description');
-			$blogdetails->meta_title = $request->input('meta_title');
-			$blogdetails->h1_heading = $request->input('h1_heading');
+			$blogdetails->meta_title = $request->input('meta_title');		
 			$blogdetails->meta_description = $request->input('meta_description');
 			$blogdetails->top_content = $request->input('top_content');
 			$blogdetails->bottom_content = $request->input('bottom_content');
@@ -370,10 +365,9 @@ class BlogController extends Controller
 				'ratingcount' => 'required|integer|min:0',
 				'title' => 'required|string',
 				'slug' => 'required|string',
-				'meta_title' => 'required|string',
-				'h1_heading' => 'required|string|max:255',
-				'meta_description' => 'required|string',
-				// 'description' => 'required|string',
+				'meta_title' => 'required|string|min:30|max:71',			
+				'meta_description' => 'required|string|min:70|max:161',
+				
 			]);
 
 			if ($validator->fails()) {
@@ -395,7 +389,7 @@ class BlogController extends Controller
 					'title' => $request->title,
 					// 'description' => $request->description,
 					'meta_title' => $request->meta_title,
-					'h1_heading' => $request->h1_heading,
+				
 					'meta_description' => $request->meta_description,
 					'ratingvalue' => $request->ratingvalue,
 					'ratingcount' => $request->ratingcount,

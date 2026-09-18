@@ -339,7 +339,7 @@ class ParentCategoryController extends Controller
 				$filename = $this->saveImageSmart(
 					$request->file('category_banner'),
 					$destinationPath,
-					1350,
+					1371,
 					190
 				);
 

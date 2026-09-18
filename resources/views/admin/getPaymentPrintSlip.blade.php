@@ -402,7 +402,7 @@
         <img src="https://www.quickdials.com/client/images/small-logo.png" alt="QuickDials">
         <h1>QuickDials Internet Pvt. Ltd.</h1>
         <p>
-          Pillar No.33, NH-19, Faridabad, Haryana<br>
+          UNIT 101 OXFORD TOWERS, 139/88 HAL OLD AIRPORT RD, H.A.L II Stage, Bangalore North, Bangalore- 560008<br>
           📞 +91-75-5943-5943 &nbsp;|&nbsp; ✉ info@quickdials.com &nbsp;|&nbsp; 🌐 www.quickdials.com
         </p>
       </div>

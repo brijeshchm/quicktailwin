@@ -24,10 +24,14 @@
 <meta property="og:url" content="{{ url()->current() }}" />
 <meta property="og:type" content="website" />
 <meta property="og:image" content="@yield('og_image', asset('client/images/quickdials-og.png'))" />
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="@yield('title', 'QuickDials')">
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="@yield('title')" />
 <meta name="twitter:description" content="@yield('description')" />
 <meta name="twitter:image" content="@yield('og_image', asset('client/images/quickdials-og.png'))" />
+<meta name="twitter:image:alt" content="@yield('title', 'QuickDials')">
 <meta name="geo.region" content="@yield('geo_region', 'IN')" />
 <meta name="geo.placename" content="@yield('geo_city', 'India')" />
 <meta name="geo.position" content="@yield('geo_position', '')" />
@@ -108,17 +112,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         : "";
 
     $serviceDescription = $metaDescription? $metaDescription: 'India’s leading local business search and service directory. Find trusted businesses, services, it training, professionals, and service providers near you with QuickDials..';
-    $cityName =$city ?: 'bangalore';
-    if (!empty($childCat) && !empty($childSlug)) {
-        $items[] = ['name' => ucfirst($childCat), 'url' => route('child.show', $childSlug)];
+    $cityName =$city ?: 'faridabad';
+    if(!empty($childCat) && !empty($childSlug)) {
+        $items[] = ['name' => ucfirst($childCat), 'url' =>route('city.slug', ['city_slug'=> $cityName,'service_slug' => $childSlug])];
     }
+
     $items =[];
-    if(request()->segment(1) ===$city){
-    $items[] = ['name' => $keyword .' in '. $city, 'url' => url()->current()];
-    }else 
-    if (!empty($keyword)) {
+    if(request()->segment(1) === $city){
+        $items[] = ['name' => ucfirst($city), 'url' => route('showCity',$city)];
+    }else if(!empty($keyword && request()->segment(1) !='blog')){   
         $items[] = ['name' => $keyword, 'url' => url()->current()];
-    } 
+    }
+
+    if(request()->segment(2) && request()->segment(1)=='blog'){
+        $items[] = ['name' => $keyword, 'url' => url()->current()];
+    }else{
+        if(request()->segment(2)){
+        $items[] = ['name' => $keyword .' in '. $city, 'url' => url()->current()];
+        }
+    }
 
     $breadcrumbs = array_merge(
         [['name' => 'Home', 'url' => route('home')]],
@@ -218,15 +230,13 @@ if (request()->is('/')){
                 'item'     => $item['url'],
             ];
         }
-
         $schemas[] = [
             '@context'        => 'https://schema.org',
             '@type'           => 'BreadcrumbList',
             'itemListElement' => $breadcrumbList,
         ];
     }
-
-    
+   
 
     // ---- 5. FAQ ----
     if (!empty($faqs)) {
@@ -271,8 +281,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <main>
 @yield('content')
 </main>
-@include('client.layouts.footer')
 
+  @include('client.layouts.footer')
 <script>
 var searchCity       = '';
 // var heroSelectedCity = '';
@@ -382,7 +392,7 @@ function applyDefaultCity() {
   if(cities){
     applyCity(cities); 
     }else{
-    applyCity('Bangalore'); 
+    applyCity('faridabad'); 
     }
 }
 

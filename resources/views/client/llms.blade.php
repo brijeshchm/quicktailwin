@@ -2033,7 +2033,7 @@ Ask ChatGPT
 
 ## Event organisers
 
-[Best Event Organisers  for Weddings & Parties | Quick Dials](https://www.quickdials.com/event-organisers): Find top event organisers  for weddings, corporate events, and parties. Get creative planning, decoration, and management for a memorable experience.
+[Best Event Organisers  for Weddings & Parties | Quick Dials](https://www.quickdials.com/event-organizers): Find top event organisers  for weddings, corporate events, and parties. Get creative planning, decoration, and management for a memorable experience.
 
 ## Photographers
 

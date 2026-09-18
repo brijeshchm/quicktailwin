@@ -43,7 +43,7 @@ $repairGradients = [
                 </div>
             </div>
             <div class="flex items-center gap-2">
-                <a href="{{ route('category.list') }}"
+                <a href="{{ route('showCity','faridabad') }}"
                    class="hidden sm:block text-blue-600 text-xs font-semibold hover:underline mr-1">
                     View All
                 </a>
@@ -74,31 +74,19 @@ $repairGradients = [
                  class="flex gap-3 overflow-x-auto pb-2"
                  style="scroll-behavior:smooth; scrollbar-width:none; -ms-overflow-style:none;">
  
-                @foreach($repairsServices as $i => $service)
-
-
-                  @php
-                $catUrl = match($service['type'] ?? '') {              
-                'keyword'    => route('city.slug', ['city_slug'=> 'bangalore','service_slug' => $service['url']]),
-                'child'      => route('child.show',      $service['url']),
-                'categories' => route('categories.show', $service['url'])
-
-                };
-                @endphp
-
-
-
+            @foreach($repairsServices as $i => $service)
+                 
                 @php
                     $grad = $repairGradients[$i % count($repairGradients)];
                 @endphp
-                <a href="{{ $catUrl }}"> 
+                <a href="{{ route('showCity',$service['url']) }}"> 
                 <div class="shrink-0 rounded-xl overflow-hidden relative group cursor-pointer border border-gray-100
                             hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
                      style="width:calc((100% - 12px) / 2.2); min-width:120px; max-width:200px;">
  
                     {{-- Image area --}}
                     <div class="relative overflow-hidden" style="height:100px;">
-                        <a href="{{ $catUrl }}">
+                        <a href="{{ route('showCity',$service['url']) }}">
                             <img src="{{ $service['img'] ?? '' }}"
                                  alt="{{ $service['alt'] ?? '' }}"
                                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-out"
@@ -116,7 +104,7 @@ $repairGradients = [
                     {{-- Card body --}}
                     <div class="p-2 bg-white relative">
                         <p class="text-[11px] font-bold text-gray-900 truncate mb-0.5">
-                            <a href="{{ route('showCity', $service['url']) }}">{{ $service['title'] ?? '' }}</a>
+                            <a href="{{ route('showCity',$service['url']) }}">{{ $service['title'] ?? '' }}</a>
                         </p>
                         <div class="flex items-center justify-between">
                             <span class="flex items-center gap-0.5 text-[9px] text-gray-500">

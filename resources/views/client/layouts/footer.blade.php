@@ -105,14 +105,15 @@
         }
     }
 
-    // Optional: shuffle for variety on each page load
-    // shuffle($allServices);
+ 
 @endphp
 
+
+<!--
 <section class="bg-gray-50 border-t border-gray-100 py-10" aria-label="Popular services on QuickDials">
     <div class="mx-auto px-4">
 
-        {{-- Section Header --}}
+      
         <div class="mb-8 text-center md:text-left">
             <span class="text-lg md:text-2xl font-bold text-gray-800">
                 Trending Services on QuickDials
@@ -122,17 +123,18 @@
             </p>
         </div>
  
-        {{-- All services in ONE flat loop --}}
+    
         <div class="flex flex-wrap gap-2">
-            @foreach($allServices as $service)
+            @if(!empty($allServices_old))
+            @foreach($allServices_old as $service)
                 @php
-              $cityName = !empty($city) && is_string($city) ? strtolower(str_replace(' ', '-', trim($city))) : 'bangalore';
+              $cityName = !empty($city) && is_string($city) ? strtolower(str_replace(' ', '-', trim($city))) : 'faridabad';
                     $href = $service['type'] === 'online'
                         ? route('city.slug', [
                             'city_slug'    => 'online',
                             'service_slug' => $service['slug'],
                         ])
-                        : route('city.slug',['city_slug' =>  $cityName, 'service_slug' => $service['slug']]);
+                        : route('showCity',$service['slug']);
                 @endphp
                 <a href="{{ $href }}"
                    title="{{ $service['name'] }}"
@@ -140,11 +142,11 @@
                     {{ $service['name'] }}
                 </a>
             @endforeach
+            @endif
         </div>
     </div>
-</section>
+</section>-->
  
-
 
         {{-- ─── SEO Category Grid ─── --}}
         <div class="mb-10 bg-white rounded-2xl border border-gray-100 shadow-sm divide-y divide-gray-100 overflow-hidden">
@@ -213,7 +215,7 @@
                         ['name' => 'Loans',                           'slug' => 'loan-service','type'=>'child'],
                         ['name' => 'Visa Consultants',                'slug' => 'visa-consultants','type'=>'keyword'],
                         ['name' => 'Beauty Parlour Services',         'slug' => 'beauty-parlours','type'=>'keyword'],
-                        ['name' => 'Event Organisers',                'slug' => 'event-organisers','type'=>'keyword'],
+                        ['name' => 'Event Organisers',                'slug' => 'event-organizers','type'=>'keyword'],
                         ['name' => 'Catering Services',               'slug' => 'catering-services','type'=>'keyword'],
                         ['name' => 'Photographers & Videographers',   'slug' => 'photographers-videographers','type'=>'keyword'],
                         ['name' => 'Astrologers',                     'slug' => 'astrologers','type'=>'keyword'],
@@ -224,24 +226,20 @@
                 ],
             ];
             @endphp
-
-            @foreach($seoSections as $section)
+@if(!empty($seoSections_old))
+            @foreach($seoSections_old as $section)
                 <div class="px-5 py-4">
                     <h4 class="text-xs font-black text-gray-900 uppercase tracking-wider mb-3">{{ $section['heading'] }}</h4>
                     <p class="text-xs text-gray-500 leading-relaxed">
                         @foreach($section['links'] as $i => $link)
- 
-                           @php
-                           $cityName = !empty($city) && is_string($city) ? strtolower(str_replace(' ', '-', trim($city))) : 'bangalore';
-                             $noCitySlugs = ['business-services'];  
-                            $slugUrl = match($link['type'] ?? '') {
-                             'keyword' => in_array($link['slug'], $noCitySlugs)
-                            ? route('showCity', $link['slug'])
-                            : route('city.slug', ['city_slug' =>  $cityName, 'service_slug' => $link['slug']]),                            
-                            'child'      => route('child.show',      $link['slug']),
-                            'categories' => route('categories.show', $link['slug'])
-                        
-                            };
+                             @php
+                            // $noCitySlugs = ['business-services'];
+                            // $cityName = !empty($city) && is_string($city) ? strtolower(str_replace(' ', '-', trim($city))) : 'faridabad';
+                            // $slugUrl = in_array($link['slug'], $noCitySlugs)
+                            // ? route('showCity', $link['slug'])
+                            // : route('city.slug', ['city_slug' => $cityName, 'service_slug' => $link['slug']]);
+                            $slugUrl = route('showCity',$link['slug']);
+
                             @endphp
                             <a href="{{ $slugUrl }}" class="hover:text-primary transition-colors hover:underline">{{ $link['name'] }}</a>
                             @if($i < count($section['links']) - 1)
@@ -251,6 +249,7 @@
                     </p>
                 </div>
             @endforeach
+                        @endif
         </div>
 
         {{-- ─── Main Footer Grid ─── --}}
@@ -267,12 +266,9 @@
                         ['name' => 'Careers',                   'route'=>route('careers')],
                         ['name' => 'Interviews',                   'route'=>route('interviews')],
                         ['name' => 'Blog',                      'route'=>route('blog.show')],
-                        ['name' => 'Pricing',                  'route'=>route('pricing')],
+                       
                       //  ['name' => 'Advertise on QuickDials',   'href' => '/business-owners','route'=>route('login')],
-                        ['name' => 'Privacy Policy',            'route'=>route('privacy.policy')],
-                        ['name' => 'Terms of Service',          'route'=>route('terms.conditions')],
-                        ['name' => 'Copyright Policy',          'route'=>route('copyright.policy')],
-                        ['name' => 'Refund Policy',             'route'=>route('refund.policy')],
+                       
                     ] as $link)
 
                         <li>
@@ -283,37 +279,24 @@
             </div>
           
             <div>
-                
+<!--                 
                 <ul class="space-y-2">
+
                     @foreach([
                         ['name' => 'Professional Courses', 'slug' => 'professional-courses','type'=>'categories'],
-                        ['name' => 'Wedding Planning',    'slug' => 'wedding-planning','type'=>'keyword'],
-                        ['name' => 'Healthcare',          'slug' => 'health-wellness','type'=>'keyword'],
-                        ['name' => 'Real Estate',         'slug' => 'real-estate','type'=>'child'],
-                        
-                        ['name' => 'Security System',     'slug' => 'security-system','type'=>'child'],
-                      
+                        ['name' => 'Wedding Planning','slug' => 'wedding-planning','type'=>'keyword'],
+                        ['name' => 'Healthcare','slug' => 'health-wellness','type'=>'keyword'],
+                        ['name' => 'Real Estate','slug' => 'real-estate','type'=>'child'],                        
+                        ['name' => 'Security System','slug' => 'security-system','type'=>'child'],                   
                     ] as $link)             
-
                         @php
-
-                         $cityName = !empty($city) && is_string($city) ? strtolower(str_replace(' ', '-', trim($city))) : 'bangalore';
-                            $catUrl = match($link['type'] ?? '') {
-                                'keyword' => $link['slug'] === 'wedding-planning'
-                                    ? route('showCity', $link['slug'])
-                                    : route('city.slug', ['city_slug' =>  $cityName, 'service_slug' => $link['slug']]),
-                                'child'      => route('child.show', $link['slug']),
-                                'categories' => route('categories.show', $link['slug']),
-                                default      => '#',
-                            };
+                        $catUrl = route('showCity',$link['slug']);
                         @endphp
                         <li>
-
-
                             <a href="{{ $catUrl }}" class="text-gray-500 text-sm hover:text-primary transition-colors">{{ $link['name'] }}</a>
                         </li>
                     @endforeach
-                </ul>
+                </ul> -->
             </div>
 
          
@@ -325,10 +308,14 @@
                 <ul class="space-y-2">
                     @foreach([
                         ['name' => 'Add your Business',  'href' => 'business-owners','route'=>route('login')],
-                        ['name' => 'Claim your Business','href' => 'business-owners','route'=>route('login')],
-                        ['name' => 'Advertise with Us',  'href' => 'contact-us','route'=>route('advertise')],
-                        ['name' => 'Business Support',   'href' => 'contact-us','route'=>route('contactUs')],
+                    //    ['name' => 'Claim your Business','href' => 'business-owners','route'=>route('login')],
+                       // ['name' => 'Advertise with Us',  'href' => 'contact-us','route'=>route('advertise')],
+                        //['name' => 'Business Support',   'href' => 'contact-us','route'=>route('contactUs')],
                         ['name' => 'Pricing',            'href' => 'pricing','route'=>route('pricing')],
+                        ['name' => 'Privacy Policy',            'route'=>route('privacy.policy')],
+                        ['name' => 'Terms of Service',          'route'=>route('terms.conditions')],
+                        ['name' => 'Copyright Policy',          'route'=>route('copyright.policy')],
+                        ['name' => 'Refund Policy',             'route'=>route('refund.policy')],
                     ] as $link)
                         <li>
                             <a href="{{ $link['route'] }}" class="text-gray-500 text-sm hover:text-primary transition-colors">{{ $link['name'] }}</a>
@@ -405,7 +392,7 @@
             <p class="text-gray-500 text-xs">
                  {{ date('Y') }} QuickDials Directory. All rights reserved.
             </p>
-            <span class="text-gray-600 text-base">Made with precision in India 🇮🇳</span>
+            <span class="text-gray-600 text-base">Made with precision in India</span>
         </div>
     </div>
 </footer>

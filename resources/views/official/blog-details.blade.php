@@ -1,7 +1,6 @@
 @extends('client.layouts.app') 
 @section('title',$blogDetails['meta_title'])
 @section('description', $blogDetails['meta_description'])
-@section('keywords', $blogDetails['h1_heading'])
 @section('og_image', !empty($blogDetails['blogImage'])
     ? asset($blogDetails['blogImage'])
     : asset('client/images/quickdials-og.png'))
@@ -251,7 +250,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
         </svg>
         <a href="{{ route('blog.show') }}" class="hover:text-blue-600 transition-colors">
-            {{ $blogDetails['name'] ?? 'Blog' }}
+        Blog
         </a>
         <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
@@ -305,7 +304,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                  class="reveal rounded-2xl overflow-hidden shadow-xl mb-8 card-glow">
                 <div class="w-full relative"
                      style="aspect-ratio: 16/7;
-                            {{ !empty($blogDetails['blogImage'])
+                    {{ !empty($blogDetails['blogImage'])
                                 ? 'background-image: url(' . e($blogDetails['blogImage']) . '); background-size: cover; background-position: center;'
                                 : 'background: linear-gradient(135deg,#1e3a5f 0%,#2563eb 50%,#0891b2 100%);' }}">
 
@@ -333,12 +332,11 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
             </div>
 
             {{-- ── TITLE & META ── --}}
-            <div class="reveal mb-8" style="transition-delay:0.1s;">
+            <div class="reveal mb-8" >
                 
                 <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
                     <div itemprop="name">
-                        <h1 class="text-lg font-bold text-gray-900 leading-tight">
-                 {{ $blogDetails['title'] ? $blogDetails['title']: ($blogDetails['h1_heading'] ?? '') }} </h1>
+                        <h1 class="text-lg font-bold text-gray-900 leading-tight">{{ !empty($blogDetails['title']) ? $blogDetails['title'] : '' }}</h1>
                     </div>                           
                     <div itemprop="aggregateRating"
                         itemscope
@@ -417,7 +415,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
                             <circle cx="12" cy="12" r="3"/>
                         </svg>
-                        <span id="view-count">—</span> views
+                        <span id="view-count">{{ $blogDetails['views'] }}</span> views
                     </span>
                 </div>
 
@@ -457,7 +455,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
 
             {{-- ── ABOUT BLOG SECTION ── --}}
             @if(!empty($blogDetails['heading']) && !empty($blogDetails['about_blog']))
-            <div class="reveal mb-8" style="transition-delay:0.15s;">
+            <div class="reveal mb-8">
                 <div class="border rounded-lg p-4 bg-white shadow-sm">
                     <section class="bg-gray-100 border rounded-md p-6">
                         <h2 class="text-2xl md:text-3xl font-semibold text-blue-900">
@@ -494,7 +492,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                 @endif
 
                 @if(!empty($blogDetails['description']))
-                <div class="reveal" style="transition-delay:0.05s;">
+                <div class="reveal">
                     {!! $blogDetails['description'] !!}
                 </div>
                 @endif
@@ -503,7 +501,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                  <h2>                    
                     {{ $blogDetails['top_heading'] }}
                 </h2>
-                <div class="reveal" style="transition-delay:0.1s;">
+                <div class="reveal" >
                 
 
                     {!! $blogDetails['top_content'] !!}
@@ -512,7 +510,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
 
                 @if(!empty($blogDetails['bottom_content']))
                    
-                <div class="reveal" style="transition-delay:0.15s;">
+                <div class="reveal" >
                     <h2>
                                   {{ $blogDetails['bottom_heading'] }}
                 </h2>
@@ -619,8 +617,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
 
                 
                 @if(count($blogList))
-                <div class="reveal-right bg-white p-5 rounded-xl border border-gray-200 shadow-sm"
-                     style="transition-delay:0.1s;">
+                <div class="reveal-right bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
                     <h4 class="text-sm font-bold text-slate-900 mb-4 uppercase tracking-widest
                                flex items-center gap-2">
                         <span class="w-1 h-4 bg-blue-500 rounded-full inline-block"></span>
@@ -673,8 +670,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                 @endif
 
                 {{-- ── NEWSLETTER ── --}}
-                <div class="reveal-right newsletter-bg p-5 rounded-xl shadow-md text-white"
-                     style="transition-delay:0.2s;">
+                <div class="reveal-right newsletter-bg p-5 rounded-xl shadow-md text-white" >
                     <div class="relative z-10">
                         <h4 class="text-base font-bold mb-1">Never Miss a Post</h4>
                         <p class="text-white/70 text-xs mb-4 leading-relaxed">
@@ -698,8 +694,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                 </div>
 
                 {{-- ── SHARE SIDEBAR ── --}}
-                <div class="reveal-right bg-white p-5 rounded-xl border border-gray-200 shadow-sm"
-                     style="transition-delay:0.3s;">
+                <div class="reveal-right bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
                     <h4 class="text-sm font-bold text-slate-900 mb-3 uppercase tracking-widest
                                flex items-center gap-2">
                         <svg class="w-3.5 h-3.5 text-blue-500" fill="none" viewBox="0 0 24 24"
@@ -744,8 +739,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
     }, { passive: true });
 
     /* ── Random stable view count ── */
-    const vc = document.getElementById('view-count');
-    if (vc) vc.textContent = (Math.floor(Math.random() * 8000) + 1200).toLocaleString();
+    
 
     /* ── IntersectionObserver — reveal on scroll ── */
     const observer = new IntersectionObserver((entries) => {

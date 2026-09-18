@@ -435,6 +435,12 @@ Route::get('/sitemap.xml', function () {
 
 });
  
+Route::get('/top-city.xml', function () {
+	 
+	return response()
+        ->view('client.top_city')
+        ->header('Content-Type', 'application/xml; charset=UTF-8');
+});
 
 Route::get('/sitemap-online.xml', function () { 
 	$keywords =  DB::table('keyword')
@@ -572,6 +578,7 @@ Route::get('/disclaimer', function () {
 Route::get('/courses/playwright-automation-training-in-noida', [App\Http\Controllers\Client\HomePageController::class, 'playwrightAutomation']);
 
 
+
 Route::get('/wedding-planning', [App\Http\Controllers\Client\HomePageController::class, 'weddingPannel'])->name('wedding.planning');
 //Route::get('/doctor-hub', [App\Http\Controllers\Client\DoctorController::class, 'doctorHub'])->name('doctor.hub');
 
@@ -601,10 +608,10 @@ Route::get('/client/logout', [App\Http\Controllers\LogoutController::class, 'cli
 
 
 
-Route::get('/categories', [HomePageController::class, 'category'])->name('category.list');
-Route::get('/child', [HomePageController::class, 'child'])->name('child.list');
-Route::get('/categories/{slug}', [HomePageController::class, 'categories'])->name('categories.show');
-Route::get('/child/{slug}', [HomePageController::class, 'childSlus'])->name('child.show');
+//Route::get('/categories', [HomePageController::class, 'category'])->name('category.list');
+//Route::get('/child', [HomePageController::class, 'child'])->name('child.list');
+//Route::get('/categories/{slug}', [HomePageController::class, 'categories'])->name('categories.show');
+//Route::get('/child/{slug}', [HomePageController::class, 'childSlus'])->name('child.show');
 Route::get('location/getAjaxCity', [HomePageController::class, 'getAjaxLocation'])->name('get.location');
 Route::get('service/getAjaxKeyword', [HomePageController::class, 'getAjaxKeyword'])->name('search.keyword');
 

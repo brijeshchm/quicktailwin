@@ -705,7 +705,7 @@
 				{{csrf_field()}}
 				<div class="form-group col-md-12">
 					<div class="col-md-12">
-					 <label>Business Description:</label>                
+					 <label>Short Description(350 Charactor):</label>                
                     
           <textarea name="business_description" type="text" class="form-control" placeholder="Please enter business Description">{{ old('business_description',(isset($client)) ? $client->business_description:"")}}</textarea>
 					</div>

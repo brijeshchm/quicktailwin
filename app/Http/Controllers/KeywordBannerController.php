@@ -34,7 +34,7 @@ public function upload(Request $request, $keywordId)
     if (!file_exists($uploadDir)) {
         mkdir($uploadDir, 0755, true);
     }
-
+//  dd($_FILES);
     $startOrder = (int) $keyword->banners()->max('sort_order') + 1;
     $clients    = $request->input('banner_clients', []);
     $saved      = [];
@@ -42,7 +42,7 @@ public function upload(Request $request, $keywordId)
     DB::beginTransaction();
     try {
         foreach ($request->file('banners') as $index => $file) {
-            $filename = $this->saveImageSmart($file, $uploadDir, 1351, 192, 'cover');
+            $filename = $this->saveImageSmart($file, $uploadDir, null, null);
 
             $saved[] = KeywordBanner::create([
                 'keyword_id'    => $keyword->id,
@@ -160,7 +160,73 @@ public function updateUrl(Request $request, $id)
      * @param  int     $quality  WebP quality 1-100
      * @return string  Final filename only (e.g. abc123_Quickdials.webp)
      */
-    private function saveImageSmart(
+
+    function saveImageSmart($file, $destinationPath, $width = null, $height = null)
+	{
+		$ext = strtolower($file->getClientOriginalExtension());
+		$name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+		$name = str_replace(' ', '_', $name);
+		$filename = $name . '_' . time();
+
+		// ✅ SVG → Save directly
+		if ($ext === 'svg') {
+			$finalName = $filename . '.svg';
+			$file->move($destinationPath, $finalName);
+			return $finalName;
+		}
+
+		// ✅ Raster → Convert to WEBP
+		$imagePath = $file->getPathname();
+
+		switch ($ext) {
+			case 'jpg':
+			case 'jpeg':
+				$src = imagecreatefromjpeg($imagePath);
+				break;
+			case 'png':
+				$src = imagecreatefrompng($imagePath);
+				imagepalettetotruecolor($src);
+				imagealphablending($src, true);
+				imagesavealpha($src, true);
+				break;
+			case 'webp':
+				$src = imagecreatefromwebp($imagePath);
+				break;
+			default:
+				throw new \Exception('Unsupported image type');
+		}
+
+		$width = $width ?? imagesx($src);
+		$height = $height ?? imagesy($src);
+
+		$dst = imagecreatetruecolor($width, $height);
+		imagealphablending($dst, false);
+		imagesavealpha($dst, true);
+
+		imagecopyresampled(
+			$dst,
+			$src,
+			0,
+			0,
+			0,
+			0,
+			$width,
+			$height,
+			imagesx($src),
+			imagesy($src)
+		);
+
+		$finalName = $filename . '.webp';
+		imagewebp($dst, $destinationPath . '/' . $finalName, 80);
+
+		imagedestroy($src);
+		imagedestroy($dst);
+
+		return $finalName;
+	}
+
+
+    private function saveImageSmart_old(
         $file,
         $destinationPath,
         $maxWidth = null,

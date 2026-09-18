@@ -38,7 +38,7 @@
 <url>
     <loc>https://www.quickdials.com/online/{{ $slug }}</loc>
     <lastmod>2026-06-09T10:30:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
+    <changefreq>daily</changefreq>
     <priority>0.80</priority>
 </url>
 @endforeach

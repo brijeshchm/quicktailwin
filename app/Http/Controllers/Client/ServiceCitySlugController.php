@@ -316,8 +316,8 @@ class ServiceCitySlugController extends Controller
  
         $planOptions = ['Immediate', 'Within Week', 'Within Months', 'Not Planned Yet'];
  
-        $googleMapUrl = 'https://www.google.com/maps/search/?api=1&query=' . urlencode($clientsList['address'] ?? 'Bangalore');
-        $mapSrc = 'https://www.google.com/maps/embed/v1/search?key=AIzaSyAPFOcLOlCcBCtp764h9HflPfA56VlCFo0&q=' . urlencode($clientsList['address'] ?? 'Bangalore');
+        $googleMapUrl = 'https://www.google.com/maps/search/?api=1&query=' . urlencode($clientsList['address'] ?? 'faridabad');
+        $mapSrc = 'https://www.google.com/maps/embed/v1/search?key=AIzaSyAPFOcLOlCcBCtp764h9HflPfA56VlCFo0&q=' . urlencode($clientsList['address'] ?? 'faridabad');
  
         $yearEst  = $clientsList['year_of_estb'] ?? 2012;
         $yearsExp = date('Y') - (int)$yearEst;

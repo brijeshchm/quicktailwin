@@ -34,19 +34,10 @@
                  style="scroll-behavior:smooth; scrollbar-width:none; -ms-overflow-style:none;">
                 @foreach($popularSearches as $svc)
                  
-                @php
-                    $noCitySlugs = ['wedding-planning'];  
-
-                    $popSUrl = match($svc['type'] ?? '') {
-                        'keyword' => in_array($svc['url'], $noCitySlugs)
-                            ? route('showCity', $svc['url'])
-                            : route('city.slug', ['city_slug' => 'bangalore', 'service_slug' => $svc['url']]),
-                        'child'      => route('child.show', $svc['url']),
-                        'categories' => route('categories.show', $svc['url']),
-                        default      => '#',
-                    };
+               @php
+                $noCitySlugs = ['wedding-planning'];       
                 @endphp
-                 <a href="{{ $popSUrl }}"
+                 <a href="{{ route('showCity',$svc['url']) }}"
    title="{{ $svc['title'] ?? '' }}"
    class="block shrink-0 rounded-xl overflow-hidden relative group cursor-pointer shadow-sm hover:shadow-md transition-shadow duration-300"
    style="width:calc((100% - 12px) / 2.2); min-width:120px; max-width:200px;">

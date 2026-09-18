@@ -87,11 +87,8 @@
                     placeholder="Search businesses,Power by AI services,..."
                     class="flex-1 text-xs px-2.5  border-gray-100 outline-none bg-transparent text-gray-800 placeholder:text-gray-400 hover:border-gray-300"
                     oninput="handleStickySearchInput(this.value)"
-                    onfocus="handleStickySearchFocus()"
                     onkeydown="handleStickyKeydown(event)"
                 />
-
-           
 
                 {{-- Search button --}}
                 <button
@@ -106,23 +103,22 @@
             {{-- Suggestions dropdown --}}
             <!-- <div
                 id="sticky-suggestions"
-                class="hidden absolute top-full left-0 right-0 mt-1.5 bg-white rounded-xl shadow-2xl border border-gray-100 z-50 overflow-hidden dropdown-enter"
-                 absolute left-0 right-0 top-full z-50 mt-1 h-[300px] overflow-hidden rounded-lg border border-gray-200 bg-white shadow-xl
+                class="absolute left-0 right-0 top-full z-50 mt-1 max-h-72 overflow-y-auto rounded-lg border border-gray-200 bg-white shadow-xl"
             >
-                <ul id="sticky-suggestions-list"></ul>
+                <ul id="sticky-suggestions-list">
+
+                </ul>
             </div> -->
+
 
 <div 
     id="sticky-suggestions" 
-    class="hidden absolute left-0 right-0 top-full z-50 mt-1
-       h-auto max-h-[300px] overflow-y-auto
-       rounded-lg border border-gray-200 bg-white shadow-xl"
+    class="absolute left-0 right-0 top-full z-50 mt-1 rounded-lg border border-gray-200 bg-white shadow-xl"
 >
     <ul 
         id="sticky-suggestions-list"
-        class="h-full overflow-y-auto"
+        class="max-h-[200px] overflow-y-auto"
     >
-        <!-- Course URLs will load here -->
     </ul>
 </div>
 
@@ -642,7 +638,7 @@ if(!empty($clientcheck)){
                 >
                     <div class="p-2 border-b border-gray-100">
                         <div class="flex items-center gap-1.5 bg-gray-50 rounded-lg px-2.5 py-1.5 border border-gray-200">
-                            <i data-lucide="search" class="w-3.5 h-3.5 text-gray-400 shrink-0" aria-hidden="true"></i>
+                            <i data-lucide="search" class="w-3.5 h-3.5 text-gray-400 shrink-0"></i>
                             <input
                                 id="mobile-city-search"
                                 type="text"
@@ -665,7 +661,6 @@ if(!empty($clientcheck)){
                 placeholder="Search businesses, Power by AI services..."
                 class="flex-1 text-xs px-2.5 outline-none bg-transparent text-gray-800 placeholder:text-gray-400"
                 oninput="handleMobileSearchInput(this.value)"
-                onfocus="handleMobileSearchFocus()"
                 onkeydown="handleMobileKeydown(event)"
             />
 
@@ -675,29 +670,17 @@ if(!empty($clientcheck)){
                 onclick="doMobileSearch()"
                 class="shrink-0 bg-orange-500 hover:bg-orange-600 text-white h-9 px-3 rounded-r-xl flex items-center transition-colors"
             >
-                <i data-lucide="search" class="w-3.5 h-3.5" aria-hidden="true"></i>
+                <i data-lucide="search" class="w-3.5 h-3.5"></i>
             </button>
         </div>
 
         {{-- Mobile Suggestions Dropdown --}}
-        <!-- <div
+        <div
             id="mobile-suggestions"
             class="hidden absolute top-full left-3 right-3 mt-1 bg-white rounded-xl shadow-2xl border border-gray-100 z-[60] overflow-hidden"
         >
             <ul id="mobile-suggestions-list"></ul>
-        </div> -->
-
-
-        <div
-    id="mobile-suggestions"
-    class="hidden absolute top-full left-3 right-3 mt-1 h-[300px] bg-white rounded-xl shadow-2xl border border-gray-100 z-[60] overflow-hidden"
->
-    <ul 
-        id="mobile-suggestions-list"
-        class="h-full overflow-y-auto"
-    ></ul>
-</div>
-
+        </div>
     </div>
 </div>
 @endif
@@ -711,7 +694,7 @@ if(!empty($clientcheck)){
         </nav>
         <div class="flex flex-col gap-2 border-t border-gray-100 pt-3">
             <button onclick="openLoginModal()" class="w-full flex items-center justify-center gap-2 text-sm h-9 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors font-medium">
-                <i data-lucide="user" class="w-4 h-4" aria-hidden="true" aria-hidden="true"></i>
+                <i data-lucide="user" class="w-4 h-4"></i>
                 Login / Register
             </button>
             <a href="{{ route('login') }}" class="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-orange-500 to-orange-400 text-white text-sm h-9 rounded-full font-bold">
@@ -882,67 +865,23 @@ document.addEventListener('mousedown', (e) => {
     }
 });
 
-
 // ─── Sticky Search + Suggestions ──────────────────────────────────────────
 let stickySearchTimeout = null;
 let stickySuggestions   = [];
 let activeStickyIdx     = -1;
 
-// Default/trending keywords shown on click before typing anything.
-// Replace this fallback array with whatever popular searches you want to show.
-const DEFAULT_KEYWORDS = [
-    { id: 'artificial-intelligence-training', label: 'Artificial Intelligence Training', kind: 'trending' },
-    { id: 'python-training', label: 'Python Training', kind: 'trending' },
-    { id: 'sap-training', label: 'SAP Training', kind: 'trending' },
-    { id: 'workday-training', label: 'Workday Training', kind: 'trending' },
-    { id: 'banquet-hall', label: 'Banquet Hall', kind: 'trending' },
-    { id: 'cricket-academy', label: 'Cricket Academy', kind: 'trending' },
-];
-
-// Fired on focus/click — shows default keywords if the box is empty,
-// or re-shows the last fetched suggestions if the user already typed something.
-function handleStickySearchFocus() {
-    const val = document.getElementById('sticky-search-input').value.trim();
-    if (val.length < 1) {
-        showDefaultStickySuggestions();
-    } else if (stickySuggestions.length) {
-        document.getElementById('sticky-suggestions').classList.remove('hidden');
-    } else {
-        fetchStickySuggestions(val);
-    }
-}
-
-function showDefaultStickySuggestions() {
-    stickySuggestions = DEFAULT_KEYWORDS;
-    const list = document.getElementById('sticky-suggestions-list');
-    const box  = document.getElementById('sticky-suggestions');
-
-    list.innerHTML = `
-        <li class="px-4 pt-2.5 pb-1 text-[10px] font-bold text-gray-400 uppercase tracking-wide">Popular Searches</li>
-        ${stickySuggestions.map((s, idx) => `
-        <li>
-            <button onmouseenter="activeStickyIdx=${idx}" onmousedown="selectStickySuggestion(${idx})"
-                class="w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors hover:bg-gray-50">
-                <svg class="w-3.5 h-3.5 text-gray-300 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/></svg>
-                <span class="flex-1 text-sm text-gray-700">${s.label}</span>
-            </button>
-        </li>`).join('')}
-    `;
-    box.classList.remove('hidden');
-    activeStickyIdx = -1;
-}
-
 function handleStickySearchInput(val) {
+    alert(val);
     clearTimeout(stickySearchTimeout);
     if (val.trim().length < 1) {
-        showDefaultStickySuggestions();
+        alert('inner');
+        hideStickysuggestions();
         return;
     }
     stickySearchTimeout = setTimeout(() => fetchStickySuggestions(val.trim()), 220);
 }
 
 async function fetchStickySuggestions(q) {
-    
     try {
         const res  = await fetch(`https://api.quickdials.com/api/website/get-keyword-list?keyword=${encodeURIComponent(q)}`);
         const data = await res.json();
@@ -971,8 +910,6 @@ function renderStickySuggestions(q) {
                 <span class="flex-1 text-sm text-gray-700">${hl}</span>
                 <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full uppercase tracking-wide ${kc}">${s.kind}</span>
             </button>
-
-
         </li>`;
     }).join('');
     box.classList.remove('hidden');
@@ -987,121 +924,30 @@ function hideStickysuggestions() {
 
 function selectStickySuggestion(idx) {
     const s = stickySuggestions[idx];
-    if (!s) return;
-    document.getElementById('sticky-search-input').value = s.label;
+      if (!s) return;
+    document.getElementById('sticky-search-input').value = s.id;
     hideStickysuggestions();
     redirectSearch(s.id, stickySelectedCity);
 }
 
 function handleStickyKeydown(e) {
+    
+
     if (e.key === 'ArrowDown') { e.preventDefault(); activeStickyIdx = Math.min(activeStickyIdx+1, stickySuggestions.length-1); }
     else if (e.key === 'ArrowUp')  { e.preventDefault(); activeStickyIdx = Math.max(activeStickyIdx-1, 0); }
     else if (e.key === 'Enter')  { e.preventDefault(); activeStickyIdx >= 0 ? selectStickySuggestion(activeStickyIdx) : doStickySearch(); }
     else if (e.key === 'Escape') hideStickysuggestions();
 }
 
-function handleMobileSearchInput(val) {
-    clearTimeout(mobileSearchTimeout);
-    if (val.trim().length < 1) {
-        showDefaultMobileSuggestions();
-        return;
-    }
-    if (val.trim().length < 2) { hideMobileSuggestions(); return; }
-    mobileSearchTimeout = setTimeout(() => fetchMobileSuggestions(val.trim()), 220);
+function doStickySearch() {
+    const kw = document.getElementById('sticky-search-input').value.trim();
+    redirectSearch(kw, stickySelectedCity);
 }
 
-function selectMobileSuggestion(idx) {
-    const s = mobileSuggestions[idx];
-    if (!s) return;
-    document.getElementById('mobile-search-input').value = s.label;
-    hideMobileSuggestions();
-    redirectSearch(s.id, stickySelectedCity);
+function doMobileSearch() {
+    const kw = document.getElementById('mobile-search-input').value.trim();
+    redirectSearch(kw, stickySelectedCity);
 }
-
-
-// // ─── Sticky Search + Suggestions ──────────────────────────────────────────
-// let stickySearchTimeout = null;
-// let stickySuggestions   = [];
-// let activeStickyIdx     = -1;
-
-// function handleStickySearchInput(val) {
-//     alert(val);
-//     clearTimeout(stickySearchTimeout);
-//     if (val.trim().length < 1) {
-//         alert('inner');
-//         hideStickysuggestions();
-//         return;
-//     }
-//     stickySearchTimeout = setTimeout(() => fetchStickySuggestions(val.trim()), 220);
-// }
-
-// async function fetchStickySuggestions(q) {
-//     try {
-//         const res  = await fetch(`https://api.quickdials.com/api/website/get-keyword-list?keyword=${encodeURIComponent(q)}`);
-//         const data = await res.json();
-//         stickySuggestions = (data.data ?? []).map(i => ({ id: i.slug, label: i.keyword, kind: i.type }));
-//         renderStickySuggestions(q);
-//     } catch { hideStickysuggestions(); }
-// }
-
-// function renderStickySuggestions(q) {
-//     const list = document.getElementById('sticky-suggestions-list');
-//     const box  = document.getElementById('sticky-suggestions');
-//     if (!stickySuggestions.length) { hideStickysuggestions(); return; }
-//     const kindColors = { category: 'bg-blue-50 text-blue-600', service: 'bg-orange-50 text-orange-600', keyword: 'bg-green-50 text-green-600' };
-//     list.innerHTML = stickySuggestions.map((s, idx) => {
-//         const low = q.toLowerCase();
-//         const lbl = s.label;
-//         const mi  = lbl.toLowerCase().indexOf(low);
-//         const hl  = mi >= 0
-//             ? `${lbl.slice(0,mi)}<span class="text-blue-600 font-semibold">${lbl.slice(mi,mi+q.length)}</span>${lbl.slice(mi+q.length)}`
-//             : lbl;
-//         const kc = kindColors[s.kind] || 'bg-gray-100 text-gray-500';
-//         return `<li>
-//             <button onmouseenter="activeStickyIdx=${idx}" onmousedown="selectStickySuggestion(${idx})"
-//                 class="w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors hover:bg-gray-50">
-//                 <svg class="w-3.5 h-3.5 text-gray-300 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/></svg>
-//                 <span class="flex-1 text-sm text-gray-700">${hl}</span>
-//                 <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full uppercase tracking-wide ${kc}">${s.kind}</span>
-//             </button>
-//         </li>`;
-//     }).join('');
-//     box.classList.remove('hidden');
-//     activeStickyIdx = -1;
-// }
-
-// function hideStickysuggestions() {
-//     document.getElementById('sticky-suggestions').classList.add('hidden');
-//     stickySuggestions = [];
-//     activeStickyIdx   = -1;
-// }
-
-// function selectStickySuggestion(idx) {
-//     const s = stickySuggestions[idx];
-//       if (!s) return;
-//     document.getElementById('sticky-search-input').value = s.id;
-//     hideStickysuggestions();
-//     redirectSearch(s.id, stickySelectedCity);
-// }
-
-// function handleStickyKeydown(e) {
-    
-
-//     if (e.key === 'ArrowDown') { e.preventDefault(); activeStickyIdx = Math.min(activeStickyIdx+1, stickySuggestions.length-1); }
-//     else if (e.key === 'ArrowUp')  { e.preventDefault(); activeStickyIdx = Math.max(activeStickyIdx-1, 0); }
-//     else if (e.key === 'Enter')  { e.preventDefault(); activeStickyIdx >= 0 ? selectStickySuggestion(activeStickyIdx) : doStickySearch(); }
-//     else if (e.key === 'Escape') hideStickysuggestions();
-// }
-
-// function doStickySearch() {
-//     const kw = document.getElementById('sticky-search-input').value.trim();
-//     redirectSearch(kw, stickySelectedCity);
-// }
-
-// function doMobileSearch() {
-//     const kw = document.getElementById('mobile-search-input').value.trim();
-//     redirectSearch(kw, stickySelectedCity);
-// }
 
 function redirectSearch(keyword, city) {
     if (!keyword || !city) return;
@@ -1111,7 +957,7 @@ function redirectSearch(keyword, city) {
     window.location.href = `/${c}/${k}`;
 }
 
-// // ─── Mobile Menu ───────────────────────────────────────────────────────────
+// ─── Mobile Menu ───────────────────────────────────────────────────────────
 function toggleMobileMenu() {
     const menu      = document.getElementById('mobile-menu');
     const iconOpen  = document.getElementById('menu-icon-open');
@@ -1122,39 +968,6 @@ function toggleMobileMenu() {
     iconClose.classList.toggle('hidden', !isHidden);
 }
 
-function handleMobileSearchFocus() {
-    const inp = document.getElementById('mobile-search-input');
-    if (!inp) return;
-    const val = inp.value.trim();
-    if (val.length < 1) {
-        showDefaultMobileSuggestions();
-    } else if (mobileSuggestions.length) {
-        document.getElementById('mobile-suggestions').classList.remove('hidden');
-    } else {
-        fetchMobileSuggestions(val);
-    }
-}
-
-function showDefaultMobileSuggestions() {
-    mobileSuggestions = DEFAULT_KEYWORDS;
-    const list = document.getElementById('mobile-suggestions-list');
-    const box  = document.getElementById('mobile-suggestions');
-    if (!list || !box) return;
-
-    list.innerHTML = `
-        <li class="px-4 pt-2.5 pb-1 text-[10px] font-bold text-gray-400 uppercase tracking-wide">Popular Searches</li>
-        ${mobileSuggestions.map((s, idx) => `
-        <li>
-            <button type="button" onmousedown="selectMobileSuggestion(${idx})" ontouchstart="selectMobileSuggestion(${idx})"
-                class="w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors hover:bg-gray-50">
-                <svg class="w-3.5 h-3.5 text-gray-300 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/></svg>
-                <span class="flex-1 text-sm text-gray-700">${s.label}</span>
-            </button>
-        </li>`).join('')}
-    `;
-    box.classList.remove('hidden');
-    activeMobileIdx = -1;
-}
 
 // ─── MOBILE: City Dropdown ─────────────────────────────────────────────────
 function toggleMobileCity() {
@@ -1183,7 +996,7 @@ function renderMobileCityList(list, q = '') {
         </button>`).join('');
 }
 
-// let mobileCityTimeout = null;
+let mobileCityTimeout = null;
 function filterMobileCities(q) {
     const clearBtn = document.getElementById('mobile-city-clear');
     if (clearBtn) clearBtn.classList.toggle('hidden', !q);
@@ -1222,7 +1035,7 @@ function selectMobileCity(city) {
     if (inp) inp.focus();
 }
 
-// // ─── MOBILE: Search Suggestions ────────────────────────────────────────────
+// ─── MOBILE: Search Suggestions ────────────────────────────────────────────
 let mobileSearchTimeout = null;
 let mobileSuggestions   = [];
 let activeMobileIdx     = -1;
@@ -1296,7 +1109,7 @@ function doMobileSearch() {
     redirectSearch(kw, stickySelectedCity);
 }
 
-// // Close mobile city dropdown on outside tap
+// Close mobile city dropdown on outside tap
 document.addEventListener('mousedown', (e) => {
     const dd = document.getElementById('mobile-city-dropdown');
     if (dd && !dd.contains(e.target)) {
@@ -1313,7 +1126,7 @@ document.addEventListener('mousedown', (e) => {
     }
 });
 
-// // Re-init Lucide icons after dynamic insert (run after DOM ready)
+// Re-init Lucide icons after dynamic insert (run after DOM ready)
 document.addEventListener('DOMContentLoaded', () => {
     if (window.lucide) window.lucide.createIcons();
 });

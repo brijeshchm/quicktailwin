@@ -1384,7 +1384,7 @@ class KeywordController extends Controller
 			return view('errors.unauthorised');
 		}
 
-
+ 
 		if ($request->ajax()) {
 			$leads = DB::table('keyword as k');
 			if ($request->input('search.value') != '') {
@@ -1399,7 +1399,13 @@ class KeywordController extends Controller
 			}
 			$leads = $leads->select('k.keyword', 'k.id', 'k.meta_title', 'k.h1_heading', 'k.meta_description', 'k.top_description', 'k.bottom_description');
 			$leads = $leads->distinct();
-			$leads = $leads->orderBy('k.id', 'desc');
+			//$leads = $leads->orderBy('k.short_definition', 'desc');
+			$leads = $leads->orderByRaw("
+			CASE
+			WHEN k.short_definition IS NULL OR TRIM(k.short_definition) = '' THEN 0
+			ELSE 1
+			END
+			")->orderBy('k.short_definition', 'desc');
 			$leads = $leads->paginate($request->input('length'), ['k.keyword']);
 
 			if ($leads) {
@@ -1439,7 +1445,138 @@ class KeywordController extends Controller
 	 * @return json object based on pagination
 	 * @param null
 	 */
+
 	public function seoReport(Request $request)
+{
+    if (!($request->user()->current_user_can('administrator') || $request->user()->current_user_can('all_SEO'))) {
+        return view('errors.unauthorised');
+    }
+
+    if ($request->ajax()) {
+
+        $leads = DB::table('seo_logs');
+
+        // Text search filter
+        if ($request->filled('search.value')) {
+            $searchVal = $request->input('search.value');
+            $leads = $leads->where(function ($query) use ($searchVal) {
+                $query->where('attributes', 'LIKE', '%' . $searchVal . '%');
+            });
+        }
+
+// Date FROM filter
+if ($request->filled('search.datef')) {
+
+$dateFrom = \Carbon\Carbon::createFromFormat(
+	'Y-m-d',
+	$request->input('search.datef')
+)->format('Y-m-d');
+
+$leads->whereDate('created_at', '>=', $dateFrom);
+}
+
+// Date TO filter
+if ($request->filled('search.datet')) {
+
+$dateTo = \Carbon\Carbon::createFromFormat(
+	'Y-m-d',
+	$request->input('search.datet')
+)->format('Y-m-d');
+
+$leads->whereDate('created_at', '<=', $dateTo);
+}
+
+        // User filter (created_by OR updated_by) — properly grouped so it doesn't break other filters
+        if ($request->filled('search.user')) {
+            $userVal = $request->input('search.user');
+            $leads = $leads->where(function ($query) use ($userVal) {
+                $query->where('created_by', 'LIKE', $userVal)
+                      ->orWhere('updated_by', 'LIKE', $userVal);
+            });
+        }
+
+        $leads = $leads->distinct();
+        $leads = $leads->orderBy('id', 'desc');
+
+        // Guard against DataTables sending -1 (meaning "All") which breaks paginate()
+        $perPage = (int) $request->input('length');
+        $leads = $leads->paginate($perPage > 0 ? $perPage : 25);
+
+        if ($leads) {
+            $returnLeads = $data = [];
+            $returnLeads['draw'] = $request->input('draw');
+            $returnLeads['recordsTotal'] = $leads->total();
+            $returnLeads['recordsFiltered'] = $leads->total();
+
+            $owner = [];
+            $users = DB::table('users')->select('users.id', 'users.first_name', 'users.last_name')->get();
+            if ($users) {
+                foreach ($users as $user) {
+                    $owner[$user->id] = $user->first_name . " " . $user->last_name;
+                }
+            }
+//dd($leads);
+            foreach ($leads as $lead) {
+
+                $owner_name = '';
+                if ($lead->created_by != null && isset($owner[$lead->created_by])) {
+                    $owner_name = $owner[$lead->created_by];
+                } elseif ($lead->updated_by != null && isset($owner[$lead->updated_by])) {
+                    $owner_name = $owner[$lead->updated_by];
+                }
+
+                // Note: this block builds $keyhtml but never uses it —
+                // $htmlreport gets overwritten right after. Left as-is from
+                // original logic; remove if truly dead code, or wire it in
+                // if the dropdown-menu view was intended to show old/new keywords.
+                if ($lead->description != null && isset($lead->description)) {
+                    $descriptions = json_decode($lead->description);
+
+                    if (is_array($descriptions)) {
+                        $keyhtml = '';
+                        foreach ($descriptions as $description) {
+                            $keywords = json_decode($description);
+                            if (isset($keywords->new)) {
+                                $keyhtml .= '<li> Old:' . e($keywords->old) . '</li>';
+                                $keyhtml .= '<li> New:' . e($keywords->new) . '</li>';
+                            }
+                        }
+                    }
+                }
+
+                $htmlreport = '<a data-lead_id_follow="' . $lead->id . '" href="javascript:keywordController.seoReportPopup(' . $lead->id . ')" title="Seo Report"><i class="fa fa-fw fa-eye"></i></a>';
+
+                $data[] = [
+                    $lead->version,
+                    $lead->table,
+                    $lead->attributes,
+                    $htmlreport,
+                    $owner_name,
+                    date('Y-m-d H:i:s', strtotime($lead->created_at)),
+                ];
+            }
+
+            $returnLeads['data'] = $data;
+            return response()->json($returnLeads);
+        }
+
+        // Fallback if paginate() somehow returns falsy (shouldn't normally happen)
+        return response()->json([
+            'draw' => $request->input('draw'),
+            'recordsTotal' => 0,
+            'recordsFiltered' => 0,
+            'data' => [],
+        ]);
+
+    } else {
+        $search = [];
+        if ($request->has('search')) {
+            $search = $request->input('search');
+        }
+        return view('admin.seo.seoReport', ['search' => $search]);
+    }
+}
+	public function seoReport_oldh(Request $request)
 	{
 		if (!($request->user()->current_user_can('administrator') || $request->user()->current_user_can('all_SEO'))) {
 			return view('errors.unauthorised');
@@ -1447,29 +1584,30 @@ class KeywordController extends Controller
 
 		if ($request->ajax()) {
 
-
-			$leads = DB::table('seo_logs as log');
+//dd($request->input('search'));
+			$leads = DB::table('seo_logs');
 			if ($request->input('search.value') != '') {
 				$leads = $leads->where(function ($query) use ($request) {
-					$query->orWhere('log.attributes', 'LIKE', '%' . $request->input('search.value') . '%');
+					$query->orWhere('attributes', 'LIKE', '%' . $request->input('search.value') . '%');
 				});
 			}
 
 			if ($request->input('search.datef') != '') {
-				$leads = $leads->whereDate('log.created_at', '>=', date_format(date_create($request->input('search.datef')), 'Y-m-d'));
+				$leads = $leads->whereDate('created_at', '>=', date_format(date_create($request->input('search.datef')), 'Y-m-d'));
 			}
 			if ($request->input('search.datet') != '') {
-				$leads = $leads->whereDate('log.created_at', '<=', date_format(date_create($request->input('search.datet')), 'Y-m-d'));
+				$leads = $leads->whereDate('created_at', '<=', date_format(date_create($request->input('search.datet')), 'Y-m-d'));
 			}
 
 			if ($request->input('search.user') != '') {
-				$leads = $leads->where('log.created_by', 'LIKE', $request->input('search.user'));
-				$leads = $leads->orWhere('log.updated_by', 'LIKE', $request->input('search.user'));
+				$leads = $leads->where('created_by', 'LIKE', $request->input('search.user'));
+				$leads = $leads->orWhere('updated_by', 'LIKE', $request->input('search.user'));
 			}
-			$leads = $leads->select('log.*');
+
+			// $leads = $leads->select('log.*');
 			$leads = $leads->distinct();
-			$leads = $leads->orderBy('log.id', 'desc');
-			$leads = $leads->paginate($request->input('length'), ['k.keyword']);
+			$leads = $leads->orderBy('id', 'desc');
+			$leads = $leads->paginate($request->input('length'));
 
 			if ($leads) {
 				$returnLeads = $data = [];
@@ -1526,7 +1664,7 @@ class KeywordController extends Controller
 						$lead->attributes,
 						$htmlreport,
 						$owner_name,
-						(date('Y-m-d', strtotime($lead->created_at))),
+						(date('Y-m-d H:i:s', strtotime($lead->created_at))),
 					];
 				}
 				$returnLeads['data'] = $data;
@@ -1776,9 +1914,11 @@ class KeywordController extends Controller
 			return response()->json(['status' => 1, 'errors' => $danger_msg], 400);
 		}
 		$validator = Validator::make($request->all(), [
-			'meta_title' => 'required|min:3|max:75',
+
+			'meta_title'        => 'required|string|min:30|max:61',
+			'meta_description'  => 'required|string|min:70|max:161',
 			'h1_heading' => 'required|min:10|max:260',
-			'meta_description' => 'required|min:45|max:300',
+	
 			'short_definition' => 'required|min:45|max:360',
 			'ratingvalue' => 'required|numeric',
 			'ratingcount' => 'required|numeric',
@@ -1981,6 +2121,140 @@ class KeywordController extends Controller
 
 		return response()->json(['status' => $status, 'msg' => $msg], 200);
 	}
+	
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function updateNoidaPageContent(Request $request, $id)
+	{
+		if (!($request->user()->current_user_can('administrator') || $request->user()->current_user_can('edit_SEO'))) {
+			return response()->json(['status' => 1, 'errors' => 'errors unauthorised'], 400);
+		}
+
+		if (empty($id) || is_null($id)) {
+			$danger_msg = 'Keyword cannot be null or blank.';
+			return response()->json(['status' => 1, 'errors' => $danger_msg], 400);
+		}
+		$validator = Validator::make($request->all(), [
+			'noida_top_description' => 'nullable',
+			'noida_top_heading' => 'nullable',
+		]);
+
+		if ($validator->fails()) {
+			$errorsBag = $validator->getMessageBag()->toArray();
+			return response()->json(['status' => 1, 'errors' => $errorsBag], 400);
+		}
+		$kwObj = Keyword::findOrFail($id);
+
+		if ($kwObj) {
+			$kwObj->noida_top_description = $request->input('noida_top_description');
+			$kwObj->noida_top_heading = $request->input('noida_top_heading');
+
+
+			if ($kwObj->isDirty()) {
+				$originalValues = $kwObj->getOriginal();
+				$changes = [];
+				foreach ($kwObj->getDirty() as $field => $newValue) {
+					$changes[$field] = json_encode([
+						'old' => $originalValues[$field] ?? null,
+						'new' => $newValue,
+					]);
+
+					$versionData['version'] = $kwObj->id;
+					$versionData['updated_by'] = Auth::id();
+					$versionData['table'] = "keyword";
+					$versionData['attributes'] = $kwObj->keyword;
+					$versionData['description'] = json_encode($changes);
+				}
+				$this->seoLog->createSeoLog($versionData);
+			}
+		}
+
+		if (!empty($kwObj->save())) {
+			$status = 1;
+			$msg = "Noida Content Update submitted successfully!";
+
+		} else {
+			$status = 0;
+			$msg = "Noida Content Update could not be submitted!";
+		}
+
+		return response()->json(['status' => $status, 'msg' => $msg], 200);
+	}
+	
+	
+		/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function updateDelhiPageContent(Request $request, $id)
+	{
+		if (!($request->user()->current_user_can('administrator') || $request->user()->current_user_can('edit_SEO'))) {
+			return response()->json(['status' => 1, 'errors' => 'errors unauthorised'], 400);
+		}
+
+		if (empty($id) || is_null($id)) {
+			$danger_msg = 'Keyword cannot be null or blank.';
+			return response()->json(['status' => 1, 'errors' => $danger_msg], 400);
+		}
+		$validator = Validator::make($request->all(), [
+			'delhi_bottom_heading' => 'nullable',
+			'delhi_bottom_description' => 'nullable',
+
+
+		]);
+
+		if ($validator->fails()) {
+			$errorsBag = $validator->getMessageBag()->toArray();
+			return response()->json(['status' => 1, 'errors' => $errorsBag], 400);
+		}
+		$kwObj = Keyword::findOrFail($id);
+
+		if ($kwObj) {
+		
+			$kwObj->delhi_bottom_description = $request->input('delhi_bottom_description');
+			$kwObj->delhi_bottom_heading = $request->input('delhi_bottom_heading');
+		
+
+
+			if ($kwObj->isDirty()) {
+				$originalValues = $kwObj->getOriginal();
+				$changes = [];
+				foreach ($kwObj->getDirty() as $field => $newValue) {
+					$changes[$field] = json_encode([
+						'old' => $originalValues[$field] ?? null,
+						'new' => $newValue,
+					]);
+
+					$versionData['version'] = $kwObj->id;
+					$versionData['updated_by'] = Auth::id();
+					$versionData['table'] = "keyword";
+					$versionData['attributes'] = $kwObj->keyword;
+					$versionData['description'] = json_encode($changes);
+				}
+				$this->seoLog->createSeoLog($versionData);
+			}
+		}
+
+		if (!empty($kwObj->save())) {
+			$status = 1;
+			$msg = "Delhi Content Update submitted successfully!";
+
+		} else {
+			$status = 0;
+			$msg = "Delhi Content Update could not be submitted!";
+		}
+
+		return response()->json(['status' => $status, 'msg' => $msg], 200);
+	}
+	
 	/**
 	 * Update the specified resource in storage.
 	 *
@@ -2000,7 +2274,7 @@ class KeywordController extends Controller
 		}
 		$validator = Validator::make($request->all(), [
 			'top_wcity_description' => 'nullable',
-			'bottom_wcity_description' => 'nullable',
+			'top_wcity_heading' => 'nullable',
 
 
 		]);
@@ -2012,9 +2286,7 @@ class KeywordController extends Controller
 		$kwObj = Keyword::findOrFail($id);
 
 		if ($kwObj) {
-			$kwObj->top_wcity_description = $request->input('top_wcity_description');
-			$kwObj->bottom_wcity_description = $request->input('bottom_wcity_description');
-			$kwObj->bottom_wcity_heading = $request->input('bottom_wcity_heading');
+			$kwObj->top_wcity_description = $request->input('top_wcity_description');		
 			$kwObj->top_wcity_heading = $request->input('top_wcity_heading');
 
 
@@ -2044,6 +2316,71 @@ class KeywordController extends Controller
 		} else {
 			$status = 0;
 			$msg = "Content Update could not be submitted!";
+		}
+
+		return response()->json(['status' => $status, 'msg' => $msg], 200);
+	}
+	
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function updateBangaloreCityContent(Request $request, $id)
+	{
+		if (!($request->user()->current_user_can('administrator') || $request->user()->current_user_can('edit_SEO'))) {
+			return response()->json(['status' => 1, 'errors' => 'errors unauthorised'], 400);
+		}
+
+		if (empty($id) || is_null($id)) {
+			$danger_msg = 'Keyword cannot be null or blank.';
+			return response()->json(['status' => 1, 'errors' => $danger_msg], 400);
+		}
+		$validator = Validator::make($request->all(), [
+			'bottom_wcity_heading' => 'nullable',
+			'bottom_wcity_description' => 'nullable',
+
+
+		]);
+
+		if ($validator->fails()) {
+			$errorsBag = $validator->getMessageBag()->toArray();
+			return response()->json(['status' => 1, 'errors' => $errorsBag], 400);
+		}
+		$kwObj = Keyword::findOrFail($id);
+
+		if ($kwObj) {
+			
+			$kwObj->bottom_wcity_description = $request->input('bottom_wcity_description');
+			$kwObj->bottom_wcity_heading = $request->input('bottom_wcity_heading');
+			if ($kwObj->isDirty()) {
+				$originalValues = $kwObj->getOriginal();
+				$changes = [];
+				foreach ($kwObj->getDirty() as $field => $newValue) {
+					$changes[$field] = json_encode([
+						'old' => $originalValues[$field] ?? null,
+						'new' => $newValue,
+					]);
+
+					$versionData['version'] = $kwObj->id;
+					$versionData['updated_by'] = Auth::id();
+					$versionData['table'] = "keyword";
+					$versionData['attributes'] = $kwObj->keyword;
+					$versionData['description'] = json_encode($changes);
+				}
+				$this->seoLog->createSeoLog($versionData);
+			}
+		}
+
+		if (!empty($kwObj->save())) {
+			$status = 1;
+			$msg = "Bangalore Content Update submitted successfully!";
+
+		} else {
+			$status = 0;
+			$msg = "Bangalore Content Update could not be submitted!";
 		}
 
 		return response()->json(['status' => $status, 'msg' => $msg], 200);
@@ -2298,8 +2635,11 @@ class KeywordController extends Controller
 
 		// Form validation
 		$validated = $request->validate([
-			'meta_title'        => 'nullable|string|max:255',
-			'meta_description'  => 'nullable|string',
+
+
+			'meta_title'        => 'required|string|min:30|max:61',
+			'meta_description'  => 'required|string|min:70|max:161',
+	
 			'h1_heading'        => 'nullable|string|max:255',
 			'top_heading'       => 'nullable|string|max:255',
 			'top_description'   => 'nullable|string',
@@ -2462,8 +2802,8 @@ class KeywordController extends Controller
 
 		// Form validation
 		$validated = $request->validate([
-			'meta_title'        => 'nullable|string|max:255',
-			'meta_description'  => 'nullable|string',
+			'meta_title'        => 'nullable|string|min:30|max:61',
+			'meta_description'  => 'nullable|string|min:70|max:161',
 			'h1_heading'        => 'nullable|string|max:255',
 			'top_heading'       => 'nullable|string|max:255',
 			'top_description'   => 'nullable|string',

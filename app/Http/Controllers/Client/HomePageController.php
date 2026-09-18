@@ -55,11 +55,17 @@ class HomePageController extends Controller
         $popularSearches    = $this->getPopularSearches();
         $trending           = $this->getTrending();
         $blogPageList       = $this->getBlogList();
- 
-		$city= "bangalore";
+
+  		$clients = Client::get()->count();
+        $keywordCount = Keyword::get()->count();
+        $childCategory = ChildCategory::get()->count();
+        $citieslists = Citieslists::get()->count();
+
+
+		$city= "faridabad";
 		$metaTitle ="QuickDials | India’s Leading Local Business Search Directory";
 		$metaDescription  ="QuickDials is India’s trusted local business search and service directory, helping users find verified businesses, services, and professionals near them"; 
-		$keyword = "Quickdials";
+		$keyword = "";
         return view('client.index', compact(
             'blogPageList',
             'trending',
@@ -68,8 +74,8 @@ class HomePageController extends Controller
             'featuredBusinesses',
             'bannerKeyword',
             'homePage',
-            'repairsServices',
-            'weddingPlanning','city',
+            'repairsServices','childCategory',
+            'weddingPlanning','city','citieslists','keywordCount','clients',
 			'metaTitle','metaDescription','keyword'
         ));
     }
@@ -127,25 +133,41 @@ class HomePageController extends Controller
 		$images  = config('app.website') . 'images/';
  
         return [
-            ['url' => 'professional-courses', 'img' => $img . 'it_training.svg', 'alt' => 'IT Professional Courses', 'title' => 'Professional Courses', 'type' => 'categories', 'rating' => '4', 'count' => '434'],
-            ['url' => 'wedding-planning', 'img' => $img . 'wedding.png', 'alt' => 'Wedding pannel', 'title' => 'Wedding pannel', 'type' => 'keyword', 'rating' => '4', 'count' => '234'],
-            ['url' => 'electric-services', 'img' => $img . 'electric-services.webp', 'alt' => 'Electric Services', 'title' => 'Electric Services', 'type' => 'child', 'rating' => '3.5', 'count' => '377'],
-            ['url' => 'entrance-exams-coaching', 'img' => $popular . 'government-exam.png', 'alt' => 'Government exam coaching', 'title' => 'Government exam', 'type' => 'child', 'rating' => '3.5', 'count' => '229'],
-            ['url' => 'study-abroad', 'img' => $img . 'study-abroad.svg', 'alt' => 'Study Abroad', 'title' => 'Study Abroad', 'type' => 'child', 'rating' => '5', 'count' => '399'],
-            ['url' => 'spa-hub', 'img' => $img . 'Spa & Beauty.png', 'alt' => 'Spa & Beauty', 'title' => 'Spa & Beauty', 'type' => 'keyword', 'rating' => '5', 'count' => '325'],
-            ['url' => 'repair-services', 'img' => $img . 'Repairs-Services.svg', 'alt' => 'Repair Services', 'title' => 'Repair Services', 'type' => 'child', 'rating' => '5', 'count' => '389'],
-            ['url' => 'packers-and-movers', 'img' => $popular . 'Packers-movers.png', 'alt' => 'Packers & Movers', 'title' => 'Packers & Movers', 'type' => 'child', 'rating' => '3.5', 'count' => '199'],
-            ['url' => 'professional', 'img' => $popular . 'Professional.png', 'alt' => 'Professional Course', 'title' => 'Professional', 'type' => 'categories', 'rating' => '3.5', 'count' => '149'],
-            ['url' => 'contractors', 'img' => $img . 'contractors.png', 'alt' => 'Contractors Property', 'title' => 'Contractors', 'type' => 'child', 'rating' => '3.5', 'count' => '167'],
-            ['url' => 'collages-and-institutions', 'img' => $popular . 'Education.png', 'alt' => 'collages and Institutions', 'title' => 'Education', 'type' => 'categories', 'rating' => '3.5', 'count' => '197'],
-            ['url' => 'rent-or-buy', 'img' => $img . 'rent_buy.svg', 'alt' => 'Rent or Buy', 'title' => 'Rent & Buy', 'type' => 'child', 'rating' => '3.5', 'count' => '329'],
-            ['url' => 'sports-academy', 'img' => $popular . 'sports.png', 'alt' => 'Sport Academy', 'title' => 'Sport Academy', 'type' => 'child', 'rating' => '3.5', 'count' => '539'],
-            ['url' => 'medical', 'img' => $img . 'Medical.webp', 'alt' => 'Medical Medician', 'title' => 'Medical', 'type' => 'child', 'rating' => '3.5', 'count' => '269'],
-            ['url' => 'loan-service', 'img' => $popular . 'Loan.png', 'alt' => 'Loan Service', 'title' => 'Loan', 'type' => 'child', 'rating' => '3.5', 'count' => '69'],
-            ['url' => 'dance-classes', 'img' => $popular . 'Dancing.png', 'alt' => 'Dancing Class', 'title' => 'Dancing', 'type' => 'child', 'rating' => '3.5', 'count' => '79'],
-            ['url' => 'yoga-classes', 'img' => $popular . 'Yoga.png', 'alt' => 'Yoga Class', 'title' => 'Yoga', 'type' => 'child', 'rating' => '3.5', 'count' => '89'],
-            ['url' => 'security-system', 'img' => $img . 'CCTV-security.webp', 'alt' => 'CCTV Security', 'title' => 'CCTV Security', 'type' => 'child', 'rating' => '3.5', 'count' => '109'],
-            ['url' => 'tours-and-travels', 'img' => $images . 'tour-travels.png', 'alt' => 'Tours & Travels', 'title' => 'Tours & Travels', 'type' => 'keyword', 'rating' => '3.5', 'count' => '49'],
+
+			 ['url' => 'artificial-intelligence-training', 'img' => $img . 'artificial-intelligence.webp', 'alt' => 'Artificial Intelligence Training', 'title' => 'Artificial Intelligence Training', 'type' => 'keyword', 'rating' => '4', 'count' => '434'],
+			 ['url' => 'python-training', 'img' => $img . 'it_training.svg', 'alt' => '', 'title' => 'Python Training', 'type' => 'keyword', 'rating' => '4.75', 'count' => '789'],
+			 ['url' => 'workday-training', 'img' => $img . 'it_training.svg', 'alt' => 'Workday Training', 'title' => 'Workday Training', 'type' => 'keyword', 'rating' => '4.75', 'count' => '539'],
+			 ['url' => 'sap-training', 'img' => $img . 'it_training.svg', 'alt' => 'SAP Training', 'title' => 'SAP Training', 'type' => 'keyword', 'rating' => '4.75', 'count' => '678'],
+			 ['url' => 'banquet-hall', 'img' => $popular . 'Banquet-Halls.webp', 'alt' => 'Banquet Hall', 'title' => 'Banquet Hall', 'type' => 'keyword', 'rating' => '4.5', 'count' => '778'],
+	 		['url' => 'cricket-academy', 'img' => $popular . 'sports.png', 'alt' => 'Cricket academy', 'title' => 'Cricket Academy', 'type' => 'categories', 'rating' => '4.75', 'count' => '480'],
+	 		['url' => 'data-science-training', 'img' => $img . 'data-science.webp', 'alt' => 'Data Science', 'title' => 'Data Science', 'type' => 'categories', 'rating' => '4.75', 'count' => '480'],
+	 		['url' => 'judo-karate', 'img' => $img . 'judo-karate.png', 'alt' => 'Judo Karate', 'title' => 'Judo Karate', 'type' => 'categories', 'rating' => '4.75', 'count' => '480'],
+	 		['url' => 'distance-education', 'img' => $popular . 'Education.png', 'alt' => 'Distance Education', 'title' => 'Distance Education', 'type' => 'categories', 'rating' => '4.75', 'count' => '480'],
+	 		['url' => 'data-analytics-training', 'img' => $img . 'data-analytics.webp', 'alt' => 'Data Analytics', 'title' => 'Data Analytics', 'type' => 'categories', 'rating' => '4.75', 'count' => '480'],
+	 		['url' => 'salesforce-training', 'img' => $img . 'it_training.svg', 'alt' => 'Salesforce Training', 'title' => 'Salesforce Training', 'type' => 'categories', 'rating' => '4.75', 'count' => '480'],
+	 		['url' => 'wedding-organisers', 'img' => $img . 'wedding.png', 'alt' => 'Wedding Organisers', 'title' => 'Wedding Organisers', 'type' => 'categories', 'rating' => '4.45', 'count' => '380'],
+
+
+
+          //  ['url' => 'professional-courses', 'img' => $img . 'it_training.svg', 'alt' => 'IT Professional Courses', 'title' => 'Professional Courses', 'type' => 'categories', 'rating' => '4', 'count' => '434'],
+            // ['url' => 'wedding-planning', 'img' => $img . 'wedding.png', 'alt' => 'Wedding pannel', 'title' => 'Wedding pannel', 'type' => 'keyword', 'rating' => '4', 'count' => '234'],
+            // ['url' => 'electric-services', 'img' => $img . 'electric-services.webp', 'alt' => 'Electric Services', 'title' => 'Electric Services', 'type' => 'child', 'rating' => '3.5', 'count' => '377'],
+            // ['url' => 'entrance-exams-coaching', 'img' => $popular . 'government-exam.png', 'alt' => 'Government exam coaching', 'title' => 'Government exam', 'type' => 'child', 'rating' => '3.5', 'count' => '229'],
+            // ['url' => 'study-abroad', 'img' => $img . 'study-abroad.svg', 'alt' => 'Study Abroad', 'title' => 'Study Abroad', 'type' => 'child', 'rating' => '5', 'count' => '399'],
+            // ['url' => 'spa-hub', 'img' => $img . 'Spa & Beauty.png', 'alt' => 'Spa & Beauty', 'title' => 'Spa & Beauty', 'type' => 'keyword', 'rating' => '5', 'count' => '325'],
+            // ['url' => 'repair-services', 'img' => $img . 'Repairs-Services.svg', 'alt' => 'Repair Services', 'title' => 'Repair Services', 'type' => 'child', 'rating' => '5', 'count' => '389'],
+            // ['url' => 'packers-and-movers', 'img' => $popular . 'Packers-movers.png', 'alt' => 'Packers & Movers', 'title' => 'Packers & Movers', 'type' => 'child', 'rating' => '3.5', 'count' => '199'],
+            // ['url' => 'professional', 'img' => $popular . 'Professional.png', 'alt' => 'Professional Course', 'title' => 'Professional', 'type' => 'categories', 'rating' => '3.5', 'count' => '149'],
+            // ['url' => 'contractors', 'img' => $img . 'contractors.png', 'alt' => 'Contractors Property', 'title' => 'Contractors', 'type' => 'child', 'rating' => '3.5', 'count' => '167'],
+            // ['url' => 'collages-and-institutions', 'img' => $popular . 'Education.png', 'alt' => 'collages and Institutions', 'title' => 'Education', 'type' => 'categories', 'rating' => '3.5', 'count' => '197'],
+            // ['url' => 'rent-or-buy', 'img' => $img . 'rent_buy.svg', 'alt' => 'Rent or Buy', 'title' => 'Rent & Buy', 'type' => 'child', 'rating' => '3.5', 'count' => '329'],
+            // ['url' => 'sports-academy', 'img' => $popular . 'sports.png', 'alt' => 'Sport Academy', 'title' => 'Sport Academy', 'type' => 'child', 'rating' => '3.5', 'count' => '539'],
+            // ['url' => 'medical', 'img' => $img . 'Medical.webp', 'alt' => 'Medical Medician', 'title' => 'Medical', 'type' => 'child', 'rating' => '3.5', 'count' => '269'],
+            // ['url' => 'loan-service', 'img' => $popular . 'Loan.png', 'alt' => 'Loan Service', 'title' => 'Loan', 'type' => 'child', 'rating' => '3.5', 'count' => '69'],
+            // ['url' => 'dance-classes', 'img' => $popular . 'Dancing.png', 'alt' => 'Dancing Class', 'title' => 'Dancing', 'type' => 'child', 'rating' => '3.5', 'count' => '79'],
+            // ['url' => 'yoga-classes', 'img' => $popular . 'Yoga.png', 'alt' => 'Yoga Class', 'title' => 'Yoga', 'type' => 'child', 'rating' => '3.5', 'count' => '89'],
+            // ['url' => 'security-system', 'img' => $img . 'CCTV-security.webp', 'alt' => 'CCTV Security', 'title' => 'CCTV Security', 'type' => 'child', 'rating' => '3.5', 'count' => '109'],
+            // ['url' => 'tours-and-travels', 'img' => $images . 'tour-travels.png', 'alt' => 'Tours & Travels', 'title' => 'Tours & Travels', 'type' => 'keyword', 'rating' => '3.5', 'count' => '49'],
         ];
     }
  
@@ -163,13 +185,13 @@ class HomePageController extends Controller
             ['url' => 'rent-or-buy', 'img' => $img . 'Rent-buy.webp', 'alt' => 'Rent Or Buy', 'title' => 'Rent & Buy', 'type' => 'child', 'rating' => '3.5', 'count' => '329'],
             ['url' => 'packers-and-movers', 'img' => $img . 'Packers-movers.webp', 'alt' => 'Packers & Movers', 'title' => 'Packers & Movers', 'type' => 'child', 'rating' => '3.5', 'count' => '199'],
             ['url' => 'tours-and-travels', 'img' => $images . 'tour-travels.webp', 'alt' => 'Tours & Travels', 'title' => 'Tours & Travels', 'type' => 'keyword', 'rating' => '3.5', 'count' => '49'],
-            ['url' => 'professional-courses', 'img' => $popular . 'IT-Training.webp', 'alt' => 'Professional Courses', 'title' => 'Professional Courses', 'type' => 'categories', 'rating' => '4', 'count' => '434'],
+           
             ['url' => 'doctor', 'img' => $img . 'Doctor.webp', 'alt' => 'Doctor Clinic', 'title' => 'Doctor', 'type' => 'keyword', 'rating' => '4', 'count' => '234'],
             ['url' => 'electric-services', 'img' => $img . 'electric-services.webp', 'alt' => 'Electric Services', 'title' => 'Electric Services', 'type' => 'child', 'rating' => '3.5', 'count' => '377'],
             ['url' => 'entrance-exams-coaching', 'img' => $img . 'government-exam.webp', 'alt' => 'Government exam', 'title' => 'Government exam', 'type' => 'child', 'rating' => '3.5', 'count' => '229'],
             ['url' => 'study-abroad', 'img' => $img . 'study-abroad.svg', 'alt' => 'Study Abroad', 'title' => 'Study Abroad', 'type' => 'child', 'rating' => '5', 'count' => '399'],
             ['url' => 'spa-and-beauty', 'img' => $img . 'Spa-Beauty.webp', 'alt' => 'Spa & Beauty', 'title' => 'Spa & Beauty', 'type' => 'child', 'rating' => '5', 'count' => '325'],
-            ['url' => 'professional-courses', 'img' => $img . 'Professional.webp', 'alt' => 'Professional Course', 'title' => 'Professional', 'type' => 'categories', 'rating' => '3.5', 'count' => '149'],
+           
             ['url' => 'contractors', 'img' => $img . 'contractors.webp', 'alt' => 'Contractors Builder', 'title' => 'Contractors', 'type' => 'child', 'rating' => '3.5', 'count' => '167'],
             ['url' => 'collages-and-institutions', 'img' => $img . 'Education.webp', 'alt' => 'Education collages', 'title' => 'Education', 'type' => 'categories', 'rating' => '3.5', 'count' => '197'],
             ['url' => 'sports-academy', 'img' => $img . 'sports.webp', 'alt' => 'Sport Academy', 'title' => 'Sport Academy', 'type' => 'child', 'rating' => '3.5', 'count' => '539'],
@@ -366,7 +388,7 @@ class HomePageController extends Controller
             ['url' => 'interior-designer', 'img' => $popular . 'Interior-design.jpg', 'alt' => 'Interior Design', 'title' => 'Interior Design', 'type' => 'keyword', 'rating' => '3.5', 'count' => '192'],
             ['url' => 'real-estate', 'img' => $popular . 'real-estate-agent.jpg', 'alt' => 'Real Estate Agents', 'title' => 'Real Estate Agents', 'type' => 'child', 'rating' => '3.5', 'count' => '239'],
             ['url' => 'carpenters', 'img' => $popular . 'carpenter.jpg', 'alt' => 'Carpenters', 'title' => 'Carpenters', 'type' => 'keyword', 'rating' => '3.5', 'count' => '123'],
-            ['url' => 'wedding-planning', 'img' => $popular . 'Bridal-Wear.jpg', 'alt' => 'Bridal Wear', 'title' => 'Bridal Wear', 'type' => 'keyword', 'rating' => '3.5', 'count' => '119'],
+           
         ];
     }
  
@@ -376,11 +398,11 @@ class HomePageController extends Controller
     private function getTrending(): array
     {
         return [
-            ['url' => 'ac-repair-service', 'title' => 'AC Repair Service', 'type' => 'keyword', 'rating' => '3.5', 'count' => '199'],
+            ['url' => 'artificial-intelligence-training', 'title' => 'Artificial Intelligence', 'type' => 'keyword', 'rating' => '3.5', 'count' => '199'],
             ['url' => 'banquet-hall', 'title' => 'Wedding Planning', 'type' => 'keyword', 'rating' => '3.5', 'count' => '778'],
-            ['url' => 'clinical-research', 'title' => 'Clinical', 'type' => 'keyword', 'rating' => '4', 'count' => '374'],
-            ['url' => 'home-loan', 'title' => 'Home Loan', 'type' => 'keyword', 'rating' => '4.75', 'count' => '475'],
-            ['url' => 'carpenters', 'title' => 'Carpenters', 'type' => 'keyword', 'rating' => '4.75', 'count' => '463'],
+            ['url' => 'sap-training', 'title' => 'SAP Training', 'type' => 'keyword', 'rating' => '4', 'count' => '374'],
+            ['url' => 'cricket-academy', 'title' => 'Cricket Academy', 'type' => 'keyword', 'rating' => '4.75', 'count' => '475'],
+            ['url' => 'python-training', 'title' => 'Python Training', 'type' => 'keyword', 'rating' => '4.75', 'count' => '463'],
         ];
     }
  
@@ -1634,13 +1656,11 @@ class HomePageController extends Controller
 	}
 
 	public function businessServices(Request $request)
-	{
-		 
-
-// ── API fetch (cached 1 hour) ────────────────────────────────────────
+	{	
+		// ── API fetch (cached 1 hour) ────────────────────────────────────────
         $apiData = Cache::remember('business_services', 3600, function () {
             try {
-                $res = Http::timeout(10)->withoutVerifying()
+                $res = Http::timeout(30)->withoutVerifying()
                     ->get('https://api.quickdials.com/api/website/business-services');
                 return $res->successful() ? $res->json('data', []) : [];
             } catch (\Exception $e) {
@@ -1662,7 +1682,7 @@ class HomePageController extends Controller
         $featured = [
             ['name' => 'TechAxis IT Solutions', 'category' => 'Web Development',   'city' => 'Delhi',     'rating' => 4.8, 'reviews' => 312],
             ['name' => 'BrightMinds Coaching',  'category' => 'IIT JEE Coaching',  'city' => 'Mumbai',    'rating' => 4.6, 'reviews' => 189],
-            ['name' => 'GreenLeaf Ayurveda',    'category' => 'Ayurvedic Clinic',   'city' => 'Bangalore', 'rating' => 4.9, 'reviews' => 97],
+            ['name' => 'GreenLeaf Ayurveda',    'category' => 'Ayurvedic Clinic',   'city' => 'faridabad', 'rating' => 4.9, 'reviews' => 97],
             ['name' => 'StyleCraft Interiors',  'category' => 'Interior Design',    'city' => 'Hyderabad', 'rating' => 4.7, 'reviews' => 243],
         ];
  
@@ -1679,8 +1699,8 @@ class HomePageController extends Controller
         $categorySections    = $apiData['businessServices']             ?? [];
  
 
- $category = array_slice($categorySections, 1, 5);
- $featuredCategory = array_slice($categorySections, 1, 5);
+ 		$category = array_slice($categorySections, 1, 5);
+ 		$featuredCategory = array_slice($categorySections, 1, 5);
 
  
         if (!empty($featuredFromApi)) $featured    = $featuredFromApi;
@@ -1813,7 +1833,7 @@ class HomePageController extends Controller
             '#145a32','#2c3e50','#154360','#7b241c','#117a65',
             '#145a32','#784212','#1e8449','#1b4332',
         ];
- 		$city = "bangalore";
+ 		$city = "faridabad";
         return view('client.category-slug', compact(
             'slug', 'keyword', 'childCategory','kwData', 'childSlug',
             'topDescription', 'bottomDescription','faqs',
@@ -1887,7 +1907,7 @@ class HomePageController extends Controller
             '#145a32','#2c3e50','#154360','#7b241c','#117a65',
             '#145a32','#784212','#1e8449','#1b4332',
         ];
- 		$city = "bangalore";
+ 		$city = "faridabad";
 		
         return view('client.child-slug', compact(
             'child_slug', 'keyword', 'childCategory', 'childSlug',
@@ -1984,7 +2004,7 @@ class HomePageController extends Controller
         $testimonials = [
             ['name' => 'Priya & Rahul Sharma',   'location' => 'Mumbai',    'date' => 'December 2024', 'rating' => 5, 'text' => 'Shaadi6 made our dream wedding a reality. From finding the perfect venue at The Taj to coordinating with 15 different vendors seamlessly — every moment was magical.', 'avatar' => 'PR', 'grad' => 'from-pink-400 to-red-500',    'package' => 'Royal Package'],
             ['name' => 'Ananya & Vikram Mehta',  'location' => 'Delhi',     'date' => 'October 2024',  'rating' => 5, 'text' => 'From the mehendi ceremony to the reception, everything was perfect. Our wedding planner was always available, incredibly organized, and made us feel calm throughout.',  'avatar' => 'AV', 'grad' => 'from-amber-400 to-orange-500', 'package' => 'Premium Package'],
-            ['name' => 'Deepa & Arjun Nair',     'location' => 'Bangalore', 'date' => 'February 2025', 'rating' => 5, 'text' => 'We had no idea how to plan a wedding for 400 guests. Shaadi6 took care of everything — venue, catering, flowers, even the honeymoon. Most stress-free experience ever.',  'avatar' => 'DA', 'grad' => 'from-purple-400 to-pink-500',  'package' => 'Royal Package'],
+            ['name' => 'Deepa & Arjun Nair',     'location' => 'faridabad', 'date' => 'February 2025', 'rating' => 5, 'text' => 'We had no idea how to plan a wedding for 400 guests. Shaadi6 took care of everything — venue, catering, flowers, even the honeymoon. Most stress-free experience ever.',  'avatar' => 'DA', 'grad' => 'from-purple-400 to-pink-500',  'package' => 'Royal Package'],
         ];
 			$city = "delhi";
 			$metaTitle = "Wedding Planning Services in Delhi | QuickDials";
@@ -2122,7 +2142,7 @@ $reviews =  [
 				'Mumbai',
 				'Pune',
 				'Meerut',
-				'Bangalore',
+				'faridabad',
 				'Indore',
 				'Kanpur',
 				'Chennai',

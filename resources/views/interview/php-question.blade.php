@@ -1,28 +1,20 @@
  @extends('interview.layouts.app')
 @section('title')
-QuickDials- Business Services
+PHP Interview Questions & Answers
 @endsection 
-@section('keywords')
-QuickDials-  Business Services list 
-@endsection
 @section('description'),  
 Prepare with PHP interview questions and answers covering OOP, arrays, sessions, MySQL, security, APIs, and advanced PHP concepts.
 @endsection
-
-
 @section('content')	 
- 
-
 <div class='main light-grey' id='belowtopnav' style='margin-left:220px;'>
   <div class='row white'>
-    <div class='col l11 m12' id='main'>
-       
-<h1>PHP<span class="color_h1"> Interview Question & Answer</span></h1>
-<div class="clear nextprev">
-<a class="left btn" href="{{url('interviews/php-interview-question-answer')}}">&#10094; Previous</a>
-<a class="right btn" href="{{url('interviews/mysql-interview-question-answer')}}">Next &#10095;</a>
-</div>
-<hr>
+    <div class='col l11 m12' id='main'>       
+    <h1>PHP<span class="color_h1"> Interview Question & Answer</span></h1>
+    <div class="clear nextprev">
+    <a class="left btn" href="{{url('interviews/php-interview-question-answer')}}">&#10094; Previous</a>
+    <a class="right btn" href="{{url('interviews/mysql-interview-question-answer')}}">Next &#10095;</a>
+    </div>
+    <hr>
  <div class="light">
   
  <section id="services-section" class="py-12 bg-gray-100"><div class="container mx-auto px-4">
@@ -263,7 +255,21 @@ echo $userService-&gt;getUser()<br>
 <div class="question">  
 <h2 class="text-3xl font-bold text-primary mt-5 mb-4">What's the OOPs PHP?</h2>
 </div>
-<p class="text-lg text-gray-700"><strong>Class: </strong>Classes define the blueprint for creating objects.</p><p class="text-lg text-gray-700"><strong>Object:</strong> Objects are instance of classes an instance of a class containing real data and behavior.</p><p class="text-lg text-gray-700"><strong>Encapsulation:</strong>Encapsulation involves restricting access to certain class members to prevent direct modification from outside the class with the help of getters and setters.</p><p class="text-lg text-gray-700"><strong>Access Modifies:</strong><ul><li><strong>Public:</strong> Accessible from any where - inside or outside the class.</li><li><strong>Protected:</strong> Accessible within the class and by inheriting class or derived class.</li><li><strong>Private:</strong>Accessible only within the class itself. </li><li><strong>Getters:</strong>Allow you to retrieving the value of private properties. </li><li><strong>Setters:</strong>Allow you to modify the values of private properties sately.</li></ul><ul class="mt-2 bg-gray-200 p-4 shadow-lg"><li class="bg-white p-3 border-l-4 border-green-500 text-sm">
+<p class="text-lg text-gray-700"><strong>Class: </strong>Classes define the blueprint for creating objects.</p><p class="text-lg text-gray-700"><strong>Object:</strong> Objects are instance of classes an instance of a class containing real data and behavior.</p><p class="text-lg text-gray-700"><strong>Encapsulation:</strong>Encapsulation is the process of bundling data and the methods that operate on that data into a single unit while restricting direct access to the internal details.</p><p class="text-lg text-gray-700">
+  
+
+ 
+
+
+<ul><li><strong>Definition:</strong> Combining variables (attributes) and functions (methods) into a single class.</li><li><strong>Data Hiding:</strong> Making internal fields private so external code cannot change them directly.</li><li><strong>Controlled Access:</strong>Using public getter and setter methods to read or update hidden data safely. </li><li><strong>Benefit:</strong>Protects data integrity and allows internal code changes without breaking outside programs. </li></ul>
+
+<strong>Access Modifies:</strong>
+<ul><li><strong>Public:</strong> Accessible from any where - inside or outside the class.</li><li><strong>Protected:</strong> Accessible within the class and by inheriting class or derived class.</li><li><strong>Private:</strong>Accessible only within the class itself. </li><li><strong>Getters:</strong>Allow you to retrieving the value of private properties. </li><li><strong>Setters:</strong>Allow you to modify the values of private properties sately.</li></ul>
+
+
+
+
+<ul class="mt-2 bg-gray-200 p-4 shadow-lg"><li class="bg-white p-3 border-l-4 border-green-500 text-sm">
   <div class="example">
  <div class="code">
   
@@ -392,29 +398,39 @@ $test = New Animal(); // wrong not direct object create<br>
   <div class="example">
  <div class="code"><code>
  
-interface Shape {<br>
-    &nbsp public function area();<br>
-    &nbsp public function perimeter();<br>
-}<br>
  
-class Circle implements Shape {<br>
-    &nbsp private $radius;<br>
 
-    &nbsp public function __construct($r) {<br>
-        &nbsp &nbsp $this-&gt;radius = $r;<br>
+interface Payment<br>
+{<br>
+    public function pay($amount);<br>
+    public function refund($amount);<br>
+}<br>
+
+class CreditCardPayment implements Payment<br>
+{<br>
+    private $cardNumber;<br>
+
+    public function __construct($cardNumber)<br>
+    {<br>
+        $this->cardNumber = $cardNumber;<br>
     }<br>
 
-    public function area() {<br>
-       &nbsp return pi() * $this-&gt;radius ** 2;<br>
+    public function pay($amount)<br>
+    {<br>
+        return "Paid ₹" . $amount . " using Credit Card";<br>
     }<br>
 
-    public function perimeter() {<br>
-      &nbsp  return 2 * pi() * $this-&gt;radius;<br>
+    public function refund($amount)<br>
+    {<br>
+        return "Refunded ₹" . $amount . " to Credit Card";<br>
     }<br>
 }<br>
 
-$circle = new Circle(5);<br>
-echo $circle-&gt;area(); // Output: 78.539...<br>
+$payment = new CreditCardPayment("123456789");<br>
+
+echo $payment->pay(5000);<br>
+
+ 
    </code></div></div></td></tr></tbody></table>
   </div>
 
@@ -441,6 +457,44 @@ $result = MathHelper::add(4, 6); // call :: <br>
 </div>
 
 
+
+</div>
+
+<div class="mb-12">
+  <div class="question">  
+  <h2 class="text-3xl font-bold text-primary mt-5 mb-4">Autowiring and Autoconfiguration?</h2>
+  </div>
+  <p class="text-lg text-gray-700">These concepts are especially common in Symfony.</p>
+   <p class="text-lg text-gray-700"><strong> Autowiring.</strong> </p>
+   <p>Symfony automatically determines which dependencies need to be injected based on type hints.</p>
+<div class="example">
+ <div class="code">
+ 
+<code> class UserController</br>
+{</br>
+    public function __construct(</br>
+        private UserService $userService</br>
+    ) {}</br>
+}</br>
+
+Automatically resolves dependencies.
+</code>
+</div>
+</div>
+
+<p class="text-lg text-gray-700"><strong> Autoconfiguration.</strong> </p>
+   <p>Symfony automatically configures services based on their interfaces/base classes.</p>
+<div class="example">
+ <div class="code">
+ 
+<code> class UserEventSubscriber implements EventSubscriberInterface</br>
+{</br>
+}</br>
+
+Automatically applies service configuration/tags based on the class/interface.
+</code>
+</div>
+</div>
 
 </div>
   

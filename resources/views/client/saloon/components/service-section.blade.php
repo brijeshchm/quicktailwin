@@ -177,7 +177,6 @@
         @foreach ($services as $i => $s)
             <article
                 data-reveal
-                style="transition-delay: {{ $i * 80 }}ms;"
                 class="group relative cursor-default overflow-hidden rounded-[24px] border-[1.5px] border-slate-200 bg-white transition-all duration-500 ease-out
                        hover:-translate-y-2 hover:border-rose-500/40"
             >

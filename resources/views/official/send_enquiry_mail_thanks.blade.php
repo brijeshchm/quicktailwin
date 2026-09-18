@@ -115,7 +115,7 @@
                                                                             <tr>
                                                                                 <td style="padding:0in 0in 0in 0in">
                                                                                     <p class="MsoNormal"><strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">Address :</span></strong><span style="font-size:10.5pt;font-family:&quot;Tahoma&quot;,&quot;sans-serif&quot;;color:#333333">
-          Pillar No.33, 1,2,3,4 1st floor Breja market, NH-19, opposite flyover, Faridabad, New Delhi  India - 110044</span><u></u><u></u></p>
+          Pillar No.33, 1,2,3,4 1st floor Breja market, NH-19, opposite flyover, Bangalore, New Delhi  India - 110044</span><u></u><u></u></p>
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>

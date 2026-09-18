@@ -237,6 +237,36 @@ if (isPrime($number)) {
 </xmp>
  </code>
 </div>
+ <div class="code">
+ <code>
+  <xmp>
+ $array = [2, 3, 4, 5, 7, 8, 9, 11, 15];
+
+$primes = [];
+
+foreach ($array as $num) {
+    if ($num < 2) {
+        continue;
+    }
+
+    $isPrime = true;
+
+    for ($i = 2; $i <= sqrt($num); $i++) {
+        if ($num % $i == 0) {
+            $isPrime = false;
+            break;
+        }
+    }
+
+    if ($isPrime) {
+        $primes[] = $num;
+    }
+}
+
+print_r($primes);   
+</xmp>
+ </code>
+</div>
 </div>
 </div> 
  

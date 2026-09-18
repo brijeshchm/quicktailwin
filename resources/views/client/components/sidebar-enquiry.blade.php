@@ -30,7 +30,7 @@
         <div class="relative bg-gradient-to-br from-indigo-600 via-violet-600 to-purple-700 px-4 pt-3 pb-3 ">
             <div class="flex items-center gap-2.5 mb-1">
                 <div class="w-8 h-8 bg-white/20 rounded-xl flex items-center justify-center border border-white/30">⚡</div>
-                <h2 class="text-white font-bold text-base">Quick Enquiry</h2>
+                <span class="text-white font-bold text-base">Quick Enquiry</span>
             </div>
             <p class="text-white/70 text-xs mb-2">We'll connect you with the best vendors instantly.</p>
 

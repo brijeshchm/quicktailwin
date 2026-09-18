@@ -46,30 +46,20 @@
                     
                     @if(!empty($trending))
                         @foreach($trending as $tag)
-                            <button
-                                onclick="redirectSearch('{{ $tag['url'] ?? $tag['title'] }}', heroSelectedCity)"
-                                aria-label="Search {{ $tag['url'] }}"
-                                class="text-[11px] bg-gray-100 hover:bg-blue-50 border border-gray-200 hover:border-blue-200 text-gray-500 hover:text-blue-700 px-2.5 py-0.5 rounded-full transition-colors"
-                            >{{ $tag['title'] }}</button>
-                        @endforeach
-                    @else
-                        @foreach(['AC Repair Service','Wedding Planner','Home Loan','Dentist','Pizza Near Me'] as $tag)
-                            <button
-                                onclick="redirectSearch('{{ Str::slug($tag) }}', heroSelectedCity)"
-                                aria-label="Search {{ Str::slug($tag) }}"
-                                class="text-[11px] bg-gray-100 hover:bg-blue-50 border border-gray-200 hover:border-blue-200 text-gray-500 hover:text-blue-700 px-2.5 py-0.5 rounded-full transition-colors"
-                            >{{ $tag }}</button>
+                            <a href="{{ route('showCity', $tag['url']) }}" class="text-[11px] bg-gray-100 hover:bg-blue-50 border border-gray-200 hover:border-blue-200 text-gray-500 hover:text-blue-700 px-2.5 py-0.5 rounded-full transition-colors"
+                            >{{ $tag['title'] }}</a>
                         @endforeach
                     @endif
+                      
                 </div>
 
         {{-- Secondary actions --}}
         <div class="mt-10 flex flex-col sm:flex-row gap-3 justify-center border-t border-gray-200 pt-8">
-            <a href="{{ url('/') }}"
+            <a href="{{ route('home') }}"
                class="inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium text-gray-600 hover:text-gray-900">
                 &larr; Back to Home
             </a>
-            <a href="{{ url('/contact-us') }}"
+            <a href="{{ route('contactUs') }}"
                class="inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium text-blue-600 hover:text-blue-700">
                 Contact Support
             </a>
@@ -79,7 +69,7 @@
 </section>
 </main>
 <script>
-    let heroSelectedCity = 'bangalore';
+    let heroSelectedCity = 'faridabad';
     function redirectSearch(keyword, city) { 
     if (!keyword || !city) return;
     const c = city.toLowerCase().replace(/\s+/g, '-');
@@ -87,7 +77,7 @@
     window.location.href = `/${c}/${k}`;
 }
 </script>
-@include('client.layouts.footer')
+ 
 
 </body>
 </html>

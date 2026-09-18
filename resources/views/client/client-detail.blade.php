@@ -1,7 +1,9 @@
 @extends('client.layouts.app')
 @section('title', $metaTitle ?? 'QuickDials | A Local Search Engine for Businesses')
-@section('description', $metaDescription ?? 'Category local search engine, for Certified Training Institutes near you Quickdials, Hotels, Salons, Real Estate, Travel, Healthcare, Education,Find addresses, phone numbers, reviews and ratings, photos, maps of businesses Find Only Certified Training Institutes')
-@section('keywords', $metaKeywords ?? 'Find Best It Training Centre near You, Find Best It Training Institute near You, Find Top 10 IT Training Institute near You, Find Best Entrance Exam Preparation Centre Near you, Top 10 Entrance Exam Centre Near you, Find Best Distance Education Centre Near You, Find Top 10 Distance Education Centre Near You, Find Best School And Colleges Near You, Find Top 10 school And College Near You, Get Education Loan, GET Free career Counselling, Find Best overseas education consultants Near you, Find Top 10 overseas education consultants Near you')
+@section('description', $metaDescription ?? 'Category local search engine, for Certified Training Institutes near you Quickdials, Hotels, Salons, Real Estate, Travel, Healthcare, Education,Find addresses, phone numbers, reviews and ratings, photos, maps of businesses Find Only Certified Training Institutes') 
+@section('meta_robots')
+<meta name="robots" content="noindex, nofollow">
+@endsection
 @section('content')
 @include('client.components.banner-section')
 <div id="scroll-progress"></div> 
@@ -147,41 +149,16 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                 {{-- Name --}}
                 <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
                     <div itemprop="name">
-                        <h1 class="text-2xl md:text-5xl font-extrabold text-white leading-tight tracking-tight"
-                    style="text-shadow:0 2px 30px rgba(30,58,138,.6);"> {{ ucfirst(
-    !empty($clientsList['h1_heading'])
-        ? $clientsList['h1_heading']
-        : (!empty($clientsList['business_name'])
-            ? $clientsList['business_name']
-            : 'Business Name')
-) }}</h1>
+                        <h2 class="text-2xl md:text-3xl font-extrabold text-white leading-tight tracking-tight"
+                    style="text-shadow:0 2px 30px rgba(30,58,138,.6);"> {{
+    ucwords(
+        strtolower(
+            $clientsList['business_name'] ?? 'Business Name'
+        )
+    )
+}}</h2>
                     </div>                           
-                    <div itemprop="aggregateRating"
-                        itemscope
-                        itemtype="https://schema.org/AggregateRating"
-                        class="flex items-center gap-2 text-sm">
-                        <img  itemprop="image" src="{{ asset('client/images/' . $starImg) }}"
-                        alt="{{ $clientsList['ratingCount']??'0' }} out of 5 stars"
-                        class="lazy-image h-4 w-auto text-white"
-                        width="80"
-                        height="16"
-                        loading="lazy"
-                        decoding="async"
-                        >
-                        <span class="font-semibold text-white">
-                        <span itemprop="ratingValue">{{ $clientsList['rating']??'0' }}</span>
-                        </span>
-                        <span class="text-white">
-                        <span class="text-white">out of</span>
-                        <span itemprop="bestRating">5</span>
-                        <span class="text-white">based on</span>
-                        (<span itemprop="ratingCount">{{ number_format(
-    !empty($clientsList['ratingCount'])
-        ? (int) $clientsList['ratingCount']
-        : 0
-) }}</span>
-                        <span class="text-white">reviews</span>)</span>
-                    </div>
+                  
                 </div> 
 
 
@@ -189,13 +166,7 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
 
 
             </div>
-            <div class="flex flex-wrap items-center gap-3 text-white/80 text-xs font-medium">
-                
-                <span class="text-[10px] font-bold tracking-wide text-white rounded-full px-2.5 py-0.5 flex items-center gap-1.5" style="background:#16a34a;">
-                    <span class="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span>Open Now
-                </span>
-                <span class="flex items-center gap-1">📍 {{ $clientsList['address'] ?? 'India' }}</span>
-            </div>
+           
         </div>
     </div>
 
@@ -260,6 +231,16 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
                 </a>
             </div>
         </div>
+
+       
+
+          <button 
+                class="flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold text-sm text-blue-700 border border-blue-200 hover:bg-blue-50">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                <circle cx="12" cy="12" r="3"/>
+            </svg> {{ !empty($clientsList['views']) ? $clientsList['views'] : '' }} Views
+        </button>
     </div>
 </div>
 
@@ -308,13 +289,45 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
 
             {{-- Left: About --}}
             <div class="space-y-6 reveal">
+
+            <div class="flex">
+         <div itemscope itemtype="https://schema.org/Product" class="space-y-2">    
+                    <div itemprop="name">
+                        <h1 class="text-sm md:text-2xl font-extrabold text-black leading-tight tracking-tight"> {{ ucfirst(!empty($clientsList['h1_heading'])? $clientsList['h1_heading'] : (!empty($clientsList['business_name']) ? $clientsList['business_name']: 'Business Name')) }}</h1>
+                    </div>                           
+                    <div itemprop="aggregateRating"
+                        itemscope
+                        itemtype="https://schema.org/AggregateRating"
+                        class="flex items-center gap-2 text-sm">
+                        <img  itemprop="image" src="{{ asset('client/images/' . $starImg) }}"
+                        alt="{{ $clientsList['ratingCount']??'0' }} out of 5 stars"
+                        class="lazy-image h-4 w-auto text-black"
+                        width="80"
+                        height="16"
+                        loading="lazy"
+                        decoding="async"
+                        >
+                        <span class="font-semibold text-black">
+                        <span itemprop="ratingValue">{{ $clientsList['rating']??'0' }}</span>
+                        </span>
+                        <span class="text-black">
+                        <span class="text-black">out of</span>
+                        <span itemprop="bestRating">5</span>
+                        <span class="text-black">based on</span>
+                        (<span itemprop="ratingCount">{{ number_format(
+    !empty($clientsList['ratingCount'])
+        ? (int) $clientsList['ratingCount']
+        : 0
+) }}</span>
+                        <span class="text-black">reviews</span>)</span>
+                    </div>
+                </div> 
+                </div> 
+
                 <span class="section-badge" style="background:rgba(59,130,246,.1);color:#2563eb;border:1px solid rgba(59,130,246,.2);">
                     ✨ About Us
                 </span>
-                <h2 class="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight text-gray-900">
-                    {{ $clientsList['business_name'] ?? '' }}<br>
-                    <span style="color:#2563eb;"></span>
-                </h2>
+               
                 <p class="text-gray-600 leading-relaxed">{!! $clientsList['business_intro'] ?? '' !!}</p>
 
                 {{-- Stats --}}
@@ -335,10 +348,8 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
 
                 {{-- Website + Social --}}
                 <div class="flex flex-wrap items-center gap-3">
-                    @if(!empty($clientsList['website']))
-                     
-                        {{ $clientsList['website'] }}
-                    
+                    @if(!empty($clientsList['website']))                     
+                        {{ $clientsList['website'] }}                    
                     @endif
                 </div>
             </div>
@@ -362,23 +373,17 @@ $starImg = $starMap[$starKey] ?? 'star_4.5.png';
         <h2 class="heading-ul text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight mb-8 reveal">Our Services</h2>
 
         <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
-           
-
-
-
             @foreach($assignKeyword as $keySlug => $keyword)
     @php
-
-
-    $i=0;
+     $i=0;
         $bg = $bgColors[$i % count($bgColors)];
         $color = $iconColors[$i % count($iconColors)];
         $city = (!empty($clientsList['city']) && !is_numeric($clientsList['city']))
         ? Str::slug($clientsList['city'])
-        : 'bangalore';
+        : 'faridabad';
     @endphp
 
-    <a href="{{ route('city.slug', ['city_slug' => strtolower($city), 'service_slug' => $keySlug]) }}"
+    <a href="{{ route('showCity',$keySlug) }}"
        class="text-decoration-none">
 
         <div class="service-card reveal d-{{ min($i%6,5) }} rounded-xl p-3 flex flex-col gap-2 cursor-pointer border bg-white"
@@ -1068,18 +1073,20 @@ function selectCert(i) {
             </div>
             <div class="px-6 py-5">
                 <ul class="flex flex-wrap gap-2">
-                  @php
-    $city = (!empty($clientsList['city']) && !is_numeric($clientsList['city']))
-        ? Str::slug($clientsList['city'])
-        : 'bangalore';
-@endphp
+                    @php
+                    $city = (!empty($clientsList['city']) && !is_numeric($clientsList['city']))
+                        ? Str::slug($clientsList['city'])
+                        : '';
+                    @endphp
+                    @if($relatedList)
                     @foreach($relatedList as $i => $item)                    
                     <li>
-                        <a href="{{ route('city.slug', ['city_slug'=>strtolower($city),'service_slug' => $item['slug']])}}" class="text-blue-600 hover:underline text-sm">
+                        <a href="{{ route('showCity',$item['slug'])}}" class="text-blue-600 hover:underline text-sm">
                             {{ $item['title'] }}{{ $i < count($relatedList)-1 ? ' |' : '' }}
                         </a>
                     </li>
                     @endforeach
+                    @endif
                 </ul>
             </div>
         </div>
@@ -1228,7 +1235,9 @@ function selectCert(i) {
                     $author = $review['comment_author'] ?? 'Anonymous';
                     $initials = strtoupper(substr($author,0,2));
                     $rating = (int)($review['rating'] ?? 5);
+                  
                     @endphp
+                    @if(!empty($review['comment_content']))
                     <div class="review-card reveal d-{{ min($i%6,5) }} rounded-2xl p-6 border"
                          data-rating="{{ $rating }}">
                         <div class="flex items-start gap-4 mb-4">
@@ -1251,8 +1260,9 @@ function selectCert(i) {
                                 </div>
                             </div>
                         </div>
-                        <p class="text-gray-500 leading-relaxed text-sm">"{{ $review['comment_content'] ?? 'Great experience!' }}"</p>
+                        <p class="text-gray-500 leading-relaxed text-sm">"{{ $review['comment_content'] ?? '' }}"</p>
                     </div>
+                    @endif                    
                     @empty
                     <div class="py-12 text-center rounded-2xl" style="background:rgba(124,58,237,.04);border:1px dashed rgba(124,58,237,.2);">
                         <p class="font-bold text-gray-400 text-sm">No reviews yet. Be the first!</p>
@@ -1359,16 +1369,7 @@ function selectCert(i) {
     </div>
 </div>
 
-{{-- ════════════════════════════════════════
-     "Write Your Review" trigger button
-     Change classList.add('open') to openReviewModal()
-════════════════════════════════════════ --}}
-<button onclick="openReviewModal()"
-        class="flex items-center justify-center gap-2.5 px-7 py-4 rounded-2xl font-bold text-base text-white"
-        style="background:linear-gradient(135deg,#6d28d9,#a855f7,#ec4899);box-shadow:0 4px 24px rgba(124,58,237,.4);">
-    ★ Write Your Review
-</button>
-
+ 
 
 {{-- ════════════════════════════════════════
      REVIEW FORM MODAL
@@ -1880,11 +1881,7 @@ $localBusiness[] = [
 
     "url" => url()->current(),
 
-    "aggregateRating" => [
-        "@type" => "AggregateRating",
-        "ratingValue" => $clientsList['rating'] ?? '1',
-        "reviewCount" => $clientsList['ratingCount'] ?? '1'
-    ]
+    
 
 ];
 

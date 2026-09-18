@@ -40,7 +40,7 @@ class CitySlugController extends Controller
 			->leftjoin('child_category', 'keyword.child_category_id', '=', 'child_category.id')
 		 
 			->where('keyword.slug', $search_kw)
-			->select('keyword.*', 'parent_category.*','child_category.*', 'keyword.id as key_id', 'keyword.faqq1', 'keyword.faqa1', 'keyword.faqq2', 'keyword.faqa2', 'keyword.faqq3', 'keyword.faqa3', 'keyword.faqq4', 'keyword.faqa4', 'keyword.faqq5', 'keyword.faqa5','keyword.faqq6', 'keyword.faqa6', 'keyword.faqq7', 'keyword.faqa7','keyword.faqq8', 'keyword.faqa8','keyword.faqq9', 'keyword.faqa9','keyword.faqq10', 'keyword.faqa10','keyword.meta_title', 'keyword.meta_description', 'keyword.h1_heading', 'keyword.top_description', 'keyword.bottom_description', 'keyword.ratingvalue', 'keyword.ratingcount','keyword.courseabout','keyword.heading','keyword.paragraph1','keyword.paragraph2','keyword.paragraph3','keyword.paragraph4','keyword.paragraph5','keyword.paragraph6','keyword.paragraph7','keyword.paragraph8','keyword.slug','keyword.bottom_heading','keyword.top_heading','keyword.extra_heading','keyword.extra_description')
+			->select('keyword.*', 'parent_category.*','child_category.*', 'keyword.id as key_id', 'keyword.faqq1', 'keyword.faqa1', 'keyword.faqq2', 'keyword.faqa2', 'keyword.faqq3', 'keyword.faqa3', 'keyword.faqq4', 'keyword.faqa4', 'keyword.faqq5', 'keyword.faqa5','keyword.faqq6', 'keyword.faqa6', 'keyword.faqq7', 'keyword.faqa7','keyword.faqq8', 'keyword.faqa8','keyword.faqq9', 'keyword.faqa9','keyword.faqq10', 'keyword.faqa10','keyword.meta_title', 'keyword.meta_description', 'keyword.h1_heading', 'keyword.top_description', 'keyword.bottom_description','keyword.ratingvalue', 'keyword.ratingcount','keyword.courseabout','keyword.heading','keyword.paragraph1','keyword.paragraph2','keyword.paragraph3','keyword.paragraph4','keyword.paragraph5','keyword.paragraph6','keyword.paragraph7','keyword.paragraph8','keyword.slug','keyword.bottom_heading','keyword.top_heading','keyword.extra_heading','keyword.extra_description','keyword.noida_top_description','keyword.delhi_bottom_description','keyword.noida_top_heading','keyword.delhi_bottom_heading')
 			->first();
  
 			 
@@ -61,10 +61,23 @@ class CitySlugController extends Controller
 		$meta_description ="";
 		$bottom_description = "";
 		$top_description = "";
+		$top_wcity_description ="";
+		$top_wcity_heading ="";
+		$bottom_wcity_heading ="";
+		$bottom_wcity_description ="";
+		$noida_top_description ="";
+		$delhi_bottom_description ="";
+		$noida_top_heading ="";
+		$delhi_bottom_heading ="";
+		$extra_heading ="";
+		$child_banner ="";
+		$category_banner ="";
+		$extra_description ="";
         if (!$keywordDetails) {
             return null;  
         }
-	 
+	  
+
 
 		$keywordBanners = [];
 		if($keywordDetails){				 			
@@ -80,8 +93,7 @@ class CitySlugController extends Controller
 			})
 			->values();
 		}
-	
-		$category_banner = config('app.website') . 'client/images/computer-courses-training.jpg';
+		//$category_banner = config('app.website') . 'client/images/computer-courses-training.jpg';
 
 		$alt = "";
 
@@ -108,6 +120,17 @@ class CitySlugController extends Controller
 				$alt = $cicons['category_banner']['name'];
 			}
 		}
+
+		if (!empty($keywordDetails->child_banner)) {
+			$cicons = unserialize($keywordDetails->child_banner);
+
+			if (!empty($cicons)) {
+				$child_banner = config('app.website') . $cicons['child_banner']['src'];
+				$alt = $cicons['child_banner']['name'];
+			}
+		}
+
+
 		$child_icon =config('app.website') . 'client/images/it_training.jpg';
 		$key_icon =config('app.website') . 'client/images/it_training.jpg';
 		$child_alt =$keywordDetails->keyword;
@@ -144,7 +167,21 @@ class CitySlugController extends Controller
 			$short_definition = preg_replace('/{{city}}/i', ucfirst($city), $keywordDetails->short_definition);
 		} 
 
+		if (!empty($keywordDetails->top_wcity_description)) {
+			$top_wcity_description = preg_replace('/{{city}}/i', ucfirst($city), $keywordDetails->top_wcity_description);
+		}  
 
+		if (!empty($keywordDetails->top_wcity_heading)) {
+			$top_wcity_heading =preg_replace('/{{city}}/i', ucfirst($city), $keywordDetails->top_wcity_heading);
+		}  
+
+		if (!empty($keywordDetails->bottom_wcity_heading)) {
+			$bottom_wcity_heading = preg_replace('/{{city}}/i', ucfirst($city), $keywordDetails->bottom_wcity_heading);
+		}  
+
+		if (!empty($keywordDetails->bottom_wcity_description)) {
+			$bottom_wcity_description = preg_replace('/{{city}}/i', ucfirst($city), $keywordDetails->bottom_wcity_description);
+		}  
 
 		if (!empty($keywordDetails->meta_description)) {
 			$meta_description = preg_replace('/{{city}}/i', ucfirst($city), $keywordDetails->meta_description);
@@ -199,13 +236,33 @@ class CitySlugController extends Controller
 			$bottom_description = preg_replace('/{{city}}/i', ucfirst($area), $keywordDetails->bottom_description);
 		}
 		 
+		if (!empty($keywordDetails->noida_top_heading)) {
+			$noida_top_heading = preg_replace('/{{city}}/i', ucfirst($city), $keywordDetails->noida_top_heading);
+		}  
 
-		 
-
+		if (!empty($keywordDetails->delhi_bottom_heading)) {
+			$delhi_bottom_heading =preg_replace('/{{city}}/i', ucfirst($city), $keywordDetails->delhi_bottom_heading);
+		}  
+		if (!empty($keywordDetails->noida_top_description)) {
+			$noida_top_description = preg_replace('/{{city}}/i', ucfirst($area), $keywordDetails->noida_top_description);
+		}
+		
+		if (!empty($keywordDetails->delhi_bottom_description)) {
+			$delhi_bottom_description = preg_replace('/{{city}}/i', ucfirst($area), $keywordDetails->delhi_bottom_description);
+		}
+		if (!empty($keywordDetails->extra_description)) {
+			$extra_description = preg_replace('/{{city}}/i', ucfirst($area), $keywordDetails->extra_description);
+		}
+		
+		if (!empty($keywordDetails->extra_heading)) {
+			$extra_heading = preg_replace('/{{city}}/i', ucfirst($area), $keywordDetails->extra_heading);
+		}
+ 
 		$data['keyword'] = array(
 			'keyword' => $keywordDetails->keyword,
 			'keyword_slug' => generate_slug($keywordDetails->keyword),
 			'category_banner' => $category_banner,
+			'child_banner' => $child_banner,
 			'child_icon' => $child_icon,
 			'child_alt' => $child_alt,
 			'key_icon' => $key_icon,
@@ -217,6 +274,14 @@ class CitySlugController extends Controller
 			'meta_description' => $meta_description,
 			'top_description' => $top_description,
 			'bottom_description' => $bottom_description,
+			'top_wcity_description' => $top_wcity_description,
+			'top_wcity_heading' => $top_wcity_heading,
+			'bottom_wcity_heading' => $bottom_wcity_heading,
+			'bottom_wcity_description' => $bottom_wcity_description,
+			'noida_top_heading' => $noida_top_heading,
+			'delhi_bottom_heading' => $delhi_bottom_heading,
+			'noida_top_description' => $noida_top_description,
+			'delhi_bottom_description' => $delhi_bottom_description,
 			'courseabout' => $courseabout,
 			'heading' => $heading,
 			'paragraph1' => $paragraph1,
@@ -229,8 +294,8 @@ class CitySlugController extends Controller
 			'paragraph8' => $paragraph8,			 
 			'bottom_heading' => preg_replace('/{{city}}/i', ucfirst($city), $keywordDetails->bottom_heading),
 			'top_heading' => preg_replace('/{{city}}/i', ucfirst($city), $keywordDetails->top_heading),
-			'extra_heading' => preg_replace('/{{city}}/i', ucfirst($city), $keywordDetails->extra_heading),
-			'extra_description' => preg_replace('/{{city}}/i', ucfirst($city), $keywordDetails->extra_description),
+			'extra_heading' => $extra_heading,
+			'extra_description' => $extra_description,
 			'faqq1' => $keywordDetails->faqq1,
 			'faqa1' => $keywordDetails->faqa1,
 			'faqq2' => $keywordDetails->faqq2,
@@ -406,7 +471,7 @@ class CitySlugController extends Controller
 				'certified_img' => $certified_img,
 				'trusted_img' => $trusted_img,
 				'gst_img' => $gst_img,			 
-				'city' => $client->city ??'bangalore',	 		 
+				'city' => $client->city ??'faridabad',	 		 
 				'state' => $client->state ?? 'Karnataka',	 		 
 				'pincode' => !empty($client->pincode) ? $client->pincode : '560008',		 
 				'landmark' => $client->landmark ??'OLD AIRPORT RD',	 		 
@@ -587,6 +652,7 @@ class CitySlugController extends Controller
 			->where('parent_category_id', $keywordDetails->parent_category_id)
 			->select('keyword', 'icon', 'slug','meta_description')
 			->orderBy('keyword', 'asc')
+			->limit(50)
 			->distinct()
 			->get();
 
@@ -608,10 +674,11 @@ class CitySlugController extends Controller
 				'url' =>$keyword->slug,
 				'img' => $img,
 				'alt' => $alt,
-				'title' => $keyword->keyword. ' in ' .$cityName ?: 'bangalore',
+				'title' => $keyword->keyword. ' in ' .$cityName ?: 'faridabad',
+				'keyword' => $keyword->keyword,
 				'type' => 'keyword',
-				'city_slug' => strtolower($cityName) ?: 'bangalore',
-				'meta_description' => $this->replaceCity($keyword->meta_description, $cityName),
+				'city_slug' => strtolower($cityName) ?: 'faridabad',
+				'meta_description' => replaceCity($keyword->meta_description, $cityName),
 			];
 		})->values()->toArray();
 
@@ -741,17 +808,7 @@ $reviewList = DB::table('clients')
      * Check if a city exists, by slug.
      */
     private function cityExists(string $city): bool
-    {
-        // $citySlug = strtolower(trim($city));
-        // if (empty($citySlug)) {
-        //     return false;
-        // }
-        // return Cache::remember("city_exists_{$citySlug}", 3600, function () use ($citySlug) {
-        //     return DB::table('citylists')
-        //         ->where('city_slug', $citySlug)
-        //         ->exists();
-        // });
-
+    {         
 
 		$citySlug = trim(strtolower($city));
 
@@ -812,11 +869,13 @@ $reviewList = DB::table('clients')
 			$paragraph6 ="";
 			$paragraph7 ="";
 			$paragraph8 ="";
+			$child_banner ="";
+			$category_banner ="";
 
 			if(!$keywordDetails){
 				return  null;
 			}
-		$category_banner = config('app.website') . 'client/images/computer-courses-training.jpg';
+		 
 		$child_icon =config('app.website') . 'client/images/it_training.jpg';
 		$key_icon =config('app.website') . 'client/images/it_training.jpg';
 		$child_alt =$keywordDetails->keyword;
@@ -831,6 +890,29 @@ $reviewList = DB::table('clients')
 			}
 		}
 		
+		$keywordBanners = [];
+		if($keywordDetails){				 			
+		$keywordBanners = DB::table('keyword_banners')
+		->where('keyword_id', $keywordDetails->key_id)
+		->orderBy('sort_order')
+		->get()
+		->map(function ($b) {
+			$b->image_url = $b->image_path ? asset($b->image_path) :'';
+			$b->alt_text  = $b->alt_text ?: 'Banner';
+			$b->click_url = $b->client_slug ? '/businessdetails/' . $b->client_slug : null;
+			return $b;
+		})
+		->values();
+		}
+		
+		if (!empty($keywordDetails->child_banner)) {
+			$cicons = unserialize($keywordDetails->child_banner);
+
+			if (!empty($cicons)) {
+				$child_banner = config('app.website') . $cicons['child_banner']['src'];
+				$alt = $cicons['child_banner']['name'];
+			}
+		}
 		if (!empty($keywordDetails->pc_icon)) {
 			$childcons = unserialize($keywordDetails->pc_icon);
 
@@ -850,17 +932,17 @@ $reviewList = DB::table('clients')
 		}
 
 		if (!empty($keywordDetails->meta_title)) {
-			$meta_title = $this->replaceCity($keywordDetails->meta_title,'');
+			$meta_title = replaceCity($keywordDetails->meta_title,'');
 		} else {
 			$meta_title = 'Best ' . $keywordDetails->keyword . ' - Reviews, Ratings & Contact Details | Quickdials';
 
 		}
 		if (!empty($keywordDetails->h1_heading)) {
-			$h1_heading = $this->replaceCity($keywordDetails->h1_heading,'');
+			$h1_heading = replaceCity($keywordDetails->h1_heading,'');
 		}  
 
 		if (!empty($keywordDetails->short_definition)) {
-			$short_definition = $this->replaceCity($keywordDetails->short_definition,'');
+			$short_definition = replaceCity($keywordDetails->short_definition,'');
 		}  
 
 		if (!empty($keywordDetails->top_wcity_description)) {
@@ -880,56 +962,57 @@ $reviewList = DB::table('clients')
 		}  
 
 		if (!empty($keywordDetails->meta_description)) {
-			$meta_description = $this->replaceCity($keywordDetails->meta_description,'');
+			$meta_description = replaceCity($keywordDetails->meta_description,'');
 		} else {
 			$meta_description = 'Find the best ' . strtolower($keywordDetails->keyword) . '. Compare ratings, reviews, contact details and service information on Quickdials.';
 		}
 	
 		$top_description = "";
 		if (!empty($keywordDetails->top_description)) {
-			$top_description = $this->replaceCity($keywordDetails->top_description,'');
+			$top_description = replaceCity($keywordDetails->top_description,'');
 		}
 		$bottom_description = "";
 		if (!empty($keywordDetails->bottom_description)) {
-			$bottom_description = $this->replaceCity($keywordDetails->bottom_description,'');
+			$bottom_description = replaceCity($keywordDetails->bottom_description,'');
 		}
 		
 		if (!empty($keywordDetails->courseabout)) {
-			$courseabout = $this->replaceCity($keywordDetails->courseabout,'');
+			$courseabout = replaceCity($keywordDetails->courseabout,'');
 		}
 		
 		if (!empty($keywordDetails->heading)) {
-			$heading = $this->replaceCity($keywordDetails->heading,'');
+			$heading = replaceCity($keywordDetails->heading,'');
 		}
 		if (!empty($keywordDetails->paragraph1)) {
-			$paragraph1 = $this->replaceCity($keywordDetails->paragraph1,'');
+			$paragraph1 = replaceCity($keywordDetails->paragraph1,'');
 		}
 		if (!empty($keywordDetails->paragraph2)) {
-			$paragraph2 = $this->replaceCity($keywordDetails->paragraph2,'');
+			$paragraph2 = replaceCity($keywordDetails->paragraph2,'');
 		}
 		if (!empty($keywordDetails->paragraph3)) {
-			$paragraph3 = $this->replaceCity($keywordDetails->paragraph3,'');
+			$paragraph3 = replaceCity($keywordDetails->paragraph3,'');
 		}
 		if (!empty($keywordDetails->paragraph4)) {
-			$paragraph4 = $this->replaceCity($keywordDetails->paragraph4,'');
+			$paragraph4 = replaceCity($keywordDetails->paragraph4,'');
 		}
 		if (!empty($keywordDetails->paragraph5)) {
-			$paragraph5 = $this->replaceCity($keywordDetails->paragraph5,'');
+			$paragraph5 = replaceCity($keywordDetails->paragraph5,'');
 		}
 		if (!empty($keywordDetails->paragraph6)) {
-			$paragraph6 = $this->replaceCity($keywordDetails->paragraph6,'');
+			$paragraph6 = replaceCity($keywordDetails->paragraph6,'');
 		}
 		if (!empty($keywordDetails->paragraph7)) {
-			$paragraph7 = $this->replaceCity($keywordDetails->paragraph7,'');
+			$paragraph7 = replaceCity($keywordDetails->paragraph7,'');
 		}
 		if (!empty($keywordDetails->paragraph8)) {
-			$paragraph8 = $this->replaceCity($keywordDetails->paragraph8,'');
+			$paragraph8 = replaceCity($keywordDetails->paragraph8,'');
 		}
 
 		$data['keyword'] = array(
 			'keyword' => $keywordDetails->keyword,
 			'keyword_slug' => $keywordDetails->slug,
 			'category_banner' => $category_banner,
+			'child_banner' => $child_banner,
 			'alt' => $alt,
 			'child_icon' => $child_icon,
 			'child_alt' => $child_alt,
@@ -945,12 +1028,12 @@ $reviewList = DB::table('clients')
 			'meta_description' => $meta_description,
 			'top_description' => $top_description,
 			'bottom_description' => $bottom_description,	
-			'bottom_heading'    => $this->replaceCity($keywordDetails->bottom_heading, $city),
-			'top_heading'       => $this->replaceCity($keywordDetails->top_heading, $city),
-			'extra_heading'     => $this->replaceCity($keywordDetails->extra_heading, $city),
-			'extra_description' => $this->replaceCity($keywordDetails->extra_description, $city),
+			'bottom_heading'    => replaceCity($keywordDetails->bottom_heading, $city),
+			'top_heading'       => replaceCity($keywordDetails->top_heading, $city),
+			'extra_heading'     => replaceCity($keywordDetails->extra_heading, $city),
+			'extra_description' => replaceCity($keywordDetails->extra_description, $city),
 
-			'courseabout' => $this->replaceCity($courseabout, $city),
+			'courseabout' => replaceCity($courseabout, $city),
 
 			'heading' => $heading,
 			'paragraph1' => $paragraph1,
@@ -968,12 +1051,13 @@ $reviewList = DB::table('clients')
 			'parent_slug' => $keywordDetails->parent_slug,
 			'child_category' => $keywordDetails->child_category,
 			'child_slug' => $keywordDetails->child_slug,
+			'keywordBanners' => $keywordBanners,
 
 		);
 
 		for ($i = 1; $i <= 10; $i++) {
-		$data['keyword']["faqq{$i}"] = $this->replaceCity($keywordDetails->{"faqq{$i}"}, $city);
-		$data['keyword']["faqa{$i}"] = $this->replaceCity($keywordDetails->{"faqa{$i}"}, $city);
+		$data['keyword']["faqq{$i}"] = replaceCity($keywordDetails->{"faqq{$i}"}, $city);
+		$data['keyword']["faqa{$i}"] = replaceCity($keywordDetails->{"faqa{$i}"}, $city);
 		}
 
 		$keywordName = ucwords(str_replace('-', ' ', $search_kw));
@@ -1127,7 +1211,7 @@ $reviewList = DB::table('clients')
 				'trending' => $client->trending,
 				'topSearch' => $client->topSearch,
 				'featured' => $client->featured,			 
-				'city' => $client->city ??'bangalore',	 		 
+				'city' => $client->city ??'faridabad',	 		 
 				'state' => $client->state ?? 'Karnataka',	 		 
 				'pincode' => !empty($client->pincode) ? $client->pincode : '560008',		 
 				'landmark' => $client->landmark ??'OLD AIRPORT RD',	 				 
@@ -1301,7 +1385,7 @@ $reviewList = DB::table('clients')
 				'country' => $client->country,
 				'year_of_estb' => $client->year_of_estb,
 				 
-				'city' => $client->city ??'bangalore',	 		 
+				'city' => $client->city ??'faridabad',	 		 
 				'state' => $client->state ?? 'Karnataka',	 		 
 				'pincode' => !empty($client->pincode) ? $client->pincode : '560008',		 
 				'landmark' => $client->landmark ??'OLD AIRPORT RD',	 
@@ -1323,6 +1407,7 @@ $reviewList = DB::table('clients')
 			->where('parent_category_id', $keywordDetails->parent_category_id)
 			->select('keyword', 'icon', 'slug')
 			->orderBy('keyword', 'asc')
+			->limit(50)
 			->distinct()
 			->get();
 
@@ -1492,7 +1577,7 @@ $reviewList = DB::table('clients')
         /**
      * Fetch a single business's profile by slug.
      */
-    private function fetchBusinessData(string $slug = null)
+    private function fetchBusinessData(string $slug = null, $city)
     {
       
 		$business_slug = $slug;
@@ -1967,19 +2052,20 @@ $reviewList = DB::table('clients')
 
 			if (!empty($assignedKeywords)) {
 				$findKeywords = Keyword::select('child_category_id')->where('keyword', $assignedKeywords->first())->first();
-
+				$relKeywords =[];
+				if(!empty($findKeywords->child_category_id)){
 				$relKeywords = Keyword::select('keyword','slug')->where('child_category_id', $findKeywords->child_category_id)
 					->orderBy('keyword', 'asc')
 					->pluck('keyword.keyword','keyword.slug')
 					->toArray();
-
+				}
 				$data['related_searches'] = $relKeywords;
 			}
 			
 			
 				$businessName = $clientscheck->business_name ?? 'this business';
 				$area         = $clientscheck->area ?? '';
-				$city         = $clientscheck->city ?? '';
+				$city         = $clientscheck->city ?? $city;
 				$location     = trim($area . ($area && $city ? ', ' : '') . $city);
 
 				if(!empty($clientscheck->business_description)){
@@ -2038,7 +2124,7 @@ $reviewList = DB::table('clients')
 			// ─── Extract once for clarity & to avoid repetition ───
 			$businessName = $clientscheck->business_name ?? 'this business';
 			$area         = $clientscheck->area ?? '';
-			$city         = $clientscheck->city ?? '';
+			$city         = $clientscheck->city ?? $city;
 			$location     = trim($area . ($area && $city ? ', ' : '') . $city);
 
 			// ─── Paragraph 1 ───
@@ -2106,15 +2192,19 @@ $reviewList = DB::table('clients')
             'reviewCount'   => (int)   ($b['reviewCount'] ?? 0),
             'address'       => $b['address'] ?? '',
             'state'       => $b['state'] ?? 'Karnataka',
-            'city'          => $b['city'] ?? 'Bangalore',
+            'city'          => $b['city'] ?? 'faridabad',
             'pincode'          => $b['pincode'] ?? '560008',
             'landmark'          => $b['landmark'] ?? '',
             'openUntil'     => $b['openUntil'] ?? $b['open_until'] ?? '9:00 AM',
-            'isOpen'        => $b['isOpen'] ?? $b['is_open'] ?? true,
-            'verified'      => $b['verified'] ?? $b['trusted_status'] ?? false,
-            'trending'      => $b['trending'] ?? false,
-            'topSearch'     => $b['topSearch'] ?? $b['top_search'] ?? false,
-            'featured'      => $b['featured'] ?? false,
+            'isOpen'        => $b['isOpen'] ?? 0,
+            'active_status' => $b['active_status'] ?? 0,
+            'gst_status' => 	$b['gst_status'] ?? 0,
+            'certified_status' => 	$b['certified_status'] ?? 0,			
+            'trusted_status' => 	$b['trusted_status'] ?? 0,
+            'verified'      => $b['verified'] ?? $b['trusted_status'] ?? 0,
+            'trending'      => $b['trending'] ?? 0,
+            'topSearch'     => $b['topSearch'] ?? $b['top_search'] ?? 0,
+            'featured'      => $b['featured'] ?? 0,
             'tags'          => array_slice($tags, 0, 5),
             'phone'         => $b['call'] ?? '',
             'whatsapp'      => $b['whatsapp'] ?? '',
@@ -2178,7 +2268,7 @@ $reviewList = DB::table('clients')
     /**
      * Convert tags/category that may be array or key-value object.
      */
-    private function getClientDetail($businessResponse,$slug): \Illuminate\Contracts\View\View
+    private function getClientDetail($businessResponse,$slug,$city): \Illuminate\Contracts\View\View
     {
     
         $clientsList = $businessResponse['clientsList']       ?? [];
@@ -2214,8 +2304,9 @@ $reviewList = DB::table('clients')
             ->limit(50)
             ->get();
 
-             $faqs = [];
+     
 
+   			$faqs = [];
 			$clientFaq = $clientsList['faqs'] ?? [];
 
 			if (!empty($clientFaq)) {
@@ -2232,6 +2323,7 @@ $reviewList = DB::table('clients')
 				}
 			}
  
+           
 
             // 🔹 Merge client data only when searching
             if (!empty($keyword)) {
@@ -2315,8 +2407,8 @@ $reviewList = DB::table('clients')
  
         $planOptions = ['Immediate', 'Within Week', 'Within Months', 'Not Planned Yet'];
  
-        $googleMapUrl = 'https://www.google.com/maps/search/?api=1&query=' . urlencode($clientsList['address'] ?? 'Bangalore');
-        $mapSrc = 'https://www.google.com/maps/embed/v1/search?key=AIzaSyAPFOcLOlCcBCtp764h9HflPfA56VlCFo0&q=' . urlencode($clientsList['address'] ?? 'Bangalore');
+        $googleMapUrl = 'https://www.google.com/maps/search/?api=1&query=' . urlencode($clientsList['address'] ?? 'faridabad');
+        $mapSrc = 'https://www.google.com/maps/embed/v1/search?key=AIzaSyAPFOcLOlCcBCtp764h9HflPfA56VlCFo0&q=' . urlencode($clientsList['address'] ?? 'faridabad');
  
         $yearEst  = $clientsList['year_of_estb'] ?? 2012;
         $yearsExp = date('Y') - (int)$yearEst;
@@ -2351,15 +2443,19 @@ $reviewList = DB::table('clients')
         ' - ' . $serviceText .
         '. View address, photos, reviews and contact details on QuickDials.';
 
-       
+       $keyword = !empty($clientsList['business_name'])
+        ? $clientsList['business_name']
+        : ($clientsList['meta_title'] ?? '') . ' | ' . ($clientsList['city'] ?? '') . ' | QuickDials';
+
         return view('client.client-detail', compact(
-            'slug', 'clientsList', 'keywordList','certificate','metaTitle','metaKeywords','metaDescription',
+        
+            'slug', 'clientsList', 'keywordList','certificate','metaTitle','metaKeywords','metaDescription','keyword',
             'comment', 'areaBusiness', 'overviewBusiness','faqs',
             'relatedList', 'gallery', 'hImages', 'vImages',
             'assignKeyword', 'certifications', 'govDocs', 'reviews',
             'gradients', 'bgColors', 'iconColors', 'planOptions',
             'googleMapUrl', 'mapSrc', 'yearsExp', 'yearEst',
-            'todayDay', 'hours','linearGradients'
+            'todayDay', 'hours','linearGradients','city'
         ));
     }
 
@@ -2376,22 +2472,27 @@ $reviewList = DB::table('clients')
         $keywordBanners   = $kwData['keywordBanners'] ?? [];
  
         // ── Keyword / meta ─────────────────────────────────────────────────
-        $keyword    = $this->replaceCity($kwData['keyword'] ?? $slug, $city);
+        $keyword    = replaceCity($kwData['keyword'] ?? $slug, $city);
         $area       = $kwData['area'] ?? $city;
         $childSlug  = $kwData['child_slug'] ?? '';
         $childCat   = $kwData['child_category'] ?? '';
         $ratingCount = (int) ($kwData['ratingcount'] ?? 0);
         $ratingValue = (float) ($kwData['ratingvalue'] ?? 0);
-        $bgImage    = $kwData['category_banner'] ?? '/computer-courses-training.jpg';
- 
-        $topDescription    = $this->replaceCity($kwData['top_description'] ?? '', $area);
-        $bottomDescription = $this->replaceCity($kwData['bottom_description'] ?? '', $area);
- 
+       	$bgImage = !empty($kwData['child_banner']) ? $kwData['child_banner'] : ($kwData['category_banner'] ?? '');
+//  dd($bgImage);
+		$topDescription = !empty($kwData['top_description']) ? replaceCity($kwData['top_description'], $area) : '';
+		$bottomDescription = !empty($kwData['bottom_description']) ? replaceCity($kwData['bottom_description'], $area) : '';
+
+		$noidatopDescription = !empty($kwData['noida_top_description']) ? replaceCity($kwData['noida_top_description'], $area) : '';
+		$delhibottomDescription = !empty($kwData['delhi_bottom_description']) ? replaceCity($kwData['delhi_bottom_description'], $area) : '';
+
+
+
         // ── FAQs ───────────────────────────────────────────────────────────
         $faqs = [];
         for ($i = 0; $i <= 10; $i++) {
-            $q = $this->replaceCity($kwData["faqq{$i}"] ?? '', $city);
-            $a = $this->replaceCity($kwData["faqa{$i}"] ?? '', $city);
+            $q = replaceCity($kwData["faqq{$i}"] ?? '', $city);
+            $a = replaceCity($kwData["faqa{$i}"] ?? '', $city);
             if ($q && $a) $faqs[] = ['q' => $q, 'a' => $a];
         }
 
@@ -2438,7 +2539,7 @@ $reviewList = DB::table('clients')
             'city', 'slug', 'keyword', 'area','zones',
             'childSlug', 'childCat','cityDetails',
             'ratingCount', 'ratingValue', 'bgImage',
-            'topDescription', 'bottomDescription',
+            'topDescription', 'bottomDescription','noidatopDescription','delhibottomDescription',
             'faqs', 'kwData','keywordBanners',
             'businesses', 'businessChunks',
             'agents', 'reviews', 'categories',
@@ -2455,7 +2556,7 @@ $reviewList = DB::table('clients')
     /**
      * Replace {{city}} placeholder and strip basic HTML.
      */
-	  private function replaceCity(?string $text, ?string $city = ''): string
+	private function replaceCity(?string $text, ?string $city = ''): string
 	{
 		$text = trim($text ?? '');
 		$city = trim($city ?? '');
@@ -2485,91 +2586,343 @@ $reviewList = DB::table('clients')
 
 		return trim($text, " \t\n\r\0\x0B,");
 	}
+
+
     /**
      * Handle  GET /{city}/{slug}
      */
 	public function showCityWithService(Request $request, string $city, string $slug)
 	{
-		$citySlug = strtolower(trim($city));
-		$keySlugRaw = strtolower(trim($slug));
-		$newSlug = strtolower(str_replace(' ', '-', trim($slug)));  		 
-		$cityMap    = $this->getCitySlugMap();     // cached, in-memory
-		$keywordMap = $this->getKeywordSlugMap();  // cached, in-memory
- 
-		// ---- Resolve city (no DB call) ----
-		$cityName = $this->resolveBestCandidate($citySlug, $cityMap);
 
-		if (!$cityName) {
-			$defaultSlug = config('app.default_city_slug', 'bangalore');
-			if (!isset($cityMap[$defaultSlug])) {
-				return redirect()->route('home');
-			}
-			return redirect()->route('city.slug', [
-				'city_slug'    => $defaultSlug,
-				'service_slug' => $slug,
-			], 301);
+ 
+    $citySlug   = strtolower(trim($city));
+    $keySlugRaw = strtolower(trim($slug));
+    $newSlug    = strtolower(str_replace(' ', '-', trim($slug)));
+
+    $cityMap    = $this->getCitySlugMap();     // cached, in-memory
+    $keywordMap = $this->getKeywordSlugMap();  // cached, in-memory
+
+    $defaultCity = config('app.default_city_slug', 'faridabad');
+
+    // ---- CATEGORY CHECK ----
+    $category = $this->categoriesCheck($newSlug);
+
+    if (!empty($category)) {
+        // No real city in URL (e.g. /categories/{slug}) — redirect with default city
+        if ($citySlug === 'categories' || !isset($cityMap[$citySlug])) {
+            // return redirect()->route('city.slug', [
+            //     'city_slug'     => $defaultCity,
+            //     'service_slug' => $newSlug,
+            // ], 301);
+
+			return redirect()->route('showCity', $newSlug, 301);
+        }
+
+		if(isset($cityMap[$citySlug])){
+			return redirect()->route('showCity', $newSlug, 301);
+
 		}
- 
-		if ($citySlug !== $cityName) {
-			return redirect()->route('city.slug', [
-				'city_slug'    => $cityName,
-				'service_slug' => $slug,
-			], 301);
-		}
+        // Real city present but not canonical (wrong case/format) — normalize it
+        $cityName = $this->resolveBestCandidate($citySlug, $cityMap);
 
-		// ---- Resolve keyword/service (no DB call) ----
-		$slugUrl = $this->resolveBestCandidate($newSlug, $keywordMap);
- 
-		if ($slugUrl) {
-			if ($keySlugRaw !== $slugUrl) {
-				return redirect()->route('city.slug', [
-					'city_slug'    => $cityName,
-					'service_slug' => $slugUrl,
-				], 301);
-			}
-
-			// Confirmed valid service slug — skip the redundant serviceExists() DB call.
-			$response = $this->fetchData($cityName, $slugUrl);
- 
-			if (!$response) {
-				abort(410);
-				//return redirect()->route('home');
-			}
-
-			return $this->getsearchlist($response, $slugUrl, $cityName);
-		}
-
- 
-     
-        $clientMap = $this->getClientSlugMap(); // cached, in-memory
- 
-        $slugUrl    = $this->resolveBestCandidate($newSlug, $clientMap);
-
-      
-		if ($slugUrl && $slugUrl !== $slug) {	 
-			return redirect()->route('city.slug', [
-				'city_slug'    => $cityName,
-				'service_slug' => $slugUrl,    
-			], 301);
-		}
-       
-
-		if($slugUrl){
 	 
-				if (!$this->clientsExists($slugUrl)) {					  
-					abort(410);
-				}
-				$businessResponse = $this->fetchBusinessData($slugUrl);
-				if (!$businessResponse) {
-					return redirect()->route('home');
-				}
+        if ($cityName && $citySlug !== $cityName) {
+			
+			return redirect()->route('showCity', $newSlug, 301);
 
-				return $this->getClientDetail($businessResponse, $slugUrl);
-			}
- 		abort(410);
+            // return redirect()->route('city.slug', [
+            //     'city_slug'     => $cityName,
+            //     'service_slug' => $newSlug,
+            // ], 301);
+        }
+		$newCat = $this->categoriesCheckDetails($newSlug);
+	 
 
+        return $this->categoriesListPage($newCat, $newSlug, $cityName ?? $city);
+    }
+
+    // ---- CHILD CHECK ----
+    $child = $this->childCheck($newSlug);
+
+    if (!empty($child)) {
+	
+        if ($citySlug === 'child' || !isset($cityMap[$citySlug])) {
+            // return redirect()->route('city.slug', [
+            //     'city_slug'  => $defaultCity,
+            //     'service_slug' => $newSlug,
+            // ], 301);
+			return redirect()->route('showCity', $newSlug, 301);
+			
+        }
+
+		if(isset($cityMap[$citySlug])){
+			return redirect()->route('showCity', $newSlug, 301);
+		}
+
+        $cityName = $this->resolveBestCandidate($citySlug, $cityMap);
+	 
+        if ($cityName && $citySlug !== $cityName) {
+            // return redirect()->route('city.slug', [
+            //     'city_slug'  => $cityName,
+            //     'service_slug' => $newSlug,
+            // ], 301);
+
+			return redirect()->route('showCity', $newSlug, 301);
+        }
+		 $newchild = $this->childCheckdetails($newSlug);
+
+        return $this->childListPage($newchild, $newSlug, $cityName ?? $city);
+    }
+
+    // ---- Resolve city (no DB call) ----
+    $cityName = $this->resolveBestCandidate($citySlug, $cityMap);
+   	$slugUrl = $this->resolveBestCandidate($newSlug, $keywordMap);
+ 
+    if (!$cityName) {
+  
+ 		$cityData = $cityMap[$cityName] ?? null;
+        if (!isset($cityData) && !$slugUrl) {			 
+			abort(410);
+           // return redirect()->route('home');
+        }
+        // return redirect()->route('city.slug', [
+        //     'city_slug'    => $defaultCity,
+        //     'service_slug' => $slug,
+        // ], 301);
+		if($slugUrl){
+			return redirect()->route('showCity', $slugUrl, 301);	
+		}	
+    }
+
+    if ($citySlug !== $cityName) {
+        return redirect()->route('city.slug', [
+            'city_slug'    => $cityName,
+            'service_slug' => $slug,
+        ], 301);
+    }
+
+    // ---- Resolve keyword/service (no DB call) ----
+  
+
+    if ($slugUrl) {
+        if ($keySlugRaw !== $slugUrl) {
+            return redirect()->route('city.slug', [
+                'city_slug'    => $cityName,
+                'service_slug' => $slugUrl,
+            ], 301);
+        }
+
+        $response = $this->fetchData($cityName, $slugUrl);
+        if (!$response) {
+            abort(410);
+			//return redirect()->route('home');
+        }
+
+        return $this->getsearchlist($response, $slugUrl, $cityName);
+    }
+
+    $clientMap = $this->getClientSlugMap(); // cached, in-memory
+    $slugUrl   = $this->resolveBestCandidate($newSlug, $clientMap);
+
+    if ($slugUrl && $slugUrl !== $slug) {
+        return redirect()->route('city.slug', [
+            'city_slug'    => $cityName,
+            'service_slug' => $slugUrl,
+        ], 301);
+    }
+
+    if ($slugUrl) {
+        if (!$this->clientsExists($slugUrl)) {
+            abort(410);
+			//return redirect()->route('home');
+        }
+        $businessResponse = $this->fetchBusinessData($slugUrl,$cityName);
+        if (!$businessResponse) {
+				abort(410);
+           // return redirect()->route('home');
+        }
+
+        return $this->getClientDetail($businessResponse, $slugUrl,$cityName);
+    }
+
+    abort(410);
+}
+ 
+
+	 
+
+		
+	public function categoriesCheck($slug)
+	{
+		$categoryDetails = DB::table('parent_category')
+			->where('parent_slug', $slug)
+			->first();
+
+		if ($categoryDetails) {
+			return $categoryDetails;
+		}
+
+		return null;
+	}
+			
+	public function categoriesCheckDetails($slug)
+	{
+
+	 
+		return Cache::remember("category_check_{$slug}", now()->addHours(6), function () use ($slug) {
+			$res = Http::withoutVerifying()
+				->get('https://api.quickdials.com/api/website/searchCategories', [
+					'category-slug' => $slug,
+				]);
+
+			return $res->successful() ? $res->json() : null;
+		});
 	}
 
+
+	public function categoriesListPage($response,$slug,$city)
+	{
+		 
+ 
+        /* ── extract data (mirrors the Next.js component) ── */
+        $kwData       = $response['data']['keyword']      ?? [];
+
+	 
+        $categoryList = $response['data']['categoryList'] ?? [];
+ 
+        $keyword          = $kwData['parent_category']   ?? '';
+        $childCategory    = $kwData['parent_category']   ?? '';
+        $childSlug        = $kwData['parent_slug']       ?? '';
+       
+		$topDescription = !empty($kwData['top_description']) ? replaceCity($kwData['top_description'], $city) : '';
+		$bottomDescription = !empty($kwData['bottom_description']) ? replaceCity($kwData['bottom_description'], $city) : '';
+
+        $ratingCount      = $kwData['ratingcount']       ?? 0;
+        $ratingValue      = $kwData['ratingvalue']       ?? 0;
+        $bgImage          = $kwData['category_banner']   ?? '';
+       		 
+		$metaTitle = !empty($kwData['meta_title']) ? replaceCity($kwData['meta_title'], $city) : '';
+		$metaDescription = !empty($kwData['meta_description']) ? replaceCity($kwData['meta_description'], $city) : '';
+		$metaKeywords = !empty($kwData['h1_heading']) ? replaceCity($kwData['h1_heading'], $city) : '';
+
+        /* star image map */
+        $starMap = [
+            0 => 'star_1.png', 2 => 'star_2.png', 3 => 'star_3.png',
+            3.5 => 'star_3.5.png', 4 => 'star_4.png', 4.5 => 'star_4.5.png',
+            4.75 => 'star_4.75.png', 5 => 'star_5.png',
+        ];
+        $stars = $starMap[$ratingValue] ?? 'star_4.5.png';
+ 
+
+		$faqs = [];
+        for ($i = 1; $i <= 6; $i++) {
+            $q = $kwData["faqq{$i}"] ?? '';
+            $a = $kwData["faqa{$i}"] ?? '';
+            if ($q && $a) $faqs[] = ['q' => $q, 'a' => $a];
+        }
+
+
+
+        /* category colour palette (index-based, mirrors Next.js CAT_STYLE) */
+        $catColors = [
+            '#1a5276','#1a6496','#4a235a','#b7770d','#0b3d5e',
+            '#145a32','#2c3e50','#154360','#7b241c','#117a65',
+            '#145a32','#784212','#1e8449','#1b4332',
+        ];
+ 		 
+        return view('client.category-slug', compact(
+            'slug', 'keyword', 'childCategory','kwData', 'childSlug',
+            'topDescription', 'bottomDescription','faqs',
+            'ratingCount', 'ratingValue', 'stars', 'bgImage',
+            'categoryList', 'catColors','metaKeywords',
+            'metaTitle', 'metaDescription','city'
+        ));
+	}
+
+
+
+	public function childCheck($child_slug)
+	{
+		  
+ 		$childDetails = ChildCategory::where('child_slug', $child_slug)->first();
+    if($childDetails){
+
+		return $childDetails;
+	}
+        
+	return null;
+	}
+
+	public function childCheckdetails($child_slug)
+	{
+		     
+            $res = Http::timeout(10)->withoutVerifying()
+                ->get('https://api.quickdials.com/api/website/searchChild', [
+                    'child-slug' => $child_slug,
+                ]);
+ 			$response = $res->successful() ? $res->json() : null;
+        
+    		return $response;
+	}
+
+
+
+	public function childListPage($response, $child_slug,$city)
+	{	      
+ 
+        /* ── extract data (mirrors the Next.js component) ── */
+        $kwData       = $response['data']['keyword']  ?? [];
+		 
+        $childLists = $response['data']['childLists'] ?? []; 
+        $keyword          = $kwData['child_category']   ?? '';
+        $childCategory    = $kwData['child_category']   ?? '';
+        $childSlug        = $kwData['child_slug']       ?? '';
+        
+		$topDescription = !empty($kwData['top_description']) ? replaceCity($kwData['top_description'], $city) : '';
+		$bottomDescription = !empty($kwData['bottom_description']) ? replaceCity($kwData['bottom_description'], $city) : '';
+      
+        $ratingCount      = $kwData['ratingcount']       ?? '0';
+        $ratingValue      = $kwData['ratingvalue']       ?? '0';
+		$bgImage = !empty($kwData['child_banner']) ? $kwData['child_banner'] : ($kwData['category_banner'] ?? '');
+ 
+    
+		$metaTitle = !empty($kwData['meta_title']) ? replaceCity($kwData['meta_title'], $city) : '';
+		$metaDescription = !empty($kwData['meta_description']) ? replaceCity($kwData['meta_description'], $city) : '';
+		$metaKeywords = !empty($kwData['h1_heading']) ? replaceCity($kwData['h1_heading'], $city) : '';
+
+
+  		$faqs = [];
+        for ($i = 1; $i <= 6; $i++) {
+            $q = $kwData["faqq{$i}"] ?? '';
+            $a = $kwData["faqa{$i}"] ?? '';
+            if ($q && $a) $faqs[] = ['q' => $q, 'a' => $a];
+        }
+
+        /* star image map */
+        $starMap = [
+            0 => 'star_1.png', 2 => 'star_2.png', 3 => 'star_3.png',
+            3.5 => 'star_3.5.png', 4 => 'star_4.png', 4.5 => 'star_4.5.png',
+            4.75 => 'star_4.75.png', 5 => 'star_5.png',
+        ];
+        $stars = $starMap[$ratingValue] ?? 'star_4.5.png';
+ 
+        /* category colour palette (index-based, mirrors Next.js CAT_STYLE) */
+        $catColors = [
+            '#1a5276','#1a6496','#4a235a','#b7770d','#0b3d5e',
+            '#145a32','#2c3e50','#154360','#7b241c','#117a65',
+            '#145a32','#784212','#1e8449','#1b4332',
+        ];
+ 		 
+		
+        return view('client.child-slug', compact(
+            'child_slug', 'keyword', 'childCategory', 'childSlug',
+            'topDescription', 'bottomDescription','metaKeywords',
+            'ratingCount', 'ratingValue', 'stars', 'bgImage',
+            'childLists', 'catColors','faqs','kwData',
+            'metaTitle', 'metaDescription','city'
+        ));
+    
+	}
 
 	private function getClientSlugMap(): array
 	{
@@ -2577,7 +2930,7 @@ $reviewList = DB::table('clients')
 			return DB::table('clients')->pluck('business_slug','business_slug')->all();
 		});
 	}
-    private function resolveBestCandidate(string $inputSlug, array $slugMap): ?string
+    private function resolveBestCandidate_old(string $inputSlug, array $slugMap): ?string
 	{
 		$tokens = array_values(array_filter(explode('-', $inputSlug), fn ($p) => $p !== ''));
 		$candidates = $this->generateSubsequenceSlugs($tokens);
@@ -2597,6 +2950,33 @@ $reviewList = DB::table('clients')
 		return null;
 	}
     
+
+private function resolveBestCandidate(string $inputSlug, array $slugMap): ?string
+{
+    $tokens = array_values(array_filter(explode('-', $inputSlug), fn ($p) => $p !== ''));
+
+    if (empty($tokens)) {
+        return null;
+    }
+
+    // Step 1: Exact full-slug match (keyword+city combo, or standalone keyword/city)
+    if (isset($slugMap[$inputSlug])) {
+        return $inputSlug;
+    }
+
+    // Step 2: Progressively strip trailing token(s) — look for exact keyword match only
+    $count = count($tokens);
+
+    for ($i = $count - 1; $i >= 1; $i--) {
+        $candidate = implode('-', array_slice($tokens, 0, $i));
+
+        if (isset($slugMap[$candidate])) {
+            return $candidate;
+        }
+    }
+
+    return null;
+}
 	/**
      * Check if a city is valid via the QuickDials city-check API.
      */
@@ -2628,100 +3008,6 @@ $reviewList = DB::table('clients')
 	}
 
  
-	
-
-		public function showCityWithService_olldd(Request $request, string $city, string $slug)
-		{
-			$citySlug = strtolower(trim($city));
-
-			$parts = array_values(array_filter(explode('-', $citySlug), fn ($p) => $p !== ''));
-
-			$candidates = [];
-			$n = count($parts);
-			for ($i = 0; $i < $n; $i++) {
-				for ($j = $i; $j < $n; $j++) {
-					$candidates[] = implode('-', array_slice($parts, $i, $j - $i + 1));
-				}
-			}
-			$candidates = array_unique($candidates);
-
-			$cityDetails = DB::table('citylists')
-				->whereIn('city_slug', $candidates)
-				->orderByRaw('LENGTH(city_slug) DESC')
-				->first();
-
-			// No match at all -> fall back to the default city, but redirect to its
-			// canonical URL rather than silently rendering it at the wrong slug.
-			if (!$cityDetails) {
-				$defaultCity = DB::table('citylists')
-					->where('city_slug', config('app.default_city_slug', 'bangalore'))
-					->first();
-
-				// Default city itself missing from DB — nothing sane to fall back to.
-				if (!$defaultCity) {
-					return redirect()->route('home');
-				}
-
-				return redirect()->route('city.slug', [
-					'city_slug'    => $defaultCity->city_slug,
-					'service_slug' => $slug,
-				], 301);
-			}
-
-			$cityName = $cityDetails->city_slug;
-
-			// City in URL is not the canonical slug (typo, junk prefix/suffix, wrong case, etc.)
-			if ($citySlug !== $cityName) {
-				return redirect()->route('city.slug', [
-					'city_slug'    => $cityName,
-					'service_slug' => $slug,
-				], 301);
-			}
-
-			$keySlug = strtolower(trim($slug));
-			$keys    = array_values(array_filter(explode('-', $keySlug), fn ($p) => $p !== ''));
-			$keywords = $this->generateSubsequenceSlugs($keys);
-
-			$exists = DB::table('keyword')
-				->select('slug')
-				->whereIn('slug', $keywords)
-				->orderByRaw('LENGTH(slug) DESC')
-				->first();
-
-			if (!$exists) {
-				abort(404);
-			}
-
-			$slugUrl = $exists->slug;
-
-			if ($keySlug !== $slugUrl) {
-				return redirect()->route('city.slug', [
-					'city_slug'    => $cityName,
-					'service_slug' => $slugUrl,
-				], 301);
-			}
-
-			// City and service are both exactly correct from here on — no redirect, just render.
-
-			if (!$this->serviceExists($slugUrl)) {
-				$businessResponse = $this->fetchBusinessData($slugUrl);
-				if (!$businessResponse) {
-					return redirect()->route('home');
-				}
-				return $this->getClientDetail($businessResponse, $slugUrl);
-			}
-
-			$response = $this->fetchData($cityName, $slugUrl);
-
-			if (!$response) {
-				return redirect()->route('home');
-			}
-
-			return $this->getsearchlist($response, $slugUrl, $cityName);
-		}
-		
-
-	
 	private function generateSubsequenceSlugs(array $tokens): array
 	{
 		$tokens = array_slice($tokens, 0, 8);
@@ -2741,8 +3027,6 @@ $reviewList = DB::table('clients')
 		return array_unique($result);
 	}
 
-
-
      /**
      * Handle  GET /{city}/{slug}
      */
@@ -2752,7 +3036,34 @@ $reviewList = DB::table('clients')
 		$slug = strtolower(trim($slug));
 		$newSlug = strtolower(str_replace(' ', '-', trim($slug)));  
 		$keywordMap = $this->getKeywordSlugMap(); // cached, in-memory
+		$cityMap    = $this->getCitySlugMap(); 
 		$slugUrl    = $this->resolveBestCandidate($newSlug, $keywordMap);
+		$city= "";
+
+		
+		$category = $this->categoriesCheck($newSlug);
+ 
+		if(!empty($category)){
+
+		$newCategory = $this->categoriesCheckDetails($newSlug);
+		return $this->categoriesListPage($newCategory,$newSlug,$city);
+		}
+		$child = $this->childCheck($newSlug);
+ 
+		if(!empty($child)){
+		$newchild = $this->childCheckDetails($newSlug);
+ 
+
+		return $this->childListPage($newchild,$newSlug,$city);
+		}
+
+	 
+		$cityName = $this->resolveBestCandidate($newSlug, $cityMap);
+ 
+		if (!empty($cityName)) {
+			$cityKeyword = $this->cityKeyword();
+			return $this->cityKeywordPage($cityKeyword,$cityName);			
+		}
 
 		// If a canonical/better match exists and differs from input → 301 redirect
 		if ($slugUrl && $slugUrl !== $slug) {
@@ -2764,14 +3075,17 @@ $reviewList = DB::table('clients')
 
 		// ── Validate city ────────────────────────────────────────────────────
 		if (!$this->serviceExists($finalSlug)) {
-			return redirect()->route('home');
+			abort(410);
+			//return redirect()->route('home');
 		}
 
 		// ── Fetch data ───────────────────────────────────────────────────────
 		$response = $this->fetchKeywordData($finalSlug);
+ 
 
 		if (!$response) {
-			return redirect()->route('home');
+			abort(410);
+			//return redirect()->route('home');
 		}		
 
         $kwData   = $response['keyword'] ?? [];
@@ -2779,22 +3093,23 @@ $reviewList = DB::table('clients')
 
         $growthBusiness = $businessOwners['data']['businessOwners'] ?? [];
         // ── Keyword / meta ─────────────────────────────────────────────────
-        $keyword    = $this->replaceCity($kwData['keyword'] ?? $slug, '');
+        $keyword    = replaceCity($kwData['keyword'] ?? $slug, '');
         $area       = $kwData['area'] ?? '';
         $childSlug  = $kwData['child_slug'] ?? '';
         $childCat   = $kwData['child_category'] ?? '';
         $ratingCount = (int) ($kwData['ratingcount'] ?? 0);
-        $ratingValue = (float) ($kwData['ratingvalue'] ?? 4.8);
-        $bgImage    = $kwData['category_banner'] ?? '/client/images/computer-courses-training.jpg';
- 
-        $topDescription    = $this->replaceCity($kwData['top_description'] ?? '', $area);
-        $bottomDescription = $this->replaceCity($kwData['bottom_description'] ?? '', $area);
+        $ratingValue = (float) ($kwData['ratingvalue'] ?? 4.8);       
+ 		$bgImage = !empty($kwData['child_banner']) ? $kwData['child_banner'] : ($kwData['category_banner'] ?? '');
+  		$keywordBanners   = $kwData['keywordBanners'] ?? [];
+
+		$topDescription = !empty($kwData['top_description']) ? replaceCity($kwData['top_description'], $area) : '';
+		$bottomDescription = !empty($kwData['bottom_description']) ? replaceCity($kwData['bottom_description'], $area) : '';
  
         // ── FAQs ───────────────────────────────────────────────────────────
         $faqs = [];
         for ($i = 0; $i <= 10; $i++) {
-            $q = $this->replaceCity($kwData["faqq{$i}"] ?? '', '');
-            $a = $this->replaceCity($kwData["faqa{$i}"] ?? '', '');
+            $q = replaceCity($kwData["faqq{$i}"] ?? '', '');
+            $a = replaceCity($kwData["faqa{$i}"] ?? '', '');
             if ($q && $a) $faqs[] = ['q' => $q, 'a' => $a];
         }
  
@@ -2805,9 +3120,7 @@ $reviewList = DB::table('clients')
         $businesses = collect($rawList)
             ->map(fn ($b, $i) => $this->normalizeBusiness($b, $i))
             ->all();
- 
- 
-         
+          
         // ── Agents comparison table ────────────────────────────────────────
         $agents = collect($agents)
             ->map(fn ($b) => $this->normalizeAgent($b))
@@ -2840,10 +3153,10 @@ $reviewList = DB::table('clients')
         $zones     = $responseZones['data'] ?? [];
   
         $cityDetails     =  [
-				"zone" => "Bangalore North",
-				"city" => "Bangalore",
+				"zone" => "faridabad North",
+				"city" => "faridabad",
 				"pincode" => '560008',
-				"city_slug" => "bangalore",
+				"city_slug" => "faridabad",
 				"state" => "Karnataka",
 		];
 
@@ -2854,7 +3167,7 @@ $reviewList = DB::table('clients')
             'childSlug', 'childCat','cityDetails',
             'ratingCount', 'ratingValue', 'bgImage',
             'topDescription', 'bottomDescription',
-            'faqs', 'kwData',
+            'faqs', 'kwData','keywordBanners',
             'businesses', 'businessChunks',
             'agents', 'reviews', 'categories',
             'relatedCategory', 'servicesRelated',
@@ -2864,6 +3177,8 @@ $reviewList = DB::table('clients')
             'metaDescription' => $kwData['meta_description'] ?? '',
             'metaKeywords'    => $kwData['h1_heading'] ?? '',
         ]);
+
+
     }
 
 /*
@@ -2876,6 +3191,7 @@ $reviewList = DB::table('clients')
 	public function searchKW(Request $request)
 	{
 
+	 
 		$str = trim($request->input('q'));
 		$query = DB::table('keyword')
 			->select('keyword.keyword', 'keyword.slug', 'keyword.id');
@@ -2899,12 +3215,12 @@ $reviewList = DB::table('clients')
         // 2. If slug is NOT a service, try it as a business slug
         if (!$this->serviceExists($slug)) {
             
-            $businessResponse = $this->fetchBusinessData($slug);
+            $businessResponse = $this->fetchBusinessData($slug, $city);
            if (!$businessResponse) {              
                abort(410);
 			   
             }             
-            return $this->getClientDetail($businessResponse,$slug);
+            return $this->getClientDetail($businessResponse,$slug,$city);
         }
 
         // 3. Otherwise treat as service / search listing
@@ -2919,4 +3235,78 @@ $reviewList = DB::table('clients')
         return $this->getsearchlist($response, $slug, $city);
 
 	}
+
+	public function cityKeyword()
+	{	
+		// ── API fetch (cached 1 hour) ────────────────────────────────────────
+        $apiData = Cache::remember('business_services', 3600, function () {
+            try {
+                $res = Http::timeout(10)->withoutVerifying()
+                    ->get('https://api.quickdials.com/api/website/business-services');
+                return $res->successful() ? $res->json('data', []) : [];
+            } catch (\Exception $e) {
+                \Log::error('BusinessServices API: ' . $e->getMessage());
+                return [];
+            }
+        });
+		return $apiData;
+ 
+	}
+	
+
+
+	public function cityKeywordPage($apiData,$city)
+	{	
+		 
+        // ── Static data ──────────────────────────────────────────────────────
+        $heroStats = [
+            ['value' => '350+',  'label' => 'Register Business'],
+            ['value' => '8000+', 'label' => 'Business Keyword'],
+            ['value' => '200+',  'label' => 'Years'],
+            ['value' => '20+',   'label' => 'Countries'],
+        ];
+ 
+        
+ 
+        $featured = [
+            ['name' => 'TechAxis IT Solutions', 'category' => 'Web Development',   'city' => 'Delhi',     'rating' => 4.8, 'reviews' => 312],
+            ['name' => 'BrightMinds Coaching',  'category' => 'IIT JEE Coaching',  'city' => 'Mumbai',    'rating' => 4.6, 'reviews' => 189],
+            ['name' => 'GreenLeaf Ayurveda',    'category' => 'Ayurvedic Clinic',   'city' => 'faridabad', 'rating' => 4.9, 'reviews' => 97],
+            ['name' => 'StyleCraft Interiors',  'category' => 'Interior Design',    'city' => 'Hyderabad', 'rating' => 4.7, 'reviews' => 243],
+        ];
+ 
+        $sidebarStats = [
+            ['icon' => 'building', 'val' => '350+',  'label' => 'Businesses'],
+            ['icon' => 'search',   'val' => '8000+', 'label' => 'Keywords'],
+            ['icon' => 'award',    'val' => '200+',  'label' => 'Years Exp.'],
+            ['icon' => 'globe',    'val' => '20+',   'label' => 'Countries'],
+        ];
+ 
+        // Merge API data over static defaults if available
+        $featuredFromApi = $apiData['featured']          ?? [];
+        $statsFromApi    = $apiData['stats']             ?? [];
+        $categorySections    = $apiData['businessServices']             ?? [];
+ 
+
+ 		$category = array_slice($categorySections, 1, 5);
+ 		$featuredCategory = array_slice($categorySections, 1, 5);
+
+ 
+        if (!empty($featuredFromApi)) $featured    = $featuredFromApi;
+        if (!empty($statsFromApi))    $heroStats   = $statsFromApi;
+ 
+
+	 
+	$metaTitle = "Business Services in Delhi | QuickDials Local Business Directory";
+	$metaDescription = "Find trusted business services in Delhi on QuickDials. Explore verified service providers, professionals, consultants, and local business solutions near you.";
+	$keyword = "business services";
+
+        return view('client.city-keyword', compact(
+            'heroStats', 'categorySections', 'featured', 'featuredCategory','sidebarStats', 'category','city','metaTitle','metaDescription','keyword'
+        ));
+
+
+ 
+	}
+	
 }

@@ -112,8 +112,8 @@ class ChildCategoryController extends Controller
 			$filename = $this->saveImageSmart(
 				$request->file('child_banner'),
 				$destinationPath,
-				1200,
-				190
+				1371,
+				192
 			);
 
 			$image['child_banner'] = array(
@@ -383,7 +383,7 @@ class ChildCategoryController extends Controller
 			$filename = $this->saveImageSmart(
 				$request->file('child_banner'),
 				$destinationPath,
-				1200,
+				1371,
 				190
 			);
 

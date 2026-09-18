@@ -168,7 +168,8 @@
             >
                 <template x-for="(course, index) in filtered()" :key="course.id">
                     <a
-                        :href="'{{ url('categories') }}/' + course.url"
+                     
+                        :href="'{{ route('showCity', course.url) }}'"
                         class="block h-full animate-fadein"
                         :style="`animation-delay: ${index * 60}ms`"
                     >
@@ -238,7 +239,7 @@
             >
                 <template x-for="(course, idx) in filtered()" :key="course.id">
                     <a
-                        :href="'{{ url('categories') }}/' + course.url"
+                        :href="'{{ route('showCity', course.url) }}'"
                         class="block animate-fadein"
                         :style="`animation-delay: ${idx * 40}ms`"
                     >

@@ -71,8 +71,12 @@ class OfficialController extends Controller
     
         $popularArticles = array_slice($featuredArticle, 1, 3);
         $tickerArticles  = array_slice($featuredArticle, 4, 10);
-        $listArticles    = array_slice($featuredArticle, 1);   
+        $listArticles    = array_slice($featuredArticle, 1);
+        $firstNews = [];
+        if($featuredArticle['0']){   
         $firstNews    = $featuredArticle['0'];   
+        }
+
         $categories = NewsArticle::select('category_name as name', DB::raw('COUNT(*) as count'))
         ->whereNotNull('category_name')
         ->where('category_name', '!=', '')
@@ -418,7 +422,12 @@ class OfficialController extends Controller
         $popularArticles = array_slice($featuredArticle, 1, 3);
         $tickerArticles  = array_slice($featuredArticle, 4, 10);
         $listArticles    = array_slice($featuredArticle, 1);   
+        
+
+         $firstBlog = [];
+        if($featuredArticle['0']){   
         $firstBlog    = $featuredArticle['0'];   
+        }
         $categories = Blogdetails::select('category_name as name', DB::raw('COUNT(*) as count'))
         ->whereNotNull('category_name')
         ->where('category_name', '!=', '')
@@ -432,9 +441,7 @@ class OfficialController extends Controller
         $city = "delhi";
         $metaTitle = "QuickDials Blog | Local Business Tips, Guides & Updates";
         $metaDescription = "Read QuickDials blogs for local business tips, service guides, market updates, and helpful information to find trusted businesses and services near you.";
-        $keyword = "QuickDials blog, local business blog, business tips, service guides, local services, business updates, service directory India";
-
-
+        $keyword = "Blog";
         return view('official.blog', compact(
             'featuredArticle',
             'firstBlog',
@@ -448,24 +455,32 @@ class OfficialController extends Controller
     }
     public function blogdetails(Request $request, $slug)
     {
-        $cacheKey = 'blog_article_' . md5($slug); 
-        $data = Cache::remember($cacheKey, 3600, function () use ($slug) {
-            try {
-                $response = Http::timeout(10)->withoutVerifying()
-                    ->get('https://api.quickdials.com/api/website/blog', [
-                        'blog_slug' => $slug,
-                    ]);
-                if ($response->successful()) {
-                    return $response->json();
-                }
-            } catch (\Exception $e) {
-                \Log::error('Blog detail API failed: ' . $e->getMessage());
+        $data = null;
+        try {
+            $response = Http::timeout(10)
+                ->withoutVerifying()
+                ->get('https://api.quickdials.com/api/website/blog', [
+                    'blog_slug' => $slug,
+                ]);
+
+            if ($response->successful()) {
+                $data = $response->json();
             }
-            return null;
-        });
- 
+        } catch (\Exception $e) {
+            \Log::error('Blog detail API failed: ' . $e->getMessage());
+        }
+
         if (!$data) abort(410);
  
+        if($slug){
+            $blog = Blogdetails::where('slug', $slug)->firstOrFail();
+ 
+            if (!session()->has('blog_view_' . $blog->id)) {
+                $blog->increment('views');
+                session()->put('blog_view_' . $blog->id, true);
+            }
+        }
+
         // Handle both { data: {} } and { data: [{}] }
         $raw = $data['data'] ?? null;
         if (is_array($raw) && isset($raw[0])) {
@@ -536,7 +551,7 @@ class OfficialController extends Controller
     public function blogCategory(Request $request, $slug)
     {
     $childCategory = ChildCategory::where('child_slug', $slug)->first();
-// dd($childCategory);
+
     // Bug #2 & #6 fix — bail out cleanly instead of null-property errors
     if (!$childCategory) {
         abort(404);
@@ -591,15 +606,17 @@ class OfficialController extends Controller
             $alt = $catIcons['pc_icon']['name'] ?? '';
         }
     }
-
+//$keyword="";
     $kwData = [
         'parent_category'    => $childCategory->parent_category,
          'child_category'    => $childCategory->child_category,
         'parent_slug'        => $childCategory->parent_slug,
         'child_banner'       => $child_banner,
+        'keyword'       => $childCategory->child_category,
         'category_icon'      => $pc_icon,
         'alt'                => $alt,
         'meta_title'         => $meta_title,
+        'title'         => $h1_heading,
         'h1_heading'      => $h1_heading,
         'meta_description'  => $meta_description,
         'top_description'    => $childCategory->top_description,
@@ -625,7 +642,7 @@ class OfficialController extends Controller
         'city'            => $city,
         'metaTitle'       => $meta_title,
         'metaDescription' => $meta_description,
-        'keyword'         => $childCategory->parent_category,
+        'keyword'         => $childCategory->child_category,
     ]);
 }
  
